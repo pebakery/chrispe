@@ -1,0 +1,238 @@
+[main]
+Title=Recommended
+Description=
+Selected=True
+Level=4
+Author=ThePEBakeryTeam
+Version=20180306
+Date=2018-03-06
+Interface=Interface1
+
+[Interface1]
+pTextLabelMenu1="1",1,1,35,3,70,18,10,Bold
+pButtonMenu2="2",1,8,75,0,70,20,pButtonMenu2,0,True,_pButtonMenu2_,True
+pButtonMenu3="3",1,8,145,0,70,20,pButtonMenu3,0,True,_pButtonMenu3_,True
+pButtonMenu4="4",1,8,215,0,70,20,pButtonMenu4,0,True,_pButtonMenu4_,True
+pButtonMenu5="?",1,8,285,0,70,20,pButtonMenu5,0,True,_pButtonMenu5_,True
+pCheckBox1="1] BootSect",1,3,40,80,180,18,True
+pCheckBox2="2] CMD Here",1,3,40,110,180,18,True
+pCheckBox3="3] Keyboard Layout",1,3,40,140,180,18,True
+pCheckBox4="4] Network",1,3,40,170,180,18,True
+pCheckBox5="5] ScreenRes",1,3,40,200,180,18,True
+pButton1=?,1,8,10,80,18,18,?option1,0,True,_?option1_,True
+pButton2=?,1,8,10,110,18,18,?option2,0,True,_?option2_,True
+pButton3=?,1,8,10,140,18,18,?option3,0,True,_?option3_,True
+pButton4=?,1,8,10,170,18,18,?option4,0,True,_?option4,True
+pButton5=?,1,8,10,200,18,18,?option5,0,True,_?option5_,True
+
+[Interface2]
+pButtonMenu1="1",1,8,5,0,70,20,pButtonMenu1,0,True,_pButtonMenu1_,True
+pTextLabelMenu2="2",1,1,108,3,70,18,10,Bold
+pButtonMenu3="3",1,8,145,0,70,20,pButtonMenu3,0,True,_pButtonMenu3_,True
+pButtonMenu4="4",1,8,215,0,70,20,pButtonMenu4,0,True,_pButtonMenu4_,True
+pButtonMenu5="?",1,8,285,0,70,20,pButtonMenu5,0,True,_pButtonMenu5_,True
+pTextLabel2="Keyboard Layout Menu Entry",1,1,10,50,230,18,8,Bold
+pBevel1=,1,12,10,65,145,2
+pCheckBoxShortcutDesktop2="Add to Desktop Menu",1,3,40,80,150,18,True
+pCheckBoxShortcutQuick2="Add to Quicklaunch Menu",1,3,40,110,150,18,True
+pCheckBoxShortcutPrograms2="Add to #$qStart#$q > ",1,3,40,140,99,18,True
+pCheckBoxShortcutLaunchBar2="Add to LaunchBar Menu ",1,3,40,170,150,18,True
+pTextBox2=,1,0,140,140,150,21,Programs
+pButtonShortcut1=?,1,8,10,80,18,18,pButtonShortcut1,0,True,_pButtonShortcut1_,True
+pButtonShortcut2=?,1,8,10,110,18,18,pButtonShortcut2,0,True,_pButtonShortcut2_,True
+pButtonShortcut3=?,1,8,10,140,18,18,pButtonShortcut3,0,True,_pButtonShortcut3_,True
+pButtonShortcut4=?,1,8,10,170,18,18,pButtonShortcut4,0,True,_pButtonShortcut4_,True
+
+[Interface3]
+pButtonMenu1="1",1,8,5,0,70,20,pButtonMenu1,0,True,_pButtonMenu1_,True
+pButtonMenu2="2",1,8,75,0,70,20,pButtonMenu2,0,True,_pButtonMenu2_,True
+pTextLabelMenu3="3",1,1,178,3,70,18,10,Bold
+pButtonMenu4="4",1,8,215,0,70,20,pButtonMenu4,0,True,_pButtonMenu4_,True
+pButtonMenu5="?",1,8,285,0,70,20,pButtonMenu5,0,True,_pButtonMenu5_,True
+pTextLabel3="Network Menu Entry",1,1,10,50,230,18,8,Bold
+pBevel1=,1,12,10,65,105,2
+pCheckBoxShortcutDesktop3="Add to Desktop Menu",1,3,40,80,150,18,True
+pCheckBoxShortcutQuick3="Add to Quicklaunch Menu",1,3,40,110,150,18,True
+pCheckBoxShortcutPrograms3="Add to #$qStart#$q > ",1,3,40,140,99,18,True
+pCheckBoxShortcutLaunchBar3="Add to LaunchBar Menu ",1,3,40,170,150,18,True
+pTextBox3=,1,0,140,140,150,21,Programs
+pButtonShortcut1=?,1,8,10,80,18,18,pButtonShortcut1,0,True,_pButtonShortcut1_,True
+pButtonShortcut2=?,1,8,10,110,18,18,pButtonShortcut2,0,True,_pButtonShortcut2_,True
+pButtonShortcut3=?,1,8,10,140,18,18,pButtonShortcut3,0,True,_pButtonShortcut3_,True
+pButtonShortcut4=?,1,8,10,170,18,18,pButtonShortcut4,0,True,_pButtonShortcut4_,True
+
+[Interface4]
+pButtonMenu1="1",1,8,5,0,70,20,pButtonMenu1,0,True,_pButtonMenu1_,True
+pButtonMenu2="2",1,8,75,0,70,20,pButtonMenu2,0,True,_pButtonMenu2_,True
+pButtonMenu3="3",1,8,145,0,70,20,pButtonMenu3,0,True,_pButtonMenu3_,True
+pTextLabelMenu4="4",1,1,248,3,70,18,10,Bold
+pButtonMenu5="?",1,8,285,0,70,20,pButtonMenu5,0,True,_pButtonMenu5_,True
+pTextLabel4="Screen Resolution Menu Entry",1,1,10,50,230,18,8,Bold
+pBevel1=,1,12,10,65,150,2
+pCheckBoxShortcutDesktop4="Add to Desktop Menu",1,3,40,80,150,18,True
+pCheckBoxShortcutQuick4="Add to Quicklaunch Menu",1,3,40,110,150,18,True
+pCheckBoxShortcutPrograms4="Add to #$qStart#$q > ",1,3,40,140,99,18,True
+pCheckBoxShortcutLaunchBar4="Add to LaunchBar Menu ",1,3,40,170,150,18,True
+pTextBox4=,1,0,140,140,150,21,Programs
+pButtonShortcut1=?,1,8,10,80,18,18,pButtonShortcut1,0,True,_pButtonShortcut1_,True
+pButtonShortcut2=?,1,8,10,110,18,18,pButtonShortcut2,0,True,_pButtonShortcut2_,True
+pButtonShortcut3=?,1,8,10,140,18,18,pButtonShortcut3,0,True,_pButtonShortcut3_,True
+pButtonShortcut4=?,1,8,10,170,18,18,pButtonShortcut4,0,True,_pButtonShortcut4_,True
+
+[pButtonMenu1]
+IniWrite,%ScriptFile%,Main,Interface,Interface1
+System,REFRESHINTERFACE
+
+[pButtonMenu2]
+IniWrite,%ScriptFile%,Main,Interface,Interface2
+System,REFRESHINTERFACE
+
+[pButtonMenu3]
+IniWrite,%ScriptFile%,Main,Interface,Interface3
+System,REFRESHINTERFACE
+
+[pButtonMenu4]
+IniWrite,%ScriptFile%,Main,Interface,Interface4
+System,REFRESHINTERFACE
+
+[pButtonMenu5]
+message,"Click on the buttons to toggle between tabs 1#$c 2#$c 3 and 4. #$x#$xTabs 2#$c 3 and 4 contain menu options for use in the selected shell. #$x#$xTab 2 - Keyboard Layout menu options#$xTab 3 - Start Network menu options#$xTab 4 - ScreenRes menu options#$x#$xClick on the ? button for information about the different options."
+
+[pButtonShortcut1]
+message,"WinXShell only#$x#$xSelect this option to add a program shortcut to the Desktop."
+
+[pButtonShortcut2]
+message,"WinXShell only#$x#$xSelect this option to add a program menu option to the Quicklaunch menu - similar in appearence to the 'Pin to Taskbar' option in Windows 7/8/10."
+
+[pButtonShortcut3]
+message,"Applies to WinXShell#$c BBLean and LaunchBar Shell(s)#$x#$xSelect this option to add a program menu option to the Start menu. Leave blank to add to the root of the menu#$c or manually type a path to place in a sub-menu (do not use spaces in the path). E.g. #$x#$s- FileManager#$x#$s- Programs#$x#$s- Programs\FileManager#$x#$xAnd looking at the examples above - #$x#$xLeave this option blank to add a menu entry to the root of the program menu (the 'Start' menu in WinXShell#$c the 'Start' menu in BBLean#$c or the root of the LaunchBar menu bar if LaunchBar is selected as Shell)#$x#$xEnter 'FileManager' to add a menu entry for this application to the 'Start' > 'FileManager' sub-menu (WinXShell and bblean) or the 'FileManager' sub-menu in LaunchBar.#$x#$xEnter 'Programs' to add a menu entry for this application to the 'Start' > 'Programs' sub-menu (WinXShell and bblean) or the 'Programs' sub-menu in LaunchBar.#$x#$xEnter 'Programs\FileManager' to add a menu entry for this application to the 'Start' > 'Programs' > 'FileManager' sub-menu (WinXShell and bblean) or the 'Programs' > 'FileManager' sub-menu in LaunchBar."
+
+[pButtonShortcut4]
+message,"This setting does not apply to any LaunchBar instance running as the WinPE Shell. This option only applies to a LaunchBar instance when the Applications' > 'LaunchBar' program script is selected in the build.#$x#$xIf the 'Applications' > 'LaunchBar' program script is selected than enable this option to add a program menu entry to the root of the LaunchBar menu bar. #$x#$xPlease note that if option '6] Programs in boot.wim' in the main project script is set as 'NO'#$c then LaunchBar and a number of other applications will not be available at boot. In this case a text based .ini file will be used for LaunchBar menu settings."
+
+[process]
+AddInterface,%ScriptFile%,Interface1,""
+AddInterface,%ScriptFile%,Interface2,""
+AddInterface,%ScriptFile%,Interface3,""
+AddInterface,%ScriptFile%,Interface4,""
+If,%pCheckBox1%,Equal,True,Run,%ScriptFile%,BootSect
+If,%pCheckBox2%,Equal,True,Run,%ScriptFile%,CMD
+If,%pCheckBox3%,Equal,True,Run,%ScriptFile%,Keyboard
+If,%pCheckBox4%,Equal,True,Run,%ScriptFile%,Network
+If,%pCheckBox5%,Equal,True,Run,%ScriptFile%,ScreenRes
+
+[BootSect]
+DirMake,"%TargetDir%\Programs\BootSect"
+DirCopy,"%Programs%\BootSect\*.*","%TargetDir%\Programs\BootSect"
+Echo,"Mounting registry hives..."
+If,Not,ExistRegSection,HKLM,_WinPE_SOFTWARE,RegHiveLoad,_WinPE_SOFTWARE,"%Target_config%\software"
+RegWrite,HKLM,0x1,_WinPE_SOFTWARE\Classes\Drive\shell\BootSect,,BootSect
+RegWrite,HKLM,0x2,_WinPE_SOFTWARE\Classes\Drive\shell\BootSect\command,,%SystemDrive%\Programs\BootSect\BootSect2.cmd %1
+Echo,"Unmounting registry hives..."
+RegHiveUnload,_WinPE_SOFTWARE
+IniWrite,"%OutputDir%\Project.Settings.ini",ESSENTIAL,BootSect,YES
+
+[CMD]
+Echo,"Mounting registry hives..."
+If,Not,ExistRegSection,HKLM,_WinPE_SOFTWARE,RegHiveLoad,_WinPE_SOFTWARE,"%Target_config%\software"
+RegWrite,HKLM,0x1,_WinPE_SOFTWARE\Classes\Directory\shell\runas,,Command Prompt
+RegWrite,HKLM,0x1,_WinPE_SOFTWARE\Classes\Directory\shell\runas,NoWorkingDirectory,
+RegWrite,HKLM,0x1,_WinPE_SOFTWARE\Classes\Directory\shell\runas\command,,cmd.exe /k #$qpushd %L && title Command Prompt#$q
+RegWrite,HKLM,0x1,_WinPE_SOFTWARE\Classes\Drive\shell\runas,,Command Prompt
+RegWrite,HKLM,0x1,_WinPE_SOFTWARE\Classes\Drive\shell\runas,NoWorkingDirectory,
+RegWrite,HKLM,0x1,_WinPE_SOFTWARE\Classes\Drive\shell\runas\command,,cmd.exe /k #$qpushd %L && title Command Prompt#$q
+Echo,"Unmounting registry hives..."
+RegHiveUnload,_WinPE_SOFTWARE
+IniWrite,"%OutputDir%\Project.Settings.ini",ESSENTIAL,CMDHere,YES
+
+[Keyboard]
+DirMake,"%TargetDir%\Programs\KeyboardLayout"
+DirCopy,"%Programs%\KeyboardLayout\*.*","%TargetDir%\Programs\KeyboardLayout"
+IniWrite,"%OutputDir%\Project.Settings.ini",ESSENTIAL,KeyBoardLayout,YES
+ShellExecute,Hide,"%Tools%\Shortcut.exe","/A:C /T:#$q#$pSystemDrive#$p\Programs\KeyboardLayout\KeyboardLayout.cmd#$q /F:#$q%ProjectTemp%\Keyboard Layout.lnk#$q /I:#$q#$pSystemDrive#$p\Programs\KeyboardLayout\Keyboard.ico#$c0#$q"
+If,ExistFile,"%ProjectTemp%\Keyboard Layout.lnk",Begin
+  Set,%MyShortcut%,Keyboard Layout.lnk
+  If,%pCheckBoxShortcutDesktop2%,Equal,True,FileCopy,"%ProjectTemp%\%MyShortcut%","%ProjectTemp%\ShortCuts\Desktop"
+  If,%pCheckBoxShortcutQuick2%,Equal,True,FileCopy,"%ProjectTemp%\%MyShortcut%","%ProjectTemp%\ShortCuts\Quick"
+  If,%pCheckBoxShortcutPrograms2%,Equal,True,Begin
+    Set,%ProgramMenuPath%,%pTextBox2%
+    Run,"%ProjectDir%\Core\common.script",StartMenu
+  End
+  If,%pCheckBoxShortcutLaunchBar2%,Equal,True,FileCopy,"%ProjectTemp%\%MyShortcut%","%ProjectTemp%\ShortCuts\LaunchBar"
+  FileDelete,"%ProjectTemp%\%MyShortcut%"
+End
+If,%pCheckBoxShortcutLaunchBar2%,Equal,True,If,%PROGRAMS.IN.WIM%,Equal,NO,If,ExistFile,"%ProjectTemp%\LaunchBar.ini",TXTaddLine,"%ProjectTemp%\LaunchBar.ini",Keyboard;X:\Programs\KeyboardLayout\KeyboardLayout.cmd; ;X:\Programs\KeyboardLayout\keyboard.ico,Append
+
+[Network]
+DirMake,"%TargetDir%\Programs\Network"
+DirCopy,"%Programs%\Network\*.*","%TargetDir%\Programs\Network"
+IniWrite,"%OutputDir%\Project.Settings.ini",ESSENTIAL,Network,YES
+ShellExecute,Hide,"%Tools%\Shortcut.exe","/A:C /T:#$q#$pSystemDrive#$p\Programs\Network\Start_Network.cmd#$q /F:#$q%ProjectTemp%\Start Network.lnk#$q /I:#$q#$pSystemDrive#$p\Programs\Network\network.ico#$c0#$q"
+If,ExistFile,"%ProjectTemp%\Start Network.lnk",Begin
+  Set,%MyShortcut%,Start Network.lnk
+  If,%pCheckBoxShortcutDesktop3%,Equal,True,FileCopy,"%ProjectTemp%\%MyShortcut%","%ProjectTemp%\ShortCuts\Desktop"
+  If,%pCheckBoxShortcutQuick3%,Equal,True,FileCopy,"%ProjectTemp%\%MyShortcut%","%ProjectTemp%\ShortCuts\Quick"
+  If,%pCheckBoxShortcutPrograms3%,Equal,True,Begin
+    Set,%ProgramMenuPath%,%pTextBox3%
+    Run,"%ProjectDir%\Core\common.script",StartMenu
+  End
+  If,%pCheckBoxShortcutLaunchBar3%,Equal,True,FileCopy,"%ProjectTemp%\%MyShortcut%","%ProjectTemp%\ShortCuts\LaunchBar"
+  FileDelete,"%ProjectTemp%\%MyShortcut%"
+End
+If,%pCheckBoxShortcutLaunchBar3%,Equal,True,If,%PROGRAMS.IN.WIM%,Equal,NO,If,ExistFile,"%ProjectTemp%\LaunchBar.ini",TXTaddLine,"%ProjectTemp%\LaunchBar.ini",Network;X:\Programs\Network; ;X:\Programs\Network\network.ico,Append
+
+[ScreenRes]
+DirMake,"%TargetDir%\Programs\ScreenRes"
+DirCopy,"%Programs%\ScreenRes\%ARCH%\*.*","%TargetDir%\Programs\ScreenRes"
+IniWrite,"%OutputDir%\Project.Settings.ini",ESSENTIAL,ScreenRes,YES
+ShellExecute,Hide,"%Tools%\Shortcut.exe","/A:C /T:#$pSystemDrive#$p\Programs\ScreenRes\custom.cmd /W:#$pSystemDrive#$p\Programs\ScreenRes /F:#$q%ProjectTemp%\ScreenRes.lnk#$q /I:#$pSystemDrive#$p\Programs\ScreenRes\screen.ico#$c0"
+If,ExistFile,"%ProjectTemp%\ScreenRes.lnk",Begin
+  Set,%MyShortcut%,ScreenRes.lnk
+  If,%pCheckBoxShortcutDesktop4%,Equal,True,FileCopy,"%ProjectTemp%\%MyShortcut%","%ProjectTemp%\ShortCuts\Desktop"
+  If,%pCheckBoxShortcutQuick4%,Equal,True,FileCopy,"%ProjectTemp%\%MyShortcut%","%ProjectTemp%\ShortCuts\Quick"
+  If,%pCheckBoxShortcutPrograms4%,Equal,True,Begin
+    Set,%ProgramMenuPath%,%pTextBox4%
+    Run,"%ProjectDir%\Core\common.script",StartMenu
+  End
+  If,%pCheckBoxShortcutLaunchBar4%,Equal,True,FileCopy,"%ProjectTemp%\%MyShortcut%","%ProjectTemp%\ShortCuts\LaunchBar"
+  FileDelete,"%ProjectTemp%\%MyShortcut%"
+End
+If,%pCheckBoxShortcutLaunchBar4%,Equal,True,If,%PROGRAMS.IN.WIM%,Equal,NO,If,ExistFile,"%ProjectTemp%\LaunchBar.ini",TXTaddLine,"%ProjectTemp%\LaunchBar.ini",ScreenRes;X:\Programs\ScreenRes\custom.cmd; ;X:\Programs\ScreenRes\screen.ico,Append
+
+[?option1]
+Message,"BootSect.exe - tool used to add NTLDR or BOOTMGR code to the volume boot record. This script will add a batch files only and an option to the right-click context menu. The bootsect.exe executable is included in WinPE"
+
+[?option2]
+Message,"Add an option to the right-click context menu (#$qCommand Prompt#$q) - opening a Command Prompt in the selected drive/directory."
+
+[?option3]
+Message,"Batch file to change the keyboard layout in the booted system (calls wpeutil)"
+
+[?option4]
+Message,"Start the network (using the built in wpeinit). This will add a batch file + a menu entry to run it - the batch will run the command 'wpeinit InitializeNetwork'. This will Initialize network components and drivers#$c and set the computer name to a randomly-chosen value."
+
+[?option5]
+Message,"Change the Screen Resolution in the booted system (calls wpeinit)"
+
+[To-Be_Added]
+//If,%pCheckBox6%,Equal,True,Run,%ScriptFile%,BCDedit
+//If,%pCheckBox7%,Equal,True,Run,%ScriptFile%,DiskPart
+//[?option6]
+//Message,"Work in progress"
+//[?option7]
+//Message,"Work in progress"
+//[BCDEdit]
+//[DiskPart]
+//pCheckBox6="6] BCDEdit (Guide)",1,3,281,40,180,18,True
+//pCheckBox7="7] DiskPart (Guide)",1,3,281,65,180,18,True
+//pButton6=?,1,8,250,40,18,18,?option6,0,True,_?option6_,True
+//pButton7=?,1,8,250,65,18,18,?option7,0,True,_?option7_,True
+
+[AuthorEncoded]
+Logo=donut.ico
+donut.ico=953,1271
+
+[EncodedFile-AuthorEncoded-donut.ico]
+lines=0
+0=eJztmctKI0EUhiu2kkXUaAKDN3AWMzAgShARESUgbly4UBQEBUfxhqgENwoBM270Fdy4EBEHXYjgwoWXRvHyAOpKMI+QpQvxTP4kxWQ6Gbu6ujvdSBL+/NAdzvlOpet0V4UxT/IdCrHk51f2+ztjXxhjP5JKHmI/Wfp46vWNsYAvLf4ioqKKKsqkjo+PKRKJUGdnJwWDQdKer66upvb2dpqbm6O9vb2c807o6emJpqamqLKyktAKsqX9rvZ8WVkZ9ff30+npqSO1jI6OksfjyeEW5c8Wfperq6uC1LG9vU3l5eX/ZZHhhzAWs7OzttYwPj6uyy3Lz9XS0kIvLy+W19HT0yPMboYfqquro8fHR8tq6O3tNcRulh+qr6+3hH9mZsYwuxX8UCgUMlXD/v6+FLtV/NDi4qJ0DYFAwHH+kpISur+/N1zD/Py8NLuV/FB3d7dhftwf3cIPXV5eCtewurpqKpcd/MPDw8L8DQ0NruP3er1C/Hd3d6byKIpCCwsLObmi0Sj5/X5TsQ8PD3Vr2NzclI4PPlVVP8zR3NwsHV+klw4ODkrFRp87OzvTjR+Px6miokIqR0dHh278pqYmqdh4thOdX2tra1I5cD/Si411kkzsm5sbYX47Jdv3neb+LPyy18/t7a0rapCdvxMTE8L8sVjMtvk7MDAgFRv9U6/3c+XbrxCRSP/c2NiQig3h2tO7jrAmkY2f776uFfLLxocw/5eXl3PyrK+vk5n1BHRwcCD0+2LtaSYPpI1pNp7o8xu0srLiOv6hoSFD/a20tNRV/BcXF4b4sc/qFv6uri5D7FxVVVWO82NfUfbeuLu76zg/9hFk2LkmJycd48deqBl2LqN7n1bw19bWEtY6VvBD4XC4YPw1NTX08PBgGTvX2NiY7fx4fnx+fracnWtra4t8Pp8t/JhrdnFrNTIyYtn/R62trXR+fl4wdi5coxizfP8n6fFjn6ivr49OTk4Kzp1PR0dHtLS0lHpGz7fOwL2wra2NpqenaWdnxxXMRRX1CQT7wK+vU/6uqDH4m6I2whOKit1kiiuqAlcVFd2UfmWcKSo6zTs8lvEwY2/Z3sjYq8YTcD/cm0i7P+ONrxlPcSVYWOP8OP+e//XfOOm42nxv2R7+y8m5eR2oi2XXyevm48DHhY8THzed8f0DAAkXr3ic40zJzyst0ctMzmcYBSMQ7FOF0AXM2OXvezWmMTABAOsJBwX2TQ3DAQAAAAIAAAAlAAAAcAMAAAAAAAABAAAAAAAAAAAAAAA
+

@@ -1,0 +1,106 @@
+v0.1
+added : getvalue , reg_sz and reg_dword only
+added : setvalue , bug: last char for value is lost / reg_sz only
+
+v0.2
+added : getvalue , reg_binary and reg_multi_sz supported
+added : getvalue will display "valuename"=value
+fixed : setvalue will no longer truncate last char
+
+v0.3
+added : deletevalue
+added : deletekey
+
+v0.4
+added : createkey
+added : setvalue will also work work for reg_dword, reg_multi_sz and reg_binary
+
+v0.5
+added : enumkeys
+added : enumvalues
+added : getvalue, reg_expand_sz supported
+added : setvalue, reg_expand_sz supported
+
+v0.6
+added : hive prefix (HKEY_LOCAL_MACHINE, etc) are now handled as well
+
+v0.7
+added : currentcontrolset will be mapped to the right controlset
+
+v0.8
+added : qword support
+
+v0.9
+fixed : support up to 512 length values
+added : enumallvalues for keynames & values
+fixed : dynamic memory allocation in getvalue
+
+0.9.1 : 
+added : (failed) 1st attempt to support 64bits
+
+0.9.2 : 
+added : exception handler
+
+0.9.3 : 
+added : human error messages, next to int codes
+
+0.9.4 : 
+added : nobackup parameter (last) to save to original file
+
+0.9.5 : 
+added : deletekeys (and all its subkeys)
+
+0.9.6 : 
+added : deletekeys will delete the top (empty) key
+added : import function (from a reg file)
+
+0.9.7
+fixed : null string when importing ok
+fixed : empty keys with subkeys ok
+added : created a blank hive
+
+0.9.8
+fixed : import was incorrectly importing multi_sz and expand_sz string
+added : getvalue and enumallvalues will report the key type
+added : setvalue syntax for reg_expand_sz was missing in the help
+
+0.9.9
+added : import will support the @ i.e default value syntax
+added : multi level paths are handled by createkey and setvalue (i.e the full path will be created)
+added : param after createkey can be empty
+added : param after deletekey can be empty
+added : new param run
+added : x64 version
+
+1.0.0
+removed : no more nobackup param - will overwrite original file
+
+1.0.1
+fixed : import syntax now consistent (similar to run command)
+added : import will handle multi level paths
+
+1.0.2
+fixed : multi level path bug (space issue)
+added : all registry type handled in the import function
+fixed : faster import function (newstringreplace function in the parsing function)
+
+1.0.3
+todo : review multi_sz in setvalue function
+fixed : createkey now handles 512 length keys
+fixed : setvalue dynamically allocate buffer (no more fixed size)
+fixed : setvalue will handle hex(b) type (binary form of REG_QWORD)
+fixed : missing REG_NONE added
+fixed : @="" case handled
+fixed : under some circumstances, temp reg file was not being created leading to incomplete keys/values
+fixed : getvalue+binary was reading only 4 bytes - now can read 65535 bytes
+fixed : oem function improved
+fixed : wrong value in enumallvalues under some circumstances
+added : enumkeyr will recursively loop thru a key and its subkeys
+added : setvaluebyteat a_reg_binary_value byte offset
+added : getvaluebyteat a_reg_binary_value offset
+fixed : setvalue error:"..." is an invalid integer on some integer
+added : getvalue key " " 255 to display a binary into ascii
+fixed : error control in deletekey
+fixed : run command will no longer fail on one single error
+
+toto review syntax for deletekey and createkey (no need to open the key first, we can use the api against the hive giving full path)

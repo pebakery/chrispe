@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Window caption="0,0,0,0" defaultfontcolor="#FFFFFFFF" size="320,540">
+    <Style imagerectstyle="l,t,w,h" />
+    <!-- <Include source="themes\default.xml" /> -->
+
+    <Default name="Button" height="30" />
+    <Style name="Settings" font="12" width="90" height="55" align="left" textpadding="5,30,0,0" />
+    <VerticalLayout style="ct-bkdarker1">
+        <Label name="::wlan_errmsg" height="30" visible="false" />
+        <Combo name="::wlan_list" height="30" style="ct-combo"
+            textpadding="10,0,0,0" itemselectedtextcolor="#FFFFFFFF" />
+        <List style="ct-list" name="::ssid_list" height="360" header="hidden" vscrollbar="true" >
+        </List>
+        <Control />
+        <Label padding="5,0,0,0" text="%{NetworkSettings}" style="ct-text-secondary" height="16" />
+        <HorizontalLayout padding="5,5,0,0" childpadding="5">
+            <Option style="ct-option" style="Settings" name="::switchwlan" text="WLAN" selected="true" />
+            <Option style="ct-option" style="Settings" name="::switchfirewall" text="%{Firewall}" selected="true"  />
+            <Button style="ct-option" style="Settings" name="proxysettings" text="%{Proxy}" />
+        </HorizontalLayout>
+        <Button name="::closebtn" text="" width="10" height="5" comment="debug" />
+    </VerticalLayout>
+</Window>

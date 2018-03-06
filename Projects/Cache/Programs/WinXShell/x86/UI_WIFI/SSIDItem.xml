@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<SubXML>
+    <ListContainerElement height="60">
+        <VerticalLayout>
+            <HorizontalLayout height="60" childpadding="5">
+                <Label name="$ssidsignal" bkimage="rc\100.png" height="32" width="32" />
+                <VerticalLayout>
+                    <Label name="$ssidname"/>
+                    <Label name="$ssidstatus" style="ct-text-secondary" />
+                </VerticalLayout>
+            </HorizontalLayout>
+            <VerticalLayout name="$ssidpwddlg" visible="false" childpadding="5" padding="32,0,20,0">
+                <Label text="%{msg_enter_password}"/>
+                <Edit name="$ssidpwd_pwd" textcolor="#FF000000" password="true" />
+                <HorizontalLayout childpadding="5">
+                    <Button style="ct-button" bordersize="2" name="$ssidpwd_conn" text="%{::Connect}" />
+                    <Button style="ct-button" bordersize="2" name="launch_osk" text="OSK" />
+                    <Button style="ct-button" bordersize="2" name="$ssidpwd_cancel" text="%{Cancel}" />
+                </HorizontalLayout>
+            </VerticalLayout>
+            <Button style="ct-button" name="$ssidconn" visible="false" text="%{::Connected}"
+                 bordersize="2" padding="120,0,20,0" />
+        </VerticalLayout>
+    </ListContainerElement>
+</SubXML>

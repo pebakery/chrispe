@@ -1,0 +1,740 @@
+0.1 alpha 54 - Aug 24, 2014
+---------------------------
+1. Added correct handling of locked file delete situation.
+2. IThumbnailProvider interface support added.
+3. %INACTIVE_PATH% parameter added for custom commands.
+4. Folder update monitoring improved.
+5. Thumbnails crash fixed.
+6. Incorrect system folders names under Win XP - fixed.
+7. file:\\ prefix handling added.
+
+
+0.1 alpha 53 - May 20, 2014
+---------------------------
+1. Incorrect appearance of folder that contains ampersand in tab and path panel - fixed.
+2. Drag&drop copy instead of moving when drive letter in lower case - fixed.
+3. Crash on drag&drop file with invalid characters in name - fixed.
+4. Missing confirmation dialog when drag&drop from archive - fixed.
+5. Crash on FTP view/edit - fixed.
+
+
+0.1 alpha 52 - Dec 22, 2013
+---------------------------
+1. Folder can't be open if it's called like environment variable - fixed.
+2. Tabs don't respect name when "Check all paths on startup" option enabled - fixed.
+3. Main toolbar custom buttons icon sometimes not loaded on startup - fixed.
+4. FTP operation progress bugs fixed.
+5. Calling context menu from panel blank space cause crash when NC style and RMB selection enabled - fixed.
+6. Fixed crash when drag-and-dropping item to menu header in Main Menu settings page.
+7. Locked (nav allowed) path not returned when current path becomes not valid - fixed.
+
+
+0.1 alpha 51 - Oct 04, 2013
+---------------------------
+1. Transparent selection incorrectly applies for even rows - fixed.
+2. Data checkbox text is cut off in File Search dialog - fixed.
+3. "Go to" command doesn't work for custom buttons if path is relative - fixed.
+4. Now button customization dialog opens from main toolbar button context menu.
+5. Problem with deleting already deleted folder - fixed.
+6. Crash on copy/move when an odd number of panels displayed - fixed.
+7. Wrong tray icon problem fixed.
+8. Rename function on panels cross clicking in NC selection - fixed.
+9. Crash on FTP disconnect from Navigation panel - fixed.
+10. Middle mouse button click on drive now opens drive path in new tab.
+11. Clicking on ".." item in locked tab cause parent path open in new tab.
+12. Incorrect tab selection on tab drag-and-drop - fixed.
+13. CPU usage reduced.
+14. Fixed error when executing custom command with relative command path and empty path.
+15. Sometimes thumbnails are displayed in wrong size - fixed.
+
+
+0.1 alpha 50 - Jul 21, 2013
+---------------------------
+1. Application hangs when closing Quick Search dialog - fixed.
+2. Move operation isn't used by default when drag-and-drop file on same disk - fixed.
+3. Rename functionality on double-click in NC style - fixed.
+4. Inverting selection with Ctrl in NC style added.
+5. Quick Viewer automatic image resize implemented.
+6. Asynchronous CFSTR_FILEDESCRIPTOR support added for drag-and-drop.
+7. "Not selected" message removed when right click on ".." item.
+8. In Ctrl+Alt_Letter quick search mode pressed letter not added to editbox - fixed.
+9. Nav panel doesn't save state when using "Show/hide nav panel" command - fixed.
+10. Transparent selection option added for panels.
+11. "Go to next item when using SelectItem command" option added.
+
+
+0.1 alpha 49 - Jun 30, 2013
+---------------------------
+1. Problem with renaming to same name with changed letter case - fixed.
+2. Incorrect selection with Ctrl in NC style - fixed.
+3. Drag-and-drop to tabs implemented.
+4. System folders customization improved.
+5. Some memory leaks fixed.
+6. Navigation panel doesn't reflect language change - fixed.
+7. Drag-and-drop for 7-zip support added.
+8. Folder view profiles implemented.
+9. Rename functionality on double-click in NC style - fixed.
+10. Fixed incorrect commands parsing.
+11. Custom commands path field now supports %PATH% param.
+
+
+0.1 alpha 48 - May 24, 2013
+---------------------------
+1. FTP log and multiple sessions problem fixed.
+2. Thumbnails functionality implemented.
+3. Crash on switching "locked navigation allowed" tabs - fixed.
+4. Environment variables now recognized when they are part of the path.
+5. Change attributes/timestamp dialog doesn't work for focused items - fixed.
+6. Incorrect selection with Shift in NC selection mode - fixed.
+7. Enter key now close Quick search editbox and opens selected folder in panel.
+8. Some drawing improvements added.
+9. Incorrect disk size bar displayed on startup before folder opened - fixed.
+10. Selection with Shift+Up/Down key now works in NC style.
+
+
+0.1 alpha 47 - May 17, 2013
+---------------------------
+1. Some symbolic links are resolved incorrectly - fixed.
+2. USB drive can't be safely removed - fixed.
+3. Files with non-English letters in name can't be copied from/to FTP - fixed.
+4. FTP file operations progress implemented.
+5. Browse buttons added to Startup folders page.
+6. Ignore list support added to folder update engine.
+7. Ignore list settings page redesigned.
+8. Context menu command added.
+9. Rename item in context menu doesn't work when menu called from the keyboard - fixed.
+10. NC style selection: context menu now opens for focused item when no items selected.
+11. NC style selection: context menu now opens with delayed right mouse button.
+12. FTP connections export/import added.
+13. Relative paths now supported in Copy/Move confirmation dialog.
+14. System folders list now can be customized.
+15. Now file renaming not using shell when "Use shell" checkbox unchecked.
+
+
+0.1 alpha 46 - May 08, 2013
+---------------------------
+1. Implemented drag-and-drop to system folders.
+2. Cut to clipboard items now displayed with greyed icons.
+3. Multiplying code pages in FTP connection settings dialog - fixed.
+4. Unnecessary FTP reconnection removed.
+5. FTP path doesn't include starting / - fixed.
+6. Incorrect resource selection on resources toolbar - fixed.
+7. Crash when adding new tab with FTP tab selected - fixed.
+8. Ignore list implemented.
+9. Date format combobox auto-scroll added.
+10. "Startup folders" option added.
+
+
+0.1 alpha 45 - Apr 26, 2013
+---------------------------
+1. "The specified path is invalid" error when moving folders - fixed.
+2. Open path edit command in path panel contextual menu doesn't work - fixed.
+3. FTP error handling improved.
+4. Copy/move file to FTP operation now checks file for existence.
+5. After FTP disconnection panel displays default path - fixed.
+6. FTP reconnection process uses currently selected panel - fixed.
+7. Now selected tab used as source for new tab.
+8. Drag-and-drop to ".." element not allowed in non-Details view - fixed.
+9. Mount points handling changed.
+10. File operation progress now changes color if operation paused.
+11. Main toolbar doesn't display icons for exe files without icon - fixed.
+12. Auto-rename function improved.
+13. Problem with some controls drawing when visual styles disabled - fixed.
+14. FTP disconnect button changed.
+15. File filter dialog now supports adding extensions separated by "," and ";".
+16. Resources toolbar collapsed buttons don't work - fixed.
+17. Graphics disk usage is incorrect when there is no free space - fixed.
+18. Disk update received by first panel with the same disk - fixed.
+19. FTP log splitter added.
+20. Equal paths confirmation added.
+21. Now FTP client sends CLNT command.
+22. FTP connection now supports code page selection.
+23. Drag-and-drop to network folder doesn't work - fixed.
+24. "Open FTP manager at unsuccessful connection" option added.
+25. Icon search mode selection implemented.
+
+
+0.1 alpha 44 - Apr 19, 2013
+---------------------------
+1. Incorrect color update for disk size bar - fixed.
+2. FTP disconnect button/command added to FTP log window/menu.
+3. Sometimes disk size is not updated - fixed.
+4. GUI hangs on internal delete operation - fixed.
+5. Overwrite confirmation layout problem - fixed.
+6. Pause and stop commands added to file operations toolbar items.
+7. Explorer style option can be checked when NC selection option enabled - fixed.
+8. "Remove selection on click" option added.
+9. Rename on second click now works for NC style selection.
+10. "Show extension when name is empty" option added.
+11. Custom selected icon index lost in button customization dialog - fixed.
+12. "Paths are equal" now displayed when cop/move to same directory.
+13. Crash on non English letters input in command line - fixed.
+14. File properties dialog now opens on Alt+double click in panel.
+15. Drag-and-drop support added to settings lists.
+16. Delete confirmation displays "To Recycle Bin" checkbox on network paths - fixed.
+17. FTP file view/edit implemented.
+18. Horizontal auto-scroll now works in all comboboxes.
+19. Problem with disk selection when drive letter is in lower case - fixed.
+20. Crash on copy to invalid paths - fixed.
+21. Progress bars shift in file operation toolbar - fixed.
+
+
+0.1 alpha 43 - Apr 12, 2013
+---------------------------
+1. "Local drives" option added to file search path menu.
+2. File operation progress now displays in taskbar.
+3. Fixed FTP connection problem when network disconnected.
+4. Folder monitor crash fixed.
+5. Rename command visible in file search dialog contextual menu - fixed.
+6. Path can't be editable on mouse click - fixed.
+7. Fixed problem with overwriting system/hidden/read-only files.
+8. Crash when copying files with 0 size - fixed.
+9. "Open new file in editor" option added.
+10. Focus not moving on right button selection - fixed.
+11. File overwrite confirmation now supports rename and auto-rename functions.
+12. Fixed FTP incorrect work with remote directory.
+13. Copy FTP log to clipboard function added.
+14. File operations toolbar introduced.
+15. Crash on file copy/move when another process uses this file.
+
+
+0.1 alpha 42 - Apr 05, 2013
+---------------------------
+1. Incorrect selection in panel view menu - fixed.
+2. ".." item can be selected for file operations - fixed.
+3. Read-only file can't be deleted from disk - fixed.
+4. Double-click in Main toolbar customization now opens edit dialog.
+5. Folder favorites customization dialog now displays icons.
+6. %ALL% option doesn't work - fixed.
+7. "Check all paths on startup" option added.
+8. Additional folder update monitor added.
+9. FTP log implemented.
+10. Now Space key performs Go To command in file search dialog.
+
+
+0.1 alpha 41 - Mar 29, 2013
+---------------------------
+1. File search template name resets on saving - fixed.
+2. Not older value is 1 by default now and range increased.
+3. Spanish localization added.
+4. Incorrect copy progress - fixed.
+5. Multi-rename tool now used on Alt+R/F2 when more than one element selected.
+6. Panel now become active on path panel click.
+7. "Show/hide navigation panel" command introduced.
+8. Favorite/system folders menus now display icons.
+9. Navigation panel and favorite/system folders menu can display real folder icons.
+10. Viewer/editor relative path problem fixed.
+11. Arabic localization added.
+12. Middle button click in panel now opens item in new tab.
+
+
+0.1 alpha 40 - Mar 22, 2013
+---------------------------
+1. Scroll under cursor feature added for panels.
+2. Operations window restore problem during session - fixed.
+3. Right button selection doesn't work for up to down direction - fixed.
+4. Panel view menu item not selected after startup - fixed.
+5. Text replace doesn't work in Multi-Rename dialog - fixed.
+6. New copy/move/delete confirmation dialogs.
+7. Copy/move dialog now supports path changing.
+8. Delete confirmation dialog now supports "To Recycle Bin" option switching.
+9. Corrupted file during CFSTR_FILEDESCRIPTOR drag-and-drop - fixed.
+10. Selection by Ins key now supported in Explorer style selection type.
+11. "Program Files (x86)" item displays in system folders on 32 bit OS - fixed.
+12. File filter now supports NotOlder option.
+
+
+0.1 alpha 39 - Mar 15, 2013
+---------------------------
+1. Minimize/maximize enabled for file operations window.
+2. Restore tab functionality added.
+3. Layout problem when minimizing to tray - fixed.
+4. Incorrect separator icon in Main Toolbar Customization dialog - fixed.
+5. Navigation panel groups collapse/expand option resets when changing panels layout - fixed.
+6. Contextual menus open in wrong place - fixed.
+7. Navigation panel drag-and-drop now supports file operations.
+8. Fixed "already exists" problem when copying directories.
+9. Multiple selection with right button implemented for NC selection type.
+10. InfoBar flickers - fixed.
+11. CFSTR_FILEDESCRIPTOR support added for drag-and-drop.
+12. Fixed drag-and-drop not allowed problem when there is no blank space in panel.
+13. Separate option added for right mouse button selection.
+14. Explorer style switching problem when enabling/disabling NC selection - fixed.
+15. "Ctrl+Num -" hotkey added for Unselect All command.
+
+
+0.1 alpha 38 - Mar 11, 2013
+---------------------------
+1. Memory usage reduced and some memory leaks fixed.
+2. "Find" command from shell context menu now opens JM's search dialog.
+3. Quick viewer stealing focus - fixed.
+4. Incorrect sort arrow used after listview column drag operation - fixed.
+5. In some cases wrong theme used for resources toolbar - fixed.
+6. NC style selection implemented.
+7. Not started file operation can't be canceled - fixed.
+8. Parallel file operations option added.
+9. Pause functionality added for file operations.
+10. Quick search filter length limit too small - fixed.
+
+
+0.1 alpha 37 - Feb 22, 2013
+---------------------------
+1. CMD folder opens instead of cmd - fixed.
+2. FTP UTF-8 support added.
+3. Fixed application crash on file view/edit.
+4. Environment variables resolving implemented.
+5. Path panel not displayed problem fixed.
+6. "Open path edit" item added to path panel menu.
+
+
+0.1 alpha 36 - Feb 15, 2013
+---------------------------
+1. New folder command from context menu now displays JM's dialog.
+2. Delete operation can't be canceled - fixed.
+3. Delete progress fixed.
+4. Ukrainian translation added.
+5. Paste option missing in folder context menu - fixed.
+6. Junction points resolving problem fixed.
+
+
+0.1 alpha 35 - Feb 08, 2013
+---------------------------
+1. Path links incorrect resolving fixed.
+2. Command line arguments transfer between Just Manager instances implemented.
+3. Directory can't be created on paths with 248-260 symbols - fixed.
+4. Polish localization added.
+5. Focus loose problem after copy/move/delete operations - fixed.
+6. Fixed JM crash when adding vertical bar char in Find What field in Multi-rename dialog.
+
+
+0.1 alpha 34 - Feb 01, 2013
+---------------------------
+1. FTP navigation problem fixed.
+2. Copy/move operation cannot be canceled - fixed.
+3. Copy folder to it's subfolder problem fixed.
+4. Enter doesn't work when "One click activate" option enabled.
+5. Now folder opens in new tab when panel is locked.
+
+
+0.1 alpha 33 - Jan 25, 2013
+---------------------------
+1. "Show/hide hidden files" command changes current path - fixed.
+2. Now "Swap panels" command not used for locked tabs.
+3. Portuguese localization added.
+4. System error problem fixed.
+5. Notify message now displays when help file missing.
+6. Shell context menu support added for navigation panel.
+7. Panel auto-scroll for drag&drop functionality improved.
+8. Network items sorting doesn't work - fixed.
+9. "Customize..." item added to Favorites group menu in navigation panel.
+10. "Yes/No to all" options added for delete subfolders confirmation.
+11. "Open selection in new tab" command implemented.
+
+
+0.1 alpha 32 - Jan 18, 2013
+---------------------------
+1. Exit menu now closes JM when "Close to tray" option enabled.
+2. "Reset Locked (nav allowed) tabs on selection change" option added.
+3. Fixed problem with restoring from tray when "One instance" option used.
+4. Folder drag&drop to itself problem fixed.
+5. Swap panels command added.
+6. Long paths support improved.
+
+
+0.1 alpha 31 - Jan 11, 2013
+---------------------------
+1. Filter on network paths crashes application - fixed.
+2. Renaming doesn't distinguish between upper and lower case - fixed.
+3. F2 shortcut added for renaming.
+4. Bug in name on folder creation - fixed.
+5. Phantom items on samba shares problem fixed.
+6. Korean localization added.
+
+
+0.1 alpha 30 - Dec 29, 2012
+---------------------------
+1. Now folders can be drag&dropped on main toolbar.
+2. Disk size is not updated - fixed.
+3. "Show navigation progress" option implemented.
+4. File items can't be used on network folders - fixed.
+5. Access dialog now displayed when trying to open network items.
+6. Czech localization added.
+7. Greek localization added.
+8. Version history log included.
+
+
+0.1 alpha 29 - Dec 23, 2012
+---------------------------
+1. Command line drag&drop improved.
+2. History doesn't work for Locked (navigation allowed) tabs - fixed.
+3. File copy progress resets on each file - fixed.
+4. Italian localization added.
+5. Ctrl+* hotkey added for reset quick viewer zoom function.
+6. "Go to command line" command added.
+7. Icon added for "Copy selected names to command line" command.
+8. "Copy selected paths to command line" command added.
+9. If selected items is not folder, "Open in nearest panel" command will use current path.
+10. "Hide folder in type column" option added.
+
+
+0.1 alpha 28 - Dec 21, 2012
+---------------------------
+1. Quick Viewer zoom support added.
+2. Word wrap option implemented for Quick Viewer.
+3. Move operation cannot be canceled - fixed.
+4. Main menu bar displays wrong icons - fixed.
+5. Font files cannot be opened from panel - fixed.
+6. Command line drag&drop supported implemented.
+7. French localization added.
+8. Splitter menu added.
+9. Restore from tray problem fixed.
+10. Now edit dialog opens after ColorFileFilter/ViewEditFilter clone.
+11. Fixed drive buttons incorrect update after USB player, flash, e.t.c removed.
+12. "Insert selection into command line" command added.
+13. FTP connection reset detection improved.
+14. Some internal file operations changes done.
+
+
+0.1 alpha 27 - Dec 14, 2012
+---------------------------
+1. Move file between drives problem fixed.
+2. Directory updates not received for network paths - fixed.
+3. Toolbars buttons size problem after font changing - fixed.
+4. Background color option added for function keys toolbar.
+5. Function key buttons icon and text now centered.
+6. Navigation toolbar redraw problem fixed.
+7. Clone option added to color file filters settings page.
+8. Fonts/colors and color file filter settings now on separate tabs.
+9. Clone option added to view/edit settings page.
+10. "Close not locked tabs on exit" option introduced.
+11. More correct way to detect default Viewer/Editor path implemented.
+12. Tray icon context menu added.
+13. Problem with delete to Recycle Bin confirmation - fixed.
+14. Chinese Simplified translation included.
+15. "Go to command line by letter key" option added.
+
+
+0.1 alpha 26 - Dec 07, 2012
+---------------------------
+1. Navigation settings page added (open root folder, symlinks and history length now here).
+2. New options for "Open in nearest panel" functionality: open in new tab and move focus.
+3. Minimize to tray functionality introduced.
+4. Close to tray option added.
+5. Tab functionality problem when quick viewer enabled - fixed.
+6. Disk selection using middle mouse button added.
+7. Enter, Alt+Enter, Ctrl+Enter hotkeys cannot be set in settings - fixed.
+8. Max file size option for quick viewer added.
+9. System icon not displayed in Control panel menu - fixed.
+10. "Search for exact match" option added to file search functionality.
+11. Quick search doesn't work for numpad keys - fixed.
+12. "Show/hide hidden files" command added.
+13. Navigation panel color/font settings introduced.
+14. Panels layout command added.
+15. Icon loading memory leak fixed.
+16. Better icon support for main toolbar drag&drop functionality.
+
+
+0.1 alpha 25 - Dec 02, 2012
+---------------------------
+1. Internal copy/move support for drag&drop and clipboard operations added.
+2. Fixed crash on environment importing.
+3. Directory size not updated in info bar after calculation - fixed.
+4. Fixed file icons problem when drag&drop on main toolbar.
+5. Some relative path problems fixed for Button/Menu customization dialogs.
+6. Automatic AutoSize panels option added.
+7. Hungarian localization added.
+8. Main menu cannot be accessed by Alt key - fixed.
+9. Alt+Up hotkey added for "open path edit" functionality.
+10. Ctrl+Left/Right hotkeys added for "open selection in nearest panel" functionality.
+
+
+0.1 alpha 24 - Nov 30, 2012
+---------------------------
+1. Shifted/blank items problem - fixed.
+2. Problem with directory deletion if subdir opened in JM - fixed.
+3. New file operations progress window.
+4. Multi-pattern support added for file search functionality.
+5. Second disk click now opens last directory if "Open root folder..." open turned off.
+6. Path now added to custom command when drag&drop items on main toolbar.
+7. Tab drawing functionality improved.
+8. Icon for *.ico files not displayed - fixed.
+9. Incorrect disk selection when new disk appears on resources toolbar - fixed.
+10. Now correct disk name and icon displayed when inserting CD/DVD.
+11. Fixed locked tab problem when folder was deleted.
+12. Natural sorting support added.
+13. Now not only applications can be drag&dropped on main toolbar.
+14. Splitter bounds added.
+15. Some splitter calculation bugs fixed.
+16. Fixed quick search problem with some keys.
+17. Show size units option introduced.
+18. Disk size bat text not fully visible after font changing - fixed.
+
+
+0.1 alpha 23 - Nov 23, 2012
+---------------------------
+1. Internal file copy/move functionality improved.
+2. Drag&drop functionality implemented for main toolbar buttons.
+3. Crash when accessing audio CD - fixed.
+4. Non-32bit icons display problem fixed.
+5. Context menu for main toolbar buttons added.
+
+
+0.1 alpha 22 - Nov 16, 2012
+---------------------------
+1. Some problems with FTP directory listing fixed.
+2. Incompatibility between "Use system color for tabs" and "Show lock icons" - fixed.
+3. Incorrect directory used on file activation in panel - fixed.
+4. Changed incorrect standard name for create file command.
+5. Crash when using Control Panel command - fixed.
+6. Blank names for standard commands in custom drop-down menus - fixed.
+7. Control panel "unknown" item problem fixed.
+8. Ctrl+Ins hotkey added for "Copy file names to clipboard" command.
+9. Shift+Alt+Ins hotkey added for "Copy paths to clipboard" command.
+10. Icons support for drop-down list customization dialog added.
+11. German localization added.
+12. Carriage return problem in "Copy file names/paths to clipboard" command fixed.
+13. Some logging problems fixed.
+14. Blank items (redrawing problem in panel) - fixed.
+15. Forms prefill functionality implemented for Button/Menu customization dialogs.
+16. Viewers/editors list update problem after changing Viewer/Editor path - fixed.
+
+
+0.1 alpha 21 - Nov 09, 2012
+---------------------------
+1. Custom drop-down menus support implemented for main toolbar buttons.
+2. Slow one click activate functionality - fixed.
+3. Better separators view in Folder Favorites dialog.
+4. Double-click on panel's empty space starts Go Up command now.
+5. Dutch localization added.
+6. Image list disappears in Icon Selection dialog - fixed.
+7. New "Show tab lock icons" option introduced.
+8. New "Lock tab symbol" option for tabs added.
+
+
+0.1 alpha 20 - Nov 02, 2012
+---------------------------
+1. GUI hangs on big files drag&drop/paste from clipboard - fixed.
+2. Incorrect cursor when drag&drop file to same disk - fixed.
+3. Incorrect selection when renaming folder - fixed.
+4. Pressing the disk button that already selected causes Go Root command.
+5. File properties dialog now opens under cursor.
+6. New "Show in one line" option for disk size bar.
+7. Properties item doesn't work in folder context menu - fixed.
+8. Properties tree sub-levels translation problem - fixed.
+9. Copy file names to clipboard command added.
+10. Copy paths to clipboard command added.
+11. Extension in directory name on F7 - fixed.
+12. Slash in path now converts to backslash.
+13. Panel layout settings moved to View settings page.
+14. Delete key support added for FTP connections list.
+15. Crash when changing menu and hotkey settings at one time - fixed.
+16. Now button type can be customized.
+17. Icon customization for menu items introduced.
+18. Menu item/button customization dialogs changed.
+
+
+0.1 alpha 19 - Oct 26, 2012
+---------------------------
+1. Control Panel menu added.
+2. Advanced commands added to folder context menu.
+3. More correct why to identify system UI language introduced.
+4. Sometimes after filter all items become selected - fixed.
+5. Lock tab icons now smaller.
+6. Now panel becomes active on tab creation, when tab removed or selected tab changed.
+7. Tab lock now resets when tab path no longer valid.
+8. New Favorites button for each panel.
+9. All items become selected problem fixed.
+10. Now default drag&drop to same disk -> move, different -> copy.
+11. Right button drag&drop context menu added.
+12. "Locked navigation allowed" tabs now reset when tab selection changes.
+13. Hide file extensions option introduced.
+14. Now only file name selected in rename editbox.
+15. "Open With" dialog support included.
+16. New Display settings page introduced.
+17. "Always on top" settings now on General settings page.
+
+
+0.1 alpha 18 - Oct 12, 2012
+---------------------------
+1. One click activate option added for panels.
+2. Rename file to same or blank name problem fixed.
+3. Some file search problems fixed.
+4. Del button support for menu and hokeys settings.
+5. "NewFile.txt" now appears in file create dialog when ".." focused in panel.
+6. Wrong selection after sorting/filter - fixed.
+
+
+0.1 alpha 17 - Oct 05, 2012
+---------------------------
+1. Theme support added: import/export.
+2. Wrong multiple items selection - fixed.
+3. Multiple CD-ROM drive buttons problem fixed.
+4. Min/max width options added for tabs.
+5. When One Instance option enabled application bring to front failed - fixed.
+6. Switching tabs on Shift+Ctrl+Tab functionality added.
+7. Network item cannot be navigated from history - fixed.
+8. Crash on exit when Import Settings command was used - fixed.
+9. Command line openes cmd widnow for cmd command - fixed.
+10. Color dialog openes after font dialog in Fonts/Colors propeties - fixed.
+11. Reset command added to Fonts/Colors propeties page.
+12. Program crashs on briefcase object creation - fixed.
+13. Crash on Ctrl+V if invalid path - fixed.
+14. Selection disappears when there is only ".." item in folder - fixed.
+
+
+0.1 alpha 16 - Sep 28, 2012
+---------------------------
+1. Switching tabs on Ctrl+Tab functionality added.
+2. Ctrl+Home shortcut for GoRoot command added.
+3. About dialog refactoring.
+4. Problem with many disks A after Windows sleep mode - fixed.
+5. Verification for blanks in command line string added.
+6. Wrong folder size calculation icon - fixed.
+7. Now 0 bytes displayed for folders after size calculation.
+8. Create file function now uses selected item name as default file name.
+9. Backslash in paths problem fixed.
+10. English localization not loading problem fixed.
+11. Show hidden/system files options added.
+12. Items selection resets after refresh - fixed.
+13. Quick preview (Ctrl+Q) implemented.
+14. Wrong item selection after folder explore - fixed.
+
+
+0.1 alpha 15 - Sep 12, 2012
+---------------------------
+1. File search results saving to file functionality improved.
+2. Now tab name can be removed.
+3. Ctrl-V file replacement confirmation fixed.
+4. Paste from zip problem fixed.
+5. Pathpanel doesn't accept long paths problem fixed.
+6. File properties command added.
+7. Incorrect TEMP system folder path problem fixed.
+8. File search dialog now uses correct path on restore.
+9. Folder compare functionality introduced.
+10. Drag&drop to quick launch problem fixed.
+11. USB flash drive blocking problem fixed.
+12. Now file copy creates on copy/paste operation in the same directory.
+13. Filter reset functionality added to GoUp command.
+14. Invert selection command added.
+15. Auto-size columns to panel width option introduced.
+
+
+0.1 alpha 14 - Jun 18, 2012
+---------------------------
+1. Incorrect quick-search filter behaviour fixed.
+2. Command line parameters functionality now works more correct.
+3. Reset command added to color file filters settings.
+4. File search dialog supports search list export to csv file.
+5. Reset command added to view/edit settings.
+6. "Lock tab with navigation allowed" functionality introduced.
+7. Columns order not saved on exit problem fixed.
+8. "Starts with filter" option added to Quick Search.
+9. Columns resizing problem fixed.
+10. Close button added to Search dialog.
+11. Help buttons integration.
+12. Close button added to Multi-Rename dialog.
+
+
+0.1 alpha 13 - May 29, 2012
+---------------------------
+1. Fixed incorrect contextual menu for drive buttons.
+2. Panel auto-scroll during drag-and-drop fixed.
+3. Icons appearance problem fixed.
+4. Arrow navigation in quick search editbox restored.
+5. FTP username and password verification added.
+6. Multiple files attributes now merge in AttributesTimestamp dialog.
+7. IconPack.dll not found problem fixed.
+8. Filter reset by Esc bug fixed.
+9. New file opens with viewer bug fixed.
+10. Quick search type switcher in quick search dialog now changes behavior immediately.
+11. Program is DPI aware now.
+12. Application size adaptation based on screen resolution added.
+13. Command line arguments support included.
+14. Attempt to access Floppy/CD-ROM on startup problem fixed.
+15. Reset command added to main menu settings.
+16. Default hotkeys settings restore on startup fixed.
+17. Reset command added to hotkeys settings
+18. OK, Cancel, Error, Warning texts now included in dictionaries.
+19. Resources list now has context menu.
+20. Incorrect file startup directory fixed.
+21. FTP connection keep-alive ping added.
+22. FTP errors handling added.
+23. Unsupported for FTP message added.
+24. FTP change directory sometimes doesn't work issue fixed.
+25. Resources list now opens when user clicks GoUp in root folder.
+26. FTP port now allows 5 digits.
+27. Reconnection on disconnection added.
+28. Sorting now allowed in file search dialog.
+
+
+0.1 alpha 12 - May 12, 2012
+---------------------------
+1. File operation confirmations refactoring. More correct file/folder count.
+2. Drag&Drop create shortcut operation added. Shortcut creates when Alt key is down.
+3. Folder Favorites refactoring. Now allows folder nameing.
+4. View/Edit refactoring. Now viewers/editors can be selected by extension + command line parameters.
+5. Map/unmap drive functionality (buttons, menus).
+6. Font properties added to color file filters.
+7. Symbolic link support added. No program can follow symbolic links.
+8. Now Del, Backspace and Space keys can be selected for shortcuts.
+9. Color file filters logic change. First satisfied filter will be used.
+10. Fixed problem with attributes not updated.
+11. Browse button added in favorites dialog.
+12. Separators added to the favorites list.
+13. Double-clicking in hotkeys list now fills hotkey control and selects appropriate command.
+14. New attributes/timestamp change functionality (dialog, menus).
+15. Command line settings page added with save history and leave cmd open options.
+16. Implemented auto-hide feature for command line.
+17. Added search/filter switch in Quick Search dialog.
+18. Separate copy, move, delete confirmations.
+19. Installer now uses path of already installed standalone application.
+20. Desktop and Quick Launch links can be created during installation.
+21. Start Menu, Program Files (x86) and Temp directories added to system folders list.
+22. FTP connection names changed. Now "FTP:<name>".
+23. Drag&Drop support for ".." folder added.
+24. Left/right arrows not allowing to scroll listview problem fixed.
+25. USB detection problem fixed.
+26. TAB key switching behaviour changed. Now it cycle trough all panels.
+27. Pressing Enter in Quick Search now closes dialog.
+28. Overwrite confirmation for Drag&Drop added.
+29. Date/time otions changed in File Search dialog.
+30. Anonymous, Remote Path and Passive Mode options added to FTP connection.
+31. FTP tab name now displays only host.
+32. Extended macro added for extensions in Multi-rename tool.
+33. Include folders option added to size group in file search dialog.
+34. Fix for date formating in US locale.
+35. Mutiple search points ability included in file search dialog.
+36. Option to open ftp connection in current/new tab added.
+37. Significantly improved file search by text.
+38. FTP file operations implemented.
+39. Custom commands support for menu and main toolbar.
+40. Menu customization.
+41. New toolbar customization.
+42. New standard commands support.
+43. Small fix for main window layout.
+44. Ctrl+\ "go to root" hotkey added.
+45. Added drives navigation when pressing letter in drives list.
+46. Help file now included in installer. Also F1 hotkey and menu support added.
+
+
+0.1 alpha 11 - Mar 12, 2012
+
+0.1 alpha 10 - Dec 29, 2011
+
+0.1 alpha 9 - Nov 29, 2011
+
+0.1 alpha 8 - Sep 23, 2011
+
+0.1 alpha 7 - Jun 01, 2011
+
+0.1 alpha 6 - Apr 06, 2011
+
+0.1 alpha 5 - Jan 16, 2011
+
+0.1 alpha 4 - Oct 12, 2010
+
+0.1 alpha 3 - May 31, 2010
+
+0.1 alpha 2 - Dec 12, 2009
+
+0.1 alpha 1 - May 20, 2009

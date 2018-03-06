@@ -1,0 +1,130 @@
+[main]
+Title=Add Custom Folders\Files
+Description=
+Selected=False
+Level=5
+Author=ThePEBakeryTeam
+Version=20180306
+Date=2018-03-06
+Interface=Interface1
+
+[Interface1]
+pTextLabelMenu1="1",1,1,35,3,70,18,10,Bold
+pButtonMenu2="2",1,8,75,0,70,20,pButtonMenu2,0,True,_pButtonMenu2_,True
+pButtonMenu3="?",1,8,145,0,70,20,pButtonMenu3,0,True,_pButtonMenu3_,True
+pTextLabel1="Add the contents of the folder selected below to the build.",1,1,9,65,480,18,10,Bold
+pBevel2=pBevel2,1,12,10,100,500,40
+pTextLabel2="PATH",1,1,20,110,166,18,8,Bold
+pFileBox1=,1,13,71,110,428,20,dir
+pCheckBoxInWim="Include Program in boot.wim",1,3,10,265,180,18,True
+
+[Interface2]
+pButtonMenu1="1",1,8,5,0,70,20,pButtonMenu1,0,True,_pButtonMenu1_,True
+pTextLabelMenu2="2",1,1,108,3,70,18,10,Bold
+pButtonMenu3="?",1,8,145,0,70,20,pButtonMenu3,0,True,_pButtonMenu3_,True
+pBevel1=,1,12,10,65,66,2
+pTextLabel="Menu Entries",1,1,10,50,230,18,8,Bold
+pCheckBoxShortcutDesktop="Add to Desktop Menu",1,3,40,80,150,18,True
+pCheckBoxShortcutQuick="Add to Quicklaunch Menu",1,3,40,110,150,18,True
+pCheckBoxShortcutPrograms="Add to #$qStart#$q > ",1,3,40,140,99,18,True
+pCheckBoxShortcutLaunchBar="Add to LaunchBar Menu ",1,3,40,170,150,18,True
+pButtonShortcut1=?,1,8,10,80,18,18,pButtonShortcut1,0,True,_pButtonShortcut1_,True
+pButtonShortcut2=?,1,8,10,110,18,18,pButtonShortcut2,0,True,_pButtonShortcut2_,True
+pButtonShortcut3=?,1,8,10,140,18,18,pButtonShortcut3,0,True,_pButtonShortcut3_,True
+pButtonShortcut4=?,1,8,10,170,18,18,pButtonShortcut4,0,True,_pButtonShortcut4_,True
+pTextBox1=,1,0,140,140,150,21,Programs
+
+[pButtonMenu1]
+IniWrite,%ScriptFile%,Main,Interface,Interface1
+System,REFRESHINTERFACE
+
+[pButtonMenu2]
+IniWrite,%ScriptFile%,Main,Interface,Interface2
+System,REFRESHINTERFACE
+
+[pButtonMenu3]
+message,"Click on the buttons to toggle between tabs 1 and 2. #$x#$xTab 2 contains menu options for use in the selected shell. Click on the ? button for information about the different options."
+
+[pButtonShortcut1]
+message,"WinXShell only#$x#$xSelect this option to add a program shortcut to the Desktop."
+
+[pButtonShortcut2]
+message,"WinXShell only#$x#$xSelect this option to add a program menu option to the Quicklaunch menu - similar in appearence to the 'Pin to Taskbar' option in Windows 7/8/10."
+
+[pButtonShortcut3]
+message,"Applies to WinXShell#$c BBLean and LaunchBar Shell(s)#$x#$xSelect this option to add a program menu option to the Start menu. Leave blank to add to the root of the menu#$c or manually type a path to place in a sub-menu (do not use spaces in the path). E.g. #$x#$s- FileManager#$x#$s- Programs#$x#$s- Programs\FileManager#$x#$xAnd looking at the examples above - #$x#$xLeave this option blank to add a menu entry to the root of the program menu (the 'Start' menu in WinXShell#$c the 'Start' menu in BBLean#$c or the root of the LaunchBar menu bar if LaunchBar is selected as Shell)#$x#$xEnter 'FileManager' to add a menu entry for this application to the 'Start' > 'FileManager' sub-menu (WinXShell and bblean) or the 'FileManager' sub-menu in LaunchBar.#$x#$xEnter 'Programs' to add a menu entry for this application to the 'Start' > 'Programs' sub-menu (WinXShell and bblean) or the 'Programs' sub-menu in LaunchBar.#$x#$xEnter 'Programs\FileManager' to add a menu entry for this application to the 'Start' > 'Programs' > 'FileManager' sub-menu (WinXShell and bblean) or the 'Programs' > 'FileManager' sub-menu in LaunchBar."
+
+[pButtonShortcut4]
+message,"This setting does not apply to any LaunchBar instance running as the WinPE Shell. This option only applies to a LaunchBar instance when the Applications' > 'LaunchBar' program script is selected in the build.#$x#$xIf the 'Applications' > 'LaunchBar' program script is selected than enable this option to add a program menu entry to the root of the LaunchBar menu bar. #$x#$xPlease note that if option '6] Programs in boot.wim' in the main project script is set as 'NO'#$c then LaunchBar and a number of other applications will not be available at boot. In this case a text based .ini file will be used for LaunchBar menu settings."
+
+
+[process]
+AddInterface,%ScriptFile%,Interface1,""
+AddInterface,%ScriptFile%,Interface2,""
+If,%pCheckBoxInWim%,Equal,True,Set,%PROGRAMS.IN.WIM%,YES
+Else,Set,%PROGRAMS.IN.WIM%,NO
+Run,%ScriptFile%,CHECKS
+Run,%ScriptFile%,MENU
+Run,%ScriptFile%,COMMON
+If,%PROGRAMS.IN.WIM%,Equal,NO,Run,%ScriptFile%,NOT.IN.WIM
+If,%PROGRAMS.IN.WIM%,Equal,YES,Run,%ScriptFile%,IN.WIM
+
+[CHECKS]
+If,"%pFileBox1%",Equal,"",Begin
+  Message,"ERROR - Path is not set. Exiting script..."
+  Exit,"ERROR - Path is not set. Exiting script..."
+End
+set,%PATH.TO.MY.FILES%,"%pFileBox1%"
+If,Not,ExistDir,%PATH.TO.MY.FILES%,Begin
+  Message,"ERROR - The folder does not exist. Exiting script..."
+  Exit,"ERROR - The folder does not exist. Exiting script..."
+End
+
+[MENU]
+If,%PROGRAMS.IN.WIM%,Equal,YES,Begin
+  If,%Filemanager%,Equal,Q-Dir,ShellExecute,Hide,"%Tools%\Shortcut.exe","/A:C /T:#$q#$pSystemDrive#$p\Programs\Q-Dir\Q-Dir.exe#$q /F:#$q%ProjectTemp%\UserAdded.lnk#$q /P:#$q#$pSystemDrive#$p\Programs\User_Added#$q /W:#$q#$pSystemDrive#$p\Programs\User_Added#$q /I:#$q#$pSystemDrive#$p\Programs\misc\folder.ico#$c0#$q"
+  If,%Filemanager%,Equal,Explorer++,ShellExecute,Hide,"%Tools%\Shortcut.exe","/A:C /T:#$q#$pSystemDrive#$p\Programs\Explorer++\Explorer++.exe#$q /F:#$q%ProjectTemp%\UserAdded.lnk#$q /P:#$q#$pSystemDrive#$p\Programs\User_Added#$q /W:#$q#$pSystemDrive#$p\Programs\User_Added#$q /I:#$q#$pSystemDrive#$p\Programs\misc\folder.ico#$c0#$q"
+  If,%Filemanager%,Equal,JustManager,ShellExecute,Hide,"%Tools%\Shortcut.exe","/A:C /T:#$q#$pSystemDrive#$p\Programs\JustManager\JustManager.exe#$q /F:#$q%ProjectTemp%\UserAdded.lnk#$q /P:#$q#$pSystemDrive#$p\Programs\User_Added#$q /W:#$q#$pSystemDrive#$p\Programs\User_Added#$q /I:#$q#$pSystemDrive#$p\Programs\misc\folder.ico#$c0#$q"
+  If,%Filemanager%,Equal,7-zip,ShellExecute,Hide,"%Tools%\Shortcut.exe","/A:C /T:#$q#$pSystemDrive#$p\Programs\7-zip\7zfm.exe#$q /F:#$q%ProjectTemp%\UserAdded.lnk#$q /P:#$q#$pSystemDrive#$p\Programs\User_Added#$q /W:#$q#$pSystemDrive#$p\Programs\User_Added#$q /I:#$q#$pSystemDrive#$p\Programs\misc\folder.ico#$c0#$q"
+  If,ExistFile,"%ProjectTemp%\UserAdded.lnk",Begin
+    Set,%MyShortcut%,UserAdded.lnk
+    If,%pCheckBoxShortcutDesktop%,Equal,True,FileCopy,"%ProjectTemp%\%MyShortcut%","%ProjectTemp%\ShortCuts\Desktop"
+    If,%pCheckBoxShortcutQuick%,Equal,True,FileCopy,"%ProjectTemp%\%MyShortcut%","%ProjectTemp%\ShortCuts\Quick"
+    If,%pCheckBoxShortcutPrograms%,Equal,True,Begin
+      Set,%ProgramMenuPath%,%pTextBox1%
+      Run,"%ProjectDir%\Core\common.script",StartMenu
+    End
+    If,%pCheckBoxShortcutLaunchBar%,Equal,True,FileCopy,"%ProjectTemp%\%MyShortcut%","%ProjectTemp%\ShortCuts\LaunchBar"
+    FileDelete,"%ProjectTemp%\%MyShortcut%"
+  End
+End
+If,%pCheckBoxShortcutLaunchBar%,Equal,True,If,%PROGRAMS.IN.WIM%,Equal,NO,If,ExistFile,"%ProjectTemp%\LaunchBar.ini",TXTaddLine,"%ProjectTemp%\LaunchBar.ini",UserAdded;..\User_Added,Append
+
+[COMMON]
+If,%PROGRAMS.IN.WIM%,Equal,NO,Set,%PATH%,%OutputDir%
+If,%PROGRAMS.IN.WIM%,Equal,YES,Begin
+  Set,%PATH%,%TargetDir%
+  If,Not,ExistDir,"%TargetDir%\Programs\misc",DirMake,"%TargetDir%\Programs\misc"
+  If,ExistFile,"%Programs%\misc\folder.ico",FileCopy,"%Programs%\misc\folder.ico","%TargetDir%\Programs\misc"
+End
+If,Not,ExistDir,"%PATH%\Programs",DirMake,"%PATH%\Programs"
+DirMake,"%PATH%\Programs\User_Added"
+Echo,"Copying files..."
+DirCopy,"%PATH.TO.MY.FILES%\*.*","%PATH%\Programs\User_Added"
+IniWrite,"%OutputDir%\Project.Settings.ini",PROGRAMS,ADD.CUSTOM.FILES,YES
+
+[IN.WIM]
+//Wait,1
+
+[NOT.IN.WIM]
+//Wait,1
+Exit,"User_Added copied to #$q%PATH%\Programs#$q directory - it will not be added to #$qboot.wim#$q",Nowarn
+
+[AuthorEncoded]
+Logo=settings.ico
+settings.ico=653,871
+
+[EncodedFile-AuthorEncoded-settings.ico]
+lines=0
+0=eJztlzFLI0EYht9gEawCFnJdplAQLfQHBEW4H3KttaWosfIHWIr9tXbhuCLhOMLdXwjIcvcDXEE0Rcj6ffPNormN3sxmJ7ML+4Q3LyyZ7DMLuzsDNOiztwf6Vvi6CawD2KLQIXyBHNdsoKbGhjZlSHmkXAZ2cUVRIkryJlcBfVxQyLpXZQ4K77uXfQ4K/3cv6xwU7N3TlOWeVnB35zwuXzWDQj53znDptrMo5Hfnce0l+75FYTF3tVzdGRRq9xAo1O4hUKjdQ6BQuxfNDuWE0qPcUR4oMWVEuaUcUzoldN+nDHI6hXRfpVx79vblvkb5VVF3vu6/K+rO3FTY/bDC7szPCrvvenbndDy5MxcW55+a5PU/9uj/3cL9yCTvHG49+v+1cE/JO4eRR/9nS/dF5hB79H9ycE9xncODJ3fmD9zcU1zmcFe49Svf4O6eYjuHXoG+/3KKfO6Avf9JUbJz2IZf98ScwyefHX/v4j4oTrMQXJ89+2E05+Lqfh1Gcy6u7ryPWw1imsXVnfdxa0FMs7i68z6uLNedn0u27rwHOgyj+SH87OZ3HL+nea3B6yVe8/G6ldfevH/YDWZXE4REM9vjc+n4QDpqS/db0t2mNFZ0T01PTI9Nx5DfRZBxfcj/dCH/C+jzTPVdw8Mbumm4bhrO3QdaidxYbfqaUB9Qj6nPE9lQJNIN7gg0XLrJrYfP60+mO6bPTCfSg6Sr+4fpoTl+PyUN9pmYHpMOd2w6Ii3xluvZXZHutzLXmfsFmCR9knic4ylOLSnJzEsv1stMzmcYBSMN7FOF0I5M2OUtLh+2Y2ACAJzcCBstMDmuAQAAAAIAAAAoAAAAQQIAAAAAAAABAAAAAAAAAAAAAAA
+

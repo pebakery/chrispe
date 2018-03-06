@@ -1,0 +1,128 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd"><html><head><link type="text/css" rel="stylesheet" href="chrispe.css" media="screen" /><title>ChrisPE</title></head><body><font> 
+ 
+ 
+ 
+<p> 
+<select ONCHANGE="location = this.options[this.selectedIndex].value;"> 
+<option value="" disabled></option> 
+<option value="../readme.html">Contents</option> 
+<option value="" disabled>=======</option> 
+<option value="winpe.htm" selected="selected">Windows PE</option>  
+<option value="builder.htm">Builders</option>  
+<option value="options.htm">Project Options</option>  
+<option value="project.htm">Project Scripts</option>  
+<option value="instructions_pebakery.htm">Instructions</option>  
+<option value="menu_system.htm">Menu System</option>  
+<option value="not_in_wim.htm">Include...in boot.wim</option>  
+<option value="usb.htm">...Bootable USB...</option>  
+<option value="uefi.htm">UEFI, BIOS, GPT...</option>  
+<option value="multiboot.htm">Multiboot WinPE</option>  
+<option value="" disabled></option> 
+<option value="" disabled>Appendices</option> 
+<option value="" disabled>=========</option> 
+<option value="quick_pebakery.htm">Quick Start</option>  
+<option value="acknowledgements.htm">Acknowledgements</option>  
+<option value="" disabled></option> 
+</select> 
+</p> 
+ 
+ 
+ 
+<hr> 
+<a href="http://chrispe.mistyprojects.co.uk/"><img src="img/home.jpg" BORDER=1></a> 
+ 
+
+
+
+<h2><u>Windows Preinstallation Environment</u></h2>
+
+<p>
+Windows Preinstallation Environment (<font class="file">WinPE</font>) is a lightweight version of Windows that can be used for many tasks. It was originally designed as a 32-bit replacement for DOS - for windows deployment, backup and recovery. <font class="file">WinPE</font> is a complete, standalone operating system and will work independently of any other operating systems already installed. See <a class="external" target="_blank" href="http://technet.microsoft.com/en-us/library/cc766093(v=ws.10).aspx">here</a> for more information. 
+</p>
+
+
+
+<p>
+When a computer is running (booted from) a full version of Windows certain files are 'locked' - making it difficult to take a system backup or to remove a virus/malware. Consequently some tasks are best performed when the operating system is offline - this can be achieved by booting to another operating system such as <font class="file">WinPE</font> to access the offline system. 
+</p>
+
+
+
+
+<p>
+There are two distinct methods for booting <font class="file">WinPE</font> - RAM Boot and Flat Boot. RAM Boot is the most common method and anyone who has installed Windows Vista/7/8/8.1 will already (perhaps unknowingly) have used it. Microsoft recommend a minimum of 512 MB RAM in order to run a RAM booted version of <font class="file">WinPE</font> - in my own tests it was possible to boot some versions of <font class="file">WinPE</font> with 256 MB RAM. For more details about RAM and Flat boot <font class="file">WinPE</font> and RAM requirements, please see <a class="external" target="_blank" href="http://mistyprojects.co.uk/documents/WinPE.RAM/winpe.ram.usage.htm">here</a>.
+</p>
+
+
+
+<p>
+When <font class="file">WinPE</font> is RAM Booted or Flat Booted from read only media it will not save any changes made to it when the system is rebooted. A benefit of this is always having a clean (virus free) <font class="file">WinPE</font> operating system on boot. 
+</p>
+
+
+
+
+<p>
+<font class="file">WinPE</font> is easy to customise. The builds prior to customisation are very limited and the UI (User Interface) is command line. It is possible to adapt these builds to use a GUI shell and other programs and utilities can be added so that various tasks can be carried out, including but not limited to - 
+<ul>
+<li><font class="file">Disk partitioning</font></li>
+<li><font class="file">Deploying Windows</font></li>
+<li><font class="file">Disk/partition imaging</font></li>
+<li><font class="file">Data backup</font></li>
+<li><font class="file">System/data recovery</font></li>
+<li><font class="file">System restore</font></li>
+<li><font class="file">Forensic analysis</font></li>
+<li><font class="file">Password reset</font></li>
+<li><font class="file">Offline Virus Scan</font></li>
+</ul>
+</p>
+
+
+
+<h2><u>WinPE Versions</u></h2>
+
+
+<p>
+There are a number of different versions of official Microsoft <font class="file">WinPE</font>. I believe that the earlier versions used the same codebase as Windows XP/2003 - these are usually referred to as <font class="file">WinPE</font> 1.*.
+</p>
+
+
+
+<p>
+Earlier versions of <font class="file">WinPE</font> (prior to the introduction of version 2.0) were aimed at enterprise customers and were not available to the general public. As of version 2.0 it was possible for non-enterprise customers to create their own <font class="file">WinPE</font> by using the freely available Windows Automated Installation Kit (WAIK). The WAIK has now been replaced with the Windows Assessment and Deployment Kit (ADK). 
+</p>
+
+
+
+<p>
+Windows Operating Systems use a numbering format for identification purposes - these numbers can be used to identify the codebase from which a particular <font class="file">WinPE</font> was created. Windows builds use the numbering format ‘MajorVersion.MinorVersion.Build’ - e.g. 6.1.7600. Unlike the product names associated with Windows Operating Systems (e.g. Windows 7) these numbers can refer to multiple products - version 6.1.7600 for example refers to both Windows 7 and Windows Server 2008.
+</p>
+
+
+<p>
+<font class="file">WinPE</font> versions include -
+
+<ul>
+<li><b>2.0</b> (6.0.6000) - Windows Vista</li>
+<li><b>2.1</b> (6.0.6001) - Windows Vista (SP1)/ Server 2008</li>
+<li><b>3.0</b> (6.1.7600) - Windows 7/Server 2008 R2</li>
+<li><b>3.1</b> (6.1.7601) - Windows 7 (SP1)/Server 2008 R2 (SP1)</li>
+<li><b>4.0</b> (6.2.9200) - Windows 8/Windows Server 2012</li>
+<li><b>5.0</b> (6.3.9600) - Windows 8.1</li>
+<li><b>5.1</b> (6.3.9600) - Windows 8.1 Update 1</li>
+<li><b>10.x</b> (10.0.#####) - Windows 10</li>
+</ul>
+</p>
+
+
+<p>
+There are 32 bit and 64 bit versions of all of the above <font class="file">WinPE</font> systems. To install a Windows 32 bit operating system you will need to use a 32 bit <font class="file">WinPE</font>, and to install a Windows 64 bit operating system you will need to use a Windows 64 bit <font class="file">WinPE</font> - I am referring here to running setup.exe included with the operating system media.
+</p>
+
+<p>
+More recent versions of <font class="file">WinPE</font> are likely to better support more recent hardware without the need for injecting drivers. <font class="file">WinPE</font> 3.x builds are very stable and I would personal recommend using these builds unless a Windows Forensic Environment is required - or hardware is not supported.  
+</p>
+
+
+
+<p class="breaktop"><font class="file">Document date - 6<sup>th</sup> March 2018</font></p></font></body></html>

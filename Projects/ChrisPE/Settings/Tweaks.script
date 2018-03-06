@@ -1,0 +1,189 @@
+[main]
+Title=Tweaks
+Description=
+Selected=True
+Level=4
+Author=ThePEBakeryTeam
+Version=20180306
+Date=2018-03-06
+Interface=Interface
+NoWarning=False
+
+[Interface]
+pCheckBoxA="A] Browse for Folders",1,3,41,40,180,18,True
+pCheckBoxB="B] NoInternetOpenWith",1,3,41,65,180,18,True
+pCheckBoxC="C] File Manager tweaks",1,3,41,90,180,18,True
+pCheckBoxD="D] File Copy progress bar",1,3,41,115,180,18,True
+pCheckBoxE="E] Windows 10 Drag 'n' Drop",1,3,41,140,180,18,True
+pCheckBoxF="F] 'NEW' context menu fix",1,3,41,165,180,18,True
+pButtonA=?,1,8,10,40,18,18,?optionA,0,True,_?optionA_,True
+pButtonB=?,1,8,10,65,18,18,?optionB,0,True,_?optionB_,True
+pButtonC=?,1,8,10,90,18,18,?optionC,0,True,_?optionC_,True
+pButtonD=?,1,8,10,115,18,18,?optionD,0,True,_?optionD,True
+pButtonE=?,1,8,10,140,18,18,?optionE,0,True,_?optionE_,True
+pButtonF=?,1,8,10,165,18,18,?optionF,0,True,_?optionF_,True
+pCheckBoxG="G] Remove 'Include in Library'",1,3,300,40,180,18,True
+pCheckBoxH="H] Remove 'Send to'",1,3,300,65,180,18,True
+pCheckBoxI="I] Remove 'Pin to Start\Taskbar'",1,3,300,90,180,18,True
+pCheckBoxJ="J] Remove 'WallpaperHost.exe'",1,3,300,115,180,18,True
+pButtonG=?,1,8,270,40,18,18,?optionG,0,True,_?optionG_,True
+pButtonH=?,1,8,270,65,18,18,?optionH,0,True,_?optionH_,True
+pButtonI=?,1,8,270,90,18,18,?optionI,0,True,_?optionI_,True
+pButtonJ=?,1,8,270,115,18,18,?optionJ,0,True,_?optionJ_,True
+
+[?optionA]
+Message,"The #$qBrowse for Folder#$q dialog is required in a number of programs - some programs might not function without this.#$x#$xNOTE - this is not working in WinPE 2.*"
+
+[?optionB]
+Message,"Surpress the #$qUse the Web service to find the correct program#$q dialog - displayed when an unknown file type is selected.#$x#$xThe #$qOpen With#$q menu will be opened directly."
+
+[?optionC]
+Message,"Remove a range of shell folders (including Libraries and Favourites) and control panel from the file manager view - none of the control panel functions are working anyway.#$x#$xEnabling this will also apply the settings required to display hidden system files (including the BCD (Boot Configuration Database) store)."
+
+[?optionD]
+Message,"Required to display a progress bar when copying files and folders."
+
+[?optionE]
+Message,"Add Drag and Drop support in Windows 10.0 based WinPE. If other WinPE versions are used this is not required and will be ignored if selected"
+
+[?optionF]
+Message,"This fix is only applied to Windows 10.0.15063 (aka Build 1703) as using the NEW context menu option in WinPE will cause the system to crash!"
+
+[?optionG]
+Message,"Remove #$qInclude in library#$q from the right-click context menu. This function is not working in WinPE - selecting this option will clean up the context menu."
+
+[?optionH]
+Message,"Remove #$qSend to#$q from the right-click context menu. This function is not working in WinPE - selecting this option will clean up the context menu."
+
+[?optionI]
+Message,"Remove #$qPin to Taskbar#$q and #$qPin to Start Menu#$q from the right-click context menu. This function is not working in WinPE - selecting this option will clean up the context menu."
+
+[?optionJ]
+Message,"Delete WallpaperHost.exe from WinPE. In Windows 8.1 and 10.* based builds many file explorers do not refresh after operations are completed (including moving#$c deleting and renaming files) - removing WallpaperHost.exe fixes this issue."
+
+[process]
+If,%pCheckBoxA%,Equal,True,Run,"%ProjectDir%\Core\Browse.For.Folder.script",process
+If,%pCheckBoxB%,Equal,True,Run,%ScriptFile%,NoInternetOpenWith
+If,%pCheckBoxC%,Equal,True,Run,%ScriptFile%,FileManagerTweaks
+If,%pCheckBoxD%,Equal,True,Run,%ScriptFile%,FileCopyProgress
+If,%pCheckBoxE%,Equal,True,Run,%ScriptFile%,DragNDrop
+If,%pCheckBoxF%,Equal,True,Run,%ScriptFile%,NewContextMenu
+If,%pCheckBoxG%,Equal,True,Run,%ScriptFile%,IncludeInLibrary
+If,%pCheckBoxH%,Equal,True,Run,%ScriptFile%,SendTo
+If,%pCheckBoxI%,Equal,True,Run,%ScriptFile%,PinToStart
+If,%pCheckBoxJ%,Equal,True,Run,%ScriptFile%,WallpaperHost
+
+[NewContextMenu]
+//If,%CODEBASE%,Equal,10.0.15063,ShellExecute,Hide,"%Tools%\offlinereg\offlinereg-win32.exe","#$q%Target_config%\software#$q #$qClasses\Directory\background\shellex\ContextMenuHandlers#$q deletekey New"
+If,%CODEBASE%,Equal,10.0.15063,ShellExecute,Hide,"%Tools%\offlinereg\offlinereg-win32.exe","#$q%Target_config%\default#$q #$q #$q run #$q%Tools%\offlinereg.file.lists\new_fix.txt#$q"
+
+[NoInternetOpenWith]
+ECHO,"Adding NoInternetOpenWith key"
+ShellExecute,Hide,"%Tools%\offlinereg\offlinereg-win32.exe","#$q%Target_config%\software#$q #$qMicrosoft\Windows\CurrentVersion\Policies\Explorer#$q setvalue #$qNoInternetOpenWith#$q #$q1#$q 4"
+
+[FileManagerTweaks]
+ECHO,"Running File Manager Tweaks..."
+ShellExecute,Hide,"%Tools%\offlinereg\offlinereg-win32.exe","#$q%Target_config%\software#$q #$q #$q run #$q%Tools%\offlinereg.file.lists\FileManagerTweaks1.txt#$q"
+ShellExecute,Hide,"%Tools%\offlinereg\offlinereg-win32.exe","#$q%Target_config%\default#$q #$q #$q run #$q%Tools%\offlinereg.file.lists\FileManagerTweaks2.txt#$q"
+
+[SendTo]
+ECHO,"Remove 'Send to' from the context menu options"
+ShellExecute,Hide,"%Tools%\offlinereg\offlinereg-win32.exe","#$q%Target_config%\software#$q #$qClasses\AllFilesystemObjects\shellex\ContextMenuHandlers\SendTo#$q setvalue #$q #$q #$q #$q"
+ShellExecute,Hide,"%Tools%\offlinereg\offlinereg-win32.exe","#$q%Target_config%\software#$q #$qClasses\UserLibraryFolder\shellex\ContextMenuHandlers\SendTo#$q setvalue #$q #$q #$q #$q"
+
+[PinToStart]
+ECHO,"Remove 'Pin to Start' and 'Pin to Taskbar' from the context menu options"
+ShellExecute,Hide,"%Tools%\offlinereg\offlinereg-win32.exe","#$q%Target_config%\software#$q #$qClasses\*\shellex\ContextMenuHandlers#$q deletekey {a2a9545d-a0c2-42b4-9708-a0b2badd77c8}"
+ShellExecute,Hide,"%Tools%\offlinereg\offlinereg-win32.exe","#$q%Target_config%\software#$q #$qClasses\*\shellex\ContextMenuHandlers#$q deletekey {90AA3A4E-1CBA-4233-B8BB-535773D48449}"
+
+[IncludeInLibrary]
+ECHO,"Remove 'Include in library' from the context menu options"
+ShellExecute,Hide,"%Tools%\offlinereg\offlinereg-win32.exe","#$q%Target_config%\software#$q #$qClasses\Folder\ShellEx\ContextMenuHandlers\Library Location#$q setvalue #$q #$q #$q #$q"
+
+[FileCopyProgress]
+Echo,"Copying System32 files for 'File Copy' progress bar..."
+Set,%MY_FILE%,actxprxy.dll
+If,Not,ExistFile,"%Target_System32%\%MY_FILE%",Begin
+If,ExistFile,"%ProjectTemp%\File.and.Dependencies.txt",FileDelete,"%ProjectTemp%\File.and.Dependencies.txt"
+FileCopy,"%Tools%\wimlib.file.lists\File.and.Dependencies.txt","%ProjectTemp%\File.and.Dependencies.txt"
+TXTReplace,"%ProjectTemp%\File.and.Dependencies.txt",myfile.ext,%MY_FILE%
+WimExtractBulk,%Install.wim%,%Install.wim.Image.number%,%ProjectTemp%\File.and.Dependencies.txt,%TargetDir%,NOACL
+End
+Set,%MY_FILE%,chartv.dll
+If,Not,ExistFile,"%Target_System32%\%MY_FILE%",Begin
+If,ExistFile,"%ProjectTemp%\File.and.Dependencies.txt",FileDelete,"%ProjectTemp%\File.and.Dependencies.txt"
+FileCopy,"%Tools%\wimlib.file.lists\File.and.Dependencies.txt","%ProjectTemp%\File.and.Dependencies.txt"
+TXTReplace,"%ProjectTemp%\File.and.Dependencies.txt",myfile.ext,%MY_FILE%
+WimExtractBulk,%Install.wim%,%Install.wim.Image.number%,%ProjectTemp%\File.and.Dependencies.txt,%TargetDir%,NOACL
+End
+Set,%MY_FILE%,OneCoreUAPCommonProxyStub.dll
+If,Not,ExistFile,"%Target_System32%\%MY_FILE%",Begin
+If,ExistFile,"%ProjectTemp%\File.and.Dependencies.txt",FileDelete,"%ProjectTemp%\File.and.Dependencies.txt"
+FileCopy,"%Tools%\wimlib.file.lists\File.and.Dependencies.txt","%ProjectTemp%\File.and.Dependencies.txt"
+TXTReplace,"%ProjectTemp%\File.and.Dependencies.txt",myfile.ext,%MY_FILE%
+WimExtractBulk,%Install.wim%,%Install.wim.Image.number%,%ProjectTemp%\File.and.Dependencies.txt,%TargetDir%,NOACL
+End
+If,Not,ExistFile,"%Target_System32%\actxprxy.txt",If,ExistFile,"%Target_System32%\actxprxy.dll",Begin
+//OFFLINEREG
+If,ExistRegSection,HKLM,_WinPE_SOFTWARE,RegHiveUnload,_WinPE_SOFTWARE
+ShellExecute,Hide,"%Tools%\offlinereg\offlinereg-win32.exe","#$q%Target_config%\software#$q #$q #$q run #$q%Tools%\offlinereg.file.lists\actxprxy.txt#$q"
+FileCreateBlank,"%Target_System32%\actxprxy.txt"
+TXTAddLine,"%Target_System32%\actxprxy.txt","Dummy file added to confirm that actxprxy.dll registry settings have already been applied.",APPEND
+End
+If,%Build%,BIGGER,15062,If,Not,ExistFile,"%Target_System32%\OneCoreUAPCommonProxyStub.txt",If,ExistFile,"%Target_System32%\OneCoreUAPCommonProxyStub.dll",Begin
+//OFFLINEREG
+If,ExistRegSection,HKLM,_WinPE_SOFTWARE,RegHiveUnload,_WinPE_SOFTWARE
+ShellExecute,Hide,"%Tools%\offlinereg\offlinereg-win32.exe","#$q%Target_config%\software#$q #$q #$q run #$q%Tools%\offlinereg.file.lists\FileCopyProgress.txt#$q"
+FileCreateBlank,"%Target_System32%\OneCoreUAPCommonProxyStub.txt"
+TXTAddLine,"%Target_System32%\OneCoreUAPCommonProxyStub.txt","Dummy file added to confirm that OneCoreUAPCommonProxyStub.dll registry settings have already been applied.",APPEND
+End
+FileCreateBlank,"%Target_System32%\FileCopyProgress.txt"
+TXTAddLine,"%Target_System32%\FileCopyProgress.txt","Dummy file added to confirm that FileCopy Progress has already been applied.",APPEND
+
+[DragNDrop]
+WimExtractBulk,%Install.wim%,%Install.wim.Image.number%,%Tools%\wimlib.file.lists\DragDrop.Dependencies.txt,%TargetDir%,NOACL
+ShellExecute,Hide,"%Tools%\offlinereg\offlinereg-win32.exe","#$q%Target_config%\software#$q #$q #$q run #$q%Tools%\offlinereg.file.lists\dataexchange.txt#$q"
+
+[WallpaperHost]
+echo,"Clearing read-only attributes from boot.wim"
+If,WimExistFile,%OutputDir%\sources\boot.wim,%Boot.wim.Image.number%,Windows/System32/WallpaperHost.exe,WimPathDelete,%OutputDir%\sources\boot.wim,%Boot.wim.Image.number%,Windows/System32/WallpaperHost.exe
+//ShellExecute,Hide,"%Tools%\wimlib\wimlib-imagex.exe","update #$q%OutputDir%\sources\boot.wim#$q %Boot.wim.Image.number% --command=#$qdelete '/Windows/System32/WallpaperHost.exe'#$q"
+
+[AuthorEncoded]
+Logo=settings.ico
+settings.ico=653,871
+
+[EncodedFile-AuthorEncoded-settings.ico]
+lines=0
+0=eJztlzFLI0EYht9gEawCFnJdplAQLfQHBEW4H3KttaWosfIHWIr9tXbhuCLhOMLdXwjIcvcDXEE0Rcj6ffPNormN3sxmJ7ML+4Q3LyyZ7DMLuzsDNOiztwf6Vvi6CawD2KLQIXyBHNdsoKbGhjZlSHmkXAZ2cUVRIkryJlcBfVxQyLpXZQ4K77uXfQ4K/3cv6xwU7N3TlOWeVnB35zwuXzWDQj53znDptrMo5Hfnce0l+75FYTF3tVzdGRRq9xAo1O4hUKjdQ6BQuxfNDuWE0qPcUR4oMWVEuaUcUzoldN+nDHI6hXRfpVx79vblvkb5VVF3vu6/K+rO3FTY/bDC7szPCrvvenbndDy5MxcW55+a5PU/9uj/3cL9yCTvHG49+v+1cE/JO4eRR/9nS/dF5hB79H9ycE9xncODJ3fmD9zcU1zmcFe49Svf4O6eYjuHXoG+/3KKfO6Avf9JUbJz2IZf98ScwyefHX/v4j4oTrMQXJ89+2E05+Lqfh1Gcy6u7ryPWw1imsXVnfdxa0FMs7i68z6uLNedn0u27rwHOgyj+SH87OZ3HL+nea3B6yVe8/G6ldfevH/YDWZXE4REM9vjc+n4QDpqS/db0t2mNFZ0T01PTI9Nx5DfRZBxfcj/dCH/C+jzTPVdw8Mbumm4bhrO3QdaidxYbfqaUB9Qj6nPE9lQJNIN7gg0XLrJrYfP60+mO6bPTCfSg6Sr+4fpoTl+PyUN9pmYHpMOd2w6Ii3xluvZXZHutzLXmfsFmCR9knic4ylOLSnJzEsv1stMzmcYBSMN7FOF0I5M2OUtLh+2Y2ACAJzcCBstMDmuAQAAAAIAAAAoAAAAQQIAAAAAAAABAAAAAAAAAAAAAAA
+
+[not.in.use.yet]
+If,%CodeBase%,Equal,10.0.15063,Begin
+Echo,"File Copy Dialog registry fix for Windows 10.0.15063..."
+If,Not,ExistDir,"%ProjectTemp%\Install.wim_Registry",DirMake,"%ProjectTemp%\Install.wim_Registry"
+Set,%Install.wim_Registry%,"%ProjectTemp%\Install.wim_Registry"
+//extracting SOFTWARE registry hive from install.wim if it wasn't previously extracted by another script
+If,Not,ExistFile,"%Install.wim_Registry%\software",Begin
+WimExtract,%Install.wim%,%Install.wim.Image.number%,Windows\System32\config\SOFTWARE,%Install.wim_Registry%,NOACL
+If,Not,ExistFile,"%Install.wim_Registry%\software",Begin
+Message,"Could not locate SOFTWARE registry hive - does the source .wim file contain image number %Install.wim.Image.number%? Aborting..."
+Halt
+End
+End
+If,ExistRegSection,HKLM,_WinPE_SOFTWARE,RegHiveUnload,_WinPE_SOFTWARE
+RegHiveLoad,_WinPE_SOFTWARE,"%Install.wim_Registry%\software"
+ShellExecute,hide,regedit.exe,"/e #$q%Install.wim_Registry%\Interface.reg#$q HKEY_LOCAL_MACHINE\_WinPE_SOFTWARE\Classes\Interface"
+RegHiveUnload,_WinPE_SOFTWARE
+//load WinPE Software hive > export > unload > delete software hive > create new software hive > import settings (this will create a new hive without any security permissions on keys
+RegHiveLoad,_WinPE_SOFTWARE,"%Target_config%\software"
+ShellExecute,hide,regedit.exe,"/e #$q%ProjectTemp%\boot.wim_software.reg#$q HKEY_LOCAL_MACHINE\_WinPE_SOFTWARE"
+RegHiveUnload,_WinPE_SOFTWARE
+FileDelete,"%Target_config%\softwar*"
+ShellExecute,Hide,"%Tools%\offlinereg\offlinereg-win32.exe","#$q%Target_config%\software#$q #$q #$q create"
+RegHiveLoad,_WinPE_SOFTWARE,"%Target_config%\software"
+ShellExecute,hide,regedit.exe,"/s #$q%ProjectTemp%\boot.wim_software.reg#$q"
+If,ExistFile,"%Install.wim_Registry%\Interface.reg",ShellExecute,hide,regedit.exe,"/s #$q%Install.wim_Registry%\Interface.reg#$q"
+RegHiveUnload,_WinPE_SOFTWARE
+ShellExecute,Hide,"%Tools%\offlinereg\offlinereg-win32.exe","#$q%Target_config%\software#$q #$q #$q run #$q%Tools%\offlinereg.file.lists\OneCoreUAPCommonProxyStub.txt#$q"
+End
+

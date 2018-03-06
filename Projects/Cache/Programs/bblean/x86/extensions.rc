@@ -1,0 +1,128 @@
+# -----------------------------------------------------
+# bblean 1.16 - extensions.rc - miscellaneous settings
+
+# Lines starting with # or ! are ignored
+# Most Items are configurable from the menu
+
+
+# Favorite Tool ---------------------------------------
+
+# - The default editor for menu, styles and settings
+blackbox.editor:                        notepad.exe
+
+
+# Appearance ------------------------------------------
+
+# - Bullet size: true=4px, false=6px
+blackbox.appearance.bullet.unix:        true
+
+# - arrow bullets:
+blackbox.appearance.arrow.unix:         true
+
+# - Menu drag cursor
+blackbox.appearance.cursor.usedefault:  false
+
+
+# Background Wallpaper options ------------------------
+
+# - Execute any rootCommands at all?
+blackbox.background.enabled:            true
+
+# - Do not use the native window's wallpaper
+blackbox.background.smartWallpaper:     true
+
+# - Dropped background images are saved here:
+blackbox.background.rootCommand:        style
+
+
+# Workspace options -----------------------------------
+
+# - Alternate workspace method (workspaces are hidden
+# - rather than moved away)
+blackbox.workspaces.altMethod:          false
+
+# - Automatically switch workspace to active task
+blackbox.workspaces.followActive:       true
+
+# - Restore minimized windows to current workspace
+blackbox.workspaces.restoreToCurrent:   true
+
+
+# Desktop settings ------------------------------------
+
+# - Desktop margins for special desktop setups.
+# - -1 means automatic margins (with tool-/systembar)
+blackbox.desktop.marginTop:             -1
+blackbox.desktop.marginBottom:          -1
+blackbox.desktop.marginLeft:            -1
+blackbox.desktop.marginRight:           -1
+
+# - 2nd, ... monitor
+!blackbox.desktop.2.marginTop:  ...
+!...
+
+# - Edge and Plugin Snap
+blackbox.snap.threshold:                7
+blackbox.snap.padding:                  2
+blackbox.snap.toPlugins:                true
+
+
+# Desktop Mouse Clicks --------------------------------
+
+# - General: blackbox.desktop.[<mod>]<button>Click: <command>
+# - <mod>    = Alt, Shift, Ctrl
+# - <button> = Left, Mid, Right, X1, X2, X3
+
+# - the defaults
+!blackbox.desktop.RightClick:           @BBCore.ShowMenu root
+!blackbox.desktop.MidClick:             @BBCore.ShowMenu workspaces
+
+# - styles menu
+blackbox.desktop.AltMidClick:           @BBCore.ShowMenu styles >> @BBCore.style %1
+
+# - configuration menu
+blackbox.desktop.AltRightClick:         @BBCore.ShowMenu configuration
+
+# - alternative menu
+!blackbox.desktop.CtrlRightClick:       @BBCore.ShowMenu alt-menu.rc
+
+
+# Miscellaneous options -------------------------------
+
+# - command for double left click on a folder in the menu
+!blackbox.options.openFolderCommand: explorer.exe /e,"%1"
+
+
+# Global font override - for special purposes ---------
+
+# - Enable this feature?
+blackbox.global.fonts.enabled:          false
+
+blackbox.global.toolbar.font:           verdana
+blackbox.global.toolbar.fontHeight:     13
+blackbox.global.toolbar.fontWeight:     normal
+
+blackbox.global.menu.title.font:        verdana
+blackbox.global.menu.title.fontHeight:  13
+blackbox.global.menu.title.fontWeight:  bold
+
+blackbox.global.menu.frame.font:        verdana
+blackbox.global.menu.frame.fontHeight:  13
+blackbox.global.menu.frame.fontWeight:  normal
+
+blackbox.global.window.font:            verdana
+blackbox.global.window.fontHeight:      13
+blackbox.global.window.fontWeight:      bold
+
+
+# Tweaks (system dependent) ---------------------------
+
+# - Contextmenu left margin adjust (normal/sendTo)
+!blackbox.contextmenu.itemAdjust: 21/28
+
+# - Try this if maximized windows are following
+# - on workspace changes (with XP).
+# - *** This is not compatible with bbpager ***
+!blackbox.workspaces.xpfix: true
+
+

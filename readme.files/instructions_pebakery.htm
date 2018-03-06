@@ -1,0 +1,376 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd"><html><head><link type="text/css" rel="stylesheet" href="chrispe.css" media="screen" /><title>ChrisPE</title></head><body><font> 
+ 
+ 
+ 
+<p> 
+<select ONCHANGE="location = this.options[this.selectedIndex].value;"> 
+<option value="" disabled></option> 
+<option value="../readme.html">Contents</option> 
+<option value="" disabled>=======</option> 
+<option value="winpe.htm">Windows PE</option>  
+<option value="builder.htm">Builders</option>  
+<option value="options.htm">Project Options</option>  
+<option value="project.htm">Project Scripts</option>  
+<option value="instructions_pebakery.htm" selected="selected">Instructions</option>  
+<option value="menu_system.htm">Menu System</option>  
+<option value="not_in_wim.htm">Include...in boot.wim</option>  
+<option value="usb.htm">...Bootable USB...</option>  
+<option value="uefi.htm">UEFI, BIOS, GPT...</option>  
+<option value="multiboot.htm">Multiboot WinPE</option>  
+<option value="" disabled></option> 
+<option value="" disabled>Appendices</option> 
+<option value="" disabled>=========</option> 
+<option value="quick_pebakery.htm">Quick Start</option>  
+<option value="acknowledgements.htm">Acknowledgements</option>  
+<option value="" disabled></option> 
+</select> 
+</p> 
+ 
+ 
+ 
+<hr> 
+<a href="http://chrispe.mistyprojects.co.uk/"><img src="img/home.jpg" BORDER=1></a> 
+ 
+
+
+<h2><u>Instructions</u></h2>
+
+<font class="file"></font>
+
+<p>
+<b>Please note that any screenshots in this documentation may differ from the current release.</b>
+</p>
+
+
+
+<p>
+You will require the following in order to build <font class="file">ChrisPE</font> -
+
+
+<ul>
+<li>
+<b>Administrator privileges</b> - registry hives will need to be mounted and edited during the build process, and other processes also require administrator privileges.
+</li>
+</ul> 
+
+<ul>
+<li>
+.Net Framework 4.7.1 and Windows 7 or newer (required to run PEBakery).
+</li>
+</ul> 
+
+<ul>
+<li>Free disk space - 1GB should be more than adequate as Windows source files are not cached during the build process. 
+</li>
+</ul>
+
+<ul>
+<li>
+Windows Installation Media - either a CD/DVD, a mounted disk image or the files copied to an accessible folder. 
+</li>
+</ul>
+</p>
+
+
+
+
+
+<p>
+<font class="file">ChrisPE</font> uses the <font class="file">WinBuilder</font> scripting language to automate a number of tasks to create a working <font class="file">WinPE</font>. New commands have been implemented in <font class="file">PEBakery</font> and this project is <b><i><u>NOT</u></i></b> compatible with <font class="file">WinBuilder</font>.
+</p>
+
+
+
+<p>
+Before running <font class="file">PEBakery</font> please be aware that, <i><u>in the <font class="file">ChrisPE</font> project</u></i>, the following project directory (and sub directories)  will, if they exist, be deleted during the start of the build process (<b>Note</b> - <i><font color="red">%BaseDir%</font></i> is a <font class="file">PEBakery</font> variable for the folder from which the <font class="file">PEBakery</font> executable <font class="file">PEBakeryLauncher.exe</font> is running).
+<ul>
+<li><font color="red">%BaseDir%</font><font color="blue">\ChrisPE.Files\</font></li>
+<li><font color="red">%BaseDir%</font><font color="blue">\ProjectTemp\</font></li>
+</ul>
+</p>
+
+
+
+<p>
+Sections in this page -
+<ul>
+<li><a class="internal" href="#update">Updating PEBakery</a></li>
+<li><a class="internal" href="#basics">PEBakery Basics</a></li>
+<li><a class="internal" href="#options">Project Options</a></li>
+</ul>
+</p>
+
+
+
+
+
+
+
+<a name="update"></a><br>
+<h2><u>Updating PEBakery</u></h2>
+
+
+<p>
+Pre-compiled <font class="file">PEBakery</font> testbuild downloads are available <a class="external" target="_blank" href="https://github.com/pebakery/pebakery/releases">here</a>.
+</p> 
+
+
+<p class="break3em">
+<font class="file">PEBakery</font> version <font class="file">0.9.3 beta3 (Build 20180225)</font> is included in the project download. <font class="file">PEBakery</font> is in active development and you may want to update to new versions as they are released. I recommend deleting all traces of the previous version before extracting a new test build to the directory containing the <font class="file">ChrisPE</font> project files. Assuming <font class="file">ChrisPE</font> is in the <font color="red">C:\ChrisPE\</font> path, delete the following files/folders -
+<ul>
+<li><font color="red">C:\ChrisPE\</font><font color="blue">PEBakeryLauncher.exe</font> (file)</li>
+<li><font color="red">C:\ChrisPE\Binary</font> (folder)</li>
+<li><font color="red">C:\ChrisPE\Database</font> (folder)</li>
+</ul>
+</p>
+
+
+
+<p class="break3em">
+Now extract the files from the updated <font class="file">PEBakery</font> testbuild download to the <font class="file">ChrisPE</font> root folder (the folder containing the <font class="file">Projects</font> directory). Using the path from the example above, the project should now contain the following (the <font color="red">C:\ChrisPE\Database</font> folder will be created when PEBakery is first started) -
+<ul>
+<li><font color="red">C:\ChrisPE\</font><font color="blue">Launcher.exe</font> (file)</li>
+<li><font color="red">C:\ChrisPE\Binary</font> (folder)</li>
+</ul>
+</p>
+
+
+
+
+
+
+
+
+
+
+<a name="basics"></a><br>
+<h2><u>PEBakery Basics</u></h2>
+
+
+
+<p>
+The <font class="file">PEBakery</font> Interface is divided into several sections - 
+</p>
+
+
+<p>
+<a href="img/pebakery_instructions3.png"><IMG SRC="img/pebakery_instructions3.png" float=left width=90% margin-right=1% margin-bottom=0.5em border=1></a>
+</p>
+
+
+<p>
+<ol>
+<li>Expandable folder tree with a list of project scripts in the left panel. Tick the box in the folder tree next to the script that you want to include in the build. Untick any boxes next to scripts to be excluded from the build process. </li>
+
+<li class=break1em><font class="file">PEBakery</font> settings/options buttons in the top panel. Buttons from left to right - </li>
+	<ul>
+	<li class="breakhalfem"><font class="file">Build</font> - run the project.</li>
+	<li class="breakhalfem"><font class="file">Refresh</font> - Refresh all scripts in the <font class="file">PEBakery</font> cache. Any edits to scripts made since <font class="file">PEBakery</font> was started, or scripts added to the project, will take effect. If a script is added to the project directory for example, it will not be displayed in the folder tree until the <font class="file">Refresh</font> button is pressed.</li>
+	<li class="breakhalfem"><font class="file">Setting</font> - <font class="file">PEBakery</font> build engine settings with numerous options.</li>
+	<li class="breakhalfem"><font class="file">Log</font> - display log files.</li>
+	<li class="breakhalfem"><font class="file">Utility</font> - can be used to check/generate code for writing scripts.</li>
+	<li class="breakhalfem"><font class="file">Update</font> - not yet implemented.</li>
+	<li class="breakhalfem"><font class="file">About</font> - contains information about the build version and software licence(s).</li>
+	</ul>
+
+<li class=break1em>Script settings/options buttons to the right of the script titlebar. From top to bottom - </li>
+	<ul>
+	<li class="breakhalfem"><font class="file">Run Script</font> - run the selected plugin without running the full project. Useful for pre/post processing scripts.</li>
+	<li class="breakhalfem"><font class="file">Refresh Script</font> - refresh the selected scripts in the <font class="file">PEBakery</font> cache. E.g. if the script file has been edited since <font class="file">PEBakery</font> was started.</li>
+	<li class="breakhalfem"><font class="file">Edit Script</font> - open the selected script in a text editor (or other default program associated with .script files).</li>
+	<li class="breakhalfem"><font class="file">Syntax Check</font> - useful for developers to check the code for syntax errors. If default <font class="file">PEBakery</font> settings are used then this button will be displayed in green if there are no errors in the script, or orange if there are any syntax errors. </li>
+	</ul>
+
+</ol>
+</p>
+
+
+
+
+<p class=break3em>
+When <font class="file">PEBakeryLauncher.exe</font> is first run, you should see a screen similar to the following (the folder tree on the left can be expanded so that individual script options can be selected or disabled as required) - 
+<br />
+<a href="img/pebakery.png"><IMG SRC="img/pebakery.png" float=left width=90% margin-right=1% margin-bottom=0.5em border=1></a>
+</p>
+
+
+
+
+<p class=break3em>
+Set the path to your source files by either manually entering the path (1) or click on the <font class="file">Folder</font> button (2) to set the path to your Windows Installation Media source files. Please note that if manually entering a path it must end in a backslash (\). E.g. D:\source_files\
+<br />
+<a href="img/main_1_2.jpg"><IMG SRC="img/main_1_2.jpg" float=left margin-right=1% margin-bottom=0.5em border=1></a>
+</p>
+
+
+<p>
+A mounted Windows RTM .iso file is recommended as source. Alternatively extract the contents of a Windows .iso to a local directory. Set the path in this option to the root folder that contains the following files/directories -
+<ul>
+<li class="file">\sources\boot.wim</li>
+<li class="file">\sources\install.wim</li>
+<li class="file">\bootmgr</li>
+<li class="file">\boot\</li>
+<li class="file">\EFI\</li>
+</ul>
+</p>
+
+
+
+
+<p class=break3em>
+Expand the folder tree on the left and view and select individual project script options as required (refer to the <a class="internal" href="project.htm">Project Scripts</a> section for details about all included project scripts) - 
+<br />
+<a href="img/pebakery_instructions1.png"><IMG SRC="img/pebakery_instructions1.png" float=left width=90% margin-right=1% margin-bottom=0.5em border=1></a>
+</>
+
+
+
+<p class=break3em>
+To start the build process, click on the <font class="file">Build</font> button in the top row of buttons - 
+<br />
+<a href="img/pebakery_quick5.png"><IMG SRC="img/pebakery_quick5.png" float=left width=90% margin-right=1% margin-bottom=0.5em border=1></a>
+</p>
+
+
+<p class=break3em>
+A progress bar will be displayed for individual project scripts as they are processed - 
+<br />
+<a href="img/pebakery_quick6.png"><IMG SRC="img/pebakery_quick6.png" float=left width=90% margin-right=1% margin-bottom=0.5em border=1></a>
+</p>
+
+
+
+<p class=break3em>
+The source for project scripts can be viewed by clicking on the <font class="file">Edit Script</font> button to the right of the script title bar (note - you may need to associate a default program to open <font class="file">.script</font> files) - 
+<br />
+<a href="img/pebakery_instructions2.png"><IMG SRC="img/pebakery_instructions2.png" float=left width=90% margin-right=1% margin-bottom=0.5em border=1></a>
+</p>
+
+
+
+
+<p class=break3em>
+<font class="file">PEBakery</font> has built in logging support with a database store containing logs for previous builds. These logs are very useful for troubleshooting problems with both the project and <font class="file">PEBakery</font>. Logs can be accessed via the <font class="file">Log</font> button in the top row of buttons -
+<br />
+<a href="img/pebakery_instructions7.png"><IMG SRC="img/pebakery_instructions7.png" float=left width=90% margin-right=1% margin-bottom=0.5em border=1></a>
+</p>
+
+
+
+<p class=break3em>
+Use the tabs to toggle between <font class="file">System Log</font> and <font class="file">Build Log</font> pages - - 
+<br />
+<a href="img/pebakery_instructions8.png"><IMG SRC="img/pebakery_instructions8.png" float=left margin-right=1% margin-bottom=0.5em border=1></a>
+</p>
+
+
+
+
+<p class=break3em>
+In the <font class="file">Build Log</font> tab, use the pick list in the <font class="file">Select Build</font> field to select the required build log and then click on the <font class="file">Export</font> button to save the log file (<font class="file">.html</font> and plain <font class="file">.txt</font> files are supported) -
+<br />
+<a href="img/pebakery_instructions9.png"><IMG SRC="img/pebakery_instructions9.png" float=left width=90% margin-right=1% margin-bottom=0.5em border=1></a>
+</p>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<a name="options"></a><br>
+<h2><u>Project Options</u></h2>
+
+
+
+
+
+
+
+<p>
+Individual <font class="file">PEBakery</font> project scripts can contain a range of options. In <font class="file">ChrisPE</font> the interface has been kept as simple as possible with options reduced to a minimum. A number of options are set in the main project script and can be viewed by selecting <font class="file">ChrisPE</font> at the top of the folder tree in the left panel -
+<br />
+<a href="img/pebakery.png"><IMG SRC="img/pebakery.png" float=left width=90% margin-right=1% margin-bottom=0.5em border=1></a>
+</p>
+
+
+
+
+<p class=break3em>
+Multiple scripts, including the main project script, use pick lists with a range of pre-defined options -
+<br />
+<a href="img/pebakery_instructions11.png"><IMG SRC="img/pebakery_instructions11.png" float=left width=90% margin-right=1% margin-bottom=0.5em border=1></a>
+</p>
+
+
+
+
+
+
+<p class=break3em>
+A number of scripts in the <font class="file">ChrisPE</font> project have a tab style interface with additional options -
+<br />
+<a href="img/pebakery_instructions4b.png"><IMG SRC="img/pebakery_instructions4b.png" float=left width=90% margin-right=1% margin-bottom=0.5em border=1></a>
+</p>
+
+
+
+<p class=break3em>
+To see more information about any of the available options that can be set/changed in the <font class="file">ChrisPE</font> project, click on the relevant <b>HELP</b> button -
+<br />
+<a href="img/pebakery_instructions5.png"><IMG SRC="img/pebakery_instructions5.png" float=left width=90% margin-right=1% margin-bottom=0.5em border=1></a>
+</p>
+
+
+
+
+<p class=break3em>
+Selecting <b>HELP</b> for this option will display the following information-
+<br />
+<IMG SRC="img/pebakery_instructions6.png" BORDER=1>
+</p>
+
+
+
+<p class=break3em>
+Some scripts use a <b>?</b> help button -
+<br />
+<a href="img/pebakery_instructions5b.png"><IMG SRC="img/pebakery_instructions5b.png" float=left width=90% margin-right=1% margin-bottom=0.5em border=1></a>
+</p>
+
+
+<p class=break3em>
+A number of <font class="file">Applications</font> .scripts have an option to <font class="file">Include Program in boot.wim</font>. For more information about this option see <a class="internal" href="not_in_wim.htm">here</a>.
+<br />
+<a href="img/notinwim.png"><IMG SRC="img/notinwim.png" float=left margin-right=1% margin-bottom=0.5em border=1></a>
+</p>
+
+
+
+
+<p class=break3em>
+<font class="file">ChrisPE</font> supports custom menus. For more information about this option see <a class="internal" href="menu_system.htm">here</a>.
+<br />
+<a href="img/menu1.png"><IMG SRC="img/menu1.png" float=left margin-right=1% margin-bottom=0.5em border=1></a>
+</p>
+
+
+
+
+
+<p class="breaktop"><font class="file">Document date - 6<sup>th</sup> March 2018</font></p></font></body></html>

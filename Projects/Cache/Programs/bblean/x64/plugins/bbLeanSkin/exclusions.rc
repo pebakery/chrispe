@@ -1,0 +1,46 @@
+# ---------------------------------------
+# exclusions.rc - for bbLeanSkinEng.dll
+
+# Format: program:classname
+#   program               excludes all windows from 'program'
+#   program:classname     excludes only that window from 'program'
+#   *:classname           excludes all windows with 'classname'
+
+# Get the appropriate names from bbleanskin's log-window.
+# See README.TXT for further information.
+
+# supported wildcards are ? and *
+# h?llo = hallo, hello
+# h*o   = hallo, hejo, ho
+
+# ---------------------------------------
+# Invisible windows:
+# (Listed here to save resources, and possibly trouble)
+
+  BROWSEUI.DLL:OTClass
+  SYSTRAY.EXE:SystemTray_Main
+  WEBCHECK.DLL:MS_WebcheckMonitor
+  STMGR.EXE:STATEMGRPROC
+  WIASERVC.DLL:STIExe_Window_Class
+  TAPISRV.EXE:UmdmSP Class
+  TAPISRV.EXE:WAN_Class
+  RNAAPP.EXE:RNAENGCLASS
+
+  QUARTZ.DLL:FilterGraphWindow
+  WMPUI.DLL:TimerWindowClass
+  WMPLAYER.EXE:atlcommon_timer*
+
+  wscntfy.dll
+  taskeng.exe
+  conime.exe:ConsoleIMEClass
+
+# ---------------------------------------
+# programs which come with their own skin:
+
+  trillian.exe
+  toolkit.dll
+  winamp.exe
+
+# programs with trouble
+
+  nero.exe

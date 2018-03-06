@@ -1,0 +1,121 @@
+[main]
+Title=DMDE
+Description=DM Disk Editor - can be used for disk/partition imaging.
+Selected=True
+Level=5
+Author=ThePEBakeryTeam
+Version=20180306
+Date=2018-03-06
+Interface=Interface1
+
+[Interface1]
+pTextLabelMenu1="1",1,1,35,3,70,18,10,Bold
+pButtonMenu2="2",1,8,75,0,70,20,pButtonMenu2,0,True,_pButtonMenu2_,True
+pButtonMenu3="?",1,8,145,0,70,20,pButtonMenu3,0,True,_pButtonMenu3_,True
+pWebLabel1=http://dmde.com/,1,10,51,100,216,18,http://dmde.com/
+pTextLabel1="DMDE Website",1,1,51,77,230,18,10,Bold
+pTextLabel2="WARNING - 32-bit application. To run in a 64-bit build, enable SysWOW64...",1,1,51,123,500,18,10,Bold
+pCheckBoxInWim="Include Program in boot.wim",1,3,51,265,180,18,True
+
+[Interface2]
+pButtonMenu1="1",1,8,5,0,70,20,pButtonMenu1,0,True,_pButtonMenu1_,True
+pTextLabelMenu2="2",1,1,108,3,70,18,10,Bold
+pButtonMenu3="?",1,8,145,0,70,20,pButtonMenu3,0,True,_pButtonMenu3_,True
+pBevel1=,1,12,10,65,66,2
+pTextLabel="Menu Entries",1,1,10,50,230,18,8,Bold
+pCheckBoxShortcutDesktop="Add to Desktop Menu",1,3,40,80,150,18,True
+pCheckBoxShortcutQuick="Add to Quicklaunch Menu",1,3,40,110,150,18,True
+pCheckBoxShortcutPrograms="Add to #$qStart#$q > ",1,3,40,140,99,18,True
+pCheckBoxShortcutLaunchBar="Add to LaunchBar Menu ",1,3,40,170,150,18,True
+pButtonShortcut1=?,1,8,10,80,18,18,pButtonShortcut1,0,True,_pButtonShortcut1_,True
+pButtonShortcut2=?,1,8,10,110,18,18,pButtonShortcut2,0,True,_pButtonShortcut2_,True
+pButtonShortcut3=?,1,8,10,140,18,18,pButtonShortcut3,0,True,_pButtonShortcut3_,True
+pButtonShortcut4=?,1,8,10,170,18,18,pButtonShortcut4,0,True,_pButtonShortcut4_,True
+pTextBox1=,1,0,140,140,150,21,Programs
+
+[pButtonMenu1]
+IniWrite,%ScriptFile%,Main,Interface,Interface1
+System,REFRESHINTERFACE
+
+[pButtonMenu2]
+IniWrite,%ScriptFile%,Main,Interface,Interface2
+System,REFRESHINTERFACE
+
+[pButtonMenu3]
+message,"Click on the buttons to toggle between tabs 1 and 2. #$x#$xTab 2 contains menu options for use in the selected shell. Click on the ? button for information about the different options."
+
+[pButtonShortcut1]
+message,"WinXShell only#$x#$xSelect this option to add a program shortcut to the Desktop."
+
+[pButtonShortcut2]
+message,"WinXShell only#$x#$xSelect this option to add a program menu option to the Quicklaunch menu - similar in appearence to the 'Pin to Taskbar' option in Windows 7/8/10."
+
+[pButtonShortcut3]
+message,"Applies to WinXShell#$c BBLean and LaunchBar Shell(s)#$x#$xSelect this option to add a program menu option to the Start menu. Leave blank to add to the root of the menu#$c or manually type a path to place in a sub-menu (do not use spaces in the path). E.g. #$x#$s- FileManager#$x#$s- Programs#$x#$s- Programs\FileManager#$x#$xAnd looking at the examples above - #$x#$xLeave this option blank to add a menu entry to the root of the program menu (the 'Start' menu in WinXShell#$c the 'Start' menu in BBLean#$c or the root of the LaunchBar menu bar if LaunchBar is selected as Shell)#$x#$xEnter 'FileManager' to add a menu entry for this application to the 'Start' > 'FileManager' sub-menu (WinXShell and bblean) or the 'FileManager' sub-menu in LaunchBar.#$x#$xEnter 'Programs' to add a menu entry for this application to the 'Start' > 'Programs' sub-menu (WinXShell and bblean) or the 'Programs' sub-menu in LaunchBar.#$x#$xEnter 'Programs\FileManager' to add a menu entry for this application to the 'Start' > 'Programs' > 'FileManager' sub-menu (WinXShell and bblean) or the 'Programs' > 'FileManager' sub-menu in LaunchBar."
+
+[pButtonShortcut4]
+message,"This setting does not apply to any LaunchBar instance running as the WinPE Shell. This option only applies to a LaunchBar instance when the Applications' > 'LaunchBar' program script is selected in the build.#$x#$xIf the 'Applications' > 'LaunchBar' program script is selected than enable this option to add a program menu entry to the root of the LaunchBar menu bar. #$x#$xPlease note that if option '6] Programs in boot.wim' in the main project script is set as 'NO'#$c then LaunchBar and a number of other applications will not be available at boot. In this case a text based .ini file will be used for LaunchBar menu settings."
+
+[process]
+AddInterface,%ScriptFile%,Interface1,""
+AddInterface,%ScriptFile%,Interface2,""
+If,%pCheckBoxInWim%,Equal,True,Set,%PROGRAMS.IN.WIM%,YES
+Else,Set,%PROGRAMS.IN.WIM%,NO
+Run,%ScriptFile%,CHECKS
+Run,%ScriptFile%,MENU
+Run,%ScriptFile%,COMMON
+If,%PROGRAMS.IN.WIM%,Equal,NO,Run,%ScriptFile%,NOT.IN.WIM
+If,%PROGRAMS.IN.WIM%,Equal,YES,Run,%ScriptFile%,IN.WIM
+
+[CHECKS]
+If,%ARCH%,Equal,x64,Begin
+  If,Not,ExistDir,"%TargetDir%\Windows\SysWOW64",Begin
+    Message,"DMDE is not compatible with x64 builds of WinPE - exiting...",Error,5
+    Exit,"DMDE is not compatible with x64 builds of WinPE - exiting..."
+  End
+End
+If,Not,ExistFile,"%Programs%\dmde\dmde.exe",Begin
+  Message,dmde is missing - exiting script...,Error,5
+  Exit,dmde is missing - exiting script...,WARN
+End
+
+[MENU]
+If,%pCheckBoxShortcutLaunchBar%,Equal,True,If,%PROGRAMS.IN.WIM%,Equal,NO,If,ExistFile,"%ProjectTemp%\LaunchBar.ini",TXTaddLine,"%ProjectTemp%\LaunchBar.ini",DMDE;..\dmde\dmde.exe,Append
+If,%PROGRAMS.IN.WIM%,Equal,YES,Begin
+  ShellExecute,Hide,"%Tools%\Shortcut.exe","/A:C /T:#$q#$pSystemDrive#$p\Programs\DMDE\DMDE.exe#$q /F:#$q%ProjectTemp%\DMDE.lnk#$q /I:#$q#$pSystemDrive#$p\Programs\DMDE\DMDE.exe#$c0#$q"
+  If,ExistFile,"%ProjectTemp%\DMDE.lnk",Begin
+    Set,%MyShortcut%,DMDE.lnk
+    If,%pCheckBoxShortcutDesktop%,Equal,True,FileCopy,"%ProjectTemp%\%MyShortcut%","%ProjectTemp%\ShortCuts\Desktop"
+    If,%pCheckBoxShortcutQuick%,Equal,True,FileCopy,"%ProjectTemp%\%MyShortcut%","%ProjectTemp%\ShortCuts\Quick"
+    If,%pCheckBoxShortcutPrograms%,Equal,True,Begin
+      Set,%ProgramMenuPath%,%pTextBox1%
+      Run,"%ProjectDir%\Core\common.script",StartMenu
+    End
+    If,%pCheckBoxShortcutLaunchBar%,Equal,True,FileCopy,"%ProjectTemp%\%MyShortcut%","%ProjectTemp%\ShortCuts\LaunchBar"
+    FileDelete,"%ProjectTemp%\%MyShortcut%"
+  End
+End
+
+[COMMON]
+If,%PROGRAMS.IN.WIM%,Equal,NO,Set,%PATH%,%OutputDir%
+If,%PROGRAMS.IN.WIM%,Equal,YES,Set,%PATH%,%TargetDir%
+If,Not,ExistDir,"%PATH%\Programs",DirMake,"%PATH%\Programs"
+DirMake,"%PATH%\Programs\dmde"
+DirCopy,"%Programs%\dmde\*.*","%PATH%\Programs\dmde"
+IniWrite,"%OutputDir%\Project.Settings.ini",PROGRAMS,DMDE,YES
+
+[IN.WIM]
+//Wait,1
+
+[NOT.IN.WIM]
+//Wait,1
+Exit,"dmde copied to #$q%PATH%\Programs#$q directory - it will not be added to #$qboot.wim#$q",Nowarn
+
+[AuthorEncoded]
+Logo=dmde.ico
+dmde.ico=1271,1695
+
+[EncodedFile-AuthorEncoded-dmde.ico]
+lines=0
+0=eJztmvtPE1kUx0v2f9jfdM1uANE1MUH9TeMPSMxqsoCPX1xXEzUaRMXFTTTtahOBbIQoLrvqT64PwCpqFGICpiKS1RhRHvGxG4vKa18sCNNGBDrt2fu97bQzFNqZztSpSYccZjq9nfl87z3n3Dtzr8WSxv4WL7bwzZFusXzK9vOZ4dRWZmmWeZZYm33D53NtBemnbPkZvcxEZpRkBqZea17GL9avv5gjZ7ety8hh3wn2jV/SleMldL/xHLU3O5LKwAS2IxsWQssYmEP1ztirdufS0EAPdd1roOvVh8hRsTepDEzdbQ30b7+LThSu4hrQDtb89NOod7DXlO8y20diWu2PhZwV7QBfsuVl9tWfKKGu1pums6m17rZG5kvfkRSr9xt+pWvVB03nUmvwpd9unsWxF58fNdWRo3Kf6VxqDaxglj6n+FP8ZvBXFeXS1ZMldLF0O9k3LpqxzA8FmXT6+3y6dKyQftr7VVLwI/c+ueMgn+ihyfejNDUxRsJwH5V/u1RR7tj25TToekzilJsmx9+S6HXT7+3NVPpNtmn8YO/paiHvpJuI/NxwjHOH12eFylXsWEHCSB+J4jiFN1Z2ykP/9D7VpSFe/mjswXHJLOw+dvwu+BvSrSEefvC5GOeUnJ35RU/33ZnZve/C7F4P/dnTwbQKIQ0iNPTFp0ErP/hedjgj6v310zZF3MLfheFeGbuf+3yL4ziP4/bbNVyzvB2GBl5Q2eYlCeM3gl0qY5QGtfxGshupQQ1/ItiN0hCLX1eeYbHqrKtQ3O/skc00/Ncf9HPxWoWGJ846xi2Q1rwUjV9vnnHWVUawg9Hvn6SJ8ZEIDY+hQWNeisbfdL6c/L5wrvb7J8j9diBifODqbCGfL9w3gf3Zg0ZFmcPrsljfPIqaDSj0QcOw7naIxl+6KZv+ftPNrxHuMwXqaLnM7jU/9BswgAVM4T7Kw8dD8ntdrtzDxxn4PlAfM2vQEg+x/D/ZNajJP8msQW3+h//BD5Ua3MxfL/F7xdJQX7VfcT18RpwoNWiI6U3Zmvhn1yDwmIuuwcvG1iM8huXXQ4wHNASVshzg6ryjKINcgZyB3CHdEzml6VyZZv542gH1KjKNyJ3y6zhrK4K+Eah/n/ie3CP9PBdLZdTk73jGn1raAX1VBDvr0+S+gz4P/cd0djX9Zrzjf7UxPd2aWZ+CMUW43sfJMzpIlTtXKtjVjFf08MejwWh2vfxaNCSC3Qh+NRoSxW4Uf7S8xJ8VDcgzieafTUPgWV1/nvkQ/JEa/KG+aUb29Qt0sSeCX9Lw/OEt7vP8XRXzhYGX7fz5TF6ufMsyGh16xfxmjL/7wjgD4wW17Inil6y6eA27VhF/Zyjv1+SG2LxwdBsfD+EdpNZ7pN7fpvhT/CH+j3b+zprH5+/666sOUGfrDdO51Brm2DEXb+Pzp5lnkM/+G3xNF8t2ms4WyzDHPjT4ijDnjvUa1oKsz9h54WTRaq4B7QBfMnu9wHQDE+bYwY61DmDG2gfl+o1FBF9K1vUbWCfA652xSus3pC3QDplnEA+25F0/08/XawTrHVsr/n2Sk2PHPi0nqCm1T9Tejh2r51bsWb3/D0rNOrt4nONIyU1J1ctMzmcYBSMR7FOF0OtZsMtrzyj7zcAEAL3jBtiqSXEKAQAAAAIAAAAkAAAArwQAAAAAAAABAAAAAAAAAAAAAAA
+

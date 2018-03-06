@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Locale>
+    <Font id="16" size="16" name="Segoe UI" shared="true" default="true" />
+    <Font id="12" size="12" name="Segoe UI" shared="true" />
+    <Font id="24" size="24" name="Segoe UI" shared="true" />
+
+    <MultiLanguage id="::Connected" value="Connected" />
+    <MultiLanguage id="::Secured" value="Secured" />
+    <MultiLanguage id="::Open" value="Open" />
+    <MultiLanguage id="::Connect" value="Connect" />
+    <MultiLanguage id="::Disconnect" value="Disconnect" />
+    <MultiLanguage id="msg_enter_password" value="Enter the network security key" />
+    <MultiLanguage id="Cancel" value="Cancel" />
+    <MultiLanguage id="NetworkSettings" value="Network Settings" />
+    <MultiLanguage id="Firewall" value="Firewall" />
+    <MultiLanguage id="Proxy" value="Proxy" />
+    <MultiLanguage id="::msg_select_device" value="Select the WLAN device" />
+    <MultiLanguage id="::msg_service_unavailable" value="WLAN service is unavailable" />
+    <MultiLanguage id="::msg_device_unavailable" value="WLAN device is unavailable" />
+</Locale>

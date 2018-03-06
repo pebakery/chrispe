@@ -1,0 +1,54 @@
+Windows Registry Editor Version 5.00
+
+[HKEY_LOCAL_MACHINE\_WinPE_SYSTEM\ControlSet001\Services\AWEAlloc]
+"Type"=dword:00000001
+"Start"=dword:00000002
+"ErrorControl"=dword:00000000
+"ImagePath"=hex(2):5c,00,53,00,79,00,73,00,74,00,65,00,6d,00,52,00,6f,00,6f,00,\
+  74,00,5c,00,73,00,79,00,73,00,74,00,65,00,6d,00,33,00,32,00,5c,00,44,00,52,\
+  00,49,00,56,00,45,00,52,00,53,00,5c,00,61,00,77,00,65,00,61,00,6c,00,6c,00,\
+  6f,00,63,00,2e,00,73,00,79,00,73,00,00,00
+"DisplayName"="AWE Memory Allocation Driver"
+"Description"="Driver for physical memory allocation through AWE"
+
+[HKEY_LOCAL_MACHINE\_WinPE_SYSTEM\ControlSet001\Services\ImDisk]
+"Type"=dword:00000001
+"Start"=dword:00000002
+"ErrorControl"=dword:00000000
+"ImagePath"=hex(2):5c,00,53,00,79,00,73,00,74,00,65,00,6d,00,52,00,6f,00,6f,00,\
+  74,00,5c,00,73,00,79,00,73,00,74,00,65,00,6d,00,33,00,32,00,5c,00,44,00,52,\
+  00,49,00,56,00,45,00,52,00,53,00,5c,00,69,00,6d,00,64,00,69,00,73,00,6b,00,\
+  2e,00,73,00,79,00,73,00,00,00
+"DisplayName"="ImDisk Virtual Disk Driver"
+"Description"="Disk emulation driver"
+
+[HKEY_LOCAL_MACHINE\_WinPE_SYSTEM\ControlSet001\Services\ImDskSvc]
+"Type"=dword:00000010
+"Start"=dword:00000002
+"ErrorControl"=dword:00000000
+"ImagePath"=hex(2):25,00,53,00,79,00,73,00,74,00,65,00,6d,00,52,00,6f,00,6f,00,\
+  74,00,25,00,5c,00,73,00,79,00,73,00,74,00,65,00,6d,00,33,00,32,00,5c,00,69,\
+  00,6d,00,64,00,73,00,6b,00,73,00,76,00,63,00,2e,00,65,00,78,00,65,00,00,00
+"DisplayName"="ImDisk Virtual Disk Driver Helper"
+"ObjectName"="LocalSystem"
+"Description"="Helper service for ImDisk Virtual Disk Driver."
+
+[HKEY_LOCAL_MACHINE\_WinPE_SOFTWARE\Classes\*\shell\ImDiskMountFile]
+@="Mount as ImDisk Virtual Disk"
+
+[HKEY_LOCAL_MACHINE\_WinPE_SOFTWARE\Classes\*\shell\ImDiskMountFile\command]
+@="rundll32.exe imdisk.cpl,RunDLL_MountFile %L"
+
+[HKEY_LOCAL_MACHINE\_WinPE_SOFTWARE\Classes\Drive\shell\ImDiskSaveImage]
+@="Save disk contents as image file"
+
+[HKEY_LOCAL_MACHINE\_WinPE_SOFTWARE\Classes\Drive\shell\ImDiskSaveImage\command]
+@="rundll32.exe imdisk.cpl,RunDLL_SaveImageFile %L"
+
+[HKEY_LOCAL_MACHINE\_WinPE_SOFTWARE\Classes\Drive\shell\ImDiskUnmount]
+@="Unmount ImDisk Virtual Disk"
+
+[HKEY_LOCAL_MACHINE\_WinPE_SOFTWARE\Classes\Drive\shell\ImDiskUnmount\command]
+@="rundll32.exe imdisk.cpl,RunDLL_RemoveDevice %L"
+
+

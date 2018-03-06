@@ -1,0 +1,13 @@
+\windows\syswow64\ext-ms-win*.dll
+\Windows\syswow64\combase.dll
+\Windows\syswow64\shcore.dll
+\Windows\syswow64\winmmbase.dll
+\Windows\syswow64\cmdext.dll
+\Windows\syswow64\mprext.dll
+\Windows\syswow64\slcext.dll
+\Windows\System32\catroot\{F750E6C3-38EE-11D1-85E5-00C04FC295EE}\Microsoft-Windows-ApisetNamespace-WOW64-*.cat
+\Windows\System32\catroot\{F750E6C3-38EE-11D1-85E5-00C04FC295EE}\Microsoft-Windows-CoreSystem-WOW64-*.cat
+\Windows\System32\catroot\{F750E6C3-38EE-11D1-85E5-00C04FC295EE}\Microsoft-Windows-Client-Drivers-Package-net~*.cat
+\Windows\System32\catroot\{F750E6C3-38EE-11D1-85E5-00C04FC295EE}\Microsoft-Windows-Client-Features-Package-net~*.cat
+\Windows\System32\catroot\{F750E6C3-38EE-11D1-85E5-00C04FC295EE}\Microsoft-Windows-SKU-Foundation-Package-net~*.cat
+\Windows\System32\catroot\{F750E6C3-38EE-11D1-85E5-00C04FC295EE}\Microsoft-Windows-Client-Drivers-Package-drivers~*.cat

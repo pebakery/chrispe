@@ -1,0 +1,15 @@
+\Windows\SysWOW64\apphelp.dll
+\Windows\SysWOW64\avifil32.dll
+\Windows\SysWOW64\dsound.dll
+\Windows\SysWOW64\msacm32.dll
+\Windows\SysWOW64\msvfw32.dll
+\Windows\SysWOW64\ntvdm64.dll 
+\Windows\SysWOW64\oledlg.dll
+\Windows\SysWOW64\quartz.dll 
+\Windows\SysWOW64\wdi.dll
+\Windows\SysWOW64\wow32.dll
+\Windows\SysWOW64\ExplorerFrame.dll
+\Windows\SysWOW64\shellstyle.dll
+
+;Missing - appears to be replaced with ntvdm64.dll
+;\windows\syswow64\ntvdm.exe

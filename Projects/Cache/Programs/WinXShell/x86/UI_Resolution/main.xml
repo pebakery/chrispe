@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Window mininfo="200,360" size="450,550" caption="0,0,0,32" sizebox="4,4,4,4" defaultfontcolor="#FFE8EAF6">
+    <Style imagerectstyle="l,t,w,h" />
+    <Include source="scrollbar_ltwh.xml" />
+
+    <VerticalLayout style="ct-bkcontent">
+        <HorizontalLayout height="32" style="ct-bktitle">
+            <Label text="%{Settings}" textpadding="5,0,0,0" />
+            <Control />
+            <Button name="::closebtn" bkimage="file='close.png'" width="16" height="16" padding="0,8,5,0" />
+        </HorizontalLayout>
+        <VerticalLayout height="64" style="ct-bksubtitle">
+            <Label text="%{Display Settings}" font="24" textpadding="10,16,0,0" />
+        </VerticalLayout>
+        <VerticalLayout vscrollbar="true">
+            <HorizontalLayout height="188" style="ct-bkontent-darker1">
+                <Control />
+                <Button normalimage="Display.png" height="124" width="218" enabled="false" padding="0,32,0,0" />
+                <Control />
+            </HorizontalLayout>
+            <Label text="<b>%{Resolution}</b>" showhtml="true" textcolor="#FF000000" textpadding="10,8,0,0" />
+            <Combo name="resolution_combo" height="32" padding="10,8,10,0" textpadding="5,2,0,2"
+                 normalimage="file='combo_nor.png' corner='2,2,32,2'" hotimage="file='combo_hot.png' corner='2,2,32,2'"
+                 vscrollbar="true" hscrollbar="true">
+                <ListLabelElement text="1920x1080" />
+                <ListLabelElement text="1024x768" selected="true" />
+                <ListLabelElement text="800x600" />
+            </Combo>
+              <Label text="<b>%{Rotate}</b>" showhtml="true" textcolor="#FF000000" textpadding="10,8,0,0" />
+            <Combo name="rotate_combo" height="32" padding="10,8,10,0" textpadding="5,2,0,2"
+                 normalimage="file='combo_nor.png' corner='2,2,32,2'" hotimage="file='combo_hot.png' corner='2,2,32,2'"
+                 vscrollbar="true" hscrollbar="true">
+                <ListLabelElement text="%{Rotate_0}" selected="true" />
+                <ListLabelElement text="%{Rotate_90}"/>
+                <ListLabelElement text="%{Rotate_180}" />
+                <ListLabelElement text="%{Rotate_270}" />
+            </Combo>
+             <Label text="<b>%{Brightness}</b>" showhtml="true" textcolor="#FF000000" textpadding="10,8,0,0" />
+            <Slider name="brightness_slider" enabled="false" min="1" max="100" value="30" padding="10,0,10,0" height="12" thumbsize="12,12" thumbimage="file='thumb.png'" bkimage="file='sliderbk.png'" foreimage="file='sliderfr.png'" />
+            <HorizontalLayout height="40" padding="0,20,0,0">
+                <Control />
+                <Button name="applybtn" text="%{Apply}" shortcut="A" showhtml="true" style="attentionBtn" />
+                <Button name="cancelbtn" text="%{Cancel}" shortcut="C" showhtml="true" style="attentionBtn" padding="0,0,10,0" />
+            </HorizontalLayout>
+        </VerticalLayout>
+    </VerticalLayout>
+</Window>

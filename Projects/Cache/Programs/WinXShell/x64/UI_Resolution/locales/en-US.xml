@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Locale>
+    <Font id="16" size="16" name="Segoe UI"  shared="true"  default="true" />
+    <Font id="24" size="24" name="Segoe UI"  shared="true" />
+
+    <MultiLanguage id="Settings" value="Settings" />
+    <MultiLanguage id="Display Settings" value="Display Settings" />
+    <MultiLanguage id="Resolution" value="Resolution" />
+    <MultiLanguage id="Rotate" value="Rotate" />
+    <MultiLanguage id="Rotate_0" value="0 degree" />
+    <MultiLanguage id="Rotate_90" value="90 degree" />
+    <MultiLanguage id="Rotate_180" value="180 degree" />
+    <MultiLanguage id="Rotate_270" value="270 degree" />
+    <MultiLanguage id="Brightness" value="Brightness" />
+    <MultiLanguage id="Apply" value="<u>A</u>pply" />
+    <MultiLanguage id="Cancel" value="<u>C</u>ancel" />
+</Locale>

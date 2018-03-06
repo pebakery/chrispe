@@ -1,0 +1,251 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd"><html><head><link type="text/css" rel="stylesheet" href="chrispe.css" media="screen" /><title>ChrisPE</title></head><body><font> 
+ 
+ 
+ 
+<p> 
+<select ONCHANGE="location = this.options[this.selectedIndex].value;"> 
+<option value="" disabled></option> 
+<option value="../readme.html">Contents</option> 
+<option value="" disabled>=======</option> 
+<option value="winpe.htm">Windows PE</option>  
+<option value="builder.htm">Builders</option>  
+<option value="options.htm">Project Options</option>  
+<option value="project.htm">Project Scripts</option>  
+<option value="instructions_pebakery.htm">Instructions</option>  
+<option value="menu_system.htm">Menu System</option>  
+<option value="not_in_wim.htm">Include...in boot.wim</option>  
+<option value="usb.htm">...Bootable USB...</option>  
+<option value="uefi.htm" selected="selected">UEFI, BIOS, GPT...</option>  
+<option value="multiboot.htm">Multiboot WinPE</option>  
+<option value="" disabled></option> 
+<option value="" disabled>Appendices</option> 
+<option value="" disabled>=========</option> 
+<option value="quick_pebakery.htm">Quick Start</option>  
+<option value="acknowledgements.htm">Acknowledgements</option>  
+<option value="" disabled></option> 
+</select> 
+</p> 
+ 
+ 
+ 
+<hr> 
+<a href="http://chrispe.mistyprojects.co.uk/"><img src="img/home.jpg" BORDER=1></a> 
+ 
+
+
+<h2><u>UEFI, BIOS, GPT and MBR</u></h2>
+
+<p>
+This page contains the following sections -
+<ul>
+<li><a class="internal" href="#uefi">UEFI and BIOS</a></li>
+<li><a class="internal" href="#gpt">GPT and MBR</a></li>
+<li><a class="internal" href="#windows">Windows Limitations</a></li>
+<li><a class="internal" href="#links">Further Reading</a></li>
+</ul>
+</p>
+
+
+
+<a name="uefi"></a><br>
+<h2><u>UEFI and BIOS</u></h2>
+
+
+<p>
+<font class="file">BIOS</font> and <font class="file">UEFI</font> are different firmware interfaces used to initialise computer hardware - running before the operating system itself is loaded/booted. 
+</p>
+
+
+<p>
+The Basic Input/Output System (<font class="file">BIOS</font>) has been the standard firmware used in IBM Compatible PC's since the release of the first IBM PC in the 1980's. Whilst it has evolved over the years it has some limitations imposed by its original design - this appears to be leading to it being gradually replaced with <font class="file">UEFI</font>. 
+</p>
+
+
+<p>
+An AT-compatible <font class="file">BIOS</font> runs in 16-bit processor mode with only 1 MB of addressable RAM. The <font class="file">BIOS</font> runs in real mode and passes control to the operating system. Windows and most other modern Operating Systems run in protected mode - allowing them to access more than 1 MB RAM. Modern Operating Systems therefore do not use <font class="file">BIOS</font> services after the OS has loaded and it is only used in the early stages to initialise hardware, identify the boot device and load the Operating System. 
+</p>
+
+
+<p>
+There are a number of articles stating that <font class="file">BIOS</font> systems cannot use/access more than 2 TiB of hard disk storage space - this is misleading and is not necessarily true. The hard disk partition table stores partition offset and size in sectors using Logical Block Addressing. The size and offset is limited to a 4 byte hexadecimal value - this means that the maximum number of sectors accessible on a <font class="file">MBR</font> type hard disk is 0xFFFFFFFF (hexadecimal) or 4,294,967,296 (decimal). Assuming a sector size of 512 bytes this equals a maximum accessible size of 2 Tebibytes. 
+</p>
+
+
+<p>
+Hard disks are now available with a 4 KiB (4096 byte) sector size - 4,294,967,296 (maximum number of sectors) x 4096 bytes (sector size) = 17,592,186,044,416 bytes, or 16 Tebibytes. <font class="file">MBR</font> disks can therefore theoretically be as large as 16 TiB. Unfortunately Windows operating systems cannot boot from a native 4 KiB sectored device - hence the misconception of the 2 TiB limit.  
+</p>
+
+
+<p>
+Some of the misconceptions about <font class="file">BIOS</font> and <font class="file">UEFI</font> limitations that are in actual fact Operating System or disk partition scheme limitations. Whilst Windows might limit the boot device to a maximum size of 2 TiB on <font class="file">MBR</font> type disks, far larger secondary disks are supported for storage purposes. 
+</p>
+
+
+
+<p>
+The Unified Extensible Firmware Interface (<font class="file">UEFI</font>) is a development of Intel's EFI specification. The <font class="file">GPT</font> partitioning scheme is part of the (U)EFI specification and is supported in all <font class="file">UEFI</font> based systems. Booting from <font class="file">MBR</font> partitioned disks is not necessarily supported on <font class="file">UEFI</font> systems, however some vendors have implemented legacy support for <font class="file">MBR</font> disks.
+</p>
+
+
+<p>
+<font class="file">UEFI</font> is free from some of the AT-compatible <font class="file">BIOS</font> limitations mentioned earlier. It can for example address far more than 1MB of RAM and runs in the full 32-bit or 64-bit processor mode (depending on Processor support). In theory a 64-bit <font class="file">UEFI</font> system should be able to address 2^64 bytes of RAM (16 exabytes, or 16.8 million terabytes) - due to processor limitations this would not currently be possible even if the physical size of RAM did not make it completely impractical. In conjunction with <font class="file">GPT</font> partitioned disks it can also boot operating systems from partitions larger than 2 TB.
+</p>
+
+
+
+<p>
+The <font class="file">UEFI</font> wiki (see <a class="external" target="_blank" href="http://en.wikipedia.org/wiki/Unified_Extensible_Firmware_Interface">here</a>) currently lists the following advantages over a traditional <font class="file">BIOS</font> system -
+<ul>
+<li>Ability to boot from large disks (over 2 TB) with a GUID Partition Table, <font class="file">GPT</font>.</li>
+<li>CPU-independent architecture</li>
+<li>CPU-independent drivers</li>
+<li>Flexible pre-OS environment, including network capability</li>
+<li>Modular design</li>
+</ul>
+</p>
+
+
+<p>
+<font class="file">UEFI</font> systems can understand file systems - FAT32 is supported (the specification also requires support for FAT12/16 on removable media). Vendors can include support for other file systems.
+</p>
+
+
+<p>
+Whilst the available Windows documentation appears to be steering towards the use of <font class="file">GPT</font> partitioned disks on <font class="file">UEFI</font> systems, it is also possible to boot Windows from a <font class="file">MBR</font> partitioned disk. It is however worth mentioning that it is may not be possible to install Windows to a <font class="file">MBR</font> partitioned disk on a <font class="file">UEFI</font> system - unless it has a <font class="file">BIOS</font> mode available and running (see <a class="external" target="_blank" href="http://support.microsoft.com/kb/2481490">here</a>).
+</p>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<a name="gpt"></a><br>
+<h2><u>GPT and MBR</u></h2>
+
+
+<p>
+Hard disks generally use one of two partitioning schemes, these being Master Boot Record (<font class="file">MBR</font>) and GUID Partition Table (<font class="file">GPT</font>). <font class="file">MBR</font> partitioned disks were introduced in the 1980's and are supported on all <font class="file">BIOS</font> based systems. <font class="file">BIOS</font> based systems generally do not support booting from <font class="file">GPT</font> partitioned disks, however due to the <font class="file">GPT</font> specification requiring a protective <font class="file">MBR</font> it is possible to install some third party boot loaders to the first sector of a <font class="file">GPT</font> disk.
+</p> 
+
+
+<p>
+The Master Boot Record is always located in the very first sector of a hard disk - sector 0. This 512 byte sector contains executable code used to load operating systems, in addition to the partition table which contains all partition information (size, starting sector, filesystem ID, etc.). The partition table can only contain a maximum of four partition entries. It's possible to create up to four primary partitions or one extended partition with up to three primary partitions. The Extended Partition can be subdivided into logical volumes, however the partition information for these logical volumes is not actually contained in the <font class="file">MBR</font>. Only one primary partition entry can be marked with a boot flag. 
+</p>
+
+
+<p>
+The size of individual partition entries in the partition table is limited to 16-bytes with 32-bit values describing the partition offset and size. This in turn limits the maximum usable storage space to 2 TiB on disks with a 512 byte sector size. Due to Windows code not being able to boot from sectors larger than 512 bytes, the boot device is also limited to 2 TiB. Whilst this may once have appeared to be more than adequate, modern technology has evolved to the point where disks with larger sector sizes and capacities above 2 TiB are available and affordable. 
+</p>
+
+
+
+<p>
+<font class="file">GPT</font> partitioned disks are free from this limitation. In fact, according to the <font class="file">UEFI</font> forum, a <font class="file">GPT</font> disk uses 64-bit values to store partition information and can support partitions up to 9.4 zettabytes in size. Additionally <font class="file">GPT</font> disks can also support far more partitions than <font class="file">MBR</font> disks - in theory there is no limit on the number of partitions, however a number of Operating Systems including Windows limit the maximum number of partitions to 128.
+</p>
+
+
+
+
+
+<p>
+The <font class="file">GPT</font> specification requires the first sector of the disk (sector 0) to contain a protective Master Boot Record. On <font class="file">UEFI</font> systems this is not actually used - it appears to have been implemented for legacy support and to prevent <font class="file">MBR</font> based utilities from overwriting <font class="file">GPT</font> disks - without the protective <font class="file">MBR</font> the disk may appear not to be initialised, or not to be partitioned.
+</p>
+
+
+
+<p>
+Because of the use of a protective <font class="file">MBR</font> on <font class="file">GPT</font> disks, it's possible to boot some operating systems from a <font class="file">GPT</font> disk on a <font class="file">BIOS</font> system. In order to do so the Protective <font class="file">MBR</font> must be edited or a third party boot loader can be installed to it. If a third party boot loader is used then it must be <font class="file">GPT</font> aware - e.g. Grub 2.
+</p>
+
+
+
+
+
+
+
+
+
+<a name="windows"></a><br>
+<h2><u>Windows Limitations</u></h2>
+
+<p>
+Windows limits the maximum number of partition entries on <font class="file">GPT</font> partitioned disks to 128.
+</p>
+
+<p>
+Due to current file system limitations the maximum partition size is limited to 256 TB. 
+</p>
+
+
+<p>
+32-bit Windows Vista and Windows 7 are not <font class="file">UEFI</font> aware and cannot be booted on <font class="file">UEFI</font> systems (in <font class="file">UEFI</font> Mode).
+</p>
+
+
+<p>
+32-bit versions of Windows 8/8.1 support <font class="file">UEFI</font>, however they cannot be booted on a 64-bit system in <font class="file">UEFI</font> mode as the Windows version must match the processor architecture. A 32-bit Windows operating system can only be booted on a system with a 32-bit processor when in <font class="file">UEFI</font> mode and a 64-bit Windows operating system can only be booted on a system with a 64-bit processor. Note that 32-bit <font class="file">UEFI</font> systems are something of a rarity.
+</p>
+
+
+
+
+
+
+
+
+
+<a name="links"></a><br>
+<h2><u>Further Reading</u></h2>
+
+
+<p>
+<ul>
+<li><a class="external" target="_blank" href="http://msdn.microsoft.com/en-us/library/windows/hardware/dn640535(v=vs.85).aspx">Windows and GPT FAQ</a></li>
+</ul>
+
+<ul>
+<li><a class="external" target="_blank" href="http://en.wikipedia.org/wiki/GUID_Partition_Table">GUID Partition Table</a> - <font class="file">GPT</font> wiki page</li>
+</ul>
+
+<ul>
+<li><a class="external" target="_blank" href="http://en.wikipedia.org/wiki/Unified_Extensible_Firmware_Interface">Unified Extensible Firmware Interface</a> - <font class="file">UEFI</font> wiki page</li>
+</ul>
+
+<ul>
+<li><a class="external" target="_blank" href="http://www.rodsbooks.com/gdisk/booting.html">Booting from GPT</a> - looks interesting and lists some hacks for booting Windows from a <font class="file">GPT</font> disk on a <font class="file">BIOS</font> based system</li>
+</ul>
+
+<ul>
+<li><a class="external" target="_blank" href="http://en.wikipedia.org/wiki/Master_boot_record">Master Boot Record</a> - <font class="file">MBR</font> wiki</li>
+</ul>
+
+<ul>
+<li><a class="external" target="_blank" href="http://thestarman.narod.ru/asm/mbr/GPT.htm">An Examination of The
+Microsoft® Windows™ 7 and 8
+GPT 'Protective' MBR
+and EFI Partitions</a></li>
+</ul>
+
+
+<ul>
+<li><a class="external" target="_blank" href="http://reboot.pro/topic/19797-questions-about-usb-booting-on-uefi-systems">Questions about USB Booting on UEFI systems</a> - reboot.pro forum thread</li>
+</ul>
+
+
+<ul>
+<li><a class="external" target="_blank" href="http://reboot.pro/topic/19797-questions-about-usb-booting-on-uefi-systems/?p=184271">Questions about USB Booting on UEFI systems</a> - post containing a number of useful links</li>
+</ul>
+</p>
+
+
+
+
+<p class="breaktop"><font class="file">Document date - 6<sup>th</sup> March 2018</font></p></font></body></html>

@@ -1,0 +1,168 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd"> <html>
+<html>
+<head>
+<link type="text/css" rel="stylesheet" href="readme.files/chrispe.css" media="screen" />
+<title>ChrisPE</title>
+</head>
+<body>
+<font>
+
+
+<p> 
+<select ONCHANGE="location = this.options[this.selectedIndex].value;"> 
+<option value="" disabled></option> 
+<option value="readme.html" selected="selected">Contents</option>  
+<option value="" disabled>=======</option>   
+<option value="readme.files/winpe.htm">Windows PE</option>  
+<option value="readme.files/builder.htm">Builder</option>  
+<option value="readme.files/options.htm">Project Options</option>  
+<option value="readme.files/project.htm">Project Scripts</option>  
+<option value="readme.files/instructions_pebakery.htm">Instructions</option>  
+<option value="readme.files/menu_system.htm">Menu System</option>  
+<option value="readme.files/not_in_wim.htm">Include...in boot.wim</option>  
+<option value="readme.files/usb.htm">...Bootable USB...</option>  
+<option value="readme.files/uefi.htm">UEFI, BIOS, GPT...</option>  
+<option value="readme.files/multiboot.htm">Multiboot WinPE</option>   
+<option value="" disabled></option> 
+<option value="" disabled>Appendices</option> 
+<option value="" disabled>=========</option> 
+<option value="readme.files/quick_pebakery.htm">Quick Start</option>  
+<option value="readme.files/acknowledgements.htm">Acknowledgements</option>  
+<option value="" disabled></option> 
+</select> 
+</p> 
+ 
+ 
+ 
+<hr> 
+<a href="http://chrispe.mistyprojects.co.uk/"><img src="readme.files/img/home.jpg" BORDER=1></a> 
+ 
+
+ 
+ 
+<h2><u>Introduction</u></h2>
+
+
+<p>
+The <font class="file">PEBakery Team</font> are proud to present the <font class="file">ChrisPE</font> project. Use this project to create <font class="file">WinPE</font> from a range of 32-bit and 64-bit Windows sources, including -
+<ul>
+<li><font class="file">Windows 7</font></li>
+<li><font class="file">Windows 7 (SP1)</font></li>
+<li><font class="file">Windows Server 2008 R2 SP1</font></li>
+<li><font class="file">Windows 8</font></li>
+<li><font class="file">Windows 8.1</font></li>
+<li><font class="file">Windows 8.1 Update</font></li>
+<li><font class="file">Windows 10</font></li>
+</ul>
+Windows RTM source files are recommended. The sources in the above list have been tested, other source files may also work. 
+</p>
+
+
+<p class="break3em">
+This project has been internally tested and developed over the past two months and is now ready for a public beta release. The <font class="file">PEBakery Team</font> anticipate ongoing development and the <font class="file">ChrisPE</font> project is likely to continue to evolve. This may result in changes to some of the core features such as the menu system and supported shells.
+</p>
+
+
+
+<p class="break3em">
+Some of the current features include -
+<ul>
+<li>No caching of Windows source files - resulting in reduced storage space requirements on the Host OS used to build the project.</li>
+
+<li class="breakhalfem">.wim support using internal <font class="file">PEBakery</font> commands - the wimlib library is used for managed wim support. The full contents of the the Windows source and <font class="file">WinPE</font> .wim files are not applied (extracted) to a local directory - resulting in significant time savings.</li>
+
+<li class="breakhalfem">Support for a range of shells including <font class="file">bblean</font>, <font class="file">CMD</font>, <font class="file">LaunchBar</font> and <font class="file">WinXShell</font>.</li>
+
+
+<li class="breakhalfem">WoW64 support.</li>
+</ul>
+</p>
+
+
+
+<p class="break3em">
+This project has been developed as a base from which to add additional features. Feedback is welcome. 
+</p>
+
+
+
+
+
+
+
+<h2 class="breaktop"><u>Contents</u></h2>
+
+
+
+<p>
+<i>Please note that the screenshots used throughout this guide may have been taken from a previous version of ChrisPE and could differ in this release.</i>
+</p>
+
+
+
+<ol start="1"><li>
+<a class="internal" href="readme.files/winpe.htm">Windows Preinstallation Environment</a> - About <i>Microsoft&copy;</i> "WinPE".
+</li></ol>
+
+
+<ol start="2"><li>
+<a class="internal" href="readme.files/builder.htm">Builders</a> - brief overview of the PEBakery build engine.
+</li></ol>
+
+
+<ol start="3"><li>
+<a class="internal" href="readme.files/options.htm">Project Options</a> - the main settings/options.
+</li></ol>
+
+
+
+<ol start="4"><li>
+<a class="internal" href="readme.files/project.htm">Project Scripts</a> - List of all scripts included with the <font class="file">ChrisPE</font> download.
+</li></ol>
+
+
+
+<ol start="5"><li>
+<a class="internal" href="readme.files/instructions_pebakery.htm">Instructions</a> - a detailed walkthrough for using the <font class="file">ChrisPE</font> project to create <font class="file">WinPE</font>. Also covers <font class="file">PEBakery</font> usage.
+</li></ol>
+
+
+<ol start="6"><li>
+<a class="internal" href="readme.files/menu_system.htm">Menu System</a> - an overview of the menu systems for the supported Shells. Cover creating custom sub-menus.
+</li></ol>
+
+
+<ol start="7"><li>
+<a class="internal" href="readme.files/not_in_wim.htm">Include Program in boot.wim</a>
+</li></ol>
+
+
+<ol start="8"><li>
+<a class="internal" href="readme.files/usb.htm">Create a Bootable USB Stick</a> - covers using <font class="file">DiskPart</font> (Command-line) and <font class="file">Rufus</font> (GUI).
+</li></ol>
+
+<ol start="9"><li>
+<a class="internal" href="readme.files/uefi.htm">UEFI, BIOS, GPT and MBR</a> - overview of <font class="file">UEFI</font> and <font class="file">BIOS</font>.
+</li></ol>
+
+<ol start="10"><li>
+<a class="internal" href="readme.files/multiboot.htm">MultiBoot WinPE</a>
+</li></ol>
+
+
+<ol start="11"><li>
+<a class="internal" href="readme.files/quick_pebakery.htm">Quick Start Guide (PEBakery)</a> - the basic steps for using this project in the <font class="file">PEBakery</font> build engine to create <font class="file">WinPE</font> in just a few minutes!
+</li></ol>
+
+
+
+<ol start="12"><li>
+<a class="internal" href="readme.files/acknowledgements.htm">Acknowledgements</a>
+</li></ol>
+
+
+
+
+<p class="breaktop"><font class="file">Document date - 6<sup>th</sup> March 2018</font></p></font></body></html>
+
+

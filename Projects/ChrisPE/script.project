@@ -1,0 +1,167 @@
+[Main]
+Title=ChrisPE Beta 0.1.0
+SourceDir=
+TargetDir=
+Description=
+Author=ThePEBakeryTeam
+Version=20180306
+Date=2018-03-06
+Locked=true
+Selected=None
+Mandatory=true
+Download_Level=0
+NoWarning=False
+Level=0
+AttachDir=
+IsoFile=
+Interface=TAB_A_Menu
+Project=ChrisPE
+
+[Variables]
+%Files%=%BaseDir%\Projects\Files
+%Cache%=%BaseDir%\Projects\Cache
+%Tools%=%BaseDir%\Projects\Tools
+%ProjectTemp%=%BaseDir%\ProjectTemp
+%Programs%=%Cache%\Programs
+%TargetDir%=%BaseDir%\ChrisPE.Files\ROOT
+%OutputDir%=%BaseDir%\ChrisPE.Files\ISO.ROOT
+%ISODir%=%BaseDir%\ChrisPE.Files
+%Target_config%=%TargetDir%\WINDOWS\System32\config
+%Target_system32%=%TargetDir%\WINDOWS\System32
+%USECACHE%=NEVER
+%CODEBASE%=unchecked
+%PROJECT.DATE%=2018-03-06
+%LANG3%=en-US
+%USE.TOOLS%=YES
+
+[HELP.1.New]
+Message,"Path to directory (or mounted .iso) containing the following files and directories-#$x#$x#$s#$s*#$s\sources\boot.wim#$x#$s#$s*#$s\sources\install.wim#$x#$s#$s*#$s\bootmgr#$x#$s#$s*#$s\boot\#$x#$s#$s*#$s\EFI\#$x#$xNote - ensure that the PATH includes a trailing backslash (\)."
+
+[TAB_A_Menu]
+pTextLabel_TAB_A="Options 1",1,1,15,4,80,18,10,Bold
+pButton_TAB_B="Options 2",1,8,85,0,80,25,Change.To.Tab.B,0,True,_Change.To.Tab.B,True
+pButton_TAB_C="Options 3",1,8,165,0,80,25,Change.To.Tab.C,0,True,_Change.To.Tab.C,True
+pBevel_A1=,1,12,9,100,500,30
+pButton_A1=HELP,1,8,20,105,80,20,HELP.1.New,0,True,_HELP.1.New_,True
+pTextLabel_A1="1] Path to Source",1,1,110,108,150,18,8,Bold
+pFileBox_A1=,1,13,220,105,275,20,dir
+pBevel_A2=,1,12,10,175,500,35
+pScrollBox_A2=2,1,4,20,182,80,20,1,2,3,4
+pButton_A2=HELP,1,8,430,182,70,20,HELP.2,0,True,_HELP.2_,True
+pTextLabel_A2="2] Set 'boot.wim' Image Number",1,1,163,185,210,18,8,Bold
+pBevel_A3=,1,12,10,250,500,35
+pScrollBox_A3=1,1,4,20,257,80,20,1,2,3,4,5,6,7,8,9
+pButton_A3=HELP,1,8,430,257,70,20,HELP.3,0,True,_HELP.3_,True
+pTextLabel_A3="3] Set 'install.wim' Image Number",1,1,160,260,210,18,8,Bold
+
+[TAB_B_Menu]
+pButton_TAB_A="Options 1",1,8,5,0,80,25,Change.To.Tab.A,0,True,_Change.To.Tab.A,True
+pTextLabel_TAB_B="Options 2",1,1,95,4,80,18,10,Bold
+pButton_TAB_C="Options 3",1,8,165,0,80,25,Change.To.Tab.C,0,True,_Change.To.Tab.C,True
+pBevel_B2=,1,12,10,95,500,35
+pScrollBox_B2=DEFAULT,1,4,20,102,80,20,DEFAULT,de-DE,en-AU,en-CA,en-GB,en-US,es-MX,es-ES,fr-CA,fr-FR,it-IT,nl-NL,pt-PT,zh-CN
+pButton_B2=HELP,1,8,430,102,70,20,HELP.4,0,True,_HELP.4_,True
+pTextLabel_B2="4] Keyboard Layout",1,1,192,105,120,22,8,Bold
+pBevel_B3=,1,12,10,140,500,35
+pScrollBox_B3=en-US,1,4,20,147,80,20,bg-BG,cs-CZ,da-DK,de-DE,el-GR,en-GB,en-US,es-ES,et-EE,fi-FI,fr-FR,hr-HR,hu-HU,it-IT,ja-JP,ko-KR,it-LT,lv-LV,nb-NO,nl-NL,pl-PL,pt-BR,pt-PT,qps-ploc,ro-RO,ru-RU,sk-SK,sr-Latn-CS,sr-Latn-RS,sv-SE,tr-TR,uk-UA,zh-CN,zh-HK,zh-TW
+pButton_B3=HELP,1,8,430,147,70,20,HELP.5,0,True,_HELP.5_,True
+pTextLabel_B3="5] WinPE Language / Fallback Language",1,1,143,150,232,18,8,Bold
+pBevel_B5=,1,12,10,185,500,35
+pScrollBox_B5=DEFAULT,1,4,20,192,80,20,16,32,64,128,256,512,DEFAULT
+pButton_B5=HELP,1,8,430,192,70,20,HELP.7,0,True,_HELP.7_,True
+pTextLabel_B5="6] RAM Disk Size",1,1,198,195,101,18,8,Bold
+
+[TAB_C_Menu]
+pButton_TAB_A="Options 1",1,8,5,0,80,25,Change.To.Tab.A,0,True,_Change.To.Tab.A,True
+pButton_TAB_B="Options 2",1,8,85,0,80,25,Change.To.Tab.B,0,True,_Change.To.Tab.B,True
+pTextLabel_TAB_C="Options 3",1,1,175,4,80,18,10,Bold
+pCheckBox_C1="1] UAC Check",1,3,41,70,180,18,False
+pCheckBox_C2="2] Admin Check",1,3,41,100,180,18,True
+pCheckBox_C3="3] Log File",1,3,41,130,180,18,True
+pButton_C1=?,1,8,10,70,18,18,HELP.C1,0,True,_HELP.C1_,True
+pButton_C2=?,1,8,10,100,18,18,HELP.C2,0,True,_HELP.C2_,True
+pButton_C3=?,1,8,10,130,18,18,HELP.C3,0,True,_HELP.C3_,True
+
+[Change.To.Tab.A]
+IniWrite,%ScriptFile%,Main,Interface,TAB_A_Menu
+System,REFRESHINTERFACE
+
+[Change.To.Tab.B]
+IniWrite,%ScriptFile%,Main,Interface,TAB_B_Menu
+System,REFRESHINTERFACE
+
+[Change.To.Tab.C]
+IniWrite,%ScriptFile%,Main,Interface,TAB_C_Menu
+System,REFRESHINTERFACE
+
+[HELP.1]
+Message,""
+
+[HELP.2]
+Message,"When using Windows Installation media (e.g. a DVD or a mounted ISO file) image #$q2#$q must be selected. WIM files can contain multiple images and care must be taken to select the correct image. In all of the official (unmodified) windows discs I have examined this has been image #$q2#$q - image 1 will not boot successfully and is not flagged as the boot image.#$x#$xIf boot.wim from the Windows AIK or ADK is used however#$c then image #$q1#$q should be selected."
+
+[HELP.3]
+Message,"Leave this setting as 1 - it should work in most cases. Some 'install.wim' files may contain multiple images. If the required dependencies cannot be extracted from image #1 during the build process then change the image number and try again."
+
+[HELP.4]
+Message,"Select #$qDEFAULT#$q to leave the default keyboard layout for your build. Select one of the other available options to change to a user specified layout (e.g. select #$qUK#$q from the list to change to a United Kingdon keyboard layout)."
+
+[HELP.5]
+Message,"In the unlikely event that the #$qDefault Language#$q cannot be obtained from the source files (more specifically from #$qboot.wim#$q) then this will be the fallback language used.#$x#$xPlease note that the project will try to verify the #$qDefault Language#$q of the source files you are using and will ignore the value selected here if this information can be obtained from #$qboot.wim#$q."
+
+[HELP.6]
+Message,"Selecting #$qYES#$q will add all programs to boot.wim. Although this will result in a larger boot file and will require more system RAM#$c all programs will be available on boot. If network booting WinPE/WinFE I recommend using this method #$x#$xSelecting #$qNO#$q will result in a smaller boot file. Essential programs will still be added to boot.wim (including WProtect.exe). You will need to ensure that you copy the #$qPrograms#$q directory to external media after the build has finished. This media will need to be accessible after booting WinPE/WinFE - you will probably need to use either WProtect.exe or diskpart to mount the external media before you can use it"
+
+[HELP.7]
+Message,"Set the size of the RAM Disk (in MB) - this is the amount of writable space on the SYSTEMDRIVE that will be available when WinPE/WinFE is running. Selecting #$qDEFAULT#$q will result in the default size for the build you are using. This varies depending on your build version - WinPE/WinFE 2.0 for example has 32MB of available space#$c whereas WinPE/WinFE 5.0 has 512MB.#$x#$xPlease note that in WinPE/WinFE 5.x this setting will be ignored if the system has more than 1GB of RAM. If more than 1GB of RAM is available then the RAM disk will be set to 512MB. If the system has 1GB or less RAM then the size selected here will be used."
+
+[HELP.C1]
+Message,"Check if User Account Control (UAC) is enabled and display a warning message if it is. The user will have the optioin of ignoring the warning and continuing with the build process."
+
+[HELP.C2]
+Message,"Check if the user is running with Administrator Privileges and abort if not. The build will not work without Admin Privileges due to some of processes that need to be executed - including mounting registry hives."
+
+[HELP.C3]
+Message,"Automatically save a log file based on date and time. This action will be executed on successful completion of the bblean script - if the build process does not get that far then a log will not be saved."
+
+[process]
+ReadInterface,Value,%ScriptFile%,TAB_A_Menu,pFileBox_A1,%pFileBox_A1%
+ReadInterface,Value,%ScriptFile%,TAB_A_Menu,pScrollBox_A2,%pScrollBox_A2%
+ReadInterface,Value,%ScriptFile%,TAB_A_Menu,pScrollBox_A3,%pScrollBox_A3%
+ReadInterface,Value,%ScriptFile%,TAB_B_Menu,pScrollBox_B2,%pScrollBox_B2%
+ReadInterface,Value,%ScriptFile%,TAB_B_Menu,pScrollBox_B3,%pScrollBox_B3%
+ReadInterface,Value,%ScriptFile%,TAB_B_Menu,pScrollBox_B5,%pScrollBox_B5%
+ReadInterface,Value,%ScriptFile%,TAB_C_Menu,pCheckBox_C1,%pCheckBox_C1%
+ReadInterface,Value,%ScriptFile%,TAB_C_Menu,pCheckBox_C2,%pCheckBox_C2%
+ReadInterface,Value,%ScriptFile%,TAB_C_Menu,pCheckBox_C3,%pCheckBox_C3%
+Set,%SourceDir%,%pFileBox_A1%,GLOBAL
+Set,%Boot.wim.Image.number%,%pScrollBox_A2%,GLOBAL
+Set,%Install.wim.Image.number%,%pScrollBox_A3%,GLOBAL
+Set,%Method%,INJECT,GLOBAL
+Set,%KEYBOARD%,%pScrollBox_B2%,GLOBAL
+Set,%LANG%,%pScrollBox_B3%,GLOBAL
+//Fallback for language support (MUI files)
+Set,%LANG2%,%pScrollBox_B3%,GLOBAL
+Set,%RAMDISK%,%pScrollBox_B5%,GLOBAL
+Set,%UAC.CHECK%,%pCheckBox_C1%,GLOBAL
+Set,%ADMIN.CHECK%,%pCheckBox_C2%,GLOBAL
+Set,%LOGFILE%,%pCheckBox_C3%,GLOBAL
+Echo,"Checking Host Operating System..."
+RegRead,HKLM,"SOFTWARE\Microsoft\Windows NT\CurrentVersion",CurrentVersion,%Host%
+StrFormat,LEFT,%Host%,3,%Host%
+Set,%Host.OS%,%Host%,GLOBAL
+
+[AuthorEncoded]
+PEBakery_48.ico=2215,2954
+PEBakery_64.ico=2927,3903
+PEBakery_128.ico=6128,8171
+Logo=pebakery_64.ico
+
+[EncodedFile-AuthorEncoded-PEBakery_48.ico]
+lines=0
+0=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
+
+[EncodedFile-AuthorEncoded-PEBakery_64.ico]
+lines=0
+0=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
+

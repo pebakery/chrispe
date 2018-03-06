@@ -1,0 +1,218 @@
+[main]
+Title=Core Files
+Description=
+Selected=True
+Locked=True
+Mandatory=True
+Level=2
+Author=ThePEBakeryTeam
+Version=20180306
+Date=2018-03-06
+Interface=Interface
+NoWarning=False
+
+[Interface]
+
+[process]
+If,Not,%PEBakery%,Equal,True,Begin
+  message,"This project is not compatible with WinBuilder. ABORTING..."
+  Halt
+End
+If,%SourceDir%,Equal,,Begin
+  message,Error - you have not set a source directory. ABORTING...
+  Halt
+End
+StrFormat,Right,%SourceDir%,1,%endcharacter%
+If,Not,%endcharacter%,Equal,\,Begin
+  Message,"Error. The #$qPATH to Source#$q entry in the main project script must end in a backslash (#$q\#$q).#$x#$xABORTING..."
+  Halt
+End
+StrFormat,RTRIM,%SourceDir%,1,%SourceDir%
+If,Not,ExistDir,"%SourceDir%",Begin
+  Message,"Could not find #$q%SourceDir%#$q#$x#$xPlease check the path in the #$qPATH to Source#$q box.#$x#$xABORTING..."
+  Halt
+End
+Set,%SourceDir%,%SourceDir%,Global
+Set,%USE.TOOLS%,NO,Global
+If,ExistFile,"%ProjectTemp%\*.*",FileDelete,"%ProjectTemp%\*.*"
+If,%UAC.CHECK%,Equal,True,Begin
+  System,HasUAC,%var%
+  If,%var%,Equal,True,begin
+    Set,%CONTINUE%,NO
+    If,Question,"UAC (User Account Control) is enabled - this may cause problems when building.#$x#$xContinue anyway?",Set,%CONTINUE%,YES
+    If,%CONTINUE%,Equal,NO,Halt
+  End
+End
+If,%ADMIN.CHECK%,Equal,True,Begin
+  System,ISADMIN,%var%
+  If,%var%,Equal,False,begin
+    Message,"This project must be run as admin. Aborting..."
+    Halt
+  End
+End
+If,Not,ExistDir,%ProjectTemp%,DirMake,%ProjectTemp%
+Run,"%ProjectDir%\Core\verify.script",Tools.Check
+Run,"%ProjectDir%\Core\verify.script",SOURCE.CHECK
+Run,"%ProjectDir%\Core\verify.script",boot.wim
+Run,"%ProjectDir%\Core\verify.script",install.wim.v2
+Run,"%ProjectDir%\Core\verify.script",Officially.Supported.OS.Check
+If,Not,%LANG%,equal,%LANG3%,If,Not,%LANG2%,equal,%LANG3%,Set,%USE.LANG3%,YES
+If,Not,%LANG%,equal,%LANG2%,Set,%USE.LANG2%,YES
+Run,%ScriptFile%,Registry_Check
+Run,%ScriptFile%,CLEAR.PREVIOUS.RUN
+Run,%ScriptFile%,MakeFolders
+If,%Method%,Equal,INJECT,Begin
+  Run,%ScriptFile%,INJECT_WIM
+End
+Run,%ScriptFile%,OPEN.WITH
+Run,%ScriptFile%,RAMDISK
+Run,%ScriptFile%,KEYBOARD
+Run,%ScriptFile%,Project.Settings
+
+[Registry_Check]
+Echo,"Checking to see if project registry hives are still mounted from a previous run and unloading them if they are..."
+If,ExistRegSection,HKLM,_WinPE_DEFAULT,RegHiveUnload,_WinPE_DEFAULT
+If,ExistRegSection,HKLM,_WinPE_SAM,RegHiveUnload,_WinPE_SAM
+If,ExistRegSection,HKLM,_WinPE_SECURITY,RegHiveUnload,_WinPE_SECURITY
+If,ExistRegSection,HKLM,_WinPE_SOFTWARE,RegHiveUnload,_WinPE_SOFTWARE
+If,ExistRegSection,HKLM,_WinPE_SYSTEM,RegHiveUnload,_WinPE_SYSTEM
+
+[CLEAR.PREVIOUS.RUN]
+Echo,"Removing files created following any previous runs of this project..."
+If,ExistDir,"%TargetDir%",Begin
+  Echo,"Deleting #$q%TargetDir%#$q..."
+  System,ERROROFF
+  DirDelete,"%TargetDir%"
+  If,ExistDir,"%TargetDir%",Begin
+    Set,%DIRECTORY%,"%TargetDir%",Global
+    Run,"%ProjectDir%\core\common.script",DIRECTORY.DELETE
+  End
+End
+If,ExistDir,"%OutputDir%",Begin
+  Echo,"Deleting #$q%OutputDir%#$q..."
+  System,ERROROFF
+  DirDelete,"%OutputDir%"
+  If,ExistDir,"%OutputDir%",Begin
+    Set,%DIRECTORY%,"%OutputDir%",Global
+    Run,"%ProjectDir%\core\common.script",DIRECTORY.DELETE
+  End
+End
+If,ExistDir,"%ISODir%",Begin
+  Echo,"Deleting #$q%ISODir%#$q..."
+  System,ERROROFF
+  DirDelete,"%ISODir%"
+  If,ExistDir,"%ISODir%",Begin
+    Set,%DIRECTORY%,"%ISODir%",Global
+    Run,"%ProjectDir%\core\common.script",DIRECTORY.DELETE
+  End
+End
+//Backup boot.wim.info.ini and then delete %ProjectTemp% -
+If,ExistFile,%ProjectTemp%\boot.wim.info.ini,Begin
+  If,ExistFile,%Cache%\boot.wim.info.ini,FileDelete,%Cache%\boot.wim.info.ini
+  FileCopy,%ProjectTemp%\boot.wim.info.ini,%Cache%\boot.wim.info.ini
+End
+If,ExistDir,"%ProjectTemp%",Begin
+  Echo,"Deleting #$q%ProjectTemp%#$q..."
+  System,ERROROFF
+  DirDelete,"%ProjectTemp%"
+  If,ExistDir,"%ProjectTemp%",Begin
+    Set,%DIRECTORY%,"%ProjectTemp%",Global
+    Run,"%ProjectDir%\core\common.script",DIRECTORY.DELETE
+  End
+End
+//now restore boot.wim.info.ini
+If,ExistFile,%Cache%\boot.wim.info.ini,FileCopy,%Cache%\boot.wim.info.ini,%ProjectTemp%\boot.wim.info.ini
+
+
+[MakeFolders]
+Echo,"Creating Directory structure..."
+DirMake,"%TargetDir%"
+DirMake,"%OutputDir%"
+DirMake,"%OutputDir%\sources"
+DirMake,"%OutputDir%\boot"
+If,%Method%,Equal,INJECT,Begin
+  DirMake,"%TargetDir%\Windows"
+  DirMake,"%TargetDir%\Windows\System32"
+  DirMake,"%TargetDir%\Windows\System32\config"
+  DirMake,"%TargetDir%\Windows\System32\%LANG%"
+End
+If,Not,ExistDir,%ProjectTemp%,DirMake,%ProjectTemp%
+
+[INJECT_WIM]
+Echo,"Copying boot.wim#$c removing read-only flag and extracting required files..."
+FileCopy,"%boot.wim%","%OutputDir%\sources\boot.wim"
+ShellExecute,Hide,"attrib.exe","-r #$q%Outputdir%\Sources\boot.wim#$q"
+WimExtractBulk,%OutputDir%\sources\boot.wim,%boot.wim.Image.number%,%Tools%\wimlib.file.lists\boot.wim.registry.txt,%TargetDir%,NOACL
+
+[OPEN.WITH]
+SET,%Openwith.workaround%,NO
+If,%CodeBase2%,Equal,10.0,Set,%Openwith.workaround%,YES,Global
+If,%Openwith.workaround%,Equal,YES,Begin
+  If,Not,ExistRegSection,HKLM,_WinPE_SOFTWARE,RegHiveLoad,_WinPE_SOFTWARE,"%Target_config%\software"
+  System,Erroroff,2
+  If,ExistRegSection,HKLM,_WinPE_SOFTWARE\Classes\Unknown,RegDelete,HKLM,_WinPE_SOFTWARE\Classes\Unknown
+  If,ExistRegSection,HKLM,"_WinPE_SOFTWARE\Classes\*\shellex\ContextMenuHandlers\Open With",RegDelete,HKLM,"_WinPE_SOFTWARE\Classes\*\shellex\ContextMenuHandlers\Open With"
+  RegWrite,HKLM,0x1,"_WinPE_SOFTWARE\Classes\*\shell\Open with",Subcommands,openwith.notepad
+  RegWrite,HKLM,0x1,_WinPE_SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\CommandStore\shell\openwith.notepad,,notepad
+  RegWrite,HKLM,0x2,_WinPE_SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\CommandStore\shell\openwith.notepad\command,,#$q%SYSTEMROOT%\System32\notepad.exe#$q #$q%1#$q
+  If,ExistRegSection,HKLM,_WinPE_SOFTWARE,RegHiveUnload,_WinPE_SOFTWARE
+End
+
+[RAMDISK]
+If,Not,%RAMDISK%,Equal,DEFAULT,Begin
+  Echo,"Mounting registry hives to change RAMDisk size..."
+  If,Not,ExistRegSection,HKLM,_WinPE_SYSTEM,RegHiveLoad,_WinPE_SYSTEM,"%Target_config%\system"
+  RegWrite,HKLM,0x4,_WinPE_SYSTEM\ControlSet001\Services\FBWF,WinPECacheThreshold,%RAMDISK%
+  Echo,"Unmounting registry hives..."
+  RegHiveUnload,_WinPE_SYSTEM
+End
+
+[KEYBOARD]
+If,Not,%KEYBOARD%,Equal,DEFAULT,Begin
+  If,%KEYBOARD%,Equal,de-DE,Set,%layout%,00000407
+  If,%KEYBOARD%,Equal,en-AU,Set,%layout%,00000c09
+  If,%KEYBOARD%,Equal,en-CA,Set,%layout%,00001009
+  If,%KEYBOARD%,Equal,en-GB,Set,%layout%,00000809
+  If,%KEYBOARD%,Equal,en-US,Set,%layout%,00000409
+  If,%KEYBOARD%,Equal,es-MX,Set,%layout%,0000080a
+  If,%KEYBOARD%,Equal,es-ES,Set,%layout%,0000040a
+  If,%KEYBOARD%,Equal,fr-CA,Set,%layout%,00000c0c
+  If,%KEYBOARD%,Equal,fr-FR,Set,%layout%,00000809
+  If,%KEYBOARD%,Equal,it-IT,Set,%layout%,00000410
+  If,%KEYBOARD%,Equal,nl-NL,Set,%layout%,00000413
+  If,%KEYBOARD%,Equal,pt-PT,Set,%layout%,00000816
+  If,%KEYBOARD%,Equal,zh-CN,Set,%layout%,00000804
+  Echo,"Mounting registry hives to change keyboard layout..."
+  If,Not,ExistRegSection,HKLM,_WinPE_DEFAULT,RegHiveLoad,_WinPE_DEFAULT,"%Target_config%\default"
+  RegWrite,HKLM,0x1,_WinPE_DEFAULT\Keyboard Layout\Preload,1,%layout%
+  Echo,"Unmounting registry hives..."
+  RegHiveUnload,_WinPE_DEFAULT
+End
+
+[Project.Settings]
+FileCopy,"%ProjectTemp%\boot.wim.info.ini","%OutputDir%\Project.Settings.ini"
+IniAddSection,"%OutputDir%\Project.Settings.ini",PROJECT.VERSION
+IniWrite,"%OutputDir%\Project.Settings.ini",PROJECT.VERSION,VERSION,%PROJECT.DATE%
+IniAddSection,"%OutputDir%\Project.Settings.ini",MAIN.SETTINGS
+//IniWrite,"%OutputDir%\Project.Settings.ini",MAIN.SETTINGS,1_CACHE,%USECACHE%
+//IniWrite,"%OutputDir%\Project.Settings.ini",MAIN.SETTINGS,2_RAMDISK,%RAMDISK%
+//IniWrite,"%OutputDir%\Project.Settings.ini",MAIN.SETTINGS,3_ARCH,%ARCH%
+//IniWrite,"%OutputDir%\Project.Settings.ini",MAIN.SETTINGS,4_SYSWOW64,%SYSWOW64%
+IniWrite,"%OutputDir%\Project.Settings.ini",MAIN.SETTINGS,5_BOOT.WIM.IMAGE.NUMBER,%Boot.wim.Image.number%
+IniWrite,"%OutputDir%\Project.Settings.ini",MAIN.SETTINGS,6_INSTALL.WIM.IMAGE.NUMBER,%Install.wim.Image.number%
+IniWrite,"%OutputDir%\Project.Settings.ini",MAIN.SETTINGS,7_METHOD,%Method%
+IniWrite,"%OutputDir%\Project.Settings.ini",MAIN.SETTINGS,8_KEYBOARD,%KEYBOARD%
+IniWrite,"%OutputDir%\Project.Settings.ini",MAIN.SETTINGS,9_FALLBACK.LANGUAGE,%LANG2%
+IniWrite,"%OutputDir%\Project.Settings.ini",MAIN.SETTINGS,10_PROGRAMS.IN.WIM,%PROGRAMS.IN.WIM%
+IniAddSection,"%OutputDir%\Project.Settings.ini",ESSENTIAL
+IniAddSection,"%OutputDir%\Project.Settings.ini",PROGRAMS
+IniAddSection,"%OutputDir%\Project.Settings.ini",WINFE
+
+[AuthorEncoded]
+Logo=donut.ico
+donut.ico=953,1271
+
+[EncodedFile-AuthorEncoded-donut.ico]
+lines=0
+0=eJztmctKI0EUhiu2kkXUaAKDN3AWMzAgShARESUgbly4UBQEBUfxhqgENwoBM270Fdy4EBEHXYjgwoWXRvHyAOpKMI+QpQvxTP4kxWQ6Gbu6ujvdSBL+/NAdzvlOpet0V4UxT/IdCrHk51f2+ztjXxhjP5JKHmI/Wfp46vWNsYAvLf4ioqKKKsqkjo+PKRKJUGdnJwWDQdKer66upvb2dpqbm6O9vb2c807o6emJpqamqLKyktAKsqX9rvZ8WVkZ9ff30+npqSO1jI6OksfjyeEW5c8Wfperq6uC1LG9vU3l5eX/ZZHhhzAWs7OzttYwPj6uyy3Lz9XS0kIvLy+W19HT0yPMboYfqquro8fHR8tq6O3tNcRulh+qr6+3hH9mZsYwuxX8UCgUMlXD/v6+FLtV/NDi4qJ0DYFAwHH+kpISur+/N1zD/Py8NLuV/FB3d7dhftwf3cIPXV5eCtewurpqKpcd/MPDw8L8DQ0NruP3er1C/Hd3d6byKIpCCwsLObmi0Sj5/X5TsQ8PD3Vr2NzclI4PPlVVP8zR3NwsHV+klw4ODkrFRp87OzvTjR+Px6miokIqR0dHh278pqYmqdh4thOdX2tra1I5cD/Si411kkzsm5sbYX47Jdv3neb+LPyy18/t7a0rapCdvxMTE8L8sVjMtvk7MDAgFRv9U6/3c+XbrxCRSP/c2NiQig3h2tO7jrAmkY2f776uFfLLxocw/5eXl3PyrK+vk5n1BHRwcCD0+2LtaSYPpI1pNp7o8xu0srLiOv6hoSFD/a20tNRV/BcXF4b4sc/qFv6uri5D7FxVVVWO82NfUfbeuLu76zg/9hFk2LkmJycd48deqBl2LqN7n1bw19bWEtY6VvBD4XC4YPw1NTX08PBgGTvX2NiY7fx4fnx+fracnWtra4t8Pp8t/JhrdnFrNTIyYtn/R62trXR+fl4wdi5coxizfP8n6fFjn6ivr49OTk4Kzp1PR0dHtLS0lHpGz7fOwL2wra2NpqenaWdnxxXMRRX1CQT7wK+vU/6uqDH4m6I2whOKit1kiiuqAlcVFd2UfmWcKSo6zTs8lvEwY2/Z3sjYq8YTcD/cm0i7P+ONrxlPcSVYWOP8OP+e//XfOOm42nxv2R7+y8m5eR2oi2XXyevm48DHhY8THzed8f0DAAkXr3ic40zJzyst0ctMzmcYBSMQ7FOF0AXM2OXvezWmMTABAOsJBwX2TQ3DAQAAAAIAAAAlAAAAcAMAAAAAAAABAAAAAAAAAAAAAAA
+

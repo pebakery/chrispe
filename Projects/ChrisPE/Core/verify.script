@@ -1,0 +1,237 @@
+[main]
+Title=Verification checks
+Description=This is set as hidden and will be executed from another project script.
+Selected=False
+Level=-2
+Author=ThePEBakeryTeam
+Version=20180306
+Date=2018-03-06
+
+[boot.wim]
+Echo,"Checking boot.wim for required information (build number, architecture, etc)..."
+FileCreateBlank,"%ProjectTemp%\boot.wim.info.ini"
+IniAddSection,"%ProjectTemp%\boot.wim.info.ini",Main
+IniWrite,"%ProjectTemp%\boot.wim.info.ini",Main,Image.Number,%Boot.wim.Image.number%
+IniWrite,"%ProjectTemp%\boot.wim.info.ini",Main,Fallback.Language,%LANG2%
+WimInfo,%boot.wim%,%Boot.wim.Image.number%,WINDOWS/VERSION/MAJOR,%Major%
+WimInfo,%boot.wim%,%Boot.wim.Image.number%,WINDOWS/VERSION/MINOR,%Minor%
+WimInfo,%boot.wim%,%Boot.wim.Image.number%,WINDOWS/VERSION/BUILD,%Build%
+WimInfo,%boot.wim%,%Boot.wim.Image.number%,WINDOWS/VERSION/SPBUILD,%SPBuild%
+WimInfo,%boot.wim%,%Boot.wim.Image.number%,WINDOWS/LANGUAGES/DEFAULT,%LANGUAGE%
+WimInfo,%boot.wim%,%Boot.wim.Image.number%,WINDOWS/ARCH,%ARCH%
+Set,%Major%,%Major%,Global
+Set,%Minor%,%Minor%,Global
+Set,%Build%,%Build%,Global
+Set,%SPBuild%,%SPBuild%,Global
+Set,%LANGUAGE%,%LANGUAGE%,Global
+If,%ARCH%,Equal,0,Set,%ARCH%,x86,Global
+If,%ARCH%,Equal,9,Set,%ARCH%,x64,Global
+Set,%CodeBase%,%Major%.%Minor%.%Build%,Global
+StrFormat,LEFT,%CodeBase%,4,%CodeBase2%
+Set,%CodeBase2%,%CodeBase2%,Global
+IniWrite,"%ProjectTemp%\boot.wim.info.ini",Main,Major,%Major%
+IniWrite,"%ProjectTemp%\boot.wim.info.ini",Main,Minor,%Minor%
+IniWrite,"%ProjectTemp%\boot.wim.info.ini",Main,Build,%Build%
+IniWrite,"%ProjectTemp%\boot.wim.info.ini",Main,SPBuild,%SPBuild%
+IniWrite,"%ProjectTemp%\boot.wim.info.ini",Main,Architecture,%ARCH%
+IniWrite,"%ProjectTemp%\boot.wim.info.ini",Main,Language,%LANGUAGE%
+IniWrite,"%ProjectTemp%\boot.wim.info.ini",Main,CodeBase,%CodeBase%
+WimInfo,%install.wim%,%install.wim.Image.number%,NAME,%ProductName%
+ReadInterface,Value,"%ProjectDir%\Shell\B_shell.script",Interface,pScrollBox_A1,%Shell%
+ReadInterface,Value,"%ProjectDir%\Shell\D_filemanager.script",Interface1,pScrollBox_A1,%FileManager%
+Set,%CONTINUE%,No
+If,Question,Detected the following settings from the source files -#$x#$x  - Architecture=%ARCH% #$x  - Language = %LANG% #$x  - Build = %CodeBase% #$x  - Product = %ProductName% #$x#$xThe following settings are user defined - #$x#$x  - boot.wim Image# = %Boot.wim.Image.number% #$x  - install.wim Image# = %Install.wim.Image.number% #$x  - Fallback Language = %LANG2%#$x  - Shell = %Shell%#$x  - FileManager = %FileManager%#$x#$xSelect YES to CONTINUE - or NO to ABORT,Set,%CONTINUE%,YES
+If,Not,%CONTINUE%,Equal,YES,Halt,User aborted due to the settings.
+
+
+
+[install.wim.v2]
+Echo,"Checking install.wim for required information (build number, architecture, etc)..."
+FileCreateBlank,"%ProjectTemp%\install.wim.info.ini"
+IniAddSection,"%ProjectTemp%\install.wim.info.ini",install.wim.source
+IniWrite,"%ProjectTemp%\install.wim.info.ini",install.wim.source,Image.Number,%install.wim.Image.number%
+WimInfo,%install.wim%,%install.wim.Image.number%,WINDOWS/VERSION/MAJOR,%Install.wim.Major%
+WimInfo,%install.wim%,%install.wim.Image.number%,WINDOWS/VERSION/MINOR,%Install.wim.Minor%
+WimInfo,%install.wim%,%install.wim.Image.number%,WINDOWS/VERSION/BUILD,%Install.wim.Build%
+WimInfo,%install.wim%,%install.wim.Image.number%,WINDOWS/VERSION/SPBUILD,%Install.wim.SPBuild%
+WimInfo,%install.wim%,%install.wim.Image.number%,WINDOWS/LANGUAGES/DEFAULT,%Install.wim.LANGUAGE%
+WimInfo,%install.wim%,%install.wim.Image.number%,WINDOWS/ARCH,%Install.wim.ARCH%
+WimInfo,%install.wim%,%install.wim.Image.number%,NAME,%Install.wim.Name%
+Set,%Install.wim.Major%,%Install.wim.Major%,Global
+Set,%Install.wim.Minor%,%Install.wim.Minor%,Global
+Set,%Install.wim.Build%,%Install.wim.Build%,Global
+Set,%Install.wim.SPBuild%,%Install.wim.SPBuild%,Global
+Set,%Install.wim.LANGUAGE%,%Install.wim.LANGUAGE%,Global
+If,%Install.wim.ARCH%,Equal,0,Set,%Install.wim.ARCH%,x86,Global
+If,%Install.wim.ARCH%,Equal,9,Set,%Install.wim.ARCH%,x64,Global
+Set,%Install.wim.CodeBase%,%Install.wim.Major%.%Install.wim.Minor%.%Install.wim.Build%,Global
+IniWrite,"%ProjectTemp%\install.wim.info.ini",install.wim.source,Source,%install.wim.Name%
+TXTReplace,"%ProjectTemp%\install.wim.info.ini","#$s",""
+IniWrite,"%ProjectTemp%\install.wim.info.ini",install.wim.source,Major,%Install.wim.Major%
+IniWrite,"%ProjectTemp%\install.wim.info.ini",install.wim.source,Minor,%Install.wim.Minor%
+IniWrite,"%ProjectTemp%\install.wim.info.ini",install.wim.source,Build,%Install.wim.Build%
+IniWrite,"%ProjectTemp%\install.wim.info.ini",install.wim.source,SPBuild,%Install.wim.SPBuild%
+IniWrite,"%ProjectTemp%\install.wim.info.ini",install.wim.source,Architecture,%Install.wim.ARCH%
+IniWrite,"%ProjectTemp%\install.wim.info.ini",install.wim.source,Language,%Install.wim.LANGUAGE%
+IniWrite,"%ProjectTemp%\install.wim.info.ini",install.wim.source,CodeBase,%Install.wim.CodeBase%
+IniMerge,"%ProjectTemp%\install.wim.info.ini","%ProjectTemp%\boot.wim.info.ini"
+
+
+
+
+[wim.registry.VERSION]
+If,ExistFile,"%ProjectTemp%\SOFTWARE",FileDelete,"%ProjectTemp%\SOFTWARE"
+If,ExistFile,"%ProjectTemp%\registy.verification.ini",FileDelete,"%ProjectTemp%\registy.verification.ini"
+WimExtract,%Registry.From.wim%,%Registry.From.Image.number%,Windows\System32\config\SOFTWARE,%ProjectTemp%,NOACL
+If,Not,ExistFile,"%ProjectTemp%\SOFTWARE",Begin
+  Message,"Could not locate SOFTWARE registry hive - does the source .wim file contain a valid image?#$x#$x#$s#$s*#$sWIM - %Registry.From.wim%#$x#$s#$s*#$sImage number - %Registry.From.Image.Number%#$x#$xAborting..."
+  Halt
+End
+FileCreateBlank,"%ProjectTemp%\registy.verification.ini"
+IniAddSection,"%ProjectTemp%\registy.verification.ini",Main
+Echo,"Mounting registry hives..."
+If,Not,ExistRegSection,HKLM,_WinPE_SOFTWARE,RegHiveLoad,_WinPE_SOFTWARE,"%ProjectTemp%\software"
+System,Erroroff,2
+RegRead,HKLM,"_WinPE_SOFTWARE\Microsoft\Windows NT\CurrentVersion",CurrentMajorVersionNumber,%Registry.verified.CurrentMajorVersionNumber%
+RegRead,HKLM,"_WinPE_SOFTWARE\Microsoft\Windows NT\CurrentVersion",CurrentMinorVersionNumber,%Registry.verified.CurrentMinorVersionNumber%
+RegRead,HKLM,"_WinPE_SOFTWARE\Microsoft\Windows NT\CurrentVersion",CurrentVersion,%Registry.verified.CurrentVersion%
+RegRead,HKLM,"_WinPE_SOFTWARE\Microsoft\Windows NT\CurrentVersion",CurrentBuild,%Registry.verified.CurrentBuild%
+Echo,"Unmounting registry hives..."
+RegHiveUnload,_WinPE_SOFTWARE
+If,Not,%Registry.verified.CurrentMajorVersionNumber%,Equal,10,Begin
+  //formating string to first three characters (e.g. 6.3) due
+  //to inconsistencies in registry entries across different
+  //Windows versions
+  StrFormat,LEFT,%Registry.verified.CurrentVersion%,3,%Registry.verified.Major.Minor%
+  StrFormat,LEFT,%Registry.verified.Major.Minor%,1,%Registry.verified.Major%
+  StrFormat,RIGHT,%Registry.verified.Major.Minor%,1,%Registry.verified.Minor%
+End
+Else,Begin
+  Set,%Registry.verified.Major%,%Registry.verified.CurrentMajorVersionNumber%
+  Set,%Registry.verified.Minor%,%Registry.verified.CurrentMinorVersionNumber%
+End
+IniWriteTextLine,"%ProjectTemp%\registy.verification.ini","Main","Major=%Registry.verified.Major%"
+IniWriteTextLine,"%ProjectTemp%\registy.verification.ini","Main","Minor=%Registry.verified.Minor%"
+IniWriteTextLine,"%ProjectTemp%\registy.verification.ini","Main","Build=%Registry.verified.CurrentBuild%"
+Set,%CodeBase%,%Registry.verified.Major%.%Registry.verified.Minor%.%Registry.verified.CurrentBuild%,Global
+IniWriteTextLine,"%ProjectTemp%\registy.verification.ini","Main","CodeBase=%CodeBase%"
+IniMerge,"%ProjectTemp%\registy.verification.ini","%ProjectTemp%\%ini.file%"
+StrFormat,LEFT,%CodeBase%,4,%CodeBase2%
+Set,%CodeBase2%,%CodeBase2%,Global
+
+[wim.registry.ARCH]
+If,ExistFile,"%ProjectTemp%\registy.verification.ini",FileDelete,"%ProjectTemp%\registy.verification.ini"
+WimExtract,%boot.wim%,%Boot.wim.Image.number%,Windows\System32\config\SYSTEM,%ProjectTemp%,NOACL
+If,Not,ExistFile,"%ProjectTemp%\system",Begin
+  Message,"Could not locate SYSTEM registry hive - does the source .wim file contain a valid image?#$x#$x#$s#$s*#$sWIM - %boot.wim%#$x#$s#$s*#$sImage number - %boot.wim.Image.number%#$x#$xAborting..."
+  Halt
+End
+Echo,"Mounting registry hives..."
+If,Not,ExistRegSection,HKLM,_WinPE_SYSTEM,RegHiveLoad,_WinPE_SYSTEM,"%ProjectTemp%\system"
+RegRead,HKLM,"_WinPE_SYSTEM\ControlSet001\Control\Session Manager\Environment",PROCESSOR_ARCHITECTURE,%Registry.verified.Architecture%
+Echo,"Unmounting registry hives..."
+RegHiveUnload,_WinPE_SYSTEM
+Set,%Architecture%,%Registry.verified.Architecture%,Global
+IniWrite,"%ProjectTemp%\boot.wim.info.ini",Main,Architecture,%Architecture%
+
+
+
+[SOURCE.CHECK]
+Echo,"Checking Source for required files..."
+Set,%install.wim%,0
+If,ExistFile,"%SourceDir%\sources\install.wim",Set,%install.wim%,"%SourceDir%\sources\install.wim",GLOBAL
+If,ExistFile,"%SourceDir%\sources\install.esd",Set,%install.wim%,"%SourceDir%\sources\install.esd",GLOBAL
+If,ExistFile,"%SourceDir%\sources\install.swm",Set,%install.wim%,"%SourceDir%\sources\install.swm",GLOBAL
+End
+Set,%boot.wim%,0
+If,ExistFile,"%SourceDir%\sources\boot.wim",Set,%boot.wim%,"%SourceDir%\sources\boot.wim",GLOBAL
+Set,%ERROR%,0
+If,%boot.wim%,Equal,0,Set,%ERROR%,1
+If,%install.wim%,Equal,0,Set,%ERROR%,1
+If,Not,ExistFile,"%SourceDir%\bootmgr",Set,%ERROR%,1
+If,Not,ExistFile,"%SourceDir%\boot\BCD",Set,%ERROR%,1
+If,Not,ExistFile,"%SourceDir%\boot\etfsboot.com",Set,%ERROR%,1
+If,%ERROR%,Equal,1,Begin
+  If,ExistFile,%ProjectTemp%\SourceCheck.txt,FileDelete,%ProjectTemp%\SourceCheck.txt
+  FileCreateBlank,%ProjectTemp%\SourceCheck.txt
+  TXTAddLine,%ProjectTemp%\SourceCheck.txt,Message#$cA required source file is missing!==,APPEND
+  If,%boot.wim%,Equal,0,TXTAddLine,%ProjectTemp%\SourceCheck.txt,=#$s#$s\sources\boot.wim is missing,APPEND
+  If,%install.wim%,Equal,0,TXTAddLine,%ProjectTemp%\SourceCheck.txt,=#$s#$s\sources\install.wim is missing,APPEND
+  If,Not,ExistFile,"%SourceDir%\bootmgr",TXTAddLine,%ProjectTemp%\SourceCheck.txt,=#$s#$s\bootmgr is missing,APPEND
+  If,Not,ExistFile,"%SourceDir%\boot\BCD",TXTAddLine,%ProjectTemp%\SourceCheck.txt,=#$s#$s\boot\BCD is missing,APPEND
+  If,Not,ExistFile,"%SourceDir%\boot\etfsboot.com",TXTAddLine,%ProjectTemp%\SourceCheck.txt,=#$s#$s\etfsboot.com is missing,APPEND
+  TXTAddLine,%ProjectTemp%\SourceCheck.txt,==Are source files present in the following location? - ==#$s#$s#$q%SourceDir%#$q,APPEND
+  //Remove line breaks
+  ShellExecute,Hide,"%Tools%\gsar.exe","-i -o -s#$q:x0D:x0A#$q -r#$q#$q #$q%ProjectTemp%\SourceCheck.txt#$q"
+  ShellExecute,Hide,"%Tools%\gsar.exe","-i -o -s#$q:x3D#$q -r#$q:x23:x24:x78#$q #$q%ProjectTemp%\SourceCheck.txt#$q"
+  TXTAddLine,%ProjectTemp%\SourceCheck.txt,[PROCESS],PREPEND
+  Run,%ProjectTemp%\SourceCheck.txt,Process
+  Halt
+End
+If,Not,%boot.wim.Image.number%,Equal,2,Begin
+  Set,%CONTINUE%,No
+  If,Question,"boot.wim Image\Index number %Boot.wim.image.number% is specified in the project settings. If using Windows RTM source files#$c Image Number 2 should be selected.#$x#$xUse Image Number 2? Click on YES to use Image 2#$c or NO to use Image %Boot.wim.image.number%",Set,%CONTINUE%,YES
+  If,%CONTINUE%,Equal,YES,Set,%Boot.wim.image.number%,2,Global
+End
+If,Not,WimExistIndex,%boot.wim%,%boot.wim.Image.number%,Begin
+  Message,"The image/index selected in the following option in the main menu settings does not exist in the target file - #$x#$x - #$q2] Set 'boot.wim' Image Number#$q #$x#$xPlease change this setting and restart the build process. ABORTING..."
+  Halt
+End
+If,Not,WimExistIndex,%Install.wim%,%Install.wim.Image.number%,Begin
+  Message,"The image/index selected in the following option in the main menu settings does not exist in the target file - #$x#$x - #$q3] Set 'install.wim' Image Number#$q #$x#$xPlease change this setting and restart the build process. ABORTING..."
+  Halt
+End
+
+
+[Officially.Supported.OS.Check]
+Echo,"Checking against known working builds..."
+Set,%ERROR%,0
+If,%CodeBase%,Equal,6.0.6000,Begin
+  Message,There are known issues with this build version (%Major%.%Minor%.%Build% - Windows Vista) - it will not boot due to a winload.exe error unless the boot file #$qboot.sdi#$q is replaced with a more recent version,Warning
+  Set,%ERROR%,1
+End
+If,%CodeBase%,Equal,6.0.6001,Set,%ERROR%,1
+If,%CodeBase%,Equal,6.1.7600,Set,%ERROR%,1
+If,%CodeBase%,Equal,6.1.7601,Set,%ERROR%,1
+If,%CodeBase%,Equal,6.2.9200,Set,%ERROR%,1
+If,%CodeBase%,Equal,6.3.9600,Set,%ERROR%,1
+If,%CodeBase%,Equal,10.0.10240,Set,%ERROR%,1
+If,%CodeBase%,Equal,10.0.10586,Set,%ERROR%,1
+If,%CodeBase%,Equal,10.0.14393,Set,%ERROR%,1
+If,%CodeBase%,Equal,10.0.15063,Set,%ERROR%,1
+If,%CodeBase%,Equal,10.0.16299,Set,%ERROR%,1
+If,%ERROR%,Equal,0,Begin
+  Set,%Officially.Supported.OS%,NO,Global
+  Message,This source has not been tested - but might work anyway. Please try using one of the following tested sources if possible - #$x#$x  * 6.0.6000 (Windows Vista)#$x  * 6.0.6001 (Windows Vista SP1/Server 2008)#$x  * 6.1.7600 (Windows 7/Server 2008 R2)#$x  * 6.1.7601 (Windows 7 SP1/Server 2008 R2 SP1)#$x  * 6.2.9200 (Windows 8/Server 2012)#$x  * 6.3.9600 (Windows 8.1/Server 2012 R2)#$x  * 10.0.10240 (Windows 10 RTM)#$x  * 10.0.10586 (Windows 10 November Update)#$x  * 10.0.14393 (Windows 10 Aniversary Update)#$x  * 10.0.15063 (Windows 10 Creators Update)#$x  * 10.0.16299 (Windows 10 Fall Creators Update)#$x#$xSome project scripts might not work with an untested/unknown source!,Warning
+End
+
+[Tools.Check]
+Set,%ERROR%,1
+If,Not,ExistFile,"%Tools%\gsar.exe",Begin
+  Set,%ERROR%,0
+  message,"The following external program required in the build is missing - #$x#$x\Project\Tools\gsar.exe"
+End
+If,Not,ExistFile,"%Tools%\7z.exe",Begin
+  Set,%ERROR%,0
+  message,"The following external program required in the build is missing - #$x#$x\Project\Tools\7z.exe"
+End
+If,Not,ExistFile,"%Tools%\7z.dll",Begin
+  Set,%ERROR%,0
+  message,"The following external program required in the build is missing - #$x#$x\Project\Tools\7z.dll"
+End
+If,Not,ExistFile,"%Tools%\wimlib\wimlib-imagex.exe",Begin
+  Set,%ERROR%,0
+  message,"The following external program required in the build is missing - #$x#$x\Project\Tools\wimlib\wimlib-imagex.exe"
+End
+If,Not,ExistFile,"%Tools%\wimlib\libwim-15.dll",Begin
+  Set,%ERROR%,0
+  message,"The following external program required in the build is missing - #$x#$x\Project\Tools\wimlib\libwim-15.dll"
+End
+If,%ERROR%,Equal,0,Begin
+  Message,"A required program is missing.#$x#$xABORTING BUILD...."
+  Halt
+End
+
+
+
+

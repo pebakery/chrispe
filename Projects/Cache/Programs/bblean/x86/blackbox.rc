@@ -1,0 +1,51 @@
+# ------------------------------------------
+# bblean 1.16 - blackbox.rc - basic settings
+
+# Lines starting with # or ! are ignored
+# All items are configurable from the menu
+
+# - the toolbar -
+session.screen0.toolbar.enabled:        false
+session.screen0.toolbar.placement:      BottomCenter
+session.screen0.toolbar.widthPercent:   66
+session.screen0.toolbar.onTop:          true
+session.screen0.toolbar.autoHide:       false
+session.screen0.toolbar.pluginToggle:   true
+session.screen0.toolbar.alpha.enabled:  false
+session.screen0.toolbar.alpha.value:    224
+
+# - the menu -
+session.menu.position.x:                280
+session.menu.position.y:                148
+session.menu.maxWidth:                  200
+session.menu.popupDelay:                60
+session.menu.mouseWheelFactor:          3
+session.menu.alpha.enabled:             true
+session.menu.alpha.value:               216
+session.menu.onTop:                     false
+session.menu.snapWindow:                false
+session.menu.pluginToggle:              true
+session.menu.bulletPosition:            default
+session.menu.sortbyExtension:           true
+
+# - the slit -
+session.screen0.slit.placement:         TopRight
+session.screen0.slit.direction:         Horizontal
+session.screen0.slit.autoHide:          false
+session.screen0.slit.ontop:             true
+session.screen0.slit.toggle:            false
+
+# - other options -
+session.screen0.workspaces:             4
+session.screen0.workspacenames:         alpha,beta,gamma,delta
+session.screen0.focusModel:             ClickToFocus
+session.screen0.fullMaximization:       false
+session.screen0.strftimeformat:         %H:%M %a %d %b
+
+session.autoraisedelay:                 250
+session.opaqueMove:                     true
+session.imageDither:                    true
+
+# - menu & style -
+session.menufile:                       menu.rc
+session.styleFile:                      styles\0505 all blue\070_Blue

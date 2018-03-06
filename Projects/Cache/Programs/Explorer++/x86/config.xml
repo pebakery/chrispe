@@ -1,0 +1,112 @@
+<?xml version="1.0"?>
+<!-- Preference file for Explorer++ -->
+<ExplorerPlusPlus>
+	<Settings>
+		<Setting name="AllowMultipleInstances">yes</Setting>
+		<Setting name="AlwaysOpenInNewTab">no</Setting>
+		<Setting name="AlwaysShowTabBar">yes</Setting>
+		<Setting name="AutoArrangeGlobal">yes</Setting>
+		<Setting name="CheckBoxSelection">no</Setting>
+		<Setting name="CloseMainWindowOnTabClose">yes</Setting>
+		<Setting name="ConfirmCloseTabs">no</Setting>
+		<Setting name="DisableFolderSizesNetworkRemovable">no</Setting>
+		<Setting name="DisplayCentreColor" r="255" g="255" b="255"/>
+		<Setting name="DisplayFont" Height="-13" Width="0" Weight="500" Italic="no" Underline="no" Strikeout="no" Font="Segoe UI"/>
+		<Setting name="DisplaySurroundColor" r="0" g="94" b="138"/>
+		<Setting name="DisplayTextColor" r="0" g="0" b="0"/>
+		<Setting name="DisplayWindowHeight">90</Setting>
+		<Setting name="DoubleClickTabClose">yes</Setting>
+		<Setting name="ExtendTabControl">no</Setting>
+		<Setting name="ForceSameTabWidth">no</Setting>
+		<Setting name="ForceSize">no</Setting>
+		<Setting name="HandleZipFiles">no</Setting>
+		<Setting name="HideLinkExtensionGlobal">no</Setting>
+		<Setting name="HideSystemFilesGlobal">no</Setting>
+		<Setting name="InfoTipType">0</Setting>
+		<Setting name="InsertSorted">yes</Setting>
+		<Setting name="Language">9</Setting>
+		<Setting name="LargeToolbarIcons">no</Setting>
+		<Setting name="LastSelectedTab">0</Setting>
+		<Setting name="LockToolbars">yes</Setting>
+		<Setting name="NextToCurrent">no</Setting>
+		<Setting name="NewTabDirectory">::{20D04FE0-3AEA-1069-A2D8-08002B30309D}</Setting>
+		<Setting name="OneClickActivate">no</Setting>
+		<Setting name="OneClickActivateHoverTime">500</Setting>
+		<Setting name="OverwriteExistingFilesConfirmation">yes</Setting>
+		<Setting name="PlayNavigationSound">no</Setting>
+		<Setting name="ReplaceExplorerMode">1</Setting>
+		<Setting name="ShowAddressBar">yes</Setting>
+		<Setting name="ShowApplicationToolbar">no</Setting>
+		<Setting name="ShowBookmarksToolbar">no</Setting>
+		<Setting name="ShowDrivesToolbar">yes</Setting>
+		<Setting name="ShowDisplayWindow">no</Setting>
+		<Setting name="ShowExtensions">yes</Setting>
+		<Setting name="ShowFilePreviews">no</Setting>
+		<Setting name="ShowFolders">yes</Setting>
+		<Setting name="ShowFolderSizes">no</Setting>
+		<Setting name="ShowFriendlyDates">yes</Setting>
+		<Setting name="ShowFullTitlePath">no</Setting>
+		<Setting name="ShowGridlinesGlobal">yes</Setting>
+		<Setting name="ShowHiddenGlobal">yes</Setting>
+		<Setting name="ShowInfoTips">no</Setting>
+		<Setting name="ShowInGroupsGlobal">no</Setting>
+		<Setting name="ShowPrivilegeLevelInTitleBar">yes</Setting>
+		<Setting name="ShowStatusBar">yes</Setting>
+		<Setting name="ShowTabBarAtBottom">no</Setting>
+		<Setting name="ShowTaskbarThumbnails">no</Setting>
+		<Setting name="ShowToolbar">no</Setting>
+		<Setting name="ShowUserNameTitleBar">no</Setting>
+		<Setting name="SizeDisplayFormat">1</Setting>
+		<Setting name="SortAscendingGlobal">yes</Setting>
+		<Setting name="StartupMode">1</Setting>
+		<Setting name="SynchronizeTreeview">yes</Setting>
+		<Setting name="TVAutoExpandSelected">no</Setting>
+		<Setting name="UseFullRowSelect">no</Setting>
+		<Setting name="ToolbarState" Button0="Back" Button1="Forward" Button2="Up" Button3="Separator" Button4="Folders" Button5="Separator" Button6="Cut" Button7="Copy" Button8="Paste" Button9="Delete" Button10="Delete permanently" Button11="Properties" Button12="Search" Button13="Separator" Button14="New Folder" Button15="Copy To" Button16="Move To" Button17="Separator" Button18="Views" Button19="Show Command Prompt" Button20="Refresh" Button21="Separator" Button22="Bookmark the current tab" Button23="Organize Bookmarks"/>
+		<Setting name="TreeViewDelayEnabled">no</Setting>
+		<Setting name="TreeViewWidth">208</Setting>
+		<Setting name="ViewModeGlobal">1</Setting>
+	</Settings>
+	<WindowPosition>
+		<Setting name="Position" Flags="0" ShowCmd="1" MinPositionX="0" MinPositionY="0" MaxPositionX="-1" MaxPositionY="-1" NormalPositionLeft="20" NormalPositionTop="38" NormalPositionRight="1003" NormalPositionBottom="667"/>
+	</WindowPosition>
+	<Tabs>
+		<Tab name="0" Directory="::{20D04FE0-3AEA-1069-A2D8-08002B30309D}" ApplyFilter="no" AutoArrange="yes" Filter="" FilterCaseSensitive="no" ShowGridlines="yes" ShowHidden="yes" ShowInGroups="no" SortAscending="yes" SortMode="1" ViewMode="1" Locked="no" AddressLocked="no" UseCustomName="no" CustomName="">
+			<Columns>
+				<Column name="Generic" Name="yes" Name_Width="150" Type="yes" Type_Width="150" Size="yes" Size_Width="150" DateModified="yes" DateModified_Width="150" Attributes="no" Attributes_Width="150" SizeOnDisk="no" SizeOnDisk_Width="150" ShortName="no" ShortName_Width="150" Owner="no" Owner_Width="150" ProductName="no" ProductName_Width="150" Company="no" Company_Width="150" Description="no" Description_Width="150" FileVersion="no" FileVersion_Width="150" ProductVersion="no" ProductVersion_Width="150" ShortcutTo="no" ShortcutTo_Width="150" HardLinks="no" HardLinks_Width="150" Extension="no" Extension_Width="150" Created="no" Created_Width="150" Accessed="no" Accessed_Width="150" Title="no" Title_Width="150" Subject="no" Subject_Width="150" Author="no" Author_Width="150" Keywords="no" Keywords_Width="150" Comment="no" Comment_Width="150" CameraModel="no" CameraModel_Width="150" DateTaken="no" DateTaken_Width="150" Width="no" Width_Width="150" Height="no" Height_Width="150"/>
+				<Column name="MyComputer" Name="yes" Name_Width="150" TotalSize="yes" TotalSize_Width="150" FreeSpace="no" FreeSpace_Width="150" FileSystem="no" FileSystem_Width="150"/>
+				<Column name="ControlPanel" Name="yes" Name_Width="150"/>
+				<Column name="RecycleBin" Name="yes" Name_Width="150" OriginalLocation="yes" OriginalLocation_Width="150" DateDeleted="yes" DateDeleted_Width="150" Size="yes" Size_Width="150" Type="yes" Type_Width="150" DateModified="yes" DateModified_Width="150"/>
+				<Column name="Printers" Name="yes" Name_Width="150" Documents="yes" Documents_Width="150" Status="yes" Status_Width="150"/>
+				<Column name="Network" Name="yes" Name_Width="150" Owner="yes" Owner_Width="150"/>
+				<Column name="NetworkPlaces" Name="yes" Name_Width="150"/>
+			</Columns>
+		</Tab>
+	</Tabs>
+	<DefaultColumns>
+		<Column name="Generic" Name="yes" Name_Width="150" Type="yes" Type_Width="150" Size="yes" Size_Width="150" DateModified="yes" DateModified_Width="150" Attributes="no" Attributes_Width="150" SizeOnDisk="no" SizeOnDisk_Width="150" ShortName="no" ShortName_Width="150" Owner="no" Owner_Width="150" ProductName="no" ProductName_Width="150" Company="no" Company_Width="150" Description="no" Description_Width="150" FileVersion="no" FileVersion_Width="150" ProductVersion="no" ProductVersion_Width="150" ShortcutTo="no" ShortcutTo_Width="150" HardLinks="no" HardLinks_Width="150" Extension="no" Extension_Width="150" Created="no" Created_Width="150" Accessed="no" Accessed_Width="150" Title="no" Title_Width="150" Subject="no" Subject_Width="150" Author="no" Author_Width="150" Keywords="no" Keywords_Width="150" Comment="no" Comment_Width="150" CameraModel="no" CameraModel_Width="150" DateTaken="no" DateTaken_Width="150" Width="no" Width_Width="150" Height="no" Height_Width="150"/>
+		<Column name="MyComputer" Name="yes" Name_Width="150" TotalSize="yes" TotalSize_Width="150" FreeSpace="no" FreeSpace_Width="150" FileSystem="no" FileSystem_Width="150"/>
+		<Column name="ControlPanel" Name="yes" Name_Width="150"/>
+		<Column name="RecycleBin" Name="yes" Name_Width="150" OriginalLocation="yes" OriginalLocation_Width="150" DateDeleted="yes" DateDeleted_Width="150" Size="yes" Size_Width="150" Type="yes" Type_Width="150" DateModified="yes" DateModified_Width="150"/>
+		<Column name="Printers" Name="yes" Name_Width="150" Documents="yes" Documents_Width="150" Status="yes" Status_Width="150"/>
+		<Column name="Network" Name="yes" Name_Width="150" Owner="yes" Owner_Width="150"/>
+		<Column name="NetworkPlaces" Name="yes" Name_Width="150"/>
+	</DefaultColumns>
+	<Bookmarks>
+	</Bookmarks>
+	<ApplicationToolbar>
+	</ApplicationToolbar>
+	<Toolbars>
+		<Toolbar name="0" id="0" Style="777" Length="603"/>
+		<Toolbar name="1" id="1" Style="257" Length="0"/>
+		<Toolbar name="2" id="2" Style="777" Length="0"/>
+		<Toolbar name="3" id="3" Style="769" Length="84"/>
+		<Toolbar name="4" id="4" Style="777" Length="0"/>
+	</Toolbars>
+	<ColorRules>
+		<ColorRule name="Compressed files" FilenamePattern="" Attributes="2048" r="0" g="0" b="255"/>
+		<ColorRule name="Encrypted files" FilenamePattern="" Attributes="16384" r="0" g="128" b="0"/>
+	</ColorRules>
+	<State>
+	</State>
+</ExplorerPlusPlus>

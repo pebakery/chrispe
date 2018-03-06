@@ -1,0 +1,3073 @@
+;DMDE Disk Editor Templates
+
+[MFT Record]
+;uncomment guid to use by default:
+guid:{1df5ef71-7ae4-b176-c967-f94c63c5fb7a}
+flow:1
+
+CALCSIZESTART
+  $1:={0x1C,2}
+  IF $1<1024
+    $1:=1024
+  ENDIF
+  $RECSIZE:=$1
+CALCSIZEEND
+
+LOADSTART
+  $1:={0x04,2}       ;fixups offset
+  IF $1<0x2A OR $1>=$RECSIZE
+    GOTO:1
+  ENDIF
+  $2:={0x06,2}       ;fixups count
+  IF $2<=1
+    GOTO:1
+  ENDIF
+  $3:=0x1FE          ;seq. offset
+  ;insert fixups:
+  IF {$3,2}={$1,2}
+    $1:=$1+2
+    WHILE 1
+      $2:=$2-1
+      {$3,2}:={$1,2}
+      $1:=$1+2
+      $3:=$3+0x200
+      IF NOT $2 OR $3>=$RECSIZE
+        BREAK
+      ENDIF
+    ENDWHILE
+  ENDIF
+  LABEL:1
+LOADEND
+
+FLUSHSTART
+  $1:={0x04,2}
+  IF $1<0x2A OR $1>=$RECSIZE
+    GOTO:1
+  ENDIF
+  $2:={0x06,2}
+  IF $2<=1
+    GOTO:1
+  ENDIF
+  $3:=0x1FE
+  $4:={$1,2}
+
+  $1:=$1+2
+  $2:=$2-1
+  WHILE 1
+    {$1,2}:={$3,2}
+    {$3,2}:=$4
+    $1:=$1+2
+    $2:=$2-1
+    $3:=$3+0x200
+    IF NOT $2 OR $3>=$RECSIZE
+      BREAK
+    ENDIF
+  ENDWHILE
+  LABEL:1
+FLUSHEND
+
+$FILERECOFS:=0x00
+$63:=TOGGLE:0,x:1
+
+$10:=0     ;default color
+IF {0x00,4}!=0x454c4946
+  $10:=8   ;error color
+ENDIF
+
+IF {0x16,2}&1
+  $13:=0   ;default color
+ELSE
+  $13:=10  ;grayed (removed)
+ENDIF
+
+x:5,w:5,c:$10,f:File
+IF {0x04,2}>=0x30
+  x:10,w:1,f:#
+  $1:={0x2C,4}
+  $1,x:11,w:10,f:%d ========
+ENDIF
+$1:={0x10,2}
+$1,x:22,w:8,f:(%h) =======
+
+x:38,w:42,f:==================
+
+IF $63
+  =
+  x:5,w:25,f:magic ("FILE"):
+  {0x00,4},x:32,w:4,c:$10,f:%4c
+  =
+  $10:=0
+  IF {0x04,2}<0x2A OR {0x04,2}>=$RECSIZE
+    $10:=8
+  ENDIF
+  x:5,w:25,f:fixups offset:
+  {0x04,2},x:32,w:4,c:$10,f:%4hX
+  x:36,w:1,f:h
+  =
+  $10:=$13
+  IF {0x06,2}<2
+    $10:=8
+  ENDIF
+  x:5,w:25,f:fixups count:
+  {0x06,2},x:32,w:5,f:%4h
+  =
+  x:5,w:23,f:LSNlo:
+  {0x08,4},x:28,w:8,f:%08X
+  x:36,w:1,f:h
+  =
+  x:5,w:23,f:LSNHi:
+  {0x0C,4},x:28,w:8,f:%08X
+  x:36,w:1,f:h
+  =
+  x:5,w:25,f:seq. number:
+  {0x10,2},x:32,w:5,f:%4h
+  =
+  x:5,w:25,f:hlink number:
+  {0x12,2},x:32,w:5,f:%4h
+  =
+  x:5,w:25,f:attrs offset:
+  {0x14,2},x:32,w:4,f:%4hX
+  x:36,w:1,f:h
+  =
+  x:5,w:25,f:flags:
+  {0x16,2},x:32,w:4,f:%4hX
+  x:36,w:1,f:h
+  =
+  x:5,w:23,f:used size:
+  {0x18,4},x:28,w:8,f:%8X
+  x:36,w:1,f:h
+
+  {0x18,4},x:38,w:10,f:%8d
+  =
+  x:5,w:23,f:record size:
+  {0x1C,4},x:28,w:8,f:%8X
+  x:36,w:1,f:h
+
+  {0x1C,4},x:38,w:10,f:%8d
+  =
+  x:5,w:23,f:basefileref:
+  {0x20,4},x:28,w:10,f:%8d
+  =
+  x:5,w:25,f:0x24:
+  {0x24,2},x:32,w:4,f:%4hX
+  x:36,w:1,f:h
+  =
+  x:5,w:25,f:basefileref seq.:
+  {0x26,2},x:32,w:5,f:%4h
+  =
+  x:5,w:25,f:next attribute #:
+  {0x28,2},x:32,w:5,f:%4h
+
+  IF {0x04,2}>=0x30
+    =
+    x:5,w:25,f:0x2A:
+    {0x2A,2},x:32,w:4,f:%4hX
+    x:36,w:1,f:h
+    =
+    x:5,w:23,f:file #:
+    {0x2C,4},x:28,w:10,f:%8d
+  ENDIF
+  $3:={0x04,2}         ;fixup offset
+  IF $3>=0x2A AND $3<$RECSIZE
+    =
+    x:5,w:25,f:fixup:
+    {$3,2},x:32,w:4,f:%04hX
+    x:36,w:1,f:h
+  ENDIF
+ELSE
+  ;if grayed
+  IF NOT $10 AND $13
+    $10:=$13
+  ENDIF
+  x:31,w:1,f:"
+  {0x00,4},x:32,w:4,c:$10,f:%4c
+  x:36,w:1,f:"
+ENDIF
+
+;Attributes
+$2:={0x14,2}
+WHILE 1
+  =
+  $1:=$2
+  IF $1<0x2A OR $1>=$RECSIZE
+    x:5,w:30,c:8,f:ERROR Attribute Offset
+    =
+    BREAK
+  ENDIF
+  $OFFSET:=$1
+  $9:={0x00,4}
+  IF $9!=0xFFFFFFFF
+    $63:=TOGGLE:$1,x:1
+  ELSE
+    {0x00,4},x:11,w:8,c:10,f:%8X
+    x:19,w:1,f:h
+    x:21,w:8,f:End Mark
+    BREAK
+  ENDIF
+
+  $ATTROFS:=$1
+
+  x:5,w:1,f:#
+  $3:={0x0E,2}
+  $3,x:6,w:5,f:%h
+
+  IF NOT $63
+    {0x00,4},x:11,w:8,c:$13,f:%8X
+    x:19,w:1,f:h
+  ENDIF
+  IF NOT $63 AND {0x09,1}
+    ;Attr name
+    $3:={0x0A,2}
+    $4:={0x09,1}<<1
+    x:21,w:1,f::
+    {$3,$4},x:22,w:58,c:$13,f:U
+    =
+  ENDIF
+  IF $9=0x10
+    x:21,w:21,f:$STANDARD_INFORMATION
+  ELSEIF $9=0x20
+    x:21,w:21,f:$ATTRIBUTE_LIST
+  ELSEIF $9=0x30
+    x:21,w:21,f:$FILE_NAME
+  ELSEIF $9=0x50
+    x:21,w:21,f:$SECURITY_DESCRIPTOR
+  ELSEIF $9=0x60
+    x:21,w:21,f:$VOLUME_NAME
+  ELSEIF $9=0x70
+    x:21,w:21,f:$VOLUME_INFORMATION
+  ELSEIF $9=0x80
+    x:21,w:21,f:$DATA
+  ELSEIF $9=0x90
+    x:21,w:21,f:$INDEX_ROOT
+  ELSEIF $9=0xA0
+    x:21,w:21,f:$INDEX_ALLOCATION
+  ELSEIF $9=0xB0
+    x:21,w:21,f:$BITMAP
+  ELSEIF $9=0x100
+    x:21,w:21,f:$LOGGED_UTILITY_STREAM
+  ELSE
+    ;$9,x:11,w:30,f:Attribute (%Xh)
+    x:21,w:21,f:Other Attribute
+  ENDIF
+
+  $10:=0             ;color
+  $2:={0x04,4}
+  $5:=$2             ;full attr length
+  IF $2<=0
+    $10:=8           ;error color
+  ELSE
+    $2:=$1+$2        ;next attribute offset
+    IF $2>$RECSIZE
+      $2:=$RECSIZE
+      $5:=$2-$1
+      $10:=8
+    ENDIF
+  ENDIF
+
+  IF $63
+    =
+    x:7,w:20,f:Attr. type:
+    {0x00,4},x:34,w:8,f:%8X
+    x:42,w:1,f:h
+    =
+    x:7,w:20,c:$10,f:Attr. length:
+    {0x04,4},x:34,w:8,c:$10,f:%8X
+    x:42,w:1,f:h
+    {0x04,4},x:44,w:10,c:$10,f:%10u
+    =
+  ELSEIF $10
+    =
+    x:7,w:20,c:$10,f:Attr. length:
+    {0x04,4},x:34,w:8,c:$10,f:%8X
+    x:42,w:1,f:h
+    =
+  ENDIF
+  IF $2<=0 
+    =
+    BREAK
+  ENDIF
+
+  IF $63
+    x:7,w:20,f:Non-resident:
+    {0x08,1},x:39,w:3,f:%3h
+    =
+    x:7,w:20,f:Attrname len:
+    {0x09,1},x:39,w:3,f:%3h
+    =
+    x:7,w:20,f:Attrname ofs:
+    {0x0A,2},x:38,w:4,f:%4hX
+    x:42,w:1,f:h
+    =
+    x:7,w:20,f:Flags:
+    {0x0C,2},x:38,w:4,f:%4hX
+    x:42,w:1,f:h
+    {0x0C:0,2},x:45,w:2,f:F:C-+-
+    {0x0C:14,2},x:48,w:2,f:F:E-S-
+    =
+    x:7,w:20,f:Attr. number:
+    {0x0E,2},x:37,w:5,f:%5h
+    =
+  ENDIF
+
+  IF NOT {0x08,1}
+    ;resident attribute
+    $10:=0           ;color for offset
+    $11:=0           ;color for size
+
+    $3:={0x14,2}     ;data offset
+    $4:={0x10,4}     ;data size
+
+    IF $3>$5         
+      ;$3>full attr length
+      $3:=$5
+      $4:=0
+      $10:=8
+    ENDIF
+    IF $3+$4>$5
+      $4:=$5-$3
+      $11:=8
+    ENDIF
+
+    IF NOT $63
+      IF {0x00,4}=0x80
+        ;$DATA:
+        ;if grayed
+        IF NOT $11 AND $13
+          $11:=$13
+        ENDIF
+        {0x10,4},x:32,w:10,c:$11,f:%u
+        =
+      ELSEIF $11
+        =
+        x:7,w:20,c:$11,f:Data Size: 
+        {0x10,4},x:34,w:8,c:$11,f:%8X
+        x:42,w:1,f:h
+        =
+      ENDIF
+      IF $10
+        =
+        x:7,w:20,c:$10,f:Data Offset:
+        {0x14,2},x:38,w:4,c:$10,f:%4hX
+        x:42,w:1,f:h
+        =
+      ENDIF
+    ELSE
+      x:7,w:20,c:$11,f:Data Size: 
+      {0x10,4},x:34,w:8,c:$11,f:%8X
+      x:42,w:1,f:h
+      {0x10,4},x:44,w:10,c:$11,f:%10u
+      =
+      x:7,w:20,c:$10,f:Data Offset:
+      {0x14,2},x:38,w:4,c:$10,f:%4hX
+      x:42,w:1,f:h
+      =
+      $9:={0x09,1}<<1
+      IF $9
+        x:7,w:20,f:Attr. name:
+        $8:={0x0A,2}
+        {$8,$9},x:32,w:48,f:U
+        =
+      ENDIF
+    ENDIF
+
+    IF {0x00,4}=0x10
+      ;standard information
+      IF NOT $63
+        $3:=$3+8
+        $4:=$4-8
+        {$3,8},x:43,w:23,c:$13,f:FILETIME
+        =
+      ELSE
+        x:14,w:10,f:created:
+        {$3,8},x:32,w:23,f:FILETIME
+        =
+        $3:=$3+8
+        $4:=$4-8
+        x:14,w:18,f:modified:
+        {$3,8},x:32,w:23,f:FILETIME
+        =
+        $3:=$3+8
+        $4:=$4-8
+        x:14,w:18,f:changed:
+        {$3,8},x:32,w:23,f:FILETIME
+        =
+        $3:=$3+8
+        $4:=$4-8
+        x:14,w:18,f:accessed:
+        {$3,8},x:32,w:23,f:FILETIME
+        =
+        $3:=$3+8
+        $4:=$4-8
+
+        x:14,w:18,f:attrs:
+        {$3,2},x:32,w:16,f:F:R-H-S-V-D-A-d-n-t-s-r-c-o-i-e-+-
+        $3:=$3+2
+        $4:=$4-2
+        {$3,2},x:49,w:16,f:F:+-+-+-+-+-+-+-+-+-+-+-+-D-I-+-+-
+        =
+        $3:=$3+2
+        $4:=$4-2
+        IF $4>=12
+          x:14,w:18,f:Max versions:
+          {$3,4},x:32,w:10,f:%u
+          =
+          $3:=$3+4
+          $4:=$4-4
+          x:14,w:18,f:Version:
+          {$3,4},x:32,w:10,f:%u
+          =
+          $3:=$3+4
+          $4:=$4-4
+          x:14,w:18,f:Class Id:
+          {$3,4},x:32,w:10,f:%u
+          =
+          $3:=$3+4
+          $4:=$4-4
+          IF $4>=24
+            x:14,w:18,f:Owner Id:
+            {$3,4},x:32,w:10,f:%u
+            =
+            $3:=$3+4
+            $4:=$4-4
+            x:14,w:18,f:Security Id:
+            {$3,4},x:32,w:10,f:%u
+            =
+            $3:=$3+4
+            $4:=$4-4
+            x:14,w:18,f:Quota Charged:
+            {$3,8},x:32,w:10,f:%u
+            =
+            $3:=$3+8
+            $4:=$4-8
+            x:14,w:18,f:USN:
+            {$3,8},x:32,w:10,f:%u
+            =
+            $3:=$3+8
+            $4:=$4-8
+          ENDIF
+        ENDIF
+      ENDIF
+    ELSEIF {0x00,4}=0x20
+      ;attribute list
+      IF $63
+        x:1,w:70,f:attr.type len n.len n.ofs vcn               MFT      (#)   attr# name
+        =
+        $8:=$OFFSET
+        $OFFSET:=$OFFSET+$3
+
+        WHILE $4>0
+          IF {0x04,2} 
+            $FILENUM:={0x10,4}
+            {0x00,4},x:1,w:8,f:%8X
+            x:9,w:1,f:h
+          ENDIF
+          $9:={0x04,2},x:11,w:5,f:%h
+          IF NOT $9
+            BREAK
+          ENDIF
+          {0x06,1},x:16,w:3,f:%h
+          $7:={0x07,1},x:21,w:3,f:%3hX
+          x:24,w:1,f:h
+          {0x08,8},x:27,w:18,f:%I
+          {0x10,6},x:45,w:10,f:%I
+          {0x16,2},x:55,w:5,f:%h
+          {0x18,2},x:60,w:5,f:%h
+          IF {0x06,1}
+            $6:={0x06,1}<<1
+            {$7,$6},x:66,w:14,f:U
+          ENDIF
+          =
+          IF $9>$4
+            $9:=$4
+          ENDIF
+          IF NOT $9
+            BREAK
+          ENDIF
+          $OFFSET:=$OFFSET+$9
+          $3:=$3+$9
+          $4:=$4-$9
+        ENDWHILE
+
+        $OFFSET:=$8
+      ENDIF
+    ELSEIF {0x00,4}=0x30
+      ;file name
+      $FILENUM:={$3,4}
+      IF NOT $63
+	$3:=$3+0x40
+        $4:=$4-0x40
+      ELSE
+        x:14,w:10,f:directory:
+        {$3,6},x:32,w:10,f:%u
+        $3:=$3+6
+        $4:=$4-6
+        x:44,w:1,f:(
+        {$3,2},x:45,w:5,f:%h
+        x:50,w:1,f:)
+        =
+        $3:=$3+2
+        $4:=$4-2
+
+        x:14,w:10,f:created:
+        {$3,8},x:32,w:23,f:FILETIME
+        =
+        $3:=$3+8
+        $4:=$4-8
+        x:14,w:10,f:modified:
+        {$3,8},x:32,w:23,f:FILETIME
+        =
+        $3:=$3+8
+        $4:=$4-8
+        x:14,w:10,f:changed:
+        {$3,8},x:32,w:23,f:FILETIME
+        =
+        $3:=$3+8
+        $4:=$4-8
+        x:14,w:10,f:accessed:
+        {$3,8},x:32,w:23,f:FILETIME
+        =
+        $3:=$3+8
+        $4:=$4-8
+        x:14,w:10,f:allocated:
+        {$3,8},x:32,w:20,f:%I
+        =
+        $3:=$3+8
+        $4:=$4-8
+        x:14,w:10,f:size:
+        {$3,8},x:32,w:20,f:%I
+        =
+        $3:=$3+8
+        $4:=$4-8
+        x:14,w:10,f:attrs:
+        {$3,2},x:32,w:16,f:F:R-H-S-V-D-A-d-n-t-s-r-c-o-i-e-+-
+        $3:=$3+2
+        $4:=$4-2
+        {$3,2},x:49,w:16,f:F:+-+-+-+-+-+-+-+-+-+-+-+-D-I-+-+-
+        =
+        $3:=$3+2
+        $4:=$4-2
+        x:14,w:10,f:reparse:
+        {$3,4},x:32,w:10,f:%u
+        =
+        $3:=$3+4
+        $4:=$4-4
+        x:14,w:10,f:name len:
+        {$3,1},x:32,w:3,f:%h
+        =
+        x:14,w:10,f:posix:
+        $9:=$3+1
+        {$9,1},x:32,w:3,f:%h
+        =
+        x:14,w:5,f:name:
+      ENDIF
+      $9:={$3,1}<<1
+      $3:=$3+2
+      $4:=$4-2
+      {$3,$9},x:32,w:60,c:$13,f:U
+      =
+      $3:=$3+$9
+      $4:=$4-$9      
+    ELSEIF {0x00,4}=0x60
+      =
+      x:14,w:18,f:Volume Name:
+      {$3,$4},x:32,w:60,c:$13,f:U
+      =
+      $3:=$3+$4
+      $4:=0
+    ELSEIF $63 AND {0x00,4}=0x90 AND {$3,4}=0x30 AND $4>0x20
+      ;INDX ROOT
+      ;IF {0x10,2}=0x10
+      $8:=$OFFSET ;store
+      $OFFSET:=$OFFSET+$3+0x20
+      $3:=$3+0x20
+      $4:=$4-0x20
+
+      $10:=0   ;color
+      $12:=0   ;END MARK
+      $9:=0    ;entry size
+      WHILE $4>=0x10
+        IF $9
+          IF $9>=$4
+            $9:=$4
+            $3:=$3+$9
+            $4:=0
+            BREAK 
+          ENDIF
+          $3:=$3+$9
+          $4:=$4-$9
+          $OFFSET:=$OFFSET+$9
+        ENDIF
+
+        $9:={0x08,2}  ;entry size
+        IF $9&7 OR $9<0x10
+          $9:=8
+          CONTINUE
+        ENDIF
+        IF $9>$4
+          $9:=$4
+        ENDIF
+
+        IF NOT {0x0C:1,1} AND $9<0x54
+          $9:=8
+          CONTINUE
+        ENDIF
+
+        IF NOT {0x0C:1,1} OR NOT $12
+          IF {0x00,4}
+            ;MFT num:
+            $FILENUM:={0x00,4}
+          ENDIF
+          {0x00,6},x:1,w:10,c:$10,f:%I
+          ;MFT seq num
+          x:11,w:1,f:(
+          {0x06,2},x:12,w:5,c:$10,f:%h
+          x:17,w:1,f:)
+        ENDIF
+
+        IF {0x0C:1,1}
+          ;last entry
+          IF NOT $12
+            $12:=1
+            x:19,w:10,f:END MARK
+            =
+          ENDIF
+          BREAK
+          $10:=10  ;grayed
+          $7:=8
+          IF {0x0C:0,1}
+            $7:=$7+8
+          ENDIF
+          IF $9!=$7
+            $9:=8
+          ENDIF
+          CONTINUE
+        ENDIF
+        ;{0x0A,2} orig nameattr size
+        ;{0x0C,1} UINT8 flags:
+          ;&0x02 last entry
+          ;&0x01: {entry_size-8,8} -> next sort vcn
+        ;{0x0D,1} !=0 - D
+        ;{0x0E,2} !=0 - U
+        ;{0x10,original nameattr size} = name.data
+ 
+        ;dir MFT num:
+        {0x10,6},x:19,w:10,c:10,f:%I
+        ;dir MFT seq num
+        x:29,w:1,f:(
+        {0x16,2},x:30,w:5,c:10,f:%h
+        x:35,w:1,f:)
+
+        ;creation time:
+        {0x18,8},x:37,w:10,c:10,f:FILETIME
+        ;last modification time:
+        {0x20,8},x:48,w:10,c:10,f:FILETIME
+        ;last change time:
+        {0x28,8},x:59,w:10,c:10,f:FILETIME
+        ;access time:
+        {0x30,8},x:70,w:10,c:10,f:FILETIME
+        =
+        $FILENUM:={0x00,4}
+        ;allocated size:
+        {0x38,8},x:3,w:18,c:10,f:%I
+        ;size:
+        {0x40,8},x:23,w:18,c:$10,f:%I
+        ;{0x48,4}: file attributes
+        ;namelen in bytes:
+        $7:={0x50,1}<<1   
+        ;{0x51,1}: ngt
+        ;name:
+        {0x52,$7},x:42,w:38,c:$10,f:U
+        =
+        $7:=(0x59+$7)&0xFFFFFFF8
+        $11:=$7+8
+        IF {0x0C:0,1}
+          ;sub nodes
+          $7:=$11
+        ENDIF
+        IF $7!=$9 AND $11!=$9
+          $9:=8
+        ENDIF
+      ENDWHILE
+      $OFFSET:=$8  ;restore
+    ENDIF
+
+;$OFFSET = attr offset
+;$3 = offset (relative to $OFFSET)
+;$4 = rest data size
+;$5 = full attr length
+
+    IF $3<$5
+      ;hex output
+      IF $63
+        x:7,w:10,f:Hex:
+	=
+
+        $6:=$3
+        $7:=0
+        $9:=$3-{0x14,2}
+ 
+        $12:=12
+        $14:=61
+
+;$6 = line start offset
+;$7 = count of bytes per line for text
+;$9 = offset relative to data start
+;$10 = color
+;$12 = screen position for hex output
+;$14 = screen posision for text output
+    
+        $9,x:7,w:4,f:%03hx:
+
+        WHILE 1
+          $10:=0
+          IF $4<=0
+            $10:=10     ;grayed
+          ENDIF
+          {$3,1},x:$12,w:2,c:$10,f:%cX
+
+          $3:=$3+1
+          IF $4
+            $4:=$4-1
+            $7:=$7+1
+          ENDIF
+          $12:=$12+3
+          $9:=$9+1
+
+          IF $12>57 OR $3>=$5
+            {$6,$7},x:$14,w:$7,f:T
+            $6:=$3
+            $7:=0
+          ENDIF
+
+          IF $3>=$5 
+            BREAK
+          ENDIF
+          IF $12>57
+            =
+            $12:=12
+            $7:=0
+            $14:=61
+            $9,x:7,w:4,f:%03hx:
+          ENDIF
+        ENDWHILE
+        =
+      ENDIF
+      =
+    ENDIF
+  ELSE
+    ;non-resident attribute
+    IF NOT $63
+      IF {0x00,4}=0x80
+        ;$DATA
+        {0x30,8},x:32,w:20,c:$13,f:%I
+        x:52,w:6,f:alloc:
+        {0x28,8},x:59,w:20,c:$13,f:%I
+        =
+      ENDIF
+    ELSE
+      x:12,w:10,f:start vcn: 
+      {0x10,8},x:22,w:20,f:%20I
+      =
+      x:12,w:10,f:end vcn:
+      {0x18,8},x:22,w:20,f:%20I
+      =
+      x:12,w:12,f:runs offset:
+      {0x20,2},x:38,w:4,f:%4hX
+      x:42,w:1,f:h
+      =
+      x:12,w:8,f:clogblk:
+      {0x22,2},x:37,w:5,f:%5h
+      =
+      x:12,w:8,f:0x24:
+      {0x24,4},x:34,w:8,f:%08X
+      x:42,w:1,f:h
+      =
+      x:12,w:10,f:allocated:
+      {0x28,8},x:22,w:20,f:%20I
+      =
+      x:12,w:10,f:size: 
+      {0x30,8},x:22,w:20,f:%20I
+      =
+      x:12,w:10,f:initializ:
+      {0x38,8},x:22,w:20,f:%20I
+      =
+      IF {0x20,2}>=0x48 AND (NOT {0x09,1} OR {0x0A,2}>=0x48)
+        x:12,w:10,f:compress:
+        {0x40,8},x:22,w:20,f:%20I
+        =
+      ENDIF
+
+      $3:={0x0A,2}
+      $4:={0x09,1}<<1
+      IF $4
+        x:7,w:20,f:Attrname:
+        {$3,$4},x:32,w:48,f:U
+        =
+      ENDIF
+
+      ;runlist:
+      $3:=$1+{0x20,2}
+      $6:=0                 ;cluster
+      $11:=0                ;vcn
+      WHILE $3<$2
+        $OFFSET:=$3
+        $11,x:1,w:10,f:%10I
+        x:12,w:5,f:run:
+        {0x00,1},x:17,w:2,f:%02hX
+        x:19,w:1,f:h
+        IF NOT {0x00,1}
+          BREAK
+        ENDIF
+        $3:=$3+1
+        $4:={0x00:0,4}
+        x:21,w:5,f:len:
+        {0x01,$4},x:26,w:16,f:%16I
+        $11:=$11+{0x01,$4}
+        $4:=$4+1
+        $9:={0x00:4,4}
+        x:43,w:5,f:relc:
+        IF NOT $9
+          x:49,w:1,f:-
+        ELSE
+          ;relative cluster value:
+          $7:={$4,$9},x:49,w:13,f:%13IX
+          x:62,w:1,f:h
+          ;convert to signed value:
+          $8:=$4+$9-1
+          IF {$8,1}&0x80
+            $7:=$7-(1<<($9*8))
+          ENDIF
+          ;add relative signed value:
+          $6:=$6+$7
+          $6,x:64,w:16,f::%I
+        ENDIF
+        =
+        $3:=$3+{0x00:0,4}+{0x00:4,4}
+      ENDWHILE
+    ENDIF
+  ENDIF
+ENDWHILE
+
+[NTFS Attribute List]
+;uncomment guid to use by default:
+guid:{27731dac-f9ab-8526-2ea2-55622acbbe12}
+h: attr.type len n.len n.ofs vcn               MFT      (#)   attr# name
+
+WHILE $OFFSET<$RECSIZE
+  IF {0x04,2}
+    $FILENUM:={0x10,4}
+  ENDIF
+  {0x00,4},x:1,w:8,f:%8X
+  x:9,w:1,f:h
+  $2:={0x04,2},x:11,w:5,f:%h
+  IF NOT $2
+    BREAK
+  ENDIF
+  {0x06,1},x:16,w:3,f:%h
+  $4:={0x07,1},x:21,w:3,f:%3hX
+  x:24,w:1,f:h
+  {0x08,8},x:27,w:18,f:%I
+  {0x10,6},x:45,w:10,f:%I
+  {0x16,2},x:55,w:5,f:%h
+  {0x18,2},x:60,w:5,f:%h
+  IF {0x06,1}
+    $3:={0x06,1}<<1
+    {$4,$3},x:66,w:14,f:U
+  ENDIF
+  =
+  IF $2<=0
+    BREAK
+  ENDIF
+  $OFFSET:=$OFFSET+$2
+ENDWHILE
+
+[extFS Superblock]
+guid:{e753e591-7808-eb38-a7d0-42cace180382}
+o:1
+$RECSIZE:=1024
+
+x:1,w:23,f:s_inodes_count
+{0x00,4},x:25,w:10,f:%u
+=
+x:1,w:23,f:s_blocks_count_lo
+{0x04,4},x:25,w:10,f:%u
+=
+x:1,w:23,f:s_r_blocks_count_lo
+{0x08,4},x:25,w:10,f:%u
+=
+x:1,w:23,f:s_free_blocks_count_lo
+{0x0C,4},x:25,w:10,f:%u
+=
+x:1,w:23,f:s_free_inodes_count
+{0x10,4},x:25,w:10,f:%u
+=
+x:1,w:23,f:s_first_data_block
+{0x14,4},x:25,w:10,f:%u
+=
+x:1,w:23,f:s_log_block_size
+{0x18,4},x:25,w:10,f:%u
+=
+x:1,w:23,f:s_log_cluster_size
+{0x1C,4},x:25,w:10,f:%u
+=
+x:1,w:23,f:s_blocks_per_group
+{0x20,4},x:25,w:10,f:%u
+;=
+;x:1,w:23,f:s_obso_frags_per_group
+;{0x24,4},x:25,w:10,f:%u
+=
+x:1,w:23,f:s_inodes_per_group
+{0x28,4},x:25,w:10,f:%u
+=
+x:1,w:23,f:s_mtime
+{0x2C,4},x:25,w:19,f:UNIXDATE
+=
+x:1,w:23,f:s_wtime
+{0x30,4},x:25,w:19,f:UNIXDATE
+=
+x:1,w:23,f:s_mnt_count
+{0x34,2},x:25,w:10,f:%hu
+=
+x:1,w:23,f:s_max_mnt_count
+{0x36,2},x:25,w:10,f:%hu
+=
+x:1,w:23,f:s_magic (53 EF)
+{0x38,1},x:25,w:2,f:%cX
+{0x39,1},x:28,w:2,f:%cX
+=
+x:1,w:23,f:s_state
+{0x3A,2},x:25,w:10,f:%hu
+=
+x:1,w:23,f:s_errors
+{0x3C,2},x:25,w:10,f:%hu
+=
+x:1,w:23,f:s_minor_rev_level
+{0x3E,2},x:25,w:10,f:%hu
+=
+x:1,w:23,f:s_lastcheck
+{0x40,4},x:25,w:19,f:UNIXDATE
+=
+x:1,w:23,f:s_checkinterval
+{0x44,4},x:25,w:10,f:%u
+=
+x:1,w:23,f:s_creator_os
+{0x48,4},x:25,w:10,f:%u
+=
+x:1,w:23,f:s_rev_level
+{0x4C,4},x:25,w:10,f:%u
+=
+;{0x50,2}s_def_resuid
+;{0x52,2}s_def_resgid
+
+IF {0x4C,4}
+  ;revision>0
+  x:1,w:23,f:s_first_ino
+  {0x54,4},x:25,w:10,f:%u
+  =
+  x:1,w:23,f:s_inode_size
+  {0x58,2},x:25,w:10,f:%hu
+  =
+  x:1,w:23,f:s_block_group_nr#
+  {0x5A,2},x:25,w:10,f:%hu
+  =
+  x:1,w:23,f:s_feature_compat
+  {0x5C,4},x:25,w:8,f:%X
+  x:33,w:1,f:h
+  ;0x1	Directory prealloc
+  ;0x2	"imagic inodes"
+  ;0x4	journal
+  ;0x8	extended attributes
+  ;0x10	reserved GDT blocks for filesystem expansion
+  ;0x20	directory indices
+  ;0x40 "Lazy BG"
+  ;0x80 "Exclude inode"
+  =
+  x:1,w:23,f:s_feature_incompat
+  {0x60,4},x:25,w:8,f:%X
+  x:33,w:1,f:h
+  ;0x1	Compression.
+  ;0x2	Directory entries record the file type
+  ;0x4	FS needs recovery
+  ;0x8	FS has a separate journal device
+  ;0x10	Meta block groups
+  ;0x40	file extents
+  ;0x80	2^64 blocks
+  ;0x200 Flexible block groups
+  ;0x400 Inodes for large extended attributes
+  ;0x1000 Data in directory entry
+  =
+  x:1,w:23,f:s_feature_ro_compat
+  {0x64,4},x:25,w:8,f:%X
+  x:33,w:1,f:h
+  ;0x1	Sparse superblocks.
+  ;0x2	files greater than 2GiB.
+  ;0x8	file sizes are in blocks, not 512-byte sectors
+  ;0x10	Group descriptor checksums
+  ;0x20	no 32,000 subdirectory limit
+  ;0x40	large inodes
+  ;0x80	FS has a snapshot.
+  =
+  x:1,w:23,f:s_uuid
+  {0x68,4},x:25,w:8,f:%08X
+  x:33,w:1,f:-
+  {0x6C,2},x:34,w:4,f:%04hX
+  x:38,w:1,f:-
+  {0x6E,2},x:39,w:4,f:%04hX
+  x:43,w:1,f:-
+  {0x70,2},x:44,w:4,f:%.2cX
+  x:48,w:1,f:-
+  {0x72,6},x:49,w:12,f:%.6cX
+  ;UUID of the volume
+  =
+  x:1,w:24,f:s_volume_name          "
+  {0x78,16},x:25,w:16,f:%-16c
+  x:41,w:1,f:"
+  =
+  ;{0x88,64}s_last_mounted:%64c
+  =
+  x:1,w:23,f:s_algorithm_usage_bitmap
+  {0xC8,4},x:25,w:10,f:%u
+  ;compression
+  =
+  ;  {0xCC,1}s_prealloc_blocks
+  ;  {0xCD,1}s_prealloc_dir_blocks
+  ;  {0xCE,2}s_reserved_gdt_blocks
+
+  IF {0x5C:2,1}
+    ;has journal
+    x:1,w:23,f:s_journal_uuid
+    ;{0xD0,16} UUID
+    {0xD0,4},x:25,w:8,f:%08X
+    x:33,w:1,f:-
+    {0xD4,2},x:34,w:4,f:%04hX
+    x:38,w:1,f:-
+    {0xD6,2},x:39,w:4,f:%04hX
+    x:43,w:1,f:-
+    {0xD8,2},x:44,w:4,f:%.2cX
+    x:48,w:1,f:-
+    {0xDA,6},x:49,w:12,f:%.6cX
+    =
+    x:1,w:23,f:s_journal_inum
+    {0xE0,4},x:25,w:10,f:%u
+    =
+    x:1,w:23,f:s_journal_dev
+    {0xE4,4},x:25,w:10,f:%u
+    =
+  ENDIF
+  ;x:1,w:23,f:s_last_orphan
+  ;{0xE8,4},x:25,w:10,f:%u
+  ;  =
+  ;  {0xEC,16}s_hash_seed
+  ;  {0xFC,1}s_def_hash_version
+  ;  {0xFD,1}s_jnl_backup_type {?}
+  =
+  x:1,w:23,f:s_desc_size
+  {0xFE,2},x:25,w:5,f:%h
+  =
+  ;  {0x100,4}s_default_mount_opts
+  =
+  x:1,w:23,f:s_first_meta_bg
+  {0x104,4},x:25,w:10,f:%u
+  =
+  x:1,w:23,f:s_mkfs_time
+  {0x108,4},x:25,w:19,f:UNIXDATE
+  ;  {0x10C,68}s_jnl_blocks 4x17
+  =
+  ;64bit support valid if EXT4_FEATURE_COMPAT_64BIT
+  x:1,w:23,f:s_blocks_count_hi
+  {0x150,4},x:25,w:8,f:%X
+  x:33,w:1,f:h
+  =
+  x:1,w:23,f:s_r_blocks_count_hi
+  {0x154,4},x:25,w:8,f:%X
+  x:33,w:1,f:h
+  =
+  x:1,w:23,f:s_free_blocks_count_hi
+  {0x158,4},x:25,w:8,f:%X
+  x:33,w:1,f:h
+  =
+  x:1,w:23,f:s_min_extra_isize
+  {0x15C,2},x:25,w:5,f:%h
+  =
+  x:1,w:23,f:s_want_extra_isize
+  {0x15E,2},x:25,w:5,f:%h
+  =
+  x:1,w:23,f:s_flags
+  {0x160,4},x:25,w:8,f:%X
+  x:33,w:1,f:h
+  ;0x0001	Signed directory hash in use.
+  ;0x0002	Unsigned directory hash in use.
+  ;0x0004	To test development code.
+  =
+  x:1,w:23,f:s_raid_stride
+  {0x164,2},x:25,w:5,f:%h
+  =
+  x:1,w:23,f:s_mmp_interval
+  {0x166,2},x:25,w:5,f:%h
+  =
+  x:1,w:23,f:s_mmp_block
+  {0x168,2},x:25,w:5,f:%h
+  =
+  x:1,w:23,f:s_raid_stripe_width
+  {0x170,4},x:25,w:10,f:%u
+  =
+  x:1,w:23,f:s_log_groups_per_flex
+  {0x174,1},x:25,w:3,f:%h
+  =
+  ;0x175	__u8	s_reserved_char_pad	
+  ;0x176	__le16	s_reserved_pad	
+  =
+  x:1,w:23,f:s_kbytes_written
+  {0x178,8},x:25,w:20,f:%I
+  ;=
+  ;0x180	__le32	s_snapshot_inum
+  ;0x184	__le32	s_snapshot_id
+  ;0x188	__le64	s_snapshot_r_blocks_count
+  ;0x190	__le32	s_snapshot_list
+  ;0x194	__le32	s_error_count
+  ;0x198	__le32	s_first_error_time
+  ;0x19C	__le32	s_first_error_ino
+  ;0x1A0	__le64	s_first_error_block
+  ;0x1A8	__u8	s_first_error_func[32]
+  ;0x1C8	__le32	s_first_error_line
+  ;0x1CC	__le32	s_last_error_time
+  ;0x1D0	__le32	s_last_error_ino
+  ;0x1D4	__le32	s_last_error_line
+  ;0x1D8	__le64	s_last_error_block
+  ;0x1E0	__u8	s_last_error_func[32]
+  ;0x200	__u8	s_mount_opts[64]
+  ;0x240	__le32	s_reserved[108]
+  =
+  x:1,w:23,f:s_checksum
+  {0x3FC,4},x:25,w:8,f:%08X
+  x:33,w:1,f:h
+ENDIF
+
+[extFS Group Descriptors x32]
+guid:{f377e6df-e06c-7909-922e-90d58c09259d}
+flow:1
+h: blk_bitmap ino_bitmap ino_table freblk frino usedir flag nusei csum
+
+WHILE 1
+  =
+  {0x0,4},x:1,w:10,f:%10u
+  {0x4,4},x:12,w:10,f:%10u
+  {0x8,4},x:23,w:10,f:%10u
+  {0xC,2},x:34,w:5,f:%5h
+  {0xE,2},x:40,w:5,f:%5h
+  {0x10,2},x:46,w:5,f:%5h
+  {0x12,2},x:52,w:4,f:%4hX
+  x:56,w:1,f:h
+  ;{0x14,4},x:58,w:10,f:%10u
+  ;{0x18,2},x:58,w:4,f:%4hX
+  ;x:62,w:1,f:h
+  ;{0x1A,2},x:64,w:4,f:%4hX
+  ;x:68,w:1,f:h
+  {0x1C,2},x:58,w:5,f:%5h
+  {0x1E,2},x:64,w:4,f:%4hX
+  x:68,w:1,f:h
+  $OFFSET:=$OFFSET+32
+ENDWHILE
+
+[extFS Group Descriptors x64]
+guid:{d3f3136d-fe00-3ffd-5cfb-eef922c334a3}
+flow:1
+h:        blk_bitmap        ino_bitmap         ino_table  freeblk  freeino   usedir    unuse flags chksum
+IF $1<=0
+  ;desriptor size not given
+  $1:=64
+ENDIF
+
+WHILE 1
+  {0x0,4;0x20,4},x:0,w:18,f:%18I
+  {0x4,4;0x24,4},x:18,w:18,f:%18I
+  {0x8,4;0x28,4},x:36,w:18,f:%18I
+  {0xC,2;0x2C,2},x:54,w:9,f:%9h
+  {0xE,2;0x2E,2},x:63,w:9,f:%9h
+  {0x10,2;0x30,2},x:72,w:9,f:%9h
+  {0x1C,2;0x32,2},x:81,w:9,f:%9h
+  {0x12,2},x:91,w:4,f:%4hX
+  x:95,w:1,f:h
+  {0x1E,2},x:97,w:4,f:%4hX
+  =
+  $OFFSET:=$OFFSET+$1
+ENDWHILE
+
+[extFS Inodes Entries]
+guid:{e39b26a7-c80d-8db3-adac-4251831fd053}      
+flow:1
+
+IF $1<=0
+  ;inode size not given
+  $1:=128
+ENDIF
+;$64=inode number (given)
+
+WHILE 1
+  $FILERECOFS:=$OFFSET
+  $63:=TOGGLE:$OFFSET,x:1
+  x:5,w:14,f:Inode ====== #
+  $64,x:19,w:10,f:%u =======
+  $OFFSET,x:29,w:10,f:(+%u) =====
+  x:39,w:20,f:====================
+  IF $64>0
+    $64:=$64+1
+  ENDIF
+  =
+  $FILERECOFS:=$OFFSET
+  x:5,w:7,f:i_mode:
+  {0x0,2},x:19,w:4,f:%hX
+  x:23,w:2,f:h:
+  IF {0x0:12,4}=0x1
+    x:25,w:4,f:FIFO
+  ELSEIF {0x0:12,4}=0x2
+    x:25,w:4,f:CHR
+  ELSEIF {0x0:12,4}=0x4
+    x:25,w:4,f:DIR
+  ELSEIF {0x0:12,4}=0x6
+    x:25,w:4,f:BLK
+  ELSEIF {0x0:12,4}=0x8
+    x:25,w:4,f:FILE
+  ELSEIF {0x0:12,4}=0xA
+    x:25,w:4,f:LINK
+  ELSEIF {0x0:12,4}=0xC
+    x:25,w:4,f:SOCK
+  ENDIF
+  x:30,w:4,f:Oth:
+  {0x0:0,3},x:34,w:3,f:F:X-W-R-
+  x:38,w:4,f:Grp:
+  {0x0:3,3},x:42,w:3,f:F:X-W-R-
+  x:46,w:4,f:Own:
+  {0x0:6,3},x:50,w:3,f:F:X-W-R-
+  x:54,w:4,f:StB:
+  {0x0:9,1},x:58,w:1,f:F:+-
+  x:60,w:4,f:Gid:
+  {0x0:10,1},x:64,w:1,f:F:+-
+  x:66,w:4,f:Uid:
+  {0x0:11,1},x:70,w:1,f:F:+-
+  =
+  IF $63
+    x:5,w:14,f:i_uid:
+    {0x2,2},x:19,w:5,f:%h
+    =
+  ENDIF
+  x:5,w:14,f:i_size_lo:
+  {0x4,4},x:19,w:10,f:%u
+  =
+  IF $63
+    x:5,w:14,f:i_atime:
+    {0x8,4},x:19,w:19,f:UNIXDATE
+    =
+    x:5,w:14,f:i_ctime:
+    {0xC,4},x:19,w:19,f:UNIXDATE
+    =
+  ENDIF
+  x:5,w:14,f:i_mtime:
+  {0x10,4},x:19,w:19,f:UNIXDATE
+  =
+  IF $63
+    x:5,w:14,f:i_dtime:
+    {0x14,4},x:19,w:19,f:UNIXDATE
+    =
+    x:5,w:14,f:i_gid:
+    {0x18,2},x:19,w:5,f:%h
+    =
+    x:5,w:14,f:i_links_count:
+    {0x1A,2},x:19,w:5,f:%h
+    =
+    x:5,w:14,f:i_blocks_lo:
+    {0x1C,4},x:19,w:10,f:%u
+    =
+    x:5,w:14,f:i_flags:
+    {0x20,4},x:19,w:8,f:%08X
+    x:27,w:1,f:h
+
+    IF {0x21:4,1}
+      x:30,w:5,f:INDEX
+    ENDIF
+    IF {0x21:5,1}
+      x:36,w:6,f:IMAGIC
+    ENDIF
+    IF {0x22:1,1}
+      x:43,w:6,f:TOPDIR
+    ENDIF
+    IF {0x22:2,1}
+      x:50,w:4,f:HUGE
+    ENDIF
+    IF {0x22:3,1}
+      x:55,w:6,f:EXTENT
+    ENDIF
+    IF {0x22:5,1}
+      x:62,w:2,f:EA
+    ENDIF
+    IF {0x23:4,1}
+      x:63,w:6,f:INLINE
+    ENDIF
+ 
+    ;0x20    EXT4_APPEND_FL
+    ;0x1000  EXT4_INDEX_FL
+    ;0x2000  EXT4_IMAGIC_FL
+    ;0x4000  EXT4_JOURNAL_DATA_F
+    ;0x20000 EXT4_TOPDIR_FL
+    ;0x40000 EXT4_HUGE_FILE_FL
+    ;0x80000 EXT4_EXTENTS_FL
+    ;0x200000 EXT4_EA_INODE_FL
+    ;0x10000000 EXT4_INLINE_DATA_FL
+    =
+
+    x:5,w:14,f:l_i_version:
+    {0x24,4},x:19,w:10,f:%u
+    =
+
+    $3:=1        
+    ;extents        
+    IF {0x22:3,1}
+      ;extents header
+      $4:=$OFFSET+0x28
+      ;save offset:
+      $2:=$OFFSET
+      $OFFSET:=$4
+  
+      x:2,w:17,f:eh_magic (F30A):
+      {0x00,2},x:19,w:4,f:%04hX
+      x:23,w:1,f:h
+      =
+      x:2,w:17,f:eh_entries:
+      {0x02,2},x:19,w:5,f:%h
+      =
+      x:2,w:17,f:eh_max:
+      {0x04,2},x:19,w:5,f:%h
+      =
+      x:2,w:17,f:eh_depth:
+      {0x06,2},x:19,w:5,f:%h
+      =
+      x:2,w:17,f:eh_generation:
+      {0x08,4},x:19,w:8,f:%X
+      x:27,w:1,f:h
+      =
+
+      ;extents:
+      $3:={0x06,2}
+      $4:=$4+0x0C
+      $5:={0x02,2}
+      IF $5>4
+        $5:=4
+      ENDIF
+
+      WHILE $5>0
+        $OFFSET:=$4
+        IF NOT $3
+          ;extent
+          x:3,w:16,f:ee_block:
+          {0x00,4},x:19,w:10,f:%u
+    
+          x:30,w:11,f:ee_len:
+          {0x04,2},x:41,w:5,f:%h
+        
+          $CLUSTER:={0x08,4;0x06,2}
+          x:49,w:11,f:ee_start:
+          {0x08,4;0x06,2},x:60,w:20,f:%I
+          =
+        ELSE
+          ;inode
+          x:3,w:16,f:ei_block:
+          {0x00,4},x:19,w:10,f:%u
+      
+          x:30,w:11,f:ei_leaf:
+          {0x04,4;0x08,2},x:41,w:20,f:%I
+          =
+        ENDIF
+  
+        $4:=$4+12
+        $5:=$5-1
+      ENDWHILE
+
+      $OFFSET:=$2          ;restore offset
+      $3:=0                ;no blocks
+    ENDIF
+    IF $3
+      IF {0x0:12,4}=0xA
+        ;link
+        IF {0x4,4}<=60
+          ;no blocks
+          $3:=0
+        ENDIF
+      ENDIF
+      IF {0x23:4,1}
+        ;inline data
+        $3:=0            
+      ENDIF
+      IF NOT $3
+        ;inline data
+        $4:={0x4,4}
+        IF $4>60
+          $4:=60
+        ENDIF
+        IF $4>0
+          x:5,w:14,f:i_block:
+          IF {0x0:12,4}=0xA
+            ;link
+            {0x28,$4},x:19,w:60,f:C
+          ELSE
+            ;data
+            {0x28,$4},x:19,w:60,f:T
+          ENDIF
+          =
+        ENDIF
+      ENDIF    
+    ENDIF
+    IF $3
+      ;blocks:
+      $CLUSTER:={0x28,4}
+      x:5,w:14,f:i_block:
+      {0x28,4},x:19,w:10,f:%u
+      {0x2C,4},x:30,w:10,f:%u
+      {0x30,4},x:41,w:10,f:%u
+      {0x34,4},x:52,w:10,f:%u
+      {0x38,4},x:63,w:10,f:%u
+      =
+      {0x3C,4},x:19,w:10,f:%u
+      {0x40,4},x:30,w:10,f:%u
+      {0x44,4},x:41,w:10,f:%u
+      {0x48,4},x:52,w:10,f:%u
+      {0x4C,4},x:63,w:10,f:%u
+      =
+      {0x50,4},x:19,w:10,f:%u
+      {0x54,4},x:30,w:10,f:%u
+      {0x58,4},x:41,w:10,f:%u
+      {0x5C,4},x:52,w:10,f:%u
+      {0x60,4},x:63,w:10,f:%u
+    ENDIF
+    =
+    x:5,w:14,f:i_generation:
+    {0x64,4},x:19,w:10,f:%u
+    =
+    x:5,w:14,f:i_file_acl_lo:
+    {0x68,4},x:19,w:10,f:%u
+    =
+  ENDIF
+  x:5,w:14,f:i_size_high:
+  {0x6C,4},x:19,w:8,f:%X
+  x:27,w:1,f:h
+  =
+  IF $63
+    ;0x70	__le32	i_obso_faddr
+    ;=
+    ;0x0	__le16	l_i_blocks_high
+    x:5,w:14,f:l_i_blocks_hi:
+    {0x74,2},x:19,w:4,f:%hX
+    x:23,w:1,f:h
+    =
+    ;0x2	__le16	l_i_file_acl_high
+    x:5,w:14,f:l_i_file_aclh:
+    {0x76,2},x:19,w:4,f:%hX
+    x:23,w:1,f:h
+    =
+    ;0x4	__le16	l_i_uid_high
+    x:5,w:14,f:l_i_uid_high:
+    {0x78,2},x:19,w:4,f:%hX
+    x:23,w:1,f:h
+    =
+    ;0x6	__le16	l_i_gid_high
+    x:5,w:14,f:l_i_gid_high:
+    {0x7A,2},x:19,w:4,f:%hX
+    x:23,w:1,f:h
+    =
+    ;0x8	__le16	l_i_checksum_lo
+    x:5,w:14,f:l_i_checksuml:
+    {0x7C,2},x:19,w:4,f:%hX
+    x:23,w:1,f:h
+    =
+    ;0xA	__le16	l_i_reserved
+    x:5,w:14,f:l_i_reserved:
+    {0x7E,2},x:19,w:4,f:%hX
+    x:23,w:1,f:h
+    =
+    IF $1>128
+      x:5,w:14,f:i_extra_isize:
+      {0x80,2},x:19,w:5,f:%h
+      =
+      x:5,w:14,f:i_pad1:
+      {0x82,2},x:19,w:5,f:%h
+      =
+      x:5,w:14,f:i_ctime_extra:
+      {0x84,4},x:19,w:10,f:%u
+      =
+      x:5,w:14,f:i_mtime_extra:
+      {0x88,4},x:19,w:10,f:%u
+      =
+      x:5,w:14,f:i_atime_extra:
+      {0x8C,4},x:19,w:10,f:%u
+      =
+      x:5,w:14,f:i_crtime:
+      {0x90,4},x:19,w:19,f:UNIXDATE
+      =
+      x:5,w:14,f:i_crtime_extra:
+      {0x94,4},x:19,w:10,f:%u
+      =
+      x:5,w:14,f:i_version_hi:
+      {0x98,4},x:19,w:8,f:%hX
+      x:27,w:1,f:h
+      =
+    ENDIF
+  ENDIF
+  $OFFSET:=$OFFSET+$1
+ENDWHILE
+
+[extFS Extent List]
+  ;extents header
+  $4:=0x00
+  $OFFSET:=$4
+
+  x:2,w:17,f:eh_magic (F30A):
+  {0x00,2},x:19,w:4,f:%04hX
+  x:23,w:1,f:h
+  =
+  x:2,w:17,f:eh_entries:
+  {0x02,2},x:19,w:5,f:%h
+  =
+  x:2,w:17,f:eh_max:
+  {0x04,2},x:19,w:5,f:%h
+  =
+  x:2,w:17,f:eh_depth:
+  {0x06,2},x:19,w:5,f:%h
+  =
+  x:2,w:17,f:eh_generation:
+  {0x08,4},x:19,w:8,f:%X
+  x:27,w:1,f:h
+  
+  ;extents:
+  $3:={0x06,2}
+  $4:=$4+0x0C
+  $5:={0x02,2}
+;  IF $5>4
+;    $5:=4
+;  ENDIF
+WHILE $5>0
+  $OFFSET:=$4
+  IF NOT $3
+    ;extent
+    =
+    x:3,w:16,f:ee_block:
+    {0x00,4},x:19,w:10,f:%u
+
+    x:30,w:11,f:ee_len:
+    {0x04,2},x:41,w:5,f:%h
+    
+    $CLUSTER:={0x08,4;0x06,2}
+    x:49,w:11,f:ee_start:
+    {0x08,4;0x06,2},x:60,w:20,f:%I
+  ELSE
+    ;inode
+    =
+    x:3,w:16,f:ei_block:
+    {0x00,4},x:19,w:10,f:%u
+    
+    x:30,w:11,f:ei_leaf:
+    {0x04,4;0x08,2},x:41,w:20,f:%I
+  ENDIF
+
+  $4:=$4+12
+  $5:=$5-1
+ENDWHILE
+
+[extFS Directory Entries]
+guid:{8a4dbd31-8a3a-0aa6-b095-58c6f3416fed}
+flow:1
+h: Inode    ESize  NmLen  Type  Name
+
+CALCSIZESTART
+  IF $1<=0
+    ;recsize is not given
+    IF $RECSIZE<4096
+      $RECSIZE:=4096
+    ENDIF
+  ENDIF
+CALCSIZEEND
+
+;removed:
+$4:=0
+;index hashes:
+$5:=0
+$6:=0
+
+WHILE 1
+  $2:={0x06,1}
+  $3:=($2+11)&0xFC
+
+  IF $OFFSET=0 AND {0x04,5}=\x0C\x00\x01\x02\x2E
+    $5:=1
+  ENDIF
+  IF $OFFSET=0x0C AND {0x06,4}!=\x02\x02\x2E\x2E
+    $5:=0
+  ENDIF
+  IF $5 AND $OFFSET=0x18 AND {0x0,4}=0 AND {0x07,1}=0 AND $4>=0x28 AND {0xA,2}>0
+    ;dx_root
+    $63:=TOGGLE:0,x:1
+    x:5,w:27,f:dx_root (index hashes)
+    =
+    IF $63
+      x:9,w:27,f:reserved_zero
+      {0x00,4},x:28,w:10,f:%u
+      =
+      x:9,w:19,f:hash_version
+      {0x04,1},x:28,w:3,f:%h
+      =
+      x:9,w:19,f:info_length (8)
+      {0x05,1},x:28,w:3,f:%h
+      =
+      x:9,w:19,f:indirect_levels
+      {0x06,1},x:28,w:3,f:%h
+      =
+      x:9,w:19,f:unused_flags
+      {0x07,1},x:28,w:3,f:%h
+      =
+      x:9,w:19,f:limit
+      {0x08,2},x:28,w:5,f:%h
+      =
+      x:9,w:19,f:count
+      {0x0A,2},x:28,w:5,f:%h
+      =
+      x:38,w:19,f:block:
+      {0x0C,4},x:58,w:10,f:%u
+      =
+    ENDIF
+
+    $6:={0x0A,2}-1
+    $OFFSET:=0x28
+  ENDIF
+
+  IF $OFFSET=0 AND {0x0,4}=0 AND {0x6,2}=0 AND {0xA,2}>0
+    ;dx_node
+    $5:=1
+
+      x:1,w:27,f:dx_node fake.inode (0)
+      {0x0,4},x:28,w:10,f:%u
+      =
+      x:9,w:19,f:fake.rec_len
+      {0x4,2},x:28,w:5,f:%h
+      =
+      x:9,w:19,f:name_len (0)
+      {0x6,1},x:28,w:5,f:%h
+      =
+      x:9,w:19,f:file_type (0)
+      {0x7,1},x:28,w:5,f:%h
+      =
+      x:9,w:19,f:limit
+      {0x8,2},x:28,w:5,f:%h
+      =
+      x:9,w:19,f:count
+      {0xA,2},x:28,w:5,f:%h
+      =
+    IF {0xA,2}>1
+      $63:=TOGGLE:0,x:5
+      x:9,w:27,f:hashes
+    ENDIF
+
+      x:38,w:9,f:block:
+      {0xC,4},x:58,w:10,f:%u
+      =
+
+    $4:={0x4,2}
+    $6:={0xA,2}-1
+    $OFFSET:=0x10
+  ENDIF
+
+  IF $6
+    WHILE 1
+      IF $63
+        x:9,w:19,f:hash:
+        {0x00,4},x:28,w:8,c:$10,f:%08X
+        x:38,w:19,f:block:
+        {0x04,4},x:58,w:10,c:$10,f:%u
+        =
+      ENDIF
+      $6:=$6-1
+      IF NOT $6
+        BREAK
+      ENDIF
+      $OFFSET:=$OFFSET+8
+      IF $OFFSET>=$4
+        $OFFSET:=$4
+        $4:=0
+        BREAK
+      ENDIF
+    ENDWHILE
+    $6:=0
+  ENDIF
+
+  IF $4
+    IF NOT {0x07,1} OR {0x07,1}>7 OR {0x04:0,2}>0 OR {0x04,2}<8
+      $2:=0
+    ENDIF
+    $5:=$2+8
+    IF $5>{0x04,2}
+      $2:=0
+    ENDIF
+    IF $RECSIZE>0
+      $5:=$OFFSET+{0x04,2}
+      IF $5>$RECSIZE
+        $2:=0
+      ENDIF
+    ENDIF
+    IF NOT $2
+      $OFFSET:=$OFFSET+4
+      IF $OFFSET>=$4
+        $4:=0
+      ENDIF
+      CONTINUE
+    ENDIF
+  ENDIF
+
+  IF NOT $4 AND {0x00,6}=0
+    BREAK
+  ENDIF
+
+  $FILENUM:={0x00,4}
+  $10:=0
+  IF $4
+    $10:=10 ;grayed
+  ENDIF
+  {0x00,4},x:1,w:10,c:$10,f:%u
+  $1:={0x04,2},x:12,w:5,c:$10,f:%h
+  $2:={0x06,1},x:19,w:3,c:$10,f:%h
+  {0x07,1},x:25,w:3,c:$10,f:%hX
+  ;0x0	Unknown.
+  ;0x1	Regular file.
+  ;0x2	Directory.
+  ;0x3	Character device file.
+  ;0x4	Block device file.
+  ;0x5	FIFO.
+  ;0x6	Socket.
+  ;0x7	Symbolic link.
+  IF {0x07,1}=2
+    x:30,w:1,f:>
+  ENDIF
+  IF $4
+    x:29,w:1,f:x
+  ENDIF
+
+  {0x08,$2},x:31,w:49,c:$10,f:C
+  $3,x:81,w:3,c:$10,f:%h
+  =
+  IF $3<$1
+    IF NOT $4
+      $4:=$OFFSET+$1
+    ENDIF
+  ELSE
+    $3:=$1
+  ENDIF
+  IF $3<4
+    $3:=4
+  ENDIF
+  $3:=$OFFSET+$3
+  IF $4 AND $3>=$4
+    $OFFSET:=$4
+    $4:=0
+    CONTINUE
+  ENDIF
+  $OFFSET:=$3
+ENDWHILE
+
+[exFAT Boot Sector]
+guid:{69aff35a-367b-8d25-22d2-2dfb6664ad4f}
+
+;{0x00,3}BS_jmpBoot        {0xEB7690}
+x:1,w:15,f:OEMName (EXFAT)
+x:24,w:1,f:"
+{0x03,8},x:25,w:8,f:%-8c
+x:33,w:1,f:"
+=
+;{0x0b,43}Zeroed
+;=
+x:1,w:23,f:PartitionOffset
+{0x40,8},x:25,w:20,f:%I
+=
+x:1,w:23,f:VolumeLength
+{0x48,8},x:25,w:20,f:%I
+=
+x:1,w:23,f:FATOffset
+{0x50,4},x:25,w:10,f:%u
+=
+x:1,w:23,f:FATLength
+{0x54,4},x:25,w:10,f:%u
+=
+x:1,w:23,f:ClusterHeapOffset
+{0x58,4},x:25,w:10,f:%u
+=
+x:1,w:23,f:ClusterCount
+{0x5C,4},x:25,w:10,f:%u
+=
+x:1,w:23,f:RootDirectoryFirstCluster
+{0x60,4},x:25,w:10,f:%u
+=
+x:1,w:23,f:VolumeSerialNumber
+{0x64,4},x:25,w:8,f:%08X
+x:33,w:1,f:h
+=
+x:1,w:23,f:FileSystemRevision
+{0x69,1},x:25,w:2,f:%02X
+x:27,w:1,f:.
+{0x68,1},x:28,w:2,f:%02X
+=
+x:1,w:23,f:VolumeFlags
+{0x6A,2},x:25,w:4,f:%04X
+x:29,w:2,f:h:
+{0x6A:0,3},x:32,w:3,f:F:21DCFN
+;Active FAT     0  1 0 – 1st, 1 – 2nd
+;Volume Dirty   1  1 0 – Clean, 1 - Dirty
+;Media Failure  2  1 0 – No Failures, 1 – Failures Reported
+;Clear to Zero  3  1 No Meaning
+;Reserved       4 12
+=
+x:1,w:23,f:BytesPerSectorPow
+{0x6C,1},x:25,w:3,f:%h
+=
+x:1,w:23,f:SectorsPerClusterPow
+{0x6D,1},x:25,w:3,f:%h
+=
+x:1,w:23,f:NumberOfFATS
+{0x6E,1},x:25,w:3,f:%h
+=
+x:1,w:23,f:DriveSelect
+{0x6F,1},x:25,w:3,f:%02X
+x:27,w:1,f:h
+=
+x:1,w:23,f:PercentInUse
+{0x6F,1},x:25,w:3,f:%h
+;=
+;{0x71,7}Reserved
+;{0x78,390}BS_Code
+=
+x:1,w:23,f:BS_ExtSign (0xAA55)
+{0x1FE,2},x:25,w:4,f:%04X
+x:29,w:1,f:h
+
+[exFAT Dir Entries]
+guid:{4496390b-27f1-a0f9-35bd-e144918e7ed0}
+flow:1
+WHILE 1
+  $10:=0
+  IF NOT {0x00:7,1}
+    $10:=10 ;grayed
+  ENDIF
+  {0x00,1},x:1,w:2,c:$10,f:%02X
+  x:3,w:1,f:h
+  IF NOT {0x00:7,1}
+    x:4,w:1,c:$10,f:x
+  ENDIF
+  IF {0x00:0,7}=1
+    ;BITMAP
+    $FILERECOFS:=$OFFSET
+    x:5,w:10,f:BITMAP  #:
+    {0x01,1},x:15,w:1,c:$10,f:F:21
+    x:47,w:3,f:cl:
+    {0x14,4},x:50,w:10,c:$10,f:%u
+    x:61,w:6,f:size:
+    {0x18,8},x:67,w:13,c:$10,f:%I
+  ELSEIF {0x00:0,7}=2
+    ;UPCASE
+    $FILERECOFS:=$OFFSET
+    x:5,w:10,c:$10,f:UPCASE:
+    x:10,w:5,f:csum:
+    {0x04,4},x:15,w:8,c:$10,f:%08X
+    x:23,w:1,c:$10,f:h
+    x:47,w:3,f:cl:
+    {0x14,4},x:50,w:10,c:$10,f:%u
+    x:61,w:6,f:size:
+    {0x18,8},x:67,w:13,c:$10,f:%I
+  ELSEIF {0x00:0,7}=3
+    ;VOLLABEL
+    x:5,w:10,f:LABEL len:
+    {0x01,1},x:15,w:3,c:$10,f:%u
+    x:20,w:5,f:name:
+    $1:={0x01,1}<<1
+    IF $1>30
+      $1:=30
+    ENDIF
+    {0x02,$1},x:25,w:15,c:$10,f:U
+  ENDIF
+  IF {0x00:0,7}=5
+    $FILERECOFS:=$OFFSET
+    x:5,w:1,f:#
+    {0x01,1},x:6,w:3,c:$10,f:%u
+    x:10,w:5,f:csum:
+    {0x02,2},x:15,w:4,c:$10,f:%04X
+    x:19,w:1,c:$10,f:h
+    x:29,w:6,f:attrs:
+    {0x04,1},x:35,w:8,c:$10,f:F:R-H-S-V-D-A-+-+-
+
+    ;Creation Time:
+    ;{0x0A:9,7},x:64,w:3,f:-%03hu
+    ;x:67,w:1,f:-
+    ;{0x0A:5,4},x:68,w:2,f:-%02hu
+    ;x:70,w:1,f:-
+    ;{0x0A:0,5},x:71,w:2,f:-%02hu
+    ;{0x08:11+5},x:74,w:2,f:-%02hu
+    ;x:76,w:1,f::
+    ;{0x08:5,6},x:77,w:2,f:-%02hu
+    ;x:79,w:1,f::
+    ;{0x08:0,5}<<1,x:80,w:2,f:-%02hu
+    ;x:82,w:1,f:.
+    ;{0x0D,1},x:83,w:3,f:%02hu
+  ENDIF
+  IF {0x00:0,7}=0x40
+    IF $OFFSET>=32
+      $FILERECOFS:=$OFFSET-32
+    ELSE
+      $FILERECOFS:=$OFFSET
+    ENDIF
+    x:5,w:1,f:F
+    {0x01,1},x:6,w:3,c:$10,f:F:+-+-
+    x:10,w:5,f:nlen:
+    {0x03,1},x:15,w:3,c:$10,f:%u
+    x:18,w:5,f:hash:
+    {0x04,2},x:23,w:4,c:$10,f:%04X
+    x:27,w:1,f:h
+    x:29,w:5,f:size:
+    {0x08,8},x:34,w:13,c:$10,f:%I
+    x:47,w:3,f:cl:
+    {0x14,4},x:50,w:10,c:$10,f:%u
+    x:61,w:6,f:alloc:
+    {0x18,8},x:67,w:13,c:$10,f:%I
+  ENDIF
+  IF {0x00:0,7}=0x41
+    x:5,w:1,f:F
+    {0x01,1},x:6,w:3,c:$10,f:F:+-+-
+    x:10,w:5,f:name:
+    {0x02,30},x:15,w:15,c:$10,f:U
+  ENDIF
+  =
+  $OFFSET:=$OFFSET+32
+ENDWHILE
+
+[NTFS Dir Entries]
+;uncomment guid to use by default:
+;guid:{451037af-3415-2b8f-a8e9-b3b9d72cd284}
+flow:1
+
+CALCSIZESTART
+  $1:=$RECSIZE
+  ;"INDX" header:
+  IF {0x00,4}=0x58444E49
+    $1:=0x18+{0x20,2}
+    IF $1<512
+      $1:=512
+    ENDIF
+  ENDIF
+  $RECSIZE:=$1
+CALCSIZEEND
+
+LOADSTART
+IF {0x00,4}=0x58444E49
+  $1:={0x04,2}      ;fixups offset
+  IF $1<0x28 OR $1>=$RECSIZE
+    GOTO:1
+  ENDIF
+  $2:={0x06,2}      ;fixups count
+  IF $2<=1
+    GOTO:1
+  ENDIF
+  $3:=0x1FE         ;seq. offset
+  IF {$3,2}={$1,2}  ;insert fixups
+    $1:=$1+2
+    WHILE 1
+      $2:=$2-1
+      {$3,2}:={$1,2}
+      $1:=$1+2
+      $3:=$3+0x200
+      IF NOT $2 OR $3>=$RECSIZE
+        BREAK
+      ENDIF
+    ENDWHILE
+  ENDIF
+  LABEL:1
+ENDIF
+LOADEND
+
+FLUSHSTART
+IF {0x00,4}=0x58444E49
+  $1:={0x04,2}
+  IF $1<0x28 OR $1>=$RECSIZE
+    GOTO:1
+  ENDIF
+  $2:={0x06,2}
+  IF $2<=1
+    GOTO:1
+  ENDIF
+  $3:=0x1FE
+  $4:={$1,2}
+
+  $1:=$1+2
+  $2:=$2-1
+  WHILE 1
+    {$1,2}:={$3,2}
+    {$3,2}:=$4
+    $1:=$1+2
+    $2:=$2-1
+    $3:=$3+0x200
+    IF NOT $2 OR $3>=$RECSIZE
+      BREAK
+    ENDIF
+  ENDWHILE
+  LABEL:1
+ENDIF
+FLUSHEND
+
+IF {0x00,4}=0x58444E49
+  x:5,w:25,c:$10,f:magic ("INDX"):
+  {0x00,4},x:32,w:4,f:%4c
+  =
+  x:5,w:25,c:$10,f:vcn:
+  {0x10,8},x:32,w:19,f:%I
+  =
+  x:5,w:25,c:$10,f:items offset:
+  {0x18,2},x:32,w:5,f:%u
+  =
+  x:5,w:25,c:$10,f:usedsize:
+  {0x1C,4},x:32,w:9,f:%u
+  =
+  x:5,w:25,c:$10,f:recordsize:
+  {0x20,4},x:32,w:9,f:%u
+  =
+  $OFFSET:=0x18+{0x18,2}
+ELSEIF {0x00,4}=0x30 AND {0x10,2}=0x10
+  $OFFSET:=0x20
+ENDIF
+
+$4:=$RECSIZE
+$10:=0   ;color
+$12:=0
+      $9:=0    ;entry size
+      WHILE $4>=0x10
+        IF $9
+          IF $9>=$4
+            $9:=$4
+            $3:=$3+$9
+            $4:=0
+            BREAK 
+          ENDIF
+          $3:=$3+$9
+          $4:=$4-$9
+          $OFFSET:=$OFFSET+$9
+        ENDIF
+
+        $9:={0x08,2}  ;entry size
+        IF $9&7 OR $9<0x10
+          $9:=8
+          CONTINUE
+        ENDIF
+        IF $9>$4
+          $9:=$4
+        ENDIF
+
+        IF NOT {0x0C:1,1} AND $9<0x54
+          $9:=8
+          CONTINUE
+        ENDIF
+
+        IF NOT {0x0C:1,1} OR NOT $12
+          IF {0x00,4}
+            ;MFT num:
+            $FILENUM:={0x00,4}
+          ENDIF
+          {0x00,6},x:1,w:10,c:$10,f:%I
+          ;MFT seq num
+          x:11,w:1,f:(
+          {0x06,2},x:12,w:5,c:$10,f:%h
+          x:17,w:1,f:)
+        ENDIF
+
+        IF {0x0C:1,1}
+          ;last entry
+          IF NOT $12
+            $12:=1
+            x:19,w:10,f:END MARK
+            =
+          ENDIF
+          ;BREAK
+          $7:=0x10
+          IF {0x0C:0,1}
+            ;sub nodes
+            x:1,w:8,f:subnode:
+            {$7,8},x:10,w:13,c:$10,f:%I
+            =
+            $7:=$7+8
+          ENDIF
+          IF $9!=$7
+            $9:=8
+          ENDIF
+          $10:=10  ;grayed
+          CONTINUE
+        ENDIF
+        ;{0x0A,2}  orig nameattr size
+        ;{0x0C,1} flags:
+          ;&0x02 last entry
+          ;&0x01: {entry_size-8,8} -> next sort vcn
+        ;{0x0D,1} !=0 - D
+        ;{0x0E,2} !=0 - U
+        ;{0x10,original nameattr size} = name.data
+ 
+        ;dir MFT num:
+        {0x10,6},x:19,w:10,c:10,f:%I
+        ;dir MFT seq num
+        x:29,w:1,f:(
+        {0x16,2},x:30,w:5,c:10,f:%h
+        x:35,w:1,f:)
+
+        ;creation time:
+        {0x18,8},x:37,w:10,c:10,f:FILETIME
+        ;last modification time:
+        {0x20,8},x:48,w:10,c:10,f:FILETIME
+        ;last change time:
+        {0x28,8},x:59,w:10,c:10,f:FILETIME
+        ;access time:
+        {0x30,8},x:70,w:10,c:10,f:FILETIME
+        =
+        $FILENUM:={0x00,4}
+        ;allocated size:
+        {0x38,8},x:3,w:18,c:10,f:%I
+        ;size:
+        {0x40,8},x:23,w:18,c:$10,f:%I
+        ;{0x48,4}: file attributes
+        ;namelen in bytes:
+        $7:={0x50,1}<<1   
+        ;{0x51,1}: ngt
+        ;name:
+        {0x52,$7},x:42,w:38,c:$10,f:U
+        =
+        $7:=(0x59+$7)&0xFFFFFFF8
+        $11:=$7+8
+        IF {0x0C:0,1}
+          ;sub nodes
+          x:1,w:8,f:subnode:
+          {$7,8},x:10,w:13,c:$10,f:%I
+          =
+          $7:=$11
+        ENDIF
+        IF $7!=$9 AND $11!=$9
+          $9:=8
+        ENDIF
+      ENDWHILE
+
+[HFS Volume Header]
+guid:{f40f1a35-fe5d-19c5-3e94-a10992273292}
+big-endian:1
+o:1
+
+x:1,f:signature
+{0x00,2},x:25,f:C
+=
+x:1,f:version
+{0x02,2},x:25,f:%h
+=
+x:1,f:attributes
+{0x04,4},x:25,f:%08X
+x:33,f:h
+=
+x:1,f:lastMountedVersion
+{0x08,4},x:25,f:C
+=
+x:1,f:journalInfoBlock
+{0x0C,4},x:25,f:%u
+;    UInt32              createDate;
+;    UInt32              modifyDate;
+;    UInt32              backupDate;
+;    UInt32              checkedDate;
+ 
+=
+x:1,f:fileCount
+{0x20,4},x:25,f:%u
+=
+x:1,f:folderCount
+{0x24,4},x:25,f:%u
+=
+x:1,f:blockSize
+{0x28,4},x:25,f:%u
+=
+x:1,f:totalBlocks
+{0x2C,4},x:25,f:%u
+=
+x:1,f:freeBlocks
+{0x30,4},x:25,f:%u
+=
+
+x:1,f:nextAllocation
+{0x34,4},x:25,f:%u
+=
+x:1,f:rsrcClumpSize
+{0x38,4},x:25,f:%u
+=
+x:1,f:dataClumpSize
+{0x3C,4},x:25,f:%u
+=
+x:1,f:nextCatalogID
+{0x40,4},x:25,f:%u
+
+=
+x:1,f:writeCount
+{0x44,4},x:25,f:%u
+=
+x:1,f:encodingsBitmap
+{0x48,8},x:25,f:%I
+= 
+$OFFSET:=0x50
+$63:=TOGGLE:$OFFSET,x:1
+x:5,f:finderInfo
+IF $63
+  $1:=0;
+  WHILE $OFFSET<0x68
+    =
+    x:5,f:finderInfo[
+    $1,x:16,f:%u]
+    {0x00,4},x:25,f:%u
+    $OFFSET:=$OFFSET+4
+    $1:=$1+1
+  ENDWHILE
+ENDIF
+= 
+$OFFSET:=0
+x:1,f:volume identifier
+{0x68,4},x:25,f:%08X
+x:33,f:-
+{0x6C,4},x:34,f:%08X
+
+$1:=0x70
+WHILE $1<0x200
+  =
+  $OFFSET:=$1
+  $63:=TOGGLE:$OFFSET,x:1
+  IF $1==0x70
+    x:5,f:allocationFile
+  ELSEIF $1==0xC0
+    x:5,f:extentsFile
+  ELSEIF $1==0x110
+    x:5,f:catalogFile
+  ELSEIF $1==0x160
+    x:5,f:attributesFile
+  ELSEIF $1==0x1B0
+    x:5,f:startupFile
+  ENDIF
+
+  IF NOT $63
+    {0x00,8},x:25,f:%I
+  ELSE
+    =
+    x:5,f:logicalSize
+    {0x00,8},x:25,f:%I
+    =
+    x:5,f:clumpSize
+    {0x08,4},x:25,f:%u
+    =
+    x:5,f:totalBlocks
+    {0x0c,4},x:25,f:%u
+    =
+    $OFFSET:=$OFFSET+0x10
+    $63:=TOGGLE:$OFFSET,x:5
+    x:9,f:extents
+    IF NOT $63
+      $CLUSTER:={0x00,4},x:25,f:%u
+    ELSE
+      $2:=0
+      WHILE $2<8
+        =
+        x:9,f:startBlock:
+        $CLUSTER:={0x00,4},x:25,f:%u
+        x:35,f:blockCount:
+        {0x04,4},x:51,f:%u
+        $OFFSET:=$OFFSET+8
+        $2:=$2+1
+      ENDWHILE
+    ENDIF
+  ENDIF
+  $1:=$1+0x50
+ENDWHILE
+
+[HFS Catalog Nodes]
+guid:{8c5be8bc-d060-0d6d-d76f-fc081e1d9187}
+big-endian:1
+flow:1
+
+CALCSIZESTART
+  IF $1<=0
+    ;recsize is not given
+    IF $RECSIZE<4096
+      $RECSIZE:=4096
+    ENDIF
+  ENDIF
+CALCSIZEEND
+
+;BTNodeDescriptor 
+x:1,f:fLink >
+$GOTOREC:={0x00,4},x:25,f:%u
+=
+x:1,f:bLink >
+$GOTOREC:={0x04,4},x:25,f:%u
+=
+x:1,f:kind
+$9:={0x08,1},x:25,f:%h
+IF $9==0xff
+  x:32,f:kBTLeafNode
+ELSEIF $9==0
+  x:32,f:kBTIndexNode
+ELSEIF $9==1
+  x:32,f:kBTHeaderNode
+ELSEIF $9==2
+  x:32,f:kBTMapNode 
+ELSE
+  x:32,c:8,f:Unknown
+ENDIF
+=
+x:1,f:height
+{0x09,1},x:25,f:%h
+=
+x:1,f:numRecords
+{0x0A,2},x:25,f:%h
+=
+x:1,f:reserved
+{0x0C,2},x:25,f:%h
+=
+$2:=0x0E
+$12:=$RECSIZE-2
+;num records:
+$13:={0x0A,2}
+
+WHILE $2<$RECSIZE AND $13>0
+  $13:=$13-1
+  x:1,f:==========
+  =
+  $OFFSET:=$2-2
+  IF $9==0
+    x:1,f:keyLength
+    $1:={0x02,2},x:25,f:%h
+    IF $1==0 
+      BREAK
+    ENDIF
+    =
+    x:1,f:parentID >
+    $FILENUM:={0x04,4},x:25,f:%u
+    =
+    x:1,f:nodeName
+    $8:={0x08,2},x:25,f:%h
+    $8:=$8*2
+    IF $8>510
+      $8:=510
+    ENDIF
+    {0x0A,$8},x:32,w:70,f:U
+    =
+    $OFFSET:=$OFFSET+$1+4
+    x:1,f:Node Number >
+    $GOTOREC:={0x00,4},x:25,f:%u
+    =
+  ELSEIF $9==1
+    ;BTHeaderRec
+    x:1,f:treeDepth
+    {0x02,2},x:25,f:%h
+    =
+    x:1,f:rootNode >
+    $GOTOREC:={0x04,4},x:25,f:%u
+    =
+    x:1,f:leafRecords
+    {0x08,4},x:25,f:%u
+    =
+    x:1,f:firstLeafNode >
+    $GOTOREC:={0x0C,4},x:25,f:%u
+    =
+    x:1,f:LastLeafNode >
+    $GOTOREC:={0x10,4},x:25,f:%u
+    =
+    x:1,f:nodeSize
+    {0x14,2},x:25,f:%h
+    =
+    x:1,f:maxKeyLength
+    {0x16,2},x:25,f:%h
+    =
+    x:1,f:totalNodes
+    {0x18,4},x:25,f:%u
+    =
+    x:1,f:freeNodes
+    {0x1C,4},x:25,f:%u
+    =
+    x:1,f:reserved1
+    {0x20,2},x:25,f:%h
+    =
+    x:1,f:clumpSize
+    {0x22,4},x:25,f:%u
+    =
+    x:1,f:btreeType
+    {0x26,1},x:25,f:%h
+    =
+    x:1,f:keyCompareType
+    {0x27,1},x:25,f:%hX
+    x:27,f:h
+    =
+    x:1,f:attributes
+    {0x28,4},x:25,f:%08X
+    x:33,f:h
+    ;UInt32    reserved3[16]
+    BREAK
+  ELSE 
+    x:1,f:keyLength
+    $1:={0x02,2},x:25,f:%h
+    IF $1==0 
+      BREAK
+    ENDIF
+    =
+    x:1,f:parentID >
+    $FILENUM:={0x4,4},x:25,f:%u
+    =
+    x:1,f:nodeName
+    $8:={0x8,2},x:25,f:%h
+    $8:=$8*2
+    IF $8>510
+      $8:=510
+    ENDIF
+    {0x0A,$8},x:32,w:70,f:U
+    IF $OFFSET+$1+4>=$RECSIZE
+      BREAK
+    ENDIF
+    =
+    $OFFSET:=$OFFSET+$1+4
+    $63:=TOGGLE:$OFFSET,x:1
+    x:5,f:recordType
+    $7:={0x00,2},x:25,f:%h
+    IF $7==1
+      ;HFSPlusCatalogFolder
+      x:32,f:HFSPlusCatalogFolder
+      =
+      IF $63
+        x:5,f:flags
+        {0x02,2},x:25,f:%hX
+        x:34,f:h
+        =
+        x:5,f:valence
+        {0x04,4},x:25,f:%X
+        x:38,f:h
+        =
+        x:5,f:folderID >
+        $FILENUM:={0x08,4},x:25,f:%u
+        =
+        x:5,f:createDate
+        {0x0C,4},x:25,f:%u
+        =
+        x:5,f:contentModDate
+        {0x10,4},x:25,f:%u
+        =
+        x:5,f:attributeModDate
+        {0x14,4},x:25,f:%u
+        =
+        x:5,f:accessDate
+        {0x18,4},x:25,f:%u
+        =
+        x:5,f:backupDate
+        {0x1C,4},x:25,f:%u
+        =
+;       {0x20,0x10}
+;       HFSPlusBSDInfo      permissions;
+; HFSPlusBSDInfo {
+;    UInt32  ownerID;
+;    UInt32  groupID;
+;    UInt8   adminFlags;
+;    UInt8   ownerFlags;
+;    UInt16  fileMode;
+;    union {
+;        UInt32  iNodeNum;
+;        UInt32  linkCount;
+;        UInt32  rawDevice;
+;    } special;
+
+;       {0x30,0x10}
+;       FolderInfo            userInfo;
+;struct FolderInfo {
+;  Rect      windowBounds;       /* The position and dimension of the folder's window */
+;  UInt16    finderFlags;
+;  Point     location;           /* Folder's location in the parent */
+;                                /* folder. If set to {0, 0}, the Finder */
+;                                /* will place the item automatically */
+;  UInt16    reservedField;
+;};
+
+;       {0x40,0x10}
+;    ExtendedFolderInfo  finderInfo;
+;struct ExtendedFolderInfo {
+;  Point     scrollPosition;     /* Scroll position (for icon views) */
+;  SInt32    reserved1;
+;  UInt16    extendedFinderFlags;
+;  SInt16    reserved2;
+;  SInt32    putAwayFolderID;
+;};
+        x:5,f:textEncoding
+        {0x50,4},x:25,f:%u
+        =
+;       UInt32              reserved;
+      ENDIF
+    ELSEIF $7==2
+      ;HFSPlusCatalogFile
+      x:32,f:HFSPlusCatalogFile >
+      $FILERECOFS:=$2
+      =
+      IF $63
+        x:5,f:flags
+        {0x02,2},x:25,f:%hX
+        x:34,f:h
+        =
+        x:5,f:reserved1
+        {0x04,4},x:25,f:%X
+        x:33,f:h
+        =
+        x:5,f:fileID >
+        $FILENUM:={0x08,4},x:25,f:%u
+        =
+        x:5,f:createDate
+        {0x0C,4},x:25,f:%u
+        =
+        x:5,f:contentModDate
+        {0x10,4},x:25,f:%u
+        =
+        x:5,f:attributeModDate
+        {0x14,4},x:25,f:%u
+        =
+        x:5,f:accessDate
+        {0x18,4},x:25,f:%u
+        =
+        x:5,f:backupDate
+        {0x1C,4},x:25,f:%u
+        =
+;       {0x20,0x10}
+;       HFSPlusBSDInfo      permissions;
+; HFSPlusBSDInfo {
+;    UInt32  ownerID;
+;    UInt32  groupID;
+;    UInt8   adminFlags;
+;    UInt8   ownerFlags;
+;    UInt16  fileMode;
+;    union {
+;        UInt32  iNodeNum;
+;        UInt32  linkCount;
+;        UInt32  rawDevice;
+;    } special;
+
+;       {0x30,0x10}
+;       FileInfo            userInfo;
+;struct FileInfo {
+;  OSType    fileType;           /* The type of the file */
+;  OSType    fileCreator;        /* The file's creator */
+;  UInt16    finderFlags;
+;  Point     location;           /* File's location in the folder. */
+;  UInt16    reservedField;
+;};
+
+;       {0x40,0x10}
+;       ExtendedFileInfo    finderInfo;
+;struct ExtendedFileInfo {
+;  SInt16    reserved1[4];
+;  UInt16    extendedFinderFlags;
+;  SInt16    reserved2;
+;  SInt32    putAwayFolderID;
+;};
+
+        x:5,f:textEncoding
+        {0x50,4},x:25,f:%u
+        =
+;       {0x54}
+;       UInt32              reserved2;
+ 
+;       {0x58}
+;       HFSPlusForkData     dataFork;
+;       HFSPlusForkData     resourceFork;
+        $4:=$OFFSET+0x58
+        $3:=0
+        WHILE $3<2
+          $OFFSET:=$4
+          $63:=TOGGLE:$OFFSET,x:1
+          IF $3==0
+            x:5,f:dataFork
+          ELSE
+            x:5,f:resourceFork
+          ENDIF
+
+          IF NOT $63
+            {0x00,8},x:25,f:%I
+            $CLUSTER:={0x10,4}
+          ELSE
+            =
+            x:5,f:logicalSize
+            {0x00,8},x:25,f:%I
+            =
+            x:5,f:clumpSize
+            {0x08,4},x:25,f:%u
+            =
+            x:5,f:totalBlocks
+            {0x0c,4},x:25,f:%u
+            =
+            $OFFSET:=$OFFSET+0x10
+            $63:=TOGGLE:$OFFSET,x:5
+            x:9,f:extents
+            IF NOT $63
+              $CLUSTER:={0x00,4},x:25,f:%u
+            ELSE
+              $5:=0
+              WHILE $5<8
+                =
+                x:9,f:startBlock:
+                $CLUSTER:={0x00,4},x:25,f:%u
+                x:35,f:blockCount:
+                {0x04,4},x:51,f:%u
+                $OFFSET:=$OFFSET+8
+                $5:=$5+1
+              ENDWHILE
+            ENDIF
+          ENDIF
+          =
+          $4:=$4+0x50
+          $3:=$3+1
+        ENDWHILE
+      ENDIF
+    ELSEIF ($7==3) OR ($7==4)
+      ;HFSPlusCatalogThread 
+      IF ($7==3)
+        x:32,f:HFSPlusFolderThreadRec
+      ELSE
+        x:32,f:HFSPlusFileThreadRec
+      ENDIF
+      =
+      x:5,f:reserved
+      {0x02,2},x:25,f:%hX
+      x:29,f:h
+      =
+      x:5,f:parentID >
+      $FILENUM:={0x04,4},x:25,f:%u
+      =
+      x:5,f:nodeName
+      $8:={0x8,2},x:25,f:%h
+      $8:=$8*2
+      IF $8>510
+        $8:=510
+      ENDIF
+      {0x0A,$8},x:32,w:70,f:U
+      =
+    ELSE
+      x:32,f:Unkonwn Record Type
+      =
+    ENDIF
+  ENDIF
+  $2:=$2+$1
+  $12:=$12-2
+  $OFFSET:=0
+  IF {$12,2}<=$2
+    BREAK
+  ENDIF
+  $2:={$12,2}
+ENDWHILE
+
+[HFS Extents Nodes]
+guid:{95b010bd-e409-fd86-764a-ea95e78bf763}
+big-endian:1
+flow:1
+
+;BTNodeDescriptor 
+x:1,f:fLink >
+$GOTOREC:={0x00,4},x:25,f:%u
+=
+x:1,f:bLink >
+$GOTOREC:={0x04,4},x:25,f:%u
+=
+x:1,f:kind
+$9:={0x08,1},x:25,f:%h
+IF $9==0xff
+  x:32,f:kBTLeafNode
+ELSEIF $9==0
+  x:32,f:kBTIndexNode
+ELSEIF $9==1
+  x:32,f:kBTHeaderNode
+ELSEIF $9==2
+  x:32,f:kBTMapNode 
+ELSE
+  x:32,c:8,f:Unknown
+ENDIF
+=
+x:1,f:height
+{0x09,1},x:25,f:%h
+=
+x:1,f:numRecords
+{0x0A,2},x:25,f:%h
+=
+x:1,f:reserved
+{0x0C,2},x:25,f:%h
+=
+$2:=0x0E
+$12:=$RECSIZE-2
+;num records:
+$13:={0x0A,2}
+
+WHILE $2<$RECSIZE AND $13>0
+  $13:=$13-1
+  x:1,f:==========
+  =
+  $OFFSET:=$2-2
+  IF $9==1
+    ;BTHeaderRec
+    x:1,f:treeDepth
+    {0x02,2},x:25,f:%h
+    =
+    x:1,f:rootNode >
+    $GOTOREC:={0x04,4},x:25,f:%u
+    =
+    x:1,f:leafRecords
+    {0x08,4},x:25,f:%u
+    =
+    x:1,f:firstLeafNode >
+    $GOTOREC:={0x0C,4},x:25,f:%u
+    =
+    x:1,f:LastLeafNode >
+    $GOTOREC:={0x10,4},x:25,f:%u
+    =
+    x:1,f:nodeSize
+    {0x14,2},x:25,f:%h
+    =
+    x:1,f:maxKeyLength
+    {0x16,2},x:25,f:%h
+    =
+    x:1,f:totalNodes
+    {0x18,4},x:25,f:%u
+    =
+    x:1,f:freeNodes
+    {0x1C,4},x:25,f:%u
+    =
+    x:1,f:reserved1
+    {0x20,2},x:25,f:%h
+    =
+    x:1,f:clumpSize
+    {0x22,4},x:25,f:%u
+    =
+    x:1,f:btreeType
+    {0x26,1},x:25,f:%h
+    =
+    x:1,f:keyCompareType
+    {0x27,1},x:25,f:%hX
+    x:27,f:h
+    =
+    x:1,f:attributes
+    {0x28,4},x:25,f:%08X
+    x:33,f:h
+    ;UInt32    reserved3[16]
+    BREAK
+  ELSE
+    x:1,f:keyLength
+    $1:={0x02,2},x:25,f:%h
+    IF $1==0 
+      BREAK
+    ENDIF
+    =
+    x:1,f:forkType
+    {0x04,1},x:25,f:%u
+    =
+    x:1,f:pad
+    {0x05,1},x:25,f:%u
+    =
+    x:1,f:fileID >
+    $FILENUM:={0x06,4},x:25,f:%u
+    =
+    x:1,f:startBlock
+    {0x0A,4},x:25,f:%u
+    =
+    $OFFSET:=$OFFSET+$1+4
+    IF $9==1
+      x:1,f:Node Number >
+      $GOTOREC:={0x00,4},x:25,f:%u
+      =
+    ELSE
+
+            $63:=TOGGLE:$OFFSET,x:5
+            x:9,f:extents
+            IF NOT $63
+              $CLUSTER:={0x00,4},x:25,f:%u
+            ELSE
+              $5:=0
+              WHILE $5<8
+                =
+                x:9,f:startBlock:
+                $CLUSTER:={0x00,4},x:25,f:%u
+                x:35,f:blockCount:
+                {0x04,4},x:51,f:%u
+                $OFFSET:=$OFFSET+8
+                $5:=$5+1
+              ENDWHILE
+            ENDIF
+            =
+    ENDIF
+  ENDIF
+  $2:=$2+1
+  $12:=$12-2
+  $OFFSET:=0
+  IF {$12,2}<=$2
+    BREAK
+  ENDIF
+  $2:={$12,2}
+ENDWHILE
+
+[Apple Partition Map]
+guid:{8d3ad335-7279-d9c2-7c82-1d013c3da08e}
+big-endian:1
+flow:1
+
+IF {0x00,2} = 0x4552
+
+  ;Apple Partition Scheme
+  x:1,f:signature ("ER")
+  {0x00,2},x:25,f:C
+  =
+  x:1,f:block size
+  {0x02,2},x:25,f:%h
+  =
+  x:1,f:blocks number
+  {0x04,4},x:25,f:%u
+
+ELSE
+
+  x:1,f:signature ("PM")
+  {0x00,2},x:25,f:C
+  =
+  x:1,f:reserved
+  {0x02,2},x:25,f:%h
+  =
+  x:1,f:partitions number
+  {0x04,4},x:25,f:%u
+  =
+  x:1,f:partition start
+  {0x08,4},x:25,f:%u
+  =
+  x:1,f:partition size
+  {0x0C,4},x:25,f:%u
+  =
+  x:1,f:partition name
+  {0x10,32},x:25,f:C
+  =
+  x:1,f:partition type
+  {0x30,32},x:25,f:C
+  =
+  x:1,f:data start
+  {0x50,4},x:25,f:%u
+  =
+  x:1,f:data size
+  {0x54,4},x:25,f:%u
+  =
+  x:1,f:partition status
+  {0x58,4},x:25,f:%08X
+  x:33,f:h
+  =
+  x:1,f:boot code start
+  {0x5C,4},x:25,f:%u
+  =
+  x:1,f:boot code size
+  {0x60,4},x:25,f:%u
+  =
+  x:1,f:bootloader code address
+  {0x64,4},x:25,f:%u
+  =
+  x:1,f:reserved
+  {0x68,4},x:25,f:%u
+  =
+  x:1,f:boot code entry point
+  {0x6C,4},x:25,f:%u
+  =
+  x:1,f:reserved
+  {0x70,4},x:25,f:%u
+  =
+  x:1,f:boot code checksum
+  {0x74,4},x:25,f:%08X
+  x:33,f:h
+  =
+  x:1,f:processor type
+  {0x78,16},x:25,f:C
+
+ENDIF
+
+[MBR Partition Table]
+fuse:0
+x:1,w:26,f:Disk identifier (Windows):
+=
+{0x1B8,4},x:1,w:8,f:%08X
+x:9,w:1,f:h
+=
+x:1,w:67,f:Boot  System ID   :   First    :    Last    : Relative : Number of
+=
+x:1,w:67,f:Flag              :Cyl Head Sec:Cyl Head Sec:  Sector  :  Sectors 
+=
+$OFFSET:=0x1BE
+LABEL:0
+  $LBA:={0x08,4}
+  {0x00,1},x:1,w:2,f:%02hX
+  x:3,w:1,f:h
+  {0x04,1},x:7,w:2,f:%02hX
+  x:9,w:1,f:h
+  x:19,w:1,f::
+  {0x03,1;0x02:6,2},x:20,w:4,f:%4hu
+  {0x01,1},x:25,w:3,f:%3hu
+  {0x02:0,6},x:29,w:2,f:%2hu
+  x:32,w:1,f::
+  {0x07,1;0x06:6,2},x:33,w:4,f:%4hu
+  {0x05,1},x:38,w:3,f:%3hu
+  {0x06:0,6},x:42,w:2,f:%2hu
+  x:45,w:1,f::
+  {0x08,4},x:46,w:10,f:%10u
+  x:56,w:1,f::
+  {0x0C,4},x:57,w:10,f:%10u
+  =
+  $OFFSET:=$OFFSET+16
+IF $OFFSET<0x1FE
+  GOTO:0
+ENDIF
+x:1,w:23,f:MBR signature (0xAA55):
+=
+{0x00,2},x:1,w:4,f:%04hX
+x:5,w:1,f:h
+
+[FAT Entries]
+fuse:0
+flow:1
+h: Name     Ext       Size   Cluster  Attrs   Modified            Created                 Accessed
+
+LABEL:0
+  $FILERECOFS:=$OFFSET
+  IF {00,1}=0xE5
+    x:0,w:1,f:x
+    $10:=10
+  ELSE
+    $10:=0
+  ENDIF
+  IF {0x0B:0,4}!=0xF         ;Short Name Entry
+    {0x00,8},x:01,w:8,c:$10,f:C
+    {0x08,3},x:10,w:3,c:$10,f:C
+    IF {0x0B:4,1}
+      x:13,w:1,f:>
+    ENDIF
+    {0x1C,4},x:14,w:10,c:$10,f:-%u
+    {0x1A,2;0x14,2},x:24,w:10,c:$10,f:-%u
+    {0x0B,1},x:35,w:8,c:$10,f:F:R-H-S-V-D-A-+-+-
+    ;Modification Time:
+    {0x16,4},x:44,w:19,c:$10,f:DOSDATE
+    ;Creation Time:
+    {0x0E,4},x:64,w:19,c:$10,f:DOSDATE
+    x:83,w:1,f:.
+    {0x0D,1},x:84,w:3,c:$10,f:%02hu
+    ;Access Date:
+    {0x12,2},x:88,w:10,c:$10,f:DOSDATE
+  ELSE
+    ;LFN Entry:
+    IF {0:7,1}
+      x:3,w:1,f:x
+    ELSE
+      {0:0,5},x:2,w:2,c:$10,f:-%hu
+    ENDIF
+    {0:5,3},x:5,w:3,c:$10,f:F:+-L-R-
+    {1,10},x:10,w:5,c:$10,f:U
+    {0x0E,12},x:15,w:6,c:$10,f:U
+    {0x1C,4},x:21,w:2,c:$10,f:U
+    {0x1A,2},x:25,w:9,c:$10,f:-%u
+    {0x0B,1},x:35,w:8,c:$10,f:F:R-H-S-V-D-A-+-+-
+    {0x0D,1},x:45,w:2,c:$10,f:%02hX
+    x:47,w:1,f:h
+  ENDIF
+  =
+  $OFFSET:=$OFFSET+32
+GOTO:0
+
+[extFS HTree Root (dx_root)]
+fuse:0
+h: Inode    ESize  NmLen  Type  Name
+
+$FILENUM:={0x00,4}
+{0x00,4},x:1,w:10,f:%u
+$1:={0x04,2},x:12,w:5,f:%h
+$2:={0x06,1},x:19,w:3,f:%h
+{0x07,1},x:25,w:3,f:%hX
+{0x08,$2},x:30,w:$2,f:C
+=
+$OFFSET:=$1
+$FILENUM:={0x00,4}
+{0x00,4},x:1,w:10,f:%u
+$2:={0x04,2},x:12,w:5,f:%h
+$3:={0x06,1},x:19,w:3,f:%h
+{0x07,1},x:25,w:3,f:%hX
+{0x08,$3},x:30,w:$3,f:C
+=
+$OFFSET:=0
+x:1,w:19,f:reserved_zero
+{0x18,4},x:20,w:10,f:%u
+=
+x:1,w:19,f:hash_version
+{0x1C,1},x:20,w:3,f:%h
+=
+x:1,w:19,f:info_length (8)
+{0x1D,1},x:20,w:3,f:%h
+=
+x:1,w:19,f:indirect_levels
+{0x1E,1},x:20,w:3,f:%h
+=
+x:1,w:19,f:unused_flags
+{0x1F,1},x:20,w:3,f:%h
+=
+x:1,w:19,f:limit
+{0x20,2},x:20,w:5,f:%h
+=
+x:1,w:19,f:count
+{0x22,2},x:20,w:5,f:%h
+=
+x:30,w:19,f:block:
+{0x24,4},x:50,w:10,f:%u
+=
+
+$2:={0x22,2}
+$OFFSET:=0x28
+WHILE 1
+  x:1,w:19,f:hash:
+  {0x00,4},x:20,w:8,f:%08X
+  x:30,w:19,f:block:
+  {0x04,4},x:50,w:8,f:%u
+  =
+  $2:=$2-1
+  IF $2<=1
+    BREAK
+  ENDIF
+  $OFFSET:=$OFFSET+8
+ENDWHILE
+
+[extFS HTree Node (dx_node)]
+fuse:0
+
+x:1,w:19,f:fake.inode (0)
+{0x0,4},x:20,w:10,f:%u
+=
+x:1,w:19,f:fake.rec_len
+{0x4,2},x:20,w:5,f:%h
+=
+x:1,w:19,f:name_len (0)
+{0x6,1},x:20,w:5,f:%h
+=
+x:1,w:19,f:file_type (0)
+{0x7,1},x:20,w:5,f:%h
+=
+x:1,w:19,f:limit
+{0x8,2},x:20,w:5,f:%h
+=
+x:1,w:19,f:count
+{0xA,2},x:20,w:5,f:%h
+=
+x:1,w:19,f:block
+{0xC,4},x:20,w:10,f:%u
+=
+$2:={0xA,2}
+$OFFSET:=0x10
+WHILE 1
+  x:1,w:19,f:hash:
+  {0x00,4},x:20,w:8,f:%08X
+  x:30,w:19,f:block:
+  {0x04,4},x:50,w:10,f:%u
+  =
+  $2:=$2-1
+  IF $2<=0
+    BREAK
+  ENDIF
+  $OFFSET:=$OFFSET+8
+ENDWHILE

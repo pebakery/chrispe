@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Window size="320,360" caption="0,0,0,32" defaultfontcolor="#FFE8EAF6">
+    <Font shared="true" id="16" size="16" name="Segoe UI" default="true" />
+    <Font shared="true" id="24" size="24" name="Segoe UI" />
+    <!-- image's source、dest attribute will define with "left,top,width,height" style -->
+    <!-- the origin style is "left,top,right,bottom". -->
+    <Style imagerectstyle="l,t,w,h" />
+    <!-- the xml file for "Include" tag is also use the same "imagerectstyle" -->
+
+    <Style name="PowerBtn" value="height=&quot;40&quot; textcolor=&quot;#FF000000&quot; hottextcolor=&quot;#FFFFFF&quot; hotimage=&quot;color='#FFF48FB1'&quot;" />
+    <VerticalLayout bkcolor="#FFF9F9F9">
+        <HorizontalLayout height="32" bkcolor="#FFC2185B">
+            <Label text="%{Power}" textpadding="5,0,0,0" />
+            <Control />
+            <Button name="::closebtn" bkimage="file='close.png'" width="16" height="16" padding="0,8,5,0" />
+        </HorizontalLayout>
+        <VerticalLayout height="150" bkcolor="#FFE91E63">
+            <HorizontalLayout>
+                <Control />
+                <VerticalLayout width="128">
+                    <Button normalimage="power.png" height="48" width="48" enabled="false" padding="40,16,0,0" />
+                    <Label text="%{CloseComputer}" font="24" textpadding="0,10,0,0" />
+                </VerticalLayout>
+                <Control />
+            </HorizontalLayout>
+        </VerticalLayout>
+        <VerticalLayout>
+            <Button name="shutdownbtn" text="%{Shutdown}" style="PowerBtn" />
+            <Button name="restartbtn" text="%{Restart}" style="PowerBtn"/>
+            <Button text="%{Hibernate}" style="PowerBtn" enabled="false" />
+            <Button text="%{Standby}" style="PowerBtn" enabled="false" />
+        </VerticalLayout>
+    </VerticalLayout>
+</Window>

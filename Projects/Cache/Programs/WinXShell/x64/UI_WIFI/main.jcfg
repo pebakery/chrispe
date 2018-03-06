@@ -1,0 +1,46 @@
+{
+  "name":"UI_WIFI",
+  "class":"CDUIWIFIWindow",
+  "singleton":true,
+  "position":"rightbottom",
+  "nobaricon":true,
+  "#exstyle comment":"WS_EX_WINDOWEDGE(256) | WS_EX_TOPMOST(8)",
+  "customstyle":true,
+  "exstyle":264,
+  "trans": 220,
+  "OnDeactive":"hide",
+  "OnClick":
+  {
+  "proxysettings":"
+PUSH 'inetcpl';
+PUSH 1;
+CALL ::Command();
+  ",
+  "launch_osk":"
+PUSH 'osk';
+PUSH 1;
+CALL ::Command();
+  "
+  },
+  "JS_CMD":
+  {
+    "::enable_firewall":{
+      "command":"Wpeutil.exe",
+      "parameters":"Enablefirewall",
+      "flags meaning":"0 - SW_HIDE",
+      "showflags":0
+    },
+    "::disable_firewall":{
+      "command":"Wpeutil.exe",
+      "parameters":"DisableFirewall",
+      "showflags":0
+    },
+    "inetcpl":{
+      "command":"rundll32.exe",
+      "parameters":"Shell32.dll,Control_RunDLL inetcpl.cpl,,4"
+    },
+    "osk":{
+      "command":"osk.exe"
+    }
+  }
+}

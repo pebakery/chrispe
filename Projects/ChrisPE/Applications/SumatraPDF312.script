@@ -1,0 +1,143 @@
+[main]
+Title=Sumatra PDF
+Description=Sumatra PDF x86/x64 (Version 3.1.2.0)
+Selected=True
+Level=5
+Author=ThePEBakeryTeam
+Version=20180306
+Date=2018-03-06
+Interface=Interface1
+
+[Interface1]
+pTextLabelMenu1="1",1,1,35,3,70,18,10,Bold
+pButtonMenu2="2",1,8,75,0,70,20,pButtonMenu2,0,True,_pButtonMenu2_,True
+pButtonMenu3="?",1,8,145,0,70,20,pButtonMenu3,0,True,_pButtonMenu3_,True
+pWebLabel1=https://www.sumatrapdfreader.org/,1,10,51,100,216,18,https://www.sumatrapdfreader.org/
+pTextLabel1="SumatraPDF Website",1,1,51,77,230,18,10,Bold
+pCheckBoxInWim="Include Program in boot.wim",1,3,51,265,180,18,True
+
+[Interface2]
+pButtonMenu1="1",1,8,5,0,70,20,pButtonMenu1,0,True,_pButtonMenu1_,True
+pTextLabelMenu2="2",1,1,108,3,70,18,10,Bold
+pButtonMenu3="?",1,8,145,0,70,20,pButtonMenu3,0,True,_pButtonMenu3_,True
+pBevel1=,1,12,10,65,66,2
+pTextLabel="Menu Entries",1,1,10,50,230,18,8,Bold
+pCheckBoxShortcutDesktop="Add to Desktop Menu",1,3,40,80,150,18,True
+pCheckBoxShortcutQuick="Add to Quicklaunch Menu",1,3,40,110,150,18,True
+pCheckBoxShortcutPrograms="Add to #$qStart#$q > ",1,3,40,140,99,18,True
+pCheckBoxShortcutLaunchBar="Add to LaunchBar Menu ",1,3,40,170,150,18,True
+pButtonShortcut1=?,1,8,10,80,18,18,pButtonShortcut1,0,True,_pButtonShortcut1_,True
+pButtonShortcut2=?,1,8,10,110,18,18,pButtonShortcut2,0,True,_pButtonShortcut2_,True
+pButtonShortcut3=?,1,8,10,140,18,18,pButtonShortcut3,0,True,_pButtonShortcut3_,True
+pButtonShortcut4=?,1,8,10,170,18,18,pButtonShortcut4,0,True,_pButtonShortcut4_,True
+pTextBox1=,1,0,140,140,150,21,Programs
+
+[pButtonMenu1]
+IniWrite,%ScriptFile%,Main,Interface,Interface1
+System,REFRESHINTERFACE
+
+[pButtonMenu2]
+IniWrite,%ScriptFile%,Main,Interface,Interface2
+System,REFRESHINTERFACE
+
+[pButtonMenu3]
+message,"Click on the buttons to toggle between tabs 1 and 2. #$x#$xTab 2 contains menu options for use in the selected shell. Click on the ? button for information about the different options."
+
+[pButtonShortcut1]
+message,"WinXShell only#$x#$xSelect this option to add a program shortcut to the Desktop."
+
+[pButtonShortcut2]
+message,"WinXShell only#$x#$xSelect this option to add a program menu option to the Quicklaunch menu - similar in appearence to the 'Pin to Taskbar' option in Windows 7/8/10."
+
+[pButtonShortcut3]
+message,"Applies to WinXShell#$c BBLean and LaunchBar Shell(s)#$x#$xSelect this option to add a program menu option to the Start menu. Leave blank to add to the root of the menu#$c or manually type a path to place in a sub-menu (do not use spaces in the path). E.g. #$x#$s- FileManager#$x#$s- Programs#$x#$s- Programs\FileManager#$x#$xAnd looking at the examples above - #$x#$xLeave this option blank to add a menu entry to the root of the program menu (the 'Start' menu in WinXShell#$c the 'Start' menu in BBLean#$c or the root of the LaunchBar menu bar if LaunchBar is selected as Shell)#$x#$xEnter 'FileManager' to add a menu entry for this application to the 'Start' > 'FileManager' sub-menu (WinXShell and bblean) or the 'FileManager' sub-menu in LaunchBar.#$x#$xEnter 'Programs' to add a menu entry for this application to the 'Start' > 'Programs' sub-menu (WinXShell and bblean) or the 'Programs' sub-menu in LaunchBar.#$x#$xEnter 'Programs\FileManager' to add a menu entry for this application to the 'Start' > 'Programs' > 'FileManager' sub-menu (WinXShell and bblean) or the 'Programs' > 'FileManager' sub-menu in LaunchBar."
+
+[pButtonShortcut4]
+message,"This setting does not apply to any LaunchBar instance running as the WinPE Shell. This option only applies to a LaunchBar instance when the Applications' > 'LaunchBar' program script is selected in the build.#$x#$xIf the 'Applications' > 'LaunchBar' program script is selected than enable this option to add a program menu entry to the root of the LaunchBar menu bar. #$x#$xPlease note that if option '6] Programs in boot.wim' in the main project script is set as 'NO'#$c then LaunchBar and a number of other applications will not be available at boot. In this case a text based .ini file will be used for LaunchBar menu settings."
+
+[process]
+AddInterface,%ScriptFile%,Interface1,""
+AddInterface,%ScriptFile%,Interface2,""
+If,%pCheckBoxInWim%,Equal,True,Set,%PROGRAMS.IN.WIM%,YES
+Else,Set,%PROGRAMS.IN.WIM%,NO
+Run,%ScriptFile%,CHECKS
+Run,%ScriptFile%,MENU
+Run,%ScriptFile%,COMMON
+If,%PROGRAMS.IN.WIM%,Equal,NO,Run,%ScriptFile%,NOT.IN.WIM
+If,%PROGRAMS.IN.WIM%,Equal,YES,Run,%ScriptFile%,IN.WIM
+
+[CHECKS]
+If,Not,ExistFile,"%Programs%\SumatraPDF312\%ARCH%\SumatraPDF.exe",Begin
+  Message,SumatraPDF is missing - exiting script...,Error,5
+  Exit,SumatraPDF is missing - exiting script...,WARN
+End
+
+[MENU]
+If,%pCheckBoxShortcutLaunchBar%,Equal,True,If,%PROGRAMS.IN.WIM%,Equal,NO,If,ExistFile,"%ProjectTemp%\LaunchBar.ini",TXTaddLine,"%ProjectTemp%\LaunchBar.ini",Sumatra PDF;..\SumatraPDF312\SumatraPDF.exe,Append
+If,%PROGRAMS.IN.WIM%,Equal,YES,Begin
+  ShellExecute,Hide,"%Tools%\Shortcut.exe","/A:C /T:#$q#$pSystemDrive#$p\Programs\SumatraPDF312\SumatraPDF.exe#$q /F:#$q%ProjectTemp%\SumatraPDF.lnk#$q /I:#$q#$pSystemDrive#$p\Programs\SumatraPDF312\SumatraPDF.exe#$c0#$q"
+  If,ExistFile,"%ProjectTemp%\SumatraPDF.lnk",Begin
+    Set,%MyShortcut%,SumatraPDF.lnk
+    If,%pCheckBoxShortcutDesktop%,Equal,True,FileCopy,"%ProjectTemp%\%MyShortcut%","%ProjectTemp%\ShortCuts\Desktop"
+    If,%pCheckBoxShortcutQuick%,Equal,True,FileCopy,"%ProjectTemp%\%MyShortcut%","%ProjectTemp%\ShortCuts\Quick"
+    If,%pCheckBoxShortcutPrograms%,Equal,True,Begin
+      Set,%ProgramMenuPath%,%pTextBox1%
+      Run,"%ProjectDir%\Core\common.script",StartMenu
+    End
+    If,%pCheckBoxShortcutLaunchBar%,Equal,True,FileCopy,"%ProjectTemp%\%MyShortcut%","%ProjectTemp%\ShortCuts\LaunchBar"
+    FileDelete,"%ProjectTemp%\%MyShortcut%"
+  End
+End
+
+[COMMON]
+If,%PROGRAMS.IN.WIM%,Equal,NO,Set,%PATH%,%OutputDir%
+If,%PROGRAMS.IN.WIM%,Equal,YES,Set,%PATH%,%TargetDir%
+If,Not,ExistDir,"%PATH%\Programs",DirMake,"%PATH%\Programs"
+DirMake,"%PATH%\Programs\SumatraPDF312"
+FileCopy,"%Programs%\SumatraPDF312\%ARCH%\SumatraPDF.exe","%PATH%\Programs\SumatraPDF312"
+If,Not,ExistFile,"%PATH%\Programs\registry.entries.cmd",Begin
+  FileCreateBlank,"%PATH%\Programs\registry.entries.cmd"
+  TXTaddLine,"%PATH%\Programs\registry.entries.cmd",@Echo off,Append
+  TXTaddLine,"%PATH%\Programs\registry.entries.cmd",,Append
+End
+TXTaddLine,"%PATH%\Programs\registry.entries.cmd",::=========SUMATRA==============,Append
+TXTaddLine,"%PATH%\Programs\registry.entries.cmd",::for file associations,Append
+TXTaddLine,"%PATH%\Programs\registry.entries.cmd",IF EXIST #$q%~dp0SumatraPDF312\SumatraPDF.exe#$q (,Append
+TXTaddLine,"%PATH%\Programs\registry.entries.cmd",ECHO.,Append
+TXTaddLine,"%PATH%\Programs\registry.entries.cmd",ECHO SUMATRA Registry Entries,Append
+TXTaddLine,"%PATH%\Programs\registry.entries.cmd",reg.exe add #$qHKLM\SOFTWARE\Classes\.pdf#$q /ve /t REG_SZ /d #$qSumatra312#$q /f,Append
+TXTaddLine,"%PATH%\Programs\registry.entries.cmd",reg.exe add #$qHKLM\SOFTWARE\Classes\Sumatra312#$q /ve /t REG_SZ /d #$qPDF Reader#$q /f,Append
+TXTaddLine,"%PATH%\Programs\registry.entries.cmd",reg.exe add #$qHKLM\SOFTWARE\Classes\Sumatra312\DefaultIcon#$q /ve /t REG_SZ /d #$q%~dp0SumatraPDF312\SumatraPDF.exe#$q /f,Append
+TXTaddLine,"%PATH%\Programs\registry.entries.cmd",reg.exe add #$qHKLM\SOFTWARE\Classes\Sumatra312\shell\open\command#$q /ve /t REG_SZ /d #$q\#$q%~dp0SumatraPDF312\SumatraPDF.exe\#$q \#$q%%1\#$q#$q /f,Append
+TXTaddLine,"%PATH%\Programs\registry.entries.cmd",::add to openwith list,Append
+TXTaddLine,"%PATH%\Programs\registry.entries.cmd",reg.exe add #$qHKLM\SOFTWARE\Classes\*\OpenWithList\Sumatra312.exe#$q /ve /t REG_SZ /d #$qSumatra312#$q /f,Append
+TXTaddLine,"%PATH%\Programs\registry.entries.cmd",reg.exe add #$qHKLM\SOFTWARE\Classes\Applications\Sumatra312.exe\shell\open\command#$q /ve /t REG_SZ /d #$q\#$q%~dp0SumatraPDF312\SumatraPDF.exe\#$q \#$q%%1\#$q#$q /f,Append
+TXTaddLine,"%PATH%\Programs\registry.entries.cmd",),Append
+TXTaddLine,"%PATH%\Programs\registry.entries.cmd",,Append
+IniWrite,"%OutputDir%\Project.Settings.ini",PROGRAMS,SumatraPDF312,YES
+
+[IN.WIM]
+Echo,"Mounting registry hives..."
+If,Not,ExistRegSection,HKLM,_WinPE_SOFTWARE,RegHiveLoad,_WinPE_SOFTWARE,"%Target_config%\software"
+RegWrite,HKLM,0x1,_WinPE_SOFTWARE\Classes\.pdf,,SumatraPDF312
+RegWrite,HKLM,0x1,_WinPE_SOFTWARE\Classes\SumatraPDF312,,PDF Reader
+RegWrite,HKLM,0x2,_WinPE_SOFTWARE\Classes\SumatraPDF312\DefaultIcon,,%SYSTEMDRIVE%\Programs\SumatraPDF312\SumatraPDF.exe
+RegWrite,HKLM,0x2,_WinPE_SOFTWARE\Classes\SumatraPDF312\shell\open\command,,%SYSTEMDRIVE%\Programs\SumatraPDF312\SumatraPDF.exe #$q%1#$q
+RegWrite,HKLM,0x1,_WinPE_SOFTWARE\Classes\*\OpenWithList\SumatraPDF312.exe,,SumatraPDF312
+RegWrite,HKLM,0x2,_WinPE_SOFTWARE\Classes\Applications\SumatraPDF312.exe\shell\open\command,,%SYSTEMDRIVE%\Programs\SumatraPDF312\SumatraPDF.exe #$q%1#$q
+Echo,"Unmounting registry hives..."
+RegHiveUnload,_WinPE_SOFTWARE
+//Wait,1
+
+[NOT.IN.WIM]
+//Wait,1
+Exit,"SumatraPDF312 copied to #$q%PATH%\Programs#$q directory - it will not be added to #$qboot.wim#$q",Nowarn
+
+[AuthorEncoded]
+SumatraPDF.ico=1525,2034
+logo=SumatraPDF.ico
+
+[EncodedFile-AuthorEncoded-SumatraPDF.ico]
+lines=0
+0=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
+

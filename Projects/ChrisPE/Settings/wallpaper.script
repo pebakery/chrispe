@@ -1,0 +1,70 @@
+[main]
+Title=Wallpaper
+Description=Change desktop wallpaper
+Selected=True
+Level=4
+Author=ThePEBakeryTeam
+Version=20180306
+Date=2018-03-06
+
+[Interface]
+pBevel1=pBevel1,1,12,10,70,500,40
+pScrollBox1=DEFAULT,1,4,20,80,70,20,DEFAULT,CUSTOM
+pTextLabel1="Add Wallpaper?",1,1,211,83,120,18,10,Bold
+pButton1=HELP,1,8,430,80,70,20,1.HELP,0,True,_1.HELP_,True
+pFileBox1=,1,13,20,130,309,20,file
+pBevel2=pBevel2,1,12,10,120,500,40
+pTextLabel3="Browse to custom .jpg file",1,1,335,133,180,18,10,Bold
+
+
+
+
+
+
+
+[process]
+If,%pScrollBox1%,Equal,DEFAULT,Begin
+Echo,Default wallpaper selected...
+If,%Shell%,Equal,WinXShell,Begin
+FileDelete,"%TargetDir%\Programs\WinXShell\wallpaper.jpg"
+Filecopy,"%Cache%\Programs\Wallpaper\winpe.jpg","%TargetDir%\Programs\WinXShell\wallpaper.jpg"
+End
+Else,Filecopy,"%Cache%\Programs\Wallpaper\winpe.jpg","%Target_System32%\winpe.jpg"
+IniWrite,"%OutputDir%\Project.Settings.ini",PROGRAMS,Wallpaper,DEFAULT
+//Wait,1
+Exit,Default wallpaper selected...,NOWARN
+End
+set,"%my.wallpaper%","%pFileBox1%"
+StrFormat,EXT,"%my.wallpaper%","%extension%"
+If,Not,ExistFile,"%my.wallpaper%",Begin
+Message,"Could not find file -#$x#$q%my.wallpaper%#$q#$x#$xExiting Wallpaper script..."
+Exit,"Could not find file #$q%my.wallpaper%#$q.Exiting Wallpaper script..."
+End
+If,Not,"%extension%",Equal,".jpg",Begin
+Message,"The file you have selected as Wallpaper is not a .jpg type file. #$xOnly .jpg file formats are supported. #$x#$xExiting Wallpaper script..."
+Exit,"The file you have selected as Wallpaper is not a .jpg type file. Only .jpg file formats are supported. Exiting Wallpaper script..."
+End
+If,%Shell%,Equal,WinXShell,Begin
+If,ExistFile,"%TargetDir%\Programs\WinXShell\wallpaper.jpg",FileDelete,"%TargetDir%\Programs\WinXShell\wallpaper.jpg"
+Filecopy,"%my.wallpaper%","%TargetDir%\Programs\WinXShell\wallpaper.jpg"
+End
+Else,Filecopy,"%my.wallpaper%","%Target_System32%\winpe.jpg"
+IniWrite,"%OutputDir%\Project.Settings.ini",PROGRAMS,Wallpaper,CUSTOM
+//Wait,1
+
+[1.HELP]
+Message,"NOTE - Please use a .jpg type file to ensure support with the bblean shell. #$x#$xLeave as DEFAULT to use the wallpaper supplied with the project.#$x#$xTo use a custom wallpaper select CUSTOM and browse to a .jpg format file using the #$qBrowse to custom .jpg File#$q box below. The file will be copied and renamed as #$qwinpe.jpg#$q"
+
+[AuthorEncoded]
+Logo=screen1.ico
+screen1.ico=537,716
+screen2.ico=365,487
+
+[EncodedFile-AuthorEncoded-screen1.ico]
+lines=0
+0=eJztmbtOwzAUhg+K1AxpFZUBqRMMIDF2bRcG5l4egaV9DZ6jb8BjIKpkZay68QZUYoABccjfyCV1YzW9xbE4qb6eKHXtz4kvSUx0lnzabUq+r+jphuiCiG4TkkP0QOnx5XZNdB6kqI2ZBUEQrDObzbjf73O9XmcMTVUCTsPhkOfzOZvcwzC07rmNZrOZW4der2fdrSi4Drp/EARraTzPqxR6W9L99Tra7ou7+p3CfzKZMHDRP45jrtVqS7Dvmn+r1VrlhX2X/DudzsaY0e12D8qzLP/RaGQc98bj8d752ui/x0T8xd+2/yH9ryimMg71V2NiGecZZR3LH3Nndi4qq52gzOy8vY8/7l0w/5fZL7JloWx1//Qf/V1vP1lc7b9ZcG9zan9TGTJ/ib/4y/NLEfKeH/PGxKr6A5ef30EURU6/PwEuv786Ntv8Go3G2u++71eKrFve+9vBYGAc96oG1lh0f1fWL+AI17w2huO4DnpbqgJYn8Aai8ldEATBAgiF41symJFP9IzobcYpkk0Rfx7T+H23Hr8u07gI06jSG+I78yfiK/MHYsi8SOIL4v1fVMdX6dT/tuW/8lBeuq+qR5reVG91XnY9n78US+U+eJzjLk4uSk3NM9TLTM5nGAUjDuxThdDnGLHLu5atk2dgAgATMQdiM1DZOgEAAAACAAAAJwAAAM4BAAAAAAAAAQAAAAAAAAAAAAAA
+
+[EncodedFile-AuthorEncoded-screen2.ico]
+lines=0
+0=eJzt2E0KgkAYxvHXz1moCCKtWxS07CJ+7Nx2vI4RdAhBXHSTad6kjVrpSIzCY/wbGER+UzKLIbLU53wm9b2n65FoR0QnlZqiC3Xzr+tAlARd70tKiRBCm4y3sCXBD/9a/HVdyzzPZRiGi0z/iE1lWcqmaUbXzPY4jo07f5UkiWzbdrCGLMuM26ZWVdXAHwSBcdfU0jQd+Pv3mN4XvvmEEPDDr+33fR9++LX9nufBD7+233Vd+OHX9juOAz/82n7btuGHX9tvWRb88Gv7x3zwm/VHUST796w1Pgvt+4uiMO6aGp8x9/1bOb9lI1vH3jGe5/9hje8Sn8/yGfMnO0IIGYiHGeP3HmqzI0F049EZjnd+zH2746d1vdc99/d8AsHhNol4nOMuTi5KTc0z0stMzmcYBSMO7FOF0EqM2OWTD56/ycAEAAYFB/uvBMkzAQAAAAIAAAAnAAAAIgEAAAAAAAABAAAAAAAAAAAAAAA
+

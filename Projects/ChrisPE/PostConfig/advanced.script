@@ -1,0 +1,81 @@
+[main]
+Title=Advanced Options
+Description=Post Processing - Load\unload any registry hives created during the build process, (re)inject files into boot.wim, etc.
+Selected=None
+Level=10
+Author=ThePEBakeryTeam
+Version=20180306
+Date=2018-03-06
+
+[Interface]
+pButton1="Load Registry Hives",1,8,15,30,130,25,load,0,True,_load_,True
+pButton2=?,1,8,160,30,18,25,?load,0,True,_?load_,True
+pButton3="Unload Registry Hives",1,8,15,80,130,25,unload,0,True,_unload_,True
+pButton4=?,1,8,160,80,18,25,?unload,0,True,_?unload_,True
+pButton5="Inject ALL Files",1,8,15,130,130,25,inject,0,True,_inject_,True
+pButton6=?,1,8,160,130,18,25,?inject,0,True,_?inject_,True
+pButton7="Inject Registry Files",1,8,15,180,130,25,inject.reg,0,True,_inject.reg_,True
+pButton8=?,1,8,160,180,18,25,?inject.reg,0,True,_?inject.reg_,True
+pButton9="Optimise boot.wim",1,8,15,230,130,25,optimise,0,True,_optimise_,True
+pButton10=?,1,8,160,230,18,25,?optimise,0,True,_?optimise_,True
+
+[?load]
+message,"This is a post processing option. Running this option will attempt to load the following registry hives...#$x#$x#$s* default (as #$qHKLM\_WinPE_DEFAULT#$q)#$x#$s* software (as #$qHKLM\_WinPE_SOFTWARE#$q)#$x#$s* system (as #$qHKLM\_WinPE_SYSTEM#$q)#$x#$x...if found in the following path #$x#$x#$s* #$q%Target_config%#$q"
+
+[?unload]
+message,"This is a post processing option. Running this option will unload the following registry hives (if mounted)...#$x#$x#$s* #$qHKLM\_WinPE_DEFAULT#$q#$x#$s* #$qHKLM\_WinPE_SOFTWARE#$q#$x#$s* #$qHKLM\_WinPE_SYSTEM#$q#$x#$xUse to unload any mounted project registry hives (e.g. after running #$qLoad Registry Hives#$q#$c or if they remain mounted due to the build process not completing successfully)."
+
+[?inject]
+message,"This is a post processing option. Running this option will inject (add) any files and directories (maintining directory structure) in...#$x#$x#$s#$s* #$q%TargetDir%#$q#$x#$x...to...#$x#$x#$s#$s* #$q%OutputDir%\Sources\boot.wim#$q"
+
+[?inject.reg]
+message,"This is a post processing option. Running this option will inject (add) the following registry files (if found)...#$x#$x#$s#$s* default#$x#$s#$s* software#$x#$s#$s* sytem#$x#$x...from...#$x#$x#$s#$s* #$q%Target_config%#$q#$x#$x...to...#$x#$x#$s#$s* #$q%OutputDir%\Sources\boot.wim#$q"
+
+[?optimise]
+message,"This is a post processing option. Running this option may reduce the file size of the following wim file...#$x#$x#$s#$s* #$q%OutputDir%\Sources\boot.wim#$q"
+
+[load]
+If,Not,ExistFile,"%Target_config%\default",Message,default Registy Hive is missing
+Else,If,ExistFile,"%Target_config%\default",If,Not,ExistRegSection,HKLM,_WinPE_DEFAULT,RegHiveLoad,_WinPE_DEFAULT,"%Target_config%\default"
+If,Not,ExistFile,"%Target_config%\software",Message,software Registy Hive is missing
+Else,If,ExistFile,"%Target_config%\software",If,Not,ExistRegSection,HKLM,_WinPE_SOFTWARE,RegHiveLoad,_WinPE_SOFTWARE,"%Target_config%\software"
+If,Not,ExistFile,"%Target_config%\system",Message,system Registy Hive is missing
+Else,If,ExistFile,"%Target_config%\system",If,Not,ExistRegSection,HKLM,_WinPE_SYSTEM,RegHiveLoad,_WinPE_SYSTEM,"%Target_config%\system"
+message,"Don't forget to Unload any mounted registry hives when you have finished",warning
+
+[unload]
+If,ExistRegSection,HKLM,_WinPE_DEFAULT,RegHiveUnload,_WinPE_DEFAULT
+If,ExistRegSection,HKLM,_WinPE_SOFTWARE,RegHiveUnload,_WinPE_SOFTWARE
+If,ExistRegSection,HKLM,_WinPE_SYSTEM,RegHiveUnload,_WinPE_SYSTEM
+message,"Registry hives (Default#$c Software and System) Unloaded",information
+
+[inject]
+If,ExistFile,%OutputDir%\sources\boot.wim,If,ExistDir,%TargetDir%,Begin
+  IniRead,"%TargetDir%\project.settings.ini",MAIN.SETTINGS,5_BOOT.WIM.IMAGE.NUMBER,%Boot.wim.Image.number%
+  //WimPathAdd,%OutputDir%\sources\boot.wim,%Boot.wim.Image.number%,%TargetDir%,""
+  ShellExecute,Hide,"%TOOLS%\wimlib\wimlib-imagex.exe","update #$q%OutputDir%\sources\boot.wim#$q %Boot.wim.Image.number% --command=#$qadd '%TargetDir%' '\'#$q"
+End
+Else,Message,Missing files
+
+[inject.reg]
+If,ExistFile,%OutputDir%\sources\boot.wim,If,ExistDir,%TargetDir%,Begin
+  IniRead,"%TargetDir%\project.settings.ini",MAIN.SETTINGS,5_BOOT.WIM.IMAGE.NUMBER,%Boot.wim.Image.number%
+  If,ExistFile,%TargetDir%\Windows\System32\config\default,WimPathAdd,%OutputDir%\sources\boot.wim,%Boot.wim.Image.number%,%TargetDir%\Windows\System32\config\default,Windows\System32\config\default
+  If,ExistFile,%TargetDir%\Windows\System32\config\software,WimPathAdd,%OutputDir%\sources\boot.wim,%Boot.wim.Image.number%,%TargetDir%\Windows\System32\config\software,Windows\System32\config\software
+  If,ExistFile,%TargetDir%\Windows\System32\config\system,WimPathAdd,%OutputDir%\sources\boot.wim,%Boot.wim.Image.number%,%TargetDir%\Windows\System32\config\system,Windows\System32\config\system
+End
+Else,Message,Missing files
+
+[optimise]
+//If,ExistFile,%OutputDir%\sources\boot.wim,ShellExecute,Open,"%TOOLS%\wimlib\wimlib-imagex.exe","optimize #$q%OutputDir%\sources\boot.wim#$q"
+If,ExistFile,%OutputDir%\sources\boot.wim,WimOptimize,%OutputDir%\sources\boot.wim
+Else,Message,Missing files
+
+[AuthorEncoded]
+Logo=settings.ico
+settings.ico=653,871
+
+[EncodedFile-AuthorEncoded-settings.ico]
+lines=0
+0=eJztlzFLI0EYht9gEawCFnJdplAQLfQHBEW4H3KttaWosfIHWIr9tXbhuCLhOMLdXwjIcvcDXEE0Rcj6ffPNormN3sxmJ7ML+4Q3LyyZ7DMLuzsDNOiztwf6Vvi6CawD2KLQIXyBHNdsoKbGhjZlSHmkXAZ2cUVRIkryJlcBfVxQyLpXZQ4K77uXfQ4K/3cv6xwU7N3TlOWeVnB35zwuXzWDQj53znDptrMo5Hfnce0l+75FYTF3tVzdGRRq9xAo1O4hUKjdQ6BQuxfNDuWE0qPcUR4oMWVEuaUcUzoldN+nDHI6hXRfpVx79vblvkb5VVF3vu6/K+rO3FTY/bDC7szPCrvvenbndDy5MxcW55+a5PU/9uj/3cL9yCTvHG49+v+1cE/JO4eRR/9nS/dF5hB79H9ycE9xncODJ3fmD9zcU1zmcFe49Svf4O6eYjuHXoG+/3KKfO6Avf9JUbJz2IZf98ScwyefHX/v4j4oTrMQXJ89+2E05+Lqfh1Gcy6u7ryPWw1imsXVnfdxa0FMs7i68z6uLNedn0u27rwHOgyj+SH87OZ3HL+nea3B6yVe8/G6ldfevH/YDWZXE4REM9vjc+n4QDpqS/db0t2mNFZ0T01PTI9Nx5DfRZBxfcj/dCH/C+jzTPVdw8Mbumm4bhrO3QdaidxYbfqaUB9Qj6nPE9lQJNIN7gg0XLrJrYfP60+mO6bPTCfSg6Sr+4fpoTl+PyUN9pmYHpMOd2w6Ii3xluvZXZHutzLXmfsFmCR9knic4ylOLSnJzEsv1stMzmcYBSMN7FOF0I5M2OUtLh+2Y2ACAJzcCBstMDmuAQAAAAIAAAAoAAAAQQIAAAAAAAABAAAAAAAAAAAAAAA
+

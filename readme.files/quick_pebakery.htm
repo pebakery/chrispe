@@ -1,0 +1,153 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd"><html><head><link type="text/css" rel="stylesheet" href="chrispe.css" media="screen" /><title>ChrisPE</title></head><body><font> 
+ 
+ 
+ 
+<p> 
+<select ONCHANGE="location = this.options[this.selectedIndex].value;"> 
+<option value="" disabled></option> 
+<option value="../readme.html">Contents</option> 
+<option value="" disabled>=======</option> 
+<option value="winpe.htm">Windows PE</option>  
+<option value="builder.htm">Builders</option>  
+<option value="options.htm">Project Options</option>  
+<option value="project.htm">Project Scripts</option>  
+<option value="instructions_pebakery.htm">Instructions</option>  
+<option value="menu_system.htm">Menu System</option>  
+<option value="not_in_wim.htm">Include...in boot.wim</option>  
+<option value="usb.htm">...Bootable USB...</option>  
+<option value="uefi.htm">UEFI, BIOS, GPT...</option>  
+<option value="multiboot.htm">Multiboot WinPE</option>  
+<option value="" disabled></option> 
+<option value="" disabled>Appendices</option> 
+<option value="" disabled>=========</option> 
+<option value="quick_pebakery.htm" selected="selected">Quick Start</option>  
+<option value="acknowledgements.htm">Acknowledgements</option>  
+<option value="" disabled></option> 
+</select> 
+</p> 
+ 
+ 
+ 
+<hr> 
+<a href="http://chrispe.mistyprojects.co.uk/"><img src="img/home.jpg" BORDER=1></a> 
+ 
+
+
+<h2><u>Quick Start Guide</u></h2>
+
+
+
+<p>
+<b>Please note that the screenshots below may differ from the current <font class="file">ChrisPE</font> release.</b>
+</p>
+
+
+
+
+
+<p>
+Whilst <font class="file">ChrisPE</font> has been designed to be as simply as possible, it has not been possible to create a "one-button push" method. It should however be very simple to create a <font class="file">WinPE</font> in a matter of minutes. To do so you will need -
+
+
+<ul>
+<li>
+<b>Administrator privileges</b> - registry hives will need to be mounted and edited during the build process, and other processes also require administrator privileges.
+</li>
+</ul> 
+
+<ul>
+<li>
+.Net Framework 4.7.1 and Windows 7 or newer (required to run PEBakery).
+</li>
+</ul> 
+
+<ul>
+<li>Free disk space - 1GB should be more than adequate as Windows source files are not cached during the build process. 
+</li>
+</ul>
+
+<ul>
+<li>
+Windows Installation Media - either a CD/DVD, a mounted disk image or the files copied to an accessible folder. 
+</li>
+</ul>
+</p>
+
+
+
+<p class=break3em>
+Instructions - 
+</p>
+
+
+
+<ol start=1>
+<li>Download the <font class="file">ChrisPE</font> .zip package and extract the contents to a local folder - preferably a folder without spaces in the path. In the examples below the project files have been extracted to <font color="red">C:\ChrisPE\</font> with the <font color="red">Projects</font> directory in the <font color="red">C:\ChrisPE\Projects</font> path.</li>
+</ol>
+
+
+
+<ol start=2 class=break3em>
+<li>Run <font class="file">PEBakeryLauncher.exe</font> (<font color="red">C:\ChrisPE\</font><font color="blue">PEBakeryLauncher.exe</font>) to start <font class="file">PEBakery</font>.</li>
+</ol>
+
+
+
+<ol start=3 class=break3em>
+<li>Set the path to your source files by either manually entering the path (1) or click on the <font class="file">Folder</font> button (2) to set the path to your Windows Installation Media source files. Please note that if manually entering a path it must end in a backslash (\). E.g. <font color="red">D:\source_files\</font>
+</li>
+<a href="img/main_1_2.jpg"><IMG SRC="img/main_1_2.jpg" float=left margin-right=1% margin-bottom=0.5em border=1></a>
+<br />
+A mounted Windows RTM .iso file is recommended as source. Alternatively extract the contents of a Windows .iso to a local directory. Set the path in this option to the root folder that contains the following files/directories -
+<ul>
+<li class="breakhalfem"><font class="file">\sources\boot.wim</font></li>
+<li class="breakhalfem"><font class="file">\sources\install.wim</font></li>
+<li class="breakhalfem"><font class="file">\bootmgr</font></li>
+<li class="breakhalfem"><font class="file">\boot\</font></li>
+<li class="breakhalfem"><font class="file">\EFI\</font></li>
+</ul>
+</ol>
+
+
+
+
+<ol start=4 class=break3em>
+<li>Now expand the folder tree on the left and view and select individual project script options as required (refer to the <a class="internal" href="project.htm">Project Scripts</a> section for details about all included project scripts). </li>
+</ol>
+
+
+
+
+
+<ol start=5 class=break3em>
+<li>I recommend selecting the <font color="red">MediaCreation</font><font color="blue">\Create ISO</font> project script - this can then be used to create a bootable CD/DVD or USB.
+</li>
+</ol>
+
+
+
+<ol start=6 class=break3em>
+<li>To start the build process, click on the <font class="file">Build</font> button in the top row of buttons - 
+</li>
+<a href="img/pebakery_quick5.png"><IMG SRC="img/pebakery_quick5.png" float=left width=90% margin-right=1% margin-bottom=0.5em border=1></a>
+</ol>
+
+
+
+<ol start=7 class=break3em>
+<li>A progress bar will be displayed for individual project scripts as they are processed - 
+</li>
+<a href="img/pebakery_quick6.png"><IMG SRC="img/pebakery_quick6.png" float=left width=90% margin-right=1% margin-bottom=0.5em border=1></a>
+</ol>
+
+
+
+
+
+<p class=break3em>
+That's it. Provided the <font color="red">MediaCreation</font><font color="blue">\Create ISO</font> script was selected you should now have a bootable ISO image file (<i><font color="red">\ChrisPE.Project.Output\</font><font color="blue">WinPE.iso</font></i> - the path is relative to <font class="file">PEBakeryLauncher.exe</font>) that can be burnt to CD/DVD. Alternatively see <a class="internal" href="usb.htm">here</a> for an easy method to create a bootable USB device. 
+</p>
+
+
+
+<p class="breaktop"><font class="file">Document date - 6<sup>th</sup> March 2018</font></p></font></body></html>

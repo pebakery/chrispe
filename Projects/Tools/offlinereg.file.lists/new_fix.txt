@@ -1,0 +1,2 @@
+Software\Microsoft\Windows\CurrentVersion\Explorer\Discardable\PostSetup\ShellNew setvalue "~reserved~" 08,00,00,00,00,00,06,00 3 
+Software\Microsoft\Windows\CurrentVersion\Explorer\Discardable\PostSetup\ShellNew setvalue "Classes" ".library-ms .link .txt Folder" 7
