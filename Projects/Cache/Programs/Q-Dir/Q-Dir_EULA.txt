@@ -1,0 +1,20 @@
+End User License Agreement
+==========================
+
+LICENSE HRG NENAD (SOFTWAREOK.COM)
+THIS SOFTWARE IS FREEWARE
+
+
+This software is the property of Hrg Nenad (softwareok.com) and its suppliers and is protected by copyright law and international treaty provisions. 
+
+You may distribute an unlimited number of unmodified , copies of the software to anyone you wish ! 
+
+You are not allowed to sell this software!
+
+You may not decompile, reverse engineer or disassemble this software and any executable part of this software. 
+
+THE SOFTWARE PROVIDED TO YOU AS IS WITHOUT WARRANTY OF ANY KIND, ANY SPECIAL,INCIDENTAL,EITHER EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE IMPLIED WARRANTIES OF MERCHANTABILITY AND/OR FITNESS FOR A PARTICULAR PURPOSE. YOU ASSUME THE ENTIRE RISK AS TO THE ACCURACY AND THE USE OF THIS SOFTWARE. 
+
+HRG NENAD (SOFTWAREOK.COM) SHALL NOT BE LIABLE FOR ANY DAMAGES WHATSOEVER ARISING OUT OF THE USE OF OR INABILITY TO USE OF THIS SOFTWARE, EVEN IF HRG NENAD (SOFTWAREOK.COM) HAS BEEN ADVISED OF THE POSSIBILITY OF SUCH DAMAGE. 
+
+NON-ACCEPTANCE OR VIOLATION OF ANY OF THE ABOVE TERMS IMMEDIATELY AND UNCONDITIONALLY WILL TERMINATE YOUR LICENSE. 
