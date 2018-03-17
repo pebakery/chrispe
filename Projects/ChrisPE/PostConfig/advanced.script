@@ -4,8 +4,8 @@ Description=Post Processing - Load\unload any registry hives created during the 
 Selected=None
 Level=10
 Author=ThePEBakeryTeam
-Version=20180306
-Date=2018-03-06
+Version=20180317
+Date=2018-03-17
 
 [Interface]
 pButton1="Load Registry Hives",1,8,15,30,130,25,load,0,True,_load_,True
@@ -51,7 +51,7 @@ message,"Registry hives (Default#$c Software and System) Unloaded",information
 
 [inject]
 If,ExistFile,%OutputDir%\sources\boot.wim,If,ExistDir,%TargetDir%,Begin
-  IniRead,"%TargetDir%\project.settings.ini",MAIN.SETTINGS,5_BOOT.WIM.IMAGE.NUMBER,%Boot.wim.Image.number%
+  IniRead,"%TargetDir%\project.settings.ini",MAIN.SETTINGS,BOOT.WIM.IMAGE.NUMBER,%Boot.wim.Image.number%
   //WimPathAdd,%OutputDir%\sources\boot.wim,%Boot.wim.Image.number%,%TargetDir%,""
   ShellExecute,Hide,"%TOOLS%\wimlib\wimlib-imagex.exe","update #$q%OutputDir%\sources\boot.wim#$q %Boot.wim.Image.number% --command=#$qadd '%TargetDir%' '\'#$q"
 End
@@ -59,7 +59,7 @@ Else,Message,Missing files
 
 [inject.reg]
 If,ExistFile,%OutputDir%\sources\boot.wim,If,ExistDir,%TargetDir%,Begin
-  IniRead,"%TargetDir%\project.settings.ini",MAIN.SETTINGS,5_BOOT.WIM.IMAGE.NUMBER,%Boot.wim.Image.number%
+  IniRead,"%TargetDir%\project.settings.ini",MAIN.SETTINGS,BOOT.WIM.IMAGE.NUMBER,%Boot.wim.Image.number%
   If,ExistFile,%TargetDir%\Windows\System32\config\default,WimPathAdd,%OutputDir%\sources\boot.wim,%Boot.wim.Image.number%,%TargetDir%\Windows\System32\config\default,Windows\System32\config\default
   If,ExistFile,%TargetDir%\Windows\System32\config\software,WimPathAdd,%OutputDir%\sources\boot.wim,%Boot.wim.Image.number%,%TargetDir%\Windows\System32\config\software,Windows\System32\config\software
   If,ExistFile,%TargetDir%\Windows\System32\config\system,WimPathAdd,%OutputDir%\sources\boot.wim,%Boot.wim.Image.number%,%TargetDir%\Windows\System32\config\system,Windows\System32\config\system
@@ -67,9 +67,8 @@ End
 Else,Message,Missing files
 
 [optimise]
-//If,ExistFile,%OutputDir%\sources\boot.wim,ShellExecute,Open,"%TOOLS%\wimlib\wimlib-imagex.exe","optimize #$q%OutputDir%\sources\boot.wim#$q"
-If,ExistFile,%OutputDir%\sources\boot.wim,WimOptimize,%OutputDir%\sources\boot.wim
-Else,Message,Missing files
+RegWrite,HKLM,0x1,"SOFTWARE\_Microsoft2\Windows NT\CurrentVersion\Fonts","Segoe UI (TrueType)","segoeui.ttf"
+
 
 [AuthorEncoded]
 Logo=settings.ico

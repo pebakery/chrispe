@@ -1,0 +1,123 @@
+[main]
+Title=Network
+Description=
+Selected=True
+Level=4
+Author=ThePEBakeryTeam
+Version=20180317
+Date=2018-03-17
+Interface=Interface1
+
+[Interface1]
+pTextLabelMenu1="1",1,1,35,3,70,18,10,Bold
+pButtonMenu2="2",1,8,75,0,70,20,pButtonMenu2,0,True,_pButtonMenu2_,True
+pButtonMenu3="?",1,8,145,0,70,20,pButtonMenu3,0,True,_pButtonMenu3_,True
+pCheckBox1="InitializeNetwork (wpeinit)",1,3,40,80,180,18,False
+pCheckBox2="DisableFirewall (wpeinit)",1,3,40,110,180,18,False
+pCheckBox3="Use a fixed computer name",1,3,40,140,180,18,False
+pTextBoxComputerName=,1,0,200,140,150,21,ChrisPE
+pButton1=?,1,8,10,80,18,18,?option1,0,True,_?option1_,True
+pButton2=?,1,8,10,110,18,18,?option2,0,True,_?option2_,True
+pButton3=?,1,8,10,140,18,18,?option3,0,True,_?option3_,True
+
+[Interface2]
+pButtonMenu1="1",1,8,5,0,70,20,pButtonMenu1,0,True,_pButtonMenu1_,True
+pTextLabelMenu2="2",1,1,108,3,70,18,10,Bold
+pButtonMenu3="?",1,8,145,0,70,20,pButtonMenu3,0,True,_pButtonMenu3_,True
+pBevel1=,1,12,10,65,66,2
+pTextLabel="Menu Entries",1,1,10,50,230,18,8,Bold
+pCheckBoxShortcutDesktop="Add to Desktop Menu",1,3,40,80,150,18,True
+pCheckBoxShortcutQuick="Add to Quicklaunch Menu",1,3,40,110,150,18,True
+pCheckBoxShortcutPrograms="Add to #$qStart#$q > ",1,3,40,140,99,18,True
+pCheckBoxShortcutLaunchBar="Add to LaunchBar Menu ",1,3,40,170,150,18,True
+pButtonShortcut1=?,1,8,10,80,18,18,pButtonShortcut1,0,True,_pButtonShortcut1_,True
+pButtonShortcut2=?,1,8,10,110,18,18,pButtonShortcut2,0,True,_pButtonShortcut2_,True
+pButtonShortcut3=?,1,8,10,140,18,18,pButtonShortcut3,0,True,_pButtonShortcut3_,True
+pButtonShortcut4=?,1,8,10,170,18,18,pButtonShortcut4,0,True,_pButtonShortcut4_,True
+pTextBox1=,1,0,140,140,150,21,Programs
+
+[?option1]
+Message,"InitializeNetwork during the boot process. This will initialize network components and drivers and set the computer name to a randomly chosen value.#$x#$xPlease note that running this command will delay WinPE starting as it takes time to run this command. It is only required if network access is needed. If this command is not enabled then a batch file (and a menu entry to run it) will be added to the build so that the network can be manually initialized if required."
+
+[?option2]
+Message,"DisableFirewall the firewall started when running the InitializeNetwork command.#$x#$xEnabling this option will automatically run the 'InitializeNetwork' command during the boot process even if the 'InitializeNetwork (wpeinit)' option is not enabled."
+
+[?option3]
+Message,"When the network is initialized in WinPE#$c a random ComputerName is assigned.#$x#$xSelect this option to set the ComputerName and enter a name in the textbox.#$x#$xEnsure that your ComputerName does not contain special characters and is a maximum length of 15 bytes. Do not use spaces or any of the following characters -#$x   { | } ~ [ \ ] ^ ' : ; < = > ? @ ! #$q ## $ % ` ( ) + / . #$c * _ &#$x#$xPlease note that enabling this option will automatically run the 'InitializeNetwork' command during the boot process even if the 'InitializeNetwork (wpeinit)' option is not enabled."
+
+[pButtonMenu1]
+IniWrite,%ScriptFile%,Main,Interface,Interface1
+System,REFRESHINTERFACE
+
+[pButtonMenu2]
+IniWrite,%ScriptFile%,Main,Interface,Interface2
+System,REFRESHINTERFACE
+
+[pButtonMenu3]
+message,"Click on the buttons to toggle between tabs 1 and 2. #$x#$xTab 2 contains menu options for use in the selected shell. Click on the ? button for information about the different options."
+
+[pButtonShortcut1]
+message,"WinXShell only#$x#$xSelect this option to add a program shortcut to the Desktop."
+
+[pButtonShortcut2]
+message,"WinXShell only#$x#$xSelect this option to add a program menu option to the Quicklaunch menu - similar in appearence to the 'Pin to Taskbar' option in Windows 7/8/10."
+
+[pButtonShortcut3]
+message,"Applies to WinXShell#$c BBLean and LaunchBar Shell(s)#$x#$xSelect this option to add a program menu option to the Start menu. Leave blank to add to the root of the menu#$c or manually type a path to place in a sub-menu (do not use spaces in the path). E.g. #$x#$s- FileManager#$x#$s- Programs#$x#$s- Programs\FileManager#$x#$xAnd looking at the examples above - #$x#$xLeave this option blank to add a menu entry to the root of the program menu (the 'Start' menu in WinXShell#$c the 'Start' menu in BBLean#$c or the root of the LaunchBar menu bar if LaunchBar is selected as Shell)#$x#$xEnter 'FileManager' to add a menu entry for this application to the 'Start' > 'FileManager' sub-menu (WinXShell and bblean) or the 'FileManager' sub-menu in LaunchBar.#$x#$xEnter 'Programs' to add a menu entry for this application to the 'Start' > 'Programs' sub-menu (WinXShell and bblean) or the 'Programs' sub-menu in LaunchBar.#$x#$xEnter 'Programs\FileManager' to add a menu entry for this application to the 'Start' > 'Programs' > 'FileManager' sub-menu (WinXShell and bblean) or the 'Programs' > 'FileManager' sub-menu in LaunchBar."
+
+[pButtonShortcut4]
+message,"This setting does not apply to any LaunchBar instance running as the WinPE Shell. This option only applies to a LaunchBar instance when the Applications' > 'LaunchBar' program script is selected in the build.#$x#$xIf the 'Applications' > 'LaunchBar' program script is selected than enable this option to add a program menu entry to the root of the LaunchBar menu bar. #$x#$xPlease note that if option '6] Programs in boot.wim' in the main project script is set as 'NO'#$c then LaunchBar and a number of other applications will not be available at boot. In this case a text based .ini file will be used for LaunchBar menu settings."
+
+[process]
+AddInterface,%ScriptFile%,Interface1,""
+AddInterface,%ScriptFile%,Interface2,""
+If,%pCheckBox2%,Equal,True,Set,%pCheckBox1%,True
+If,%pCheckBox3%,Equal,True,Set,%pCheckBox1%,True
+If,%pCheckBox1%,Equal,True,Run,%ScriptFile%,InitializeNetwork
+If,%pCheckBox2%,Equal,True,Run,%ScriptFile%,DisableFirewall
+If,%pCheckBox3%,Equal,True,Run,%ScriptFile%,ComputerName
+If,%pCheckBox1%,Equal,False,Run,%ScriptFile%,StartNetworkManual
+
+[InitializeNetwork]
+FileCreateBlank,"%Target_system32%\InitializeNetwork.txt"
+TXTaddLine,"%Target_system32%\InitializeNetwork.txt","Dummy file added confirm that InitializeNetwork is already enabled.",APPEND
+If,%ARCH%,Equal,x86,FileCopy,"%Programs%\Network\x86.xml","%OutputDir%\Unattend.xml"
+If,%ARCH%,Equal,x64,FileCopy,"%Programs%\Network\x64.xml","%OutputDir%\Unattend.xml"
+If,Not,ExistFile,%ProjectTemp%\winpeshl.txt,FileCreateBlank,%ProjectTemp%\winpeshl.txt
+TXTaddLine,%ProjectTemp%\winpeshl.txt,wpeinit,Append
+
+[DisableFirewall]
+TXTreplace,"%OutputDir%\Unattend.xml",<EnableFirewall>true</EnableFirewall>,<EnableFirewall>false</EnableFirewall>
+FileCreateBlank,"%Target_system32%\DisableFirewall.txt"
+TXTaddLine,"%Target_system32%\DisableFirewall.txt","Dummy file added to confirm that firewall is already disabled.",APPEND
+
+[ComputerName]
+TXTreplace,"%OutputDir%\Unattend.xml",<ComputerName>*</ComputerName>,<ComputerName>%pTextBoxComputerName%</ComputerName>
+
+[StartNetworkManual]
+DirMake,"%TargetDir%\Programs\Network"
+DirCopy,"%Programs%\Network\*.*","%TargetDir%\Programs\Network"
+IniWrite,"%OutputDir%\Project.Settings.ini",ESSENTIAL,Network,YES
+ShellExecute,Hide,"%Tools%\Shortcut.exe","/A:C /T:#$q#$pSystemDrive#$p\Programs\Network\Start_Network.cmd#$q /F:#$q%ProjectTemp%\Start Network.lnk#$q /I:#$q#$pSystemDrive#$p\Programs\Network\network.ico#$c0#$q"
+If,ExistFile,"%ProjectTemp%\Start Network.lnk",Begin
+  Set,%MyShortcut%,Start Network.lnk
+  If,%pCheckBoxShortcutDesktop%,Equal,True,FileCopy,"%ProjectTemp%\%MyShortcut%","%ProjectTemp%\ShortCuts\Desktop"
+  If,%pCheckBoxShortcutQuick%,Equal,True,FileCopy,"%ProjectTemp%\%MyShortcut%","%ProjectTemp%\ShortCuts\Quick"
+  If,%pCheckBoxShortcutPrograms%,Equal,True,Begin
+    Set,%ProgramMenuPath%,%pTextBox1%
+    Run,"%ProjectDir%\Core\common.script",StartMenu
+  End
+  If,%pCheckBoxShortcutLaunchBar%,Equal,True,FileCopy,"%ProjectTemp%\%MyShortcut%","%ProjectTemp%\ShortCuts\LaunchBar"
+  FileDelete,"%ProjectTemp%\%MyShortcut%"
+End
+
+[AuthorEncoded]
+Logo=network.ico
+network.ico=756,1008
+
+[EncodedFile-AuthorEncoded-network.ico]
+lines=0
+0=eJztmctr1FAUxs84aEAXBRE3Slvw1WVBN6LSnY+diKDiRlHcuND/oJSCIq4V9ypWN/Wx8bFJnZ0KPjaioszOF8jQilapxHNyMzT9cjM3mdyZhHK/8s0Hc87N/Ca99yZNiWr8MzpK/DpMU1uI1hPRCJvfohOk3g+1mZycnJyqqEDjX9DjQf1Pznra52TxHHuavTUH/3PoGYb6Z6ivg/p3i/xt/0j5Drrec9BzGOpPob4d6m97wC+eznDc1+xV0HMDei5B/TjU7/WIf85w3DfsDVDfSGo+x/v2QM81qF/QfE63wu+Amme/YJ8ntQ5Rd2D8e5Jbk6X6BD17bYBHMvF30lnN+JPQswvqv9mrC/CiuuUX9n8w9hl7BfTdgp6pgryovPwy/3HOtNcO7l9yu7sAffusUC/KxL+SPcg+xL5Oaj3gmL8pXE+g76VldtKwmOq6865jP6PpPWiZXcdnqsct12HdNW8HqXUa731oGzyFz1QXf2CfouRaFW1jf4P+WfYm2+ApfCiZ21/YDfZl9hgl9/e25D7hq+aYR+wiL1GR/T+u06TuS/F4k0UBDSrKL/PlkeY44iuWGDupW/6d7JuU3N/7dd7bMvHLveZaUo9djrGvsj9qxsXX6tGeUy+q6P4f92Pq3T6TJhv8r0hdn8tQt/xyfbrN3t8fzFRl2f/lb8t37Afsi+wD7DX9AjTI1v5flhx/uVru/FX/fo6/XDn+crXc+Wc1PVW17vnt3QpwZbXuubY8Q2tVgM3kVsSq00j0e6jiXPrJvt+B3cnJyamvCkJlT7/ZbMl/98KsJ3PGbwZBg6gRZTDhq6zNhLlQnwjT9yZVDtRVDnoqd0c5P6DGtYZU+mMqaVzVhUiyFqUX5VCU4ypD7A7ZyJm+nLR6MpuSXv7z+R96iDv/eJzjzkstKc8vytbLTM5nGAUjDuxThdArmbDLe/4/uZOBCQDRAAjZBqLRiQEAAAACAAAAJwAAAKkCAAAAAAAAAQAAAAAAAAAAAAAA
+
+
+

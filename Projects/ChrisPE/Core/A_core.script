@@ -6,8 +6,8 @@ Locked=True
 Mandatory=True
 Level=2
 Author=ThePEBakeryTeam
-Version=20180306
-Date=2018-03-06
+Version=20180317
+Date=2018-03-17
 Interface=Interface
 NoWarning=False
 
@@ -18,6 +18,7 @@ If,Not,%PEBakery%,Equal,True,Begin
   message,"This project is not compatible with WinBuilder. ABORTING..."
   Halt
 End
+Set,%FullProjectRun%,YES,GLOBAL
 If,%SourceDir%,Equal,,Begin
   message,Error - you have not set a source directory. ABORTING...
   Halt
@@ -194,19 +195,20 @@ FileCopy,"%ProjectTemp%\boot.wim.info.ini","%OutputDir%\Project.Settings.ini"
 IniAddSection,"%OutputDir%\Project.Settings.ini",PROJECT.VERSION
 IniWrite,"%OutputDir%\Project.Settings.ini",PROJECT.VERSION,VERSION,%PROJECT.DATE%
 IniAddSection,"%OutputDir%\Project.Settings.ini",MAIN.SETTINGS
-//IniWrite,"%OutputDir%\Project.Settings.ini",MAIN.SETTINGS,1_CACHE,%USECACHE%
-//IniWrite,"%OutputDir%\Project.Settings.ini",MAIN.SETTINGS,2_RAMDISK,%RAMDISK%
-//IniWrite,"%OutputDir%\Project.Settings.ini",MAIN.SETTINGS,3_ARCH,%ARCH%
-//IniWrite,"%OutputDir%\Project.Settings.ini",MAIN.SETTINGS,4_SYSWOW64,%SYSWOW64%
-IniWrite,"%OutputDir%\Project.Settings.ini",MAIN.SETTINGS,5_BOOT.WIM.IMAGE.NUMBER,%Boot.wim.Image.number%
-IniWrite,"%OutputDir%\Project.Settings.ini",MAIN.SETTINGS,6_INSTALL.WIM.IMAGE.NUMBER,%Install.wim.Image.number%
-IniWrite,"%OutputDir%\Project.Settings.ini",MAIN.SETTINGS,7_METHOD,%Method%
-IniWrite,"%OutputDir%\Project.Settings.ini",MAIN.SETTINGS,8_KEYBOARD,%KEYBOARD%
-IniWrite,"%OutputDir%\Project.Settings.ini",MAIN.SETTINGS,9_FALLBACK.LANGUAGE,%LANG2%
-IniWrite,"%OutputDir%\Project.Settings.ini",MAIN.SETTINGS,10_PROGRAMS.IN.WIM,%PROGRAMS.IN.WIM%
+IniWrite,"%OutputDir%\Project.Settings.ini",MAIN.SETTINGS,BOOT.WIM.IMAGE.NUMBER,%Boot.wim.Image.number%
+IniWrite,"%OutputDir%\Project.Settings.ini",MAIN.SETTINGS,INSTALL.WIM.IMAGE.NUMBER,%Install.wim.Image.number%
+IniWrite,"%OutputDir%\Project.Settings.ini",MAIN.SETTINGS,METHOD,%Method%
+IniWrite,"%OutputDir%\Project.Settings.ini",MAIN.SETTINGS,KEYBOARD,%KEYBOARD%
+IniWrite,"%OutputDir%\Project.Settings.ini",MAIN.SETTINGS,FALLBACK.LANGUAGE,%LANG2%
 IniAddSection,"%OutputDir%\Project.Settings.ini",ESSENTIAL
 IniAddSection,"%OutputDir%\Project.Settings.ini",PROGRAMS
-IniAddSection,"%OutputDir%\Project.Settings.ini",WINFE
+IniAddSection,"%OutputDir%\Project.Settings.ini",SHELL
+StrFormat,Date,%TagFile%,yyyy-mm-dd-hh.nn
+FileCreateBlank,"%OutputDir%\%TagFile%.tag"
+IniWrite,"%OutputDir%\Project.Settings.ini",MAIN,TagFile,%TagFile%.tag
+Set,%TagFile%,%TagFile%,Global
+
+
 
 [AuthorEncoded]
 Logo=donut.ico

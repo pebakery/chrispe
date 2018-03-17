@@ -1,11 +1,11 @@
 [Main]
-Title=ChrisPE Beta 0.1.0
+Title=ChrisPE Beta 0.1.1
 SourceDir=
 TargetDir=
 Description=
 Author=ThePEBakeryTeam
-Version=20180306
-Date=2018-03-06
+Version=20180317
+Date=2018-03-17
 Locked=true
 Selected=None
 Mandatory=true
@@ -30,7 +30,7 @@ Project=ChrisPE
 %Target_system32%=%TargetDir%\WINDOWS\System32
 %USECACHE%=NEVER
 %CODEBASE%=unchecked
-%PROJECT.DATE%=2018-03-06
+%PROJECT.DATE%=2018-03-17
 %LANG3%=en-US
 %USE.TOOLS%=YES
 
@@ -125,6 +125,7 @@ Message,"Check if the user is running with Administrator Privileges and abort if
 Message,"Automatically save a log file based on date and time. This action will be executed on successful completion of the bblean script - if the build process does not get that far then a log will not be saved."
 
 [process]
+Set,%FullProjectRun%,NO,GLOBAL
 ReadInterface,Value,%ScriptFile%,TAB_A_Menu,pFileBox_A1,%pFileBox_A1%
 ReadInterface,Value,%ScriptFile%,TAB_A_Menu,pScrollBox_A2,%pScrollBox_A2%
 ReadInterface,Value,%ScriptFile%,TAB_A_Menu,pScrollBox_A3,%pScrollBox_A3%

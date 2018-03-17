@@ -78,6 +78,17 @@ Explorer++
 
 --------------------------------------------------------
 
+Get WAIK Tools
+============
+
+  Author - JFX
+
+  https://msfn.org/board/topic/156869-get-waik-tools-wo-downloading-the-huge-isos/
+
+  License is not specified. Comment from the author "...Get WAIK Tools is redistributable..." (https://msfn.org/board/topic/156869-get-waik-tools-wo-downloading-the-huge-isos/?do=findComment&comment=1149523)
+
+--------------------------------------------------------
+
 gsar
 ====
   
@@ -147,6 +158,16 @@ mkisofs.exe
 
 --------------------------------------------------------
 
+nircmd
+======
+
+  Copyright (c) 2003 - 2016 Nir Sofer 
+
+  License (http://www.nirsoft.net/utils/nircmd.html)
+  This utility is released as freeware. You are allowed to freely distribute this utility via floppy disk, CD-ROM, Internet, or in any other way, as long as you don't charge anything for this. If you distribute this utility, you must include all files in the distribution package, without any modification ! 
+
+--------------------------------------------------------
+
 OfflineReg
 ==========
 
@@ -187,13 +208,25 @@ Shortcut.exe
 SumatraPDF
 ==========
 
- Most code under src is licensed as GPL v3 (see COPYING) with the main exception of code in src/utils and src/mui which has a BSD license.
+  Most code under src is licensed as GPL v3 (see COPYING) with the main exception of code in src/utils and src/mui which has a BSD license.
 
   Please refer to the following files for more information -
 
   \Projects\Cache\Programs\SumatraPDF312\AUTHORS.txt
   \Projects\Cache\Programs\SumatraPDF312\COPYING.txt
   \Projects\Cache\Programs\SumatraPDF312\COPYING_BSD.txt
+
+--------------------------------------------------------
+
+TightVNC
+========
+
+  Copyright (c) GlavSoft LLC.
+
+  TightVNC is freely available under the terms of the GNU GPL license. Please refer to the following file for more information -
+
+  \Projects\Cache\Programs\TightVNC\LICENSE.txt
+
 
 --------------------------------------------------------
 
@@ -215,13 +248,13 @@ wimlib
 
   Please refer to the following files for more information -
 
-  \Projects\Tools\wimlib\COPYING.CCO
-  \Projects\Tools\wimlib\COPYING.GPLv3
-  \Projects\Tools\wimlib\COPYING.LGPLv3
-  \Projects\Tools\wimlib\COPYING.libdivsufsort-lite
-  \Projects\Tools\wimlib\COPYING.libxml2
-  \Projects\Tools\wimlib\COPYING
-  \Projects\Tools\wimlib\COPYING.winpthreads
+  \Projects\Tools\wimlib\COPYING.CCO.txt
+  \Projects\Tools\wimlib\COPYING.GPLv3.txt
+  \Projects\Tools\wimlib\COPYING.LGPLv3.txt
+  \Projects\Tools\wimlib\COPYING.libdivsufsort-lite.txt
+  \Projects\Tools\wimlib\COPYING.libxml2.txt
+  \Projects\Tools\wimlib\COPYING.txt
+  \Projects\Tools\wimlib\COPYING.winpthreads.txt
 
 --------------------------------------------------------
 

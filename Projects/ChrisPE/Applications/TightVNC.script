@@ -1,6 +1,6 @@
 [main]
-Title=DMDE
-Description=DM Disk Editor - can be used for disk/partition imaging.
+Title=TightVNC Server
+Description=TightVNC for Windows version 2.8.8.0
 Selected=True
 Level=5
 Author=ThePEBakeryTeam
@@ -12,10 +12,18 @@ Interface=Interface1
 pTextLabelMenu1="1",1,1,35,3,70,18,10,Bold
 pButtonMenu2="2",1,8,75,0,70,20,pButtonMenu2,0,True,_pButtonMenu2_,True
 pButtonMenu3="?",1,8,145,0,70,20,pButtonMenu3,0,True,_pButtonMenu3_,True
-pWebLabel1=http://dmde.com/,1,10,51,100,216,18,http://dmde.com/
-pTextLabel1="DMDE Website",1,1,51,77,230,18,10,Bold
-pTextLabel2="WARNING - 32-bit application. To run in a 64-bit build, enable SysWOW64...",1,1,51,123,500,18,10,Bold
-pCheckBoxInWim="Include Program in boot.wim",1,3,51,265,180,18,True
+pWebLabel1=https://www.tightvnc.com/,1,10,51,100,216,18,https://www.tightvnc.com/
+pTextLabel1="TightVNC Website",1,1,51,77,230,18,10,Bold
+pCheckBoxAuto="Run at boot",1,3,51,235,180,18,False,_pCheckBoxAuto_,True
+pCheckBoxInWim="Include Program in boot.wim",1,3,51,265,180,18,True,_pCheckBoxInWim_,True
+
+[pCheckBoxAuto]
+If,%pCheckBoxInWim%,Equal,False,If,%pCheckBoxAuto%,Equal,True,WriteInterface,Value,%ScriptFile%,Interface1,pCheckBoxInWim,True
+
+[pCheckBoxInWim]
+If,%pCheckBoxAuto%,Equal,True,If,%pCheckBoxInWim%,Equal,False,WriteInterface,Value,%ScriptFile%,Interface1,pCheckBoxAuto,False
+
+
 
 [Interface2]
 pButtonMenu1="1",1,8,5,0,70,20,pButtonMenu1,0,True,_pButtonMenu1_,True
@@ -57,7 +65,13 @@ message,"Applies to WinXShell#$c BBLean and LaunchBar Shell(s)#$x#$xSelect this 
 message,"This setting does not apply to any LaunchBar instance running as the WinPE Shell. This option only applies to a LaunchBar instance when the Applications' > 'LaunchBar' program script is selected in the build.#$x#$xIf the 'Applications' > 'LaunchBar' program script is selected than enable this option to add a program menu entry to the root of the LaunchBar menu bar. #$x#$xPlease note that if option '6] Programs in boot.wim' in the main project script is set as 'NO'#$c then LaunchBar and a number of other applications will not be available at boot. In this case a text based .ini file will be used for LaunchBar menu settings."
 
 [process]
-If,%FullProjectRun%,Equal,NO,Run,"%ProjectDir%\Core\common.script",PostConfigRun
+If,%FullProjectRun%,Equal,NO,Begin
+  If,%pCheckBoxAuto%,Equal,True,Begin
+    message,"You are running this script Post Build with the 'Run at boot' option enabled. Unfortunately this is not supported as a post processing option. Please disable this option or complete a full project build. #$x#$xAborting..." 
+	Exit
+  End
+  Else,Run,"%ProjectDir%\Core\common.script",PostConfigRun
+End
 AddInterface,%ScriptFile%,Interface1,""
 AddInterface,%ScriptFile%,Interface2,""
 If,%pCheckBoxInWim%,Equal,True,Set,%PROGRAMS.IN.WIM%,YES
@@ -69,26 +83,21 @@ If,%PROGRAMS.IN.WIM%,Equal,NO,Run,%ScriptFile%,NOT.IN.WIM
 If,%PROGRAMS.IN.WIM%,Equal,YES,Run,%ScriptFile%,IN.WIM
 
 [CHECKS]
-If,%ARCH%,Equal,x64,Begin
-  If,Not,ExistDir,"%TargetDir%\Windows\SysWOW64",Begin
-    Message,"DMDE is not compatible with x64 builds of WinPE - exiting...",Error,5
-    Exit,"DMDE is not compatible with x64 builds of WinPE - exiting..."
-  End
-End
-If,Not,ExistFile,"%Programs%\dmde\dmde.exe",Begin
-  Message,dmde is missing - exiting script...,Error,5
-  Exit,dmde is missing - exiting script...,WARN
+If,Not,ExistFile,"%Programs%\TightVNC\%ARCH%\tvnserver.exe",Begin
+  Message,TightVNC Server is missing - exiting script...,Error,5
+  Exit,TightVNC Server is missing - exiting script...,WARN
 End
 
 [MENU]
 If,%PROGRAMS.IN.WIM%,Equal,NO,Begin
   If,Not,ExistFile,"%OutputDir%\Programs\ShortcutsNotInWim.txt",Run,"%ProjectDir%\Core\common.script",NotInWim
-  TXTaddline,"%OutputDir%\Programs\ShortcutsNotInWim.txt","#$p~dp0nircmd.exe shortcut #$q#$p~dp0dmde\dmde.exe#$q #$q#$pTemp#$p\ShortCuts#$q #$qdmde#$q",Append
+  TXTaddline,"%OutputDir%\Programs\ShortcutsNotInWim.txt","#$p~dp0nircmd.exe shortcut #$q#$p~dp0TightVNC\tvnserver.exe#$q #$q#$pTemp#$p\ShortCuts#$q #$qTightVNC#$q",Append
+  If,%Shell%,Equal,LaunchBar,TXTaddline,"%OutputDir%\Programs\ShortcutsNotInWim.txt","#$p~dp0nircmd.exe shortcut #$q#$p~dp0TightVNC\tvnserver.exe#$q #$q#$pTemp#$p\ShortCuts#$q #$qTVNC Config#$q #$q-configservice#$q",Append
 End 
 If,%PROGRAMS.IN.WIM%,Equal,YES,Begin
-  ShellExecute,Hide,"%Tools%\Shortcut.exe","/A:C /T:#$q#$pSystemDrive#$p\Programs\DMDE\DMDE.exe#$q /F:#$q%ProjectTemp%\DMDE.lnk#$q /I:#$q#$pSystemDrive#$p\Programs\DMDE\DMDE.exe#$c0#$q"
-  If,ExistFile,"%ProjectTemp%\DMDE.lnk",Begin
-    Set,%MyShortcut%,DMDE.lnk
+  ShellExecute,Hide,"%Tools%\Shortcut.exe","/A:C /T:#$q#$pSystemDrive#$p\Programs\TightVNC\tvnserver.exe#$q /F:#$q%ProjectTemp%\TightVNC.lnk#$q /I:#$q#$pSystemDrive#$p\Programs\TightVNC\tvnserver.exe#$c0#$q"
+  If,ExistFile,"%ProjectTemp%\TightVNC.lnk",Begin
+    Set,%MyShortcut%,TightVNC.lnk
     If,%pCheckBoxShortcutDesktop%,Equal,True,FileCopy,"%ProjectTemp%\%MyShortcut%","%ProjectTemp%\ShortCuts\Desktop"
     If,%pCheckBoxShortcutQuick%,Equal,True,FileCopy,"%ProjectTemp%\%MyShortcut%","%ProjectTemp%\ShortCuts\Quick"
     If,%pCheckBoxShortcutPrograms%,Equal,True,Begin
@@ -99,29 +108,59 @@ If,%PROGRAMS.IN.WIM%,Equal,YES,Begin
     If,%FullProjectRun%,Equal,NO,Run,"%ProjectDir%\Core\common.script",PostConfigRunShortcuts
     FileDelete,"%ProjectTemp%\%MyShortcut%"
   End
+  If,%Shell%,Equal,LaunchBar,Begin
+    ShellExecute,Hide,"%Tools%\Shortcut.exe","/A:C /T:#$q#$pSystemDrive#$p\Programs\TightVNC\tvnserver.exe#$q /F:#$q%ProjectTemp%\TVNC Config.lnk#$q /P:-configservice /I:#$q#$pSystemDrive#$p\Programs\TightVNC\tvnserver.exe#$c0#$q"
+    If,ExistFile,"%ProjectTemp%\TVNC Config.lnk",Begin
+      Set,%MyShortcut%,TVNC Config.lnk
+      If,%pCheckBoxShortcutDesktop%,Equal,True,FileCopy,"%ProjectTemp%\%MyShortcut%","%ProjectTemp%\ShortCuts\Desktop"
+      If,%pCheckBoxShortcutQuick%,Equal,True,FileCopy,"%ProjectTemp%\%MyShortcut%","%ProjectTemp%\ShortCuts\Quick"
+      If,%pCheckBoxShortcutPrograms%,Equal,True,Begin
+        Set,%ProgramMenuPath%,%pTextBox1%
+        Run,"%ProjectDir%\Core\common.script",StartMenu
+      End
+      If,%pCheckBoxShortcutLaunchBar%,Equal,True,FileCopy,"%ProjectTemp%\%MyShortcut%","%ProjectTemp%\ShortCuts\LaunchBar"
+      If,%FullProjectRun%,Equal,NO,Run,"%ProjectDir%\Core\common.script",PostConfigRunShortcuts
+      FileDelete,"%ProjectTemp%\%MyShortcut%"
+    End
+  End 
 End
 
 [COMMON]
 If,%PROGRAMS.IN.WIM%,Equal,NO,Set,%PATH%,%OutputDir%
 If,%PROGRAMS.IN.WIM%,Equal,YES,Set,%PATH%,%TargetDir%
 If,Not,ExistDir,"%PATH%\Programs",DirMake,"%PATH%\Programs"
-DirMake,"%PATH%\Programs\dmde"
-DirCopy,"%Programs%\dmde\*.*","%PATH%\Programs\dmde"
-IniWrite,"%OutputDir%\Project.Settings.ini",PROGRAMS,DMDE,YES
+DirMake,"%PATH%\Programs\TightVNC"
+FileCopy,"%Programs%\TightVNC\%ARCH%\tvnserver.exe","%PATH%\Programs\TightVNC"
+IniWrite,"%OutputDir%\Project.Settings.ini",PROGRAMS,TightVNC,YES
 
 [IN.WIM]
+Echo,"Mounting registry hives..."
+If,Not,ExistRegSection,HKLM,_WinPE_DEFAULT,RegHiveLoad,_WinPE_DEFAULT,"%Target_config%\default"
+ShellExecute,hide,regedit.exe,"/s #$q%Programs%\TightVNC\TVNC.reg#$q"
+Echo,"Unmounting registry hives..."
+RegHiveUnload,_WinPE_DEFAULT
+If,%pCheckBoxAuto%,Equal,True,Begin
+  If,Not,ExistFile,"%Target_system32%\InitializeNetwork.txt",Run,"%ProjectDir%\Settings\Network.script",InitializeNetwork
+  If,Not,ExistFile,"%Target_system32%\DisableFirewall.txt",Run,"%ProjectDir%\Settings\Network.script",DisableFirewall
+  FileCreateBlank,"%PATH%\Programs\TightVNC\tvnserver.cmd"
+  TXTaddLine,"%PATH%\Programs\TightVNC\tvnserver.cmd",@echo off,Append
+  TXTaddLine,"%PATH%\Programs\TightVNC\tvnserver.cmd",cd #$pSystemDrive#$p\Programs\TightVNC,Append
+  TXTaddLine,"%PATH%\Programs\TightVNC\tvnserver.cmd",start tvnserver.exe -run,Append
+  If,Not,ExistFile,%ProjectTemp%\winpeshl.txt,FileCreateBlank,%ProjectTemp%\winpeshl.txt
+  TXTaddLine,%ProjectTemp%\winpeshl.txt,"#$pSystemDrive#$p\Programs\TightVNC\tvnserver.cmd",Append
+End
 If,%FullProjectRun%,Equal,NO,WimPathAdd,%OutputDir%\sources\boot.wim,%Boot.wim.Image.number%,%TargetDir%,""
-//Wait,1
 
 [NOT.IN.WIM]
 //Wait,1
 If,%FullProjectRun%,Equal,NO,Run,"%ProjectDir%\Core\common.script",PostConfigRunNotInWim
 
 [AuthorEncoded]
-Logo=dmde.ico
-dmde.ico=1271,1695
+tvnserver.ico=422,563
+logo=tvnserver.ico
 
-[EncodedFile-AuthorEncoded-dmde.ico]
+[EncodedFile-AuthorEncoded-tvnserver.ico]
 lines=0
-0=eJztmvtPE1kUx0v2f9jfdM1uANE1MUH9TeMPSMxqsoCPX1xXEzUaRMXFTTTtahOBbIQoLrvqT64PwCpqFGICpiKS1RhRHvGxG4vKa18sCNNGBDrt2fu97bQzFNqZztSpSYccZjq9nfl87z3n3Dtzr8WSxv4WL7bwzZFusXzK9vOZ4dRWZmmWeZZYm33D53NtBemnbPkZvcxEZpRkBqZea17GL9avv5gjZ7ety8hh3wn2jV/SleMldL/xHLU3O5LKwAS2IxsWQssYmEP1ztirdufS0EAPdd1roOvVh8hRsTepDEzdbQ30b7+LThSu4hrQDtb89NOod7DXlO8y20diWu2PhZwV7QBfsuVl9tWfKKGu1pums6m17rZG5kvfkRSr9xt+pWvVB03nUmvwpd9unsWxF58fNdWRo3Kf6VxqDaxglj6n+FP8ZvBXFeXS1ZMldLF0O9k3LpqxzA8FmXT6+3y6dKyQftr7VVLwI/c+ueMgn+ihyfejNDUxRsJwH5V/u1RR7tj25TToekzilJsmx9+S6HXT7+3NVPpNtmn8YO/paiHvpJuI/NxwjHOH12eFylXsWEHCSB+J4jiFN1Z2ykP/9D7VpSFe/mjswXHJLOw+dvwu+BvSrSEefvC5GOeUnJ35RU/33ZnZve/C7F4P/dnTwbQKIQ0iNPTFp0ErP/hedjgj6v310zZF3MLfheFeGbuf+3yL4ziP4/bbNVyzvB2GBl5Q2eYlCeM3gl0qY5QGtfxGshupQQ1/ItiN0hCLX1eeYbHqrKtQ3O/skc00/Ncf9HPxWoWGJ846xi2Q1rwUjV9vnnHWVUawg9Hvn6SJ8ZEIDY+hQWNeisbfdL6c/L5wrvb7J8j9diBifODqbCGfL9w3gf3Zg0ZFmcPrsljfPIqaDSj0QcOw7naIxl+6KZv+ftPNrxHuMwXqaLnM7jU/9BswgAVM4T7Kw8dD8ntdrtzDxxn4PlAfM2vQEg+x/D/ZNajJP8msQW3+h//BD5Ua3MxfL/F7xdJQX7VfcT18RpwoNWiI6U3Zmvhn1yDwmIuuwcvG1iM8huXXQ4wHNASVshzg6ryjKINcgZyB3CHdEzml6VyZZv542gH1KjKNyJ3y6zhrK4K+Eah/n/ie3CP9PBdLZdTk73jGn1raAX1VBDvr0+S+gz4P/cd0djX9Zrzjf7UxPd2aWZ+CMUW43sfJMzpIlTtXKtjVjFf08MejwWh2vfxaNCSC3Qh+NRoSxW4Uf7S8xJ8VDcgzieafTUPgWV1/nvkQ/JEa/KG+aUb29Qt0sSeCX9Lw/OEt7vP8XRXzhYGX7fz5TF6ufMsyGh16xfxmjL/7wjgD4wW17Inil6y6eA27VhF/Zyjv1+SG2LxwdBsfD+EdpNZ7pN7fpvhT/CH+j3b+zprH5+/666sOUGfrDdO51Brm2DEXb+Pzp5lnkM/+G3xNF8t2ms4WyzDHPjT4ijDnjvUa1oKsz9h54WTRaq4B7QBfMnu9wHQDE+bYwY61DmDG2gfl+o1FBF9K1vUbWCfA652xSus3pC3QDplnEA+25F0/08/XawTrHVsr/n2Sk2PHPi0nqCm1T9Tejh2r51bsWb3/D0rNOrt4nONIyU1J1ctMzmcYBSMR7FOF0OtZsMtrzyj7zcAEAL3jBtiqSXEKAQAAAAIAAAAkAAAArwQAAAAAAAABAAAAAAAAAAAAAAA
+0=eJzFkrFShDAQhn/QmaSSpFIrmCucewwfKXZ2pLPER+JxLOM1pFv3T0DRGSqdcYHLfWH3z7K7QIMWw+B0vcZbCzwAcK7yuQFuroCz7g36POrDfVpscWCx3IixLrz0zzzPunJHyg2RuvDiFn9+WCffLB1wNnI5qQ0rR8hpz8C45wWY9pwBs7H3IgGwlx2XnMt5jZLvmdn4xZk8rfmof9oy965wIJvC9O9LUWzxJN/ybcZIpj/lukzBGk+5aaFgjWf4Ux/NFq9o333Qp9RjqYclzZDxkmsydypYmNlM3qtg9accz1ZBMsMtcw22fE9euQ8qqBzXj194SuqW0iZbZUfl8v5F5Jm7R/365KMJ+i/jnDvUWd/mfD70jr+ec/ZnqnUJOnKD9oSjNzTSo9Sb3R/FNfLKrilH5IYM3BvP+htVdV3SdgbloG1OU+ooHUyyNYvQ/XG9PwB5E0zGeJzjLSnLK04tKkst0stMzmcYBSMMmLFA6EhG7PI33A5xMTABAJJtB+YWabhAAQAAAAIAAAApAAAAWQEAAAAAAAABAAAAAAAAAAAAAAA
+
 
