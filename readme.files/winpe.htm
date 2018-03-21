@@ -14,6 +14,8 @@
 <option value="instructions_pebakery.htm">Instructions</option>  
 <option value="menu_system.htm">Menu System</option>  
 <option value="not_in_wim.htm">Include...in boot.wim</option>  
+<option value="postconfig.htm">Post Config</option>  
+<option value="packages.htm">Packages</option>  
 <option value="usb.htm">...Bootable USB...</option>  
 <option value="uefi.htm">UEFI, BIOS, GPT...</option>  
 <option value="multiboot.htm">Multiboot WinPE</option>  
@@ -21,6 +23,7 @@
 <option value="" disabled>Appendices</option> 
 <option value="" disabled>=========</option> 
 <option value="quick_pebakery.htm">Quick Start</option>  
+<option value="links.htm">Download\Links</option>  
 <option value="acknowledgements.htm">Acknowledgements</option>  
 <option value="" disabled></option> 
 </select> 
@@ -42,27 +45,27 @@ Windows Preinstallation Environment (<font class="file">WinPE</font>) is a light
 
 
 
-<p>
+<p class="break3em">
 When a computer is running (booted from) a full version of Windows certain files are 'locked' - making it difficult to take a system backup or to remove a virus/malware. Consequently some tasks are best performed when the operating system is offline - this can be achieved by booting to another operating system such as <font class="file">WinPE</font> to access the offline system. 
 </p>
 
 
 
 
-<p>
-There are two distinct methods for booting <font class="file">WinPE</font> - RAM Boot and Flat Boot. RAM Boot is the most common method and anyone who has installed Windows Vista/7/8/8.1 will already (perhaps unknowingly) have used it. Microsoft recommend a minimum of 512 MB RAM in order to run a RAM booted version of <font class="file">WinPE</font> - in my own tests it was possible to boot some versions of <font class="file">WinPE</font> with 256 MB RAM. For more details about RAM and Flat boot <font class="file">WinPE</font> and RAM requirements, please see <a class="external" target="_blank" href="http://mistyprojects.co.uk/documents/WinPE.RAM/winpe.ram.usage.htm">here</a>.
+<p class="break3em">
+There are two distinct methods for booting <font class="file">WinPE</font> - RAM Boot and Flat Boot. RAM Boot is the most common method and anyone who has installed Windows Vista/7/8/8.1 will already (perhaps unknowingly) have used it. Microsoft recommend a minimum of 512 MB RAM in order to run a RAM booted version of <font class="file">WinPE</font> - in own tests it was possible to boot some versions of <font class="file">WinPE</font> with 256 MB RAM. For more details about RAM and Flat boot <font class="file">WinPE</font> and RAM requirements, please see <a class="external" target="_blank" href="http://mistyprojects.co.uk/documents/WinPE.RAM/winpe.ram.usage.htm">here</a>.
 </p>
 
 
 
-<p>
-When <font class="file">WinPE</font> is RAM Booted or Flat Booted from read only media it will not save any changes made to it when the system is rebooted. A benefit of this is always having a clean (virus free) <font class="file">WinPE</font> operating system on boot. 
+<p class="break3em">
+When <font class="file">WinPE</font> is RAM Booted or Flat Booted from <u>read only</u> media it will not save any changes made to it when the system is rebooted. A benefit of this is always having a clean (virus free) <font class="file">WinPE</font> operating system on boot. 
 </p>
 
 
 
 
-<p>
+<p class="break3em">
 <font class="file">WinPE</font> is easy to customise. The builds prior to customisation are very limited and the UI (User Interface) is command line. It is possible to adapt these builds to use a GUI shell and other programs and utilities can be added so that various tasks can be carried out, including but not limited to - 
 <ul>
 <li><font class="file">Disk partitioning</font></li>
@@ -79,50 +82,133 @@ When <font class="file">WinPE</font> is RAM Booted or Flat Booted from read only
 
 
 
-<h2><u>WinPE Versions</u></h2>
+<h2 class="breaktop"><u>WinPE Versions</u></h2>
 
 
 <p>
-There are a number of different versions of official Microsoft <font class="file">WinPE</font>. I believe that the earlier versions used the same codebase as Windows XP/2003 - these are usually referred to as <font class="file">WinPE</font> 1.*.
+There are a number of different versions of official Microsoft <font class="file">WinPE</font>. The earlier versions used the same codebase as Windows XP/2003 - these are usually referred to as <font class="file">WinPE</font> 1.*.
 </p>
 
 
 
-<p>
+<p class="break3em">
 Earlier versions of <font class="file">WinPE</font> (prior to the introduction of version 2.0) were aimed at enterprise customers and were not available to the general public. As of version 2.0 it was possible for non-enterprise customers to create their own <font class="file">WinPE</font> by using the freely available Windows Automated Installation Kit (WAIK). The WAIK has now been replaced with the Windows Assessment and Deployment Kit (ADK). 
 </p>
 
 
 
-<p>
+<p class="break3em">
 Windows Operating Systems use a numbering format for identification purposes - these numbers can be used to identify the codebase from which a particular <font class="file">WinPE</font> was created. Windows builds use the numbering format ‘MajorVersion.MinorVersion.Build’ - e.g. 6.1.7600. Unlike the product names associated with Windows Operating Systems (e.g. Windows 7) these numbers can refer to multiple products - version 6.1.7600 for example refers to both Windows 7 and Windows Server 2008.
 </p>
 
 
-<p>
+<p class="break3em">
 <font class="file">WinPE</font> versions include -
 
-<ul>
-<li><b>2.0</b> (6.0.6000) - Windows Vista</li>
-<li><b>2.1</b> (6.0.6001) - Windows Vista (SP1)/ Server 2008</li>
-<li><b>3.0</b> (6.1.7600) - Windows 7/Server 2008 R2</li>
-<li><b>3.1</b> (6.1.7601) - Windows 7 (SP1)/Server 2008 R2 (SP1)</li>
-<li><b>4.0</b> (6.2.9200) - Windows 8/Windows Server 2012</li>
-<li><b>5.0</b> (6.3.9600) - Windows 8.1</li>
-<li><b>5.1</b> (6.3.9600) - Windows 8.1 Update 1</li>
-<li><b>10.x</b> (10.0.#####) - Windows 10</li>
-</ul>
-</p>
-
-
 <p>
-There are 32 bit and 64 bit versions of all of the above <font class="file">WinPE</font> systems. To install a Windows 32 bit operating system you will need to use a 32 bit <font class="file">WinPE</font>, and to install a Windows 64 bit operating system you will need to use a Windows 64 bit <font class="file">WinPE</font> - I am referring here to running setup.exe included with the operating system media.
+<table style="width:90%">
+  <col width="15%">
+  <col width="30%">
+  <col width="55%">
+  <tr>
+    <th>WinPE</th>
+    <th>Major.Minor.Build</th> 
+    <th>OS</th> 
+  </tr>
+  <tr>
+    <td>2.0</td>
+    <td>6.0.6000</td>
+    <td>Windows Vista</td> 
+  </tr>
+  <tr>
+    <td>2.1</td>
+    <td>6.0.6001</td>
+    <td>Windows Vista (SP1) / Server 2008</td> 
+  </tr>
+  <tr>
+    <td>3.0</td>
+    <td>6.1.7600</td>
+    <td>Windows 7 / Server 2008 R2</td> 
+  </tr>
+  <tr>
+    <td>3.1</td>
+    <td>6.1.7601</td>
+    <td>Windows 7 (SP1) / Server 2008 R2 (SP1)</td> 
+  </tr>
+  <tr>
+    <td>4.0</td>
+    <td>6.2.9200</td>
+    <td>Windows 8 / Server 2012</td> 
+  </tr>
+  <tr>
+    <td>5.0</td>
+    <td>6.3.9600</td>
+    <td>Windows 8.1</td> 
+  </tr>
+  <tr>
+    <td>5.1</td>
+    <td>6.3.9600</td>
+    <td>Windows 8.1 Update</td> 
+  </tr>
+</table>
 </p>
 
-<p>
-More recent versions of <font class="file">WinPE</font> are likely to better support more recent hardware without the need for injecting drivers. <font class="file">WinPE</font> 3.x builds are very stable and I would personal recommend using these builds unless a Windows Forensic Environment is required - or hardware is not supported.  
+
+
+
+
+<p class="break3em">
+Following the release of Windows 10, <font class="file">WinPE</font> versions are also identifed by MajorVersion.MinorVersion.Build numbers that correspond with the Windows 10 build from which they were compiled. WinPE 10.0.16299 for example corresponds with Windows 10.0.16299 (aka Version 1709 / Fall Creators Update) -
+
+<table style="width:90%">
+  <col width="15%">
+  <col width="30%">
+  <col width="55%">
+  <tr>
+    <th>Build</th>
+    <th>Version</th> 
+    <th>Name</th> 
+  </tr>
+  <tr>
+    <td>10.0.10240</td>
+    <td>1507</td>
+    <td>-</td> 
+  </tr>
+  <tr>
+    <td>10.0.10586</td>
+    <td>1511</td>
+    <td>November Update</td> 
+  </tr>
+  <tr>
+    <td>10.0.14393</td>
+    <td>1607</td>
+    <td>Anniversary Update</td> 
+  </tr>
+  <tr>
+    <td>10.0.15063</td>
+    <td>1703</td>
+    <td>Creators Update</td> 
+  </tr>
+  <tr>
+    <td>10.0.16299</td>
+    <td>1709</td>
+    <td>Fall Creators Update</td> 
+  </tr>
+</table>
+</p>
+
+
+<p class="break3em">
+There are 32 bit and 64 bit versions of all of the above <font class="file">WinPE</font> systems. To install a Windows 32 bit operating system by running <font class="file">setup.exe</font> you will need to use a 32 bit <font class="file">WinPE</font>, and to install a Windows 64 bit operating system by running <font class="file">setup.exe</font> you will need to use a Windows 64 bit <font class="file">WinPE</font>. Whilst the bit-type must match if running <font class="file">setup.exe</font> to install the Operating System, it is possible to use alternative methods to install Windows - for example using <font class="file">wimlib</font> or <font class="file">DISM</font> to <font class="file">Apply</font> an image from <font class="file">install.wim</font> and then running the <font class="file">bcdboot</font> command to create boot files. 
 </p>
 
 
 
-<p class="breaktop"><font class="file">Document date - 6<sup>th</sup> March 2018</font></p></font></body></html>
+
+<p class="break3em">
+More recent versions of <font class="file">WinPE</font> are likely to better support more recent hardware without the need for injecting drivers. <font class="file">WinPE</font> 3.x builds are very stable and have been well tested, with a large userbase and support for a wide range of third party scripts in other projects.   
+</p>
+
+
+
+<p class="breaktop"><font class="file">Document date - 21<sup>st</sup> March 2018</font></p></font></body></html>

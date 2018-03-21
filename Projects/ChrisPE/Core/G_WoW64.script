@@ -4,8 +4,8 @@ Description=
 Selected=True
 Level=2
 Author=ThePEBakeryTeam
-Version=20180306
-Date=2018-03-06
+Version=20180321
+Date=2018-03-21
 Interface=Interface
 NoWarning=False
 
@@ -17,6 +17,7 @@ pButton1=?,1,8,10,80,18,18,?option1,0,True,_?option1_,True
 message,"Early versions of Windows 10 (up to and including Windows 10.0.14393) will not work without a fix to create two missing native objects - #$x#$x- create an object #$q\\KnownDlls32#$q with NtCreateDirectoryObject API,#$x- create #$qSymbolicLink#$q with NtCreateSymbolicLinkObject API.#$x#$xloadWOW64.exe (developed by yamingw) resolves these issues. At the time of writing this fix does not appear to be required in recent releases - builds 10.0.15063 and 10.0.16299 function without running loadWOW64.exe. As this may change in future releases#$c enable this option to force the use of loadWOW64.exe in all Windows 10 versions. Please note that loadWOW64.exe will be automatically applied for build versions up to and including Windows 10.0.14393."
 
 [process]
+If,%FullProjectRun%,Equal,NO,Run,"%ProjectDir%\Core\common.script",ExitScript
 If,%ARCH%,Equal,x64,Begin
 Run,%ScriptFile%,Wow64-WIM.All
 If,%CodeBase%,Equal,6.2.9200,Run,%ScriptFile%,Cache.WoW64.Dependencies

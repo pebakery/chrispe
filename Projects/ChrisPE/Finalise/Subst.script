@@ -1,0 +1,35 @@
+[main]
+Title=Subst
+Description=Assign a virtual drive letter to the ChrisPE boot device.
+Selected=True
+Level=8
+Author=ThePEBakeryTeam
+Version=20180321
+Date=2018-03-21
+Interface=Interface
+
+[Interface]
+pBevel_A1=,1,12,10,70,500,40
+pScrollBox_A1=Y,1,4,20,80,100,20,Z,Y,W,V,U,T,S,R,Q,P,O,N,M,L,K,J,I,H,G,F,E,D,C,B,A
+pTextLabel_A1=Preferred Mount Point,1,1,196,81,200,18,10,Bold
+pButton_A1=HELP,1,8,430,80,70,20,HELPA1,0,True,_HELPA1_,True
+pBevel_A2=,1,12,10,120,500,40
+pScrollBox_A2=A,1,4,20,130,100,20,Z,Y,W,V,U,T,S,R,Q,P,O,N,M,L,K,J,I,H,G,F,E,D,C,B,A
+pTextLabel_A2="Fallback Mount Point",1,1,200,131,200,18,10,Bold
+pButton_A2=HELP,1,8,430,130,70,20,HELPA2,0,True,_HELPA2_,True
+
+[HELPA1]
+message,"Run a batch file to search for a unique tag file - locating the media containing ChrisPE. The 'subst.exe' utility will then be used to map the media to the virtual drive letter selected in this option.#$x#$xIf the drive letter selected is already in use when WinPE is booted then the fallback option will be used." 
+
+[HELPA2]
+message,"Fallback option if the drive letter selected as Preferred Mount Point is already in use when WinPE is booted."
+
+[process]
+If,%FullProjectRun%,Equal,NO,Run,"%ProjectDir%\Core\common.script",ExitScript
+If,Not,ExistDir,"%TargetDir%\Programs\misc",DirMake,"%TargetDir%\Programs\misc"
+FileCopy,"%Programs%\misc\Subst.cmd","%TargetDir%\Programs\misc"
+TXTReplace,"%TargetDir%\Programs\misc\Subst.cmd",MOUNTA,%pScrollBox_A1%
+TXTReplace,"%TargetDir%\Programs\misc\Subst.cmd",MOUNTB,%pScrollBox_A2%
+TXTReplace,"%TargetDir%\Programs\misc\Subst.cmd",MyTagFile,%TagFile%.tag
+If,Not,ExistFile,%ProjectTemp%\winpeshl.txt,FileCreateBlank,%ProjectTemp%\winpeshl.txt
+TXTaddLine,%ProjectTemp%\winpeshl.txt,#$pSystemDrive#$p\Programs\misc\Subst.cmd,Append

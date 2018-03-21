@@ -14,6 +14,8 @@
 <option value="instructions_pebakery.htm">Instructions</option>  
 <option value="menu_system.htm">Menu System</option>  
 <option value="not_in_wim.htm">Include...in boot.wim</option>  
+<option value="postconfig.htm">Post Config</option>  
+<option value="packages.htm">Packages</option>  
 <option value="usb.htm">...Bootable USB...</option>  
 <option value="uefi.htm">UEFI, BIOS, GPT...</option>  
 <option value="multiboot.htm">Multiboot WinPE</option>  
@@ -21,6 +23,7 @@
 <option value="" disabled>Appendices</option> 
 <option value="" disabled>=========</option> 
 <option value="quick_pebakery.htm">Quick Start</option>  
+<option value="links.htm">Download\Links</option>  
 <option value="acknowledgements.htm">Acknowledgements</option>  
 <option value="" disabled></option> 
 </select> 
@@ -48,6 +51,7 @@ The <font class="file">ChrisPE</font> project scripts can currently be divided i
 <li><a class="internal" href="#settings">Settings</a></li>
 <li><a class="internal" href="#applications">Applications</a></li>
 <li><a class="internal" href="#finalise">Finalise</a></li>
+<li><a class="internal" href="#drivers">Drivers</a></li>
 <li><a class="internal" href="#mediacreation">MediaCreation</a></li>
 <li><a class="internal" href="#postconfig">PostConfig</a></li>
 </ul>
@@ -177,6 +181,21 @@ Please note that only two of the scripts in this section are actually visible to
 
 
 <p>
+
+<ul class="break3em">
+<li><b>Network</b> - this script can be enabled without selecting any of the script options to give different results - 
+	<ul>
+	<li class="break1em">No options selected - will add a batch file + a menu entry to run it. The batch file runs the command <i>"wpeutil InitializeNetwork"</i> - this will Initialize network components and drivers, and set the computer name to a randomly chosen value. Running the InitializeNetwork command can cause an unnecessary delay when <font class="file">WinPE</font> boots - added it as a menu option ensures that the network can be started <i><u>if required</u></i>.</li>
+	</ul>
+	<ul>
+	<li class="break1em">Option(s) selected - selecting any combination of script options will add <font class="file">unattend.xml</font> to the build, with a menu entry added to <font class="file">winpeshl.ini</font> to automatically run <font class="file">wpeinit</font>. This will Initialize the network during the boot process. This is useful if an application requires network access - e.g. TightVNC Server.</li>
+	</ul>
+<br />Path - <font class="file">Projects</font> &gt; <font class="file">ChrisPE</font> &gt; <font class="file">Settings</font> &gt; <font class="file">Network.script</font></li>
+</ul>
+
+
+
+
 <ul class="break3em">
 <li><b>Recommended</b> - <br />Path - <font class="file">Projects</font> &gt; <font class="file">ChrisPE</font> &gt; <font class="file">Settings</font> &gt; <font class="file">Recommended.script</font></li>
 	<ul>
@@ -187,9 +206,6 @@ Please note that only two of the scripts in this section are actually visible to
 	</li>
 
 	<li class="break1em"><b>Keyboard Layout</b> - change the keyboard layout in <font class="file">WinPE</font> whilst it's running. Uses <font class="file">wpeutil</font> tool that is already included in the build.
-	</li>
-
-	<li class="break1em"><b>Network</b> - This will add a batch file + a menu entry to run it. The batch file runs the command <i>"wpeinit InitializeNetwork"</i> - this will Initialize network components and drivers, and set the computer name to a randomly-chosen value. This command is usually executed in <font class="file">startnet.cmd</font> on a standard <font class="file">WinPE</font>. I found that running this command causes an unnecessary delay when <font class="file">WinPE</font> boots and therefore added it as a menu option so that it can be started <i><u>if required</u></i>.
 	</li>
 
 	<li class="break1em"><b>ScreenRes</b> - This will add a menu option for changing the screen resolution. No external programs are used, however a number of xml files are added - this option simply starts a batch file that will run the <font class="file">wpeinit</font> command to change the screen resolution to a value set in the included xml files. A number of screen resolutions are available in the batch file. 
@@ -257,7 +273,7 @@ If <font class="file">LaunchBar</font> is enabled, an option to add shortcuts to
 
 
 
-<ul>
+<ul class="break3em">
 <li>
 <b>Add Custom Folders\Files</b> - select a directory and it's contents will be added to the build.
 	<ul>
@@ -270,7 +286,7 @@ If <font class="file">LaunchBar</font> is enabled, an option to add shortcuts to
 
 
 
-<ul>
+<ul class="break3em">
 <li>
 <b>7-Zip</b> (version 16.04) - File archiver. Used to extract contents from <i>.zip</i>/<i>.7z</i>/<i>.iso</i>/<i>.wim</i> files and numerous other file types. Can also create <i>.zip</i> and <i>.7z</i> files. Right click a file in explorer to access menu options for extracting from or creating files. <a class="external" target="_blank" href="http://www.7-zip.org/">7-zip website</a>
 	<ul>
@@ -284,7 +300,7 @@ If <font class="file">LaunchBar</font> is enabled, an option to add shortcuts to
 
 
 
-<ul>
+<ul class="break3em">
 <li>
 <b>Disk Management</b> - Disk management console (diskmgmt.msc). Not working in <font class="file">WinPE</font> 2.* (Vista sources). This will add an option to install diskmgmt.msc on demand. Credit to IcemanND on the msfn forum - see <a class="external" target="_blank" href="http://www.msfn.org/board/topic/153842-disk-partition-gui-in-winpe/?p=979055">here</a>.
 	<ul>
@@ -298,7 +314,7 @@ If <font class="file">LaunchBar</font> is enabled, an option to add shortcuts to
 
 
 
-<ul>
+<ul class="break3em">
 <li>
 <b>DMDE</b> (Version 3.4.2) - "...is a powerful software for data searching, editing, and recovery on disks. It may recover directory structure and files in some complicated cases through the use of special algorithms when other software can't help....DMDE has a number of freeware features such as disk editor, simple partition manager (e.g. allows undelete a partition), a tool to create disk images and clones, RAID constructor, file recovery from the current panel....DMDE supports FAT12/16, FAT32, NTFS, Ext2/3/4..." The Free Edition is included in the download - please refer to the  License Agreement - <a class="internal" href="eula_en.txt">here</a>. <a class="external" target="_blank" href="http://dmde.com/">DMDE website</a>
 	<ul>
@@ -309,7 +325,7 @@ If <font class="file">LaunchBar</font> is enabled, an option to add shortcuts to
 </ul>
 
 
-<ul>
+<ul class="break3em">
 <li>
 <b>Explorer++</b> (version 1.3.5) - file manager with multiple pane and tab support. <a class="external" target="_blank" href="https://explorerplusplus.com/">Explorer++ website</a>
 	<ul>
@@ -323,7 +339,7 @@ If <font class="file">LaunchBar</font> is enabled, an option to add shortcuts to
 
 
 
-<ul>
+<ul class="break3em">
 <li>
 <b>ImDisk</b> (version 2.0.9) - ImDisk is a virtual disk driver for Windows. It can create virtual hard disk, floppy or CD/DVD drives using image files or system memory. Right click on supported image types (e.g. <b>.iso</b> files) to mount them as virtual drives. Can also be used to create disc images of real drives. <a class="external" target="_blank" href="http://www.ltr-data.se/opencode.html/#ImDisk">ImDisk website</a>
 	<ul>
@@ -335,7 +351,7 @@ If <font class="file">LaunchBar</font> is enabled, an option to add shortcuts to
 
 
 
-<ul>
+<ul class="break3em">
 <li>
 <b>JustManager</b> (Version 0.1 Alpha 54) - file manager with multiple pane and tab support. <a class="external" target="_blank" href="http://justmanager.ru/">JustManager website</a>
 	<ul>
@@ -346,7 +362,7 @@ If <font class="file">LaunchBar</font> is enabled, an option to add shortcuts to
 </ul>
 
 
-<ul>
+<ul class="break3em">
 <li>
 <b>Q-Dir</b> - Quad explorer file manager with multiple pane and tab support. <a class="external" target="_blank" href="https://www.softwareok.com/?seite=Freeware/Q-Dir">Q-Dir website</a>
 	<ul>
@@ -359,7 +375,7 @@ If <font class="file">LaunchBar</font> is enabled, an option to add shortcuts to
 
 
 
-<ul>
+<ul class="break3em">
 <li>
 <b>Sumatra</b> (Version 3.1.2) - <b>.PDF</b> file reader. <a class="external" target="_blank" href="https://www.sumatrapdfreader.org/">SumatraPDF website</a>
 	<ul>
@@ -374,7 +390,22 @@ If <font class="file">LaunchBar</font> is enabled, an option to add shortcuts to
 
 
 
-<ul>
+<ul class="break3em">
+<li>
+<b>TightVNC Server</b> (Version 2.8.8.0) - <font class="file">VNC</font> server application. Boot <font class="file">WinPE</font> and create a Remote Desktop - accessing the <font class="file">WinPE</font> system from a <font class="file">VNC</font> client application. Includes an option to run at boot - this is useful if booting <font class="file">WinPE</font> on a remote/headless system. <a class="external" target="_blank" href="https://www.tightvnc.com/">TightVNC website</a>
+	<ul>
+	<li>Included in download - YES</li>
+	<li>Processor Architecture - x86 and x64</li>
+	</ul>
+</li>
+</ul>
+
+
+
+
+
+
+<ul class="break3em">
 <li>
 <b>TinyHexer</b> (version 1.7) - Tiny hexer is a hex editor for binary files. It will also allow access and editing of disk sectors. 
 	<ul>
@@ -399,7 +430,17 @@ If <font class="file">LaunchBar</font> is enabled, an option to add shortcuts to
 
 
 <p>
-Only one script is included in this section -
+<ul class="break3em"><li>
+<b>Subst</b> - add a batch file to locate the boot media (via a unique tag file created during the boot process) and use the <font class="file">subst.exe</font> utility to assign a virtual drive letter. This is useful if using custom scripts/utilities/shortcuts with a hardcoded path. 
+<br />Path - <font class="file">Projects</font> &gt; <font class="file">ChrisPE</font> &gt; <font class="file">Finalise</font> &gt; <font class="file">Subst.script</font>
+</li></ul>
+
+
+<ul class="break3em"><li>
+<b>WinFE</b> - Add the registry settings required to create a Windows Forensic Environment. <font class="file">Erwan Labalec</font>'s <font class="file">DiskMgr</font> will be added to the build - this provides a User Interface for toggling disk attributes. 
+<br />Path - <font class="file">Projects</font> &gt; <font class="file">ChrisPE</font> &gt; <font class="file">Finalise</font> &gt; <font class="file">winfe.script</font>
+</li></ul>
+
 
 
 <ul class="break3em"><li>
@@ -409,6 +450,30 @@ Only one script is included in this section -
 
 
 
+
+
+
+
+
+<a name="drivers"></a><br>
+<h2><u>Drivers</u></h2>
+
+
+
+<p>
+Only one script is included in this section -
+
+
+<ul class="break3em"><li>
+<b>Drivers</b> - Use this script to integrate drivers to the build. <font class="file">Get WAIK Tools</font> is used to download <font class="file">DISM</font>. There are two options in the script -
+
+	<ul><li class="break1em"><b>EXTRACT</b> - the contents of the image selected in <font class="file">boot.wim</font> will be fully extracted and <font class="file">DISM</font> will be used to inject the drivers to the offline image. If this method is selected then setting option 4 in the main project script (<b>METHOD</b>) as <font class="file">EXTRACT</font> is recommended - this will fully extract <font class="file">boot.wim</font> early in the build process.</ul>
+
+	<ul><li class="break1em"><b>MOUNT</b> - <font class="file">DISM</font> will be used to mount the image selected in <font class="file">boot.wim</font></li> &gt; inject drivers to the mounted image &gt; unmount the image.</ul>
+
+<br />Path - <font class="file">Projects</font> &gt; <font class="file">ChrisPE</font> &gt; <font class="file">Drivers</font> &gt; <font class="file">drivers.script</font>
+</li></ul>
+</p>
 
 
 
@@ -425,7 +490,7 @@ The script in this section can either be selected during the build process, or c
 
 
 <p>
-<ul>
+<ul class="break3em">
 <li>
 <b>Create ISO</b> - this script includes a number of options, the default settings will create a RAM bootable ISO file using MKISOFS - for use on BIOS and UEFI based systems. It's also possible to create a Flat Boot <font class="file">WinPE</font> (<font class="file">WinPE</font> 2.x/3.x only) or even a multiboot ISO file with options for RAM Boot and Flat Boot - bootable on UEFI and BIOS based systems. 
 </li>
@@ -433,7 +498,7 @@ The script in this section can either be selected during the build process, or c
 
 
 
-<p>
+<p class="break3em">
 To execute the Create ISO script following a build, simply select the script in the directory tree and click on the <font class="file">Run Script</font> button to the right of the title bar -
 <br />
 <a href="img/project1.png"><IMG SRC="img/project1.png" float=left width=90% margin-right=1% margin-bottom=0.5em border=1></a>
@@ -451,12 +516,13 @@ To execute the Create ISO script following a build, simply select the script in 
 <h2><u>PostConfig</u></h2>
 
 <p>
-The script in this section cannot be executed during the build process and is designed for post processing.
+The scripts in this section cannot be executed during the build process and is designed for post processing.
 </p>
 
 
 
-<ul>
+<p>
+<ul class="break3em">
 <li>
 <b>Advanced Options</b> - Can be used to mount/unmount the registry hives created when the <font class="file">ChrisPE</font> project has finished the build process. This script can also be used to inject (add) additional files to <font class="file">boot.wim</font> and carry out some additional tasks. 
 </li>
@@ -466,6 +532,20 @@ The script in this section cannot be executed during the build process and is de
 
 
 
+<ul class="break3em">
+<li>
+<b>Add Package</b> - Use this script to add a <font class="file">ChrisPE</font> compatible <font class="file">Package</font> to the project (refer to the <a class="internal" href="packages.htm">Packages</a> section for more information) -
+</li>
+<a href="img/packages01.png"><IMG SRC="img/packages01.png" float=left width=80% margin-right=1% margin-bottom=0.5em border=1></a>
+</ul>
+</p>
 
-<p class="breaktop"><font class="file">Document date - 6<sup>th</sup> March 2018</font></p></font></body></html>
+
+
+
+
+
+
+
+<p class="breaktop"><font class="file">Document date - 21<sup>st</sup> March 2018</font></p></font></body></html>
 

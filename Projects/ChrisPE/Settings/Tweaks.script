@@ -4,8 +4,8 @@ Description=
 Selected=True
 Level=4
 Author=ThePEBakeryTeam
-Version=20180311
-Date=2018-03-11
+Version=20180321
+Date=2018-03-21
 Interface=Interface
 NoWarning=False
 
@@ -67,6 +67,7 @@ Message,"Delete WallpaperHost.exe from WinPE. In Windows 8.1 and 10.* based buil
 Message,"Add '\Windows\Fonts\segoeui.ttf' font support"
 
 [process]
+If,%FullProjectRun%,Equal,NO,Run,"%ProjectDir%\Core\common.script",ExitScript
 If,%pCheckBoxA%,Equal,True,Run,"%ProjectDir%\Core\Browse.For.Folder.script",process
 If,%pCheckBoxB%,Equal,True,Run,%ScriptFile%,NoInternetOpenWith
 If,%pCheckBoxC%,Equal,True,Run,%ScriptFile%,FileManagerTweaks

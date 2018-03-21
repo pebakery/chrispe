@@ -6,18 +6,20 @@ Locked=True
 Mandatory=True
 Level=2
 Author=ThePEBakeryTeam
-Version=20180306
-Date=2018-03-06
+Version=20180321
+Date=2018-03-21
 Interface=Interface
 NoWarning=False
 
 [Interface]
 
 [process]
+If,%FullProjectRun%,Equal,NO,Run,"%ProjectDir%\Core\common.script",ExitScript
 If,Not,%PEBakery%,Equal,True,Begin
   message,"This project is not compatible with WinBuilder. ABORTING..."
   Halt
 End
+Set,%FullProjectRun%,YES,GLOBAL
 If,%SourceDir%,Equal,,Begin
   message,Error - you have not set a source directory. ABORTING...
   Halt
@@ -63,6 +65,9 @@ Run,%ScriptFile%,CLEAR.PREVIOUS.RUN
 Run,%ScriptFile%,MakeFolders
 If,%Method%,Equal,INJECT,Begin
   Run,%ScriptFile%,INJECT_WIM
+End
+If,%Method%,Equal,EXTRACT,Begin
+  Run,%ScriptFile%,EXTRACT_WIM
 End
 Run,%ScriptFile%,OPEN.WITH
 Run,%ScriptFile%,RAMDISK
@@ -143,6 +148,28 @@ Echo,"Copying boot.wim#$c removing read-only flag and extracting required files.
 FileCopy,"%boot.wim%","%OutputDir%\sources\boot.wim"
 ShellExecute,Hide,"attrib.exe","-r #$q%Outputdir%\Sources\boot.wim#$q"
 WimExtractBulk,%OutputDir%\sources\boot.wim,%boot.wim.Image.number%,%Tools%\wimlib.file.lists\boot.wim.registry.txt,%TargetDir%,NOACL
+IniRead,"%ProjectDir%\Drivers\Drivers.script",MAIN,Selected,%Drivers%
+If,%Drivers%,Equal,True,Begin
+  ReadInterface,Value,"%ProjectDir%\Drivers\Drivers.script",Interface,pScrollBox_A1,%DriversMethod%
+  If,%DriversMethod%,Equal,EXTRACT,Begin  
+    Set,%CONTINUE%,NO
+    If,Question,"The Driver script has been selected in this build. The settings selected in the driver script will require the full extraction of boot.wim.#$x#$xSelect YES to fully EXTRACT boot.wim now#$c or NO to continue as normal and extract later.",Set,%CONTINUE%,YES
+    If,%CONTINUE%,Equal,YES,Begin
+	  WimApply,%OutputDir%\sources\boot.wim,%Boot.wim.Image.number%,%TargetDir%,NOACL
+      FileCreateBlank,"%Target_System32%\wim_applied.txt"
+      TXTaddLine,"%Target_System32%\wim_applied.txt","Dummy file added to confirm that boot.wim has been fully extracted during the project build process (required for Driver integration - EXTRACT method).",APPEND
+	End
+  End
+End
+
+[EXTRACT_WIM]
+Echo,"Copying boot.wim#$c removing read-only flag and extracting required files..."
+FileCopy,"%boot.wim%","%OutputDir%\sources\boot.wim"
+ShellExecute,Hide,"attrib.exe","-r #$q%Outputdir%\Sources\boot.wim#$q"
+Echo,"Applying (Extracting) image %Boot.wim.Image.number% from  boot.wim..."
+WimApply,%OutputDir%\sources\boot.wim,%Boot.wim.Image.number%,%TargetDir%,NOACL
+FileCreateBlank,"%Target_System32%\wim_applied.txt"
+TXTaddLine,"%Target_System32%\wim_applied.txt","Dummy file added to confirm that boot.wim has been fully extracted during the project build process (required for Driver integration - EXTRACT method).",APPEND
 
 [OPEN.WITH]
 SET,%Openwith.workaround%,NO
@@ -194,19 +221,20 @@ FileCopy,"%ProjectTemp%\boot.wim.info.ini","%OutputDir%\Project.Settings.ini"
 IniAddSection,"%OutputDir%\Project.Settings.ini",PROJECT.VERSION
 IniWrite,"%OutputDir%\Project.Settings.ini",PROJECT.VERSION,VERSION,%PROJECT.DATE%
 IniAddSection,"%OutputDir%\Project.Settings.ini",MAIN.SETTINGS
-//IniWrite,"%OutputDir%\Project.Settings.ini",MAIN.SETTINGS,1_CACHE,%USECACHE%
-//IniWrite,"%OutputDir%\Project.Settings.ini",MAIN.SETTINGS,2_RAMDISK,%RAMDISK%
-//IniWrite,"%OutputDir%\Project.Settings.ini",MAIN.SETTINGS,3_ARCH,%ARCH%
-//IniWrite,"%OutputDir%\Project.Settings.ini",MAIN.SETTINGS,4_SYSWOW64,%SYSWOW64%
-IniWrite,"%OutputDir%\Project.Settings.ini",MAIN.SETTINGS,5_BOOT.WIM.IMAGE.NUMBER,%Boot.wim.Image.number%
-IniWrite,"%OutputDir%\Project.Settings.ini",MAIN.SETTINGS,6_INSTALL.WIM.IMAGE.NUMBER,%Install.wim.Image.number%
-IniWrite,"%OutputDir%\Project.Settings.ini",MAIN.SETTINGS,7_METHOD,%Method%
-IniWrite,"%OutputDir%\Project.Settings.ini",MAIN.SETTINGS,8_KEYBOARD,%KEYBOARD%
-IniWrite,"%OutputDir%\Project.Settings.ini",MAIN.SETTINGS,9_FALLBACK.LANGUAGE,%LANG2%
-IniWrite,"%OutputDir%\Project.Settings.ini",MAIN.SETTINGS,10_PROGRAMS.IN.WIM,%PROGRAMS.IN.WIM%
+IniWrite,"%OutputDir%\Project.Settings.ini",MAIN.SETTINGS,BOOT.WIM.IMAGE.NUMBER,%Boot.wim.Image.number%
+IniWrite,"%OutputDir%\Project.Settings.ini",MAIN.SETTINGS,INSTALL.WIM.IMAGE.NUMBER,%Install.wim.Image.number%
+IniWrite,"%OutputDir%\Project.Settings.ini",MAIN.SETTINGS,METHOD,%Method%
+IniWrite,"%OutputDir%\Project.Settings.ini",MAIN.SETTINGS,KEYBOARD,%KEYBOARD%
+IniWrite,"%OutputDir%\Project.Settings.ini",MAIN.SETTINGS,FALLBACK.LANGUAGE,%LANG2%
 IniAddSection,"%OutputDir%\Project.Settings.ini",ESSENTIAL
 IniAddSection,"%OutputDir%\Project.Settings.ini",PROGRAMS
-IniAddSection,"%OutputDir%\Project.Settings.ini",WINFE
+IniAddSection,"%OutputDir%\Project.Settings.ini",SHELL
+StrFormat,Date,%TagFile%,yyyy-mm-dd-hh.nn
+FileCreateBlank,"%OutputDir%\%TagFile%.tag"
+IniWrite,"%OutputDir%\Project.Settings.ini",MAIN,TagFile,%TagFile%.tag
+Set,%TagFile%,%TagFile%,Global
+
+
 
 [AuthorEncoded]
 Logo=donut.ico

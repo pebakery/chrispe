@@ -4,8 +4,8 @@ Description=Post Processing - Load\unload any registry hives created during the 
 Selected=None
 Level=10
 Author=ThePEBakeryTeam
-Version=20180306
-Date=2018-03-06
+Version=20180321
+Date=2018-03-21
 
 [Interface]
 pButton1="Load Registry Hives",1,8,15,30,130,25,load,0,True,_load_,True
@@ -18,6 +18,10 @@ pButton7="Inject Registry Files",1,8,15,180,130,25,inject.reg,0,True,_inject.reg
 pButton8=?,1,8,160,180,18,25,?inject.reg,0,True,_?inject.reg_,True
 pButton9="Optimise boot.wim",1,8,15,230,130,25,optimise,0,True,_optimise_,True
 pButton10=?,1,8,160,230,18,25,?optimise,0,True,_?optimise_,True
+pButton11="Extract boot.wim",1,8,275,30,130,25,Extract,0,False,_Extract_,True
+pButton12=?,1,8,420,30,18,25,?Extract,0,True,_?Extract_,True
+pButton13="Capture boot.wim",1,8,275,80,130,25,Capture,0,False,_Capture_,True
+pButton14=?,1,8,420,80,18,25,?Capture,0,True,_?Capture_,True
 
 [?load]
 message,"This is a post processing option. Running this option will attempt to load the following registry hives...#$x#$x#$s* default (as #$qHKLM\_WinPE_DEFAULT#$q)#$x#$s* software (as #$qHKLM\_WinPE_SOFTWARE#$q)#$x#$s* system (as #$qHKLM\_WinPE_SYSTEM#$q)#$x#$x...if found in the following path #$x#$x#$s* #$q%Target_config%#$q"
@@ -51,7 +55,7 @@ message,"Registry hives (Default#$c Software and System) Unloaded",information
 
 [inject]
 If,ExistFile,%OutputDir%\sources\boot.wim,If,ExistDir,%TargetDir%,Begin
-  IniRead,"%TargetDir%\project.settings.ini",MAIN.SETTINGS,5_BOOT.WIM.IMAGE.NUMBER,%Boot.wim.Image.number%
+  IniRead,"%TargetDir%\project.settings.ini",MAIN.SETTINGS,BOOT.WIM.IMAGE.NUMBER,%Boot.wim.Image.number%
   //WimPathAdd,%OutputDir%\sources\boot.wim,%Boot.wim.Image.number%,%TargetDir%,""
   ShellExecute,Hide,"%TOOLS%\wimlib\wimlib-imagex.exe","update #$q%OutputDir%\sources\boot.wim#$q %Boot.wim.Image.number% --command=#$qadd '%TargetDir%' '\'#$q"
 End
@@ -59,7 +63,7 @@ Else,Message,Missing files
 
 [inject.reg]
 If,ExistFile,%OutputDir%\sources\boot.wim,If,ExistDir,%TargetDir%,Begin
-  IniRead,"%TargetDir%\project.settings.ini",MAIN.SETTINGS,5_BOOT.WIM.IMAGE.NUMBER,%Boot.wim.Image.number%
+  IniRead,"%TargetDir%\project.settings.ini",MAIN.SETTINGS,BOOT.WIM.IMAGE.NUMBER,%Boot.wim.Image.number%
   If,ExistFile,%TargetDir%\Windows\System32\config\default,WimPathAdd,%OutputDir%\sources\boot.wim,%Boot.wim.Image.number%,%TargetDir%\Windows\System32\config\default,Windows\System32\config\default
   If,ExistFile,%TargetDir%\Windows\System32\config\software,WimPathAdd,%OutputDir%\sources\boot.wim,%Boot.wim.Image.number%,%TargetDir%\Windows\System32\config\software,Windows\System32\config\software
   If,ExistFile,%TargetDir%\Windows\System32\config\system,WimPathAdd,%OutputDir%\sources\boot.wim,%Boot.wim.Image.number%,%TargetDir%\Windows\System32\config\system,Windows\System32\config\system
@@ -67,9 +71,8 @@ End
 Else,Message,Missing files
 
 [optimise]
-//If,ExistFile,%OutputDir%\sources\boot.wim,ShellExecute,Open,"%TOOLS%\wimlib\wimlib-imagex.exe","optimize #$q%OutputDir%\sources\boot.wim#$q"
-If,ExistFile,%OutputDir%\sources\boot.wim,WimOptimize,%OutputDir%\sources\boot.wim
-Else,Message,Missing files
+RegWrite,HKLM,0x1,"SOFTWARE\_Microsoft2\Windows NT\CurrentVersion\Fonts","Segoe UI (TrueType)","segoeui.ttf"
+
 
 [AuthorEncoded]
 Logo=settings.ico
@@ -79,3 +82,42 @@ settings.ico=653,871
 lines=0
 0=eJztlzFLI0EYht9gEawCFnJdplAQLfQHBEW4H3KttaWosfIHWIr9tXbhuCLhOMLdXwjIcvcDXEE0Rcj6ffPNormN3sxmJ7ML+4Q3LyyZ7DMLuzsDNOiztwf6Vvi6CawD2KLQIXyBHNdsoKbGhjZlSHmkXAZ2cUVRIkryJlcBfVxQyLpXZQ4K77uXfQ4K/3cv6xwU7N3TlOWeVnB35zwuXzWDQj53znDptrMo5Hfnce0l+75FYTF3tVzdGRRq9xAo1O4hUKjdQ6BQuxfNDuWE0qPcUR4oMWVEuaUcUzoldN+nDHI6hXRfpVx79vblvkb5VVF3vu6/K+rO3FTY/bDC7szPCrvvenbndDy5MxcW55+a5PU/9uj/3cL9yCTvHG49+v+1cE/JO4eRR/9nS/dF5hB79H9ycE9xncODJ3fmD9zcU1zmcFe49Svf4O6eYjuHXoG+/3KKfO6Avf9JUbJz2IZf98ScwyefHX/v4j4oTrMQXJ89+2E05+Lqfh1Gcy6u7ryPWw1imsXVnfdxa0FMs7i68z6uLNedn0u27rwHOgyj+SH87OZ3HL+nea3B6yVe8/G6ldfevH/YDWZXE4REM9vjc+n4QDpqS/db0t2mNFZ0T01PTI9Nx5DfRZBxfcj/dCH/C+jzTPVdw8Mbumm4bhrO3QdaidxYbfqaUB9Qj6nPE9lQJNIN7gg0XLrJrYfP60+mO6bPTCfSg6Sr+4fpoTl+PyUN9pmYHpMOd2w6Ii3xluvZXZHutzLXmfsFmCR9knic4ylOLSnJzEsv1stMzmcYBSMN7FOF0I5M2OUtLh+2Y2ACAJzcCBstMDmuAQAAAAIAAAAoAAAAQQIAAAAAAAABAAAAAAAAAAAAAAA
 
+[Capture]
+//WimCapture,<SrcDir>,<DestWim>,<Compress>[,ImageName=<String>][,ImageDesc=<String>][,Flags=<String>][,BOOT][,CHECK][,NOACL]
+If,Not,ExistFile,"%Target_System32%\wim_applied.txt",Begin
+  message,"boot.wim does not appear to have been applied (Extracted). #$x#$xAborting..."
+  Exit
+End
+Set,%CONTINUE%,NO
+If,Question,"Running this option will delete the existing boot.wim file. A new boot.wim will be created using the contents of the following build directory as source - #$x#$x  - %TargetDir%\#$x#$xSelect YES to CONTINUE or NO to ABORT.",Set,%CONTINUE%,YES
+If,%CONTINUE%,Equal,NO,Exit
+If,ExistFile,"%OutputDir%\sources\boot.wim",FileDelete,"%OutputDir%\sources\boot.wim"
+IniWrite,"%TargetDir%\project.settings.ini",MAIN.SETTINGS,BOOT.WIM.IMAGE.NUMBER,1
+IniWrite,"%TargetDir%\project.settings.ini",MAIN,Image.Number,1
+If,ExistFile,"%OutputDir%\project.settings.ini",Begin
+  IniWrite,"%OutputDir%\project.settings.ini",MAIN.SETTINGS,BOOT.WIM.IMAGE.NUMBER,1
+  IniWrite,"%OutputDir%\project.settings.ini",MAIN,Image.Number,1
+End
+//WimCapture,%TargetDir%,"%OutputDir%\sources\boot.wim",XPRESS,BOOT,NOACL
+WimCapture,%TargetDir%,"%OutputDir%\sources\boot.wim",LZX,BOOT,NOACL
+
+[?Capture]
+message,"Running this option will delete the existing boot.wim file (\ChrisPE.Files\sources\boot.wim). #$x#$xA new boot.wim will be created using the contents of the \ChrisPE.Files\ROOT\ build directory as source. The new file will contain only one image and may reduce the size of boot.wim - reducing RAM requirements.#$x#$xThe project configuration file '\ChrisPE\*\project.options.ini' will be updated and any reference to the boot.wim image number will be changed to image\index 1."
+
+
+[Extract]
+If,%FullProjectRun%,Equal,NO,Begin 
+  Run,"%ProjectDir%\Core\common.script",PostConfigRun
+  IniRead,"%TargetDir%\project.settings.ini",MAIN.SETTINGS,BOOT.WIM.IMAGE.NUMBER,%Boot.wim.Image.number%
+End
+Set,%CONTINUE%,NO
+If,Question,"Running this option will apply (Extract) the contents of boot.wim to the following directory - #$x#$x  - %TargetDir%\#$x#$xThis will overwrite all files in this directory. Select YES to CONTINUE or NO to ABORT.",Set,%CONTINUE%,YES
+If,%CONTINUE%,Equal,NO,Exit
+WimApply,%OutputDir%\sources\boot.wim,%Boot.wim.Image.number%,%TargetDir%,NOACL
+If,Not,ExistFile,"%Target_System32%\wim_applied.txt",Begin
+  FileCreateBlank,"%Target_System32%\wim_applied.txt"
+  TXTaddLine,"%Target_System32%\wim_applied.txt","Dummy file added to confirm that boot.wim has been fully extracted during the project build process (required for Driver integration - EXTRACT method).",APPEND
+End
+
+[?Extract]
+message,"Apply (Extract) the contents of '\ChrisPE.Files\sources\boot.wim' to '\ChrisPE.Files\ROOT\'#$x#$xThis will overwrite any files currently in the '\ChrisPE.Files\ROOT\' directory."

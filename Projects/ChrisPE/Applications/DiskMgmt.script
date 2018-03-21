@@ -4,8 +4,8 @@ Description=
 Selected=True
 Level=5
 Author=ThePEBakeryTeam
-Version=20180306
-Date=2018-03-06
+Version=20180321
+Date=2018-03-21
 Interface=Interface1
 
 [Interface1]
@@ -53,6 +53,7 @@ message,"Applies to WinXShell#$c BBLean and LaunchBar Shell(s)#$x#$xSelect this 
 message,"This setting does not apply to any LaunchBar instance running as the WinPE Shell. This option only applies to a LaunchBar instance when the Applications' > 'LaunchBar' program script is selected in the build.#$x#$xIf the 'Applications' > 'LaunchBar' program script is selected than enable this option to add a program menu entry to the root of the LaunchBar menu bar. #$x#$xPlease note that if option '6] Programs in boot.wim' in the main project script is set as 'NO'#$c then LaunchBar and a number of other applications will not be available at boot. In this case a text based .ini file will be used for LaunchBar menu settings."
 
 [process]
+If,%FullProjectRun%,Equal,NO,Run,"%ProjectDir%\Core\common.script",PostConfigRunV2
 AddInterface,%ScriptFile%,Interface1,""
 AddInterface,%ScriptFile%,Interface2,""
 //Run,%ScriptFile%,CHECKS
@@ -63,7 +64,6 @@ Run,%ScriptFile%,IN.WIM
 [CHECKS]
 
 [MENU]
-If,%pCheckBoxShortcutLaunchBar%,Equal,True,If,%PROGRAMS.IN.WIM%,Equal,NO,If,ExistFile,"%ProjectTemp%\LaunchBar.ini",TXTaddLine,"%ProjectTemp%\LaunchBar.ini",DiskMgmt;%SystemRoot%\System32\diskmgmt.msc,Append
 ShellExecute,Hide,"%Tools%\Shortcut.exe","/A:C /T:#$q#$pSystemRoot#$p\System32\diskmgmt.msc#$q /F:#$q%ProjectTemp%\DiskMgmt.lnk#$q"
 If,ExistFile,"%ProjectTemp%\DiskMgmt.lnk",Begin
   Set,%MyShortcut%,DiskMgmt.lnk
@@ -74,6 +74,7 @@ If,ExistFile,"%ProjectTemp%\DiskMgmt.lnk",Begin
     Run,"%ProjectDir%\Core\common.script",StartMenu
   End
   If,%pCheckBoxShortcutLaunchBar%,Equal,True,FileCopy,"%ProjectTemp%\%MyShortcut%","%ProjectTemp%\ShortCuts\LaunchBar"
+  If,%FullProjectRun%,Equal,NO,Run,"%ProjectDir%\Core\common.script",PostConfigRunShortcuts
   FileDelete,"%ProjectTemp%\%MyShortcut%"
 End
 
@@ -85,6 +86,7 @@ ShellExecute,hide,regedit.exe,"/s #$q%Programs%\DiskMgmt\mmc.registry.reg#$q"
 Echo,"Unmounting registry hives..."
 RegHiveUnload,_WinPE_SOFTWARE
 IniWrite,"%OutputDir%\Project.Settings.ini",PROGRAMS,DiskMgmt,YES
+If,%FullProjectRun%,Equal,NO,WimPathAdd,%OutputDir%\sources\boot.wim,%Boot.wim.Image.number%,%TargetDir%,""
 
 [IN.WIM]
 //Wait,1

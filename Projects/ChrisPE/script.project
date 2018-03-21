@@ -1,11 +1,11 @@
 [Main]
-Title=ChrisPE Beta 0.1.0
+Title=ChrisPE Beta 0.1.2
 SourceDir=
 TargetDir=
 Description=
 Author=ThePEBakeryTeam
-Version=20180306
-Date=2018-03-06
+Version=20180321
+Date=2018-03-21
 Locked=true
 Selected=None
 Mandatory=true
@@ -30,46 +30,49 @@ Project=ChrisPE
 %Target_system32%=%TargetDir%\WINDOWS\System32
 %USECACHE%=NEVER
 %CODEBASE%=unchecked
-%PROJECT.DATE%=2018-03-06
+%PROJECT.DATE%=2018-03-21
 %LANG3%=en-US
 %USE.TOOLS%=YES
-
-[HELP.1.New]
-Message,"Path to directory (or mounted .iso) containing the following files and directories-#$x#$x#$s#$s*#$s\sources\boot.wim#$x#$s#$s*#$s\sources\install.wim#$x#$s#$s*#$s\bootmgr#$x#$s#$s*#$s\boot\#$x#$s#$s*#$s\EFI\#$x#$xNote - ensure that the PATH includes a trailing backslash (\)."
 
 [TAB_A_Menu]
 pTextLabel_TAB_A="Options 1",1,1,15,4,80,18,10,Bold
 pButton_TAB_B="Options 2",1,8,85,0,80,25,Change.To.Tab.B,0,True,_Change.To.Tab.B,True
 pButton_TAB_C="Options 3",1,8,165,0,80,25,Change.To.Tab.C,0,True,_Change.To.Tab.C,True
-pBevel_A1=,1,12,9,100,500,30
-pButton_A1=HELP,1,8,20,105,80,20,HELP.1.New,0,True,_HELP.1.New_,True
-pTextLabel_A1="1] Path to Source",1,1,110,108,150,18,8,Bold
-pFileBox_A1=,1,13,220,105,275,20,dir
-pBevel_A2=,1,12,10,175,500,35
-pScrollBox_A2=2,1,4,20,182,80,20,1,2,3,4
-pButton_A2=HELP,1,8,430,182,70,20,HELP.2,0,True,_HELP.2_,True
-pTextLabel_A2="2] Set 'boot.wim' Image Number",1,1,163,185,210,18,8,Bold
-pBevel_A3=,1,12,10,250,500,35
-pScrollBox_A3=1,1,4,20,257,80,20,1,2,3,4,5,6,7,8,9
-pButton_A3=HELP,1,8,430,257,70,20,HELP.3,0,True,_HELP.3_,True
-pTextLabel_A3="3] Set 'install.wim' Image Number",1,1,160,260,210,18,8,Bold
+pBevel_A1=,1,12,9,70,500,35
+pButton_A1=HELP,1,8,20,77,80,20,HELP.A1,0,True,_HELP.A1_,True
+pTextLabel_A1="1] Path to Source",1,1,110,80,150,18,8,Bold
+pFileBox_A1=,1,13,220,77,275,20,dir
+pBevel_A2=,1,12,10,125,500,35
+pScrollBox_A2=2,1,4,20,132,80,20,1,2,3,4
+pButton_A2=HELP,1,8,430,132,70,20,HELP.A2,0,True,_HELP.A2_,True
+pTextLabel_A2="2] Set 'boot.wim' Image Number",1,1,163,135,210,18,8,Bold
+pBevel_A3=,1,12,10,180,500,35
+pScrollBox_A3=1,1,4,20,187,80,20,1,2,3,4,5,6,7,8,9
+pButton_A3=HELP,1,8,430,187,70,20,HELP.A3,0,True,_HELP.A3_,True
+pTextLabel_A3="3] Set 'install.wim' Image Number",1,1,160,190,210,18,8,Bold
+pBevel_A4=,1,12,10,235,500,35
+pScrollBox_A4=INJECT,1,4,20,242,80,20,INJECT,EXTRACT
+pButton_A4=HELP,1,8,430,242,70,20,HELP.A4,0,True,_HELP.A4_,True
+pTextLabel_A4="4] METHOD",1,1,210,245,210,18,8,Bold
+
+
 
 [TAB_B_Menu]
 pButton_TAB_A="Options 1",1,8,5,0,80,25,Change.To.Tab.A,0,True,_Change.To.Tab.A,True
 pTextLabel_TAB_B="Options 2",1,1,95,4,80,18,10,Bold
 pButton_TAB_C="Options 3",1,8,165,0,80,25,Change.To.Tab.C,0,True,_Change.To.Tab.C,True
-pBevel_B2=,1,12,10,95,500,35
-pScrollBox_B2=DEFAULT,1,4,20,102,80,20,DEFAULT,de-DE,en-AU,en-CA,en-GB,en-US,es-MX,es-ES,fr-CA,fr-FR,it-IT,nl-NL,pt-PT,zh-CN
-pButton_B2=HELP,1,8,430,102,70,20,HELP.4,0,True,_HELP.4_,True
-pTextLabel_B2="4] Keyboard Layout",1,1,192,105,120,22,8,Bold
-pBevel_B3=,1,12,10,140,500,35
-pScrollBox_B3=en-US,1,4,20,147,80,20,bg-BG,cs-CZ,da-DK,de-DE,el-GR,en-GB,en-US,es-ES,et-EE,fi-FI,fr-FR,hr-HR,hu-HU,it-IT,ja-JP,ko-KR,it-LT,lv-LV,nb-NO,nl-NL,pl-PL,pt-BR,pt-PT,qps-ploc,ro-RO,ru-RU,sk-SK,sr-Latn-CS,sr-Latn-RS,sv-SE,tr-TR,uk-UA,zh-CN,zh-HK,zh-TW
-pButton_B3=HELP,1,8,430,147,70,20,HELP.5,0,True,_HELP.5_,True
-pTextLabel_B3="5] WinPE Language / Fallback Language",1,1,143,150,232,18,8,Bold
-pBevel_B5=,1,12,10,185,500,35
-pScrollBox_B5=DEFAULT,1,4,20,192,80,20,16,32,64,128,256,512,DEFAULT
-pButton_B5=HELP,1,8,430,192,70,20,HELP.7,0,True,_HELP.7_,True
-pTextLabel_B5="6] RAM Disk Size",1,1,198,195,101,18,8,Bold
+pBevel_B2=,1,12,10,70,500,35
+pScrollBox_B2=DEFAULT,1,4,20,77,80,20,DEFAULT,de-DE,en-AU,en-CA,en-GB,en-US,es-MX,es-ES,fr-CA,fr-FR,it-IT,nl-NL,pt-PT,zh-CN
+pButton_B2=HELP,1,8,430,77,70,20,HELP.B2,0,True,_HELP.B2_,True
+pTextLabel_B2="5] Keyboard Layout",1,1,192,80,120,22,8,Bold
+pBevel_B3=,1,12,10,125,500,35
+pScrollBox_B3=en-US,1,4,20,132,80,20,bg-BG,cs-CZ,da-DK,de-DE,el-GR,en-GB,en-US,es-ES,et-EE,fi-FI,fr-FR,hr-HR,hu-HU,it-IT,ja-JP,ko-KR,it-LT,lv-LV,nb-NO,nl-NL,pl-PL,pt-BR,pt-PT,qps-ploc,ro-RO,ru-RU,sk-SK,sr-Latn-CS,sr-Latn-RS,sv-SE,tr-TR,uk-UA,zh-CN,zh-HK,zh-TW
+pButton_B3=HELP,1,8,430,132,70,20,HELP.B3,0,True,_HELP.B3_,True
+pTextLabel_B3="6] WinPE Language / Fallback Language",1,1,135,135,232,18,8,Bold
+pBevel_B5=,1,12,10,180,500,35
+pScrollBox_B5=DEFAULT,1,4,20,187,80,20,16,32,64,128,256,512,DEFAULT
+pButton_B5=HELP,1,8,430,187,70,20,HELP.B5,0,True,_HELP.B5_,True
+pTextLabel_B5="7] RAM Disk Size",1,1,198,190,101,18,8,Bold
 
 [TAB_C_Menu]
 pButton_TAB_A="Options 1",1,8,5,0,80,25,Change.To.Tab.A,0,True,_Change.To.Tab.A,True
@@ -94,25 +97,25 @@ System,REFRESHINTERFACE
 IniWrite,%ScriptFile%,Main,Interface,TAB_C_Menu
 System,REFRESHINTERFACE
 
-[HELP.1]
-Message,""
+[HELP.A1]
+Message,"Path to directory (or mounted .iso) containing the following files and directories-#$x#$x#$s#$s*#$s\sources\boot.wim#$x#$s#$s*#$s\sources\install.wim#$x#$s#$s*#$s\bootmgr#$x#$s#$s*#$s\boot\#$x#$s#$s*#$s\EFI\#$x#$xNote - ensure that the PATH includes a trailing backslash (\)."
 
-[HELP.2]
+[HELP.A2]
 Message,"When using Windows Installation media (e.g. a DVD or a mounted ISO file) image #$q2#$q must be selected. WIM files can contain multiple images and care must be taken to select the correct image. In all of the official (unmodified) windows discs I have examined this has been image #$q2#$q - image 1 will not boot successfully and is not flagged as the boot image.#$x#$xIf boot.wim from the Windows AIK or ADK is used however#$c then image #$q1#$q should be selected."
 
-[HELP.3]
+[HELP.A3]
 Message,"Leave this setting as 1 - it should work in most cases. Some 'install.wim' files may contain multiple images. If the required dependencies cannot be extracted from image #1 during the build process then change the image number and try again."
 
-[HELP.4]
+[HELP.A4]
+Message,"There are two different build methods - #$x#$xEXTRACT - applies the selected image to a local directory#$c customises the applied files and adds the files back to boot.wim during the final stages of the build process. This method takes longer due to the need to fully extract all files from the selected image in boot.wim.#$x#$xINJECT - this method will extract the registry hives only#$c compile the new files to be added to boot.wim#$c edit the extracted registry#$c then add all of these files to boot.wim and finally optimise boot.wim to save space. This is the RECOMMENDED OPTION."
+
+[HELP.B2]
 Message,"Select #$qDEFAULT#$q to leave the default keyboard layout for your build. Select one of the other available options to change to a user specified layout (e.g. select #$qUK#$q from the list to change to a United Kingdon keyboard layout)."
 
-[HELP.5]
+[HELP.B3]
 Message,"In the unlikely event that the #$qDefault Language#$q cannot be obtained from the source files (more specifically from #$qboot.wim#$q) then this will be the fallback language used.#$x#$xPlease note that the project will try to verify the #$qDefault Language#$q of the source files you are using and will ignore the value selected here if this information can be obtained from #$qboot.wim#$q."
 
-[HELP.6]
-Message,"Selecting #$qYES#$q will add all programs to boot.wim. Although this will result in a larger boot file and will require more system RAM#$c all programs will be available on boot. If network booting WinPE/WinFE I recommend using this method #$x#$xSelecting #$qNO#$q will result in a smaller boot file. Essential programs will still be added to boot.wim (including WProtect.exe). You will need to ensure that you copy the #$qPrograms#$q directory to external media after the build has finished. This media will need to be accessible after booting WinPE/WinFE - you will probably need to use either WProtect.exe or diskpart to mount the external media before you can use it"
-
-[HELP.7]
+[HELP.B5]
 Message,"Set the size of the RAM Disk (in MB) - this is the amount of writable space on the SYSTEMDRIVE that will be available when WinPE/WinFE is running. Selecting #$qDEFAULT#$q will result in the default size for the build you are using. This varies depending on your build version - WinPE/WinFE 2.0 for example has 32MB of available space#$c whereas WinPE/WinFE 5.0 has 512MB.#$x#$xPlease note that in WinPE/WinFE 5.x this setting will be ignored if the system has more than 1GB of RAM. If more than 1GB of RAM is available then the RAM disk will be set to 512MB. If the system has 1GB or less RAM then the size selected here will be used."
 
 [HELP.C1]
@@ -125,19 +128,14 @@ Message,"Check if the user is running with Administrator Privileges and abort if
 Message,"Automatically save a log file based on date and time. This action will be executed on successful completion of the bblean script - if the build process does not get that far then a log will not be saved."
 
 [process]
-ReadInterface,Value,%ScriptFile%,TAB_A_Menu,pFileBox_A1,%pFileBox_A1%
-ReadInterface,Value,%ScriptFile%,TAB_A_Menu,pScrollBox_A2,%pScrollBox_A2%
-ReadInterface,Value,%ScriptFile%,TAB_A_Menu,pScrollBox_A3,%pScrollBox_A3%
-ReadInterface,Value,%ScriptFile%,TAB_B_Menu,pScrollBox_B2,%pScrollBox_B2%
-ReadInterface,Value,%ScriptFile%,TAB_B_Menu,pScrollBox_B3,%pScrollBox_B3%
-ReadInterface,Value,%ScriptFile%,TAB_B_Menu,pScrollBox_B5,%pScrollBox_B5%
-ReadInterface,Value,%ScriptFile%,TAB_C_Menu,pCheckBox_C1,%pCheckBox_C1%
-ReadInterface,Value,%ScriptFile%,TAB_C_Menu,pCheckBox_C2,%pCheckBox_C2%
-ReadInterface,Value,%ScriptFile%,TAB_C_Menu,pCheckBox_C3,%pCheckBox_C3%
+Set,%FullProjectRun%,NO,GLOBAL
+AddInterface,%ScriptFile%,TAB_A_Menu,""
+AddInterface,%ScriptFile%,TAB_B_Menu,""
+AddInterface,%ScriptFile%,TAB_C_Menu,""
 Set,%SourceDir%,%pFileBox_A1%,GLOBAL
 Set,%Boot.wim.Image.number%,%pScrollBox_A2%,GLOBAL
 Set,%Install.wim.Image.number%,%pScrollBox_A3%,GLOBAL
-Set,%Method%,INJECT,GLOBAL
+Set,%Method%,%pScrollBox_A4%,GLOBAL
 Set,%KEYBOARD%,%pScrollBox_B2%,GLOBAL
 Set,%LANG%,%pScrollBox_B3%,GLOBAL
 //Fallback for language support (MUI files)

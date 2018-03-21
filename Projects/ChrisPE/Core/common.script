@@ -4,8 +4,8 @@ Description=This is set as hidden and will be executed from another project scri
 Selected=False
 Level=-2
 Author=ThePEBakeryTeam
-Version=20180306
-Date=2018-03-06
+Version=20180321
+Date=2018-03-21
 
 [DIRECTORY.DELETE]
 Set,%CONTINUE%,NO
@@ -36,4 +36,150 @@ End
 
 
 
+[PostConfigRun]
+If,Not,ExistFile,"%TargetDir%\Project.Settings.ini",Begin
+  message,"You are attempting to run this script Post Build#$c however the project does not appear to have been run. Aborting..."
+  Halt
+End
+IniRead,"%TargetDir%\Project.Settings.ini",Main,Architecture,%ARCH%
+
+
+[PostConfigRunShortcuts]
+IniRead,"%TargetDir%\Project.Settings.ini",SHELL,Shell,%Shell%
+If,%Shell%,Equal,WinXShell,Begin
+  IniRead,"%TargetDir%\Project.Settings.ini",SHELL,WinXShellIconsDesktop,%WinXShellIconsDesktop%
+  IniRead,"%TargetDir%\Project.Settings.ini",SHELL,WinXShellIconsMenu,%WinXShellIconsMenu%
+  IniRead,"%TargetDir%\Project.Settings.ini",SHELL,WinXShellIconsQuickLaunch,%WinXShellIconsQuickLaunch%
+  If,%WinXShellIconsDesktop%,Equal,YES,FileCopy,"%ProjectTemp%\%MyShortcut%","%TargetDir%\Users\Default\Desktop"
+  If,%WinXShellIconsQuickLaunch%,Equal,YES,FileCopy,"%ProjectTemp%\%MyShortcut%","%TargetDir%\Users\Default\AppData\Roaming\Microsoft\Internet Explorer\Quick Launch"
+  If,%WinXShellIconsMenu%,Equal,YES,Begin
+    If,%ProgramMenuPath%,Equal,"",FileCopy,"%ProjectTemp%\%MyShortcut%","%TargetDir%\Users\Default\AppData\Roaming\Microsoft\Windows\Start Menu"
+    Else,Begin
+      If,Not,ExistDir,"%TargetDir%\Users\Default\AppData\Roaming\Microsoft\Windows\Start Menu\%ProgramMenuPath%",DirMake,"%TargetDir%\Users\Default\AppData\Roaming\Microsoft\Windows\Start Menu\%ProgramMenuPath%"
+      FileCopy,"%ProjectTemp%\%MyShortcut%","%TargetDir%\Users\Default\AppData\Roaming\Microsoft\Windows\Start Menu\%ProgramMenuPath%"
+    End
+  End
+End
+If,%Shell%,Equal,BBLean,Begin
+  If,%ProgramMenuPath%,Equal,"",FileCopy,"%ProjectTemp%\%MyShortcut%","%TargetDir%\Users\Default\AppData\Roaming\Microsoft\Windows\Start Menu"
+  Else,Begin
+    If,Not,ExistDir,"%TargetDir%\Users\Default\AppData\Roaming\Microsoft\Windows\Start Menu\%ProgramMenuPath%",DirMake,"%TargetDir%\Users\Default\AppData\Roaming\Microsoft\Windows\Start Menu\%ProgramMenuPath%"
+    FileCopy,"%ProjectTemp%\%MyShortcut%","%TargetDir%\Users\Default\AppData\Roaming\Microsoft\Windows\Start Menu\%ProgramMenuPath%"
+  End
+End
+If,%Shell%,Equal,LaunchBar,Begin
+  If,%ProgramMenuPath%,Equal,"",FileCopy,"%ProjectTemp%\%MyShortcut%","%TargetDir%\Windows\System32\config\systemprofile\AppData\Roaming\Microsoft\Internet Explorer\Quick Launch"
+  Else,Begin
+    If,Not,ExistDir,"%TargetDir%\Windows\System32\config\systemprofile\AppData\Roaming\Microsoft\Internet Explorer\Quick Launch\%ProgramMenuPath%",DirMake,"%TargetDir%\Windows\System32\config\systemprofile\AppData\Roaming\Microsoft\Internet Explorer\Quick Launch\%ProgramMenuPath%"
+    FileCopy,"%ProjectTemp%\%MyShortcut%","%TargetDir%\Windows\System32\config\systemprofile\AppData\Roaming\Microsoft\Internet Explorer\Quick Launch\%ProgramMenuPath%"
+  End
+End
+
+[PostConfigRunV2]
+If,Not,ExistFile,"%TargetDir%\Project.Settings.ini",Begin
+  message,"You are attempting to run this script Post Build#$c however the project does not appear to have been run. Aborting..."
+  Halt
+End
+IniRead,"%TargetDir%\Project.Settings.ini",Main,Architecture,%ARCH%
+IniRead,"%TargetDir%\Project.Settings.ini",Main,Major,%Major%
+IniRead,"%TargetDir%\Project.Settings.ini",Main,Minor,%Minor%
+IniRead,"%TargetDir%\Project.Settings.ini",Main,Build,%Build%
+IniRead,"%TargetDir%\Project.Settings.ini",Main,SPBuild,%SPBuild%
+IniRead,"%TargetDir%\Project.Settings.ini",Main,CodeBase,%CodeBase%
+If,ExistFile,"%SourceDir%sources\install.wim",Set,%install.wim%,"%SourceDir%sources\install.wim",GLOBAL
+If,ExistFile,"%SourceDir%sources\install.esd",Set,%install.wim%,"%SourceDir%sources\install.esd",GLOBAL
+If,ExistFile,"%SourceDir%sources\install.swm",Set,%install.wim%,"%SourceDir%sources\install.swm",GLOBAL
+If,Not,ExistFile,%install.wim%,Begin
+  message,"You are attempting to run this script Post Build. This script requires windows source files#$c however the source files do not appear to be available. Please mount a valid source or edit the path to your source files in the main project script. #$x#$xAborting..."
+  Halt
+End
+WimInfo,%install.wim%,%install.wim.Image.number%,WINDOWS/VERSION/MAJOR,%Install.wim.Major%
+If,Not,%Install.wim.Major%,Equal,%Major%,Run,"%ProjectDir%\Core\common.script",PostConfigSourceError
+WimInfo,%install.wim%,%install.wim.Image.number%,WINDOWS/VERSION/MINOR,%Install.wim.Minor%
+If,Not,%Install.wim.Minor%,Equal,%Minor%,Run,"%ProjectDir%\Core\common.script",PostConfigSourceError
+WimInfo,%install.wim%,%install.wim.Image.number%,WINDOWS/VERSION/BUILD,%Install.wim.Build%
+If,Not,%Install.wim.Build%,Equal,%Build%,Run,"%ProjectDir%\Core\common.script",PostConfigSourceError
+WimInfo,%install.wim%,%install.wim.Image.number%,WINDOWS/VERSION/SPBUILD,%Install.wim.SPBuild%
+If,Not,%Install.wim.SPBuild%,Equal,%SPBuild%,Run,"%ProjectDir%\Core\common.script",PostConfigSourceError
+WimInfo,%install.wim%,%install.wim.Image.number%,WINDOWS/ARCH,%Install.wim.ARCH%
+If,%Install.wim.ARCH%,Equal,0,Set,%Install.wim.ARCH%,x86
+If,%Install.wim.ARCH%,Equal,9,Set,%Install.wim.ARCH%,x64
+If,Not,%Install.wim.ARCH%,Equal,%ARCH%,Run,"%ProjectDir%\Core\common.script",PostConfigSourceError
+If,Not,WimExistIndex,%Install.wim%,%Install.wim.Image.number%,Begin
+  Message,"The image/index selected in the - #$x#$x - #$q3] Set 'install.wim' Image Number#$q does not exist in the selected source file.#$x#$xPlease change this setting and rerun this script. #$x#$xABORTING..."
+  Halt
+End
+
+[PostConfigSourceError]
+message,ERROR - source files do not match current build. #$x#$xAborting...
+Halt
+
+[PostConfigRunNotInWim]
+If,ExistDir,"%OutputDir%\Programs.%ARCH%",Begin
+  If,Not,ExistFile,"%OutputDir%\Programs.%ARCH%\ShortcutsNotInWim.cmd",If,ExistFile,"%OutputDir%\Programs\ShortcutsNotInWim.txt",Begin
+    TXTaddLine,"%OutputDir%\Programs\ShortcutsNotInWim.txt",MD #$q#$pTemp#$p\ShortCuts#$q,PrePend
+    TXTaddLine,"%OutputDir%\Programs\ShortcutsNotInWim.txt",IF EXIST #$q#$pTemp#$p\ShortCuts#$q RD /S /Q #$q#$pTemp#$p\ShortCuts#$q,PrePend
+    TXTaddLine,"%OutputDir%\Programs\ShortcutsNotInWim.txt",@echo off,PrePend
+    FileRename,"%OutputDir%\Programs\ShortcutsNotInWim.txt","%OutputDir%\Programs\ShortcutsNotInWim.cmd"
+  End
+  If,ExistFile,"%OutputDir%\Programs.%ARCH%\ShortcutsNotInWim.cmd",If,ExistFile,"%OutputDir%\Programs\ShortcutsNotInWim.txt",ShellExecute,Hide,"cmd.exe","/C COPY /B #$q%OutputDir%\Programs.%ARCH%\ShortcutsNotInWim.cmd#$q + #$q%OutputDir%\Programs\ShortcutsNotInWim.txt#$q #$q%OutputDir%\Programs.%ARCH%\ShortcutsNotInWim.cmd#$q"
+  If,ExistFile,"%OutputDir%\Programs.%ARCH%\ShortcutsNotInWim.txt",FileDelete,"%OutputDir%\Programs.%ARCH%\ShortcutsNotInWim.txt"
+  If,ExistFile,"%OutputDir%\Programs\ShortcutsNotInWim.txt",FileDelete,"%OutputDir%\Programs\ShortcutsNotInWim.txt"
+  If,ExistFile,"%OutputDir%\Programs\registry.entries.cmd",If,ExistFile,"%OutputDir%\Programs.%ARCH%\registry.entries.cmd",ShellExecute,Hide,"cmd.exe","/C COPY /B #$q%OutputDir%\Programs\registry.entries.cmd#$q + #$q%OutputDir%\Programs.%ARCH%\registry.entries.cmd#$q #$q%OutputDir%\Programs\registry.entries.cmd#$q"
+  DirCopy,"%OutputDir%\Programs\*.*","%OutputDir%\Programs.%ARCH%"
+  DirDelete,"%OutputDir%\Programs"
+End
+If,Not,ExistDir,"%OutputDir%\Programs.%ARCH%",Begin
+  If,ExistFile,"%OutputDir%\Programs\ShortcutsNotInWim.txt",Begin
+    TXTaddLine,"%OutputDir%\Programs\ShortcutsNotInWim.txt",MD #$q#$pTemp#$p\ShortCuts#$q,PrePend
+    TXTaddLine,"%OutputDir%\Programs\ShortcutsNotInWim.txt",IF EXIST #$q#$pTemp#$p\ShortCuts#$q RD /S /Q #$q#$pTemp#$p\ShortCuts#$q,PrePend
+    TXTaddLine,"%OutputDir%\Programs\ShortcutsNotInWim.txt",@echo off,PrePend
+    FileRename,"%OutputDir%\Programs\ShortcutsNotInWim.txt","%OutputDir%\Programs\ShortcutsNotInWim.cmd"
+  End
+  If,Not,ExistFile,"%OutputDir%\Programs\ShortcutsCopy.cmd",FileCreateBlank,"%OutputDir%\Programs\ShortcutsCopy.cmd"
+  TXTaddLine,"%OutputDir%\Programs\ShortcutsCopy.cmd",@echo off,Append
+  If,%Shell%,Equal,BBLean,TXTaddLine,"%OutputDir%\Programs\ShortcutsCopy.cmd",COPY #$q#$pTemp#$p\ShortCuts\*.*#$q #$q#$pSystemDrive#$p\Users\Default\AppData\Roaming\Microsoft\Windows\Start Menu\ExternalMedia#$q,Append
+  If,%Shell%,Equal,LaunchBar,TXTaddLine,"%OutputDir%\Programs\ShortcutsCopy.cmd",COPY #$q#$pTemp#$p\ShortCuts\*.*#$q #$q#$pUserProfile#$p\AppData\Roaming\Microsoft\Internet Explorer\Quick Launch\ExternalMedia#$q,Append
+  If,%Shell%,Equal,WinXShell,TXTaddLine,"%OutputDir%\Programs\ShortcutsCopy.cmd",COPY #$q#$pTemp#$p\ShortCuts\*.*#$q #$q#$pUserProfile#$p\AppData\Roaming\Microsoft\Windows\Start Menu\ExternalMedia#$q,Append
+  FileRename,"%OutputDir%\Programs","%OutputDir%\Programs.%ARCH%"
+End
+If,Not,ExistFile,"%OutputDir%\Programs.%ARCH%\nircmd.exe",FileCopy,"%Tools%\nircmd\%ARCH%\nircmd.exe","%OutputDir%\Programs.%ARCH%"
+If,Not,ExistFile,"%TargetDir%\Programs\misc\FindPrograms%ARCH%.cmd",Begin
+  If,Not,ExistDir,"%TargetDir%\Programs\misc",DirMake,"%TargetDir%\Programs\misc"
+  FileCopy,%Programs%\misc\FindPrograms%ARCH%.cmd,"%TargetDir%\Programs\misc"
+  IniRead,"%OutputDir%\Project.Settings.ini",MAIN,TagFile,%TagFile%
+  TXTReplace,"%TargetDir%\Programs\misc\FindPrograms%ARCH%.cmd",MyTagFile,%TagFile%
+  FileCopy,"%Programs%\misc\Find_Replace.ico","%TargetDir%\Programs\misc"
+  ShellExecute,Hide,"%Tools%\Shortcut.exe","/A:C /T:#$q#$pSystemDrive#$p\Programs\misc\FindPrograms%ARCH%.cmd#$q /F:#$q%ProjectTemp%\FindPrograms.lnk#$q /I:#$q#$pSystemDrive#$p\Programs\misc\Find_Replace.ico#$c0#$q"
+  If,ExistFile,"%ProjectTemp%\FindPrograms.lnk",Begin
+    Set,%MyShortcut%,FindPrograms.lnk
+    Set,%ProgramMenuPath%,""
+    Run,%ProjectDir%\Core\common.script,PostConfigRunShortcuts
+    FileDelete,"%ProjectTemp%\%MyShortcut%"
+  End
+End
+If,Not,ExistDir,"%TargetDir%\Users\Default\AppData\Roaming\Microsoft\Windows\Start Menu\ExternalMedia",Begin
+  DirMake,"%TargetDir%\Users\Default\AppData\Roaming\Microsoft\Windows\Start Menu\ExternalMedia"
+  WimPathAdd,%OutputDir%\sources\boot.wim,%Boot.wim.Image.number%,%TargetDir%,""
+End
+If,Not,ExistDir,"%TargetDir%\Users\Default\AppData\Roaming\Microsoft\Internet Explorer\Quick Launch\ExternalMedia",Begin
+  DirMake,"%TargetDir%\Users\Default\AppData\Roaming\Microsoft\Internet Explorer\Quick Launch\ExternalMedia"
+  WimPathAdd,%OutputDir%\sources\boot.wim,%Boot.wim.Image.number%,%TargetDir%,""
+End
+If,Not,ExistDir,"%Target_System32%\config\systemprofile\AppData\Roaming\Microsoft\Internet Explorer\Quick Launch\ExternalMedia",Begin
+  DirMake,"%Target_System32%\config\systemprofile\AppData\Roaming\Microsoft\Internet Explorer\Quick Launch\ExternalMedia"
+  WimPathAdd,%OutputDir%\sources\boot.wim,%Boot.wim.Image.number%,%TargetDir%,""
+End
+If,Not,ExistDir,"%Target_System32%\config\systemprofile\AppData\Roaming\Microsoft\Windows\Start Menu\ExternalMedia",Begin
+  DirMake,"%Target_System32%\config\systemprofile\AppData\Roaming\Microsoft\Windows\Start Menu\ExternalMedia"
+  WimPathAdd,%OutputDir%\sources\boot.wim,%Boot.wim.Image.number%,%TargetDir%,""
+End
+
+[NotInWim]
+If,Not,ExistDir,"%OutputDir%\Programs",DirMake,"%OutputDir%\Programs"
+If,Not,ExistFile,"%OutputDir%\Programs\ShortcutsNotInWim.txt",FileCreateBlank,"%OutputDir%\Programs\ShortcutsNotInWim.txt"
+
+[ExitScript]
+message,"This script must be executed during the build process and cannot be executed post build.#$x#$xABORTING..."
+Exit
 

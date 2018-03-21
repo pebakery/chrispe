@@ -6,8 +6,8 @@ Locked=True
 Mandatory=True
 Level=3
 Author=ThePEBakeryTeam
-Version=20180306
-Date=2018-03-06
+Version=20180321
+Date=2018-03-21
 Interface=Interface1
 
 [Interface1]
@@ -63,6 +63,7 @@ message,"This setting does not apply to any LaunchBar instance running as the Wi
 Message,"Select one of the included file Managers - #$x#$x7-zip (by Igor Pavlov). Dependency free lightweigt file manager with built in Drag and Drop and File Copy dialog. No file dependencies are required.#$x#$xExplorer++ (by David Erceg) - refer to #$qhttps://explorerplusplus.com/#$q. Files and settings required for Drag and Drop support will be automatically included in the build and registered at runtime if required.#$x#$xJustManager (by Nikita Leontiev) - refer to #$qhttp://justmanager.ru/#$q. Files and settings required for Drag and Drop support will be automatically included in the build and registered at runtime if required.#$x#$xQ-Dir (by Nenad Hrg) - refer to #$qhttp://www.softwareok.com/?Freeware/Q-Dir#$q. Files and settings required for Drag and Drop support will be automatically included in the build and registered at runtime if required."
 
 [process]
+If,%FullProjectRun%,Equal,NO,Run,"%ProjectDir%\Core\common.script",ExitScript
 AddInterface,%ScriptFile%,Interface1,""
 AddInterface,%ScriptFile%,Interface2,""
 If,%pScrollBox_A1%,Equal,7-zip,Begin

@@ -14,6 +14,8 @@
 <option value="instructions_pebakery.htm">Instructions</option>  
 <option value="menu_system.htm">Menu System</option>  
 <option value="not_in_wim.htm">Include...in boot.wim</option>  
+<option value="postconfig.htm">Post Config</option>  
+<option value="packages.htm">Packages</option>  
 <option value="usb.htm">...Bootable USB...</option>  
 <option value="uefi.htm">UEFI, BIOS, GPT...</option>  
 <option value="multiboot.htm">Multiboot WinPE</option>  
@@ -21,6 +23,7 @@
 <option value="" disabled>Appendices</option> 
 <option value="" disabled>=========</option> 
 <option value="quick_pebakery.htm">Quick Start</option>  
+<option value="links.htm">Download\Links</option>  
 <option value="acknowledgements.htm">Acknowledgements</option>  
 <option value="" disabled></option> 
 </select> 
@@ -67,11 +70,13 @@ A number of the project options are contained in the main <font class="file">Chr
 <li><a class="internal" href="#1">1] Path to Source</a></li>
 <li><a class="internal" href="#2">2] Set 'boot.wim' Image number</a></li>
 <li><a class="internal" href="#3">3] Set 'install.wim' Image number</a></li>
-<li><a class="internal" href="#4">4] Keyboard Layout</a></li>
-<li><a class="internal" href="#5">5] WinPE Language / Fallback Language</a></li>
-<li><a class="internal" href="#6">6] RAM Disk Size</a></li>
+<li><a class="internal" href="#4">4] METHOD</a></li>
+<li><a class="internal" href="#5">5] Keyboard Layout</a></li>
+<li><a class="internal" href="#6">6] WinPE Language / Fallback Language</a></li>
+<li><a class="internal" href="#7">7] RAM Disk Size</a></li>
 </ul>
 </p>
+
 
 
 
@@ -131,8 +136,29 @@ In the majority of cases, image number <b>1</b> should be selected when using Wi
 
 
 
+
+
 <a name="4"></a><br>
-<h3><u>4] Keyboard Layout</u></h3>
+<h3><u>4] METHOD</u></h3>
+
+<p>
+Two build methods are currently supported -
+<ul>
+<li><b>INJECT</b> - a minimal fileset is extracted from <font class="file">boot.wim</font>, reducing storage space requirements. Files extracted include registry hives, which are modified during the build process. The <font class="file">INJECT</font> method is significantly faster than the <font class="file">EXTRACT</font> method, however <font class="file">EXTRACT</font> should be considered if any drivers are being integrated - please refer to the <a class="internal" href="project.htm#drivers">Drivers</a> section for more information. </li>
+
+<li class="break1em"><b>EXTRACT</b> - the <font class="file">wimapply</font> command will be used to apply/extract the full contents of the selected image in <font class="file">boot.wim</font>. This method is slower and requires more storage space, however if drivers are being integrated then this method should be considered - please refer to the <a class="internal" href="project.htm#drivers">Drivers</a> section for more information.  </li>
+</ul>
+Both of these methods involve extracting files from <font class="file">boot.wim</font>, modifying the registry, then injecting any modified or added files back to <font class="file">boot.wim</font>.
+</p>
+
+
+
+
+
+
+
+<a name="5"></a><br>
+<h3><u>5] Keyboard Layout</u></h3>
 
 <p>
 If the <b>DEFAULT</b> setting is used, then no settings will be changed and the keyboard layout from the existing source files will be used. There are a limited range of alternative Keyboard Layout's available in this script. 
@@ -142,8 +168,8 @@ If the <b>DEFAULT</b> setting is used, then no settings will be changed and the 
 
 
 
-<a name="5"></a><br>
-<h3><u>5] WinPE Language / Fallback Language</u></h3>
+<a name="6"></a><br>
+<h3><u>6] WinPE Language / Fallback Language</u></h3>
 
 <p>
 This setting is only used if the source file language cannot be verified by <font class="file">wimlib-imagex</font>.  
@@ -154,8 +180,8 @@ This setting is only used if the source file language cannot be verified by <fon
 
 
 
-<a name="6"></a><br>
-<h3><u>6] RAM Disk Size</u></h3>
+<a name="7"></a><br>
+<h3><u>7] RAM Disk Size</u></h3>
 
 <p>
 Use this option to set the size of the RAM Disk (in MB) - this is the amount of writable space on the SYSTEMDRIVE that will be available when <font class="file">WinPE</font> is running. 
@@ -176,5 +202,5 @@ This setting is ignored in <font class="file">WinPE</font> 5.x if system RAM is 
 
 
 
-<p class="breaktop"><font class="file">Document date - 6<sup>th</sup> March 2018</font></p></font></body></html>
+<p class="breaktop"><font class="file">Document date - 21<sup>st</sup> March 2018</font></p></font></body></html>
 

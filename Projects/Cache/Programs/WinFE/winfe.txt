@@ -1,0 +1,88 @@
+Windows Forensic Environment (WinFE)
+====================================
+
+There are a number of different version of WinFE, being based as it is
+on the Windows Preinstallation Environment (WinPE). The main versions 
+are -
+
+2.0   (codebase 6.0.6000)
+2.1   (codebase 6.0.6001)
+3.0   (codebase 6.1.7600)
+3.1   (codebase 6.1.7601)
+4.0   (codebase 6.2.9200)
+5.x   (codebase 6.3.****)
+10.x  (codebase 10.0.*****)
+
+These are all available in 32 and 64-bit processor architectures. The
+different versions behave differently. For more details and some tests
+please see - http://mistyprojects.co.uk/documents/WinFE/winfe.htm. To 
+summarise, WinFE 4.0/5.x offers more robust write protection. Earlier 
+versions are known to write a disk signature to none Windows NT based
+disks that do not already have one. 
+
+I have not had the opportunity to carry out any in depth testing of 
+WinFE 10.x builds, however based on initial tests they appear to function
+identically to WinFE 4.0/5.x.
+
+The ChrisPE project includes the following tool that can be used to
+easily change a disk attributes (Read-Only / Read-Write and 
+OFFLINE / ONLINE) - 
+
+* DiskMgr - developed by Erwan.L. Available in native 32-bit and 
+  64-bit version. 
+
+DiskMgr can be used to mount a disk so that it can be written to - e.g. 
+to copy an internal disk to an external disk. Care should be taken as 
+it's also possible to remove the readonly flag from internal (evidence) 
+disks - something that is not possible when using Diskpart in WinFE 
+4.0/5.0 systems.
+
+Earlier version of WinFE (2.*/3.*) do not mark disks as READONLY, the
+WinFE registry settings merely stop disks from being mounted - hence the
+use of the WProtect or DiskMgr tools. 
+
+As an alternative to DiskMgr, use diskpart. Diskpart is a command-line 
+tool. To use it, you must first give the "object" focus - any additional 
+commands will then be carried out on the selected "object". An object 
+can be a disk, volume or partition.  
+
+Below is a quick run through of the commands required to mount a disk on 
+the host and allow write access.
+
+
+DISKPART> List Disks 
+	This command will list all drives connected to the system.
+	Select the drive to mount based on the attributes (e.g. size).
+ 
+DISKPART> Select Disk 1 
+	Identified from list in previous step. 
+ 
+DISKPART> Detail Disk 
+	If you are unsure of the disk selected, this command will 
+	give you more information about it. 
+ 
+DISKPART> Online Disk 
+	If your destination drive is not online already, this will 
+	put it online. 
+ 
+DISKPART> List Volume  
+	This command will list the volume(s) on your selected disk.
+	Identify the one you want to work on and select it in the 
+	following step.
+ 
+DISKPART> Select Volume 1 
+	Identified from preceding step.
+ 
+DISKPART> Attribute volume clear readonly 
+	This will set your destination disk to read/write.
+	NOTE
+	If you receive the error "The media is write protected..."
+	then you are probably trying to work on an internal disk 
+	using WinFE 4.0/5.0. This is not possible - refer to first 
+	paragraph above!
+ 
+DISKPART> Assign Letter=R 
+	This will assign the drive letter (mount point) R: to
+	the selected volume 
+ 
+DISKPART> Exit 

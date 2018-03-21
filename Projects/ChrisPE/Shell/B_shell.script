@@ -6,8 +6,8 @@ Locked=True
 Mandatory=True
 Level=3
 Author=ThePEBakeryTeam
-Version=20180306
-Date=2018-03-06
+Version=20180321
+Date=2018-03-21
 
 [Interface]
 pBevel_A1=,1,12,10,70,500,40
@@ -111,6 +111,7 @@ If,%Shell%,Equal,LaunchBar,Begin
 End
 
 [process]
+If,%FullProjectRun%,Equal,NO,Run,"%ProjectDir%\Core\common.script",ExitScript
 If,%pScrollBox_A1%,Equal,BBLean,Run,%ScriptFile%,BBLean
 If,%pScrollBox_A1%,Equal,CMD,Set,%Shell%,CMD,Global
 If,%pScrollBox_A1%,Equal,LaunchBar,Run,%ScriptFile%,LaunchBar
@@ -120,6 +121,7 @@ If,Not,ExistDir,"%ProjectTemp%\ShortCuts\Quick",DirMake,"%ProjectTemp%\ShortCuts
 If,Not,ExistDir,"%ProjectTemp%\ShortCuts\Start",DirMake,"%ProjectTemp%\ShortCuts\Start"
 If,Not,ExistDir,"%ProjectTemp%\ShortCuts\LaunchBar",DirMake,"%ProjectTemp%\ShortCuts\LaunchBar"
 If,%Shell%,Equal,WinXShell,If,Not,ExistDir,"%ProjectTemp%\ShortCuts\Start\Programs",DirMake,"%ProjectTemp%\ShortCuts\Start\Programs"
+IniWrite,"%OutputDir%\Project.Settings.ini",SHELL,Shell,%Shell%
 
 [BBLean]
 Set,%Shell%,BBLean,Global
@@ -159,6 +161,9 @@ Set,%WinXShellIconsQuickLaunch%,%pScrollBox_WinXShell4%,Global
 If,Not,ExistDir,"%TargetDir%\Programs",DirMake,"%TargetDir%\Programs"
 DirMake,"%TargetDir%\Programs\WinXShell"
 DirCopy,"%Programs%\WinXShell\%ARCH%\*.*","%TargetDir%\Programs\WinXShell"
+IniWrite,"%OutputDir%\Project.Settings.ini",SHELL,WinXShellIconsDesktop,%WinXShellIconsDesktop%
+IniWrite,"%OutputDir%\Project.Settings.ini",SHELL,WinXShellIconsMenu,%WinXShellIconsMenu%
+IniWrite,"%OutputDir%\Project.Settings.ini",SHELL,WinXShellIconsQuickLaunch,%WinXShellIconsQuickLaunch%
 
 [AuthorEncoded]
 Logo=donut.ico

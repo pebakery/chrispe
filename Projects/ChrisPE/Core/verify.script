@@ -4,8 +4,8 @@ Description=This is set as hidden and will be executed from another project scri
 Selected=False
 Level=-2
 Author=ThePEBakeryTeam
-Version=20180306
-Date=2018-03-06
+Version=20180321
+Date=2018-03-21
 
 [boot.wim]
 Echo,"Checking boot.wim for required information (build number, architecture, etc)..."
@@ -40,7 +40,7 @@ WimInfo,%install.wim%,%install.wim.Image.number%,NAME,%ProductName%
 ReadInterface,Value,"%ProjectDir%\Shell\B_shell.script",Interface,pScrollBox_A1,%Shell%
 ReadInterface,Value,"%ProjectDir%\Shell\D_filemanager.script",Interface1,pScrollBox_A1,%FileManager%
 Set,%CONTINUE%,No
-If,Question,Detected the following settings from the source files -#$x#$x  - Architecture=%ARCH% #$x  - Language = %LANG% #$x  - Build = %CodeBase% #$x  - Product = %ProductName% #$x#$xThe following settings are user defined - #$x#$x  - boot.wim Image# = %Boot.wim.Image.number% #$x  - install.wim Image# = %Install.wim.Image.number% #$x  - Fallback Language = %LANG2%#$x  - Shell = %Shell%#$x  - FileManager = %FileManager%#$x#$xSelect YES to CONTINUE - or NO to ABORT,Set,%CONTINUE%,YES
+If,Question,Detected the following settings from the source files -#$x#$x  - Architecture=%ARCH% #$x  - Language = %LANG% #$x  - Build = %CodeBase% #$x  - Product = %ProductName% #$x#$xThe following settings are user defined - #$x#$x  - boot.wim Image# = %Boot.wim.Image.number% #$x  - install.wim Image# = %Install.wim.Image.number% #$x  - Method = %Method% #$x  - Fallback Language = %LANG2%#$x  - Shell = %Shell%#$x  - FileManager = %FileManager%#$x#$xSelect YES to CONTINUE - or NO to ABORT,Set,%CONTINUE%,YES
 If,Not,%CONTINUE%,Equal,YES,Halt,User aborted due to the settings.
 
 

@@ -4,8 +4,8 @@ Description=
 Selected=False
 Level=5
 Author=ThePEBakeryTeam
-Version=20180306
-Date=2018-03-06
+Version=20180321
+Date=2018-03-21
 Interface=Interface1
 
 [Interface1]
@@ -59,6 +59,7 @@ message,"This setting does not apply to any LaunchBar instance running as the Wi
 
 
 [process]
+If,%FullProjectRun%,Equal,NO,Run,"%ProjectDir%\Core\common.script",PostConfigRun
 AddInterface,%ScriptFile%,Interface1,""
 AddInterface,%ScriptFile%,Interface2,""
 If,%pCheckBoxInWim%,Equal,True,Set,%PROGRAMS.IN.WIM%,YES
@@ -81,6 +82,13 @@ If,Not,ExistDir,%PATH.TO.MY.FILES%,Begin
 End
 
 [MENU]
+If,%PROGRAMS.IN.WIM%,Equal,NO,Begin
+  If,Not,ExistFile,"%OutputDir%\Programs\ShortcutsNotInWim.txt",Run,"%ProjectDir%\Core\common.script",NotInWim
+  If,%Filemanager%,Equal,7-zip,TXTaddline,"%OutputDir%\Programs\ShortcutsNotInWim.txt","#$p~dp0nircmd.exe shortcut #$q#$pSystemDrive#$p\Programs\7-zip\7zfm.exe#$q #$q#$pTemp#$p\ShortCuts#$q #$qUserAdded#$q #$q#$p~dp0User_Added#$q #$q#$p~dp0misc\folder.ico#$q #$q0#$q",Append
+  If,%Filemanager%,Equal,Explorer++,TXTaddline,"%OutputDir%\Programs\ShortcutsNotInWim.txt","#$p~dp0nircmd.exe shortcut #$q#$pSystemDrive#$p\Programs\Explorer++\Explorer++.exe#$q #$q#$pTemp#$p\ShortCuts#$q #$qUserAdded#$q #$q#$p~dp0User_Added#$q #$q#$p~dp0misc\folder.ico#$q #$q0#$q",Append
+  If,%Filemanager%,Equal,JustManager,TXTaddline,"%OutputDir%\Programs\ShortcutsNotInWim.txt","#$p~dp0nircmd.exe shortcut #$q#$pSystemDrive#$p\Programs\JustManager\JustManager.exe#$q #$q#$pTemp#$p\ShortCuts#$q #$qUserAdded#$q #$q#$p~dp0User_Added#$q #$q#$p~dp0misc\folder.ico#$q #$q0#$q",Append
+  If,%Filemanager%,Equal,Q-Dir,TXTaddline,"%OutputDir%\Programs\ShortcutsNotInWim.txt","#$p~dp0nircmd.exe shortcut #$q#$pSystemDrive#$p\Programs\Q-Dir\Q-Dir.exe#$q #$q#$pTemp#$p\ShortCuts#$q #$qUserAdded#$q #$q#$p~dp0User_Added#$q #$q#$p~dp0misc\folder.ico#$q #$q0#$q",Append
+End 
 If,%PROGRAMS.IN.WIM%,Equal,YES,Begin
   If,%Filemanager%,Equal,Q-Dir,ShellExecute,Hide,"%Tools%\Shortcut.exe","/A:C /T:#$q#$pSystemDrive#$p\Programs\Q-Dir\Q-Dir.exe#$q /F:#$q%ProjectTemp%\UserAdded.lnk#$q /P:#$q#$pSystemDrive#$p\Programs\User_Added#$q /W:#$q#$pSystemDrive#$p\Programs\User_Added#$q /I:#$q#$pSystemDrive#$p\Programs\misc\folder.ico#$c0#$q"
   If,%Filemanager%,Equal,Explorer++,ShellExecute,Hide,"%Tools%\Shortcut.exe","/A:C /T:#$q#$pSystemDrive#$p\Programs\Explorer++\Explorer++.exe#$q /F:#$q%ProjectTemp%\UserAdded.lnk#$q /P:#$q#$pSystemDrive#$p\Programs\User_Added#$q /W:#$q#$pSystemDrive#$p\Programs\User_Added#$q /I:#$q#$pSystemDrive#$p\Programs\misc\folder.ico#$c0#$q"
@@ -95,30 +103,29 @@ If,%PROGRAMS.IN.WIM%,Equal,YES,Begin
       Run,"%ProjectDir%\Core\common.script",StartMenu
     End
     If,%pCheckBoxShortcutLaunchBar%,Equal,True,FileCopy,"%ProjectTemp%\%MyShortcut%","%ProjectTemp%\ShortCuts\LaunchBar"
+    If,%FullProjectRun%,Equal,NO,Run,"%ProjectDir%\Core\common.script",PostConfigRunShortcuts
     FileDelete,"%ProjectTemp%\%MyShortcut%"
   End
 End
-If,%pCheckBoxShortcutLaunchBar%,Equal,True,If,%PROGRAMS.IN.WIM%,Equal,NO,If,ExistFile,"%ProjectTemp%\LaunchBar.ini",TXTaddLine,"%ProjectTemp%\LaunchBar.ini",UserAdded;..\User_Added,Append
 
 [COMMON]
 If,%PROGRAMS.IN.WIM%,Equal,NO,Set,%PATH%,%OutputDir%
-If,%PROGRAMS.IN.WIM%,Equal,YES,Begin
-  Set,%PATH%,%TargetDir%
-  If,Not,ExistDir,"%TargetDir%\Programs\misc",DirMake,"%TargetDir%\Programs\misc"
-  If,ExistFile,"%Programs%\misc\folder.ico",FileCopy,"%Programs%\misc\folder.ico","%TargetDir%\Programs\misc"
-End
+If,%PROGRAMS.IN.WIM%,Equal,YES,Set,%PATH%,%TargetDir%
 If,Not,ExistDir,"%PATH%\Programs",DirMake,"%PATH%\Programs"
+If,Not,ExistDir,"%PATH%\Programs\misc",DirMake,"%PATH%\Programs\misc"
+If,ExistFile,"%Programs%\misc\folder.ico",FileCopy,"%Programs%\misc\folder.ico","%PATH%\Programs\misc"
 DirMake,"%PATH%\Programs\User_Added"
 Echo,"Copying files..."
 DirCopy,"%PATH.TO.MY.FILES%\*.*","%PATH%\Programs\User_Added"
 IniWrite,"%OutputDir%\Project.Settings.ini",PROGRAMS,ADD.CUSTOM.FILES,YES
 
 [IN.WIM]
+If,%FullProjectRun%,Equal,NO,WimPathAdd,%OutputDir%\sources\boot.wim,%Boot.wim.Image.number%,%TargetDir%,""
 //Wait,1
 
 [NOT.IN.WIM]
 //Wait,1
-Exit,"User_Added copied to #$q%PATH%\Programs#$q directory - it will not be added to #$qboot.wim#$q",Nowarn
+If,%FullProjectRun%,Equal,NO,Run,"%ProjectDir%\Core\common.script",PostConfigRunNotInWim
 
 [AuthorEncoded]
 Logo=settings.ico

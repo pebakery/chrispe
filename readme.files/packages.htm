@@ -1,0 +1,99 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd"><html><head><link type="text/css" rel="stylesheet" href="chrispe.css" media="screen" /><title>ChrisPE</title></head><body><font> 
+ 
+ 
+ 
+<p> 
+<select ONCHANGE="location = this.options[this.selectedIndex].value;"> 
+<option value="" disabled></option> 
+<option value="../readme.html">Contents</option> 
+<option value="" disabled>=======</option> 
+<option value="winpe.htm">Windows PE</option>  
+<option value="builder.htm">Builders</option>  
+<option value="options.htm">Project Options</option>  
+<option value="project.htm">Project Scripts</option>  
+<option value="instructions_pebakery.htm">Instructions</option>  
+<option value="menu_system.htm">Menu System</option>  
+<option value="not_in_wim.htm">Include...in boot.wim</option>  
+<option value="postconfig.htm">Post Config</option>  
+<option value="packages.htm" selected="selected">Packages</option>  
+<option value="usb.htm">...Bootable USB...</option>  
+<option value="uefi.htm">UEFI, BIOS, GPT...</option>  
+<option value="multiboot.htm">Multiboot WinPE</option>  
+<option value="" disabled></option> 
+<option value="" disabled>Appendices</option> 
+<option value="" disabled>=========</option> 
+<option value="quick_pebakery.htm">Quick Start</option>  
+<option value="links.htm">Download\Links</option>  
+<option value="acknowledgements.htm">Acknowledgements</option>  
+<option value="" disabled></option> 
+</select> 
+</p> 
+ 
+ 
+ 
+<hr> 
+<a href="http://chrispe.mistyprojects.co.uk/"><img src="img/home.jpg" BORDER=1></a> 
+ 
+
+
+<h2><u>Packages</u></h2>
+
+
+<p class="break3em">
+<b><u><font color="red">NOTE</font></u></b> - Packages are currently limited - more will be added over time. At the time of writing a limited set of compatible packages is available <a class="external" target="_blank" href="http://chrispe.mistyprojects.co.uk/packages/packages.htm">here</a>
+</p>
+
+
+<p class="break3em">
+A basic package system has been introduced in <font class="file">ChrisPE</font> to make it easier to add third party scripts to the project. Packages can be added via the <font class="file">PostConfig</font> &gt; <font class="file">Add Package</font> script. There are two options at the time of writing - 
+<ul>
+<li><font class="file">Tab 1</font> - add a single package.</li>
+<li><font class="file">Tab 2</font> - add multiple packages.</li>
+</ul>
+</p>
+
+
+
+
+<p class="break3em">
+Both options use the command-line <font class="file">7z.exe</font> executable (included in the project download) to extract the selected file(s) to the <font class="file">ChrisPE</font> root directory. Neither option will check the selected package(s) for project compatibility so please ensure that any target is a compatible <font class="file">ChrisPE</font> package. 
+</p>
+
+
+
+<p class="break3em">
+Packages are compressed using <font class="file">7-zip</font> LZMA compression - the <font class="file">PostConfig</font> &gt; <font class="file">Add Package</font> script will only work with files with a <font class="file">.7z</font> extension.
+</p>
+
+
+
+<p class="break3em">
+The following screenshot shows <font class="file">Tab 1</font> settings - used to add a single package. Manually enter a path to a package or use the file browser button - 
+<br />
+<a href="img/packages01.png"><IMG SRC="img/packages01.png" float=left width=80% margin-right=1% margin-bottom=0.5em border=1></a>
+</p>
+
+
+<p class="break3em">
+The following screenshot shows <font class="file">Tab 2</font> settings - used to add multiple packages. Manually enter a path to the directory containing your package(s) or use the directory browser button. If manually entereing a path, please ensure that it ends in a backslash ("<b>\</b>") - 
+<br />
+<a href="img/packages02.png"><IMG SRC="img/packages02.png" float=left width=80% margin-right=1% margin-bottom=0.5em border=1></a>
+</p>
+
+
+
+<p class="break3em">
+After entering/selecting a valid PATH, click on the <font class="file">Run Script</font> button to add the package(s) to the project -
+<br />
+<a href="img/packages03.png"><IMG SRC="img/packages03.png" float=left width=80% margin-right=1% margin-bottom=0.5em border=1></a>
+</p>
+
+
+
+
+
+
+
+
+
+<p class="breaktop"><font class="file">Document date - 21<sup>st</sup> March 2018</font></p></font></body></html>

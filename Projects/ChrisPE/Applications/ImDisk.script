@@ -4,9 +4,8 @@ Description=Virtual Disk Driver - Version 2.0.9.
 Selected=True
 Level=5
 Author=ThePEBakeryTeam
-Version=20180306
-Productversion=2.0.9.
-Date=2018-03-06
+Version=20180321
+Date=2018-03-21
 Interface=Interface1
 
 [Interface1]
@@ -15,6 +14,9 @@ pButtonMenu2="2",1,8,75,0,70,20,pButtonMenu2,0,True,_pButtonMenu2_,True
 pButtonMenu3="?",1,8,145,0,70,20,pButtonMenu3,0,True,_pButtonMenu3_,True
 pWebLabel1=http://www.ltr-data.se/opencode.html/#ImDisk,1,10,51,100,216,18,http://www.ltr-data.se/opencode.html/#ImDisk
 pTextLabel1="ImDisk Website",1,1,51,77,230,18,10,Bold
+pCheckBoxInstall="Pre-Install ImDisk",1,3,80,265,180,18,True
+pButtonInstall=?,1,8,51,265,18,18,pButtonInstall,0,True,_pButtonInstall_,True
+
 
 [Interface2]
 pButtonMenu1="1",1,8,5,0,70,20,pButtonMenu1,0,True,_pButtonMenu1_,True
@@ -31,8 +33,7 @@ pButtonShortcut2=?,1,8,10,110,18,18,pButtonShortcut2,0,True,_pButtonShortcut2_,T
 pButtonShortcut3=?,1,8,10,140,18,18,pButtonShortcut3,0,True,_pButtonShortcut3_,True
 pButtonShortcut4=?,1,8,10,170,18,18,pButtonShortcut4,0,True,_pButtonShortcut4_,True
 pTextBox1=,1,0,140,140,150,21,
-pCheckBoxInstall="Pre-Install ImDisk",1,3,240,80,180,18,True
-pButtonInstall=?,1,8,210,80,18,18,pButtonInstall,0,True,_pButtonInstall_,True
+
 
 [pButtonMenu1]
 IniWrite,%ScriptFile%,Main,Interface,Interface1
@@ -61,6 +62,8 @@ message,"This setting does not apply to any LaunchBar instance running as the Wi
 message,"Select this option to install ImDisk during the build process so that the service is already started when WinPE is booted."
 
 [process]
+If,%FullProjectRun%,Equal,NO,Run,"%ProjectDir%\Core\common.script",PostConfigRun
+AddInterface,%ScriptFile%,Interface1,""
 AddInterface,%ScriptFile%,Interface2,""
 Run,%ScriptFile%,CHECKS
 Run,%ScriptFile%,MENU
@@ -73,14 +76,8 @@ If,Not,ExistFile,"%Programs%\ImDisk\imdisk.inf",Begin
 End
 
 [MENU]
-If,%pCheckBoxInstall%,Equal,False,Begin
-  If,%pCheckBoxShortcutLaunchBar%,Equal,True,If,%PROGRAMS.IN.WIM%,Equal,NO,If,ExistFile,"%ProjectTemp%\LaunchBar.ini",TXTaddLine,"%ProjectTemp%\LaunchBar.ini",ImDisk;#$pSystemDrive#$p\Programs\ImDisk\install.cmd; ;..\Imdisk\cpl\i386\imdisk.cpl,Append
-  ShellExecute,Hide,"%Tools%\Shortcut.exe","/A:C /T:#$q#$pSystemDrive#$p\Programs\ImDisk\install.cmd#$q /F:#$q%ProjectTemp%\ImDisk.lnk#$q /I:#$q#$pSystemDrive#$p\Programs\Imdisk\cpl\i386\imdisk.cpl#$c0#$q"
-End
-If,%pCheckBoxInstall%,Equal,True,Begin
-  If,%pCheckBoxShortcutLaunchBar%,Equal,True,If,%PROGRAMS.IN.WIM%,Equal,NO,If,ExistFile,"%ProjectTemp%\LaunchBar.ini",TXTaddLine,"%ProjectTemp%\LaunchBar.ini",ImDisk;#$pSystemRoot#$p\System32\rundll32.exe;#$pSystemRoot#$p\System32\imdisk.cpl#$cRunDLL_MountFile;#$pSystemRoot#$p\System32\imdisk.cpl,Append
-  ShellExecute,Hide,"%Tools%\Shortcut.exe","/A:C /T:#$q#$pSystemRoot#$p\System32\rundll32.exe#$q /F:#$q%ProjectTemp%\ImDisk.lnk#$q /P:#$q#$pSystemRoot#$p\System32\imdisk.cpl#$cRunDLL_MountFile#$q /I:#$q#$pSystemRoot#$p\System32\imdisk.cpl#$c0#$q"
-End
+If,%pCheckBoxInstall%,Equal,False,ShellExecute,Hide,"%Tools%\Shortcut.exe","/A:C /T:#$q#$pSystemDrive#$p\Programs\ImDisk\install.cmd#$q /F:#$q%ProjectTemp%\ImDisk.lnk#$q /I:#$q#$pSystemDrive#$p\Programs\Imdisk\cpl\i386\imdisk.cpl#$c0#$q"
+If,%pCheckBoxInstall%,Equal,True,ShellExecute,Hide,"%Tools%\Shortcut.exe","/A:C /T:#$q#$pSystemRoot#$p\System32\rundll32.exe#$q /F:#$q%ProjectTemp%\ImDisk.lnk#$q /P:#$q#$pSystemRoot#$p\System32\imdisk.cpl#$cRunDLL_MountFile#$q /I:#$q#$pSystemRoot#$p\System32\imdisk.cpl#$c0#$q"
 If,ExistFile,"%ProjectTemp%\ImDisk.lnk",Begin
   Set,%MyShortcut%,ImDisk.lnk
   If,%pCheckBoxShortcutDesktop%,Equal,True,FileCopy,"%ProjectTemp%\%MyShortcut%","%ProjectTemp%\ShortCuts\Desktop"
@@ -90,7 +87,8 @@ If,ExistFile,"%ProjectTemp%\ImDisk.lnk",Begin
     Run,"%ProjectDir%\Core\common.script",StartMenu
   End
   If,%pCheckBoxShortcutLaunchBar%,Equal,True,FileCopy,"%ProjectTemp%\%MyShortcut%","%ProjectTemp%\ShortCuts\LaunchBar"
-  FileDelete,"%ProjectTemp%\%MyShortcut%"
+    If,%FullProjectRun%,Equal,NO,Run,"%ProjectDir%\Core\common.script",PostConfigRunShortcuts
+    FileDelete,"%ProjectTemp%\%MyShortcut%"
 End
 
 [COMMON]
@@ -119,6 +117,7 @@ If,%pCheckBoxInstall%,Equal,False,Begin
   DirCopy,"%Programs%\ImDisk\*.*","%TargetDir%\Programs\ImDisk"
 End
 IniWrite,"%OutputDir%\Project.Settings.ini",PROGRAMS,ImDisk,YES
+If,%FullProjectRun%,Equal,NO,WimPathAdd,%OutputDir%\sources\boot.wim,%Boot.wim.Image.number%,%TargetDir%,""
 
 [AuthorEncoded]
 logo=imdisk.ico

@@ -1,0 +1,52 @@
+if %HF%==acknowledgements.htm ECHO <option value="acknowledgements.htm" selected="selected">acknowledgements.htm</option> >> %HF%_header.txt 
+if NOT %HF%==acknowledgements.htm ECHO <option value="acknowledgements.htm">acknowledgements.htm</option> >> %HF%_header.txt 
+ 
+ 
+if %HF%==builder.htm ECHO <option value="builder.htm" selected="selected">builder.htm</option> >> %HF%_header.txt 
+if NOT %HF%==builder.htm ECHO <option value="builder.htm">builder.htm</option> >> %HF%_header.txt 
+ 
+ 
+if %HF%==instructions_pebakery.htm ECHO <option value="instructions_pebakery.htm" selected="selected">instructions_pebakery.htm</option> >> %HF%_header.txt 
+if NOT %HF%==instructions_pebakery.htm ECHO <option value="instructions_pebakery.htm">instructions_pebakery.htm</option> >> %HF%_header.txt 
+ 
+ 
+if %HF%==menu_system.htm ECHO <option value="menu_system.htm" selected="selected">menu_system.htm</option> >> %HF%_header.txt 
+if NOT %HF%==menu_system.htm ECHO <option value="menu_system.htm">menu_system.htm</option> >> %HF%_header.txt 
+ 
+ 
+if %HF%==multiboot.htm ECHO <option value="multiboot.htm" selected="selected">multiboot.htm</option> >> %HF%_header.txt 
+if NOT %HF%==multiboot.htm ECHO <option value="multiboot.htm">multiboot.htm</option> >> %HF%_header.txt 
+ 
+ 
+if %HF%==not_in_wim.htm ECHO <option value="not_in_wim.htm" selected="selected">not_in_wim.htm</option> >> %HF%_header.txt 
+if NOT %HF%==not_in_wim.htm ECHO <option value="not_in_wim.htm">not_in_wim.htm</option> >> %HF%_header.txt 
+ 
+ 
+if %HF%==options.htm ECHO <option value="options.htm" selected="selected">options.htm</option> >> %HF%_header.txt 
+if NOT %HF%==options.htm ECHO <option value="options.htm">options.htm</option> >> %HF%_header.txt 
+ 
+ 
+if %HF%==project.htm ECHO <option value="project.htm" selected="selected">project.htm</option> >> %HF%_header.txt 
+if NOT %HF%==project.htm ECHO <option value="project.htm">project.htm</option> >> %HF%_header.txt 
+ 
+ 
+if %HF%==postconfig.htm ECHO <option value="postconfig.htm" selected="selected">postconfig.htm</option> >> %HF%_header.txt 
+if NOT %HF%==postconfig.htm ECHO <option value="postconfig.htm">postconfig.htm</option> >> %HF%_header.txt 
+ 
+ 
+if %HF%==quick_pebakery.htm ECHO <option value="quick_pebakery.htm" selected="selected">quick_pebakery.htm</option> >> %HF%_header.txt 
+if NOT %HF%==quick_pebakery.htm ECHO <option value="quick_pebakery.htm">quick_pebakery.htm</option> >> %HF%_header.txt 
+ 
+ 
+if %HF%==uefi.htm ECHO <option value="uefi.htm" selected="selected">uefi.htm</option> >> %HF%_header.txt 
+if NOT %HF%==uefi.htm ECHO <option value="uefi.htm">uefi.htm</option> >> %HF%_header.txt 
+ 
+ 
+if %HF%==usb.htm ECHO <option value="usb.htm" selected="selected">usb.htm</option> >> %HF%_header.txt 
+if NOT %HF%==usb.htm ECHO <option value="usb.htm">usb.htm</option> >> %HF%_header.txt 
+ 
+ 
+if %HF%==winpe.htm ECHO <option value="winpe.htm" selected="selected">winpe.htm</option> >> %HF%_header.txt 
+if NOT %HF%==winpe.htm ECHO <option value="winpe.htm">winpe.htm</option> >> %HF%_header.txt 
+ 
+ 

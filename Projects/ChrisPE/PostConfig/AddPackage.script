@@ -1,0 +1,93 @@
+[main]
+Title=Add Package
+Description=
+Selected=None
+Level=10
+Author=ThePEBakeryTeam
+Version=20180321
+Date=2018-03-21
+Interface=Interface1
+
+[Interface1]
+pTextLabelMenu1="1",1,1,35,3,70,18,10,Bold
+pButtonMenu2="2",1,8,75,0,70,20,pButtonMenu2,0,True,_pButtonMenu2_,True
+pButtonMenu3="?",1,8,145,0,70,20,pButtonMenu3,0,True,_pButtonMenu3_,True
+pBevel1=,1,12,10,70,500,40
+pTextLabel1="PATH to package",1,1,20,83,105,18,8,Bold
+pFileBox1=,1,13,127,80,250,20,file
+pButton1="HELP",1,8,400,78,100,25,HELP1,0,True,_HELP1_,True
+pTextLabel2="Add ONE package",1,1,20,200,250,18,10,Bold
+
+[Interface2]
+pButtonMenu1="1",1,8,5,0,70,20,pButtonMenu1,0,True,_pButtonMenu1_,True
+pTextLabelMenu2="2",1,1,108,3,70,18,10,Bold
+pButtonMenu3="?",1,8,145,0,70,20,pButtonMenu3,0,True,_pButtonMenu3_,True
+pBevel1=,1,12,10,70,500,40
+pTextLabel1="PATH to package(s)",1,1,20,83,105,18,8,Bold
+pFileBox1=,1,13,127,80,250,20,dir
+pButton1="HELP",1,8,400,78,100,25,HELP2,0,True,_HELP2_,True
+pTextLabel2="Add MULTIPLE packages",1,1,20,200,250,18,10,Bold
+
+[HELP1]
+message,"Add a single package. Enter a path to your package and click on the 'Run Script' button - the small triangular play button to the right of the title bar"
+
+[HELP2]
+message,"Add multiple packages. Enter a path to the directory containing your package(s) and click on the 'Run Script' button - the small triangular play button to the right of the title bar#$x#$xThe path must end in a backslash (#$q\#$q)."
+
+[pButtonMenu1]
+IniWrite,%ScriptFile%,Main,Interface,Interface1
+System,REFRESHINTERFACE
+
+[pButtonMenu2]
+IniWrite,%ScriptFile%,Main,Interface,Interface2
+System,REFRESHINTERFACE
+
+[pButtonMenu3]
+message,Tab 1 - add a single package#$x#$xTab 2 - add multiple packages
+
+[Process]
+IniRead,%ScriptFile%,main,Interface,%Interface%
+If,%Interface%,Equal,Interface1,Run,%ScriptFile%,SinglePackage
+If,%Interface%,Equal,Interface2,Run,%ScriptFile%,MuliplePackages
+
+[MuliplePackages]
+set,%MYPATH%,%pFileBox1%,Global
+If,%MYPATH%,Equal,,Begin
+  Message,"Package not selected. Aborting..."
+  Exit
+End
+If,Not,ExistDir,"%MYPATH%",Begin
+  Message,"Could not find #$q%MYPATH%#$q - check path"
+  Exit
+End
+StrFormat,Right,%MYPATH%,1,%endcharacter%
+If,Not,%endcharacter%,Equal,\,Begin
+  Message,"Error. The #$qPATH to package(s)#$q entry in this script must end in a backslash (#$q\#$q).#$x#$xABORTING..."
+  Exit
+End
+Set,%CONTINUE%,NO
+If,Question,"Running this script will extract all .7z files in the target path to the ChrisPE project directory. #$x#$xPlease ensure that any .7z files in the path are compatible project packages.#$x#$xSelect YES to CONTINUE or NO to ABORT.",Set,%CONTINUE%,YES
+If,%CONTINUE%,Equal,NO,Exit
+ShellExecute,Hide,"%Tools%\7z.exe","x #$q%MYPATH%*.7z#$q -y -o#$q%BaseDir%#$q"
+System,LoadAll
+
+[SinglePackage]
+set,%MYPACKAGE%,%pFileBox1%,Global
+If,%MYPACKAGE%,Equal,,Begin
+  Message,"Package not selected. Aborting..."
+  Exit
+End
+If,Not,ExistFile,"%MYPACKAGE%",Begin
+  Message,"Could not find #$q%MYPACKAGE%#$q - check path"
+  Exit
+End
+StrFormat,EXT,"%MYPACKAGE%","%extension%"
+If,Not,"%extension%",Equal,".7z",Begin
+  Message,"The file you have selected as not a .7z type file. #$xOnly .7z package files are supported. #$x#$xAborting script..."
+  Exit
+End
+Set,%CONTINUE%,NO
+If,Question,"Running this script will extract the selected .7z file to the ChrisPE project directory. #$x#$xPlease ensure that this file is a compatible project package.#$x#$xSelect YES to CONTINUE or NO to ABORT.",Set,%CONTINUE%,YES
+If,%CONTINUE%,Equal,NO,Exit
+ShellExecute,Hide,"%Tools%\7z.exe","x #$q%MYPACKAGE%#$q -y -o#$q%BaseDir%#$q"
+System,LoadAll

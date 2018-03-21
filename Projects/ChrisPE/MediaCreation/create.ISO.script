@@ -6,8 +6,8 @@ Locked=False
 Mandatory=False
 Level=9
 Author=ThePEBakeryTeam
-Version=20180306
-Date=2018-03-06
+Version=20180321
+Date=2018-03-21
 Interface=TAB_B_Menu
 
 [TAB_A_Menu]
@@ -43,34 +43,12 @@ pTextLabel6="6] WinPE.iso",1,1,217,285,180,18,8,Bold
 pButton6=HELP,1,8,430,282,70,20,HELP.B6,0,True,_HELP.B6_,True
 
 [Change.To.Tab.A]
-IniRead,%ScriptFile%,Main,Interface,%Current.Tab%
-Run,%ScriptFile%,Save.Settings
 IniWrite,%ScriptFile%,Main,Interface,TAB_A_Menu
 System,REFRESHINTERFACE
 
 [Change.To.Tab.B]
-IniRead,%ScriptFile%,Main,Interface,%Current.Tab%
-Run,%ScriptFile%,Save.Settings
 IniWrite,%ScriptFile%,Main,Interface,TAB_B_Menu
 System,REFRESHINTERFACE
-
-[Save.Settings]
-If,%Current.Tab%,Equal,TAB_B_Menu,Begin
-IniWrite,%ScriptFile%,Saved.Options,pScrollBoxB1,%pScrollBoxB1%
-IniWrite,%ScriptFile%,Saved.Options,pScrollBoxB2,%pScrollBoxB2%
-IniWrite,%ScriptFile%,Saved.Options,pScrollBoxB3,%pScrollBoxB3%
-IniWrite,%ScriptFile%,Saved.Options,pScrollBoxB4,%pScrollBoxB4%
-IniWrite,%ScriptFile%,Saved.Options,pScrollBoxB5,%pScrollBoxB5%
-IniWrite,%ScriptFile%,Saved.Options,pScrollBoxB6,%pScrollBoxB6%
-End
-
-[Saved.Options]
-pScrollBoxB1=RAM
-pScrollBoxB2=YES
-pScrollBoxB3=BOTH
-pScrollBoxB4=mkisofs
-pScrollBoxB5=NO
-pScrollBoxB6=YES
 
 [HELP.B1]
 Message,"RAM Boot is the most commonly used boot method - boot.wim is copied to RAM during the boot process and this method requires more RAM (a minimum of 256 MB for WinPE 2.x/3.x or a minimum of 512 MB for WinPE 4.0/5.x).#$x#$xFLAT Boot will work better on low RAM systems - in tests MistyPE/Mini-WinFE booted on systems with as little as 128 RAM when Flat Booted. Please note that WinPE 4.0/5.x cannot be FLAT booted from a CD/DVD drive#$x#$xSelect BOTH to create a multiboot ISO file with FLAT and RAM Boot options.#$x#$xWARNING - extracting the contents of boot.wim (required for FLAT Booting) is a time consuming process."
@@ -91,28 +69,20 @@ Message,"Select YES to attempt to optimise storage by encoding duplicate files o
 Message,"YES - create WinPE.iso in the project build directory #$q\ChrisPE.Project.Output#$q (path relative to WinBuilder.exe / Launcher.exe). NOTE - this file will be deleted during any project rebuilds.#$x#$xNO - create WinPE_yyyy_mm_dd_hh.nn.iso in the project root directory (the directory containing WinBuilder.exe / Launcher.exe). As this file is named dynamically based on the date and time it is unlikely to be accidentally overwritten - unless two builds are completed within the same minute! This file will NOT be deleted during any project rebuilds."
 
 [process]
-IniRead,"%ScriptFile%",Main,Interface,%Interface%
-If,Not,%Interface%,Equal,TAB_B_Menu,Begin
-IniRead,%ScriptFile%,Saved.Options,pScrollBoxB1,%pScrollBoxB1%
-IniRead,%ScriptFile%,Saved.Options,pScrollBoxB2,%pScrollBoxB2%
-IniRead,%ScriptFile%,Saved.Options,pScrollBoxB3,%pScrollBoxB3%
-IniRead,%ScriptFile%,Saved.Options,pScrollBoxB4,%pScrollBoxB4%
-IniRead,%ScriptFile%,Saved.Options,pScrollBoxB5,%pScrollBoxB5%
-IniRead,%ScriptFile%,Saved.Options,pScrollBoxB6,%pScrollBoxB6%
-End
+AddInterface,%ProjectDir%\MediaCreation\create.ISO.script,TAB_B_Menu,""
 If,%pScrollBoxB6%,Equal,NO,Begin
 StrFormat,Date,%var%,yyyy_mm_dd_hh.nn
 Set,%ISO_File%,"%ISODir%\..\WinPE_%var%.iso"
 End
 Else,Set,%ISO_File%,"%ISODir%\WinPE.iso"
-If,%pScrollBoxB4%,Equal,oscdimg,Run,%ScriptFile%,oscdimg.Checks
-Run,%ScriptFile%,File.Checks
-If,%CODEBASE%,Equal,unchecked,Run,%Scriptfile%,codebase
-Run,%ScriptFile%,Permissions
-Run,%ScriptFile%,Bootfix.Check
-If,%pScrollBoxB1%,Equal,RAM,Run,%ScriptFile%,RAM
-If,%pScrollBoxB1%,Equal,FLAT,Run,%ScriptFile%,FLAT
-If,%pScrollBoxB1%,Equal,BOTH,Run,%ScriptFile%,RAM.And.FLAT
+If,%pScrollBoxB4%,Equal,oscdimg,Run,%ProjectDir%\MediaCreation\create.ISO.script,oscdimg.Checks
+Run,%ProjectDir%\MediaCreation\create.ISO.script,File.Checks
+If,%CODEBASE%,Equal,unchecked,Run,%ProjectDir%\MediaCreation\create.ISO.script,codebase
+Run,%ProjectDir%\MediaCreation\create.ISO.script,Permissions
+Run,%ProjectDir%\MediaCreation\create.ISO.script,Bootfix.Check
+If,%pScrollBoxB1%,Equal,RAM,Run,%ProjectDir%\MediaCreation\create.ISO.script,RAM
+If,%pScrollBoxB1%,Equal,FLAT,Run,%ProjectDir%\MediaCreation\create.ISO.script,FLAT
+If,%pScrollBoxB1%,Equal,BOTH,Run,%ProjectDir%\MediaCreation\create.ISO.script,RAM.And.FLAT
 
 [File.Checks]
 Echo,"Running file checks..."
@@ -191,18 +161,18 @@ If,ExistFile,"%OutputDir%\boot\bootfix.bin",FileDelete,"%OutputDir%\boot\bootfix
 End
 
 [RAM]
-If,Not,%pScrollBoxB3%,Equal,BIOS,Run,%Scriptfile%,efi.check
+If,Not,%pScrollBoxB3%,Equal,BIOS,Run,%ProjectDir%\MediaCreation\create.ISO.script,efi.check
 Set,%ISO.Root.Directory%,"%OutputDir%"
-If,%pScrollBoxB3%,Equal,BIOS,Run,%Scriptfile%,BIOS
-If,%pScrollBoxB3%,Equal,UEFI,Run,%Scriptfile%,UEFI
-If,%pScrollBoxB3%,Equal,BOTH,Run,%Scriptfile%,BOTH
+If,%pScrollBoxB3%,Equal,BIOS,Run,%ProjectDir%\MediaCreation\create.ISO.script,BIOS
+If,%pScrollBoxB3%,Equal,UEFI,Run,%ProjectDir%\MediaCreation\create.ISO.script,UEFI
+If,%pScrollBoxB3%,Equal,BOTH,Run,%ProjectDir%\MediaCreation\create.ISO.script,BOTH
 
 [FLAT]
 //ENSURE THAT FLATBOOT IS NOT ATTEMPTED FOR WINPE 4 (AND NEWER) BUILDS
 StrFormat,LEFT,%CODEBASE%,3,%FLATBOOT.CHECK2%
-If,Not,%FLATBOOT.CHECK2%,SMALLER,6.2,Run,%Scriptfile%,Unsupported.Error.1
+If,Not,%FLATBOOT.CHECK2%,SMALLER,6.2,Run,%ProjectDir%\MediaCreation\create.ISO.script,Unsupported.Error.1
 //
-If,Not,%pScrollBoxB3%,Equal,BIOS,Run,%Scriptfile%,efi.check
+If,Not,%pScrollBoxB3%,Equal,BIOS,Run,%ProjectDir%\MediaCreation\create.ISO.script,efi.check
 Set,%ISO.Root.Directory%,"%OutputDir%\..\ISO.Root.FlatBoot"
 If,ExistDir,"%ISO.Root.Directory%",Begin
 Echo,"Deleting #$q%ISO.Root.Directory%#$q..."
@@ -223,16 +193,16 @@ FileCopy,"%Programs%\misc\BIOS-FLATBoot-BCD","%ISO.Root.Directory%\boot\BCD"
 FileCopy,"%Programs%\misc\UEFI-FLATBoot-BCD","%ISO.Root.Directory%\efi\microsoft\boot\BCD"
 Echo,"Extracting files from boot.wim - this may take a while..."
 WimApply,%OutputDir%\sources\boot.wim,%Boot.wim.Image.number%,%ISO.Root.Directory%,NOACL
-If,%pScrollBoxB3%,Equal,BIOS,Run,%Scriptfile%,BIOS
-If,%pScrollBoxB3%,Equal,UEFI,Run,%Scriptfile%,UEFI
-If,%pScrollBoxB3%,Equal,BOTH,Run,%Scriptfile%,BOTH
+If,%pScrollBoxB3%,Equal,BIOS,Run,%ProjectDir%\MediaCreation\create.ISO.script,BIOS
+If,%pScrollBoxB3%,Equal,UEFI,Run,%ProjectDir%\MediaCreation\create.ISO.script,UEFI
+If,%pScrollBoxB3%,Equal,BOTH,Run,%ProjectDir%\MediaCreation\create.ISO.script,BOTH
 
 [RAM.And.FLAT]
 //ENSURE THAT FLATBOOT IS NOT ATTEMPTED FOR WINPE 4 (AND NEWER) BUILDS
 StrFormat,LEFT,%CODEBASE%,3,%FLATBOOT.CHECK2%
-If,Not,%FLATBOOT.CHECK2%,SMALLER,6.2,Run,%Scriptfile%,Unsupported.Error.1
+If,Not,%FLATBOOT.CHECK2%,SMALLER,6.2,Run,%ProjectDir%\MediaCreation\create.ISO.script,Unsupported.Error.1
 //
-If,Not,%pScrollBoxB3%,Equal,BIOS,Run,%Scriptfile%,efi.check
+If,Not,%pScrollBoxB3%,Equal,BIOS,Run,%ProjectDir%\MediaCreation\create.ISO.script,efi.check
 Set,%ISO.Root.Directory%,"%OutputDir%\..\ISO.Root.FlatBoot"
 If,ExistDir,"%ISO.Root.Directory%",Begin
 Echo,"Deleting #$q%ISO.Root.Directory%#$q..."
@@ -251,9 +221,9 @@ FileCopy,"%Programs%\misc\BIOS-FLATandRAM-BCD","%ISO.Root.Directory%\boot\BCD"
 FileCopy,"%Programs%\misc\UEFI-FLATandRAM-BCD","%ISO.Root.Directory%\efi\microsoft\boot\BCD"
 Echo,"Extracting files from boot.wim - this may take a while..."
 WimApply,%OutputDir%\sources\boot.wim,%Boot.wim.Image.number%,%ISO.Root.Directory%,NOACL
-If,%pScrollBoxB3%,Equal,BIOS,Run,%Scriptfile%,BIOS
-If,%pScrollBoxB3%,Equal,UEFI,Run,%Scriptfile%,UEFI
-If,%pScrollBoxB3%,Equal,BOTH,Run,%Scriptfile%,BOTH
+If,%pScrollBoxB3%,Equal,BIOS,Run,%ProjectDir%\MediaCreation\create.ISO.script,BIOS
+If,%pScrollBoxB3%,Equal,UEFI,Run,%ProjectDir%\MediaCreation\create.ISO.script,UEFI
+If,%pScrollBoxB3%,Equal,BOTH,Run,%ProjectDir%\MediaCreation\create.ISO.script,BOTH
 
 [BIOS]
 Echo,"Creating ISO File - this may take a while..."
@@ -349,10 +319,10 @@ End
 [efi.check]
 Echo,"Running UEFI file checks..."
 If,%ARCH%,Equal,x86,Begin
-If,%CODEBASE%,Equal,6.0.6000,Run,%Scriptfile%,Unsupported.Error.2
-If,%CODEBASE%,Equal,6.0.6001,Run,%Scriptfile%,Unsupported.Error.2
-If,%CODEBASE%,Equal,6.1.7600,Run,%Scriptfile%,Unsupported.Error.2
-If,%CODEBASE%,Equal,6.1.7601,Run,%Scriptfile%,Unsupported.Error.2
+If,%CODEBASE%,Equal,6.0.6000,Run,%ProjectDir%\MediaCreation\create.ISO.script,Unsupported.Error.2
+If,%CODEBASE%,Equal,6.0.6001,Run,%ProjectDir%\MediaCreation\create.ISO.script,Unsupported.Error.2
+If,%CODEBASE%,Equal,6.1.7600,Run,%ProjectDir%\MediaCreation\create.ISO.script,Unsupported.Error.2
+If,%CODEBASE%,Equal,6.1.7601,Run,%ProjectDir%\MediaCreation\create.ISO.script,Unsupported.Error.2
 End
 
 [Unsupported.Error.2]

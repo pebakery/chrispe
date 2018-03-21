@@ -4,25 +4,20 @@ Description=Change desktop wallpaper
 Selected=True
 Level=4
 Author=ThePEBakeryTeam
-Version=20180306
-Date=2018-03-06
+Version=20180321
+Date=2018-03-21
 
 [Interface]
 pBevel1=pBevel1,1,12,10,70,500,40
-pScrollBox1=DEFAULT,1,4,20,80,70,20,DEFAULT,CUSTOM
+pScrollBox1=CUSTOM,1,4,20,80,70,20,DEFAULT,CUSTOM
 pTextLabel1="Add Wallpaper?",1,1,211,83,120,18,10,Bold
 pButton1=HELP,1,8,430,80,70,20,1.HELP,0,True,_1.HELP_,True
 pFileBox1=,1,13,20,130,309,20,file
 pBevel2=pBevel2,1,12,10,120,500,40
 pTextLabel3="Browse to custom .jpg file",1,1,335,133,180,18,10,Bold
 
-
-
-
-
-
-
 [process]
+If,%FullProjectRun%,Equal,NO,Run,"%ProjectDir%\Core\common.script",ExitScript
 If,%pScrollBox1%,Equal,DEFAULT,Begin
 Echo,Default wallpaper selected...
 If,%Shell%,Equal,WinXShell,Begin
