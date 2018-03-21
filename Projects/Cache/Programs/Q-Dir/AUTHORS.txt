@@ -1,0 +1,63 @@
+﻿SumatraPDF contains code by:
+
+* Alexander Klenin
+* Củ Văn Chuối (mrchuoi at gmail.com)
+* David Lopez
+* Danilo Roascio
+* Jarkko Pöyry
+* Krzysztof J. Kowalczyk  (http://blog.kowalczyk.info)
+* Ludo Brands
+* Matthew Wilcoxson (matthew.wilcoxson at gmail.com)
+* Nathan Jhaveri
+* Peter Astrand
+* Robert Liu
+* Robert Prouse (rprouse at gmail.com)
+* Simon Bünzli (zeniko at gmail.com, http://www.zeniko.ch/#SumatraPDF)
+* Stefan Stefanov (userchefo at gmail.com)
+* Tom Clegg
+* vadmium at gmail.com
+* Vasily Fomin (vasili.fomin at gmail.com)
+* Victor Kozyakin
+* William Blum (william.blum at gmail.com, http://william.famille-blum.org/)
+
+Most code under src is licensed as GPL v3 (see COPYING) with the main
+exception of code in src/utils and src/mui which has a BSD license
+(see COPYING.BSD). Due to mupdf/COPYING, section 13 of the AGPL v3
+applies to SumatraPDF as well.
+
+Icons by Zenon, Sonke Tesch, George Georgiou, Robert Hegner,
+FAMFAMFAM and Yusuke Kamiyamane.
+
+Windows program icon (gfx/SumatraPDF*.png, gfx/SumatraPDF.ico) by
+Alex (koo.studios at gmail.com, old address: zenon38 at gmail.com).
+License: CC BY 3.0 (http://creativecommons.org/licenses/by/3.0/).
+
+Translations by various translators (see TRANSLATORS).
+
+External projects are by their various authors:
+
+Project        License                   Type Website
+---------------------------------------------------------------------------------------------------------
+MuPDF          mupdf/COPYING             AGPL http://mupdf.com/
+bzip2          ext/bzip2/LICENSE              http://bzip.org/
+CHMLIB         ext/CHMLib/COPYING        LGPL http://www.jedrea.com/chmlib/
+FreeType       ext/freetype2/FTL.txt          http://www.freetype.org/
+jbig2dec       ext/jbig2dec/COPYING      AGPL http://www.ghostscript.com/jbig2dec.html
+libjpeg-turbo  ext/.../README-turbo.txt  BSD  http://libjpeg-turbo.virtualgl.org/
+DjVuLibre      ext/libdjvu/COPYRIGHT     GPL  http://djvu.sourceforge.net/
+OpenJPEG       ext/openjpeg/LICENSE      BSD  http://www.openjpeg.org/
+SyncTeX        ext/.../synctex_parser.c       http://itexmac.sourceforge.net/SyncTeX.html
+zlib           ext/zlib/zlib.h                http://www.zlib.net/
+lzma           ext/lzma/lzma.txt              http://www.7-zip.org/sdk.html
+libwebp        ext/libwebp/COPYING       BSD  https://developers.google.com/speed/webp/
+unarr          ext/unarr/COPYING         LGPL https://github.com/zeniko/unarr
+
+CMap Resources mupdf/.../cmaps/README         http://sourceforge.net/adobe/cmap/home/Home/
+XySSL          mupdf/.../crypt-aes.c     BSD  http://en.wikipedia.org/wiki/PolarSSL#History
+Arcfour        mupdf/.../crypt-arc4.c         http://tools.ietf.org/html/draft-kaukonen-cipher-arcfour-01
+RSA's MD5      mupdf/.../crypt-md5.c          http://tools.ietf.org/html/rfc1321
+Android        mupdf/.../droid/NOTICE    APL  http://www.droidfonts.com/
+Poppler        mupdf/.../pdf-annot.c     GPL  http://poppler.freedesktop.org/
+ezgdi          mupdf/.../pdf-ft-tools.c  GPL  http://code.google.com/p/ezgdi/
+
+Fugue Icons    CC BY 3.0                      http://p.yusukekamiyamane.com/

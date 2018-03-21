@@ -4,8 +4,8 @@ Description=
 Selected=True
 Level=4
 Author=ThePEBakeryTeam
-Version=20180306
-Date=2018-03-06
+Version=20180311
+Date=2018-03-11
 Interface=Interface
 NoWarning=False
 
@@ -26,10 +26,12 @@ pCheckBoxG="G] Remove 'Include in Library'",1,3,300,40,180,18,True
 pCheckBoxH="H] Remove 'Send to'",1,3,300,65,180,18,True
 pCheckBoxI="I] Remove 'Pin to Start\Taskbar'",1,3,300,90,180,18,True
 pCheckBoxJ="J] Remove 'WallpaperHost.exe'",1,3,300,115,180,18,True
+pCheckBoxK="K] Font(s)",1,3,300,140,180,18,True
 pButtonG=?,1,8,270,40,18,18,?optionG,0,True,_?optionG_,True
 pButtonH=?,1,8,270,65,18,18,?optionH,0,True,_?optionH_,True
 pButtonI=?,1,8,270,90,18,18,?optionI,0,True,_?optionI_,True
 pButtonJ=?,1,8,270,115,18,18,?optionJ,0,True,_?optionJ_,True
+pButtonK=?,1,8,270,140,18,18,?optionK,0,True,_?optionK_,True
 
 [?optionA]
 Message,"The #$qBrowse for Folder#$q dialog is required in a number of programs - some programs might not function without this.#$x#$xNOTE - this is not working in WinPE 2.*"
@@ -61,6 +63,9 @@ Message,"Remove #$qPin to Taskbar#$q and #$qPin to Start Menu#$q from the right-
 [?optionJ]
 Message,"Delete WallpaperHost.exe from WinPE. In Windows 8.1 and 10.* based builds many file explorers do not refresh after operations are completed (including moving#$c deleting and renaming files) - removing WallpaperHost.exe fixes this issue."
 
+[?optionK]
+Message,"Add '\Windows\Fonts\segoeui.ttf' font support"
+
 [process]
 If,%pCheckBoxA%,Equal,True,Run,"%ProjectDir%\Core\Browse.For.Folder.script",process
 If,%pCheckBoxB%,Equal,True,Run,%ScriptFile%,NoInternetOpenWith
@@ -72,6 +77,7 @@ If,%pCheckBoxG%,Equal,True,Run,%ScriptFile%,IncludeInLibrary
 If,%pCheckBoxH%,Equal,True,Run,%ScriptFile%,SendTo
 If,%pCheckBoxI%,Equal,True,Run,%ScriptFile%,PinToStart
 If,%pCheckBoxJ%,Equal,True,Run,%ScriptFile%,WallpaperHost
+If,%pCheckBoxK%,Equal,True,Run,%ScriptFile%,Fonts
 
 [NewContextMenu]
 //If,%CODEBASE%,Equal,10.0.15063,ShellExecute,Hide,"%Tools%\offlinereg\offlinereg-win32.exe","#$q%Target_config%\software#$q #$qClasses\Directory\background\shellex\ContextMenuHandlers#$q deletekey New"
@@ -149,6 +155,15 @@ echo,"Clearing read-only attributes from boot.wim"
 If,WimExistFile,%OutputDir%\sources\boot.wim,%Boot.wim.Image.number%,Windows/System32/WallpaperHost.exe,WimPathDelete,%OutputDir%\sources\boot.wim,%Boot.wim.Image.number%,Windows/System32/WallpaperHost.exe
 //ShellExecute,Hide,"%Tools%\wimlib\wimlib-imagex.exe","update #$q%OutputDir%\sources\boot.wim#$q %Boot.wim.Image.number% --command=#$qdelete '/Windows/System32/WallpaperHost.exe'#$q"
 
+[Fonts]
+If,WimExistFile,%Install.wim%,%Install.wim.Image.number%,Windows\Fonts\segoeui.ttf,Begin
+  If,Not,ExistDir,"%TargetDir%\Windows\Fonts",DirMake,"%TargetDir%\Windows\Fonts"
+  WimExtract,%Install.wim%,%Install.wim.Image.number%,Windows\Fonts\segoeui.ttf,"%TargetDir%\Windows\Fonts",NOACL
+  If,Not,ExistRegSection,HKLM,_WinPE_SOFTWARE,RegHiveLoad,_WinPE_SOFTWARE,"%Target_config%\software"
+  RegWrite,HKLM,0x1,"_WinPE_SOFTWARE\Microsoft\Windows NT\CurrentVersion\Fonts","Segoe UI (TrueType)","segoeui.ttf"
+  If,ExistRegSection,HKLM,_WinPE_SOFTWARE,RegHiveUnload,_WinPE_SOFTWARE
+End
+
 [AuthorEncoded]
 Logo=settings.ico
 settings.ico=653,871
@@ -157,33 +172,15 @@ settings.ico=653,871
 lines=0
 0=eJztlzFLI0EYht9gEawCFnJdplAQLfQHBEW4H3KttaWosfIHWIr9tXbhuCLhOMLdXwjIcvcDXEE0Rcj6ffPNormN3sxmJ7ML+4Q3LyyZ7DMLuzsDNOiztwf6Vvi6CawD2KLQIXyBHNdsoKbGhjZlSHmkXAZ2cUVRIkryJlcBfVxQyLpXZQ4K77uXfQ4K/3cv6xwU7N3TlOWeVnB35zwuXzWDQj53znDptrMo5Hfnce0l+75FYTF3tVzdGRRq9xAo1O4hUKjdQ6BQuxfNDuWE0qPcUR4oMWVEuaUcUzoldN+nDHI6hXRfpVx79vblvkb5VVF3vu6/K+rO3FTY/bDC7szPCrvvenbndDy5MxcW55+a5PU/9uj/3cL9yCTvHG49+v+1cE/JO4eRR/9nS/dF5hB79H9ycE9xncODJ3fmD9zcU1zmcFe49Svf4O6eYjuHXoG+/3KKfO6Avf9JUbJz2IZf98ScwyefHX/v4j4oTrMQXJ89+2E05+Lqfh1Gcy6u7ryPWw1imsXVnfdxa0FMs7i68z6uLNedn0u27rwHOgyj+SH87OZ3HL+nea3B6yVe8/G6ldfevH/YDWZXE4REM9vjc+n4QDpqS/db0t2mNFZ0T01PTI9Nx5DfRZBxfcj/dCH/C+jzTPVdw8Mbumm4bhrO3QdaidxYbfqaUB9Qj6nPE9lQJNIN7gg0XLrJrYfP60+mO6bPTCfSg6Sr+4fpoTl+PyUN9pmYHpMOd2w6Ii3xluvZXZHutzLXmfsFmCR9knic4ylOLSnJzEsv1stMzmcYBSMN7FOF0I5M2OUtLh+2Y2ACAJzcCBstMDmuAQAAAAIAAAAoAAAAQQIAAAAAAAABAAAAAAAAAAAAAAA
 
-[not.in.use.yet]
-If,%CodeBase%,Equal,10.0.15063,Begin
-Echo,"File Copy Dialog registry fix for Windows 10.0.15063..."
-If,Not,ExistDir,"%ProjectTemp%\Install.wim_Registry",DirMake,"%ProjectTemp%\Install.wim_Registry"
-Set,%Install.wim_Registry%,"%ProjectTemp%\Install.wim_Registry"
-//extracting SOFTWARE registry hive from install.wim if it wasn't previously extracted by another script
-If,Not,ExistFile,"%Install.wim_Registry%\software",Begin
-WimExtract,%Install.wim%,%Install.wim.Image.number%,Windows\System32\config\SOFTWARE,%Install.wim_Registry%,NOACL
-If,Not,ExistFile,"%Install.wim_Registry%\software",Begin
-Message,"Could not locate SOFTWARE registry hive - does the source .wim file contain image number %Install.wim.Image.number%? Aborting..."
-Halt
-End
-End
-If,ExistRegSection,HKLM,_WinPE_SOFTWARE,RegHiveUnload,_WinPE_SOFTWARE
-RegHiveLoad,_WinPE_SOFTWARE,"%Install.wim_Registry%\software"
-ShellExecute,hide,regedit.exe,"/e #$q%Install.wim_Registry%\Interface.reg#$q HKEY_LOCAL_MACHINE\_WinPE_SOFTWARE\Classes\Interface"
-RegHiveUnload,_WinPE_SOFTWARE
-//load WinPE Software hive > export > unload > delete software hive > create new software hive > import settings (this will create a new hive without any security permissions on keys
-RegHiveLoad,_WinPE_SOFTWARE,"%Target_config%\software"
-ShellExecute,hide,regedit.exe,"/e #$q%ProjectTemp%\boot.wim_software.reg#$q HKEY_LOCAL_MACHINE\_WinPE_SOFTWARE"
-RegHiveUnload,_WinPE_SOFTWARE
-FileDelete,"%Target_config%\softwar*"
-ShellExecute,Hide,"%Tools%\offlinereg\offlinereg-win32.exe","#$q%Target_config%\software#$q #$q #$q create"
-RegHiveLoad,_WinPE_SOFTWARE,"%Target_config%\software"
-ShellExecute,hide,regedit.exe,"/s #$q%ProjectTemp%\boot.wim_software.reg#$q"
-If,ExistFile,"%Install.wim_Registry%\Interface.reg",ShellExecute,hide,regedit.exe,"/s #$q%Install.wim_Registry%\Interface.reg#$q"
-RegHiveUnload,_WinPE_SOFTWARE
-ShellExecute,Hide,"%Tools%\offlinereg\offlinereg-win32.exe","#$q%Target_config%\software#$q #$q #$q run #$q%Tools%\offlinereg.file.lists\OneCoreUAPCommonProxyStub.txt#$q"
-End
+
+
+
+
+
+
+
+
+
+
+
 
