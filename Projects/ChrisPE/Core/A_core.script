@@ -14,7 +14,6 @@ NoWarning=False
 [Interface]
 
 [process]
-If,%FullProjectRun%,Equal,NO,Run,"%ProjectDir%\Core\common.script",ExitScript
 If,Not,%PEBakery%,Equal,True,Begin
   message,"This project is not compatible with WinBuilder. ABORTING..."
   Halt

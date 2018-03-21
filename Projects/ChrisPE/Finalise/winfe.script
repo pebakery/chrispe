@@ -1,7 +1,7 @@
 [main]
 Title=WinFE
 Description=WinPE as a Windows Forensic Environment.
-Selected=True
+Selected=False
 Level=8
 Author=ThePEBakeryTeam
 Version=20180321
