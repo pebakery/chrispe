@@ -1,0 +1,369 @@
+[main]
+Title=Create ISO
+Description=Create a bootable DVD/CD Image File (ISO)
+Selected=True
+Locked=False
+Mandatory=False
+Level=9
+Author=ThePEBakeryTeam
+Version=20180306
+Date=2018-03-06
+Interface=TAB_B_Menu
+
+[TAB_A_Menu]
+pTextLabel_TAB_A="Home",1,1,25,4,80,18,10,Bold
+pButton_TAB_B="Advanced",1,8,85,0,80,25,Change.To.Tab.B,0,True,_Change.To.Tab.B,True
+
+[TAB_B_Menu]
+pButton_TAB_A="Home",1,8,5,0,80,25,Change.To.Tab.A,0,True,_Change.To.Tab.A,True
+pTextLabel_TAB_B="Advanced",1,1,95,4,80,18,10,Bold
+pBevel1=pBevel1,1,12,10,50,500,35
+pScrollBoxB1=RAM,1,4,20,57,70,20,RAM,FLAT,BOTH
+pTextLabel1="1] Select Boot Type",1,1,196,60,130,18,8,Bold
+pButton1=HELP,1,8,430,57,70,20,HELP.B1,0,True,_HELP.B1_,True
+pBevel2=pBevel2,1,12,10,95,500,35
+pScrollBoxB2=YES,1,4,20,102,70,20,YES,NO
+pTextLabel2="2] Press any key to boot from CD...",1,1,163,105,210,18,8,Bold
+pButton2=HELP,1,8,430,102,70,20,HELP.B2,0,True,_HELP.B2_,True
+pBevel3=pBevel3,1,12,10,140,500,35
+pScrollBoxB3=BOTH,1,4,20,147,70,20,BIOS,UEFI,BOTH
+pTextLabel3="3] Firmware Type",1,1,201,150,119,18,8,Bold
+pButton3=HELP,1,8,430,147,70,20,HELP.B3,0,True,_HELP.B3_,True
+pBevel4=pBevel4,1,12,10,185,500,35
+pScrollBoxB4=mkisofs,1,4,20,192,70,20,mkisofs,oscdimg
+pTextLabel4="4] MIKISOFS OR OSCDIMG",1,1,180,195,217,18,8,Bold
+pButton4=HELP,1,8,430,192,70,20,HELP.B4,0,True,_HELP.B4_,True
+pBevel5=pBevel5,1,12,10,230,500,35
+pScrollBoxB5=NO,1,4,20,237,70,20,YES,NO
+pTextLabel5="5] Optimise",1,1,217,240,180,18,8,Bold
+pButton5=HELP,1,8,430,237,70,20,HELP.B5,0,True,_HELP.B5_,True
+pBevel6=pBevel6,1,12,10,275,500,35
+pScrollBoxB6=YES,1,4,20,282,70,20,YES,NO
+pTextLabel6="6] WinPE.iso",1,1,217,285,180,18,8,Bold
+pButton6=HELP,1,8,430,282,70,20,HELP.B6,0,True,_HELP.B6_,True
+
+[Change.To.Tab.A]
+IniRead,%ScriptFile%,Main,Interface,%Current.Tab%
+Run,%ScriptFile%,Save.Settings
+IniWrite,%ScriptFile%,Main,Interface,TAB_A_Menu
+System,REFRESHINTERFACE
+
+[Change.To.Tab.B]
+IniRead,%ScriptFile%,Main,Interface,%Current.Tab%
+Run,%ScriptFile%,Save.Settings
+IniWrite,%ScriptFile%,Main,Interface,TAB_B_Menu
+System,REFRESHINTERFACE
+
+[Save.Settings]
+If,%Current.Tab%,Equal,TAB_B_Menu,Begin
+IniWrite,%ScriptFile%,Saved.Options,pScrollBoxB1,%pScrollBoxB1%
+IniWrite,%ScriptFile%,Saved.Options,pScrollBoxB2,%pScrollBoxB2%
+IniWrite,%ScriptFile%,Saved.Options,pScrollBoxB3,%pScrollBoxB3%
+IniWrite,%ScriptFile%,Saved.Options,pScrollBoxB4,%pScrollBoxB4%
+IniWrite,%ScriptFile%,Saved.Options,pScrollBoxB5,%pScrollBoxB5%
+IniWrite,%ScriptFile%,Saved.Options,pScrollBoxB6,%pScrollBoxB6%
+End
+
+[Saved.Options]
+pScrollBoxB1=RAM
+pScrollBoxB2=YES
+pScrollBoxB3=BOTH
+pScrollBoxB4=mkisofs
+pScrollBoxB5=NO
+pScrollBoxB6=YES
+
+[HELP.B1]
+Message,"RAM Boot is the most commonly used boot method - boot.wim is copied to RAM during the boot process and this method requires more RAM (a minimum of 256 MB for WinPE 2.x/3.x or a minimum of 512 MB for WinPE 4.0/5.x).#$x#$xFLAT Boot will work better on low RAM systems - in tests MistyPE/Mini-WinFE booted on systems with as little as 128 RAM when Flat Booted. Please note that WinPE 4.0/5.x cannot be FLAT booted from a CD/DVD drive#$x#$xSelect BOTH to create a multiboot ISO file with FLAT and RAM Boot options.#$x#$xWARNING - extracting the contents of boot.wim (required for FLAT Booting) is a time consuming process."
+
+[HELP.B2]
+Message,"Select #$qYES#$q to include the prompt to #$qPress any key to boot from CD...#$q. Choosing this option will prompt you to press a key to boot WinPE - if you do not press a key within the alloted time (approximately 5 seconds) the PC will try to boot from another device.#$x#$xSelect #$qNO#$q to remove this prompt and automatically boot the CD/DVD.#$x"
+
+[HELP.B3]
+Message,"BIOS (Basic Input/Output System) and UEFI (Unified Extensible Firmware Interface) are two different firmware interfaces which run before the operating system is booted. Older systems are generally BIOS based - UEFI is slowly starting to replace BIOS and is required in order to pass Windows 8 Hardware Certification.#$x#$xA BIOS bootable CD/DVD may also work on UEFI systems - depending on the system settings.#$x#$xA UEFI bootable CD/DVD will not work on BIOS based computers.#$x#$xIf you are not sure which option to use then select BOTH."
+
+[HELP.B4]
+Message,"mkisofs.exe and oscdimg.exe are both command line executables and can be used to create a bootable .iso image file. #$x#$xmkisofs.exe is included in the project download. #$x#$xoscdimg.exe is a microsoft executable and cannot be redistributed, however if this option is selected then an attempt to download it will be made. If the download is unsuccessful then the project will fall back to using mkisofs.exe."
+
+[HELP.B5]
+Message,"Select YES to attempt to optimise storage by encoding duplicate files once. This will add the -o switch if oscdimg.exe is used#$c or the -duplicates-once switch if mkisofs.exe is used.#$x#$xIn a test using a FlatBoot build of MistyPE#$c the .iso file was reduced in size from 1.08GB to 517MB when storage was optimised.#$x#$xPlease be aware that the .iso image creation is likely to take longer if storage optimisation is used."
+
+[HELP.B6]
+Message,"YES - create WinPE.iso in the project build directory #$q\ChrisPE.Project.Output#$q (path relative to WinBuilder.exe / Launcher.exe). NOTE - this file will be deleted during any project rebuilds.#$x#$xNO - create WinPE_yyyy_mm_dd_hh.nn.iso in the project root directory (the directory containing WinBuilder.exe / Launcher.exe). As this file is named dynamically based on the date and time it is unlikely to be accidentally overwritten - unless two builds are completed within the same minute! This file will NOT be deleted during any project rebuilds."
+
+[process]
+IniRead,"%ScriptFile%",Main,Interface,%Interface%
+If,Not,%Interface%,Equal,TAB_B_Menu,Begin
+IniRead,%ScriptFile%,Saved.Options,pScrollBoxB1,%pScrollBoxB1%
+IniRead,%ScriptFile%,Saved.Options,pScrollBoxB2,%pScrollBoxB2%
+IniRead,%ScriptFile%,Saved.Options,pScrollBoxB3,%pScrollBoxB3%
+IniRead,%ScriptFile%,Saved.Options,pScrollBoxB4,%pScrollBoxB4%
+IniRead,%ScriptFile%,Saved.Options,pScrollBoxB5,%pScrollBoxB5%
+IniRead,%ScriptFile%,Saved.Options,pScrollBoxB6,%pScrollBoxB6%
+End
+If,%pScrollBoxB6%,Equal,NO,Begin
+StrFormat,Date,%var%,yyyy_mm_dd_hh.nn
+Set,%ISO_File%,"%ISODir%\..\WinPE_%var%.iso"
+End
+Else,Set,%ISO_File%,"%ISODir%\WinPE.iso"
+If,%pScrollBoxB4%,Equal,oscdimg,Run,%ScriptFile%,oscdimg.Checks
+Run,%ScriptFile%,File.Checks
+If,%CODEBASE%,Equal,unchecked,Run,%Scriptfile%,codebase
+Run,%ScriptFile%,Permissions
+Run,%ScriptFile%,Bootfix.Check
+If,%pScrollBoxB1%,Equal,RAM,Run,%ScriptFile%,RAM
+If,%pScrollBoxB1%,Equal,FLAT,Run,%ScriptFile%,FLAT
+If,%pScrollBoxB1%,Equal,BOTH,Run,%ScriptFile%,RAM.And.FLAT
+
+[File.Checks]
+Echo,"Running file checks..."
+Set,%ERROR%,0
+If,Not,ExistFile,"%OutputDir%\boot\boot.sdi",Set,%ERROR%,1
+If,Not,ExistFile,"%OutputDir%\sources\boot.wim",Set,%ERROR%,1
+If,%ERROR%,Equal,1,Begin
+If,ExistFile,%ProjectTemp%\SourceCheck.txt,FileDelete,%ProjectTemp%\SourceCheck.txt
+FileCreateBlank,%ProjectTemp%\SourceCheck.txt
+TXTAddLine,%ProjectTemp%\SourceCheck.txt,Message#$cA required source file is missing!==,APPEND
+If,Not,ExistFile,"%OutputDir%\boot\boot.sdi",TXTAddLine,%ProjectTemp%\SourceCheck.txt,=#$s#$s\boot\boot.sdi is missing,APPEND
+If,Not,ExistFile,"%OutputDir%\sources\boot.wim",TXTAddLine,%ProjectTemp%\SourceCheck.txt,=#$s#$s\sources\boot.wim is missing,APPEND
+TXTAddLine,%ProjectTemp%\SourceCheck.txt,==Are source files present in the following location? - ==#$s#$s#$q%OutputDir%#$q,APPEND
+//Remove line breaks
+ShellExecute,Hide,"%Tools%\gsar.exe","-i -o -s#$q:x0D:x0A#$q -r#$q#$q #$q%ProjectTemp%\SourceCheck.txt#$q"
+ShellExecute,Hide,"%Tools%\gsar.exe","-i -o -s#$q:x3D#$q -r#$q:x23:x24:x78#$q #$q%ProjectTemp%\SourceCheck.txt#$q"
+TXTAddLine,%ProjectTemp%\SourceCheck.txt,[PROCESS],PREPEND
+Run,%ProjectTemp%\SourceCheck.txt,Process
+Halt
+End
+If,Not,ExistFile,"%OutputDir%\bootmgr",Set,%BIOSBootFiles%,ERROR
+If,Not,ExistFile,"%OutputDir%\boot\etfsboot.com",Set,%BIOSBootFiles%,ERROR
+If,Not,ExistFile,"%OutputDir%\boot\BCD",Set,%BIOSBootFiles%,ERROR
+If,Not,ExistFile,"%OutputDir%\bootmgr.efi",Set,%UEFIBootFiles%,ERROR
+If,Not,ExistFile,"%OutputDir%\efi\microsoft\boot\efisys.bin",Set,%UEFIBootFiles%,ERROR
+If,Not,ExistFile,"%OutputDir%\efi\microsoft\boot\BCD",Set,%UEFIBootFiles%,ERROR
+If,ExistFile,"%OutputDir%\boot\etfsboot.com",Begin
+//Renaming etfsboot.com to ensure that it has a lower case filename...
+FileRename,"%OutputDir%\boot\etfsboot.com","%OutputDir%\boot\etfsboot.com.temp"
+FileRename,"%OutputDir%\boot\etfsboot.com.temp","%OutputDir%\boot\etfsboot.com"
+End
+If,%pScrollBoxB3%,Equal,BIOS,Begin
+If,%BIOSBootFiles%,Equal,ERROR,If,%UEFIBootFiles%,Equal,ERROR,Begin
+message,"WARNING - BIOS and UEFI boot files are missing. ABORTING..."
+exit
+End
+If,%BIOSBootFiles%,Equal,ERROR,Begin
+Message,"WARNING - a file required for BIOS boot is missing. Creating UEFI only bootable .iso image file...",Error
+Set,%pScrollBoxB3%,UEFI
+End
+End
+If,%pScrollBoxB3%,Equal,UEFI,Begin
+If,%BIOSBootFiles%,Equal,ERROR,If,%UEFIBootFiles%,Equal,ERROR,Begin
+message,"WARNING - BIOS and UEFI boot files are missing. ABORTING..."
+exit
+End
+If,%UEFIBootFiles%,Equal,ERROR,Begin
+Message,"WARNING - a file required for UEFI boot is missing. Creating BIOS only bootable .iso image file...",Error
+Set,%pScrollBoxB3%,BIOS
+End
+End
+If,%pScrollBoxB3%,Equal,BOTH,Begin
+If,%BIOSBootFiles%,Equal,ERROR,If,%UEFIBootFiles%,Equal,ERROR,Begin
+message,"WARNING - BIOS and UEFI boot files are missing. ABORTING..."
+exit
+End
+If,%BIOSBootFiles%,Equal,ERROR,Begin
+Message,"WARNING - a file required for BIOS boot is missing. Creating UEFI only bootable .iso image file...",Error
+Set,%pScrollBoxB3%,UEFI
+End
+If,%UEFIBootFiles%,Equal,ERROR,Begin
+Message,"WARNING - a file required for UEFI boot is missing. Creating BIOS only bootable .iso image file...",Error
+Set,%pScrollBoxB3%,BIOS
+End
+End
+
+[Permissions]
+Echo,"Taking ownership of #$q%OutputDir%#$q to avoid possible build errors..."
+ShellExecute,Hide,takeown.exe,/f #$q%OutputDir%#$q /r /d y
+ShellExecute,Hide,icacls.exe,#$q%OutputDir%#$q /grant administrators:F /t
+
+[Bootfix.Check]
+If,%pScrollBoxB2%,Equal,NO,Begin
+Echo,Removing bootfix.bin to remove the #$qPress any key to boot CD#$q prompt...
+If,ExistFile,"%OutputDir%\boot\bootfix.bin",FileDelete,"%OutputDir%\boot\bootfix.bin"
+End
+
+[RAM]
+If,Not,%pScrollBoxB3%,Equal,BIOS,Run,%Scriptfile%,efi.check
+Set,%ISO.Root.Directory%,"%OutputDir%"
+If,%pScrollBoxB3%,Equal,BIOS,Run,%Scriptfile%,BIOS
+If,%pScrollBoxB3%,Equal,UEFI,Run,%Scriptfile%,UEFI
+If,%pScrollBoxB3%,Equal,BOTH,Run,%Scriptfile%,BOTH
+
+[FLAT]
+//ENSURE THAT FLATBOOT IS NOT ATTEMPTED FOR WINPE 4 (AND NEWER) BUILDS
+StrFormat,LEFT,%CODEBASE%,3,%FLATBOOT.CHECK2%
+If,Not,%FLATBOOT.CHECK2%,SMALLER,6.2,Run,%Scriptfile%,Unsupported.Error.1
+//
+If,Not,%pScrollBoxB3%,Equal,BIOS,Run,%Scriptfile%,efi.check
+Set,%ISO.Root.Directory%,"%OutputDir%\..\ISO.Root.FlatBoot"
+If,ExistDir,"%ISO.Root.Directory%",Begin
+Echo,"Deleting #$q%ISO.Root.Directory%#$q..."
+System,ERROROFF
+DirDelete,"%ISO.Root.Directory%"
+If,ExistDir,"%ISO.Root.Directory%",Begin
+Set,%DIRECTORY%,"%ISO.Root.Directory%",Global
+Run,"%ProjectDir%\core\common.script",DIRECTORY.DELETE
+End
+End
+DirMake,"%ISO.Root.Directory%"
+DirCopy,"%OutputDir%\*.*","%ISO.Root.Directory%"
+FileDelete,"%ISO.Root.Directory%\Boot\BCD"
+If,ExistFile,"%ISO.Root.Directory%\EFI\Microsoft\Boot\BCD",FileDelete,"%ISO.Root.Directory%\EFI\Microsoft\Boot\BCD"
+FileDelete,"%ISO.Root.Directory%\Boot\boot.sdi"
+FileDelete,"%ISO.Root.Directory%\sources\boot.wim"
+FileCopy,"%Programs%\misc\BIOS-FLATBoot-BCD","%ISO.Root.Directory%\boot\BCD"
+FileCopy,"%Programs%\misc\UEFI-FLATBoot-BCD","%ISO.Root.Directory%\efi\microsoft\boot\BCD"
+Echo,"Extracting files from boot.wim - this may take a while..."
+WimApply,%OutputDir%\sources\boot.wim,%Boot.wim.Image.number%,%ISO.Root.Directory%,NOACL
+If,%pScrollBoxB3%,Equal,BIOS,Run,%Scriptfile%,BIOS
+If,%pScrollBoxB3%,Equal,UEFI,Run,%Scriptfile%,UEFI
+If,%pScrollBoxB3%,Equal,BOTH,Run,%Scriptfile%,BOTH
+
+[RAM.And.FLAT]
+//ENSURE THAT FLATBOOT IS NOT ATTEMPTED FOR WINPE 4 (AND NEWER) BUILDS
+StrFormat,LEFT,%CODEBASE%,3,%FLATBOOT.CHECK2%
+If,Not,%FLATBOOT.CHECK2%,SMALLER,6.2,Run,%Scriptfile%,Unsupported.Error.1
+//
+If,Not,%pScrollBoxB3%,Equal,BIOS,Run,%Scriptfile%,efi.check
+Set,%ISO.Root.Directory%,"%OutputDir%\..\ISO.Root.FlatBoot"
+If,ExistDir,"%ISO.Root.Directory%",Begin
+Echo,"Deleting #$q%ISO.Root.Directory%#$q..."
+SYSTEM,ERROROFF
+DirDelete,"%ISO.Root.Directory%"
+If,ExistDir,"%ISO.Root.Directory%",Begin
+Set,%DIRECTORY%,"%ISO.Root.Directory%",Global
+Run,"%ProjectDir%\core\common.script",DIRECTORY.DELETE
+End
+End
+DirMake,"%ISO.Root.Directory%"
+DirCopy,"%OutputDir%\*.*","%ISO.Root.Directory%"
+FileDelete,"%ISO.Root.Directory%\Boot\BCD"
+If,ExistFile,"%ISO.Root.Directory%\EFI\Microsoft\Boot\BCD",FileDelete,"%ISO.Root.Directory%\EFI\Microsoft\Boot\BCD"
+FileCopy,"%Programs%\misc\BIOS-FLATandRAM-BCD","%ISO.Root.Directory%\boot\BCD"
+FileCopy,"%Programs%\misc\UEFI-FLATandRAM-BCD","%ISO.Root.Directory%\efi\microsoft\boot\BCD"
+Echo,"Extracting files from boot.wim - this may take a while..."
+WimApply,%OutputDir%\sources\boot.wim,%Boot.wim.Image.number%,%ISO.Root.Directory%,NOACL
+If,%pScrollBoxB3%,Equal,BIOS,Run,%Scriptfile%,BIOS
+If,%pScrollBoxB3%,Equal,UEFI,Run,%Scriptfile%,UEFI
+If,%pScrollBoxB3%,Equal,BOTH,Run,%Scriptfile%,BOTH
+
+[BIOS]
+Echo,"Creating ISO File - this may take a while..."
+If,%pScrollBoxB5%,Equal,YES,Begin
+If,%pScrollBoxB4%,Equal,oscdimg,ShellExecute,Open,"%TOOLS%\oscdimg.exe","-l#$qWinPE#$q -o -n -m -b#$q%ISO.Root.Directory%\boot\etfsboot.com#$q #$q%ISO.Root.Directory%#$q #$q%ISO_File%#$q"
+If,%pScrollBoxB4%,Equal,mkisofs,ShellExecute,Open,"%TOOLS%\mkisofs.exe","-iso-level 4 -udf -duplicates-once -hide boot.catalog -hide-udf boot.catalog -b boot/etfsboot.com -no-emul-boot -volid #$qWINPE#$q -o #$q%ISO_File%#$q #$q%ISO.Root.Directory%#$q"
+End
+If,%pScrollBoxB5%,Equal,NO,Begin
+If,%pScrollBoxB4%,Equal,oscdimg,ShellExecute,Open,"%TOOLS%\oscdimg.exe","-l#$qWinPE#$q -n -m -b#$q%ISO.Root.Directory%\boot\etfsboot.com#$q #$q%ISO.Root.Directory%#$q #$q%ISO_File%#$q"
+If,%pScrollBoxB4%,Equal,mkisofs,ShellExecute,Open,"%TOOLS%\mkisofs.exe","-iso-level 4 -udf -hide boot.catalog -hide-udf boot.catalog -b boot/etfsboot.com -no-emul-boot -volid #$qWINPE#$q -o #$q%ISO_File%#$q #$q%ISO.Root.Directory%#$q"
+End
+
+[UEFI]
+If,%pScrollBoxB2%,Equal,NO,If,Not,ExistFile,"%ISO.Root.Directory%\efi\microsoft\boot\efisys_noprompt.bin",Begin
+Message,"'efisys_noprompt.bin' is missing - it's therefore not possible to suppress the prompt to 'Press any key to boot from CD...' on UEFI systems"
+Set,%pScrollBoxB2%,YES
+End
+Echo,"Creating ISO File - this may take a while..."
+If,%pScrollBoxB5%,Equal,YES,Begin
+If,%pScrollBoxB4%,Equal,oscdimg,Begin
+If,%pScrollBoxB2%,Equal,YES,ShellExecute,Open,"%TOOLS%\oscdimg.exe","-l#$qWinPE#$q -pEF -o -u2 -udfver102 -b#$q%ISO.Root.Directory%\EFI\microsoft\boot\efisys.bin#$q #$q%ISO.Root.Directory%#$q #$q%ISO_File%#$q"
+Else,ShellExecute,Open,"%TOOLS%\oscdimg.exe","-l#$qWinPE#$q -pEF -o -u2 -udfver102 -b#$q%ISO.Root.Directory%\EFI\microsoft\boot\efisys_noprompt.bin#$q #$q%ISO.Root.Directory%#$q #$q%ISO_File%#$q"
+End
+If,%pScrollBoxB4%,Equal,mkisofs,Begin
+If,%pScrollBoxB2%,Equal,YES,ShellExecute,Open,"%TOOLS%\mkisofs.exe","-iso-level 4 -udf -duplicates-once -hide boot.catalog -hide-udf boot.catalog -eltorito-platform efi -volid #$qWINPE#$q -b efi/microsoft/boot/efisys.bin -no-emul-boot -o #$q%ISO_File%#$q #$q%ISO.Root.Directory%#$q"
+Else,ShellExecute,Open,"%TOOLS%\mkisofs.exe","-iso-level 4 -udf -duplicates-once -hide boot.catalog -hide-udf boot.catalog -eltorito-platform efi -volid #$qWINPE#$q -b efi/microsoft/boot/efisys_noprompt.bin -no-emul-boot -o #$q%ISO_File%#$q #$q%ISO.Root.Directory%#$q"
+End
+End
+If,%pScrollBoxB5%,Equal,NO,Begin
+If,%pScrollBoxB4%,Equal,oscdimg,Begin
+If,%pScrollBoxB2%,Equal,YES,ShellExecute,Open,"%TOOLS%\oscdimg.exe","-l#$qWinPE#$q -pEF -u2 -udfver102 -b#$q%ISO.Root.Directory%\EFI\microsoft\boot\efisys.bin#$q #$q%ISO.Root.Directory%#$q #$q%ISO_File%#$q"
+Else,ShellExecute,Open,"%TOOLS%\oscdimg.exe","-l#$qWinPE#$q -pEF -u2 -udfver102 -b#$q%ISO.Root.Directory%\EFI\microsoft\boot\efisys_noprompt.bin#$q #$q%ISO.Root.Directory%#$q #$q%ISO_File%#$q"
+End
+If,%pScrollBoxB4%,Equal,mkisofs,Begin
+If,%pScrollBoxB2%,Equal,YES,ShellExecute,Open,"%TOOLS%\mkisofs.exe","-iso-level 4 -udf -hide boot.catalog -hide-udf boot.catalog -eltorito-platform efi -volid #$qWINPE#$q -b efi/microsoft/boot/efisys.bin -no-emul-boot -o #$q%ISO_File%#$q #$q%ISO.Root.Directory%#$q"
+Else,ShellExecute,Open,"%TOOLS%\mkisofs.exe","-iso-level 4 -udf -hide boot.catalog -hide-udf boot.catalog -eltorito-platform efi -volid #$qWINPE#$q -b efi/microsoft/boot/efisys_noprompt.bin -no-emul-boot -o #$q%ISO_File%#$q #$q%ISO.Root.Directory%#$q"
+End
+End
+
+[BOTH]
+If,%pScrollBoxB2%,Equal,NO,If,Not,ExistFile,"%ISO.Root.Directory%\efi\microsoft\boot\efisys_noprompt.bin",Begin
+Message,"'efisys_noprompt.bin' is missing - it's therefore not possible to suppress the prompt to 'Press any key to boot from CD...' on UEFI systems"
+Set,%pScrollBoxB2%,YES
+End
+Echo,"Creating ISO File - this may take a while..."
+If,%pScrollBoxB5%,Equal,YES,Begin
+If,%pScrollBoxB4%,Equal,oscdimg,Begin
+If,%pScrollBoxB2%,Equal,YES,ShellExecute,Open,"%TOOLS%\oscdimg.exe","-l#$qWinPE#$q -m -o -u2 -udfver102 -bootdata:2#p0#$ce#$cb#$q%ISO.Root.Directory%\boot\etfsboot.com#$q#pEF#$ce#$cb#$q%ISO.Root.Directory%\EFI\microsoft\boot\efisys.bin#$q #$q%ISO.Root.Directory%#$q #$q%ISO_File%#$q"
+Else,ShellExecute,Open,"%TOOLS%\oscdimg.exe","-l#$qWinPE#$q -m -o -u2 -udfver102 -bootdata:2#p0#$ce#$cb#$q%ISO.Root.Directory%\boot\etfsboot.com#$q#pEF#$ce#$cb#$q%ISO.Root.Directory%\EFI\microsoft\boot\efisys_noprompt.bin#$q #$q%ISO.Root.Directory%#$q #$q%ISO_File%#$q"
+End
+If,%pScrollBoxB4%,Equal,mkisofs,Begin
+If,%pScrollBoxB2%,Equal,YES,ShellExecute,Open,"%TOOLS%\mkisofs.exe","-iso-level 4 -udf -duplicates-once -hide boot.catalog -hide-udf boot.catalog -volid #$qWINPE#$q -b boot/etfsboot.com -no-emul-boot -eltorito-alt-boot -eltorito-platform efi -b efi/microsoft/boot/efisys.bin -no-emul-boot -o #$q%ISO_File%#$q #$q%ISO.Root.Directory%#$q"
+Else,ShellExecute,Open,"%TOOLS%\mkisofs.exe","-iso-level 4 -udf -duplicates-once -hide boot.catalog -hide-udf boot.catalog -volid #$qWINPE#$q -b boot/etfsboot.com -no-emul-boot -eltorito-alt-boot -eltorito-platform efi -b efi/microsoft/boot/efisys_noprompt.bin -no-emul-boot -o #$q%ISO_File%#$q #$q%ISO.Root.Directory%#$q"
+End
+End
+If,%pScrollBoxB5%,Equal,NO,Begin
+If,%pScrollBoxB4%,Equal,oscdimg,Begin
+If,%pScrollBoxB2%,Equal,YES,ShellExecute,Open,"%TOOLS%\oscdimg.exe","-l#$qWinPE#$q -m -u2 -udfver102 -bootdata:2#p0#$ce#$cb#$q%ISO.Root.Directory%\boot\etfsboot.com#$q#pEF#$ce#$cb#$q%ISO.Root.Directory%\EFI\microsoft\boot\efisys.bin#$q #$q%ISO.Root.Directory%#$q #$q%ISO_File%#$q"
+Else,ShellExecute,Open,"%TOOLS%\oscdimg.exe","-l#$qWinPE#$q -m -u2 -udfver102 -bootdata:2#p0#$ce#$cb#$q%ISO.Root.Directory%\boot\etfsboot.com#$q#pEF#$ce#$cb#$q%ISO.Root.Directory%\EFI\microsoft\boot\efisys_noprompt.bin#$q #$q%ISO.Root.Directory%#$q #$q%ISO_File%#$q"
+End
+If,%pScrollBoxB4%,Equal,mkisofs,Begin
+If,%pScrollBoxB2%,Equal,YES,ShellExecute,Open,"%TOOLS%\mkisofs.exe","-iso-level 4 -udf -hide boot.catalog -hide-udf boot.catalog -volid #$qWINPE#$q -b boot/etfsboot.com -no-emul-boot -eltorito-alt-boot -eltorito-platform efi -b efi/microsoft/boot/efisys.bin -no-emul-boot -o #$q%ISO_File%#$q #$q%ISO.Root.Directory%#$q"
+Else,ShellExecute,Open,"%TOOLS%\mkisofs.exe","-iso-level 4 -udf -hide boot.catalog -hide-udf boot.catalog -volid #$qWINPE#$q -b boot/etfsboot.com -no-emul-boot -eltorito-alt-boot -eltorito-platform efi -b efi/microsoft/boot/efisys_noprompt.bin -no-emul-boot -o #$q%ISO_File%#$q #$q%ISO.Root.Directory%#$q"
+End
+End
+
+[Unsupported.Error.1]
+Message,WARNING - Build %CODEBASE% detected. This version does not support Flat Boot from CD/DVD. Aborting...
+Exit
+
+[codebase]
+If,Not,ExistFile,"%OutputDir%\Project.Settings.ini",Begin
+Message,"'%OutputDir%\Project.Settings.ini' is missing - this file is required if running this script as a post processing option.#$x#$xABORTING..."
+Exit
+End
+IniRead,"%OutputDir%\Project.Settings.ini",Main,CodeBase,%CODEBASE%
+IniRead,"%OutputDir%\Project.Settings.ini",Main,Architecture,%ARCHITECTURE%
+If,%ARCHITECTURE%,Equal,x64,Set,%ARCH%,x64
+If,%ARCHITECTURE%,Equal,x86,Set,%ARCH%,x86
+IniRead,"%OutputDir%\Project.Settings.ini",Main,Image.Number,%Boot.wim.Image.number%
+
+[oscdimg.Checks]
+If,Not,ExistFile,"%TOOLS%\oscdimg.exe",Begin
+  System,ERROROFF,1
+  WebGetIfNotExist,http://download.microsoft.com/download/3/1/E/31EC1AAF-3501-4BB4-B61C-8BD8A07B4E8A/adk/Installers/5d984200acbde182fd99cbfbe9bad133.cab,%TOOLS%\5d984200acbde182fd99cbfbe9bad133.cab
+  If,ExistFile,"%TOOLS%\5d984200acbde182fd99cbfbe9bad133.cab",Begin
+    ShellExecute,Hide,"%TOOLS%\7z.exe","e #$q%TOOLS%\5d984200acbde182fd99cbfbe9bad133.cab#$q -o#$q%TOOLS%#$q fil720cc132fbb53f3bed2e525eb77bdbc1 -y"
+    If,ExistFile,"%TOOLS%\fil720cc132fbb53f3bed2e525eb77bdbc1",FileRename,"%TOOLS%\fil720cc132fbb53f3bed2e525eb77bdbc1","%TOOLS%\oscdimg.exe"
+  End
+  If,Not,ExistFile,"%TOOLS%\oscdimg.exe",Message,"There appears to have been a problem downloading oscdimg.exe....using mkisofs.exe instead...",INFORMATION,5
+End
+
+[efi.check]
+Echo,"Running UEFI file checks..."
+If,%ARCH%,Equal,x86,Begin
+If,%CODEBASE%,Equal,6.0.6000,Run,%Scriptfile%,Unsupported.Error.2
+If,%CODEBASE%,Equal,6.0.6001,Run,%Scriptfile%,Unsupported.Error.2
+If,%CODEBASE%,Equal,6.1.7600,Run,%Scriptfile%,Unsupported.Error.2
+If,%CODEBASE%,Equal,6.1.7601,Run,%Scriptfile%,Unsupported.Error.2
+End
+
+[Unsupported.Error.2]
+Message,"WARNING - (32-bit) Build %CODEBASE% detected. This version does not support UEFI boot. Creating BIOS only bootable .iso image file..."
+Set,%pScrollBoxB3%,BIOS
+
+[AuthorEncoded]
+iso.ico=2668,3558
+Logo=iso.ico
+
+[EncodedFile-AuthorEncoded-iso.ico]
+lines=0
+0=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
+

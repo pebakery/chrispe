@@ -1,0 +1,19 @@
+Software\7-Zip\FM setvalue ShowDots 0 4
+Software\7-Zip\FM setvalue ShowRealFileIcons 0 4
+Software\7-Zip\FM setvalue FullRow 0 4
+Software\7-Zip\FM setvalue ShowGrid 0 4
+Software\7-Zip\FM setvalue SingleClick 0 4
+Software\7-Zip\FM setvalue AlternativeSelection 0 4
+Software\7-Zip\FM setvalue ShowSystemMenu 1 4
+Software\7-Zip\FM setvalue FlatViewArc0 0 4
+Software\7-Zip\FM setvalue FlatViewArc1 0 4
+Software\7-Zip\FM setvalue ListMode 771 4
+Software\7-Zip\FM setvalue "PanelPath0" "Computer\" 1
+Software\7-Zip\FM setvalue "PanelPath1" "Computer\" 1
+Software\7-Zip\FM setvalue "FolderShortcuts" " " 3
+Software\7-Zip\FM setvalue "FolderHistory" "00,00" 3
+Software\7-Zip\FM setvalue "Position" "34,00,00,00,34,00,00,00,34,03,00,00,41,02,00,00,00,00,00,00" 3
+Software\7-Zip\FM setvalue "Panels" "02,00,00,00,00,00,00,00,76,01,00,00" 3
+Software\7-Zip\FM\Columns setvalue "RootFolder" "01,00,00,00,00,00,00,00,01,00,00,00,04,00,00,00,01,00,00,00,a0,00,00,00" 3
+Software\7-Zip\FM\Columns setvalue "FSDrives" "01,00,00,00,04,00,00,00,01,00,00,00,04,00,00,00,01,00,00,00,51,00,00,00,38,00,00,00,01,00,00,00,87,00,00,00,3b,00,00,00,01,00,00,00,64,00,00,00,39,00,00,00,00,00,00,00,64,00,00,00,14,00,00,00,00,00,00,00,64,00,00,00,18,00,00,00,00,00,00,00,64,00,00,00,3a,00,00,00,00,00,00,00,64,00,00,00" 3
+Software\7-Zip\FM\Columns setvalue "FSFolder" "01,00,00,00,04,00,00,00,01,00,00,00,04,00,00,00,01,00,00,00,a0,00,00,00,07,00,00,00,01,00,00,00,64,00,00,00,0c,00,00,00,01,00,00,00,64,00,00,00,0a,00,00,00,00,00,00,00,64,00,00,00,0b,00,00,00,00,00,00,00,64,00,00,00,09,00,00,00,00,00,00,00,64,00,00,00,08,00,00,00,00,00,00,00,64,00,00,00,5b,00,00,00,00,00,00,00,64,00,00,00,25,00,00,00,00,00,00,00,64,00,00,00,1c,00,00,00,00,00,00,00,64,00,00,00,1f,00,00,00,00,00,00,00,64,00,00,00,20,00,00,00,00,00,00,00,64,00,00,00,59,00,00,00,00,00,00,00,64,00,00,00" 3

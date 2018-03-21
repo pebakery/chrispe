@@ -1,0 +1,2 @@
+\windows\system32\myfile.ext
+\Windows\system32\*\myfile.ext.mui 

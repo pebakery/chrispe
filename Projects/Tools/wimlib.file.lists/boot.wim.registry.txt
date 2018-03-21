@@ -1,0 +1,5 @@
+\Windows\System32\config\DEFAULT
+\Windows\System32\config\SAM
+\Windows\System32\config\SECURITY
+\Windows\System32\config\SOFTWARE
+\Windows\System32\config\SYSTEM

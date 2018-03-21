@@ -1,0 +1,36 @@
+﻿{
+  "description" : {
+    "name":"string. Specify the UI name.",
+    "entry":"string. Specify the Entry file. optional(main.xml).",
+    "singleton":"boolean. wether the window is only one instance or not. optional(false).",
+    "noshadow":"boolean. wether use Shadow.png for window shadow effort or not. optional(true).",
+    "position":"string(center|rightbottom ). Specify the startup position. optional(center).",
+    "nobaricon":"boolean. wether show icon on the taskbar or not. optional(false).",
+    "baricon":"string. Specify the taskbar icon. optional(main.ico).",
+    "customstyle":"boolean. wether use custom the window style or not. optional(false).",
+    "style":"long. Specify the window style. Please refer to Microsoft documentation. optional(WS_OVERLAPPEDWINDOW).",
+    "exstyle":"long. Specify the window extend style. Please refer to Microsoft documentation. optional(WS_EX_WINDOWEDGE).",
+    "theme":"string. Specify the theme(themes\*.xml). optional(default).",
+    "locale":"string. Define the locale resources for the UI text display, ie:zh-CN，en-US. optional(SYSTEM default locale)."
+  },
+  "name":"UI_Resolution",
+  "baricon":"settings.ico",
+  "OnLoad":"
+= #resolution_combo.list, ::GetResolutionList();
+= #resolution_combo.index, ::GetCurrentResolution();
+= #rotate_combo.index, ::GetRotation();
+  ",
+  "OnClick":{
+  "applybtn":"
+PUSH #resolution_combo.text;
+PUSH 1;
+CALL ::SetResolution();
+PUSH #rotate_combo.index;
+PUSH 1;
+CALL ::SetRotation();
+  ",
+  "cancelbtn":"
+  CALL ::Close();
+  "
+  }
+}

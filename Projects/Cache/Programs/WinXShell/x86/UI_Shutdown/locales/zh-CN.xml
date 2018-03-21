@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Locale>
+    <MultiLanguage id="Power" value="电源" />
+    <MultiLanguage id="CloseComputer" value="关闭计算机" />
+    <MultiLanguage id="Shutdown" value="关机" />
+    <MultiLanguage id="Restart" value="重启" />
+    <MultiLanguage id="Hibernate" value="休眠" />
+    <MultiLanguage id="Standby" value="待机" />
+</Locale>

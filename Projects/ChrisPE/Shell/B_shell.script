@@ -1,0 +1,170 @@
+[main]
+Title=Shell
+Description=Select a shell.
+Selected=True
+Locked=True
+Mandatory=True
+Level=3
+Author=ThePEBakeryTeam
+Version=20180306
+Date=2018-03-06
+
+[Interface]
+pBevel_A1=,1,12,10,70,500,40
+pScrollBox_A1=WinXShell,1,4,20,80,100,20,BBLean,CMD,LaunchBar,WinXShell,_on_change_,True
+pTextLabel_A1=Select Shell,1,1,220,80,222,18,10,Bold
+pButton_A1=HELP,1,8,430,80,70,20,HELPShell,0,True,_HELPShell_,True
+pBevel_WinXShell2=,1,12,10,120,500,40
+pScrollBox_WinXShell2=YES,1,4,20,130,100,20,YES,NO
+pTextLabel_WinXShell2="Desktop Icons",1,1,215,131,133,18,10,Bold
+pButton_WinXShell2=HELP,1,8,430,130,70,20,HELPWinXShell2,0,True
+pBevel_WinXShell3=,1,12,10,170,500,40
+pScrollBox_WinXShell3=YES,1,4,20,180,100,20,YES,NO
+pTextLabel_WinXShell3="Start Menu Icons",1,1,205,181,150,18,10,Bold
+pButton_WinXShell3=HELP,1,8,430,180,70,20,HELPWinXShell3,0,True
+pBevel_WinXShell4=,1,12,10,220,500,40
+pScrollBox_WinXShell4=NO,1,4,20,230,100,20,YES,NO
+pTextLabel_WinXShell4="QuickLaunch Icons",1,1,200,231,150,18,10,Bold
+pButton_WinXShell4=HELP,1,8,430,230,70,20,HELPWinXShell4,0,True
+pBevel_LaunchBar3=,0,12,10,120,500,40
+pScrollBox_LaunchBar3=SMALL,0,4,20,130,100,20,SMALL,LARGE
+pTextLabel_LaunchBar3=Icons,0,1,233,131,150,18,10,Bold
+pButton_LaunchBar3=HELP,0,8,430,130,70,20,HELPLaunchBar3,0,True
+pBevel_LaunchBar4=,0,12,10,170,500,40
+pScrollBox_LaunchBar4=TOP,0,4,20,180,100,20,LEFT,RIGHT,TOP,BOTTOM
+pTextLabel_LaunchBar4=Position,0,1,228,181,150,18,10,Bold
+pButton_LaunchBar4=HELP,0,8,430,180,70,20,HELPLaunchBar4,0,True
+pWebLabel_LaunchBar=http://www.lerup.com/LaunchBar/,0,10,150,35,180,18,http://www.lerup.com/LaunchBar/
+pTextLabel_LaunchBar="LaunchBar Website",0,1,10,35,150,18,10,Bold
+
+[HELPShell]
+Message,"Select one of the currently supported shells"
+
+[HELPLaunchBar3]
+Message,"Select the icon size. If all project options are enabled on a low resolution display then they may not be displayed correctly if LARGE icons are selected."
+
+[HELPLaunchBar4]
+Message,"Select LaunchBar screen position."
+
+[HELPWinXShell2]
+Message,"Enable to add Desktop Shortcuts to WinXShell. This option will override any 'Add to Desktop Menu' options set in other project scripts.#$x#$xAlthough the Desktop Shortcuts will automatically be created in a temp directory during the build process#$c they will not be added to the build unless this option is enabled."
+
+[HELPWinXShell3]
+Message,"Enable to add Start Menu Shortcuts to WinXShell. This option will override any 'Add to #$qStart#$q >' options set in other project scripts.#$x#$xAlthough the Start Menu Shortcuts will automatically be created in a temp directory during the build process#$c they will not be added to the build unless this option is enabled."
+
+[HELPWinXShell4]
+Message,"Enable to add Quick Launch Menu Shortcuts to WinXShell. This option will override any 'Add to Quicklaunch Menu' options set in other project scripts.#$x#$xAlthough the Quicklaunch Menu Shortcuts will automatically be created in a temp directory during the build process#$c they will not be added to the build unless this option is enabled."
+
+
+[HideEverything]
+WriteInterface,Visible,%ScriptFile%,Interface,pScrollBox_WinXShell2,False
+WriteInterface,Visible,%ScriptFile%,Interface,pScrollBox_WinXShell3,False
+WriteInterface,Visible,%ScriptFile%,Interface,pScrollBox_WinXShell4,False
+WriteInterface,Visible,%ScriptFile%,Interface,pButton_WinXShell2,False
+WriteInterface,Visible,%ScriptFile%,Interface,pButton_WinXShell3,False
+WriteInterface,Visible,%ScriptFile%,Interface,pButton_WinXShell4,False
+WriteInterface,Visible,%ScriptFile%,Interface,pBevel_WinXShell2,False
+WriteInterface,Visible,%ScriptFile%,Interface,pBevel_WinXShell3,False
+WriteInterface,Visible,%ScriptFile%,Interface,pBevel_WinXShell4,False
+WriteInterface,Visible,%ScriptFile%,Interface,pTextLabel_WinXShell2,False
+WriteInterface,Visible,%ScriptFile%,Interface,pTextLabel_WinXShell3,False
+WriteInterface,Visible,%ScriptFile%,Interface,pTextLabel_WinXShell4,False
+WriteInterface,Visible,%ScriptFile%,Interface,pScrollBox_LaunchBar3,False
+WriteInterface,Visible,%ScriptFile%,Interface,pScrollBox_LaunchBar4,False
+WriteInterface,Visible,%ScriptFile%,Interface,pButton_LaunchBar3,False
+WriteInterface,Visible,%ScriptFile%,Interface,pButton_LaunchBar4,False
+WriteInterface,Visible,%ScriptFile%,Interface,pBevel_LaunchBar3,False
+WriteInterface,Visible,%ScriptFile%,Interface,pBevel_LaunchBar4,False
+WriteInterface,Visible,%ScriptFile%,Interface,pTextLabel_LaunchBar3,False
+WriteInterface,Visible,%ScriptFile%,Interface,pTextLabel_LaunchBar4,False
+WriteInterface,Visible,%ScriptFile%,Interface,pWebLabel_LaunchBar,False
+WriteInterface,Visible,%ScriptFile%,Interface,pTextLabel_LaunchBar,False
+
+[on_change]
+ReadInterface,Value,"%ScriptFile%",Interface,pScrollBox_A1,%Shell%
+Run,%ScriptFile%,HideEverything
+If,%Shell%,Equal,WinXShell,Begin
+  WriteInterface,Visible,%ScriptFile%,Interface,pScrollBox_WinXShell2,True
+  WriteInterface,Visible,%ScriptFile%,Interface,pScrollBox_WinXShell3,True
+  WriteInterface,Visible,%ScriptFile%,Interface,pScrollBox_WinXShell4,True
+  WriteInterface,Visible,%ScriptFile%,Interface,pButton_WinXShell2,True
+  WriteInterface,Visible,%ScriptFile%,Interface,pButton_WinXShell3,True
+  WriteInterface,Visible,%ScriptFile%,Interface,pButton_WinXShell4,True
+  WriteInterface,Visible,%ScriptFile%,Interface,pBevel_WinXShell2,True
+  WriteInterface,Visible,%ScriptFile%,Interface,pBevel_WinXShell3,True
+  WriteInterface,Visible,%ScriptFile%,Interface,pBevel_WinXShell4,True
+  WriteInterface,Visible,%ScriptFile%,Interface,pTextLabel_WinXShell2,True
+  WriteInterface,Visible,%ScriptFile%,Interface,pTextLabel_WinXShell3,True
+  WriteInterface,Visible,%ScriptFile%,Interface,pTextLabel_WinXShell4,True
+End
+If,%Shell%,Equal,LaunchBar,Begin
+  WriteInterface,Visible,%ScriptFile%,Interface,pScrollBox_LaunchBar3,True
+  WriteInterface,Visible,%ScriptFile%,Interface,pScrollBox_LaunchBar4,True
+  WriteInterface,Visible,%ScriptFile%,Interface,pButton_LaunchBar3,True
+  WriteInterface,Visible,%ScriptFile%,Interface,pButton_LaunchBar4,True
+  WriteInterface,Visible,%ScriptFile%,Interface,pBevel_LaunchBar3,True
+  WriteInterface,Visible,%ScriptFile%,Interface,pBevel_LaunchBar4,True
+  WriteInterface,Visible,%ScriptFile%,Interface,pTextLabel_LaunchBar3,True
+  WriteInterface,Visible,%ScriptFile%,Interface,pTextLabel_LaunchBar4,True
+  WriteInterface,Visible,%ScriptFile%,Interface,pWebLabel_LaunchBar,True
+  WriteInterface,Visible,%ScriptFile%,Interface,pTextLabel_LaunchBar,True
+End
+
+[process]
+If,%pScrollBox_A1%,Equal,BBLean,Run,%ScriptFile%,BBLean
+If,%pScrollBox_A1%,Equal,CMD,Set,%Shell%,CMD,Global
+If,%pScrollBox_A1%,Equal,LaunchBar,Run,%ScriptFile%,LaunchBar
+If,%pScrollBox_A1%,Equal,WinXShell,Run,%ScriptFile%,WinXShell
+If,Not,ExistDir,"%ProjectTemp%\ShortCuts\Desktop",DirMake,"%ProjectTemp%\ShortCuts\Desktop"
+If,Not,ExistDir,"%ProjectTemp%\ShortCuts\Quick",DirMake,"%ProjectTemp%\ShortCuts\Quick"
+If,Not,ExistDir,"%ProjectTemp%\ShortCuts\Start",DirMake,"%ProjectTemp%\ShortCuts\Start"
+If,Not,ExistDir,"%ProjectTemp%\ShortCuts\LaunchBar",DirMake,"%ProjectTemp%\ShortCuts\LaunchBar"
+If,%Shell%,Equal,WinXShell,If,Not,ExistDir,"%ProjectTemp%\ShortCuts\Start\Programs",DirMake,"%ProjectTemp%\ShortCuts\Start\Programs"
+
+[BBLean]
+Set,%Shell%,BBLean,Global
+If,Not,ExistFile,"%ProjectTemp%\programs.cmd.txt",FileCreateBlank,"%ProjectTemp%\programs.cmd.txt"
+If,Not,ExistFile,"%ProjectTemp%\programs.rc.txt",FileCreateBlank,"%ProjectTemp%\programs.rc.txt"
+DirMake,"%TargetDir%\Users\Default\AppData\Roaming\Microsoft\Windows\Start Menu\Programs"
+
+[LaunchBar]
+Set,%Shell%,LaunchBar,Global
+If,ExistFile,"%ProjectTemp%\LaunchBar_Shell.ini",FileDelete,"%ProjectTemp%\LaunchBar_Shell.ini"
+If,Not,ExistDir,"%TargetDir%\Programs",DirMake,"%TargetDir%\Programs"
+If,Not,ExistDir,"%TargetDir%\Programs\LaunchBar_Shell",DirMake,"%TargetDir%\Programs\LaunchBar_Shell"
+If,%ARCH%,Equal,x64,FileCopy,"%Programs%\LaunchBar\LaunchBar_x64.exe","%TargetDir%\Programs\LaunchBar_Shell"
+If,%ARCH%,Equal,x86,FileCopy,"%Programs%\LaunchBar\LaunchBar.exe","%TargetDir%\Programs\LaunchBar_Shell"
+If,Not,ExistDir,"%TargetDir%\Windows\System32\config\systemprofile\AppData\Roaming\Microsoft\Internet Explorer\Quick Launch",DirMake,"%TargetDir%\Windows\System32\config\systemprofile\AppData\Roaming\Microsoft\Internet Explorer\Quick Launch"
+If,Not,ExistDir,"%ProjectTemp%\ShortCuts\Start",DirMake,"%ProjectTemp%\ShortCuts\Start"
+ShellExecute,Hide,"%Tools%\Shortcut.exe","/A:C /T:#$q#$pSystemRoot#$p\System32\cmd.exe#$q /F:#$q%ProjectTemp%\cmd.lnk#$q"
+If,ExistFile,"%ProjectTemp%\cmd.lnk",Begin
+  FileCopy,"%ProjectTemp%\cmd.lnk","%ProjectTemp%\ShortCuts\Start"
+  FileDelete,"%ProjectTemp%\cmd.lnk"
+End
+ShellExecute,Hide,"%Tools%\Shortcut.exe","/A:C /T:#$q#$pSystemRoot#$p\System32\rundll32.exe#$q /F:#$q%ProjectTemp%\run.lnk#$q /P:#$q#$pSystemRoot#$p\System32\shell32.dll#$c##61#$q /I:#$q#$pSystemRoot#$p\System32\shell32.dll#$c-25#$q"
+If,ExistFile,"%ProjectTemp%\run.lnk",Begin
+  FileCopy,"%ProjectTemp%\run.lnk","%ProjectTemp%\ShortCuts\Start"
+  FileDelete,"%ProjectTemp%\run.lnk"
+End
+
+[WinXShell]
+Set,%Shell%,WinXShell,Global
+FileCopy,"%Programs%\WinXShell\%ARCH%\WinXShell.jcfg",%ProjectTemp%\WinXShell.txt
+DirMake,"%TargetDir%\Users\Default\Desktop"
+DirMake,"%TargetDir%\Users\Default\AppData\Roaming\Microsoft\Windows\Start Menu\Programs"
+DirMake,"%TargetDir%\Users\Default\AppData\Roaming\Microsoft\Internet Explorer\Quick Launch"
+Set,%WinXShellIconsDesktop%,%pScrollBox_WinXShell2%,Global
+Set,%WinXShellIconsMenu%,%pScrollBox_WinXShell3%,Global
+Set,%WinXShellIconsQuickLaunch%,%pScrollBox_WinXShell4%,Global
+If,Not,ExistDir,"%TargetDir%\Programs",DirMake,"%TargetDir%\Programs"
+DirMake,"%TargetDir%\Programs\WinXShell"
+DirCopy,"%Programs%\WinXShell\%ARCH%\*.*","%TargetDir%\Programs\WinXShell"
+
+[AuthorEncoded]
+Logo=donut.ico
+donut.ico=953,1271
+
+[EncodedFile-AuthorEncoded-donut.ico]
+lines=0
+0=eJztmctKI0EUhiu2kkXUaAKDN3AWMzAgShARESUgbly4UBQEBUfxhqgENwoBM270Fdy4EBEHXYjgwoWXRvHyAOpKMI+QpQvxTP4kxWQ6Gbu6ujvdSBL+/NAdzvlOpet0V4UxT/IdCrHk51f2+ztjXxhjP5JKHmI/Wfp46vWNsYAvLf4ioqKKKsqkjo+PKRKJUGdnJwWDQdKer66upvb2dpqbm6O9vb2c807o6emJpqamqLKyktAKsqX9rvZ8WVkZ9ff30+npqSO1jI6OksfjyeEW5c8Wfperq6uC1LG9vU3l5eX/ZZHhhzAWs7OzttYwPj6uyy3Lz9XS0kIvLy+W19HT0yPMboYfqquro8fHR8tq6O3tNcRulh+qr6+3hH9mZsYwuxX8UCgUMlXD/v6+FLtV/NDi4qJ0DYFAwHH+kpISur+/N1zD/Py8NLuV/FB3d7dhftwf3cIPXV5eCtewurpqKpcd/MPDw8L8DQ0NruP3er1C/Hd3d6byKIpCCwsLObmi0Sj5/X5TsQ8PD3Vr2NzclI4PPlVVP8zR3NwsHV+klw4ODkrFRp87OzvTjR+Px6miokIqR0dHh278pqYmqdh4thOdX2tra1I5cD/Si411kkzsm5sbYX47Jdv3neb+LPyy18/t7a0rapCdvxMTE8L8sVjMtvk7MDAgFRv9U6/3c+XbrxCRSP/c2NiQig3h2tO7jrAmkY2f776uFfLLxocw/5eXl3PyrK+vk5n1BHRwcCD0+2LtaSYPpI1pNp7o8xu0srLiOv6hoSFD/a20tNRV/BcXF4b4sc/qFv6uri5D7FxVVVWO82NfUfbeuLu76zg/9hFk2LkmJycd48deqBl2LqN7n1bw19bWEtY6VvBD4XC4YPw1NTX08PBgGTvX2NiY7fx4fnx+fracnWtra4t8Pp8t/JhrdnFrNTIyYtn/R62trXR+fl4wdi5coxizfP8n6fFjn6ivr49OTk4Kzp1PR0dHtLS0lHpGz7fOwL2wra2NpqenaWdnxxXMRRX1CQT7wK+vU/6uqDH4m6I2whOKit1kiiuqAlcVFd2UfmWcKSo6zTs8lvEwY2/Z3sjYq8YTcD/cm0i7P+ONrxlPcSVYWOP8OP+e//XfOOm42nxv2R7+y8m5eR2oi2XXyevm48DHhY8THzed8f0DAAkXr3ic40zJzyst0ctMzmcYBSMQ7FOF0AXM2OXvezWmMTABAOsJBwX2TQ3DAQAAAAIAAAAlAAAAcAMAAAAAAAABAAAAAAAAAAAAAAA
+

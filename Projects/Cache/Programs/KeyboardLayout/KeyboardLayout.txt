@@ -1,0 +1,23 @@
+:: see - http://windowsitpro.com/systems-management/how-do-i-configure-default-keyboard-layout-during-login
+:: and - http://msdn.microsoft.com/en-us/goglobal/bb895996
+:: and - http://www.science.co.il/Language/Locale-codes.asp
+
+
+Bulgarian 		(00000402)	bg
+Croatian		(0000041a)	hr	
+Czech			(00000405)	cs
+Danish			(00000406)	da
+Dutch (Standard)	(00000413)	nl-nl
+Dutch (Belgian)		(00000813)	nl-be
+English (US)		(00000409)	en-us
+English (UK)		(00000809)	en-gb
+English (Canadian)	(00001009)	en-ca
+English (New Zealand)	(00001409)	en-nz
+English (Australia)	(00000c09)	en-au
+Finnish			(0000040b)	fi
+French (Standard)	(0000040c)	fr-fr
+German (Standard)	(00000407)	de-de
+Italian (Italy)		(00000410)	it-it
+Portuguese (Portual)	(00000816)	pt-pt
+Spanish (Mexico)	(0000080a)	es-mx
+Spanish (Spain)		(0000040a)	es-es

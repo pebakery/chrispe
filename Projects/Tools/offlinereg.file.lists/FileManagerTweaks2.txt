@@ -1,0 +1,2 @@
+Software\Microsoft\Windows\CurrentVersion\Explorer\Advanced setvalue SuperHidden 0 4
+Software\Microsoft\Windows\CurrentVersion\Explorer\Advanced setvalue ShowSuperHidden 1 4

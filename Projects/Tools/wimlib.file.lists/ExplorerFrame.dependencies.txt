@@ -1,0 +1,2 @@
+\windows\system32\ExplorerFrame.dll
+\Windows\system32\*\ExplorerFrame.dll.mui 

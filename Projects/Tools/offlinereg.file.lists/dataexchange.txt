@@ -1,0 +1,3 @@
+Classes\CLSID\{9FC8E510-A27C-4B3B-B9A3-BF65F00256A8}\InProcServer32 setvalue " " "X:\Windows\System32\dataexchange.dll"
+Classes\CLSID\{9FC8E510-A27C-4B3B-B9A3-BF65F00256A8}\InProcServer32 setvalue "ThreadingModel" "Both"
+Microsoft\Ole\Extensions setvalue DragDropExtension "{9FC8E510-A27C-4B3B-B9A3-BF65F00256A8}"

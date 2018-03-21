@@ -1,0 +1,265 @@
+NEW (EMPTY) STORE
+NEW {BOOTMGR} ENTRY
+CREATE ENTRY FOR WINDOWS (VISTA/7)
+CREATE {ntldr} ENTRY
+CREATE ENTRY FOR VHD BOOT
+GRUB4DOS
+CREATE {RAMDISKOPTIONS} ENTRY
+WINPE
+CREATE MULTIPLE {RAMDISKOPTIONS} ENTRIES
+
+
+
+
+NEW (EMPTY) STORE
+=================
+
+@echo off
+setlocal
+
+:: Do not use spaces in paths and do 
+:: NOT wrap in quotes
+
+set BCDEDIT=%SYSTEMROOT%\system32\bcdedit.exe
+set BCDSTORE=C:\Boot\BCD
+
+%BCDEDIT% /createstore %BCDSTORE% 
+
+endlocal
+pause
+
+
+
+
+NEW {BOOTMGR} ENTRY
+===================
+
+@echo off
+setlocal
+
+:: Do not use spaces in paths and do 
+:: NOT wrap in quotes
+
+set BCDEDIT=%SYSTEMROOT%\system32\bcdedit.exe
+set BCDSTORE=C:\Boot\BCD
+
+%BCDEDIT% /store %BCDSTORE% /create {bootmgr}
+%BCDEDIT% /store %BCDSTORE% /set {bootmgr} description "Boot Manager"
+%BCDEDIT% /store %BCDSTORE% /set {bootmgr} device boot
+%BCDEDIT% /store %BCDSTORE% /set {bootmgr} timeout 20
+
+endlocal
+pause
+
+
+
+CREATE ENTRY FOR WINDOWS (VISTA/7)
+==================================
+
+@echo off
+setlocal
+
+:: Do not use spaces in paths and do 
+:: NOT wrap in quotes
+
+set BCDEDIT=%SYSTEMROOT%\system32\bcdedit.exe
+set BCDSTORE=C:\Boot\BCD
+
+for /f "tokens=3" %%A in ('%BCDEDIT% /store %BCDSTORE% /create /application osloader') do set guid=%%A
+
+%BCDEDIT% /store %BCDSTORE% /set %guid% device partition=C:
+%BCDEDIT% /store %BCDSTORE% /set %guid% path \Windows\system32\winload.exe
+%BCDEDIT% /store %BCDSTORE% /set %guid% osdevice partition=C:
+%BCDEDIT% /store %BCDSTORE% /set %guid% systemroot \Windows
+%BCDEDIT% /store %BCDSTORE% /set %guid% description "Windows 7"
+%BCDEDIT% /store %BCDSTORE% /displayorder %guid% /addlast
+
+endlocal
+pause
+
+
+
+CREATE {ntldr} ENTRY
+====================
+
+@echo off
+setlocal
+
+:: Do not use spaces in paths and do 
+:: NOT wrap in quotes
+
+set BCDEDIT=%SYSTEMROOT%\system32\bcdedit.exe
+set BCDSTORE=C:\Boot\BCD
+
+%BCDEDIT% /store %BCDSTORE% /create {ntldr}
+%BCDEDIT% /store %BCDSTORE% /set {ntldr} device partition=C:
+%BCDEDIT% /store %BCDSTORE% /set {ntldr} path \ntldr
+%BCDEDIT% /store %BCDSTORE% /set {ntldr} description "Windows XP"
+%BCDEDIT% /store %BCDSTORE% /displayorder {ntldr} /addlast
+
+endlocal
+pause
+
+
+CREATE ENTRY FOR VHD BOOT
+=========================
+
+@echo off
+setlocal
+
+:: Do not use spaces in paths and do 
+:: NOT wrap in quotes
+
+set BCDEDIT=%SYSTEMROOT%\system32\bcdedit.exe
+set BCDSTORE=C:\Boot\BCD
+
+for /f "tokens=3" %%A in ('%BCDEDIT% /store %BCDSTORE% /create /application osloader') do set guid=%%A
+
+%BCDEDIT% /store %BCDSTORE% /set %guid% device vhd=[C:]\vhd\seven.vhd
+%BCDEDIT% /store %BCDSTORE% /set %guid% path \Windows\system32\winload.exe
+%BCDEDIT% /store %BCDSTORE% /set %guid% osdevice vhd=[C:]\vhd\seven.vhd
+%BCDEDIT% /store %BCDSTORE% /set %guid% systemroot \Windows
+%BCDEDIT% /store %BCDSTORE% /set %guid% description "Windows 7 VHD"
+%BCDEDIT% /store %BCDSTORE% /displayorder %guid% /addlast
+
+endlocal
+pause
+
+
+
+
+GRUB4DOS
+========
+
+@echo off
+setlocal
+
+:: Do not use spaces in paths and do 
+:: NOT wrap in quotes
+
+set BCDEDIT=%SYSTEMROOT%\system32\bcdedit.exe
+set BCDSTORE=C:\Boot\BCD
+
+for /f "tokens=3" %%A in ('%BCDEDIT% /store %BCDSTORE% /create /application bootsector') do set guid=%%A
+
+%BCDEDIT% /store %BCDSTORE% /set %guid% device boot
+%BCDEDIT% /store %BCDSTORE% /set %guid% path \grldr.mbr
+%BCDEDIT% /store %BCDSTORE% /set %guid% description "Grub4dos"
+%BCDEDIT% /store %BCDSTORE% /displayorder %guid% /addlast
+
+endlocal
+pause
+
+
+
+CREATE {RAMDISKOPTIONS} ENTRY
+=============================
+
+@echo off
+setlocal
+
+:: Do not use spaces in paths and do 
+:: NOT wrap in quotes
+
+set BCDEDIT=%SYSTEMROOT%\system32\bcdedit.exe
+set BCDSTORE=C:\Boot\BCD
+
+%BCDEDIT% /store %BCDSTORE% /create {ramdiskoptions}
+%BCDEDIT% /store %BCDSTORE% /set {ramdiskoptions} ramdisksdidevice boot
+%BCDEDIT% /store %BCDSTORE% /set {ramdiskoptions} ramdisksdipath \Boot\boot.sdi
+
+endlocal
+pause
+
+
+
+
+
+WINPE
+=====
+
+@echo off
+setlocal
+
+:: Do not use spaces in paths and do 
+:: NOT wrap in quotes
+
+set BCDEDIT=%SYSTEMROOT%\system32\bcdedit.exe
+set BCDSTORE=C:\Boot\BCD
+
+for /f "tokens=3" %%A in ('%BCDEDIT% /store %BCDSTORE% /create /application osloader') do set guid=%%A
+
+%BCDEDIT% /store %BCDSTORE% /set %guid% systemroot \Windows
+%BCDEDIT% /store %BCDSTORE% /set %guid% detecthal Yes
+%BCDEDIT% /store %BCDSTORE% /set %guid% winpe Yes
+%BCDEDIT% /store %BCDSTORE% /set %guid% osdevice ramdisk=[boot]\Boot\boot.wim,{ramdiskoptions}
+%BCDEDIT% /store %BCDSTORE% /set %guid% device ramdisk=[boot]\Boot\boot.wim,{ramdiskoptions}
+%BCDEDIT% /store %BCDSTORE% /set %guid% description "Windows PE"
+%BCDEDIT% /store %BCDSTORE% /displayorder %guid% /addlast
+
+endlocal
+pause
+
+
+
+
+
+
+CREATE MULTIPLE {RAMDISKOPTIONS} ENTRIES
+========================================
+
+@echo off
+setlocal
+
+:: Do not use spaces in paths and do 
+:: NOT wrap in quotes
+
+set BCDEDIT=%SYSTEMROOT%\system32\bcdedit.exe
+set BCDSTORE=%~dp0BCD
+
+ECHO.
+ECHO.
+ECHO Create store
+ECHO.
+%BCDEDIT% /createstore %BCDSTORE% 
+
+ECHO.
+ECHO.
+ECHO {bootmgr} entry
+ECHO.
+%BCDEDIT% /store %BCDSTORE% /create {bootmgr}
+%BCDEDIT% /store %BCDSTORE% /set {bootmgr} description "Boot Manager"
+%BCDEDIT% /store %BCDSTORE% /set {bootmgr} device boot
+%BCDEDIT% /store %BCDSTORE% /set {bootmgr} timeout 20
+
+
+
+ECHO.
+ECHO.
+ECHO ramdisksdidevice
+ECHO.
+for /f "tokens=3" %%A in ('%BCDEDIT% /store %BCDSTORE% /create /device') do set ramdisk=%%A 
+
+%BCDEDIT% /store %BCDSTORE% /set %ramdisk% ramdisksdidevice boot
+%BCDEDIT% /store %BCDSTORE% /set %ramdisk% ramdisksdipath \boot\boot.sdi 
+
+
+
+ECHO.
+ECHO.
+ECHO winpe
+ECHO.
+for /f "Tokens=3" %%A in ('%BCDEDIT% /store %BCDSTORE% /create /application osloader') do set GUID=%%A
+
+%BCDEDIT% /store %BCDSTORE% /set %GUID% systemroot \Windows
+%BCDEDIT% /store %BCDSTORE% /set %GUID% detecthal Yes
+%BCDEDIT% /store %BCDSTORE% /set %GUID% winpe Yes
+%BCDEDIT% /store %BCDSTORE% /set %GUID% osdevice ramdisk=[boot]\Sources\boot.wim,%ramdisk%
+%BCDEDIT% /store %BCDSTORE% /set %GUID% device ramdisk=[boot]\Sources\boot.wim,%ramdisk%
+%BCDEDIT% /store %BCDSTORE% /set %GUID% description "Windows PE"
+%BCDEDIT% /store %BCDSTORE% /displayorder %guid% /addlast
+
+endlocal
+pause
+
+

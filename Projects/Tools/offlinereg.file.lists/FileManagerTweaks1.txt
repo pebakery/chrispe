@@ -1,0 +1,5 @@
+Microsoft\Windows\CurrentVersion\Policies\Explorer setvalue NoControlPanel 1 4
+Microsoft\Windows\CurrentVersion\Explorer\MyComputer deletekeys NameSpace
+Wow6432Node\Microsoft\Windows\CurrentVersion\Explorer\MyComputer deletekeys NameSpace
+Classes\CLSID\{323CA680-C24D-4099-B94D-446DD2D7249E}\ShellFolder setvalue "Attributes" "2839544064" 4
+Classes\CLSID\{031E4825-7B94-4dc3-B131-E946B44C8DD5}\ShellFolder setvalue "Attributes" "2839544064" 4

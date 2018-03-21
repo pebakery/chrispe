@@ -1,0 +1,2 @@
+Classes\CLSID\{C90250F3-4D7D-4991-9B69-A5C5BC1C2AE6}\InProcServer32 setvalue " " "X:\Windows\System32\actxprxy.dll"
+Classes\CLSID\{C90250F3-4D7D-4991-9B69-A5C5BC1C2AE6}\InProcServer32 setvalue "ThreadingModel" "Both"

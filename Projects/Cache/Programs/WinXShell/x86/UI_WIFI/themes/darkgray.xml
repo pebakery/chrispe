@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ColorTheme>
+    <Style name="ct-bkdarker1" bkcolor="#FF3F3F3F" />
+    <Style name="ct-text-primary" bkcolor="#FFFFFFFF" />
+    <Style name="ct-text-secondary" textcolor="#FFBBBBBB" />
+    <Style name="ct-button" bkcolor="#FF3F3F3F" bordercolor="#FF555555" focusbordercolor="#FF777777" />
+    <Style name="ct-option" bkcolor="#FF555555" selectedimage="color='#FF4A4A4A'" />
+    <Style name="ct-list" itemhotbkcolor="#FF555555" itemselectedbkcolor="#FF777777" />
+    <Style name="ct-combo" bkimage="file='themes\ComboButton-darkgray.png' corner='2,2,36,2'" />
+</ColorTheme>

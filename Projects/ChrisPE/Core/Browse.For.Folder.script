@@ -1,0 +1,45 @@
+[main]
+Title=Browse for Folder
+Description=This is set as hidden and will be executed from another project script.
+Selected=False
+Level=-2
+Author=ThePEBakeryTeam
+Version=20180306
+Date=2018-03-06
+
+[process]
+If,ExistFile,"%Target_system32%\BrowseForFolder.txt",Begin
+  Echo,BrowseForFolder fix has already been applied...
+End
+Else,Begin
+  Echo,Applying BrowseForFolder fix...
+  If,Not,ExistFile,%Target_system32%\ExplorerFrame.dll,Begin
+    Set,%MY_FILE%,ExplorerFrame.dll
+    If,Not,ExistFile,"%Target_System32%\%MY_FILE%",Begin
+      If,ExistFile,"%ProjectTemp%\File.and.Dependencies.txt",FileDelete,"%ProjectTemp%\File.and.Dependencies.txt"
+      FileCopy,"%Tools%\wimlib.file.lists\File.and.Dependencies.txt","%ProjectTemp%\File.and.Dependencies.txt"
+      TXTReplace,"%ProjectTemp%\File.and.Dependencies.txt",myfile.ext,%MY_FILE%
+      WimExtractBulk,%Install.wim%,%Install.wim.Image.number%,%ProjectTemp%\File.and.Dependencies.txt,%TargetDir%,NOACL
+	End
+    If,%CodeBase2%,Equal,10.0,WimExtract,%Install.wim%,%Install.wim.Image.number%,Windows\System32\edputil.dll,%Target_system32%,NOACL
+	If,Not,ExistDir,"%TargetDir%\Windows\System32\config\systemprofile\Desktop",Begin
+      Echo,"Creating folder 'Windows\System32\config\systemprofile\Desktop' to enable Browse for Folders dialog"
+      DirMake,"%TargetDir%\Windows\System32\config\systemprofile\Desktop"
+    End
+    If,Not,ExistFile,"%TargetDir%\Windows\System32\config\systemprofile\Desktop\marker.txt",Begin
+      ECHO,"Adding marker file to ensure that 'Windows\System32\config\systemprofile\Desktop' is copied to boot.wim (to enable Browse for Folders dialog and to display the directory tree in some file managers) - required when INJECT method is used"
+      FileCreateBlank,"%TargetDir%\Windows\System32\config\systemprofile\Desktop\marker.txt",NOWARN
+      TXTaddLine,"%TargetDir%\Windows\System32\config\systemprofile\Desktop\marker.txt","Added to support directory tree view in some file managers and the Browse for Folders dialog required for certain programs (including Recuva) to function correctly",Append
+    End
+    Echo,"Mounting registry hives..."
+    If,Not,ExistRegSection,HKLM,_WinPE_SOFTWARE,RegHiveLoad,_WinPE_SOFTWARE,"%Target_config%\software"
+    RegWrite,HKLM,0x1,"_WinPE_SOFTWARE\Classes\CLSID\{AE054212-3535-4430-83ED-D501AA6680E6}","","Shell Name Space ListView"
+    RegWrite,HKLM,0x1,"_WinPE_SOFTWARE\Classes\CLSID\{AE054212-3535-4430-83ED-D501AA6680E6}\InProcServer32","ThreadingModel","Apartment"
+    RegWrite,HKLM,0x2,"_WinPE_SOFTWARE\Classes\CLSID\{AE054212-3535-4430-83ED-D501AA6680E6}\InProcServer32","","%SystemDrive%\Programs\BrowseForFolder\%Codebase%\explorerframe.dll"
+    Echo,"Unmounting registry hives..."
+    RegHiveUnload,_WinPE_SOFTWARE
+  end
+  FileCreateBlank,"%Target_system32%\BrowseForFolder.txt"
+  TXTaddLine,"%Target_system32%\BrowseForFolder.txt","Dummy file added to confirm that Browse For Folder Fix has already been applied.",APPEND
+end
+

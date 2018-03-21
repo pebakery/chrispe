@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Locale>
+    <Font id="16" name="微软雅黑" size="16" shared="true" default="true" />
+    <Font id="12" name="微软雅黑" size="12" shared="true" />
+    <Font id="24" name="微软雅黑" size="24" shared="true" />
+
+    <MultiLanguage id="::Connected" value="已连接" />
+    <MultiLanguage id="::Secured" value="安全" />
+    <MultiLanguage id="::Open" value="开放" />
+    <MultiLanguage id="::Connect" value="连接" />
+    <MultiLanguage id="::Disconnect" value="断开连接" />
+    <MultiLanguage id="msg_enter_password" value="请输入连接密码" />
+    <MultiLanguage id="Cancel" value="取消" />
+    <MultiLanguage id="NetworkSettings" value="更改设置" />
+    <MultiLanguage id="Firewall" value="防火墙" />
+    <MultiLanguage id="Proxy" value="代理" />
+    <MultiLanguage id="::msg_select_device" value="请选择无线网络设备" />
+    <MultiLanguage id="::msg_service_unavailable" value="无线连接服务不可用" />
+    <MultiLanguage id="::msg_device_unavailable" value="无可用的无线网络设备" />
+</Locale>

@@ -1,0 +1,39 @@
+[main]
+Title=Common Commands
+Description=This is set as hidden and will be executed from another project script.
+Selected=False
+Level=-2
+Author=ThePEBakeryTeam
+Version=20180306
+Date=2018-03-06
+
+[DIRECTORY.DELETE]
+Set,%CONTINUE%,NO
+If,Question,"Looks like there was an error deleting the following directory - #$x#$x#$s*#$s%DIRECTORY%#$x#$xIs the directory open in Explorer?#$x#$xSelect YES to try again or NO to ABORT...",Set,%CONTINUE%,YES
+If,%CONTINUE%,Equal,NO,Halt
+System,ERROROFF
+DirDelete,"%DIRECTORY%"
+If,ExistDir,"%DIRECTORY%",Begin
+  Set,%CONTINUE%,NO
+  If,Question,"Looks like there was still an error deleting the directory.#$x#$xSelect YES to attempt to take ownership of the files\directories and try again or NO to ABORT...",Set,%CONTINUE%,YES
+  If,%CONTINUE%,Equal,NO,Halt
+  ShellExecute,Hide,takeown.exe,/f #$q%DIRECTORY%#$q /r /d y
+  ShellExecute,Hide,icacls.exe,#$q%DIRECTORY%#$q /grant administrators:F /t
+  System,ERROROFF
+  DirDelete,"%DIRECTORY%"
+  If,ExistDir,"%DIRECTORY%",Begin
+    Message,"Looks like there was still an error deleting the directory. ABORTING..."
+    Halt
+  End
+End
+
+[StartMenu]
+If,%ProgramMenuPath%,Equal,"",FileCopy,"%ProjectTemp%\%MyShortcut%","%ProjectTemp%\ShortCuts\Start"
+Else,Begin
+  If,Not,ExistDir,"%ProjectTemp%\ShortCuts\Start\%ProgramMenuPath%",DirMake,"%ProjectTemp%\ShortCuts\Start\%ProgramMenuPath%"
+  FileCopy,"%ProjectTemp%\%MyShortcut%","%ProjectTemp%\ShortCuts\Start\%ProgramMenuPath%"
+End
+
+
+
+

@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Locale>
+    <Font shared="true" id="16" size="16" name="微软雅黑" default="true" />
+    <Font shared="true" id="24" size="24" name="微软雅黑" />
+
+    <MultiLanguage id="Settings" value="设置" />
+    <MultiLanguage id="Display Settings" value="显示设置" />
+    <MultiLanguage id="Resolution" value="分辨率" />
+    <MultiLanguage id="Rotate" value="方向" />
+    <MultiLanguage id="Rotate_0" value="横向" />
+    <MultiLanguage id="Rotate_90" value="纵向" />
+    <MultiLanguage id="Rotate_180" value="横向(翻转)" />
+    <MultiLanguage id="Rotate_270" value="纵向(翻转)" />
+    <MultiLanguage id="Brightness" value="亮度" />
+    <MultiLanguage id="Apply" value="应用<u>(A)</u>" />
+    <MultiLanguage id="Cancel" value="取消<u>(C)</u>" />
+</Locale>

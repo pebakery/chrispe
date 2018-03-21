@@ -1,0 +1,17 @@
+\Windows\syswow64\cryptbase.dll
+\Windows\syswow64\cryptsp.dll
+\Windows\syswow64\devobj.dll
+\Windows\syswow64\kernelbase.dll
+\Windows\syswow64\netutils.dll
+\Windows\syswow64\profapi.dll
+\Windows\syswow64\samcli.dll
+\Windows\syswow64\sechost.dll
+\Windows\syswow64\srvcli.dll
+\Windows\syswow64\sspicli.dll
+\Windows\syswow64\wkscli.dll
+\Windows\syswow64\browcli.dll
+\Windows\syswow64\dui70.dll
+\Windows\syswow64\StructuredQuery.dll
+\Windows\syswow64\logoncli.dll
+\Windows\syswow64\rpcrtremote.dll
+\Windows\syswow64\webio.dll

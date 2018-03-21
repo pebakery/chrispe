@@ -1,0 +1,164 @@
+[main]
+Title=7-zip
+Description=File archive tool (zip, 7z, rar, etc).
+Selected=True
+Level=5
+Author=ThePEBakeryTeam
+Version=20180306
+Date=2018-03-06
+Interface=Interface1
+
+[Interface1]
+pTextLabelMenu1="1",1,1,35,3,70,18,10,Bold
+pButtonMenu2="2",1,8,75,0,70,20,pButtonMenu2,0,True,_pButtonMenu2_,True
+pButtonMenu3="?",1,8,145,0,70,20,pButtonMenu3,0,True,_pButtonMenu3_,True
+pWebLabel1=http://www.7-zip.org/,1,10,51,100,216,18,http://www.7-zip.org/
+pTextLabel1="7-Zip Website",1,1,51,77,230,18,10,Bold
+pCheckBoxInWim="Include Program in boot.wim",1,3,51,265,180,18,True
+
+[Interface2]
+pButtonMenu1="1",1,8,5,0,70,20,pButtonMenu1,0,True,_pButtonMenu1_,True
+pTextLabelMenu2="2",1,1,108,3,70,18,10,Bold
+pButtonMenu3="?",1,8,145,0,70,20,pButtonMenu3,0,True,_pButtonMenu3_,True
+pBevel1=,1,12,10,65,66,2
+pTextLabel="Menu Entries",1,1,10,50,230,18,8,Bold
+pCheckBoxShortcutDesktop="Add to Desktop Menu",1,3,40,80,150,18,True
+pCheckBoxShortcutQuick="Add to Quicklaunch Menu",1,3,40,110,150,18,True
+pCheckBoxShortcutPrograms="Add to #$qStart#$q > ",1,3,40,140,99,18,True
+pCheckBoxShortcutLaunchBar="Add to LaunchBar Menu ",1,3,40,170,150,18,True
+pButtonShortcut1=?,1,8,10,80,18,18,pButtonShortcut1,0,True,_pButtonShortcut1_,True
+pButtonShortcut2=?,1,8,10,110,18,18,pButtonShortcut2,0,True,_pButtonShortcut2_,True
+pButtonShortcut3=?,1,8,10,140,18,18,pButtonShortcut3,0,True,_pButtonShortcut3_,True
+pButtonShortcut4=?,1,8,10,170,18,18,pButtonShortcut4,0,True,_pButtonShortcut4_,True
+pTextBox1=,1,0,140,140,150,21,Programs\FileManager
+
+[pButtonMenu1]
+IniWrite,%ScriptFile%,Main,Interface,Interface1
+System,REFRESHINTERFACE
+
+[pButtonMenu2]
+IniWrite,%ScriptFile%,Main,Interface,Interface2
+System,REFRESHINTERFACE
+
+[pButtonMenu3]
+message,"Click on the buttons to toggle between tabs 1 and 2. #$x#$xTab 2 contains menu options for use in the selected shell. Click on the ? button for information about the different options."
+
+[pButtonShortcut1]
+message,"WinXShell only#$x#$xSelect this option to add a program shortcut to the Desktop."
+
+[pButtonShortcut2]
+message,"WinXShell only#$x#$xSelect this option to add a program menu option to the Quicklaunch menu - similar in appearence to the 'Pin to Taskbar' option in Windows 7/8/10."
+
+[pButtonShortcut3]
+message,"Applies to WinXShell#$c BBLean and LaunchBar Shell(s)#$x#$xSelect this option to add a program menu option to the Start menu. Leave blank to add to the root of the menu#$c or manually type a path to place in a sub-menu (do not use spaces in the path). E.g. #$x#$s- FileManager#$x#$s- Programs#$x#$s- Programs\FileManager#$x#$xAnd looking at the examples above - #$x#$xLeave this option blank to add a menu entry to the root of the program menu (the 'Start' menu in WinXShell#$c the 'Start' menu in BBLean#$c or the root of the LaunchBar menu bar if LaunchBar is selected as Shell)#$x#$xEnter 'FileManager' to add a menu entry for this application to the 'Start' > 'FileManager' sub-menu (WinXShell and bblean) or the 'FileManager' sub-menu in LaunchBar.#$x#$xEnter 'Programs' to add a menu entry for this application to the 'Start' > 'Programs' sub-menu (WinXShell and bblean) or the 'Programs' sub-menu in LaunchBar.#$x#$xEnter 'Programs\FileManager' to add a menu entry for this application to the 'Start' > 'Programs' > 'FileManager' sub-menu (WinXShell and bblean) or the 'Programs' > 'FileManager' sub-menu in LaunchBar."
+
+[pButtonShortcut4]
+message,"This setting does not apply to any LaunchBar instance running as the WinPE Shell. This option only applies to a LaunchBar instance when the Applications' > 'LaunchBar' program script is selected in the build.#$x#$xIf the 'Applications' > 'LaunchBar' program script is selected than enable this option to add a program menu entry to the root of the LaunchBar menu bar. #$x#$xPlease note that if option '6] Programs in boot.wim' in the main project script is set as 'NO'#$c then LaunchBar and a number of other applications will not be available at boot. In this case a text based .ini file will be used for LaunchBar menu settings."
+
+[process]
+AddInterface,%ScriptFile%,Interface1,""
+AddInterface,%ScriptFile%,Interface2,""
+If,%pCheckBoxInWim%,Equal,True,Set,%PROGRAMS.IN.WIM%,YES
+Else,Set,%PROGRAMS.IN.WIM%,NO
+If,%Filemanager%,Equal,7-zip,Begin
+  Echo,"7-zip is set as the default FileManager and is already included in the build. Exiting script...."
+  Exit
+End
+Run,%ScriptFile%,CHECKS
+Run,%ScriptFile%,MENU
+Run,%ScriptFile%,COMMON
+If,%PROGRAMS.IN.WIM%,Equal,NO,Run,%ScriptFile%,NOT.IN.WIM
+If,%PROGRAMS.IN.WIM%,Equal,YES,Run,%ScriptFile%,IN.WIM
+
+[CHECKS]
+If,Not,ExistFile,"%Programs%\7-zip\%ARCH%\7zFM.exe",Begin
+  Message,7-zip is missing - exiting script...,Error,5
+  Exit,7-zip is missing - exiting script...,WARN
+End
+
+[MENU]
+If,%PROGRAMS.IN.WIM%,Equal,YES,Begin
+  ShellExecute,Hide,"%Tools%\Shortcut.exe","/A:C /T:#$q#$pSystemDrive#$p\Programs\7-zip\7zfm.exe#$q /F:#$q%ProjectTemp%\7-zip.lnk#$q /I:#$q#$pSystemDrive#$p\Programs\7-zip\7zfm.exe#$c0#$q"
+  If,ExistFile,"%ProjectTemp%\7-zip.lnk",Begin
+    Set,%MyShortcut%,7-zip.lnk
+    If,%pCheckBoxShortcutDesktop%,Equal,True,FileCopy,"%ProjectTemp%\%MyShortcut%","%ProjectTemp%\ShortCuts\Desktop"
+    If,%pCheckBoxShortcutQuick%,Equal,True,FileCopy,"%ProjectTemp%\%MyShortcut%","%ProjectTemp%\ShortCuts\Quick"
+    If,%pCheckBoxShortcutPrograms%,Equal,True,Begin
+      Set,%ProgramMenuPath%,%pTextBox1%
+      Run,"%ProjectDir%\Core\common.script",StartMenu
+    End
+    If,%pCheckBoxShortcutLaunchBar%,Equal,True,FileCopy,"%ProjectTemp%\%MyShortcut%","%ProjectTemp%\ShortCuts\LaunchBar"
+    FileDelete,"%ProjectTemp%\%MyShortcut%"
+  End
+End
+If,%pCheckBoxShortcutLaunchBar%,Equal,True,If,%PROGRAMS.IN.WIM%,Equal,NO,If,ExistFile,"%ProjectTemp%\LaunchBar.ini",TXTaddLine,"%ProjectTemp%\LaunchBar.ini",7-zip;..\7-zip\7zFM.exe,Append
+
+[COMMON]
+If,%PROGRAMS.IN.WIM%,Equal,NO,Set,%PATH%,%OutputDir%
+If,%PROGRAMS.IN.WIM%,Equal,YES,Set,%PATH%,%TargetDir%
+If,Not,ExistDir,"%PATH%\Programs",DirMake,"%PATH%\Programs"
+DirMake,"%PATH%\Programs\7-zip"
+DirCopy,"%Programs%\7-zip\%ARCH%\*.*","%PATH%\Programs\7-zip"
+If,Not,ExistFile,"%PATH%\Programs\registry.entries.cmd",Begin
+  FileCreateBlank,"%PATH%\Programs\registry.entries.cmd"
+  TXTaddLine,"%PATH%\Programs\registry.entries.cmd",@Echo off,Append
+  TXTaddLine,"%PATH%\Programs\registry.entries.cmd",Call #$p~dp0version.check.cmd,Append
+  TXTaddLine,"%PATH%\Programs\registry.entries.cmd",,Append
+End
+TXTaddLine,"%PATH%\Programs\registry.entries.cmd",::==========7-ZIP===============,Append
+TXTaddLine,"%PATH%\Programs\registry.entries.cmd",::for file associations,Append
+TXTaddLine,"%PATH%\Programs\registry.entries.cmd",IF EXIST #$q#$p~dp07-zip\7zFM.exe#$q (,Append
+TXTaddLine,"%PATH%\Programs\registry.entries.cmd",ECHO.,Append
+TXTaddLine,"%PATH%\Programs\registry.entries.cmd",ECHO 7-ZIP Registry Entries,Append
+TXTaddLine,"%PATH%\Programs\registry.entries.cmd",reg.exe add #$qHKLM\SOFTWARE\Classes\*\shellex\ContextMenuHandlers\7-Zip#$q /ve /t REG_SZ /d #$q{23170F69-40C1-278A-1000-000100020000}#$q,Append
+TXTaddLine,"%PATH%\Programs\registry.entries.cmd",reg.exe add #$qHKLM\SOFTWARE\Classes\CLSID\{23170F69-40C1-278A-1000-000100020000}#$q /ve /t REG_SZ /d #$q7-Zip Shell Extension#$q,Append
+TXTaddLine,"%PATH%\Programs\registry.entries.cmd",reg.exe add #$qHKLM\SOFTWARE\Classes\CLSID\{23170F69-40C1-278A-1000-000100020000}\InprocServer32#$q /ve /t REG_SZ /d #$q#$p~dp07-zip\7-zip.dll#$q,Append
+TXTaddLine,"%PATH%\Programs\registry.entries.cmd",reg.exe add #$qHKLM\SOFTWARE\Classes\CLSID\{23170F69-40C1-278A-1000-000100020000}\InprocServer32#$q /v #$qThreadingModel#$q /t REG_SZ /d #$qApartment#$q,Append
+TXTaddLine,"%PATH%\Programs\registry.entries.cmd",reg.exe add #$qHKLM\SOFTWARE\Classes\Directory\shellex\ContextMenuHandlers\7-Zip#$q /ve /t REG_SZ /d #$q{23170F69-40C1-278A-1000-000100020000}#$q,Append
+TXTaddLine,"%PATH%\Programs\registry.entries.cmd",reg.exe add #$qHKLM\SOFTWARE\Classes\Directory\shellex\DragDropHandlers\7-Zip#$q /ve /t REG_SZ /d #$q{23170F69-40C1-278A-1000-000100020000}#$q,Append
+TXTaddLine,"%PATH%\Programs\registry.entries.cmd",reg.exe add #$qHKLM\SOFTWARE\Classes\Drive\shellex\DragDropHandlers\7-Zip#$q /ve /t REG_SZ /d #$q{23170F69-40C1-278A-1000-000100020000}#$q,Append
+TXTaddLine,"%PATH%\Programs\registry.entries.cmd",reg.exe add #$qHKLM\SOFTWARE\Classes\*\OpenWithList\7zFM.exe#$q /ve /t REG_SZ /d #$q7-zip#$q,Append
+TXTaddLine,"%PATH%\Programs\registry.entries.cmd",reg.exe add #$qHKLM\SOFTWARE\Classes\Applications\7zFM.exe\shell\open\command#$q /ve /t REG_SZ /d #$q\#$q#$p~dp07-zip\7zFM.exe\#$q \#$q#$p#$p1\#$q#$q,Append
+TXTaddLine,"%PATH%\Programs\registry.entries.cmd",reg.exe add #$qHKLM\SOFTWARE\7-zip#$q /v #$qPath#$q /t REG_SZ /d #$q#$p~dp07-zip#$q,Append
+TXTaddLine,"%PATH%\Programs\registry.entries.cmd",reg.exe add #$qHKLM\SOFTWARE\7-zip#$q /v #$qLang#$q /t REG_SZ /d #$q-#$q,Append
+TXTaddLine,"%PATH%\Programs\registry.entries.cmd",),Append
+TXTaddLine,"%PATH%\Programs\registry.entries.cmd",,Append
+IniWrite,"%OutputDir%\Project.Settings.ini",PROGRAMS,7-ZIP,YES
+
+[IN.WIM]
+Echo,"Mounting registry hives..."
+If,Not,ExistRegSection,HKLM,_WinPE_SOFTWARE,RegHiveLoad,_WinPE_SOFTWARE,"%Target_config%\software"
+RegWrite,HKLM,0x1,_WinPE_SOFTWARE\Classes\*\shellex\ContextMenuHandlers\7-Zip,,"{23170F69-40C1-278A-1000-000100020000}"
+RegWrite,HKLM,0x1,_WinPE_SOFTWARE\Classes\CLSID\{23170F69-40C1-278A-1000-000100020000},,"7-Zip Shell Extension"
+RegWrite,HKLM,0x2,_WinPE_SOFTWARE\Classes\CLSID\{23170F69-40C1-278A-1000-000100020000}\InprocServer32,,"#$psystemdrive#$p\Programs\7-zip\7-zip.dll"
+RegWrite,HKLM,0x1,_WinPE_SOFTWARE\Classes\CLSID\{23170F69-40C1-278A-1000-000100020000}\InprocServer32,ThreadingModel,Apartment
+RegWrite,HKLM,0x1,_WinPE_SOFTWARE\Classes\Directory\shellex\ContextMenuHandlers\7-Zip,,{23170F69-40C1-278A-1000-000100020000}
+RegWrite,HKLM,0x1,_WinPE_SOFTWARE\Classes\Directory\shellex\DragDropHandlers\7-Zip,,{23170F69-40C1-278A-1000-000100020000}
+RegWrite,HKLM,0x1,_WinPE_SOFTWARE\Classes\Drive\shellex\DragDropHandlers\7-Zip,,{23170F69-40C1-278A-1000-000100020000}
+RegWrite,HKLM,0x1,_WinPE_SOFTWARE\Classes\*\OpenWithList\7zFM.exe,,
+RegWrite,HKLM,0x2,_WinPE_SOFTWARE\Classes\Applications\7zFM.exe\shell\open\command,,"#$psystemdrive#$p\Programs\7-zip\7zFM.exe #$p1"
+RegWrite,HKLM,0x2,_WinPE_SOFTWARE\7-zip,Path,"#$psystemdrive#$p\Programs\7-zip"
+RegWrite,HKLM,0x1,_WinPE_SOFTWARE\7-zip,Lang,-
+If,%Openwith.workaround%,Equal,YES,Begin
+  RegRead,HKLM,_WinPE_SOFTWARE\Classes\*\shell\Open with,Subcommands,%Subcommands%
+  Set,%new.subcommand%,%Subcommands%;openwith.7-zip
+  RegWrite,HKLM,0x1,"_WinPE_SOFTWARE\Classes\*\shell\Open with",Subcommands,%new.subcommand%
+  RegWrite,HKLM,0x1,_WinPE_SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\CommandStore\shell\openwith.7-zip,,7-zip
+  RegWrite,HKLM,0x2,_WinPE_SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\CommandStore\shell\openwith.7-zip\command,,#$q#$psystemdrive#$p\Programs\7-zip\7zFM.exe#$q #$q#$p1#$q
+End
+Echo,"Unmounting registry hives..."
+RegHiveUnload,_WinPE_SOFTWARE
+//Wait,1
+
+[NOT.IN.WIM]
+//Wait,1
+Exit,"7-zip copied to #$q%PATH%\Programs#$q directory - it will not be added to #$qboot.wim#$q",Nowarn
+
+[AuthorEncoded]
+7zip-2.ico=943,1258
+logo=7zip-2.ico
+
+[EncodedFile-AuthorEncoded-7zip-2.ico]
+lines=0
+0=eJztlbFPXEcQh382V6AI5aChQhGhgs7SSpboLAp3SG6ocbX/Ak2Kq6gjRULazkUcxUUa/oKrUpipoTEVhSMUyUeHlGLyzS4X7hAXDgsIiph3+/bNvJmdb2dW76RnmtHy8jxzR388l15Kmp9v+uoz6bsZ6cULoc/q12+l1x1pFZ9lxiup+oX0nmuC9OpPvV6b4uKh3+8zh8XrT+5tiitMcbtr8TGZQh9cxDG6E/Q60Pzf9IHG9eowqg801LsXm/8nX7wbzd/1Eb1bQS95r+qj+55Cv2V97lkeNJmubs89zvm82lkfnvP+xOjenZ/zbsMYdONZYuZYRJNjHnRHZobHe3n1I7A7jPOLQ+HDZl+37zZuK8O4qBOfCL1V+07UanwzKao3sU79T30NPv6iTqej2dlZzc3NaWFhQYuLi1paWtLKyorW1ta0tbWlzc1NbWxsaH19Xb0fXG/euH7SofxP0++HX3T4+bN+/PAbGRIjMwrDmpq4JWwJWwqbN5eMPfOQsWfs2VtYwV6wF5SCvXhdSobdsBt2w2BREHRHd2up6pUZhRE2b+m5JRgSDAmGBENFgiHBkGBIMCQYKiYMCYYEQ4IhwVDRYUgwJBgSDAmG5NjgSHCk4KBJdXuVJK7CMIa3LcOSSZ5JlFk0w1LLwMvMQ4Ylw1LLAkeGI8ORS9i8lQqODEOGIcMQpctwZBgyDFZPvLUSkqdddlHeVIlKCt1bqcldYCokLSQoMBVyF14WFikl1vLWjpobO/kL+Qv5o0WF/CXsMBQYinttW+tErtmDLNprMBj5DDaDw8hXWxsc1MDgsOBgY7XdBBksBosBYSSsRwAWI9BwMgwGSxwLCxZ6YrBY1KOyxGmILpR6lBwGh8FhcBgchnqcYDAYHAaHwWCoRwwGh8FhcBgcBpZmYIfBYXAY3OJbwxos5gQ6TjlHj+hjfI/q2uGT9b3ea3t7Wzs7O9rd3dXe3p4ODg60v7+vo6MjHR8f6+TkRKenpzo7O9P5+bkGf7l+fvfu4f/Pn+TxydU/0evlcftfu6sJHg/oP/44trkp/McCpvEfDbgXfx9/utn/MuBO/Eee/UrA9f6XyrT9HVlzKv+herO/X8q4NmG/9+0/Lv+t/83yeP2f5H8rw1bfdu5H8MzTPJy/to5/A62b4F94nOMyr8os0DXSy0zOZxgFIw+8E4LQqczY5Vd/u8XFwAQAZhwHTETokBUBAAAAAgAAACYAAABlAwAAAAAAAAEAAAAAAAAAAAAAAA
+

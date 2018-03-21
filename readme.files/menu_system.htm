@@ -1,0 +1,215 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd"><html><head><link type="text/css" rel="stylesheet" href="chrispe.css" media="screen" /><title>ChrisPE</title></head><body><font> 
+ 
+ 
+ 
+<p> 
+<select ONCHANGE="location = this.options[this.selectedIndex].value;"> 
+<option value="" disabled></option> 
+<option value="../readme.html">Contents</option> 
+<option value="" disabled>=======</option> 
+<option value="winpe.htm">Windows PE</option>  
+<option value="builder.htm">Builders</option>  
+<option value="options.htm">Project Options</option>  
+<option value="project.htm">Project Scripts</option>  
+<option value="instructions_pebakery.htm">Instructions</option>  
+<option value="menu_system.htm" selected="selected">Menu System</option>  
+<option value="not_in_wim.htm">Include...in boot.wim</option>  
+<option value="usb.htm">...Bootable USB...</option>  
+<option value="uefi.htm">UEFI, BIOS, GPT...</option>  
+<option value="multiboot.htm">Multiboot WinPE</option>  
+<option value="" disabled></option> 
+<option value="" disabled>Appendices</option> 
+<option value="" disabled>=========</option> 
+<option value="quick_pebakery.htm">Quick Start</option>  
+<option value="acknowledgements.htm">Acknowledgements</option>  
+<option value="" disabled></option> 
+</select> 
+</p> 
+ 
+ 
+ 
+<hr> 
+<a href="http://chrispe.mistyprojects.co.uk/"><img src="img/home.jpg" BORDER=1></a> 
+ 
+
+
+<h2><u>ChrisPE Menu System</u></h2>
+
+
+
+<p>
+<font class="file">ChrisPE</font> currently has support for the following four shells -
+<ul>
+<li class="file">bblean</li>
+<li class="file">CMD</li>
+<li class="file">LaunchBar</li>
+<li class="file">WinXShell</li>
+</ul>
+</p>
+
+
+
+<p class="break3em">
+Each shell has a different menu system - except the <font class="file">CMD</font> shell, which does 
+not have any menu support. <font class="file">WinXShell</font> for example supports Desktop 
+shortcuts, QuickLaunch shortcuts and a Start menu. The <font class="file">bblean</font> menu is 
+accessible via the Windows button or by right-click on the desktop. <font 
+class="file">LaunchBar</font> uses a Quick Launch style menu bar not dissimilar to the Mac OSX Dock.
+</p>
+
+
+
+<p class="break3em">
+The menu can be customised to create sub-menus. Select an application script in the directory tree to 
+the left of the <font class="file">PEBakery</font> interface and select tab 2 (if present) to access 
+the menu options -
+<br />
+<a href="img/menu1.png"><IMG SRC="img/menu1.png" float=left width=90% margin-right=1% margin-
+bottom=0.5em border=1></a>
+</p>
+
+
+<p class="break3em">
+Current options -
+<ul>
+<li><font class="file">Add to Desktop Menu</font> - select to add a Desktop shortcut for the 
+application (<font class="file">WinXShell</font> only).</li>
+
+<li class="breakhalfem"><font class="file">Add to Quicklaunch Menu</font> - select to add a 
+Quicklaunch shortcut for the application (<font class="file">WinXShell</font> only).</li>
+
+<li class="breakhalfem"><font class="file">Add to "Start" &gt;</font> - use the textbox in this 
+option to create custom menu entries (sub-menus) for the <font class="file">bblean</font>, <font 
+class="file">LaunchBar</font> and <font class="file">WinXShell</font> shells.</li>
+
+<li class="breakhalfem"><font class="file">Add to LaunchBar Menu</font> - applies only to a second 
+instance of <font class="file">LaunchBar</font> (e.g. when the <font class="file">Applications</font> 
+&gt; <font class="file">LaunchBar</font> script is selected in the build).</li>
+</ul>
+<font class="file"></font>
+</p>
+
+
+
+<p class="break3em">
+Screenshot of a <font class="file">WinXShell</font> start menu -
+<br />
+<a href="img/menu_winxshell1.png"><IMG SRC="img/menu_winxshell1.png" float=left width=90% margin-
+right=1% margin-bottom=0.5em border=1></a>
+</p>
+
+
+
+
+<p class="break3em">
+In the screenshots below, the <font class="file">Add to "Start" &gt;</font> option has been set with 
+the following values in the textbox (<b>bold</b> text entries below) -
+<ul>
+<li><font class="file">Shell</font> &gt; <font class="file">Default Filemanager</font> - 
+<b>Programs</b></li>
+<li class="breakhalfem"><font class="file">Settings</font> &gt; <font class="file">Recommended</font> 
+- <b>Programs</b></li>
+<li class="breakhalfem"><font class="file">Applications</font> &gt; <font 
+class="file">LaunchBar</font> - <b>Programs</b></li>
+<li class="breakhalfem"><font class="file">Applications</font> &gt; <font class="file">7-zip</font> - 
+<b>Programs</b></li>
+<li class="breakhalfem"><font class="file">Applications</font> &gt; <font 
+class="file">DiskMgmt</font> - <b>Programs</b></li>
+<li class="breakhalfem"><font class="file">Applications</font> &gt; <font class="file">DMDE</font> - 
+<b>Programs</b></li>
+<li class="breakhalfem"><font class="file">Applications</font> &gt; <font class="file">Explorer+
++</font> - <b>Programs\FileManager</b></li>
+<li class="breakhalfem"><font class="file">Applications</font> &gt; <font class="file">ImDisk</font> 
+- N/A (left empty)</li>
+<li class="breakhalfem"><font class="file">Applications</font> &gt; <font 
+class="file">JustManager</font> - <b>Programs\FileManager</b></li>
+<li class="breakhalfem"><font class="file">Applications</font> &gt; <font class="file">Q-Dir</font> - 
+<b>Programs\FileManager</b></li>
+<li class="breakhalfem"><font class="file">Applications</font> &gt; <font class="file">Sumatra 
+PDF</font> - <b>Programs</b></li>
+<li class="breakhalfem"><font class="file">Applications</font> &gt; <font 
+class="file">TinyHexer</font> - <b>Programs</b></li>
+</ul>
+</p>
+
+
+<p class="break3em">
+Screenshot of <font class="file">bblean</font> menu. Note that <font class="file">ImDisk</font> is 
+displayed at the root of the Start menu as the entry in the <font class="file">Add to "Start" 
+&gt;</font> field was left blank. Also note the Programs\FileManager sub-menu created by the entries 
+in the <font class="file">Add to "Start" &gt;</font> field in the <font class="file">Explorer+
++</font>, <font class="file">JustManager</font> and <font class="file">Q-Dir</font> scripts - -
+<br />
+<a href="img/menu_bblean1.png"><IMG SRC="img/menu_bblean1.png" float=left width=90% margin-right=1% 
+margin-bottom=0.5em border=1></a>
+</p>
+
+
+
+
+
+<p class="break3em">
+Screenshot of <font class="file">LaunchBar</font> menu. Note that <font class="file">ImDisk</font> is 
+displayed at the root of the LaunchBar as the entry in the <font class="file">Add to "Start" 
+&gt;</font> field was left blank -
+<br />
+<a href="img/menu_launchbar1.png"><IMG SRC="img/menu_launchbar1.png" float=left width=90% margin-
+right=1% margin-bottom=0.5em border=1></a>
+</p>
+
+
+
+
+
+<p class="break3em">
+Screenshot of <font class="file">LaunchBar</font> menu displaying sub-menus. Note the Programs
+\FileManager sub-menu created by the entries in the <font class="file">Add to "Start" &gt;</font> 
+field in the <font class="file">Explorer++</font>, <font class="file">JustManager</font> and <font 
+class="file">Q-Dir</font> scripts -
+<br />
+<a href="img/menu_launchbar2.png"><IMG SRC="img/menu_launchbar2.png" float=left width=90% margin-
+right=1% margin-bottom=0.5em border=1></a>
+</p>
+
+
+
+
+
+
+
+<p class="break3em">
+Screenshot of <font class="file">WinXShell</font> Start Menu. Note that <font 
+class="file">ImDisk</font> is displayed at the root of the Start menu as the entry in the <font 
+class="file">Add to "Start" &gt;</font> field was left blank. Also note the Programs\FileManager 
+sub-menu created by the entries in the <font class="file">Add to "Start" &gt;</font> field in the 
+<font class="file">Explorer++</font>, <font class="file">JustManager</font> and <font 
+class="file">Q-Dir</font> scripts -
+<br />
+<a href="img/menu_winxshell1.png"><IMG SRC="img/menu_winxshell1.png" float=left width=90% margin-
+right=1% margin-bottom=0.5em border=1></a>
+</div>
+</p>
+
+
+
+
+
+
+
+<p class="break3em">
+Screenshot of <font class="file">LaunchBar</font> running in <font class="file">WinXShell</font> -
+<br />
+<a href="img/menu_winxshell2.png"><IMG SRC="img/menu_winxshell2.png" float=left width=90% margin-
+right=1% margin-bottom=0.5em border=1></a>
+</p>
+
+
+
+
+
+
+
+
+
+<p class="breaktop"><font class="file">Document date - 6<sup>th</sup> March 2018</font></p></font></body></html>
+

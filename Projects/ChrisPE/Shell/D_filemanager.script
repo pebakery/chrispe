@@ -1,0 +1,151 @@
+[main]
+Title=Default FileManager
+Description=Add a filemanager - Q-Dir (by Nenad Hrg) or JustManager (by Nikita Leontiev) or Explorer++ (by David Erceg) or 7-zip (by Igor Pavlov).
+Selected=True
+Locked=True
+Mandatory=True
+Level=3
+Author=ThePEBakeryTeam
+Version=20180306
+Date=2018-03-06
+Interface=Interface1
+
+[Interface1]
+pTextLabelMenu1="1",1,1,35,3,70,18,10,Bold
+pButtonMenu2="2",1,8,75,0,70,20,pButtonMenu2,0,True,_pButtonMenu2_,True
+pButtonMenu3="?",1,8,145,0,70,20,pButtonMenu3,0,True,_pButtonMenu3_,True
+pBevel_A1=,1,12,10,70,500,40
+pScrollBox_A1=7-zip,1,4,20,80,100,20,7-zip,Explorer++,JustManager,Q-Dir
+pButton_A1=HELP,1,8,430,80,70,20,HELP.1,0,True,_HELP.1_,True
+pTextLabel_A1="Select File Manager",1,1,200,80,200,18,10,Bold
+
+[Interface2]
+pButtonMenu1="1",1,8,5,0,70,20,pButtonMenu1,0,True,_pButtonMenu1_,True
+pTextLabelMenu2="2",1,1,108,3,70,18,10,Bold
+pButtonMenu3="?",1,8,145,0,70,20,pButtonMenu3,0,True,_pButtonMenu3_,True
+pBevel1=,1,12,10,65,66,2
+pTextLabel="Menu Entries",1,1,10,50,230,18,8,Bold
+pCheckBoxShortcutDesktop="Add to Desktop Menu",1,3,40,80,150,18,True
+pCheckBoxShortcutQuick="Add to Quicklaunch Menu",1,3,40,110,150,18,True
+pCheckBoxShortcutPrograms="Add to #$qStart#$q > ",1,3,40,140,99,18,True
+pCheckBoxShortcutLaunchBar="Add to LaunchBar Menu ",1,3,40,170,150,18,True
+pButtonShortcut1=?,1,8,10,80,18,18,pButtonShortcut1,0,True,_pButtonShortcut1_,True
+pButtonShortcut2=?,1,8,10,110,18,18,pButtonShortcut2,0,True,_pButtonShortcut2_,True
+pButtonShortcut3=?,1,8,10,140,18,18,pButtonShortcut3,0,True,_pButtonShortcut3_,True
+pButtonShortcut4=?,1,8,10,170,18,18,pButtonShortcut4,0,True,_pButtonShortcut4_,True
+pTextBox1=,1,0,140,140,150,21,Programs
+
+[pButtonMenu1]
+IniWrite,%ScriptFile%,Main,Interface,Interface1
+System,REFRESHINTERFACE
+
+[pButtonMenu2]
+IniWrite,%ScriptFile%,Main,Interface,Interface2
+System,REFRESHINTERFACE
+
+[pButtonMenu3]
+message,"Click on the buttons to toggle between tabs 1 and 2. #$x#$xTab 2 contains menu options for use in the selected shell. Click on the ? button for information about the different options."
+
+[pButtonShortcut1]
+message,"WinXShell only#$x#$xSelect this option to add a program shortcut to the Desktop."
+
+[pButtonShortcut2]
+message,"WinXShell only#$x#$xSelect this option to add a program menu option to the Quicklaunch menu - similar in appearence to the 'Pin to Taskbar' option in Windows 7/8/10."
+
+[pButtonShortcut3]
+message,"Applies to WinXShell#$c BBLean and LaunchBar Shell(s)#$x#$xSelect this option to add a program menu option to the Start menu. Leave blank to add to the root of the menu#$c or manually type a path to place in a sub-menu (do not use spaces in the path). E.g. #$x#$s- FileManager#$x#$s- Programs#$x#$s- Programs\FileManager#$x#$xAnd looking at the examples above - #$x#$xLeave this option blank to add a menu entry to the root of the program menu (the 'Start' menu in WinXShell#$c the 'Start' menu in BBLean#$c or the root of the LaunchBar menu bar if LaunchBar is selected as Shell)#$x#$xEnter 'FileManager' to add a menu entry for this application to the 'Start' > 'FileManager' sub-menu (WinXShell and bblean) or the 'FileManager' sub-menu in LaunchBar.#$x#$xEnter 'Programs' to add a menu entry for this application to the 'Start' > 'Programs' sub-menu (WinXShell and bblean) or the 'Programs' sub-menu in LaunchBar.#$x#$xEnter 'Programs\FileManager' to add a menu entry for this application to the 'Start' > 'Programs' > 'FileManager' sub-menu (WinXShell and bblean) or the 'Programs' > 'FileManager' sub-menu in LaunchBar."
+
+[pButtonShortcut4]
+message,"This setting does not apply to any LaunchBar instance running as the WinPE Shell. This option only applies to a LaunchBar instance when the Applications' > 'LaunchBar' program script is selected in the build.#$x#$xIf the 'Applications' > 'LaunchBar' program script is selected than enable this option to add a program menu entry to the root of the LaunchBar menu bar. #$x#$xPlease note that if option '6] Programs in boot.wim' in the main project script is set as 'NO'#$c then LaunchBar and a number of other applications will not be available at boot. In this case a text based .ini file will be used for LaunchBar menu settings."
+
+
+[HELP.1]
+Message,"Select one of the included file Managers - #$x#$x7-zip (by Igor Pavlov). Dependency free lightweigt file manager with built in Drag and Drop and File Copy dialog. No file dependencies are required.#$x#$xExplorer++ (by David Erceg) - refer to #$qhttps://explorerplusplus.com/#$q. Files and settings required for Drag and Drop support will be automatically included in the build and registered at runtime if required.#$x#$xJustManager (by Nikita Leontiev) - refer to #$qhttp://justmanager.ru/#$q. Files and settings required for Drag and Drop support will be automatically included in the build and registered at runtime if required.#$x#$xQ-Dir (by Nenad Hrg) - refer to #$qhttp://www.softwareok.com/?Freeware/Q-Dir#$q. Files and settings required for Drag and Drop support will be automatically included in the build and registered at runtime if required."
+
+[process]
+AddInterface,%ScriptFile%,Interface1,""
+AddInterface,%ScriptFile%,Interface2,""
+If,%pScrollBox_A1%,Equal,7-zip,Begin
+  Set,%Filemanager%,7-zip,Global
+  DirMake,"%TargetDir%\Programs\7-zip"
+  DirCopy,"%Programs%\7-zip\%ARCH%\*.*","%TargetDir%\Programs\7-zip"
+  IniWrite,"%OutputDir%\Project.Settings.ini",ESSENTIAL,FileManager,7-zip
+  If,ExistFile,"%ProjectTemp%\WinXShell.txt",ShellExecute,Hide,"%Tools%\gsar.exe","-o -i -s#$q:x233rd_filename:x22:x3A:x22:x23:x23{JVAR_MODULEPATH}\\explorer++.exe#$q -r#$q3rd_filename:x22:x3A:x22X:x3A\\Programs\\7-zip\\7zfm.exe#$q #$q%ProjectTemp%\WinXShell.txt#$q"
+  Echo,"Adding 7-zip registry settings..."
+  If,Not,ExistRegSection,HKLM,_WinPE_SOFTWARE,RegHiveLoad,_WinPE_SOFTWARE,"%Target_config%\software"
+  RegWrite,HKLM,0x1,_WinPE_SOFTWARE\Classes\*\shellex\ContextMenuHandlers\7-Zip,,"{23170F69-40C1-278A-1000-000100020000}"
+  RegWrite,HKLM,0x1,_WinPE_SOFTWARE\Classes\CLSID\{23170F69-40C1-278A-1000-000100020000},,"7-Zip Shell Extension"
+  RegWrite,HKLM,0x2,_WinPE_SOFTWARE\Classes\CLSID\{23170F69-40C1-278A-1000-000100020000}\InprocServer32,,"#$psystemdrive#$p\Programs\7-zip\7-zip.dll"
+  RegWrite,HKLM,0x1,_WinPE_SOFTWARE\Classes\CLSID\{23170F69-40C1-278A-1000-000100020000}\InprocServer32,ThreadingModel,Apartment
+  RegWrite,HKLM,0x1,_WinPE_SOFTWARE\Classes\Directory\shellex\ContextMenuHandlers\7-Zip,,{23170F69-40C1-278A-1000-000100020000}
+  RegWrite,HKLM,0x1,_WinPE_SOFTWARE\Classes\Directory\shellex\DragDropHandlers\7-Zip,,{23170F69-40C1-278A-1000-000100020000}
+  RegWrite,HKLM,0x1,_WinPE_SOFTWARE\Classes\Drive\shellex\DragDropHandlers\7-Zip,,{23170F69-40C1-278A-1000-000100020000}
+  RegWrite,HKLM,0x1,_WinPE_SOFTWARE\Classes\*\OpenWithList\7zFM.exe,,
+  RegWrite,HKLM,0x2,_WinPE_SOFTWARE\Classes\Applications\7zFM.exe\shell\open\command,,"#$psystemdrive#$p\Programs\7-zip\7zFM.exe #$p1"
+  RegWrite,HKLM,0x2,_WinPE_SOFTWARE\7-zip,Path,"#$psystemdrive#$p\Programs\7-zip"
+  RegWrite,HKLM,0x1,_WinPE_SOFTWARE\7-zip,Lang,-
+  If,%Openwith.workaround%,Equal,YES,Begin
+    RegRead,HKLM,_WinPE_SOFTWARE\Classes\*\shell\Open with,Subcommands,%Subcommands%
+    Set,%new.subcommand%,%Subcommands%;openwith.7-zip
+    RegWrite,HKLM,0x1,"_WinPE_SOFTWARE\Classes\*\shell\Open with",Subcommands,%new.subcommand%
+    RegWrite,HKLM,0x1,_WinPE_SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\CommandStore\shell\openwith.7-zip,,7-zip
+    RegWrite,HKLM,0x2,_WinPE_SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\CommandStore\shell\openwith.7-zip\command,,#$q#$psystemdrive#$p\Programs\7-zip\7zFM.exe#$q #$q#$p1#$q
+  End
+  RegHiveUnload,_WinPE_SOFTWARE
+  ShellExecute,Hide,"%Tools%\offlinereg\offlinereg-win32.exe","#$q%Target_config%\default#$q #$q #$q run #$q%Tools%\offlinereg.file.lists\7-zip.txt#$q"
+  //Create menu entry
+  ShellExecute,Hide,"%Tools%\Shortcut.exe","/A:C /T:#$q#$pSystemDrive#$p\Programs\7-zip\7zfm.exe#$q /F:#$q%ProjectTemp%\FileManager.lnk#$q /I:#$q#$pSystemDrive#$p\Programs\7-zip\7zfm.exe#$c0#$q"
+End
+If,%pScrollBox_A1%,Equal,JustManager,Begin
+  Set,%Filemanager%,JustManager,Global
+  DirMake,"%TargetDir%\Programs\JustManager"
+  DirCopy,"%Programs%\JustManager\%ARCH%\*.*","%TargetDir%\Programs\JustManager"
+  IniWrite,"%OutputDir%\Project.Settings.ini",ESSENTIAL,FileManager,JustManager
+  If,ExistFile,"%ProjectTemp%\WinXShell.txt",ShellExecute,Hide,"%Tools%\gsar.exe","-o -i -s#$q:x233rd_filename:x22:x3A:x22:x23:x23{JVAR_MODULEPATH}\\explorer++.exe#$q -r#$q3rd_filename:x22:x3A:x22X:x3A\\Programs\\JustManager\\JustManager.exe#$q #$q%ProjectTemp%\WinXShell.txt#$q"
+  If,Not,ExistFile,"%Target_system32%\FileCopyProgress.txt",Run,"%ProjectDir%\Settings\Tweaks.script",FileCopyProgress
+  If,Not,ExistFile,"%Target_system32%\BrowseForFolder.txt",Run,"%ProjectDir%\Core\Browse.For.Folder.script",process
+  //Create menu entry
+  ShellExecute,Hide,"%Tools%\Shortcut.exe","/A:C /T:#$q#$pSystemDrive#$p\Programs\JustManager\JustManager.exe#$q /F:#$q%ProjectTemp%\FileManager.lnk#$q /I:#$q#$pSystemDrive#$p\Programs\JustManager\JustManager.exe#$c0#$q"
+End
+If,%pScrollBox_A1%,Equal,Explorer++,Begin
+  Set,%Filemanager%,Explorer++,Global
+  DirMake,"%TargetDir%\Programs\Explorer++"
+  DirCopy,"%Programs%\Explorer++\%ARCH%\*.*","%TargetDir%\Programs\Explorer++"
+  IniWrite,"%OutputDir%\Project.Settings.ini",ESSENTIAL,FileManager,Explorer++
+  If,ExistFile,"%ProjectTemp%\WinXShell.txt",ShellExecute,Hide,"%Tools%\gsar.exe","-o -i -s#$q:x233rd_filename:x22:x3A:x22:x23:x23{JVAR_MODULEPATH}\\explorer++.exe#$q -r#$q3rd_filename:x22:x3A:x22X:x3A\\Programs\\Explorer++\\Explorer++.exe#$q #$q%ProjectTemp%\WinXShell.txt#$q"
+  If,Not,ExistFile,"%Target_system32%\FileCopyProgress.txt",Run,"%ProjectDir%\Settings\Tweaks.script",FileCopyProgress
+  If,Not,ExistFile,"%Target_system32%\BrowseForFolder.txt",Run,"%ProjectDir%\Core\Browse.For.Folder.script",process
+  //Create menu entry
+  ShellExecute,Hide,"%Tools%\Shortcut.exe","/A:C /T:#$q#$pSystemDrive#$p\Programs\Explorer++\Explorer++.exe#$q /F:#$q%ProjectTemp%\FileManager.lnk#$q /I:#$q#$pSystemDrive#$p\Programs\Explorer++\Explorer++.exe#$c0#$q"
+End
+If,%pScrollBox_A1%,Equal,Q-Dir,Begin
+  Set,%Filemanager%,Q-Dir,Global
+  DirMake,"%TargetDir%\Programs\Q-Dir"
+  DirCopy,"%Programs%\Q-Dir\%ARCH%\*.*","%TargetDir%\Programs\Q-Dir"
+  IniWrite,"%OutputDir%\Project.Settings.ini",ESSENTIAL,FileManager,Q-Dir
+  If,ExistFile,"%ProjectTemp%\WinXShell.txt",ShellExecute,Hide,"%Tools%\gsar.exe","-o -i -s#$q:x233rd_filename:x22:x3A:x22:x23:x23{JVAR_MODULEPATH}\\explorer++.exe#$q -r#$q3rd_filename:x22:x3A:x22X:x3A\\Programs\\Q-Dir\\Q-Dir.exe#$q #$q%ProjectTemp%\WinXShell.txt#$q"
+  If,Not,ExistFile,"%Target_system32%\FileCopyProgress.txt",Run,"%ProjectDir%\Settings\Tweaks.script",FileCopyProgress
+  If,Not,ExistFile,"%Target_system32%\BrowseForFolder.txt",Run,"%ProjectDir%\Core\Browse.For.Folder.script",process
+  //Create menu entry
+  ShellExecute,Hide,"%Tools%\Shortcut.exe","/A:C /T:#$q#$pSystemDrive#$p\Programs\Q-Dir\Q-Dir.exe#$q /F:#$q%ProjectTemp%\FileManager.lnk#$q /I:#$q#$pSystemDrive#$p\Programs\Q-Dir\Q-Dir.exe#$c0#$q"
+End
+If,ExistFile,"%ProjectTemp%\FileManager.lnk",Begin
+  Set,%MyShortcut%,FileManager.lnk
+  If,%pCheckBoxShortcutDesktop%,Equal,True,FileCopy,"%ProjectTemp%\%MyShortcut%","%ProjectTemp%\ShortCuts\Desktop"
+  If,%pCheckBoxShortcutQuick%,Equal,True,FileCopy,"%ProjectTemp%\%MyShortcut%","%ProjectTemp%\ShortCuts\Quick"
+  If,%pCheckBoxShortcutPrograms%,Equal,True,Begin
+    Set,%ProgramMenuPath%,%pTextBox1%
+    Run,"%ProjectDir%\Core\common.script",StartMenu
+  End
+  If,%pCheckBoxShortcutLaunchBar%,Equal,True,FileCopy,"%ProjectTemp%\%MyShortcut%","%ProjectTemp%\ShortCuts\LaunchBar"
+  FileDelete,"%ProjectTemp%\%MyShortcut%"
+End  
+
+[AuthorEncoded]
+Logo=filemanager.ico
+filemanager.ico=1836,2448
+
+[EncodedFile-AuthorEncoded-filemanager.ico]
+lines=0
+0=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
+

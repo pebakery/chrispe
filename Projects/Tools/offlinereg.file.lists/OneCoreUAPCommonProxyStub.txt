@@ -1,0 +1,3 @@
+Classes\CLSID\{95E15D0A-66E6-93D9-C53C-76E6219D3341} setvalue " " PSFactoryBuffer
+Classes\CLSID\{95E15D0A-66E6-93D9-C53C-76E6219D3341}\InProcServer32 setvalue " " "x:\Windows\System32\OneCoreUAPCommonProxyStub.dll"
+Classes\CLSID\{95E15D0A-66E6-93D9-C53C-76E6219D3341}\InProcServer32 setvalue "ThreadingModel" "Both"

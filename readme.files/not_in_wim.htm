@@ -1,0 +1,90 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd"><html><head><link type="text/css" rel="stylesheet" href="chrispe.css" media="screen" /><title>ChrisPE</title></head><body><font> 
+ 
+ 
+ 
+<p> 
+<select ONCHANGE="location = this.options[this.selectedIndex].value;"> 
+<option value="" disabled></option> 
+<option value="../readme.html">Contents</option> 
+<option value="" disabled>=======</option> 
+<option value="winpe.htm">Windows PE</option>  
+<option value="builder.htm">Builders</option>  
+<option value="options.htm">Project Options</option>  
+<option value="project.htm">Project Scripts</option>  
+<option value="instructions_pebakery.htm">Instructions</option>  
+<option value="menu_system.htm">Menu System</option>  
+<option value="not_in_wim.htm" selected="selected">Include...in boot.wim</option>  
+<option value="usb.htm">...Bootable USB...</option>  
+<option value="uefi.htm">UEFI, BIOS, GPT...</option>  
+<option value="multiboot.htm">Multiboot WinPE</option>  
+<option value="" disabled></option> 
+<option value="" disabled>Appendices</option> 
+<option value="" disabled>=========</option> 
+<option value="quick_pebakery.htm">Quick Start</option>  
+<option value="acknowledgements.htm">Acknowledgements</option>  
+<option value="" disabled></option> 
+</select> 
+</p> 
+ 
+ 
+ 
+<hr> 
+<a href="http://chrispe.mistyprojects.co.uk/"><img src="img/home.jpg" BORDER=1></a> 
+ 
+
+
+<h2><u>Include Program in boot.wim</u></h2>
+
+
+
+<p>
+A number of <font class="file">Applications</font> .scripts have an option to <font class="file">Include Program in boot.wim</font>. E.g. -
+<br />
+<a href="img/notinwim.png"><IMG SRC="img/notinwim.png" float=left margin-right=1% margin-bottom=0.5em border=1></a>
+</p>
+
+
+
+
+<p class="break3em">
+If the <font class="file">Include Program in boot.wim</font> option is enabled then the selected application will be added to <font class="file">boot.wim</font> - increasing the size of <font class="file">WinPE</font> and the system RAM requirements.
+</p>
+
+
+
+<p class="break3em">
+If a light build of <font class="file">WinPE</font> is required, then consider disabling this option at the individual application script level - allowing control over which applications are included or excluded from <font class="file">boot.wim</font>. None of the applications included in the initial <font class="file">ChrisPE</font> release are particularly large and this is unlikely to be an issue at the moment, however as the project develops, larger (in file size) applications are likely to be added. Any applications included in <font class="file">boot.wim</font> will increase RAM usage due to the file size increase in <font class="file">boot.wim</font> when adding files. FTK Imager version 3.1.1.8 for example is 74 MB when unpacked. Although not currently included/supported in the project, this program can run in a <font class="file">WinPE</font> environment.
+</p>
+
+
+<p class="break3em">
+Disabling the <font class="file">Include Program in boot.wim</font> option has some advantages - the main one being the ability to update individual programs without having to rebuild <font class="file">boot.wim</font>. As an added advantage <font class="file">boot.wim</font> will be smaller in size and less RAM will be required to boot <font class="file">ChrisPE</font>. 
+</p>
+
+
+
+<p class="break3em">
+If the <font class="file">Include Program in boot.wim</font> option is selected, the application will be copied to the <font color="red">\ChrisPE.Files\ISO.ROOT\</font> directory (this path is relative to <font class="file">PEBakeryLauncher.exe</font>), and will be added to the root of the CD\DVD image if the Create ISO script is enabled. Alternatively, manually copy the <font color="red">\ChrisPE.Files\ISO.ROOT\Programs\</font> directory to the root of a USB drive. 
+</p>
+
+
+
+<p class="break3em">
+If the <font class="file">Applications</font> &gt; <font class="file">LaunchBar</font> script is selected with the <font class="file">Include Program in boot.wim</font> option disabled, then this application can be used as a secondary program launcher. In this scenario a menu shortcut will be added to run a batch file to locate and start <font class="file">LaunchBar</font> from external media. 
+</p>
+
+
+
+<p class="break3em">
+<b><u>NOTE</u></b> - if you plan to PXE boot your <font class="file">ChrisPE</font> build then there are significant advantages in enabling the <font class="file">Include Program in boot.wim</font> option as it may not be possible to access other media from this environment. 
+</p>
+
+
+
+
+
+
+
+
+<p class="breaktop"><font class="file">Document date - 6<sup>th</sup> March 2018</font></p></font></body></html>
+

@@ -1,0 +1,121 @@
+[main]
+Title=Explorer++
+Description=Explorer++ x86/x64
+Selected=True
+Level=5
+Author=ThePEBakeryTeam
+Version=20180306
+Date=2018-03-06
+Interface=Interface1
+
+[Interface1]
+pTextLabelMenu1="1",1,1,35,3,70,18,10,Bold
+pButtonMenu2="2",1,8,75,0,70,20,pButtonMenu2,0,True,_pButtonMenu2_,True
+pButtonMenu3="?",1,8,145,0,70,20,pButtonMenu3,0,True,_pButtonMenu3_,True
+pWebLabel1=https://explorerplusplus.com/,1,10,51,100,216,18,https://explorerplusplus.com/
+pTextLabel1="Explorer++ Website",1,1,51,77,230,18,10,Bold
+pCheckBoxInWim="Include Program in boot.wim",1,3,51,265,180,18,True
+
+[Interface2]
+pButtonMenu1="1",1,8,5,0,70,20,pButtonMenu1,0,True,_pButtonMenu1_,True
+pTextLabelMenu2="2",1,1,108,3,70,18,10,Bold
+pButtonMenu3="?",1,8,145,0,70,20,pButtonMenu3,0,True,_pButtonMenu3_,True
+pBevel1=,1,12,10,65,66,2
+pTextLabel="Menu Entries",1,1,10,50,230,18,8,Bold
+pCheckBoxShortcutDesktop="Add to Desktop Menu",1,3,40,80,150,18,True
+pCheckBoxShortcutQuick="Add to Quicklaunch Menu",1,3,40,110,150,18,True
+pCheckBoxShortcutPrograms="Add to #$qStart#$q > ",1,3,40,140,99,18,True
+pCheckBoxShortcutLaunchBar="Add to LaunchBar Menu ",1,3,40,170,150,18,True
+pButtonShortcut1=?,1,8,10,80,18,18,pButtonShortcut1,0,True,_pButtonShortcut1_,True
+pButtonShortcut2=?,1,8,10,110,18,18,pButtonShortcut2,0,True,_pButtonShortcut2_,True
+pButtonShortcut3=?,1,8,10,140,18,18,pButtonShortcut3,0,True,_pButtonShortcut3_,True
+pButtonShortcut4=?,1,8,10,170,18,18,pButtonShortcut4,0,True,_pButtonShortcut4_,True
+pTextBox1=,1,0,140,140,150,21,Programs\FileManager
+
+[pButtonMenu1]
+IniWrite,%ScriptFile%,Main,Interface,Interface1
+System,REFRESHINTERFACE
+
+[pButtonMenu2]
+IniWrite,%ScriptFile%,Main,Interface,Interface2
+System,REFRESHINTERFACE
+
+[pButtonMenu3]
+message,"Click on the buttons to toggle between tabs 1 and 2. #$x#$xTab 2 contains menu options for use in the selected shell. Click on the ? button for information about the different options."
+
+[pButtonShortcut1]
+message,"WinXShell only#$x#$xSelect this option to add a program shortcut to the Desktop."
+
+[pButtonShortcut2]
+message,"WinXShell only#$x#$xSelect this option to add a program menu option to the Quicklaunch menu - similar in appearence to the 'Pin to Taskbar' option in Windows 7/8/10."
+
+[pButtonShortcut3]
+message,"Applies to WinXShell#$c BBLean and LaunchBar Shell(s)#$x#$xSelect this option to add a program menu option to the Start menu. Leave blank to add to the root of the menu#$c or manually type a path to place in a sub-menu (do not use spaces in the path). E.g. #$x#$s- FileManager#$x#$s- Programs#$x#$s- Programs\FileManager#$x#$xAnd looking at the examples above - #$x#$xLeave this option blank to add a menu entry to the root of the program menu (the 'Start' menu in WinXShell#$c the 'Start' menu in BBLean#$c or the root of the LaunchBar menu bar if LaunchBar is selected as Shell)#$x#$xEnter 'FileManager' to add a menu entry for this application to the 'Start' > 'FileManager' sub-menu (WinXShell and bblean) or the 'FileManager' sub-menu in LaunchBar.#$x#$xEnter 'Programs' to add a menu entry for this application to the 'Start' > 'Programs' sub-menu (WinXShell and bblean) or the 'Programs' sub-menu in LaunchBar.#$x#$xEnter 'Programs\FileManager' to add a menu entry for this application to the 'Start' > 'Programs' > 'FileManager' sub-menu (WinXShell and bblean) or the 'Programs' > 'FileManager' sub-menu in LaunchBar."
+
+[pButtonShortcut4]
+message,"This setting does not apply to any LaunchBar instance running as the WinPE Shell. This option only applies to a LaunchBar instance when the Applications' > 'LaunchBar' program script is selected in the build.#$x#$xIf the 'Applications' > 'LaunchBar' program script is selected than enable this option to add a program menu entry to the root of the LaunchBar menu bar. #$x#$xPlease note that if option '6] Programs in boot.wim' in the main project script is set as 'NO'#$c then LaunchBar and a number of other applications will not be available at boot. In this case a text based .ini file will be used for LaunchBar menu settings."
+
+[process]
+AddInterface,%ScriptFile%,Interface1,""
+AddInterface,%ScriptFile%,Interface2,""
+If,%pCheckBoxInWim%,Equal,True,Set,%PROGRAMS.IN.WIM%,YES
+Else,Set,%PROGRAMS.IN.WIM%,NO
+If,%Filemanager%,Equal,Explorer++,Begin
+  Echo,"Explorer++ is set as the default FileManager and is already included in the build. Exiting script...."
+  Exit
+End
+Run,%ScriptFile%,CHECKS
+Run,%ScriptFile%,MENU
+Run,%ScriptFile%,COMMON
+If,%PROGRAMS.IN.WIM%,Equal,NO,Run,%ScriptFile%,NOT.IN.WIM
+If,%PROGRAMS.IN.WIM%,Equal,YES,Run,%ScriptFile%,IN.WIM
+
+[CHECKS]
+If,Not,ExistFile,"%Programs%\Explorer++\%ARCH%\Explorer++.exe",Begin
+  Message,Explorer++ is missing - exiting script...,Error,5
+  Exit,Explorer++ is missing - exiting script...,WARN
+End
+
+[MENU]
+If,%pCheckBoxShortcutLaunchBar%,Equal,True,If,%PROGRAMS.IN.WIM%,Equal,NO,If,ExistFile,"%ProjectTemp%\LaunchBar.ini",TXTaddLine,"%ProjectTemp%\LaunchBar.ini",Explorer++;..\Explorer++\Explorer++.exe,Append
+If,%PROGRAMS.IN.WIM%,Equal,YES,Begin
+  ShellExecute,Hide,"%Tools%\Shortcut.exe","/A:C /T:#$q#$pSystemDrive#$p\Programs\Explorer++\Explorer++.exe#$q /F:#$q%ProjectTemp%\Explorer++.lnk#$q /I:#$q#$pSystemDrive#$p\Programs\Explorer++\Explorer++.exe#$c0#$q"
+  If,ExistFile,"%ProjectTemp%\Explorer++.lnk",Begin
+    Set,%MyShortcut%,Explorer++.lnk
+    If,%pCheckBoxShortcutDesktop%,Equal,True,FileCopy,"%ProjectTemp%\%MyShortcut%","%ProjectTemp%\ShortCuts\Desktop"
+    If,%pCheckBoxShortcutQuick%,Equal,True,FileCopy,"%ProjectTemp%\%MyShortcut%","%ProjectTemp%\ShortCuts\Quick"
+    If,%pCheckBoxShortcutPrograms%,Equal,True,Begin
+      Set,%ProgramMenuPath%,%pTextBox1%
+      Run,"%ProjectDir%\Core\common.script",StartMenu
+    End
+    If,%pCheckBoxShortcutLaunchBar%,Equal,True,FileCopy,"%ProjectTemp%\%MyShortcut%","%ProjectTemp%\ShortCuts\LaunchBar"
+    FileDelete,"%ProjectTemp%\%MyShortcut%"
+  End
+End
+
+[COMMON]
+If,%PROGRAMS.IN.WIM%,Equal,NO,Set,%PATH%,%OutputDir%
+If,%PROGRAMS.IN.WIM%,Equal,YES,Set,%PATH%,%TargetDir%
+If,Not,ExistDir,"%PATH%\Programs",DirMake,"%PATH%\Programs"
+DirMake,"%PATH%\Programs\Explorer++"
+DirCopy,"%Programs%\Explorer++\%ARCH%\*.*","%PATH%\Programs\Explorer++"
+//Creating folder 'Windows\System32\config\systemprofile\Desktop' to enable Directory Tree view"
+If,Not,ExistDir,"%TargetDir%\Windows\System32\config\systemprofile\Desktop",DirMake,"%TargetDir%\Windows\System32\config\systemprofile\Desktop"
+IniWrite,"%OutputDir%\Project.Settings.ini",PROGRAMS,Explorer++,YES
+
+[IN.WIM]
+//Wait,1
+
+[NOT.IN.WIM]
+//Wait,1
+Exit,"Explorer++ copied to #$q%PATH%\Programs#$q directory - it will not be added to #$qboot.wim#$q",Nowarn
+
+[AuthorEncoded]
+Explorer++.ico=3139,4186
+logo=Explorer++.ico
+
+[EncodedFile-AuthorEncoded-Explorer++.ico]
+lines=1
+0=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
+1=jJL0ot0tbWy0zOZxgFIwvsU4XQX7mxy885GlHDwAQAJokJOWtFQP0BAAAAAgAAACoAAAD1CwAAAAAAAAEAAAAAAAAAAAAAAA
+

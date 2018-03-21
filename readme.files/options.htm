@@ -1,0 +1,180 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd"><html><head><link type="text/css" rel="stylesheet" href="chrispe.css" media="screen" /><title>ChrisPE</title></head><body><font> 
+ 
+ 
+ 
+<p> 
+<select ONCHANGE="location = this.options[this.selectedIndex].value;"> 
+<option value="" disabled></option> 
+<option value="../readme.html">Contents</option> 
+<option value="" disabled>=======</option> 
+<option value="winpe.htm">Windows PE</option>  
+<option value="builder.htm">Builders</option>  
+<option value="options.htm" selected="selected">Project Options</option>  
+<option value="project.htm">Project Scripts</option>  
+<option value="instructions_pebakery.htm">Instructions</option>  
+<option value="menu_system.htm">Menu System</option>  
+<option value="not_in_wim.htm">Include...in boot.wim</option>  
+<option value="usb.htm">...Bootable USB...</option>  
+<option value="uefi.htm">UEFI, BIOS, GPT...</option>  
+<option value="multiboot.htm">Multiboot WinPE</option>  
+<option value="" disabled></option> 
+<option value="" disabled>Appendices</option> 
+<option value="" disabled>=========</option> 
+<option value="quick_pebakery.htm">Quick Start</option>  
+<option value="acknowledgements.htm">Acknowledgements</option>  
+<option value="" disabled></option> 
+</select> 
+</p> 
+ 
+ 
+ 
+<hr> 
+<a href="http://chrispe.mistyprojects.co.uk/"><img src="img/home.jpg" BORDER=1></a> 
+ 
+
+
+
+<h2><u>Project Options</u></h2>
+
+
+
+<p>
+A number of the project options are contained in the main <font class="file">ChrisPE</font> project script - to display them, ensure that the script is selected by clicking on <b><i>ChrisPE</i></b> at the top of the directory tree on the left.... 
+<br />
+<a href="img/pebakery.png"><IMG SRC="img/pebakery.png" float=left width=90% margin-right=1% margin-bottom=0.5em border=1></a>
+</p>
+
+
+
+
+<p>
+...one of the screens below will be displayed (toggle between them by clicking on the tab buttons (<b>Options1</b>, <b>Options2</b>, etc.)) -
+</p>
+
+
+<p>
+<IMG SRC="img/main_1_1.jpg" WIDTH=500 BORDER=2>
+<br />
+<br />
+<IMG SRC="img/main_2_1.jpg" WIDTH=500 BORDER=2>
+<br />
+</p>
+
+
+
+<p>
+<ul>
+<li><a class="internal" href="#1">1] Path to Source</a></li>
+<li><a class="internal" href="#2">2] Set 'boot.wim' Image number</a></li>
+<li><a class="internal" href="#3">3] Set 'install.wim' Image number</a></li>
+<li><a class="internal" href="#4">4] Keyboard Layout</a></li>
+<li><a class="internal" href="#5">5] WinPE Language / Fallback Language</a></li>
+<li><a class="internal" href="#6">6] RAM Disk Size</a></li>
+</ul>
+</p>
+
+
+
+<a name="1"></a><br>
+<h3><u>1] Path to Source</u></h3>
+
+
+<p>
+Set the path to your source files by either manually entering the path or click on the <font class="file">Folder</font> button to set the path to your Windows Installation Media source files. Please note that if manually entering a path it must end in a backslash (\). E.g. D:\source_files\
+</p>
+
+
+<p>
+A mounted Windows RTM .iso file is recommended. Alternatively extract the contents of a Windows .iso to a local directory. Set the path in this option to the root folder that contains the following files/directories -
+<ul>
+<li class="file">\sources\boot.wim</li>
+<li class="file">\sources\install.wim</li>
+<li class="file">\bootmgr</li>
+<li class="file">\boot\</li>
+<li class="file">\EFI\</li>
+</ul>
+</p>
+
+
+
+
+
+
+
+<a name="2"></a><br>
+<h3><u>2] Set 'boot.wim' Image number</u></h3>
+
+
+<p>
+Use image number <b>2</b> when using Windows installation media. The only time you should need to use image number <b>1</b> is when using <font class="file">boot.wim</font> from the WAIK or <font class="file">ADK</font> - which I consider to be more advanced usage.
+</p>
+
+<p>
+If an existing cache is used, then the configuration file created when the cache was created will be read and the image number of <font class="file">boot.wim</font>  will be checked. If this is different to the image number selected in this option, then the user will be asked which image to use - either the image number from the configuration file, or the image number specified in this option.
+</p>
+
+
+
+
+
+
+<a name="3"></a><br>
+<h3><u>3] Set 'install.wim' Image number</u></h3>
+
+<p>
+In the majority of cases, image number <b>1</b> should be selected when using Windows installation media. The only time you might need to use a different image number is when using a Windows Server source. Windows 2008 R2 (SP1) and Windows 2012 R2 releases for example contain multiple images (in <font class="file">install.wim</font>) - image number <b>1</b> is a <font class="file">Server Core Installation</font> and doesn't contain some of the file dependencies required in <font class="file">ChrisPE</font>.
+</p>
+
+
+
+
+
+
+
+<a name="4"></a><br>
+<h3><u>4] Keyboard Layout</u></h3>
+
+<p>
+If the <b>DEFAULT</b> setting is used, then no settings will be changed and the keyboard layout from the existing source files will be used. There are a limited range of alternative Keyboard Layout's available in this script. 
+</p>
+
+
+
+
+
+<a name="5"></a><br>
+<h3><u>5] WinPE Language / Fallback Language</u></h3>
+
+<p>
+This setting is only used if the source file language cannot be verified by <font class="file">wimlib-imagex</font>.  
+</p>
+
+
+
+
+
+
+<a name="6"></a><br>
+<h3><u>6] RAM Disk Size</u></h3>
+
+<p>
+Use this option to set the size of the RAM Disk (in MB) - this is the amount of writable space on the SYSTEMDRIVE that will be available when <font class="file">WinPE</font> is running. 
+</p>
+
+<p>
+This setting is ignored in <font class="file">WinPE</font> 5.x if system RAM is greater than 1GB. It will only be used when RAM is less than (or equal to) 1GB. 
+</p>
+
+
+
+
+
+
+
+
+
+
+
+
+<p class="breaktop"><font class="file">Document date - 6<sup>th</sup> March 2018</font></p></font></body></html>
+

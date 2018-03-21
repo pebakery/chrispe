@@ -1,0 +1,14 @@
+http://justmanager.ru/forum/viewtopic.php?id=559
+
+To select files by first letters of names with Just Manager, you have to select the "Starts with filter" option in Configuration/Settings/Quick Search (filter).
+
+It works fine and fast by the Alt F command.
+
+The documentation of Just Manager clearly states that the default search and filtering patterns are "contains" patterns. It is also stated that there exists a checkable control to change this default option to "start with". See Documentation Configuration/Program Settings/Quick Search.
+
+
+
+Configuration > Settings > Quick Search
+Type=Filter
+Shortcut=Letter
+Starts With Filter - enabled

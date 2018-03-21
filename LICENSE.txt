@@ -1,0 +1,281 @@
+The ChrisPE Project includes a range of third party software that is subject to different licenses. All software remains the property of its authors. The licenses for third party software are listed below. 
+
+The files developed by the PEBakery Team are subject to the MIT license. 
+
+--------------------------------------------------------
+ChrisPE License
+--------------------------------------------------------
+
+Copyright 2018 David Hickinbottom
+
+Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the "Software"), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:
+
+The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
+
+--------------------------------------------------------
+Third Party Software included with the ChrisPE project
+--------------------------------------------------------
+
+PEBakery
+========
+
+  Copyright (C) 2016-2018 Hajin Jang
+
+  PEBakery is licensed under GPLv3. Some parts of the PEBakery release are subject to different licenses. Please refer to LICENSE_PEBakery.txt for more information.
+
+--------------------------------------------------------
+
+7-zip
+=====
+
+  7-Zip Copyright (C) 1999-2016 Igor Pavlov.
+  Licenses for files are:
+    1) 7z.dll: GNU LGPL + unRAR restriction
+    2) All other files:  GNU LGPL
+
+  Please refer to the following files for more information -
+
+  \Projects\Cache\Programs\7-zip\x86\readme.txt
+  \Projects\Cache\Programs\7-zip\x86\License.txt
+
+--------------------------------------------------------
+
+bblean
+======
+
+  bbLean is copyright 2003-2009 grischka@users.sourceforge.net
+
+  bbLean is free software, released under the GNU General Public License (GPL version 2). For details see: http://www.fsf.org/licenses/gpl.html
+
+  This program is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
+
+--------------------------------------------------------
+
+DMDE
+====
+
+  DMDE 3.4 - DM Disk Editor and Data Recovery Software
+  Copyright (C) 2005-2017 Dmitry Sidorov
+
+  Please refer to the following files for more information -
+
+  \Projects\Cache\Programs\dmde\eula_en.txt
+
+--------------------------------------------------------
+
+Explorer++
+==========
+
+  Copyright (c) 2005-2011 David Erceg
+  Explorer++ is free software released under the GNU General Public License.
+
+  Please refer to the following files for more information -
+
+  \Projects\Cache\Programs\Explorer++\x86\Readme.txt
+  \Projects\Cache\Programs\Explorer++\x86\License.txt
+
+--------------------------------------------------------
+
+Get WAIK Tools
+============
+
+  Author - JFX
+
+  https://msfn.org/board/topic/156869-get-waik-tools-wo-downloading-the-huge-isos/
+
+  License is not specified. Comment from the author "...Get WAIK Tools is redistributable..." (https://msfn.org/board/topic/156869-get-waik-tools-wo-downloading-the-huge-isos/?do=findComment&comment=1149523)
+
+--------------------------------------------------------
+
+gsar
+====
+  
+  Authors -
+  Tormod Tjaberg (coding, design (all bugs are his))
+       
+  Hans Peter Verne (ideas, demands, testing, UNIX platforms)
+
+  Released under GNU GENERAL PUBLIC LICENSE
+
+--------------------------------------------------------
+
+ImDisk
+======
+
+  Copyright (c) Olof Lagerkvist (http://www.ltr-data.se/)
+  Released under GNU GENERAL PUBLIC LICENSE v2
+
+  Please refer to the following file for more information -
+
+  \Projects\Cache\Programs\ImDisk\gpl.txt
+
+--------------------------------------------------------
+
+JustManager
+===========
+
+  Just Manager is (c) copyright 2008-2013 by Nikita Leontiev.  The program is the sole property of the authors.
+
+  You are granted a license to use the software free of charge provided that you accept full responsibility for it's use.  The software is provided "as-is" without any expressed or implied warranty.  The authors are not liable for any damages or data loss to your computer or any other computers that you connect to using the software in any way including, but not limited to, any defects in the software, known or not.
+
+--------------------------------------------------------
+
+LaunchBar
+=========
+
+  Copyright (c) Peter Lerup
+
+  LaunchBar is freeware i.e. you can use it free of charge and no registration is required.
+
+  Any type of feedback as well as support questions can be sent to the author Peter Lerup at the following address: peter@lerup.com
+  
+
+  DISCLAIMER OF WARRANTY.
+
+  SINCE THE SOFTWARE IS PROVIDED FREE OF CHARGE, THE INFORMATION AND CODE PROVIDED IS PROVIDED "AS IS" WITHOUT WARRANTY OF ANY KIND, EITHER EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE. UNDER NO CIRCUMSTANCES SHALL PETER LERUP BE LIABLE FOR ANY INDIRECT, SPECIAL, INCIDENTAL, OR CONSEQUENTIAL DAMAGES OF ANY CHARACTER INCLUDING, WITHOUT LIMITATION, DAMAGES FOR LOSS OF GOODWILL, WORK STOPPAGE, COMPUTER FAILURE OR MALFUNCTION, OR ANY AND ALL OTHER COMMERCIAL DAMAGES OR LOSSES, EVEN IF PETER LERUP HAS BEEN INFORMED OF THE POSSIBILITY OF SUCH DAMAGES, OR FOR ANY CLAIM BY ANY OTHER PARTY.
+
+--------------------------------------------------------
+
+loadWoW64.exe and setWOW64.exe
+==============================
+
+  Attributed to yamingw
+
+--------------------------------------------------------
+
+mkisofs.exe
+===========
+
+  AUTHOR 
+  Eric Youngdale <ericy@gnu.ai.mit.edu> or <eric@andante.org> wrote the first versions (1993 ... 1998) of the mkisofs utility. The copyright for old versions of the mkisofs utility is held by Yggdrasil Computing, Incorporated. Jorg Schilling wrote the SCSI transport library and its adaptation layer to mkisofs and newer parts (starting from 1997) of the utility. Jorg Schilling is the primary maintainer since 1999, this makes mkisofs Copyright (C) 1997-2010 Jorg Schilling.
+  HFS hybrid code Copyright (C) James Pearson 1997 ... 2001.
+  libhfs code Copyright (C) 1996, 1997 Robert Leslie.
+  libfile code Copyright (C) Ian F. Darwin 1986, 1987, 1989, 1990, 1991, 1992, 1994, 1995.
+
+  See - https://sourceforge.net/projects/cdrtools/
+
+--------------------------------------------------------
+
+nircmd
+======
+
+  Copyright (c) 2003 - 2016 Nir Sofer 
+
+  License (http://www.nirsoft.net/utils/nircmd.html)
+  This utility is released as freeware. You are allowed to freely distribute this utility via floppy disk, CD-ROM, Internet, or in any other way, as long as you don't charge anything for this. If you distribute this utility, you must include all files in the distribution package, without any modification ! 
+
+--------------------------------------------------------
+
+OfflineReg
+==========
+
+  Copyright (c) Erwan.l
+
+  Refer to \Projects\Tools\offlinereg\license.txt
+
+  offreg.dll / offreg64.dll - "The offline registry library is provided as a binary redistributable dynamic-link library (DLL)....Offreg.dll is provided in the Windows Driver Kit (WDK) for Windows 10 and earlier versions of the Windows operating system...." (https://msdn.microsoft.com/en-us/library/ee210757(v=vs.85).aspx)
+
+--------------------------------------------------------
+
+Q-Dir
+=====
+
+  LICENSE HRG NENAD (SOFTWAREOK.COM)
+
+  Please refer to the following files for more information -
+
+  \Projects\Cache\Programs\Q-Dir\Q-Dir_EULA.txt
+
+--------------------------------------------------------
+
+Shortcut.exe
+============
+ 
+  Copyright 2000-2005 Marty List, www.OptimumX.com
+
+  LICENSE TERMS
+
+  Optimum X freeware utilities are completely free, including commercial use. You are allowed to freely distribute these freeware utilities as long as you don't charge anything for this. If you distribute this utility, you must include all files in the distribution package, without any modification.
+
+  DISCLAIMER
+
+  The software is provided "AS IS" without any warranty, either expressed or implied, including, but not limited to, the implied warranties of merchantability and fitness for a particular purpose. The author will not be liable for any special, incidental, consequential or indirect damages due to loss of data or any other reason.
+
+--------------------------------------------------------
+
+SumatraPDF
+==========
+
+  Most code under src is licensed as GPL v3 (see COPYING) with the main exception of code in src/utils and src/mui which has a BSD license.
+
+  Please refer to the following files for more information -
+
+  \Projects\Cache\Programs\SumatraPDF312\AUTHORS.txt
+  \Projects\Cache\Programs\SumatraPDF312\COPYING.txt
+  \Projects\Cache\Programs\SumatraPDF312\COPYING_BSD.txt
+
+--------------------------------------------------------
+
+TightVNC
+========
+
+  Copyright (c) GlavSoft LLC.
+
+  TightVNC is freely available under the terms of the GNU GPL license. Please refer to the following file for more information -
+
+  \Projects\Cache\Programs\TightVNC\LICENSE.txt
+
+
+--------------------------------------------------------
+
+TinyHexer
+=========
+
+  Copyright (c) 2015-2018. Markus Stephany 
+
+  http://www.stephanys.de/tiny-hexer/
+
+--------------------------------------------------------
+
+wimlib
+======
+
+  Copyright (c) 2012-2018 Eric Biggers
+
+  "License files for all software included. These are all free software licenses. COPYING.txt is the main license, and it refers to COPYING.GPLv3.txt and COPYING.LGPLv3.txt.  The other licenses are for third-party software included in the library."
+
+  Please refer to the following files for more information -
+
+  \Projects\Tools\wimlib\COPYING.CCO.txt
+  \Projects\Tools\wimlib\COPYING.GPLv3.txt
+  \Projects\Tools\wimlib\COPYING.LGPLv3.txt
+  \Projects\Tools\wimlib\COPYING.libdivsufsort-lite.txt
+  \Projects\Tools\wimlib\COPYING.libxml2.txt
+  \Projects\Tools\wimlib\COPYING.txt
+  \Projects\Tools\wimlib\COPYING.winpthreads.txt
+
+--------------------------------------------------------
+
+WinXShell
+=========
+
+  Copyright (c) slore (http://theoven.org/index.php?topic=2090.0)
+
+--------------------------------------------------------
+
+Icons
+=====
+
+  "Material icons are beautifully crafted, delightful, and easy to use in your web, Android, and iOS projects. Learn more about material design and our process for making these icons in the system icons section of the material design guidelines.
+
+  The icons are available under the Apache License Version 2.0. We'd love attribution in your app's "about" screen, but it's not required. The only thing we ask is that you not re-sell these icons." (https://material.io/icons/)
+
+  \Projects\Cache\Programs\keyboardLayout\keyboard.ico
+  \Projects\Cache\Programs\misc\find_replace.ico
+  \Projects\Cache\Programs\misc\folder.ico
+  \Projects\Cache\Programs\network\network.ico
+  \Projects\Cache\Programs\ScreenRes\x64\screen.ico
+  \Projects\Cache\Programs\ScreenRes\x86\screen.ico
+

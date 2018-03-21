@@ -1,0 +1,266 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd"><html><head><link type="text/css" rel="stylesheet" href="chrispe.css" media="screen" /><title>ChrisPE</title></head><body><font> 
+ 
+ 
+ 
+<p> 
+<select ONCHANGE="location = this.options[this.selectedIndex].value;"> 
+<option value="" disabled></option> 
+<option value="../readme.html">Contents</option> 
+<option value="" disabled>=======</option> 
+<option value="winpe.htm">Windows PE</option>  
+<option value="builder.htm">Builders</option>  
+<option value="options.htm">Project Options</option>  
+<option value="project.htm">Project Scripts</option>  
+<option value="instructions_pebakery.htm">Instructions</option>  
+<option value="menu_system.htm">Menu System</option>  
+<option value="not_in_wim.htm">Include...in boot.wim</option>  
+<option value="usb.htm" selected="selected">...Bootable USB...</option>  
+<option value="uefi.htm">UEFI, BIOS, GPT...</option>  
+<option value="multiboot.htm">Multiboot WinPE</option>  
+<option value="" disabled></option> 
+<option value="" disabled>Appendices</option> 
+<option value="" disabled>=========</option> 
+<option value="quick_pebakery.htm">Quick Start</option>  
+<option value="acknowledgements.htm">Acknowledgements</option>  
+<option value="" disabled></option> 
+</select> 
+</p> 
+ 
+ 
+ 
+<hr> 
+<a href="http://chrispe.mistyprojects.co.uk/"><img src="img/home.jpg" BORDER=1></a> 
+ 
+
+
+
+<h2><u>Create a Bootable USB Stick</u></h2>
+
+
+
+
+<p>
+There are a number of different methods for creating a bootable USB stick, including -
+<ul>
+<li><a class="internal" href="#diskpart">Diskpart</a></li>
+<li><a class="internal" href="#rufus">Rufus</a></li>
+<li><a class="internal" href="#other">Other Tools/Methods</a></li>
+</ul>
+</p>
+
+
+
+
+
+<a name="diskpart"></a><br>
+<h2><u>Diskpart</u></h2>
+
+
+
+<p>
+The following is a walkthrough of the steps required for creating a bootable USB stick using the command-line <font class="file">DiskPart</font> tool. The actions include wiping the disk before creating and formatting a new partition and making the partition active - as this could potentially result in data loss make sure that the correct disk is selected. <font class="file">DiskPart</font> works by targeting an object (either a disk, volume or partition) - making it have <i>"focus"</i> (see <a class="external" target="_blank" href="http://support.microsoft.com/kb/300415">here</a>).
+</p>
+
+
+
+
+
+<p>
+The drive will need to be manually selected. Use the command <b>List disk</b> to show all available disks -
+<br>
+<IMG SRC="img/1.jpg" WIDTH=500 BORDER=2><br>
+<br>
+</p>
+
+
+
+<p>
+It should be possible to identify your USB stick based on it's size or other attributes. In this walkthrough the <i>"target"</i> was identified as disk 1. Select disk 1 by entering the command <b>sel disk 1</b> -
+<br>
+<IMG SRC="img/2.jpg" WIDTH=500 BORDER=2><br>
+<br>
+</p>
+
+
+
+<p>
+To double check the correct disk has been selected, use the command <b>detail disk</b> to display more detailed attributes -
+<br>
+<IMG SRC="img/3.jpg" WIDTH=500 BORDER=2><br>
+<br>
+</p>
+
+
+
+<p>
+Use the <b>clean</b> command to wipe the disk (a limited number of sectors will be erased - removing all partition information and effectively wiping the whole disk). Alternatively the command <b>clean all</b> could be used to zero the whole of the disk. As either of these commands will for all intents and purposes delete everything on the selected drive, make sure this is your USB stick and not your hard drive before proceeding! -
+<br>
+<IMG SRC="img/4.jpg" WIDTH=500 BORDER=2><br>
+<br>
+</p>
+
+
+
+<p>
+To create a primary partition using all available disk space, use the command <b>create partition primary</b>
+<br>
+<IMG SRC="img/5.jpg" WIDTH=500 BORDER=2><br>
+<br>
+</p>
+
+
+
+<p>
+The remaining tasks need to be carried out on the newly created partition. Use the command <b>select part 1</b> to select the new partition -
+<br>
+<IMG SRC="img/6.jpg" WIDTH=500 BORDER=2><br>
+<br>
+</p>
+
+
+
+<p>
+Use the <b>active</b> command to make the partition bootable -
+<br>
+<IMG SRC="img/7.jpg" WIDTH=500 BORDER=2><br>
+<br>
+</p>
+
+
+
+<p>
+To (quick) format the selected partition with a FAT32 file system, with a volume label WinPE_USB, use command <b>format fs=fat32 label=WinPE_USB quick</b>. Where <b>fs=</b> selects the file system to be used (options are <b>fat32</b>, <b>ntfs</b>), <b>label=</b> is the volume label to assign to the drive, and <b>quick</b> completes a fast format -
+<br>
+<IMG SRC="img/8.jpg" WIDTH=500 BORDER=2><br>
+<br>
+</p>
+
+
+
+<p>
+To mount the new partition (to assign a drive letter) use the command <b>assign</b> -
+<br>
+<IMG SRC="img/9.jpg" WIDTH=500 BORDER=2><br>
+<br>
+</p>
+
+
+
+<p>
+Now copy the files and folder from <font color="red">%BaseDir%</font><font color="blue">\ChrisPE.Files\ISO.ROOT\</font> to the USB stick.
+</p>
+
+
+
+
+<p>
+The following files/folders should be present on the USB stick -
+<ul>
+<li><font color="red">\</font><font color="blue">bootmgr</font></li>
+<li><font color="red">\boot</font><font color="blue"></font></li>
+<li><font color="red">\boot\</font><font color="blue">BCD</font></li>
+<li><font color="red">\boot\</font><font color="blue">boot.sdi</font></li>
+<li><font color="red">\sources\</font><font color="blue">boot.wim</font></li>
+</ul>
+
+
+</p>
+
+
+
+
+
+<p>
+That's it.
+</p>
+
+
+
+
+
+
+
+
+
+
+
+
+<a name="rufus"></a><br>
+<h2><u>Rufus</u></h2>
+
+
+
+<p>
+<font class="file">Rufus</font> (see <a class="external" target="_blank" href="http://rufus.akeo.ie/">here</a>) is a relatively simple tool that can be used to create a bootable USB drive from an ISO file. 
+</p>
+
+
+<p>
+Start <font class="file">Rufus</font> > select the target device, use the default settings > make sure that <i>"Create a bootable disk using:"</i> is selected > click on the disc icon next to <i>"ISO Image"</i> > browse to your WinPE.iso file > then click on start -
+<br>
+<IMG SRC="img/rufus1.jpg" BORDER=2>
+</p>
+
+
+
+
+<p>
+You will see a warning -
+<br>
+<IMG SRC="img/rufus2.jpg" BORDER=2>
+</p>
+
+
+
+
+<p>
+That's pretty much it - <font class="file">Rufus</font> will make the USB stick bootable and will unpack the contents of the ISO files selected earlier.
+<br>
+<IMG SRC="img/rufus3.jpg" BORDER=2>
+</p>
+
+
+
+
+
+
+
+
+
+
+
+
+<a name="other"></a><br>
+<h2><u>Other Tools/Methods</u></h2>
+
+
+<p>
+As an alternative to using <font class="file">DiskPart</font> or <font class="file">Rufus</font>, try one of the following -
+
+
+<ul>
+<li> RMPrepUSB (see <a class="external" target="_blank" href="http://www.rmprepusb.com/">here</a>)</li>
+<li> WiNToBootic (see <a class="external" target="_blank" href="http://reboot.pro/files/file/18-wintobootic/">here</a>)</li>
+
+</ul>
+</p>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<p class="breaktop"><font class="file">Document date - 6<sup>th</sup> March 2018</font></p></font></body></html>

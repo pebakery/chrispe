@@ -1,0 +1,99 @@
+[main]
+Title=DiskMgmt
+Description=
+Selected=True
+Level=5
+Author=ThePEBakeryTeam
+Version=20180306
+Date=2018-03-06
+Interface=Interface1
+
+[Interface1]
+pTextLabelMenu1="1",1,1,35,3,70,18,10,Bold
+pButtonMenu2="2",1,8,75,0,70,20,pButtonMenu2,0,True,_pButtonMenu2_,True
+pButtonMenu3="?",1,8,145,0,70,20,pButtonMenu3,0,True,_pButtonMenu3_,True
+
+[Interface2]
+pButtonMenu1="1",1,8,5,0,70,20,pButtonMenu1,0,True,_pButtonMenu1_,True
+pTextLabelMenu2="2",1,1,108,3,70,18,10,Bold
+pButtonMenu3="?",1,8,145,0,70,20,pButtonMenu3,0,True,_pButtonMenu3_,True
+pBevel1=,1,12,10,65,66,2
+pTextLabel="Menu Entries",1,1,10,50,230,18,8,Bold
+pCheckBoxShortcutDesktop="Add to Desktop Menu",1,3,40,80,150,18,True
+pCheckBoxShortcutQuick="Add to Quicklaunch Menu",1,3,40,110,150,18,True
+pCheckBoxShortcutPrograms="Add to #$qStart#$q > ",1,3,40,140,99,18,True
+pCheckBoxShortcutLaunchBar="Add to LaunchBar Menu ",1,3,40,170,150,18,True
+pButtonShortcut1=?,1,8,10,80,18,18,pButtonShortcut1,0,True,_pButtonShortcut1_,True
+pButtonShortcut2=?,1,8,10,110,18,18,pButtonShortcut2,0,True,_pButtonShortcut2_,True
+pButtonShortcut3=?,1,8,10,140,18,18,pButtonShortcut3,0,True,_pButtonShortcut3_,True
+pButtonShortcut4=?,1,8,10,170,18,18,pButtonShortcut4,0,True,_pButtonShortcut4_,True
+pTextBox1=,1,0,140,140,150,21,Programs
+
+[pButtonMenu1]
+IniWrite,%ScriptFile%,Main,Interface,Interface1
+System,REFRESHINTERFACE
+
+[pButtonMenu2]
+IniWrite,%ScriptFile%,Main,Interface,Interface2
+System,REFRESHINTERFACE
+
+[pButtonMenu3]
+message,"Click on the buttons to toggle between tabs 1 and 2. #$x#$xTab 2 contains menu options for use in the selected shell. Click on the ? button for information about the different options."
+
+[pButtonShortcut1]
+message,"WinXShell only#$x#$xSelect this option to add a program shortcut to the Desktop."
+
+[pButtonShortcut2]
+message,"WinXShell only#$x#$xSelect this option to add a program menu option to the Quicklaunch menu - similar in appearence to the 'Pin to Taskbar' option in Windows 7/8/10."
+
+[pButtonShortcut3]
+message,"Applies to WinXShell#$c BBLean and LaunchBar Shell(s)#$x#$xSelect this option to add a program menu option to the Start menu. Leave blank to add to the root of the menu#$c or manually type a path to place in a sub-menu (do not use spaces in the path). E.g. #$x#$s- FileManager#$x#$s- Programs#$x#$s- Programs\FileManager#$x#$xAnd looking at the examples above - #$x#$xLeave this option blank to add a menu entry to the root of the program menu (the 'Start' menu in WinXShell#$c the 'Start' menu in BBLean#$c or the root of the LaunchBar menu bar if LaunchBar is selected as Shell)#$x#$xEnter 'FileManager' to add a menu entry for this application to the 'Start' > 'FileManager' sub-menu (WinXShell and bblean) or the 'FileManager' sub-menu in LaunchBar.#$x#$xEnter 'Programs' to add a menu entry for this application to the 'Start' > 'Programs' sub-menu (WinXShell and bblean) or the 'Programs' sub-menu in LaunchBar.#$x#$xEnter 'Programs\FileManager' to add a menu entry for this application to the 'Start' > 'Programs' > 'FileManager' sub-menu (WinXShell and bblean) or the 'Programs' > 'FileManager' sub-menu in LaunchBar."
+
+[pButtonShortcut4]
+message,"This setting does not apply to any LaunchBar instance running as the WinPE Shell. This option only applies to a LaunchBar instance when the Applications' > 'LaunchBar' program script is selected in the build.#$x#$xIf the 'Applications' > 'LaunchBar' program script is selected than enable this option to add a program menu entry to the root of the LaunchBar menu bar. #$x#$xPlease note that if option '6] Programs in boot.wim' in the main project script is set as 'NO'#$c then LaunchBar and a number of other applications will not be available at boot. In this case a text based .ini file will be used for LaunchBar menu settings."
+
+[process]
+AddInterface,%ScriptFile%,Interface1,""
+AddInterface,%ScriptFile%,Interface2,""
+//Run,%ScriptFile%,CHECKS
+Run,%ScriptFile%,MENU
+Run,%ScriptFile%,COMMON
+Run,%ScriptFile%,IN.WIM
+
+[CHECKS]
+
+[MENU]
+If,%pCheckBoxShortcutLaunchBar%,Equal,True,If,%PROGRAMS.IN.WIM%,Equal,NO,If,ExistFile,"%ProjectTemp%\LaunchBar.ini",TXTaddLine,"%ProjectTemp%\LaunchBar.ini",DiskMgmt;%SystemRoot%\System32\diskmgmt.msc,Append
+ShellExecute,Hide,"%Tools%\Shortcut.exe","/A:C /T:#$q#$pSystemRoot#$p\System32\diskmgmt.msc#$q /F:#$q%ProjectTemp%\DiskMgmt.lnk#$q"
+If,ExistFile,"%ProjectTemp%\DiskMgmt.lnk",Begin
+  Set,%MyShortcut%,DiskMgmt.lnk
+  If,%pCheckBoxShortcutDesktop%,Equal,True,FileCopy,"%ProjectTemp%\%MyShortcut%","%ProjectTemp%\ShortCuts\Desktop"
+  If,%pCheckBoxShortcutQuick%,Equal,True,FileCopy,"%ProjectTemp%\%MyShortcut%","%ProjectTemp%\ShortCuts\Quick"
+  If,%pCheckBoxShortcutPrograms%,Equal,True,Begin
+    Set,%ProgramMenuPath%,%pTextBox1%
+    Run,"%ProjectDir%\Core\common.script",StartMenu
+  End
+  If,%pCheckBoxShortcutLaunchBar%,Equal,True,FileCopy,"%ProjectTemp%\%MyShortcut%","%ProjectTemp%\ShortCuts\LaunchBar"
+  FileDelete,"%ProjectTemp%\%MyShortcut%"
+End
+
+[COMMON]
+WimExtractBulk,%Install.wim%,%Install.wim.Image.number%,%Programs%\DiskMgmt\DiskMgmt.dependencies.txt,%TargetDir%,NOACL
+Echo,"Mounting registry hives..."
+If,Not,ExistRegSection,HKLM,_WinPE_SOFTWARE,RegHiveLoad,_WinPE_SOFTWARE,"%Target_config%\software"
+ShellExecute,hide,regedit.exe,"/s #$q%Programs%\DiskMgmt\mmc.registry.reg#$q"
+Echo,"Unmounting registry hives..."
+RegHiveUnload,_WinPE_SOFTWARE
+IniWrite,"%OutputDir%\Project.Settings.ini",PROGRAMS,DiskMgmt,YES
+
+[IN.WIM]
+//Wait,1
+
+[AuthorEncoded]
+hdd.ico=1958,2611
+logo=hdd.ico
+
+[EncodedFile-AuthorEncoded-hdd.ico]
+lines=0
+0=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
+

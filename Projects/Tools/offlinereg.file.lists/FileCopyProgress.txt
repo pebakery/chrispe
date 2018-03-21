@@ -1,0 +1,15 @@
+Classes\CLSID\{95E15D0A-66E6-93D9-C53C-76E6219D3341} setvalue " " PSFactoryBuffer
+Classes\CLSID\{95E15D0A-66E6-93D9-C53C-76E6219D3341}\InProcServer32 setvalue " " "%SystemRoot%\System32\OneCoreUAPCommonProxyStub.dll" 2
+Classes\CLSID\{95E15D0A-66E6-93D9-C53C-76E6219D3341}\InProcServer32 setvalue "ThreadingModel" "Both"
+Classes\Interface\{036B4FC7-6A11-4C07-8046-22D268C37721} setvalue " " "IInterruptedOperationHandler"
+Classes\Interface\{036B4FC7-6A11-4C07-8046-22D268C37721}\ProxyStubClsid32 setvalue " " "{95E15D0A-66E6-93D9-C53C-76E6219D3341}"
+Classes\Interface\{04B0F1A7-9490-44BC-96E1-4296A31252E2} setvalue " " "IFileOperationProgressSink"
+Classes\Interface\{04B0F1A7-9490-44BC-96E1-4296A31252E2}\ProxyStubClsid32 setvalue " " "{95E15D0A-66E6-93D9-C53C-76E6219D3341}"
+Classes\Interface\{0C9FB851-E5C9-43EB-A370-F0677B13874C} setvalue " " "IOperationsProgressDialog"
+Classes\Interface\{0C9FB851-E5C9-43EB-A370-F0677B13874C}\ProxyStubClsid32 setvalue " " "{95E15D0A-66E6-93D9-C53C-76E6219D3341}"
+Classes\Interface\{4AE7498C-E1C0-475F-8573-41C26127C5D8} setvalue " " "IOperationStatusTile"
+Classes\Interface\{4AE7498C-E1C0-475F-8573-41C26127C5D8}\ProxyStubClsid32 setvalue " " "{95E15D0A-66E6-93D9-C53C-76E6219D3341}"
+Classes\Interface\{61A969EF-64EA-4C48-BBF5-EEDE3B32BF86} setvalue " " "IOperationStatusService"
+Classes\Interface\{61A969EF-64EA-4C48-BBF5-EEDE3B32BF86}\ProxyStubClsid32 setvalue " " "{95E15D0A-66E6-93D9-C53C-76E6219D3341}"
+Classes\Interface\{0C3C904A-AD89-4851-9C3D-210C080CEE18} setvalue " " "IOperationStatusService"
+Classes\Interface\{0C3C904A-AD89-4851-9C3D-210C080CEE18}\ProxyStubClsid32 setvalue " " "{95E15D0A-66E6-93D9-C53C-76E6219D3341}"

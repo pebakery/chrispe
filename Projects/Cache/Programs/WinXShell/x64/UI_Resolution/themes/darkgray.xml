@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ColorTheme>
+    <Style name="ct-bktitle" bkcolor="#FF333333" />
+    <Style name="ct-bksubtitle" bkcolor="#FF555555" />
+    <Style name="ct-bkcontent" bkcolor="#FFF9F9F9" />
+    <Style name="ct-bkontent-darker1" bkcolor="#FFF2F2F2" />
+    <Style name="attentionBtn" width="120" height="32" textcolor="#FF000000"
+         hottextcolor="#FFFFFF" hotimage="color='#FFFF4081'" />
+</ColorTheme>

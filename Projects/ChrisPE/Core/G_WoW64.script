@@ -1,0 +1,93 @@
+[main]
+Title=WoW64
+Description=
+Selected=True
+Level=2
+Author=ThePEBakeryTeam
+Version=20180306
+Date=2018-03-06
+Interface=Interface
+NoWarning=False
+
+[Interface]
+pCheckBox1="Always use loadWOW64.exe in Windows 10 (64-bit) builds",1,3,41,80,330,18,False
+pButton1=?,1,8,10,80,18,18,?option1,0,True,_?option1_,True
+
+[?option1]
+message,"Early versions of Windows 10 (up to and including Windows 10.0.14393) will not work without a fix to create two missing native objects - #$x#$x- create an object #$q\\KnownDlls32#$q with NtCreateDirectoryObject API,#$x- create #$qSymbolicLink#$q with NtCreateSymbolicLinkObject API.#$x#$xloadWOW64.exe (developed by yamingw) resolves these issues. At the time of writing this fix does not appear to be required in recent releases - builds 10.0.15063 and 10.0.16299 function without running loadWOW64.exe. As this may change in future releases#$c enable this option to force the use of loadWOW64.exe in all Windows 10 versions. Please note that loadWOW64.exe will be automatically applied for build versions up to and including Windows 10.0.14393."
+
+[process]
+If,%ARCH%,Equal,x64,Begin
+Run,%ScriptFile%,Wow64-WIM.All
+If,%CodeBase%,Equal,6.2.9200,Run,%ScriptFile%,Cache.WoW64.Dependencies
+If,%CodeBase%,Equal,6.3.9600,Run,%ScriptFile%,Cache.WoW64.Dependencies
+If,%CodeBase%,Equal,6.1.7601,Run,%ScriptFile%,Cache.WoW64.Dependencies
+If,%CodeBase%,Equal,6.1.7600,Run,%ScriptFile%,Cache.WoW64.Dependencies
+If,%CodeBase2%,Equal,10.0,Run,%ScriptFile%,Cache.WoW64.Dependencies
+End
+
+[Wow64-WIM.All]
+Echo,"Extracting SysWow64 files to Target..."
+Set,%SysWow64_Files%,%TargetDir%,Global
+DirMake,"%SysWow64_Files%"
+If,%CodeBase%,Equal,6.1.7600,WimExtractBulk,%Install.wim%,%Install.wim.Image.number%,%Tools%\wimlib.file.lists\syswow.files.7.txt,%SysWow64_Files%,NOACL
+If,%CodeBase%,Equal,6.1.7601,WimExtractBulk,%Install.wim%,%Install.wim.Image.number%,%Tools%\wimlib.file.lists\syswow.files.7.txt,%SysWow64_Files%,NOACL
+If,%CodeBase%,Equal,6.2.9200,WimExtractBulk,%Install.wim%,%Install.wim.Image.number%,%Tools%\wimlib.file.lists\syswow.files.8.0.txt,%SysWow64_Files%,NOACL
+If,%CodeBase%,Equal,6.3.9600,WimExtractBulk,%Install.wim%,%Install.wim.Image.number%,%Tools%\wimlib.file.lists\syswow.files.8.1.txt,%SysWow64_Files%,NOACL
+If,%CodeBase2%,Equal,10.0,WimExtractBulk,%Install.wim%,%Install.wim.Image.number%,%Tools%\wimlib.file.lists\syswow.files.10.txt,%SysWow64_Files%,NOACL
+ShellExecute,Hide,"attrib.exe","-h -s #$q%SysWow64_Files%#$q"
+Echo,"SysWOW64 registry fix..."
+If,Not,ExistDir,"%ProjectTemp%\Install.wim_Registry",DirMake,"%ProjectTemp%\Install.wim_Registry"
+Set,%SysWow64_Registry%,"%ProjectTemp%\Install.wim_Registry"
+//extracting SOFTWARE registry hive from install.wim if it wasn't previously extracted by another script
+If,Not,ExistFile,"%SysWow64_Registry%\software",Begin
+WimExtract,%Install.wim%,%Install.wim.Image.number%,Windows\System32\config\SOFTWARE,%SysWow64_Registry%,NOACL
+If,Not,ExistFile,"%SysWow64_Registry%\software",Begin
+Message,"Could not locate SOFTWARE registry hive - does the source .wim file contain image number %Install.wim.Image.number%? Aborting..."
+Halt
+End
+End
+If,Not,ExistFile,%SysWow64_Registry%\Wow6432Node.reg,If,Not,ExistFile,%SysWow64_Registry%\Classes_Wow6432Node.reg,Begin
+If,Not,ExistRegSection,HKLM,_WinPE_SOFTWARE,RegHiveLoad,_WinPE_SOFTWARE,"%SysWow64_Registry%\software"
+ShellExecute,hide,regedit.exe,"/e #$q%SysWow64_Registry%\Wow6432Node.reg#$q HKEY_LOCAL_MACHINE\_WinPE_SOFTWARE\Wow6432Node"
+ShellExecute,hide,regedit.exe,"/e #$q%SysWow64_Registry%\Classes_Wow6432Node.reg#$q HKEY_LOCAL_MACHINE\_WinPE_SOFTWARE\Classes\Wow6432Node"
+If,ExistRegSection,HKLM,_WinPE_SOFTWARE,RegHiveUnload,_WinPE_SOFTWARE
+//Fix paths in reg files (replace C:\ with X:\)
+ShellExecute,Hide,"%Tools%\gsar.exe","-o -i -sC:x00:::x00\ -rX:x00:::x00\ #$q%SysWow64_Registry%\*.reg#$q"
+//Windows 7 sources appear to use D: as path, so also attempt to replace D:\ with X:\
+ShellExecute,Hide,"%Tools%\gsar.exe","-o -i -sD:x00:::x00\ -rX:x00:::x00\ #$q%SysWow64_Registry%\*.reg#$q"
+End
+
+[Cache.WoW64.Dependencies]
+Echo,"Running SysWow64 section..."
+//Set,%SysWow64_Registry%,"%ProjectTemp%\SysWow64_Registry"
+If,Not,ExistRegSection,HKLM,_WinPE_SOFTWARE,RegHiveLoad,_WinPE_SOFTWARE,"%Target_config%\software"
+If,ExistFile,"%SysWow64_Registry%\Wow6432Node.reg",ShellExecute,hide,regedit.exe,"/s #$q%SysWow64_Registry%\Wow6432Node.reg#$q"
+If,ExistFile,"%SysWow64_Registry%\Classes_Wow6432Node.reg",ShellExecute,hide,regedit.exe,"/s #$q%SysWow64_Registry%\Classes_Wow6432Node.reg#$q"
+If,ExistFile,"%SysWow64_Registry%\Wow6432Node.reg",RegDelete,HKLM,"_WinPE_SOFTWARE\Wow6432Node\Microsoft\Active Setup\Installed Components"
+If,%CodeBase%,Equal,6.2.9200,Run,"%ProjectDir%\Core\syswow64.script",WoW64-WinPE4.0-registry
+If,%CodeBase%,Equal,6.3.9600,Run,"%ProjectDir%\Core\syswow64.script",WoW64-WinPE5.x-registry
+If,%CodeBase%,Equal,6.1.7601,Run,"%ProjectDir%\Core\syswow64.script",WoW64-WinPE3.1-registry
+If,%CodeBase%,Equal,6.1.7600,Run,"%ProjectDir%\Core\syswow64.script",WoW64-WinPE3.0-registry
+If,%CodeBase2%,Equal,10.0,Begin
+Run,"%ProjectDir%\Core\syswow64.script",WoW64-WinPE10-registry
+If,%Build%,Bigger,15062,If,%pCheckBox1%,Equal,True,Run,%ScriptFile%,loadWOW64.exe
+If,%Build%,Smaller,15063,Run,%ScriptFile%,loadWOW64.exe
+End
+If,ExistRegSection,HKLM,_WinPE_SOFTWARE,RegHiveUnload,_WinPE_SOFTWARE
+
+[loadWOW64.exe]
+If,Not,ExistRegSection,HKLM,_WinPE_SYSTEM,RegHiveLoad,_WinPE_SYSTEM,"%Target_config%\system"
+RegWrite,HKLM,0x7,_WinPE_SYSTEM\ControlSet001\Control\Session Manager,BootExecute,loadWoW64.exe
+If,ExistRegSection,HKLM,_WinPE_SYSTEM,RegHiveUnload,_WinPE_SYSTEM
+FileCopy,"%TOOLS%\SysWOW64.files\loadWoW64.exe","%Target_System32%"
+//FileCopy,"%TOOLS%\SysWOW64.files\setWOW64.exe","%Target_System32%"
+
+[AuthorEncoded]
+Logo=donut.ico
+donut.ico=953,1271
+
+[EncodedFile-AuthorEncoded-donut.ico]
+lines=0
+0=eJztmctKI0EUhiu2kkXUaAKDN3AWMzAgShARESUgbly4UBQEBUfxhqgENwoBM270Fdy4EBEHXYjgwoWXRvHyAOpKMI+QpQvxTP4kxWQ6Gbu6ujvdSBL+/NAdzvlOpet0V4UxT/IdCrHk51f2+ztjXxhjP5JKHmI/Wfp46vWNsYAvLf4ioqKKKsqkjo+PKRKJUGdnJwWDQdKer66upvb2dpqbm6O9vb2c807o6emJpqamqLKyktAKsqX9rvZ8WVkZ9ff30+npqSO1jI6OksfjyeEW5c8Wfperq6uC1LG9vU3l5eX/ZZHhhzAWs7OzttYwPj6uyy3Lz9XS0kIvLy+W19HT0yPMboYfqquro8fHR8tq6O3tNcRulh+qr6+3hH9mZsYwuxX8UCgUMlXD/v6+FLtV/NDi4qJ0DYFAwHH+kpISur+/N1zD/Py8NLuV/FB3d7dhftwf3cIPXV5eCtewurpqKpcd/MPDw8L8DQ0NruP3er1C/Hd3d6byKIpCCwsLObmi0Sj5/X5TsQ8PD3Vr2NzclI4PPlVVP8zR3NwsHV+klw4ODkrFRp87OzvTjR+Px6miokIqR0dHh278pqYmqdh4thOdX2tra1I5cD/Si411kkzsm5sbYX47Jdv3neb+LPyy18/t7a0rapCdvxMTE8L8sVjMtvk7MDAgFRv9U6/3c+XbrxCRSP/c2NiQig3h2tO7jrAmkY2f776uFfLLxocw/5eXl3PyrK+vk5n1BHRwcCD0+2LtaSYPpI1pNp7o8xu0srLiOv6hoSFD/a20tNRV/BcXF4b4sc/qFv6uri5D7FxVVVWO82NfUfbeuLu76zg/9hFk2LkmJycd48deqBl2LqN7n1bw19bWEtY6VvBD4XC4YPw1NTX08PBgGTvX2NiY7fx4fnx+fracnWtra4t8Pp8t/JhrdnFrNTIyYtn/R62trXR+fl4wdi5coxizfP8n6fFjn6ivr49OTk4Kzp1PR0dHtLS0lHpGz7fOwL2wra2NpqenaWdnxxXMRRX1CQT7wK+vU/6uqDH4m6I2whOKit1kiiuqAlcVFd2UfmWcKSo6zTs8lvEwY2/Z3sjYq8YTcD/cm0i7P+ONrxlPcSVYWOP8OP+e//XfOOm42nxv2R7+y8m5eR2oi2XXyevm48DHhY8THzed8f0DAAkXr3ic40zJzyst0ctMzmcYBSMQ7FOF0AXM2OXvezWmMTABAOsJBwX2TQ3DAQAAAAIAAAAlAAAAcAMAAAAAAAABAAAAAAAAAAAAAAA
+

@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Locale>
+    <MultiLanguage id="Power" value="Power" />
+    <MultiLanguage id="CloseComputer" value="Close PC" />
+    <MultiLanguage id="Shutdown" value="Shutdown" />
+    <MultiLanguage id="Restart" value="Restart" />
+    <MultiLanguage id="Hibernate" value="Hibernate" />
+    <MultiLanguage id="Standby" value="Standby" />
+</Locale>

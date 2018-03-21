@@ -1,0 +1,193 @@
+[main]
+Title=Shell - Finalise
+Description=
+Selected=True
+Locked=True
+Mandatory=True
+Level=8
+Author=ThePEBakeryTeam
+Version=20180306
+Date=2018-03-06
+
+[process]
+If,Not,ExistDir,"%TargetDir%\Programs",DirMake,"%TargetDir%\Programs"
+If,ExistDir,"%OutputDir%\Programs\LaunchBar",If,ExistFile,"%ProjectTemp%\LaunchBar.ini",Run,%ScriptFile%,Secondary_LaunchBar_NotInWIM
+If,ExistDir,"%TargetDir%\Programs\LaunchBar",Run,%ScriptFile%,Secondary_LaunchBar_InWIM
+If,%Shell%,Equal,BBLean,Run,%ScriptFile%,BBLEAN
+If,%Shell%,Equal,LaunchBar,Run,%ScriptFile%,LaunchBar
+If,%Shell%,Equal,WinXShell,Run,%ScriptFile%,WinXShell
+Run,%ScriptFile%,WINPESHL
+If,WimExistFile,%OutputDir%\sources\boot.wim,%Boot.wim.Image.number%,Windows/System32/WinPE.bmp,WimPathDelete,%OutputDir%\sources\boot.wim,%Boot.wim.Image.number%,Windows/System32/WinPE.bmp
+Run,%ScriptFile%,MakeWim
+Run,%ScriptFile%,LOGFILE
+
+[Secondary_LaunchBar_InWIM]
+If,Not,ExistDir,"%TargetDir%\Programs\LaunchBar\Menu",DirMake,"%TargetDir%\Programs\LaunchBar\Menu"
+If,%LaunchBarMenuStyle%,Equal,QUICK,FileCopy,"%ProjectTemp%\ShortCuts\LaunchBar\*.*","%TargetDir%\Programs\LaunchBar\Menu"
+If,%LaunchBarMenuStyle%,Equal,START,DirCopy,"%ProjectTemp%\ShortCuts\Start\*","%TargetDir%\Programs\LaunchBar\Menu"
+
+[Secondary_LaunchBar_NotInWIM]
+If,ExistFile,"%ProjectTemp%\LaunchBar.ini",Filecopy,"%ProjectTemp%\LaunchBar.ini","%OutputDir%\Programs\LaunchBar"
+If,Not,ExistDir,"%TargetDir%\Programs\misc",DirMake,"%TargetDir%\Programs\misc"
+FileCopy,"%Programs%\misc\find.LaunchBar.%ARCH%.cmd","%TargetDir%\Programs\misc\FindLaunchBar_%ARCH%.cmd"
+FileRename,"%OutputDir%\Programs","%OutputDir%\Programs.%ARCH%"
+FileCopy,"%Programs%\misc\Find_Replace.ico","%TargetDir%\Programs\misc\Find_Replace.ico"
+ShellExecute,Hide,"%Tools%\Shortcut.exe","/A:C /T:#$q#$pSystemDrive#$p\Programs\misc\FindLaunchBar_%ARCH%.cmd#$q /F:#$q%ProjectTemp%\Find LaunchBar.lnk#$q /I:#$q#$pSystemDrive#$p\Programs\misc\Find_Replace.ico#$c0#$q"
+If,ExistFile,"%ProjectTemp%\Find LaunchBar.lnk",Begin
+  Set,%MyShortcut%,Find LaunchBar.lnk
+  FileCopy,"%ProjectTemp%\%MyShortcut%","%ProjectTemp%\ShortCuts\Desktop"
+  FileCopy,"%ProjectTemp%\%MyShortcut%","%ProjectTemp%\ShortCuts\Quick"
+  FileCopy,"%ProjectTemp%\%MyShortcut%","%ProjectTemp%\ShortCuts\Start"
+  FileDelete,"%ProjectTemp%\%MyShortcut%"
+End
+
+[LaunchBar]
+If,ExistDir,"%ProjectTemp%\ShortCuts\Start",DirCopy,"%ProjectTemp%\ShortCuts\Start\*","%TargetDir%\Windows\System32\config\systemprofile\AppData\Roaming\Microsoft\Internet Explorer\Quick Launch"
+ReadInterface,Value,"%ProjectDir%\Shell\B_shell.script",Interface,pScrollBox_LaunchBar3,%LaunchBarIconSize%
+If,%LaunchBarIconSize%,Equal,SMALL,Set,%LaunchBarIconSize%,0
+If,%LaunchBarIconSize%,Equal,LARGE,Set,%LaunchBarIconSize%,1
+ReadInterface,Value,"%ProjectDir%\Shell\B_shell.script",Interface,pScrollBox_LaunchBar4,%LaunchBarMenuPosition%
+If,%LaunchBarMenuPosition%,Equal,LEFT,Set,%LaunchBarMenuPosition%,1
+If,%LaunchBarMenuPosition%,Equal,RIGHT,Set,%LaunchBarMenuPosition%,3
+If,%LaunchBarMenuPosition%,Equal,TOP,Set,%LaunchBarMenuPosition%,2
+If,%LaunchBarMenuPosition%,Equal,BOTTOM,Set,%LaunchBarMenuPosition%,4
+StrFormat,LEFT,%CodeBase%,3,%CodeBase3%
+
+[WinXShell]
+If,ExistFile,"%TargetDir%\Programs\WinXShell\WinXShell.jcfg",FileDelete,"%TargetDir%\Programs\WinXShell\WinXShell.jcfg"
+FileCopy,"%ProjectTemp%\WinXShell.txt","%TargetDir%\Programs\WinXShell\WinXShell.jcfg"
+If,%WinXShellIconsDesktop%,Equal,YES,If,ExistFile,"%ProjectTemp%\ShortCuts\Desktop\*.lnk",FileCopy,"%ProjectTemp%\ShortCuts\Desktop\*.lnk","%TargetDir%\Users\Default\Desktop"
+If,%WinXShellIconsMenu%,Equal,YES,If,ExistDir,"%ProjectTemp%\ShortCuts\Start",DirCopy,"%ProjectTemp%\ShortCuts\Start\*","%TargetDir%\Users\Default\AppData\Roaming\Microsoft\Windows\Start Menu"
+If,%WinXShellIconsQuickLaunch%,Equal,YES,If,ExistFile,"%ProjectTemp%\ShortCuts\Quick\*.lnk",FileCopy,"%ProjectTemp%\ShortCuts\Quick\*.lnk","%TargetDir%\Users\Default\AppData\Roaming\Microsoft\Internet Explorer\Quick Launch"
+//Remove arrow from Shortcuts
+ShellExecute,Hide,"%Tools%\offlinereg\offlinereg-win32.exe","#$q%Target_config%\software#$q #$qMicrosoft\Windows\CurrentVersion\Explorer\Shell Icons#$q setvalue #$q29#$q #$q#$pSystemRoot#$p\system32\shell32.dll#$c-50#$q"
+
+[BBLEAN]
+DirMake,"%TargetDir%\Programs\bblean"
+DirCopy,"%Programs%\bblean\%ARCH%\*","%TargetDir%\Programs\bblean"
+Run,%ScriptFile%,BBLEAN_MENU
+Run,%ScriptFile%,BBKEYS_CONFIG
+Run,%ScriptFile%,BBLEAN_Wallpaper
+Wait,1
+
+[BBKEYS_CONFIG]
+FileCreateBlank,"%TargetDir%\Programs\bblean\plugins\bbkeys\bbKeys.rc"
+TXTaddLine,"%TargetDir%\Programs\bblean\plugins\bbkeys\bbKeys.rc",# Invoke menu:,Append
+TXTaddLine,"%TargetDir%\Programs\bblean\plugins\bbkeys\bbKeys.rc",KeyToGrab(LWIN)#$c        WithModifier()#$c         WithAction(ExecCommand)#$c DoThis(@BBCore.ShowMenu),Append
+TXTaddLine,"%TargetDir%\Programs\bblean\plugins\bbkeys\bbKeys.rc",,Append
+TXTaddLine,"%TargetDir%\Programs\bblean\plugins\bbkeys\bbKeys.rc",# Extern commands:,Append
+If,%Filemanager%,Equal,Q-Dir,TXTaddLine,"%TargetDir%\Programs\bblean\plugins\bbkeys\bbKeys.rc",KeyToGrab(E)#$c           WithModifier(Win)#$c      WithAction(ExecCommand)#$c DoThis(%SYSTEMDRIVE%\Programs\Q-Dir\Q-Dir.exe),Append
+If,%Filemanager%,Equal,JustManager,TXTaddLine,"%TargetDir%\Programs\bblean\plugins\bbkeys\bbKeys.rc",KeyToGrab(E)#$c           WithModifier(Win)#$c      WithAction(ExecCommand)#$c DoThis(%SYSTEMDRIVE%\Programs\JustManager\JustManager.exe),Append
+If,%Filemanager%,Equal,7-zip,TXTaddLine,"%TargetDir%\Programs\bblean\plugins\bbkeys\bbKeys.rc",KeyToGrab(E)#$c           WithModifier(Win)#$c      WithAction(ExecCommand)#$c DoThis(%SYSTEMDRIVE%\Programs\7-zip\7zfm.exe),Append
+If,%Filemanager%,Equal,Explorer++,TXTaddLine,"%TargetDir%\Programs\bblean\plugins\bbkeys\bbKeys.rc",KeyToGrab(E)#$c           WithModifier(Win)#$c      WithAction(ExecCommand)#$c DoThis(%SYSTEMDRIVE%\Programs\Explorer++\Explorer++.exe),Append
+TXTaddLine,"%TargetDir%\Programs\bblean\plugins\bbkeys\bbKeys.rc",KeyToGrab(R)#$c           WithModifier(Win)#$c      WithAction(Run),Append
+
+[BBLEAN_MENU]
+If,ExistDir,"%ProjectTemp%\ShortCuts\Start",DirCopy,"%ProjectTemp%\ShortCuts\Start\*","%TargetDir%\Users\Default\AppData\Roaming\Microsoft\Windows\Start Menu"
+If,%Filemanager%,Equal,JustManager,TXTaddLine,"%TargetDir%\Programs\bblean\menu.rc",[exec] (File Manager) {%SYSTEMDRIVE%\Programs\JustManager\JustManager.exe},Append
+If,%Filemanager%,Equal,Explorer++,TXTaddLine,"%TargetDir%\Programs\bblean\menu.rc",[exec] (File Manager) {%SYSTEMDRIVE%\Programs\Explorer++\Explorer++.exe},Append
+If,%Filemanager%,Equal,7-zip,TXTaddLine,"%TargetDir%\Programs\bblean\menu.rc",[exec] (File Manager) {%SYSTEMDRIVE%\Programs\7-zip\7zfm.exe},Append
+If,%Filemanager%,Equal,Q-Dir,TXTaddLine,"%TargetDir%\Programs\bblean\menu.rc",[exec] (File Manager) {%SYSTEMDRIVE%\Programs\Q-Dir\Q-Dir.exe},Append
+TXTaddLine,"%TargetDir%\Programs\bblean\menu.rc",[nop],Append
+TXTaddLine,"%TargetDir%\Programs\bblean\menu.rc",[path] (Start) {DRIVES\X:\Users\Default\AppData\Roaming\Microsoft\Windows\Start Menu},Append
+TXTaddLine,"%TargetDir%\Programs\bblean\menu.rc",,Append
+TXTaddLine,"%TargetDir%\Programs\bblean\menu.rc",[exec] (Command Prompt) {cmd.exe},Append
+TXTaddLine,"%TargetDir%\Programs\bblean\menu.rc",[run]  (Run),Append
+TXTaddLine,"%TargetDir%\Programs\bblean\menu.rc",,Append
+If,ExistFile,"%TargetDir%\Programs\ScreenRes\custom.cmd",TXTaddLine,"%TargetDir%\Programs\bblean\menu.rc",[exec] (Set Resolution) {%SYSTEMDRIVE%\Programs\ScreenRes\custom.cmd},Append
+If,ExistFile,"%TargetDir%\Programs\network\start_network.cmd",Begin
+  TXTaddLine,"%TargetDir%\Programs\bblean\menu.rc",[submenu] (Network),Append
+  TXTaddLine,"%TargetDir%\Programs\bblean\menu.rc",[exec] (Start) {%SYSTEMDRIVE%\Programs\network\start_network.cmd},Append
+  TXTaddLine,"%TargetDir%\Programs\bblean\menu.rc",[exec] (Firewall Off) {%SYSTEMDRIVE%\Programs\network\firewall.off.cmd},Append
+  TXTaddLine,"%TargetDir%\Programs\bblean\menu.rc",[exec] (Readme) {%SYSTEMROOT%\System32\notepad.exe %SYSTEMDRIVE%\Programs\network\readme.txt},Append
+  TXTaddLine,"%TargetDir%\Programs\bblean\menu.rc",[end],Append
+  TXTaddLine,"%TargetDir%\Programs\bblean\menu.rc",,Append
+End
+TXTaddLine,"%TargetDir%\Programs\bblean\menu.rc",[submenu] (System),Append
+If,ExistFile,"%TargetDir%\Programs\BootRec\BootRec.exe",Begin
+  TXTaddLine,"%TargetDir%\Programs\bblean\menu.rc",[submenu] (BootRec),Append
+  TXTaddLine,"%TargetDir%\Programs\bblean\menu.rc",[exec] (/FixMbr) {%SYSTEMDRIVE%\Programs\BootRec\fixmbr.cmd},Append
+  TXTaddLine,"%TargetDir%\Programs\bblean\menu.rc",[exec] (/FixBoot) {%SYSTEMDRIVE%\Programs\BootRec\fixboot.cmd},Append
+  TXTaddLine,"%TargetDir%\Programs\bblean\menu.rc",[exec] (/ScanOs) {%SYSTEMDRIVE%\Programs\BootRec\scanos.cmd},Append
+  TXTaddLine,"%TargetDir%\Programs\bblean\menu.rc",[exec] (/RebuildBcd) {%SYSTEMDRIVE%\Programs\BootRec\rebuildbcd.cmd},Append
+  TXTaddLine,"%TargetDir%\Programs\bblean\menu.rc",[end],Append
+  TXTaddLine,"%TargetDir%\Programs\bblean\menu.rc",,Append
+End
+If,ExistFile,"%TargetDir%\WINDOWS\System32\diskpart.align.cmd",TXTaddLine,"%TargetDir%\Programs\bblean\menu.rc",[submenu] (DiskPart),Append
+TXTaddLine,"%TargetDir%\Programs\bblean\menu.rc",[exec] (DiskPart) {%SYSTEMROOT%\System32\diskpart.exe},Append
+If,ExistFile,"%TargetDir%\WINDOWS\System32\diskpart.align.cmd",TXTaddLine,"%TargetDir%\Programs\bblean\menu.rc",[exec] (Set Alignment) {%SYSTEMROOT%\System32\diskpart.align.cmd},Append
+If,ExistFile,"%TargetDir%\WINDOWS\System32\diskpart.align.cmd",TXTaddLine,"%TargetDir%\Programs\bblean\menu.rc",[end],Append
+If,ExistFile,"%TargetDir%\Programs\KeyboardLayout\KeyboardLayout.cmd",TXTaddLine,"%TargetDir%\Programs\bblean\menu.rc",[exec] (KeyboardLayout) {%SYSTEMDRIVE%\Programs\KeyboardLayout\KeyboardLayout.cmd},Append
+TXTaddLine,"%TargetDir%\Programs\bblean\menu.rc",[exec] (Notepad) {%SYSTEMROOT%\System32\notepad.exe},Append
+TXTaddLine,"%TargetDir%\Programs\bblean\menu.rc",[exec] (Regedit) {%SYSTEMROOT%\regedit.exe},Append
+TXTaddLine,"%TargetDir%\Programs\bblean\menu.rc",[exec] (Task Manager) {%SYSTEMROOT%\system32\taskmgr.exe},Append
+TXTaddLine,"%TargetDir%\Programs\bblean\menu.rc",[end],Append
+TXTaddLine,"%TargetDir%\Programs\bblean\menu.rc",,Append
+TXTaddLine,"%TargetDir%\Programs\bblean\menu.rc",[sep],Append
+TXTaddLine,"%TargetDir%\Programs\bblean\menu.rc",[submenu] (Shutdown),Append
+TXTaddLine,"%TargetDir%\Programs\bblean\menu.rc",[exec] (Reboot)			{%SYSTEMROOT%\System32\wpeutil.exe Reboot},Append
+TXTaddLine,"%TargetDir%\Programs\bblean\menu.rc",[exec] (Shutdown)		{%SYSTEMROOT%\System32\wpeutil.exe Shutdown},Append
+TXTaddLine,"%TargetDir%\Programs\bblean\menu.rc",[end],Append
+TXTaddLine,"%TargetDir%\Programs\bblean\menu.rc",,Append
+TXTaddLine,"%TargetDir%\Programs\bblean\menu.rc",[end],Append
+TXTReplace,"%TargetDir%\Programs\bblean\styles\0505 all blue\070_Blue","window.handleHeight: 8","window.handleHeight: 2"
+
+[BBLEAN_Wallpaper]
+If,Not,ExistDir,"%TargetDir%\Programs\bblean\backgrounds",DirMake,"%TargetDir%\Programs\bblean\backgrounds"
+If,ExistFile,"%Target_System32%\winpe.jpg",FileCopy,"%Target_System32%\winpe.jpg","%TargetDir%\Programs\bblean\backgrounds"
+Else,FileCopy,"%Cache%\Programs\Wallpaper\winpe.jpg","%TargetDir%\Programs\bblean\backgrounds"
+
+[WINPESHL]
+//new lines - section rewritten
+If,ExistFile,"%TargetDir%\Windows\System32\winpeshl.ini",FileDelete,"%TargetDir%\Windows\System32\winpeshl.ini"
+FileCreateBlank,"%TargetDir%\Windows\System32\winpeshl.ini"
+TXTaddLine,"%TargetDir%\Windows\System32\winpeshl.ini",[LaunchApps],Append
+If,ExistFile,"%Target_System32%\actxprxy.dll",TXTaddLine,"%TargetDir%\Windows\System32\winpeshl.ini",Regsvr32.exe#$c /s actxprxy.dll,Append
+If,%Shell%,Equal,BBLean,TXTaddLine,"%TargetDir%\Windows\System32\winpeshl.ini",%SYSTEMDRIVE%\Programs\bbLean\blackbox.exe,Append
+If,%Shell%,Equal,CMD,TXTaddLine,"%TargetDir%\Windows\System32\winpeshl.ini",%SYSTEMROOT%\System32\cmd.exe,Append
+If,%Shell%,Equal,LaunchBar,Begin
+  If,%ARCH%,Equal,x86,Begin
+    If,%CodeBase3%,Smaller,6.3,TXTaddLine,"%TargetDir%\Windows\System32\winpeshl.ini",%SYSTEMDRIVE%\Programs\LaunchBar_Shell\LaunchBar.exe#$c #$qLARGE=%LaunchBarIconSize% POSITION=%LaunchBarMenuPosition% ONTOP=0 CENTER=1#$q,Append
+	Else,TXTaddLine,"%TargetDir%\Windows\System32\winpeshl.ini",%SYSTEMDRIVE%\Programs\LaunchBar_Shell\LaunchBar.exe#$c LARGE=%LaunchBarIconSize% POSITION=%LaunchBarMenuPosition% ONTOP=0 CENTER=1,Append
+  End
+  If,%ARCH%,Equal,x64,Begin
+    If,%CodeBase3%,Smaller,6.3,TXTaddLine,"%TargetDir%\Windows\System32\winpeshl.ini",%SYSTEMDRIVE%\Programs\LaunchBar_Shell\LaunchBar_x64.exe#$c #$qLARGE=%LaunchBarIconSize% POSITION=%LaunchBarMenuPosition% ONTOP=0 CENTER=1#$q,Append
+    Else,TXTaddLine,"%TargetDir%\Windows\System32\winpeshl.ini",%SYSTEMDRIVE%\Programs\LaunchBar_Shell\LaunchBar_x64.exe#$c LARGE=%LaunchBarIconSize% POSITION=%LaunchBarMenuPosition% ONTOP=0 CENTER=1,Append
+  End
+End
+If,%Shell%,Equal,WinXShell,TXTaddLine,"%TargetDir%\Windows\System32\winpeshl.ini",%SYSTEMDRIVE%\Programs\WinXShell\WinXShell.exe#$c -winpe,Append
+
+[MakeWim]
+If,ExistFile,"%OutputDir%\Project.Settings.ini",FileCopy,"%OutputDir%\Project.Settings.ini","%TargetDir%\Project.Settings.ini"
+If,ExistFile,"%SourceDir%\bootmgr",FileCopy,"%SourceDir%\bootmgr","%OutputDir%"
+If,ExistFile,"%SourceDir%\bootmgr.efi",FileCopy,"%SourceDir%\bootmgr.efi","%OutputDir%"
+If,ExistDir,"%SourceDir%\boot",DirCopy,"%SourceDir%\boot\*.*","%OutputDir%\boot"
+If,ExistDir,"%SourceDir%\efi",Begin
+  If,Not,ExistDir,"%OutputDir%\efi",DirMake,"%OutputDir%\efi"
+  DirCopy,"%SourceDir%\efi\*.*","%OutputDir%\efi"
+End
+//
+ShellExecute,Hide,"attrib.exe","-h -s #$q%TargetDir%#$q"
+If,%Method%,Equal,inject,Begin
+  Echo,"Injecting files"
+  //the empty quotes on the next line are required (to add files at the root of boot.wim)
+  WimPathAdd,%OutputDir%\sources\boot.wim,%Boot.wim.Image.number%,%TargetDir%,""
+  wait,1
+  Echo,"Optimize boot.wim to save space"
+  WimOptimize,%OutputDir%\sources\boot.wim
+End
+
+[LOGFILE]
+If,%LOGFILE%,Equal,True,Begin
+  StrFormat,Date,%var%,yyyy-mm-dd-hh.nn
+  System,SAVELOG,%BaseDir%\Log-%var%.html
+End
+
+[AuthorEncoded]
+Logo=donut.ico
+donut.ico=953,1271
+
+[EncodedFile-AuthorEncoded-donut.ico]
+lines=0
+0=eJztmctKI0EUhiu2kkXUaAKDN3AWMzAgShARESUgbly4UBQEBUfxhqgENwoBM270Fdy4EBEHXYjgwoWXRvHyAOpKMI+QpQvxTP4kxWQ6Gbu6ujvdSBL+/NAdzvlOpet0V4UxT/IdCrHk51f2+ztjXxhjP5JKHmI/Wfp46vWNsYAvLf4ioqKKKsqkjo+PKRKJUGdnJwWDQdKer66upvb2dpqbm6O9vb2c807o6emJpqamqLKyktAKsqX9rvZ8WVkZ9ff30+npqSO1jI6OksfjyeEW5c8Wfperq6uC1LG9vU3l5eX/ZZHhhzAWs7OzttYwPj6uyy3Lz9XS0kIvLy+W19HT0yPMboYfqquro8fHR8tq6O3tNcRulh+qr6+3hH9mZsYwuxX8UCgUMlXD/v6+FLtV/NDi4qJ0DYFAwHH+kpISur+/N1zD/Py8NLuV/FB3d7dhftwf3cIPXV5eCtewurpqKpcd/MPDw8L8DQ0NruP3er1C/Hd3d6byKIpCCwsLObmi0Sj5/X5TsQ8PD3Vr2NzclI4PPlVVP8zR3NwsHV+klw4ODkrFRp87OzvTjR+Px6miokIqR0dHh278pqYmqdh4thOdX2tra1I5cD/Si411kkzsm5sbYX47Jdv3neb+LPyy18/t7a0rapCdvxMTE8L8sVjMtvk7MDAgFRv9U6/3c+XbrxCRSP/c2NiQig3h2tO7jrAmkY2f776uFfLLxocw/5eXl3PyrK+vk5n1BHRwcCD0+2LtaSYPpI1pNp7o8xu0srLiOv6hoSFD/a20tNRV/BcXF4b4sc/qFv6uri5D7FxVVVWO82NfUfbeuLu76zg/9hFk2LkmJycd48deqBl2LqN7n1bw19bWEtY6VvBD4XC4YPw1NTX08PBgGTvX2NiY7fx4fnx+fracnWtra4t8Pp8t/JhrdnFrNTIyYtn/R62trXR+fl4wdi5coxizfP8n6fFjn6ivr49OTk4Kzp1PR0dHtLS0lHpGz7fOwL2wra2NpqenaWdnxxXMRRX1CQT7wK+vU/6uqDH4m6I2whOKit1kiiuqAlcVFd2UfmWcKSo6zTs8lvEwY2/Z3sjYq8YTcD/cm0i7P+ONrxlPcSVYWOP8OP+e//XfOOm42nxv2R7+y8m5eR2oi2XXyevm48DHhY8THzed8f0DAAkXr3ic40zJzyst0ctMzmcYBSMQ7FOF0AXM2OXvezWmMTABAOsJBwX2TQ3DAQAAAAIAAAAlAAAAcAMAAAAAAAABAAAAAAAAAAAAAAA
+

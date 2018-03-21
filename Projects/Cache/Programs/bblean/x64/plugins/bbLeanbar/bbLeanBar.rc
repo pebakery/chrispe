@@ -1,0 +1,65 @@
+# ------------------------------------------------------
+# bbLeanBar.rc
+
+# Lines starting with # or ! are ignored
+
+# This builds a toolbar with tasks and tray. You may
+# change the order of items or uncomment some of the
+# currently disabled (!) items:
+
+bbleanbar.item:                 WorkspaceLabel
+bbleanbar.item:                 WorkspaceButtonL
+bbleanbar.item:                 WorkspaceButtonR
+bbleanbar.item:                 Tasks
+bbleanbar.item:                 CurrentOnlyButton
+bbleanbar.item:                 Tray
+bbleanbar.item:                 WindowButtonL
+bbleanbar.item:                 WindowButtonR
+bbleanbar.item:                 Clock
+
+# other available items:
+!bbleanbar.item:                 TaskStyleButton
+!bbleanbar.item:                 WindowLabel
+# opens another bar-line
+!bbleanbar.item:                NewLine
+# inserts a small gap
+!bbleanbar.item:                Space
+
+# ----------------
+# general settings
+
+bbLeanBar.placement:            BottomCenter
+bbLeanBar.position.x:           103
+bbLeanBar.position.y:           0
+bbLeanBar.widthPercent:         100
+bbLeanBar.useSlit:              false
+bbLeanBar.smallicons:           true
+bbLeanBar.pluginToggle:         true
+bbleanbar.OnTop:                false
+bbLeanBar.autoHide:             false
+bbleanbar.autoRaise:            true
+bbleanbar.snapToEdge:           true
+bbleanbar.alpha.enabled:        false
+bbleanbar.alpha.value:          200
+bbLeanBar.balloonTips:          true
+# Hide when applications go fullscreen
+bbLeanBar.autoFullscreenHide:   true
+
+# task tabs
+bbLeanBar.tasks.style:          2
+bbLeanBar.tasks.reverse:        false
+bbLeanBar.tasks.current:        false
+bbLeanBar.tasks.sysmenu:        false
+bbLeanBar.tasks.drawBorder:     false
+
+# icon color
+bbleanbar.icon.saturation:      0
+bbleanbar.icon.hue:             40
+
+# clock-format string
+bbleanbar.strftimeFormat:       %d %a %#H:%M
+
+# ------------------------------------------------------
+# systray icon fix, tweak it, if the icon's
+# context menus don't open correctly...
+! bbleanbar.tray.FocusDelay: 60

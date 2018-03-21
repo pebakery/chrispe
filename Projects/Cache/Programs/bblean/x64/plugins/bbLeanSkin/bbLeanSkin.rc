@@ -1,0 +1,64 @@
+# -----------------------------------------------
+# - bbleanskin.rc - for bbLeanSkin 1.16
+
+
+# - Titlebar Buttons
+# - 0 = Empty
+# - 1 = Close
+# - 2 = Maximize
+# - 3 = Minimize
+# - 4 = Rollup
+# - 5 = AlwaysOnTop
+# - 6 = Pin
+
+bbleanskin.titlebar.buttons:            400321
+
+
+# -----------------------------------------------
+# - Titlebar Clicks
+# - One out of 1-6 from above, "Lower", or empty
+
+bbleanskin.titlebar.DblClick:           Rollup
+bbleanskin.titlebar.shiftDblClick:      Maximize
+bbleanskin.titlebar.ctrlDblClick:       
+
+bbleanskin.titlebar.RightClick:         Minimize
+bbleanskin.titlebar.shiftRightClick:    Close
+bbleanskin.titlebar.ctrlRightClick:     
+
+bbleanskin.titlebar.MidClick:           Close
+bbleanskin.titlebar.shiftMidClick:      
+bbleanskin.titlebar.ctrlMidClick:       
+
+bbleanskin.titlebar.shiftLeftClick:     Lower
+bbleanskin.titlebar.ctrlLLeftClick:     
+
+
+# -----------------------------------------------
+# - Options
+
+# - Apply skin to open applications on start
+bbleanskin.option.applyToOpen:          true
+
+# - Snap windows to screen edges
+bbleanskin.option.snapWindows:          false
+
+# - Rollup style
+bbleanskin.option.nixShadeStyle:        true
+
+# - Show log window
+bbleanskin.option.enableLog:            false
+
+# - Automatically adjust the systemwide caption
+# - height to eliminate a gap at the top of
+# - maximized windows. But some apps might draw
+# - distorted icons with this.
+bbleanskin.option.adjustCaptionHeight:  false
+
+# -----------------------------------------------
+# - Windows Appearance
+!bbleanskin.windows.menu.Height:         15
+!bbleanskin.windows.menu.Font:           shoe's 6pt ownage
+!bbleanskin.windows.menu.FontHeight:     8
+!bbleanskin.windows.ScrollbarSize:       13
+!bbleanskin.windows.setToolTipColor:     true

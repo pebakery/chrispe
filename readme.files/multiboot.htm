@@ -1,0 +1,557 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd"><html><head><link type="text/css" rel="stylesheet" href="chrispe.css" media="screen" /><title>ChrisPE</title></head><body><font> 
+ 
+ 
+ 
+<p> 
+<select ONCHANGE="location = this.options[this.selectedIndex].value;"> 
+<option value="" disabled></option> 
+<option value="../readme.html">Contents</option> 
+<option value="" disabled>=======</option> 
+<option value="winpe.htm">Windows PE</option>  
+<option value="builder.htm">Builders</option>  
+<option value="options.htm">Project Options</option>  
+<option value="project.htm">Project Scripts</option>  
+<option value="instructions_pebakery.htm">Instructions</option>  
+<option value="menu_system.htm">Menu System</option>  
+<option value="not_in_wim.htm">Include...in boot.wim</option>  
+<option value="usb.htm">...Bootable USB...</option>  
+<option value="uefi.htm">UEFI, BIOS, GPT...</option>  
+<option value="multiboot.htm" selected="selected">Multiboot WinPE</option>  
+<option value="" disabled></option> 
+<option value="" disabled>Appendices</option> 
+<option value="" disabled>=========</option> 
+<option value="quick_pebakery.htm">Quick Start</option>  
+<option value="acknowledgements.htm">Acknowledgements</option>  
+<option value="" disabled></option> 
+</select> 
+</p> 
+ 
+ 
+ 
+<hr> 
+<a href="http://chrispe.mistyprojects.co.uk/"><img src="img/home.jpg" BORDER=1></a> 
+ 
+
+
+
+
+<h2><u>MultiBoot WinPE</u></h2>
+
+
+
+<p>
+It's possible to create a boot menu to enable more than one version of <font class="file">WinPE</font> to be booted from the same device by using the command-line bcdedit tool - which is available in all version of Windows since the release of Windows Vista. <font class="file">BCDEdit</font> usage is covered <a class="external" target="_blank" href="http://www.mistyprojects.co.uk/documents/BCDEdit/index.html">here</a> for those interested. 
+</p>
+
+<p>
+<font class="file">WinPE</font> 2.x/3.x/4.0/5.x/10.x all use the Boot Configuration Database (<font class="file">BCD</font>) for boot data - this replaced the <font class="file">boot.ini</font> file used in previous Windows NT versions (including Windows 2000/XP/2003). Unlike <font class="file">boot.ini</font>, which used plain text entries, the <font class="file">BCD</font> store is a registry hive - when opened with a text editor the contents are unreadable. Whilst there are some third party GUI tools capable of editing <font class="file">BCD</font> stores, bcdedit.exe is easy to script - the batch file examples included in this section should make the process easier. 
+</p>
+
+
+<p>
+It's possible to create a <font class="file">WinPE</font> multiboot USB thumbdrive or CD/DVD using an existing <font class="file">ChrisPE</font> build. The following example setups will hopefully give you some idea of the flexibility of this approach -
+
+<ul>
+<li>A RAM Boot <font class="file">WinPE</font> 3.1 + a Flat Boot <font class="file">WinPE</font> 3.1 for use on low RAM systems.</li>
+</ul>
+
+<ul>
+<li>A RAM Boot <font class="file">WinPE</font> 3.1 + a RAM Boot <font class="file">WinFE</font> 4.0 for Forensic Acquisitions.</li>
+</ul>
+
+<ul>
+<li><font class="file">WinPE</font> 2.1/3.0/3.1/4.0/5.0/5.1 - all RAM Boot + <font class="file">WinPE</font> 5.1 Flat Boot.</li>
+</ul>
+Note - it's not possible to multiboot more than one flat boot <font class="file">WinPE</font> unless installing each version to a separate partition.
+</p>
+
+
+<p>
+The following series of batch scripts can be used to create a store and add individual boot entries. 
+</p>
+
+
+
+<a name="bios"></a><br>
+<h2><u>BIOS Entries</u></h2>
+
+
+<p>
+In the examples below we will create a boot menu for <font class="file">x86.wim</font> (RAM boot), <font class="file">x64.wim</font> (RAM boot) and a Flat Boot <font class="file">WinPE</font> for use on <font class="file">BIOS</font> firmware (note the paths to <font class="file">winload.exe</font>. This will hopefully give you an idea of the steps involved so that you can adapt them for your own setup (changing the filenames as appropriate).
+</p>
+
+
+<p>
+After creating the <font class="file">BIOS</font> <font class="file">BCD</font> store it should be copied to the \boot folder.
+</p>
+
+
+<p>
+The first step is to create a new <font class="file">BCD</font> store -
+<br />
+<textarea rows="15" cols="80" readonly="" align="left">
+@echo off
+setlocal
+:: Do not use spaces in paths and do 
+:: NOT wrap in quotes
+
+set BCDEDIT=%SYSTEMROOT%\system32\bcdedit.exe
+set BCDSTORE="%~dp0BCD"
+::___________________________________
+%BCDEDIT% /createstore %BCDSTORE% 
+echo.
+endlocal
+pause
+
+</textarea>
+</p>
+
+
+<p>
+Now add an entry for bootmgr - 
+<br />
+<textarea rows="15" cols="80" readonly="" align="left">
+@echo off
+setlocal
+:: Do not use spaces in paths and do 
+:: NOT wrap in quotes
+
+set BCDEDIT=%SYSTEMROOT%\system32\bcdedit.exe
+set BCDSTORE="%~dp0BCD"
+::___________________________________
+%BCDEDIT% /store %BCDSTORE% /create {bootmgr}
+%BCDEDIT% /store %BCDSTORE% /set {bootmgr} description "Boot Manager"
+%BCDEDIT% /store %BCDSTORE% /set {bootmgr} device boot
+%BCDEDIT% /store %BCDSTORE% /set {bootmgr} timeout 20
+echo.
+endlocal
+pause
+
+</textarea>
+</p>
+
+
+
+<p>
+Add an entry for <font class="file">x86.wim</font> -
+<br />
+<textarea rows="15" cols="80" readonly="" align="left">
+@echo off
+setlocal
+:: Do not use spaces in paths and do 
+:: NOT wrap in quotes
+
+set BCDEDIT=%SYSTEMROOT%\system32\bcdedit.exe
+set BCDSTORE="%~dp0BCD"
+::___________________________________
+ECHO Creating ramdisksdidevice entry...
+for /f "tokens=2 delims={}" %%g in ('%BCDEDIT% /store %BCDSTORE% /create /device') do set ramdisk={%%g} 
+%BCDEDIT% /store %BCDSTORE% /set %ramdisk% ramdisksdidevice boot
+%BCDEDIT% /store %BCDSTORE% /set %ramdisk% ramdisksdipath \boot\boot.sdi 
+
+Echo Adding RAM Boot WinPE entry...
+for /f "tokens=2 delims={}" %%g in ('%BCDEDIT% /store %BCDSTORE% /create /application osloader') do set GUID={%%g}
+%BCDEDIT% /store %BCDSTORE% /set %GUID% systemroot \Windows
+%BCDEDIT% /store %BCDSTORE% /set %GUID% detecthal Yes
+%BCDEDIT% /store %BCDSTORE% /set %GUID% winpe Yes
+%BCDEDIT% /store %BCDSTORE% /set %GUID% osdevice ramdisk=[boot]\sources\x86.wim,%ramdisk%
+%BCDEDIT% /store %BCDSTORE% /set %GUID% device ramdisk=[boot]\sources\x86.wim,%ramdisk%
+%BCDEDIT% /store %BCDSTORE% /set %GUID% path \windows\system32\winload.exe
+%BCDEDIT% /store %BCDSTORE% /set %GUID% description "32-bit Windows PE RAMBoot (BIOS)"
+%BCDEDIT% /store %BCDSTORE% /displayorder %guid% /addlast
+echo.
+endlocal
+pause
+
+</textarea>
+</p>
+
+
+
+
+<p>
+Add an entry for <font class="file">x64.wim</font> -
+<br />
+<textarea rows="15" cols="80" readonly="" align="left">
+@echo off
+setlocal
+:: Do not use spaces in paths and do 
+:: NOT wrap in quotes
+
+set BCDEDIT=%SYSTEMROOT%\system32\bcdedit.exe
+set BCDSTORE="%~dp0BCD"
+::___________________________________
+ECHO Creating ramdisksdidevice entry...
+for /f "tokens=2 delims={}" %%g in ('%BCDEDIT% /store %BCDSTORE% /create /device') do set ramdisk={%%g} 
+%BCDEDIT% /store %BCDSTORE% /set %ramdisk% ramdisksdidevice boot
+%BCDEDIT% /store %BCDSTORE% /set %ramdisk% ramdisksdipath \boot\boot.sdi 
+
+Echo Adding RAM Boot WinPE entry...
+for /f "tokens=2 delims={}" %%g in ('%BCDEDIT% /store %BCDSTORE% /create /application osloader') do set GUID={%%g}
+%BCDEDIT% /store %BCDSTORE% /set %GUID% systemroot \Windows
+%BCDEDIT% /store %BCDSTORE% /set %GUID% detecthal Yes
+%BCDEDIT% /store %BCDSTORE% /set %GUID% winpe Yes
+%BCDEDIT% /store %BCDSTORE% /set %GUID% osdevice ramdisk=[boot]\sources\x64.wim,%ramdisk%
+%BCDEDIT% /store %BCDSTORE% /set %GUID% device ramdisk=[boot]\sources\x64.wim,%ramdisk%
+%BCDEDIT% /store %BCDSTORE% /set %GUID% path \windows\system32\winload.exe
+%BCDEDIT% /store %BCDSTORE% /set %GUID% description "64-bit Windows PE RAMBoot (BIOS)"
+%BCDEDIT% /store %BCDSTORE% /displayorder %guid% /addlast
+echo.
+endlocal
+pause
+
+</textarea>
+</p>
+
+
+
+
+
+
+<p>
+Add an entry for a Flat Boot <font class="file">WinPE</font> -
+<br />
+<textarea rows="15" cols="80" readonly="" align="left">
+@echo off
+setlocal
+:: Do not use spaces in paths and do 
+:: NOT wrap in quotes
+
+set BCDEDIT=%SYSTEMROOT%\system32\bcdedit.exe
+set BCDSTORE="%~dp0BCD"
+::___________________________________
+Echo Adding FlatBoot WinPE entry...
+for /f "tokens=2 delims={}" %%g in ('%BCDEDIT% /store %BCDSTORE% /create /application osloader') do set guid={%%g}
+%BCDEDIT% /store %BCDSTORE% /set %guid% path \Windows\system32\winload.exe
+%BCDEDIT% /store %BCDSTORE% /set %guid% device boot
+%BCDEDIT% /store %BCDSTORE% /set %guid% osdevice boot
+%BCDEDIT% /store %BCDSTORE% /set %guid% systemroot \Windows
+%BCDEDIT% /store %BCDSTORE% /set %guid% description "Windows PE FLATBoot (BIOS)"
+%BCDEDIT% /store %BCDSTORE% /set %guid% winpe yes
+%BCDEDIT% /store %BCDSTORE% /set %guid% detecthal yes
+%BCDEDIT% /store %BCDSTORE% /displayorder %guid% /addlast
+echo.
+endlocal
+pause
+
+</textarea>
+</p>
+
+
+
+
+
+<p>
+Now putting this all together in one script (the text below has become wrapped - see <a class="internal" href="bcd.bios.txt">here</a> for an easier to read version) -
+
+<br />
+<textarea rows="15" cols="80" readonly="" align="left">
+@echo off
+setlocal
+:: Do not use spaces in paths and do 
+:: NOT wrap in quotes
+
+set BCDEDIT=%SYSTEMROOT%\system32\bcdedit.exe
+set BCDSTORE="%~dp0BCD"
+::___________________________________
+Echo Creating BCD Store...
+%BCDEDIT% /createstore %BCDSTORE% 
+Echo Adding {bootmgr} entry...
+%BCDEDIT% /store %BCDSTORE% /create {bootmgr}
+%BCDEDIT% /store %BCDSTORE% /set {bootmgr} description "Boot Manager"
+%BCDEDIT% /store %BCDSTORE% /set {bootmgr} device boot
+%BCDEDIT% /store %BCDSTORE% /set {bootmgr} timeout 20
+Echo Creating ramdisksdidevice entry...
+for /f "tokens=2 delims={}" %%g in ('%BCDEDIT% /store %BCDSTORE% /create /device') do set ramdisk={%%g} 
+%BCDEDIT% /store %BCDSTORE% /set %ramdisk% ramdisksdidevice boot
+%BCDEDIT% /store %BCDSTORE% /set %ramdisk% ramdisksdipath \boot\boot.sdi 
+Echo Adding RAM Boot WinPE entry...
+for /f "tokens=2 delims={}" %%g in ('%BCDEDIT% /store %BCDSTORE% /create /application osloader') do set GUID={%%g}
+%BCDEDIT% /store %BCDSTORE% /set %GUID% systemroot \Windows
+%BCDEDIT% /store %BCDSTORE% /set %GUID% detecthal Yes
+%BCDEDIT% /store %BCDSTORE% /set %GUID% winpe Yes
+%BCDEDIT% /store %BCDSTORE% /set %GUID% osdevice ramdisk=[boot]\sources\x86.wim,%ramdisk%
+%BCDEDIT% /store %BCDSTORE% /set %GUID% device ramdisk=[boot]\sources\x86.wim,%ramdisk%
+%BCDEDIT% /store %BCDSTORE% /set %GUID% path \windows\system32\winload.exe
+%BCDEDIT% /store %BCDSTORE% /set %GUID% description "32-bit Windows PE RAMBoot (BIOS)"
+%BCDEDIT% /store %BCDSTORE% /displayorder %guid% /addlast
+Echo Creating ramdisksdidevice entry...
+for /f "tokens=2 delims={}" %%g in ('%BCDEDIT% /store %BCDSTORE% /create /device') do set ramdisk={%%g} 
+%BCDEDIT% /store %BCDSTORE% /set %ramdisk% ramdisksdidevice boot
+%BCDEDIT% /store %BCDSTORE% /set %ramdisk% ramdisksdipath \boot\boot.sdi 
+Echo Adding RAM Boot WinPE entry...
+for /f "tokens=2 delims={}" %%g in ('%BCDEDIT% /store %BCDSTORE% /create /application osloader') do set GUID={%%g}
+%BCDEDIT% /store %BCDSTORE% /set %GUID% systemroot \Windows
+%BCDEDIT% /store %BCDSTORE% /set %GUID% detecthal Yes
+%BCDEDIT% /store %BCDSTORE% /set %GUID% winpe Yes
+%BCDEDIT% /store %BCDSTORE% /set %GUID% osdevice ramdisk=[boot]\sources\x64.wim,%ramdisk%
+%BCDEDIT% /store %BCDSTORE% /set %GUID% device ramdisk=[boot]\sources\x64.wim,%ramdisk%
+%BCDEDIT% /store %BCDSTORE% /set %GUID% path \windows\system32\winload.exe
+%BCDEDIT% /store %BCDSTORE% /set %GUID% description "64-bit Windows PE RAMBoot (BIOS)"
+%BCDEDIT% /store %BCDSTORE% /displayorder %guid% /addlast
+Echo Adding FlatBoot WinPE entry...
+for /f "tokens=2 delims={}" %%g in ('%BCDEDIT% /store %BCDSTORE% /create /application osloader') do set guid={%%g}
+%BCDEDIT% /store %BCDSTORE% /set %guid% path \Windows\system32\winload.exe
+%BCDEDIT% /store %BCDSTORE% /set %guid% device boot
+%BCDEDIT% /store %BCDSTORE% /set %guid% osdevice boot
+%BCDEDIT% /store %BCDSTORE% /set %guid% systemroot \Windows
+%BCDEDIT% /store %BCDSTORE% /set %guid% description "Windows PE FLATBoot (BIOS)"
+%BCDEDIT% /store %BCDSTORE% /set %guid% winpe yes
+%BCDEDIT% /store %BCDSTORE% /set %guid% detecthal yes
+%BCDEDIT% /store %BCDSTORE% /displayorder %guid% /addlast
+echo.
+endlocal
+pause
+
+</textarea>
+</p>
+
+
+
+
+
+
+
+
+
+
+
+<a name="uefi"></a><br>
+<h2><u>UEFI Entries</u></h2>
+
+
+<p>
+In the examples below we will create a boot menu for <font class="file">x86.wim</font> (RAM boot), <font class="file">x64.wim</font> (RAM boot) and a Flat Boot <font class="file">WinPE</font> for use on <font class="file">UEFI</font> firmware - the entries are almost identical to those used on <font class="file">BIOS</font> firmware with the only difference being the path to <font class="file">winload.exe</font> being changed to <font class="file">winload.efi</font>.
+</p>
+
+
+<p>
+After creating the <font class="file">UEFI</font> <font class="file">BCD</font> store it should be copied to the <font color="red">\EFI\Microsoft\boot</font> directory.
+</p>
+
+
+<p>
+The first step is to create a new <font class="file">BCD</font> store -
+<br />
+<textarea rows="15" cols="80" readonly="" align="left">
+@echo off
+setlocal
+:: Do not use spaces in paths and do 
+:: NOT wrap in quotes
+
+set BCDEDIT=%SYSTEMROOT%\system32\bcdedit.exe
+set BCDSTORE="%~dp0BCD"
+::___________________________________
+%BCDEDIT% /createstore %BCDSTORE% 
+echo.
+endlocal
+pause
+
+</textarea>
+</p>
+
+
+<p>
+Now add an entry for bootmgr - 
+<br />
+<textarea rows="15" cols="80" readonly="" align="left">
+@echo off
+setlocal
+:: Do not use spaces in paths and do 
+:: NOT wrap in quotes
+
+set BCDEDIT=%SYSTEMROOT%\system32\bcdedit.exe
+set BCDSTORE="%~dp0BCD"
+::___________________________________
+%BCDEDIT% /store %BCDSTORE% /create {bootmgr}
+%BCDEDIT% /store %BCDSTORE% /set {bootmgr} description "Boot Manager"
+%BCDEDIT% /store %BCDSTORE% /set {bootmgr} device boot
+%BCDEDIT% /store %BCDSTORE% /set {bootmgr} timeout 20
+echo.
+endlocal
+pause
+
+</textarea>
+</p>
+
+
+
+<p>
+Add an entry for <font class="file">x86.wim</font> -
+<br />
+<textarea rows="15" cols="80" readonly="" align="left">
+@echo off
+setlocal
+:: Do not use spaces in paths and do 
+:: NOT wrap in quotes
+
+set BCDEDIT=%SYSTEMROOT%\system32\bcdedit.exe
+set BCDSTORE="%~dp0BCD"
+::___________________________________
+ECHO Creating ramdisksdidevice entry...
+for /f "tokens=2 delims={}" %%g in ('%BCDEDIT% /store %BCDSTORE% /create /device') do set ramdisk={%%g} 
+%BCDEDIT% /store %BCDSTORE% /set %ramdisk% ramdisksdidevice boot
+%BCDEDIT% /store %BCDSTORE% /set %ramdisk% ramdisksdipath \boot\boot.sdi 
+
+Echo Adding RAM Boot WinPE entry...
+for /f "tokens=2 delims={}" %%g in ('%BCDEDIT% /store %BCDSTORE% /create /application osloader') do set GUID={%%g}
+%BCDEDIT% /store %BCDSTORE% /set %GUID% systemroot \Windows
+%BCDEDIT% /store %BCDSTORE% /set %GUID% detecthal Yes
+%BCDEDIT% /store %BCDSTORE% /set %GUID% winpe Yes
+%BCDEDIT% /store %BCDSTORE% /set %GUID% osdevice ramdisk=[boot]\sources\x86.wim,%ramdisk%
+%BCDEDIT% /store %BCDSTORE% /set %GUID% device ramdisk=[boot]\sources\x86.wim,%ramdisk%
+%BCDEDIT% /store %BCDSTORE% /set %GUID% path \windows\system32\winload.efi
+%BCDEDIT% /store %BCDSTORE% /set %GUID% description "32-bit Windows PE RAMBoot (UEFI)"
+%BCDEDIT% /store %BCDSTORE% /displayorder %guid% /addlast
+echo.
+endlocal
+pause
+
+</textarea>
+</p>
+
+
+
+
+<p>
+Add an entry for <font class="file">x64.wim</font> -
+<br />
+<textarea rows="15" cols="80" readonly="" align="left">
+@echo off
+setlocal
+:: Do not use spaces in paths and do 
+:: NOT wrap in quotes
+
+set BCDEDIT=%SYSTEMROOT%\system32\bcdedit.exe
+set BCDSTORE="%~dp0BCD"
+::___________________________________
+ECHO Creating ramdisksdidevice entry...
+for /f "tokens=2 delims={}" %%g in ('%BCDEDIT% /store %BCDSTORE% /create /device') do set ramdisk={%%g} 
+%BCDEDIT% /store %BCDSTORE% /set %ramdisk% ramdisksdidevice boot
+%BCDEDIT% /store %BCDSTORE% /set %ramdisk% ramdisksdipath \boot\boot.sdi 
+
+Echo Adding RAM Boot WinPE entry...
+for /f "tokens=2 delims={}" %%g in ('%BCDEDIT% /store %BCDSTORE% /create /application osloader') do set GUID={%%g}
+%BCDEDIT% /store %BCDSTORE% /set %GUID% systemroot \Windows
+%BCDEDIT% /store %BCDSTORE% /set %GUID% detecthal Yes
+%BCDEDIT% /store %BCDSTORE% /set %GUID% winpe Yes
+%BCDEDIT% /store %BCDSTORE% /set %GUID% osdevice ramdisk=[boot]\sources\x64.wim,%ramdisk%
+%BCDEDIT% /store %BCDSTORE% /set %GUID% device ramdisk=[boot]\sources\x64.wim,%ramdisk%
+%BCDEDIT% /store %BCDSTORE% /set %GUID% path \windows\system32\winload.efi
+%BCDEDIT% /store %BCDSTORE% /set %GUID% description "64-bit Windows PE RAMBoot (UEFI)"
+%BCDEDIT% /store %BCDSTORE% /displayorder %guid% /addlast
+echo.
+endlocal
+pause
+
+</textarea>
+</p>
+
+
+
+
+
+
+<p>
+Add an entry for a Flat Boot <font class="file">WinPE</font> -
+<br />
+<textarea rows="15" cols="80" readonly="" align="left">
+@echo off
+setlocal
+:: Do not use spaces in paths and do 
+:: NOT wrap in quotes
+
+set BCDEDIT=%SYSTEMROOT%\system32\bcdedit.exe
+set BCDSTORE="%~dp0BCD"
+::___________________________________
+Echo Adding FlatBoot WinPE entry...
+for /f "tokens=2 delims={}" %%g in ('%BCDEDIT% /store %BCDSTORE% /create /application osloader') do set guid={%%g}
+%BCDEDIT% /store %BCDSTORE% /set %guid% path \Windows\system32\winload.efi
+%BCDEDIT% /store %BCDSTORE% /set %guid% device boot
+%BCDEDIT% /store %BCDSTORE% /set %guid% osdevice boot
+%BCDEDIT% /store %BCDSTORE% /set %guid% systemroot \Windows
+%BCDEDIT% /store %BCDSTORE% /set %guid% description "Windows PE FLATBoot (UEFI)"
+%BCDEDIT% /store %BCDSTORE% /set %guid% winpe yes
+%BCDEDIT% /store %BCDSTORE% /set %guid% detecthal yes
+%BCDEDIT% /store %BCDSTORE% /displayorder %guid% /addlast
+echo.
+endlocal
+pause
+
+</textarea>
+</p>
+
+
+
+
+
+
+
+
+<p>
+Now putting this all together in one script (the text below has become wrapped - see <a class="internal" href="bcd.uefi.txt">here</a> for an easier to read version) -
+<br />
+<textarea rows="15" cols="80" readonly="" align="left">
+@echo off
+setlocal
+:: Do not use spaces in paths and do 
+:: NOT wrap in quotes
+
+set BCDEDIT=%SYSTEMROOT%\system32\bcdedit.exe
+set BCDSTORE="%~dp0BCD"
+::___________________________________
+Echo Creating BCD Store...
+%BCDEDIT% /createstore %BCDSTORE% 
+Echo Adding {bootmgr} entry...
+%BCDEDIT% /store %BCDSTORE% /create {bootmgr}
+%BCDEDIT% /store %BCDSTORE% /set {bootmgr} description "Boot Manager"
+%BCDEDIT% /store %BCDSTORE% /set {bootmgr} device boot
+%BCDEDIT% /store %BCDSTORE% /set {bootmgr} timeout 20
+Echo Creating ramdisksdidevice entry...
+for /f "tokens=2 delims={}" %%g in ('%BCDEDIT% /store %BCDSTORE% /create /device') do set ramdisk={%%g} 
+%BCDEDIT% /store %BCDSTORE% /set %ramdisk% ramdisksdidevice boot
+%BCDEDIT% /store %BCDSTORE% /set %ramdisk% ramdisksdipath \boot\boot.sdi 
+Echo Adding RAM Boot WinPE entry...
+for /f "tokens=2 delims={}" %%g in ('%BCDEDIT% /store %BCDSTORE% /create /application osloader') do set GUID={%%g}
+%BCDEDIT% /store %BCDSTORE% /set %GUID% systemroot \Windows
+%BCDEDIT% /store %BCDSTORE% /set %GUID% detecthal Yes
+%BCDEDIT% /store %BCDSTORE% /set %GUID% winpe Yes
+%BCDEDIT% /store %BCDSTORE% /set %GUID% osdevice ramdisk=[boot]\sources\x86.wim,%ramdisk%
+%BCDEDIT% /store %BCDSTORE% /set %GUID% device ramdisk=[boot]\sources\x86.wim,%ramdisk%
+%BCDEDIT% /store %BCDSTORE% /set %GUID% path \windows\system32\winload.efi
+%BCDEDIT% /store %BCDSTORE% /set %GUID% description "32-bit Windows PE RAMBoot (UEFI)"
+%BCDEDIT% /store %BCDSTORE% /displayorder %guid% /addlast
+Echo Creating ramdisksdidevice entry...
+for /f "tokens=2 delims={}" %%g in ('%BCDEDIT% /store %BCDSTORE% /create /device') do set ramdisk={%%g} 
+%BCDEDIT% /store %BCDSTORE% /set %ramdisk% ramdisksdidevice boot
+%BCDEDIT% /store %BCDSTORE% /set %ramdisk% ramdisksdipath \boot\boot.sdi 
+Echo Adding RAM Boot WinPE entry...
+for /f "tokens=2 delims={}" %%g in ('%BCDEDIT% /store %BCDSTORE% /create /application osloader') do set GUID={%%g}
+%BCDEDIT% /store %BCDSTORE% /set %GUID% systemroot \Windows
+%BCDEDIT% /store %BCDSTORE% /set %GUID% detecthal Yes
+%BCDEDIT% /store %BCDSTORE% /set %GUID% winpe Yes
+%BCDEDIT% /store %BCDSTORE% /set %GUID% osdevice ramdisk=[boot]\sources\x64.wim,%ramdisk%
+%BCDEDIT% /store %BCDSTORE% /set %GUID% device ramdisk=[boot]\sources\x64.wim,%ramdisk%
+%BCDEDIT% /store %BCDSTORE% /set %GUID% path \windows\system32\winload.efi
+%BCDEDIT% /store %BCDSTORE% /set %GUID% description "64-bit Windows PE RAMBoot (UEFI)"
+%BCDEDIT% /store %BCDSTORE% /displayorder %guid% /addlast
+Echo Adding FlatBoot WinPE entry...
+for /f "tokens=2 delims={}" %%g in ('%BCDEDIT% /store %BCDSTORE% /create /application osloader') do set guid={%%g}
+%BCDEDIT% /store %BCDSTORE% /set %guid% path \Windows\system32\winload.efi
+%BCDEDIT% /store %BCDSTORE% /set %guid% device boot
+%BCDEDIT% /store %BCDSTORE% /set %guid% osdevice boot
+%BCDEDIT% /store %BCDSTORE% /set %guid% systemroot \Windows
+%BCDEDIT% /store %BCDSTORE% /set %guid% description "Windows PE FLATBoot (UEFI)"
+%BCDEDIT% /store %BCDSTORE% /set %guid% winpe yes
+%BCDEDIT% /store %BCDSTORE% /set %guid% detecthal yes
+%BCDEDIT% /store %BCDSTORE% /displayorder %guid% /addlast
+echo.
+endlocal
+pause
+
+</textarea>
+</p>
+
+
+
+<p class="breaktop"><font class="file">Document date - 6<sup>th</sup> March 2018</font></p></font></body></html>
