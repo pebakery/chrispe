@@ -4,8 +4,8 @@ Description=Program launcher developed by Peter Lerup.
 Selected=True
 Level=5
 Author=ThePEBakeryTeam
-Version=20180306
-Date=2018-03-06
+Version=20180317
+Date=2018-03-17
 Interface=Interface1
 
 [Interface1]
@@ -80,6 +80,7 @@ message,"Applies to WinXShell#$c BBLean and LaunchBar Shell(s)#$x#$xSelect this 
 message,"This setting does not apply to any LaunchBar instance running as the WinPE Shell. This option only applies to a LaunchBar instance when the Applications' > 'LaunchBar' program script is selected in the build.#$x#$xIf the 'Applications' > 'LaunchBar' program script is selected than enable this option to add a program menu entry to the root of the LaunchBar menu bar. #$x#$xPlease note that if option '6] Programs in boot.wim' in the main project script is set as 'NO'#$c then LaunchBar and a number of other applications will not be available at boot. In this case a text based .ini file will be used for LaunchBar menu settings."
 
 [process]
+If,%FullProjectRun%,Equal,NO,Run,"%ProjectDir%\Core\common.script",PostConfigRun
 AddInterface,%ScriptFile%,Interface1,""
 AddInterface,%ScriptFile%,Interface2,""
 If,%pCheckBoxInWim%,Equal,True,Set,%PROGRAMS.IN.WIM%,YES
@@ -87,6 +88,8 @@ Else,Set,%PROGRAMS.IN.WIM%,NO
 Run,%ScriptFile%,CHECKS
 Run,%ScriptFile%,MENU
 Run,%ScriptFile%,COMMON
+If,%PROGRAMS.IN.WIM%,Equal,NO,Run,%ScriptFile%,NOT.IN.WIM
+If,%PROGRAMS.IN.WIM%,Equal,YES,Run,%ScriptFile%,IN.WIM
 
 [CHECKS]
 If,Not,ExistDir,"%Programs%\LaunchBar",DirMake,"%Programs%\LaunchBar"
@@ -137,26 +140,23 @@ If,%PROGRAMS.IN.WIM%,Equal,YES,Begin
       Set,%ProgramMenuPath%,%pTextBox1%
       Run,"%ProjectDir%\Core\common.script",StartMenu
     End
+    If,%FullProjectRun%,Equal,NO,Run,"%ProjectDir%\Core\common.script",PostConfigRunShortcuts
     FileDelete,"%ProjectTemp%\%MyShortcut%"
   End
 End
 If,%PROGRAMS.IN.WIM%,Equal,NO,Begin
-  If,Not,ExistFile,"%ProjectTemp%\LaunchBar.ini",Begin
-    FileCreateBlank,"%ProjectTemp%\LaunchBar.ini"
-    TXTaddLine,"%ProjectTemp%\LaunchBar.ini",LARGE=%IconSize%,Append
-    TXTaddLine,"%ProjectTemp%\LaunchBar.ini",POSITION=%MenuPosition%,Append
-    TXTaddLine,"%ProjectTemp%\LaunchBar.ini",ONTOP=0,Append
-    TXTaddLine,"%ProjectTemp%\LaunchBar.ini",CENTER=1,Append
-    //TXTaddLine,"%ProjectTemp%\LaunchBar.ini",CMD;#$pCOMSPEC#$p,Append
-    //TXTaddLine,"%ProjectTemp%\LaunchBar.ini",Run;#$pSystemRoot#$p\System32\rundll32.exe;#$pSystemRoot#$p\System32\shell32.dll#$c##61;#$pSystemRoot#$p\System32\shell32.dll;-25,Append
+  If,Not,ExistDir,"%OutputDir%\Programs",DirMake,"%OutputDir%\Programs"
+  If,%ARCH%,Equal,x64,Begin
+    FileCreateBlank,"%OutputDir%\Programs\LaunchBarX64.cmd"
+    TXTaddLine,"%OutputDir%\Programs\LaunchBarX64.cmd",@echo off,Append
+    TXTaddLine,"%OutputDir%\Programs\LaunchBarX64.cmd","CD /D #$p~dp0LaunchBar",Append
+    TXTaddLine,"%OutputDir%\Programs\LaunchBarX64.cmd","Start LaunchBar_x64.exe LARGE=%IconSize% POSITION=%MenuPosition% ONTOP=0 CENTER=1 #$pTemp#$p\ShortCuts",Append
   End
-  //Add and entry for the default file manager
-  ReadInterface,Value,"%ProjectDir%\Shell\D_filemanager.script",Interface2,pCheckBoxShortcutLaunchBar,%pCheckBoxShortcutLaunchBar%
-  If,%pCheckBoxShortcutLaunchBar%,Equal,True,Begin
-    If,%Filemanager%,Equal,Q-Dir,TXTaddLine,"%ProjectTemp%\LaunchBar.ini",FileManager;%SystemDrive%\Programs\Q-Dir\Q-Dir.exe,Append
-    If,%Filemanager%,Equal,Explorer++,TXTaddLine,"%ProjectTemp%\LaunchBar.ini",FileManager;%SystemDrive%\Programs\Explorer++\Explorer++.exe,Append
-    If,%Filemanager%,Equal,JustManager,TXTaddLine,"%ProjectTemp%\LaunchBar.ini",FileManager;%SystemDrive%\Programs\JustManager\JustManager.exe,Append
-    If,%Filemanager%,Equal,7-zip,TXTaddLine,"%ProjectTemp%\LaunchBar.ini",FileManager;%SystemDrive%\Programs\7-zip\7zfm.exe,Append
+  If,%ARCH%,Equal,x86,Begin
+    FileCreateBlank,"%OutputDir%\Programs\LaunchBarX86.cmd"
+    TXTaddLine,"%OutputDir%\Programs\LaunchBarX86.cmd",@echo off,Append
+    TXTaddLine,"%OutputDir%\Programs\LaunchBarX86.cmd","CD /D #$p~dp0LaunchBar",Append
+    TXTaddLine,"%OutputDir%\Programs\LaunchBarX86.cmd","Start LaunchBar.exe LARGE=%IconSize% POSITION=%MenuPosition% ONTOP=0 CENTER=1 #$pTemp#$p\ShortCuts",Append
   End
 End
 
@@ -169,6 +169,14 @@ If,%ARCH%,Equal,x64,FileCopy,"%Programs%\LaunchBar\LaunchBar_x64.exe","%PATH%\Pr
 If,%ARCH%,Equal,x86,FileCopy,"%Programs%\LaunchBar\LaunchBar.exe","%PATH%\Programs\LaunchBar"
 IniWrite,"%OutputDir%\Project.Settings.ini",PROGRAMS,LaunchBar,YES
 
+[IN.WIM]
+If,%FullProjectRun%,Equal,NO,WimPathAdd,%OutputDir%\sources\boot.wim,%Boot.wim.Image.number%,%TargetDir%,""
+//Wait,1
+
+[NOT.IN.WIM]
+//Wait,1
+If,%FullProjectRun%,Equal,NO,Run,"%ProjectDir%\Core\common.script",PostConfigRunNotInWim
+
 [EncodedFile-AuthorEncoded-LaunchBar.ico]
 lines=1
 0=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
@@ -177,17 +185,3 @@ lines=1
 [AuthorEncoded]
 logo=LaunchBar.ico
 LaunchBar.ico=4324,5766
-
-[TOADD]
-//Check if another instance of LaunchBar is set as shell and make sure that they do not share the same screen position.
-If,%pScrollBox2%,Equal,SMALL,Set,%IconSize%,0
-If,%pScrollBox2%,Equal,LARGE,Set,%IconSize%,1
-//POSITION - Controls the placement. Left=1, top = 2, right = 3, bottom = 4
-If,%pScrollBox3%,Equal,LEFT,Set,%MenuPosition%,1
-If,%pScrollBox3%,Equal,RIGHT,Set,%MenuPosition%,3
-If,%pScrollBox3%,Equal,TOP,Set,%MenuPosition%,2
-If,%pScrollBox3%,Equal,BOTTOM,Set,%MenuPosition%,4
-LaunchBar.exe LARGE=%IconSize% POSITION=%MenuPosition% ONTOP=0 CENTER=1
-Arguments for shortcut -
-LARGE=
-

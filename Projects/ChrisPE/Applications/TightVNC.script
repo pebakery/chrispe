@@ -1,0 +1,166 @@
+[main]
+Title=TightVNC Server
+Description=TightVNC for Windows version 2.8.8.0
+Selected=True
+Level=5
+Author=ThePEBakeryTeam
+Version=20180317
+Date=2018-03-17
+Interface=Interface1
+
+[Interface1]
+pTextLabelMenu1="1",1,1,35,3,70,18,10,Bold
+pButtonMenu2="2",1,8,75,0,70,20,pButtonMenu2,0,True,_pButtonMenu2_,True
+pButtonMenu3="?",1,8,145,0,70,20,pButtonMenu3,0,True,_pButtonMenu3_,True
+pWebLabel1=https://www.tightvnc.com/,1,10,51,100,216,18,https://www.tightvnc.com/
+pTextLabel1="TightVNC Website",1,1,51,77,230,18,10,Bold
+pCheckBoxAuto="Run at boot",1,3,51,235,180,18,False,_pCheckBoxAuto_,True
+pCheckBoxInWim="Include Program in boot.wim",1,3,51,265,180,18,True,_pCheckBoxInWim_,True
+
+[pCheckBoxAuto]
+If,%pCheckBoxInWim%,Equal,False,If,%pCheckBoxAuto%,Equal,True,WriteInterface,Value,%ScriptFile%,Interface1,pCheckBoxInWim,True
+
+[pCheckBoxInWim]
+If,%pCheckBoxAuto%,Equal,True,If,%pCheckBoxInWim%,Equal,False,WriteInterface,Value,%ScriptFile%,Interface1,pCheckBoxAuto,False
+
+
+
+[Interface2]
+pButtonMenu1="1",1,8,5,0,70,20,pButtonMenu1,0,True,_pButtonMenu1_,True
+pTextLabelMenu2="2",1,1,108,3,70,18,10,Bold
+pButtonMenu3="?",1,8,145,0,70,20,pButtonMenu3,0,True,_pButtonMenu3_,True
+pBevel1=,1,12,10,65,66,2
+pTextLabel="Menu Entries",1,1,10,50,230,18,8,Bold
+pCheckBoxShortcutDesktop="Add to Desktop Menu",1,3,40,80,150,18,True
+pCheckBoxShortcutQuick="Add to Quicklaunch Menu",1,3,40,110,150,18,True
+pCheckBoxShortcutPrograms="Add to #$qStart#$q > ",1,3,40,140,99,18,True
+pCheckBoxShortcutLaunchBar="Add to LaunchBar Menu ",1,3,40,170,150,18,True
+pButtonShortcut1=?,1,8,10,80,18,18,pButtonShortcut1,0,True,_pButtonShortcut1_,True
+pButtonShortcut2=?,1,8,10,110,18,18,pButtonShortcut2,0,True,_pButtonShortcut2_,True
+pButtonShortcut3=?,1,8,10,140,18,18,pButtonShortcut3,0,True,_pButtonShortcut3_,True
+pButtonShortcut4=?,1,8,10,170,18,18,pButtonShortcut4,0,True,_pButtonShortcut4_,True
+pTextBox1=,1,0,140,140,150,21,Programs
+
+[pButtonMenu1]
+IniWrite,%ScriptFile%,Main,Interface,Interface1
+System,REFRESHINTERFACE
+
+[pButtonMenu2]
+IniWrite,%ScriptFile%,Main,Interface,Interface2
+System,REFRESHINTERFACE
+
+[pButtonMenu3]
+message,"Click on the buttons to toggle between tabs 1 and 2. #$x#$xTab 2 contains menu options for use in the selected shell. Click on the ? button for information about the different options."
+
+[pButtonShortcut1]
+message,"WinXShell only#$x#$xSelect this option to add a program shortcut to the Desktop."
+
+[pButtonShortcut2]
+message,"WinXShell only#$x#$xSelect this option to add a program menu option to the Quicklaunch menu - similar in appearence to the 'Pin to Taskbar' option in Windows 7/8/10."
+
+[pButtonShortcut3]
+message,"Applies to WinXShell#$c BBLean and LaunchBar Shell(s)#$x#$xSelect this option to add a program menu option to the Start menu. Leave blank to add to the root of the menu#$c or manually type a path to place in a sub-menu (do not use spaces in the path). E.g. #$x#$s- FileManager#$x#$s- Programs#$x#$s- Programs\FileManager#$x#$xAnd looking at the examples above - #$x#$xLeave this option blank to add a menu entry to the root of the program menu (the 'Start' menu in WinXShell#$c the 'Start' menu in BBLean#$c or the root of the LaunchBar menu bar if LaunchBar is selected as Shell)#$x#$xEnter 'FileManager' to add a menu entry for this application to the 'Start' > 'FileManager' sub-menu (WinXShell and bblean) or the 'FileManager' sub-menu in LaunchBar.#$x#$xEnter 'Programs' to add a menu entry for this application to the 'Start' > 'Programs' sub-menu (WinXShell and bblean) or the 'Programs' sub-menu in LaunchBar.#$x#$xEnter 'Programs\FileManager' to add a menu entry for this application to the 'Start' > 'Programs' > 'FileManager' sub-menu (WinXShell and bblean) or the 'Programs' > 'FileManager' sub-menu in LaunchBar."
+
+[pButtonShortcut4]
+message,"This setting does not apply to any LaunchBar instance running as the WinPE Shell. This option only applies to a LaunchBar instance when the Applications' > 'LaunchBar' program script is selected in the build.#$x#$xIf the 'Applications' > 'LaunchBar' program script is selected than enable this option to add a program menu entry to the root of the LaunchBar menu bar. #$x#$xPlease note that if option '6] Programs in boot.wim' in the main project script is set as 'NO'#$c then LaunchBar and a number of other applications will not be available at boot. In this case a text based .ini file will be used for LaunchBar menu settings."
+
+[process]
+If,%FullProjectRun%,Equal,NO,Begin
+  If,%pCheckBoxAuto%,Equal,True,Begin
+    message,"You are running this script Post Build with the 'Run at boot' option enabled. Unfortunately this is not supported as a post processing option. Please disable this option or complete a full project build. #$x#$xAborting..." 
+	Exit
+  End
+  Else,Run,"%ProjectDir%\Core\common.script",PostConfigRun
+End
+AddInterface,%ScriptFile%,Interface1,""
+AddInterface,%ScriptFile%,Interface2,""
+If,%pCheckBoxInWim%,Equal,True,Set,%PROGRAMS.IN.WIM%,YES
+Else,Set,%PROGRAMS.IN.WIM%,NO
+Run,%ScriptFile%,CHECKS
+Run,%ScriptFile%,MENU
+Run,%ScriptFile%,COMMON
+If,%PROGRAMS.IN.WIM%,Equal,NO,Run,%ScriptFile%,NOT.IN.WIM
+If,%PROGRAMS.IN.WIM%,Equal,YES,Run,%ScriptFile%,IN.WIM
+
+[CHECKS]
+If,Not,ExistFile,"%Programs%\TightVNC\%ARCH%\tvnserver.exe",Begin
+  Message,TightVNC Server is missing - exiting script...,Error,5
+  Exit,TightVNC Server is missing - exiting script...,WARN
+End
+
+[MENU]
+If,%PROGRAMS.IN.WIM%,Equal,NO,Begin
+  If,Not,ExistFile,"%OutputDir%\Programs\ShortcutsNotInWim.txt",Run,"%ProjectDir%\Core\common.script",NotInWim
+  TXTaddline,"%OutputDir%\Programs\ShortcutsNotInWim.txt","#$p~dp0nircmd.exe shortcut #$q#$p~dp0TightVNC\tvnserver.exe#$q #$q#$pTemp#$p\ShortCuts#$q #$qTightVNC#$q",Append
+  If,%Shell%,Equal,LaunchBar,TXTaddline,"%OutputDir%\Programs\ShortcutsNotInWim.txt","#$p~dp0nircmd.exe shortcut #$q#$p~dp0TightVNC\tvnserver.exe#$q #$q#$pTemp#$p\ShortCuts#$q #$qTVNC Config#$q #$q-configservice#$q",Append
+End 
+If,%PROGRAMS.IN.WIM%,Equal,YES,Begin
+  ShellExecute,Hide,"%Tools%\Shortcut.exe","/A:C /T:#$q#$pSystemDrive#$p\Programs\TightVNC\tvnserver.exe#$q /F:#$q%ProjectTemp%\TightVNC.lnk#$q /I:#$q#$pSystemDrive#$p\Programs\TightVNC\tvnserver.exe#$c0#$q"
+  If,ExistFile,"%ProjectTemp%\TightVNC.lnk",Begin
+    Set,%MyShortcut%,TightVNC.lnk
+    If,%pCheckBoxShortcutDesktop%,Equal,True,FileCopy,"%ProjectTemp%\%MyShortcut%","%ProjectTemp%\ShortCuts\Desktop"
+    If,%pCheckBoxShortcutQuick%,Equal,True,FileCopy,"%ProjectTemp%\%MyShortcut%","%ProjectTemp%\ShortCuts\Quick"
+    If,%pCheckBoxShortcutPrograms%,Equal,True,Begin
+      Set,%ProgramMenuPath%,%pTextBox1%
+      Run,"%ProjectDir%\Core\common.script",StartMenu
+    End
+    If,%pCheckBoxShortcutLaunchBar%,Equal,True,FileCopy,"%ProjectTemp%\%MyShortcut%","%ProjectTemp%\ShortCuts\LaunchBar"
+    If,%FullProjectRun%,Equal,NO,Run,"%ProjectDir%\Core\common.script",PostConfigRunShortcuts
+    FileDelete,"%ProjectTemp%\%MyShortcut%"
+  End
+  If,%Shell%,Equal,LaunchBar,Begin
+    ShellExecute,Hide,"%Tools%\Shortcut.exe","/A:C /T:#$q#$pSystemDrive#$p\Programs\TightVNC\tvnserver.exe#$q /F:#$q%ProjectTemp%\TVNC Config.lnk#$q /P:-configservice /I:#$q#$pSystemDrive#$p\Programs\TightVNC\tvnserver.exe#$c0#$q"
+    If,ExistFile,"%ProjectTemp%\TVNC Config.lnk",Begin
+      Set,%MyShortcut%,TVNC Config.lnk
+      If,%pCheckBoxShortcutDesktop%,Equal,True,FileCopy,"%ProjectTemp%\%MyShortcut%","%ProjectTemp%\ShortCuts\Desktop"
+      If,%pCheckBoxShortcutQuick%,Equal,True,FileCopy,"%ProjectTemp%\%MyShortcut%","%ProjectTemp%\ShortCuts\Quick"
+      If,%pCheckBoxShortcutPrograms%,Equal,True,Begin
+        Set,%ProgramMenuPath%,%pTextBox1%
+        Run,"%ProjectDir%\Core\common.script",StartMenu
+      End
+      If,%pCheckBoxShortcutLaunchBar%,Equal,True,FileCopy,"%ProjectTemp%\%MyShortcut%","%ProjectTemp%\ShortCuts\LaunchBar"
+      If,%FullProjectRun%,Equal,NO,Run,"%ProjectDir%\Core\common.script",PostConfigRunShortcuts
+      FileDelete,"%ProjectTemp%\%MyShortcut%"
+    End
+  End 
+End
+
+[COMMON]
+If,%PROGRAMS.IN.WIM%,Equal,NO,Set,%PATH%,%OutputDir%
+If,%PROGRAMS.IN.WIM%,Equal,YES,Set,%PATH%,%TargetDir%
+If,Not,ExistDir,"%PATH%\Programs",DirMake,"%PATH%\Programs"
+DirMake,"%PATH%\Programs\TightVNC"
+FileCopy,"%Programs%\TightVNC\%ARCH%\tvnserver.exe","%PATH%\Programs\TightVNC"
+IniWrite,"%OutputDir%\Project.Settings.ini",PROGRAMS,TightVNC,YES
+
+[IN.WIM]
+Echo,"Mounting registry hives..."
+If,Not,ExistRegSection,HKLM,_WinPE_DEFAULT,RegHiveLoad,_WinPE_DEFAULT,"%Target_config%\default"
+ShellExecute,hide,regedit.exe,"/s #$q%Programs%\TightVNC\TVNC.reg#$q"
+Echo,"Unmounting registry hives..."
+RegHiveUnload,_WinPE_DEFAULT
+If,%pCheckBoxAuto%,Equal,True,Begin
+  If,Not,ExistFile,"%Target_system32%\InitializeNetwork.txt",Run,"%ProjectDir%\Settings\Network.script",InitializeNetwork
+  If,Not,ExistFile,"%Target_system32%\DisableFirewall.txt",Run,"%ProjectDir%\Settings\Network.script",DisableFirewall
+  FileCreateBlank,"%PATH%\Programs\TightVNC\tvnserver.cmd"
+  TXTaddLine,"%PATH%\Programs\TightVNC\tvnserver.cmd",@echo off,Append
+  TXTaddLine,"%PATH%\Programs\TightVNC\tvnserver.cmd",cd #$pSystemDrive#$p\Programs\TightVNC,Append
+  TXTaddLine,"%PATH%\Programs\TightVNC\tvnserver.cmd",start tvnserver.exe -run,Append
+  If,Not,ExistFile,%ProjectTemp%\winpeshl.txt,FileCreateBlank,%ProjectTemp%\winpeshl.txt
+  TXTaddLine,%ProjectTemp%\winpeshl.txt,"#$pSystemDrive#$p\Programs\TightVNC\tvnserver.cmd",Append
+End
+If,%FullProjectRun%,Equal,NO,WimPathAdd,%OutputDir%\sources\boot.wim,%Boot.wim.Image.number%,%TargetDir%,""
+
+[NOT.IN.WIM]
+//Wait,1
+If,%FullProjectRun%,Equal,NO,Run,"%ProjectDir%\Core\common.script",PostConfigRunNotInWim
+
+[AuthorEncoded]
+tvnserver.ico=422,563
+logo=tvnserver.ico
+
+[EncodedFile-AuthorEncoded-tvnserver.ico]
+lines=0
+0=eJzFkrFShDAQhn/QmaSSpFIrmCucewwfKXZ2pLPER+JxLOM1pFv3T0DRGSqdcYHLfWH3z7K7QIMWw+B0vcZbCzwAcK7yuQFuroCz7g36POrDfVpscWCx3IixLrz0zzzPunJHyg2RuvDiFn9+WCffLB1wNnI5qQ0rR8hpz8C45wWY9pwBs7H3IgGwlx2XnMt5jZLvmdn4xZk8rfmof9oy965wIJvC9O9LUWzxJN/ybcZIpj/lukzBGk+5aaFgjWf4Ux/NFq9o333Qp9RjqYclzZDxkmsydypYmNlM3qtg9accz1ZBMsMtcw22fE9euQ8qqBzXj194SuqW0iZbZUfl8v5F5Jm7R/365KMJ+i/jnDvUWd/mfD70jr+ec/ZnqnUJOnKD9oSjNzTSo9Sb3R/FNfLKrilH5IYM3BvP+htVdV3SdgbloG1OU+ooHUyyNYvQ/XG9PwB5E0zGeJzjLSnLK04tKkst0stMzmcYBSMMmLFA6EhG7PI33A5xMTABAJJtB+YWabhAAQAAAAIAAAApAAAAWQEAAAAAAAABAAAAAAAAAAAAAAA
+
+

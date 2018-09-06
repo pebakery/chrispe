@@ -4,8 +4,8 @@ Description=Hex Editor
 Selected=True
 Level=5
 Author=ThePEBakeryTeam
-Version=20180306
-Date=2018-03-06
+Version=20180317
+Date=2018-03-17
 Interface=Interface1
 
 [Interface1]
@@ -61,6 +61,7 @@ IniRead,%ScriptFile%,Main,Interface,%CurrentInterface%
 If,%CurrentInterface%,Equal,Interface1,AddInterface,%ScriptFile%,Interface2,""
 
 [process]
+If,%FullProjectRun%,Equal,NO,Run,"%ProjectDir%\Core\common.script",PostConfigRun
 AddInterface,%ScriptFile%,Interface1,""
 AddInterface,%ScriptFile%,Interface2,""
 If,%pCheckBoxInWim%,Equal,True,Set,%PROGRAMS.IN.WIM%,YES
@@ -84,7 +85,10 @@ If,Not,ExistFile,"%Programs%\TinyHexer\MPTH_SMALL.exe",Begin
 End
 
 [MENU]
-If,%pCheckBoxShortcutLaunchBar%,Equal,True,If,%PROGRAMS.IN.WIM%,Equal,NO,If,ExistFile,"%ProjectTemp%\LaunchBar.ini",TXTaddLine,"%ProjectTemp%\LaunchBar.ini",TinyHexer;..\TinyHexer\mpth_small.exe,Append
+If,%PROGRAMS.IN.WIM%,Equal,NO,Begin
+  If,Not,ExistFile,"%OutputDir%\Programs\ShortcutsNotInWim.txt",Run,"%ProjectDir%\Core\common.script",NotInWim
+  TXTaddline,"%OutputDir%\Programs\ShortcutsNotInWim.txt","#$p~dp0nircmd.exe shortcut #$q#$p~dp0TinyHexer\mpth_small.exe#$q #$q#$pTemp#$p\ShortCuts#$q #$qTinyHexer#$q",Append
+End 
 If,%PROGRAMS.IN.WIM%,Equal,YES,Begin
   ShellExecute,Hide,"%Tools%\Shortcut.exe","/A:C /T:#$q#$pSystemDrive#$p\Programs\TinyHexer\mpth_small.exe#$q /F:#$q%ProjectTemp%\TinyHexer.lnk#$q /I:#$q#$pSystemDrive#$p\Programs\TinyHexer\mpth_small.exe#$c0#$q"
   If,ExistFile,"%ProjectTemp%\TinyHexer.lnk",Begin
@@ -96,6 +100,7 @@ If,%PROGRAMS.IN.WIM%,Equal,YES,Begin
       Run,"%ProjectDir%\Core\common.script",StartMenu
     End
     If,%pCheckBoxShortcutLaunchBar%,Equal,True,FileCopy,"%ProjectTemp%\%MyShortcut%","%ProjectTemp%\ShortCuts\LaunchBar"
+    If,%FullProjectRun%,Equal,NO,Run,"%ProjectDir%\Core\common.script",PostConfigRunShortcuts
     FileDelete,"%ProjectTemp%\%MyShortcut%"
   End
 End
@@ -109,7 +114,6 @@ DirCopy,"%Programs%\TinyHexer\*.*","%PATH%\Programs\TinyHexer"
 If,Not,ExistFile,"%PATH%\Programs\registry.entries.cmd",Begin
   FileCreateBlank,"%PATH%\Programs\registry.entries.cmd"
   TXTaddLine,"%PATH%\Programs\registry.entries.cmd",@Echo off,Append
-  TXTaddLine,"%PATH%\Programs\registry.entries.cmd",Call #$p~dp0version.check.cmd,Append
   TXTaddLine,"%PATH%\Programs\registry.entries.cmd",,Append
 End
 TXTaddLine,"%PATH%\Programs\registry.entries.cmd",::==========TINYHEXER===========,Append
@@ -142,11 +146,12 @@ If,%Openwith.workaround%,Equal,YES,Begin
 End
 Echo,"Unmounting registry hives..."
 RegHiveUnload,_WinPE_SOFTWARE
+If,%FullProjectRun%,Equal,NO,WimPathAdd,%OutputDir%\sources\boot.wim,%Boot.wim.Image.number%,%TargetDir%,""
 //Wait,1
 
 [NOT.IN.WIM]
 //Wait,1
-Exit,"TinyHexer copied to #$q%PATH%\Programs#$q directory - it will not be added to #$qboot.wim#$q",Nowarn
+If,%FullProjectRun%,Equal,NO,Run,"%ProjectDir%\Core\common.script",PostConfigRunNotInWim
 
 [AuthorEncoded]
 TinyHexer.ico=914,1219

@@ -6,12 +6,12 @@ Locked=True
 Mandatory=True
 Level=8
 Author=ThePEBakeryTeam
-Version=20180306
-Date=2018-03-06
+Version=20180317
+Date=2018-03-17
 
 [process]
 If,Not,ExistDir,"%TargetDir%\Programs",DirMake,"%TargetDir%\Programs"
-If,ExistDir,"%OutputDir%\Programs\LaunchBar",If,ExistFile,"%ProjectTemp%\LaunchBar.ini",Run,%ScriptFile%,Secondary_LaunchBar_NotInWIM
+If,ExistDir,"%OutputDir%\Programs",Run,%ScriptFile%,NIRCMD
 If,ExistDir,"%TargetDir%\Programs\LaunchBar",Run,%ScriptFile%,Secondary_LaunchBar_InWIM
 If,%Shell%,Equal,BBLean,Run,%ScriptFile%,BBLEAN
 If,%Shell%,Equal,LaunchBar,Run,%ScriptFile%,LaunchBar
@@ -21,25 +21,40 @@ If,WimExistFile,%OutputDir%\sources\boot.wim,%Boot.wim.Image.number%,Windows/Sys
 Run,%ScriptFile%,MakeWim
 Run,%ScriptFile%,LOGFILE
 
-[Secondary_LaunchBar_InWIM]
-If,Not,ExistDir,"%TargetDir%\Programs\LaunchBar\Menu",DirMake,"%TargetDir%\Programs\LaunchBar\Menu"
-If,%LaunchBarMenuStyle%,Equal,QUICK,FileCopy,"%ProjectTemp%\ShortCuts\LaunchBar\*.*","%TargetDir%\Programs\LaunchBar\Menu"
-If,%LaunchBarMenuStyle%,Equal,START,DirCopy,"%ProjectTemp%\ShortCuts\Start\*","%TargetDir%\Programs\LaunchBar\Menu"
-
-[Secondary_LaunchBar_NotInWIM]
-If,ExistFile,"%ProjectTemp%\LaunchBar.ini",Filecopy,"%ProjectTemp%\LaunchBar.ini","%OutputDir%\Programs\LaunchBar"
-If,Not,ExistDir,"%TargetDir%\Programs\misc",DirMake,"%TargetDir%\Programs\misc"
-FileCopy,"%Programs%\misc\find.LaunchBar.%ARCH%.cmd","%TargetDir%\Programs\misc\FindLaunchBar_%ARCH%.cmd"
+[NIRCMD]
+If,Not,ExistFile,"%OutputDir%\Programs\nircmd.exe",FileCopy,"%Tools%\nircmd\%ARCH%\nircmd.exe","%OutputDir%\Programs"
+If,ExistFile,"%OutputDir%\Programs\ShortcutsNotInWim.txt",Begin
+  TXTaddLine,"%OutputDir%\Programs\ShortcutsNotInWim.txt",MD #$q#$pTemp#$p\ShortCuts#$q,PrePend
+  TXTaddLine,"%OutputDir%\Programs\ShortcutsNotInWim.txt",IF EXIST #$q#$pTemp#$p\ShortCuts#$q RD /S /Q #$q#$pTemp#$p\ShortCuts#$q,PrePend
+  TXTaddLine,"%OutputDir%\Programs\ShortcutsNotInWim.txt",@echo off,PrePend
+  FileRename,"%OutputDir%\Programs\ShortcutsNotInWim.txt","%OutputDir%\Programs\ShortcutsNotInWim.cmd"
+End
+If,Not,ExistFile,"%OutputDir%\Programs\ShortcutsCopy.cmd",FileCreateBlank,"%OutputDir%\Programs\ShortcutsCopy.cmd"
+TXTaddLine,"%OutputDir%\Programs\ShortcutsCopy.cmd",@echo off,Append
+If,%Shell%,Equal,BBLean,TXTaddLine,"%OutputDir%\Programs\ShortcutsCopy.cmd",COPY #$q#$pTemp#$p\ShortCuts\*.*#$q #$q#$pSystemDrive#$p\Users\Default\AppData\Roaming\Microsoft\Windows\Start Menu\ExternalMedia#$q,Append
+If,%Shell%,Equal,LaunchBar,TXTaddLine,"%OutputDir%\Programs\ShortcutsCopy.cmd",COPY #$q#$pTemp#$p\ShortCuts\*.*#$q #$q#$pUserProfile#$p\AppData\Roaming\Microsoft\Internet Explorer\Quick Launch\ExternalMedia#$q,Append
+If,%Shell%,Equal,WinXShell,TXTaddLine,"%OutputDir%\Programs\ShortcutsCopy.cmd",COPY #$q#$pTemp#$p\ShortCuts\*.*#$q #$q#$pUserProfile#$p\AppData\Roaming\Microsoft\Windows\Start Menu\ExternalMedia#$q,Append
 FileRename,"%OutputDir%\Programs","%OutputDir%\Programs.%ARCH%"
-FileCopy,"%Programs%\misc\Find_Replace.ico","%TargetDir%\Programs\misc\Find_Replace.ico"
-ShellExecute,Hide,"%Tools%\Shortcut.exe","/A:C /T:#$q#$pSystemDrive#$p\Programs\misc\FindLaunchBar_%ARCH%.cmd#$q /F:#$q%ProjectTemp%\Find LaunchBar.lnk#$q /I:#$q#$pSystemDrive#$p\Programs\misc\Find_Replace.ico#$c0#$q"
-If,ExistFile,"%ProjectTemp%\Find LaunchBar.lnk",Begin
-  Set,%MyShortcut%,Find LaunchBar.lnk
+If,%Shell%,Equal,WinXShell,If,Not,ExistDir,"%TargetDir%\Users\Default\AppData\Roaming\Microsoft\Windows\Start Menu\ExternalMedia",DirMake,"%TargetDir%\Users\Default\AppData\Roaming\Microsoft\Windows\Start Menu\ExternalMedia"
+If,%Shell%,Equal,BBLean,If,Not,ExistDir,"%TargetDir%\Users\Default\AppData\Roaming\Microsoft\Windows\Start Menu\ExternalMedia",DirMake,"%TargetDir%\Users\Default\AppData\Roaming\Microsoft\Windows\Start Menu\ExternalMedia"
+If,%Shell%,Equal,LaunchBar,If,Not,ExistDir,"%TargetDir%\Windows\System32\config\systemprofile\AppData\Roaming\Microsoft\Internet Explorer\Quick Launch\ExternalMedia",DirMake,"%TargetDir%\Windows\System32\config\systemprofile\AppData\Roaming\Microsoft\Internet Explorer\Quick Launch\ExternalMedia"
+If,Not,ExistDir,"%TargetDir%\Programs\misc",DirMake,"%TargetDir%\Programs\misc"
+FileCopy,%Programs%\misc\FindPrograms%ARCH%.cmd,"%TargetDir%\Programs\misc"
+TXTReplace,"%TargetDir%\Programs\misc\FindPrograms%ARCH%.cmd",MyTagFile,%TagFile%.tag
+FileCopy,"%Programs%\misc\Find_Replace.ico","%TargetDir%\Programs\misc"
+ShellExecute,Hide,"%Tools%\Shortcut.exe","/A:C /T:#$q#$pSystemDrive#$p\Programs\misc\FindPrograms%ARCH%.cmd#$q /F:#$q%ProjectTemp%\FindPrograms.lnk#$q /I:#$q#$pSystemDrive#$p\Programs\misc\Find_Replace.ico#$c0#$q"
+If,ExistFile,"%ProjectTemp%\FindPrograms.lnk",Begin
+  Set,%MyShortcut%,FindPrograms.lnk
   FileCopy,"%ProjectTemp%\%MyShortcut%","%ProjectTemp%\ShortCuts\Desktop"
   FileCopy,"%ProjectTemp%\%MyShortcut%","%ProjectTemp%\ShortCuts\Quick"
   FileCopy,"%ProjectTemp%\%MyShortcut%","%ProjectTemp%\ShortCuts\Start"
   FileDelete,"%ProjectTemp%\%MyShortcut%"
 End
+
+[Secondary_LaunchBar_InWIM]
+If,Not,ExistDir,"%TargetDir%\Programs\LaunchBar\Menu",DirMake,"%TargetDir%\Programs\LaunchBar\Menu"
+If,%LaunchBarMenuStyle%,Equal,QUICK,FileCopy,"%ProjectTemp%\ShortCuts\LaunchBar\*.*","%TargetDir%\Programs\LaunchBar\Menu"
+If,%LaunchBarMenuStyle%,Equal,START,DirCopy,"%ProjectTemp%\ShortCuts\Start\*","%TargetDir%\Programs\LaunchBar\Menu"
 
 [LaunchBar]
 If,ExistDir,"%ProjectTemp%\ShortCuts\Start",DirCopy,"%ProjectTemp%\ShortCuts\Start\*","%TargetDir%\Windows\System32\config\systemprofile\AppData\Roaming\Microsoft\Internet Explorer\Quick Launch"
@@ -138,10 +153,10 @@ If,ExistFile,"%Target_System32%\winpe.jpg",FileCopy,"%Target_System32%\winpe.jpg
 Else,FileCopy,"%Cache%\Programs\Wallpaper\winpe.jpg","%TargetDir%\Programs\bblean\backgrounds"
 
 [WINPESHL]
-//new lines - section rewritten
 If,ExistFile,"%TargetDir%\Windows\System32\winpeshl.ini",FileDelete,"%TargetDir%\Windows\System32\winpeshl.ini"
 FileCreateBlank,"%TargetDir%\Windows\System32\winpeshl.ini"
 TXTaddLine,"%TargetDir%\Windows\System32\winpeshl.ini",[LaunchApps],Append
+If,ExistFile,%ProjectTemp%\winpeshl.txt,ShellExecute,Hide,"cmd.exe","/C COPY /B #$q%TargetDir%\Windows\System32\winpeshl.ini#$q + #$q%ProjectTemp%\winpeshl.txt#$q #$q%TargetDir%\Windows\System32\winpeshl.ini#$q"
 If,ExistFile,"%Target_System32%\actxprxy.dll",TXTaddLine,"%TargetDir%\Windows\System32\winpeshl.ini",Regsvr32.exe#$c /s actxprxy.dll,Append
 If,%Shell%,Equal,BBLean,TXTaddLine,"%TargetDir%\Windows\System32\winpeshl.ini",%SYSTEMDRIVE%\Programs\bbLean\blackbox.exe,Append
 If,%Shell%,Equal,CMD,TXTaddLine,"%TargetDir%\Windows\System32\winpeshl.ini",%SYSTEMROOT%\System32\cmd.exe,Append

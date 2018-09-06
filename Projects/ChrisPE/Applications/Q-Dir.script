@@ -4,8 +4,8 @@ Description=Q-Dir x86/x64
 Selected=True
 Level=5
 Author=ThePEBakeryTeam
-Version=20180306
-Date=2018-03-06
+Version=20180317
+Date=2018-03-17
 Interface=Interface1
 
 [Interface1]
@@ -56,6 +56,7 @@ message,"Applies to WinXShell#$c BBLean and LaunchBar Shell(s)#$x#$xSelect this 
 message,"This setting does not apply to any LaunchBar instance running as the WinPE Shell. This option only applies to a LaunchBar instance when the Applications' > 'LaunchBar' program script is selected in the build.#$x#$xIf the 'Applications' > 'LaunchBar' program script is selected than enable this option to add a program menu entry to the root of the LaunchBar menu bar. #$x#$xPlease note that if option '6] Programs in boot.wim' in the main project script is set as 'NO'#$c then LaunchBar and a number of other applications will not be available at boot. In this case a text based .ini file will be used for LaunchBar menu settings."
 
 [process]
+If,%FullProjectRun%,Equal,NO,Run,"%ProjectDir%\Core\common.script",PostConfigRun
 AddInterface,%ScriptFile%,Interface1,""
 AddInterface,%ScriptFile%,Interface2,""
 If,%pCheckBoxInWim%,Equal,True,Set,%PROGRAMS.IN.WIM%,YES
@@ -77,7 +78,10 @@ If,Not,ExistFile,"%Programs%\Q-Dir\%ARCH%\Q-Dir.exe",Begin
 End
 
 [MENU]
-If,%pCheckBoxShortcutLaunchBar%,Equal,True,If,%PROGRAMS.IN.WIM%,Equal,NO,If,ExistFile,"%ProjectTemp%\LaunchBar.ini",TXTaddLine,"%ProjectTemp%\LaunchBar.ini",Q-Dir;..\Q-Dir\Q-Dir.exe,Append
+If,%PROGRAMS.IN.WIM%,Equal,NO,Begin
+  If,Not,ExistFile,"%OutputDir%\Programs\ShortcutsNotInWim.txt",Run,"%ProjectDir%\Core\common.script",NotInWim
+  TXTaddline,"%OutputDir%\Programs\ShortcutsNotInWim.txt","#$p~dp0nircmd.exe shortcut #$q#$p~dp0Q-Dir\Q-Dir.exe#$q #$q#$pTemp#$p\ShortCuts#$q #$qQ-Dir#$q",Append
+End 
 If,%PROGRAMS.IN.WIM%,Equal,YES,Begin
   ShellExecute,Hide,"%Tools%\Shortcut.exe","/A:C /T:#$q#$pSystemDrive#$p\Programs\Q-Dir\Q-Dir.exe#$q /F:#$q%ProjectTemp%\Q-Dir.lnk#$q /I:#$q#$pSystemDrive#$p\Programs\Q-Dir\Q-Dir.exe#$c0#$q"
   If,ExistFile,"%ProjectTemp%\Q-Dir.lnk",Begin
@@ -89,6 +93,7 @@ If,%PROGRAMS.IN.WIM%,Equal,YES,Begin
       Run,"%ProjectDir%\Core\common.script",StartMenu
     End
     If,%pCheckBoxShortcutLaunchBar%,Equal,True,FileCopy,"%ProjectTemp%\%MyShortcut%","%ProjectTemp%\ShortCuts\LaunchBar"
+    If,%FullProjectRun%,Equal,NO,Run,"%ProjectDir%\Core\common.script",PostConfigRunShortcuts
     FileDelete,"%ProjectTemp%\%MyShortcut%"
   End
 End
@@ -104,11 +109,12 @@ If,Not,ExistDir,"%TargetDir%\Windows\System32\config\systemprofile\Desktop",DirM
 IniWrite,"%OutputDir%\Project.Settings.ini",PROGRAMS,Q-Dir,YES
 
 [IN.WIM]
+If,%FullProjectRun%,Equal,NO,WimPathAdd,%OutputDir%\sources\boot.wim,%Boot.wim.Image.number%,%TargetDir%,""
 //Wait,1
 
 [NOT.IN.WIM]
 //Wait,1
-Exit,"Q-Dir copied to #$q%PATH%\Programs#$q directory - it will not be added to #$qboot.wim#$q",Nowarn
+If,%FullProjectRun%,Equal,NO,Run,"%ProjectDir%\Core\common.script",PostConfigRunNotInWim
 
 [AuthorEncoded]
 Q-Dir.ico=218,291

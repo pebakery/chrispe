@@ -47,6 +47,16 @@ PEBakery.IniLib.Tests
 PEBakery.TreeLib
     MIT License
     https://opensource.org/licenses/MIT
+	
+PEBakery.XZLib
+PEBakery.XZLib.Tests
+    MIT License
+    https://opensource.org/licenses/MIT
+	
+PEBakery.LZ4Lib
+PEBakery.LZ4Lib.Tests
+    The 2-Clause BSD License
+    https://opensource.org/licenses/BSD-2-Clause
 
 ManagedWimLib
 ManagedWimLib.Tests
@@ -78,35 +88,45 @@ XZNet20/liblzma64.dll
     Public Domain
     https://git.tukaani.org/?p=xz.git;a=blob;f=COPYING
 
-PEBakery/Helper.cs 
+PEBakery/Helper
     MIT License
     https://opensource.org/licenses/MIT
 
-PEBakery/WPF/Controls/AutoSizedGridView
+PEBakery/WPF/Controls/NumberBox.xaml
+PEBakery/WPF/Controls/NumberBox.xaml.cs
+    MIT License
+    https://opensource.org/licenses/MIT
+
+PEBakery/WPF/Controls/DragCanvas.cs
+PEBakery/WPF/Controls/EditCanvas.cs
+    MIT License
+    https://opensource.org/licenses/MIT
+
+PEBakery/WPF/Controls/AutoSizedGridView.cs
     MIT License
     https://opensource.org/licenses/MIT
 
     Derived from http://stackoverflow.com/a/15745082
 
-PEBakery/WPF/Controls/CustomMessageBox
+PEBakery/WPF/Controls/CustomMessageBox.cs
+PEBakery/WPF/Controls/CustomMessageBoxUtil.cs
+PEBakery/WPF/Controls/CustomMessageBoxWindow.xaml
+PEBakery/WPF/Controls/CustomMessageBoxWindow.xaml.cs
     MIT License
     https://opensource.org/licenses/MIT
 
     Copyright (c) 2013 Evan Wondrasek / Apricity Software LLC
     Derived from https://github.com/evanwon/WPFCustomMessageBox
 
-PEBakery/WPF/Controls/MahApps 
+PEBakery/WPF/Controls/ProgressRing.cs
+PEBakery/WPF/Controls/ProgressRing.xaml
     MIT License
     https://opensource.org/licenses/MIT
 
     Copyright (c) 2016 MahApps
     Derived from https://github.com/MahApps/MahApps.Metro
 
-PEBakery/WPF/Controls/FreeNumberBox
-    MIT License
-    https://opensource.org/licenses/MIT
-
-PEBakery/WPF/Controls/Svg/Donut.xaml
+PEBakery/WPF/Controls/Donut.xaml
 PEBakery/Resources/Donut.ico
 LauncherNative/Donut.ico
 LauncherSharp/Donut.ico
@@ -120,20 +140,20 @@ LauncherSharp/Donut.ico
 PEBakery uses Open Source Software (OSS).
 This is the list of open source projects and licenses.
 
-Antlr4
-    The 3-Clause BSD License
-    https://opensource.org/licenses/BSD-3-Clause
-
-    Copyright (c) Terence Parr and Sam Harwell
-    http://www.antlr.org/
-
 BetterWin32Errors
     MIT License
     https://opensource.org/licenses/MIT
     
     Copyright (c) Michael Kropat
     https://github.com/mkropat/BetterWin32Errors
+
+ControlzEx
+    MIT License
+    https://opensource.org/licenses/MIT
     
+    Copyright (c) 2015 Jan Karger, Bastian Schmidt
+    https://github.com/ControlzEx/ControlzEx
+
 ZLibWrapper
     zlib license
     https://opensource.org/licenses/Zlib
@@ -155,12 +175,37 @@ ManagedWimgApi
     Copyright (c) josemesona
     https://github.com/josemesona/ManagedWimgApi
     
+Material Icons
+    Apache License, Version 2.0
+    http://www.apache.org/licenses/LICENSE-2.0
+
+    https://material.io/tools/icons/
+    https://github.com/google/material-design-icons
+
+NaturalSort.Extension
+    MIT License
+    https://opensource.org/licenses/MIT
+
+    Copyright (c) 2017 Tomáš Pažourek
+    https://github.com/tompazourek/NaturalSort.Extension
+
 Newtonsoft.Json
     MIT License
     https://opensource.org/licenses/MIT
 
     Copyright (c) James Newton-King
     https://github.com/JamesNK/Newtonsoft.Json
+
+NUglify
+    The 2-Clause BSD License
+    https://opensource.org/licenses/BSD-2-Clause
+    Copyright (c) 2016, Alexandre Mutel
+
+    Apache License, Version 2.0
+    http://www.apache.org/licenses/LICENSE-2.0
+    Copyright (c) 2010-2015 Microsoft Corporation
+
+    https://github.com/xoofx/NUglify
 
 RazorEngine
     Apache License, Version 2.0
@@ -193,5 +238,12 @@ Svg.Net
     https://opensource.org/licenses/MS-PL
 
     https://github.com/vvvv/SVG
+
+UACHelper
+    MIT License
+    https://opensource.org/licenses/MIT
+
+    Copyright (c) 2016 Soroush
+    https://github.com/falahati/UACHelper
 
 -----------------------------------------------------------

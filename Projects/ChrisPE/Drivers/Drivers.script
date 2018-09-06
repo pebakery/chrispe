@@ -1,0 +1,78 @@
+[main]
+Title=Drivers
+Description=
+Selected=True
+Level=9
+Author=ThePEBakeryTeam
+Version=20180317
+Date=2018-03-17
+Interface=Interface
+
+[Interface]
+pBevel_A1=,1,12,10,70,500,40
+pScrollBox_A1=MOUNT,1,4,20,80,100,20,EXTRACT,MOUNT
+pTextLabel_A1=Method,1,1,230,81,140,18,10,Bold
+pButton_A1=HELP,1,8,430,80,70,20,HELPA1,0,True,_HELPA1_,True
+pBevel_A2=,1,12,10,120,500,40
+pButton_A2=HELP,1,8,20,130,80,20,HELPA2,0,True,_HELPA2_,True
+pTextLabel_A2="1] Path to Drivers",1,1,110,134,150,18,8,Bold
+pFileBox_A2=,1,13,220,130,275,20,dir
+
+[HELPA1]
+message,"EXTRACT - Use the (wimlib) Apply command to fully extract the contents of boot.wim before using DISM to add any drivers selected in the path below.#$x#$xMOUNT - Use DISM to mount boot.wim > Use the DISM /Recurse command to add drivers > Commit (write) the changes to boot.wim. #$x#$xPlease note that the MOUNT option may fail if Explorer or other file managers/programs are running. Closing any applications before running the project is recommended."
+
+[HELPA2]
+Message,"Path to the directory containing driver .inf files. The DISM /Recurse command will be used to add all drivers in this path. Adding drivers will increase the size of boot.wim#$c which will increase RAM requirements. Please keep drivers to a minimum.#$x#$xNote - ensure that the PATH includes a trailing backslash (\)."
+
+[process]
+If,%FullProjectRun%,Equal,NO,Begin 
+  Run,"%ProjectDir%\Core\common.script",PostConfigRun
+  IniRead,"%TargetDir%\project.settings.ini",MAIN.SETTINGS,BOOT.WIM.IMAGE.NUMBER,%Boot.wim.Image.number%
+End
+Run,%ScriptFile%,CHECKS
+If,%pScrollBox_A1%,Equal,EXTRACT,Run,%ScriptFile%,EXTRACT
+If,%pScrollBox_A1%,Equal,MOUNT,Run,%ScriptFile%,MOUNT
+If,%FullProjectRun%,Equal,NO,Begin
+    Set,%CONTINUE%,NO
+    If,Question,"Do you want to run the Create ISO script?#$x#$xSelect YES to create an .iso file - or NO to ABORT?",Set,%CONTINUE%,YES
+    If,%CONTINUE%,Equal,NO,Halt
+	Run,"%ProjectDir%\MediaCreation\create.ISO.script",Process
+End
+
+[CHECKS]
+If,"%pFileBox_A2%",Equal,"",Begin
+  Message,"ERROR - Path to driver files is not set. Exiting script..."
+  Exit
+End
+If,Not,ExistDir,%pFileBox_A2%,Begin
+  Message,"ERROR - The selected driver folder does not exist. Exiting script..."
+  Exit
+End
+If,Not,ExistFile,%Tools%\DISM\dism.exe,Begin
+  ShellExecute,Hide,"%Tools%\GetWaikTools\GWT.exe","-win10dism -silent"
+  DirMove,%Tools%\GetWaikTools\ADK_6\x86\Dism,%Tools%\DISM
+  If,Not,ExistFile,%Tools%\DISM\dism.exe,Begin
+    message,DISM is missing. Aborting...
+	message,Halt
+  End
+End
+
+[EXTRACT]
+If,Not,ExistFile,"%Target_System32%\wim_applied.txt",Begin
+  WimApply,%OutputDir%\sources\boot.wim,%Boot.wim.Image.number%,%TargetDir%,NOACL
+  FileCreateBlank,"%Target_System32%\wim_applied.txt"
+  TXTaddLine,"%Target_System32%\wim_applied.txt","Dummy file added to confirm that boot.wim has been fully extracted during the project build process (required for Driver integration - EXTRACT method).",APPEND
+End
+ShellExecute,Hide,"%Tools%\DISM\DISM.exe","/Image:%TargetDir% /Add-Driver /Driver:%pFileBox_A2% /Recurse"
+WimPathAdd,%OutputDir%\sources\boot.wim,%Boot.wim.Image.number%,%TargetDir%,""
+
+[MOUNT]
+Set,%CONTINUE%,NO
+If,Question,"Using the DISM to mount and commit changes to boot.wim is known to fail if any file managers (including Explorer.exe) are open. #$x#$xClosing all applications before running this script is recommended.#$x#$xSelect YES when you are ready to CONTINUE. Select NO to ABORT.",Set,%CONTINUE%,YES
+If,%CONTINUE%,Equal,NO,Halt
+If,Not,ExistDir,"%TargetDir%\..\MOUNT",DirMake,"%TargetDir%\..\MOUNT"
+ShellExecute,Hide,"%Tools%\DISM\DISM.exe","/Mount-Wim /WimFile:#$q%OutputDir%\sources\boot.wim#$q /Index:%Boot.wim.Image.number% /MountDir:#$q%TargetDir%\..\MOUNT#$q"
+ShellExecute,Hide,"%Tools%\DISM\DISM.exe","/Image:#$q%TargetDir%\..\MOUNT#$q /Add-Driver /Driver:%pFileBox_A2% /Recurse"
+ShellExecute,Hide,"%Tools%\DISM\DISM.exe","/Unmount-Wim /MountDir:#$q%TargetDir%\..\MOUNT#$q /Commit"
+
+
