@@ -1,0 +1,19 @@
+@import url(opera.css);
+
+h3 > a {
+	border: 1px solid #bbb;
+	border-radius: 4px;
+	box-sizing: border-box;
+	padding: 2px;
+	display: block;
+	height: 100%;
+	width: 100%;
+	text-decoration: none
+}
+h3 > a:hover { background-color: #e5f0ff; }
+
+body > div { border: 1px solid #bbb; border-radius: 4px; box-sizing: border-box; padding: 4px; }
+
+body > div > table { margin: 0 }
+
+tr:last-child { border-bottom: 0 }

@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<turbo_settings>
+	<validation expires="31-12-2010">
+		<public_key>wd16t34slndG/hBoECbJIPhkgRMhvLi+a7+loD/aThbJyNs68oD3cDNm53jp
+PFXnFZqIUtKxOB5SGjN/IrFAbN30GjEUrstPS/554MWqK6iCT8mJy4vcv47F
+zvUXa/1AWfIpuRv6AlEmspX5xAnnX29kFe4JT9f139OVofQxZoxaCOiN6JHc
+TdONTpqpucANxgSgQo46paKMz6da8JkUew==</public_key>
+	</validation> 
+	<obml brand="tiro" encrypt="yes" transcoder="server4.operamini.com:1080" httpproxy="server4.operamini.com:80" />
+	<wop proxy="opera10-turbo-ch.opera-mini.net:80" />
+</turbo_settings>
+

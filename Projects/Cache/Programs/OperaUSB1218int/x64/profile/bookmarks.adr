@@ -1,0 +1,194 @@
+Opera Hotlist version 2.0
+Options: encoding = utf8, version=3
+
+-
+
+#FOLDER
+	ID=17
+	NAME=Trash
+	CREATED=1456420821
+	TRASH FOLDER=YES
+	DELETABLE=NO
+	UNIQUEID=56BD213415BF4A29AADF55742DB4EA2C
+
+-
+
+#FOLDER
+	ID=18
+	NAME=Opera
+	CREATED=1456420822
+	PARTNERID=opera-operafolder
+	EXPANDED=YES
+	UNIQUEID=826CF25AF11C491899711FC93513A4F4
+
+#URL
+	ID=23
+	NAME=Opera Extensions
+	URL=https://addons.opera.com/
+	CREATED=1456420822
+	DESCRIPTION=addons, extensions
+	UNIQUEID=29DF2B28174D42D08D98B71A16139D64
+	PARTNERID=opera-operaextensions
+
+#URL
+	ID=24
+	NAME=Amazon
+	URL=http://redir.opera.com/bookmarks/amazon/
+	DISPLAY URL=http://www.amazon.com
+	CREATED=1456420822
+	DESCRIPTION=kindle, laptop, books, movies, music
+	ON PERSONALBAR=YES
+	PERSONALBAR_POS=2
+	UNIQUEID=80A0C80A99554C429032E569E083C6C4
+	PARTNERID=opera-webshop
+
+#URL
+	ID=25
+	NAME=Download.com
+	URL=http://redir.opera.com/bookmarks/download
+	DISPLAY URL=http://www.download.com
+	CREATED=1456420822
+	UNIQUEID=857166B8087A422CB42A6C541C615D94
+	PARTNERID=opera-downloadsite
+
+#URL
+	ID=26
+	NAME=eBay
+	URL=http://redir.opera.com/bookmarks/ebay/
+	DISPLAY URL=http://www.ebay.com/
+	CREATED=1456420822
+	DESCRIPTION=art, books, cars, electronics, cars, cameras, antiques
+	ON PERSONALBAR=YES
+	PERSONALBAR_POS=3
+	UNIQUEID=55DA86E6CC334CF9B2F5A38728A63F52
+	PARTNERID=opera-auction
+
+#URL
+	ID=27
+	NAME=Wikipedia
+	URL=http://en.wikipedia.org/wiki/Main_Page
+	CREATED=1456420822
+	ON PERSONALBAR=YES
+	PERSONALBAR_POS=5
+	UNIQUEID=E86E91A28D61476B92F56F4AF3B75F00
+	PARTNERID=opera-encyclopedia
+
+#URL
+	ID=28
+	NAME=Reddit
+	URL=http://redir.opera.com/bookmarks/reddit
+	DISPLAY URL=http://www.reddit.com/
+	CREATED=1456420822
+	ON PERSONALBAR=YES
+	PERSONALBAR_POS=6
+	UNIQUEID=E6ACEC4ED7524B4DACFFF992F2DD29B4
+	PARTNERID=opera-socialnews
+
+#URL
+	ID=29
+	NAME=FastMail
+	URL=http://redir.opera.com/bookmarks/fastmail
+	DISPLAY URL=http://www.fastmail.fm/
+	CREATED=1456420822
+	UNIQUEID=BAF6AE40FA1543AC97010132CD806EEE
+	PARTNERID=opera-mail
+
+
+#URL
+	ID=31
+	NAME=Booking.com
+	URL=http://redir.opera.com/bookmarks/booking.com
+	DISPLAY URL=http://www.booking.com/
+	CREATED=1456420822
+	DESCRIPTION=hotels, hostel,holidays
+	ON PERSONALBAR=YES
+	PERSONALBAR_POS=4
+	UNIQUEID=0739A8A088FA4094ADDF36856DB4340F
+	PARTNERID=opera-booking
+
+#URL
+	ID=33
+	NAME=Bigpoint
+	URL=http://redir.opera.com/bookmarks/bigpoint/
+	DISPLAY URL=http://www.bigpoint.com/?aid=2922
+	CREATED=1456420822
+	DESCRIPTION=games
+	UNIQUEID=2633F9CAFCD54C7B97E49102BD772021
+	PARTNERID=opera-gamesportal3
+
+#URL
+	ID=34
+	NAME=Hotels.com
+	URL=http://redir.opera.com/bookmarks/hotels.com
+	DISPLAY URL=http://hotels.com/
+	CREATED=1456420822
+	DESCRIPTION=hotels
+	UNIQUEID=83EDE91B0FE34F1392665EB3F5AD2BFE
+	PARTNERID=opera-booking2
+
+#URL
+	ID=35
+	NAME=YouSendIt
+	URL=http://redir.opera.com/bookmarks/yousendit
+	DISPLAY URL=http://www.yousendit.com
+	CREATED=1456420822
+	DESCRIPTION=share, files, storage
+	UNIQUEID=664794225C55478C99290B033B77E2F4
+	PARTNERID=opera-filedelivery
+
+#URL
+	ID=36
+	NAME=Accuweather
+	URL=http://redir.opera.com/bookmarks/accuweather
+	DISPLAY URL=http://www.accuweather.com
+	CREATED=1456420822
+	DESCRIPTION=maps, forecast, weather
+	UNIQUEID=C14463D67D124F7FA7564217A37455C3
+	PARTNERID=opera-weather
+
+#URL
+	ID=37
+	NAME=blekko.com
+	URL=http://redir.opera.com/bookmarks/blekko
+	DISPLAY URL=http://blekko.com/
+	CREATED=1456420822
+	UNIQUEID=AF9C2704715C4253AEDCE2181E9D91D5
+	PARTNERID=opera-searchengine2
+
+#URL
+	ID=38
+	NAME=Wego
+	URL=http://redir.opera.com/bookmarks/travel1/all
+	DISPLAY URL=http://www.wego.com
+	CREATED=1456420822
+	DESCRIPTION=flights, hotels, travel
+	UNIQUEID=9BA9AD832CC24356BAC817F8AFF058DA
+	PARTNERID=opera-travel2
+
+#URL
+	ID=39
+	NAME=DuckDuckGo
+	URL=http://redir.opera.com/bookmarks/search/all
+	DISPLAY URL=http://duckduckgo.com
+	CREATED=1456420822
+	DESCRIPTION=search, privacy
+	UNIQUEID=CBB1126CDBBA491D9A3CB2120445841F
+	PARTNERID=opera-searchengine3
+
+-
+#URL
+	ID=51
+	NAME=Whoer.net - find out IP address: lite version
+	URL=http://whoer.net/?src=speeddial
+	CREATED=1399228183
+	DESCRIPTION=Whoer.net - find out your IP address location: detect IP location, ISP, country, city
+	UNIQUEID=AC0AA97B24CCE54F8C5065F646D62054
+
+#URL
+	ID=52
+	NAME=Opera@USB : download your free version of mobile Opera for PC & USB
+	URL=http://www.opera-usb.com/
+	CREATED=1345877957
+	DESCRIPTION=mobile portable Opera for PC & USB - complete free download version - in various langauges Browser Mailclient
+	UNIQUEID=A8AC0D86FB1C32448BC40C7D3F060DE8
+

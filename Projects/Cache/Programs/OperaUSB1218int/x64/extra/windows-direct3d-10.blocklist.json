@@ -1,0 +1,50 @@
+{
+	"blocklist version": "1.0.5",
+	"driver links":
+	{
+		"driver entry":
+		{
+			"vendor id": { "regex": "0x10de" },
+			"URL": "http://www.nvidia.com/page/drivers.html"
+		},
+		"driver entry":
+		{
+			"vendor id": { "regex": "0x1002" },
+			"URL": "http://support.amd.com/us/gpudownload/Pages/index.aspx"
+		},
+		"driver entry":
+		{
+			"vendor id": { "regex": "0x8086" },
+			"URL": "http://support.intel.com/support/graphics/detect.htm"
+		}
+	},
+	"list entry": {
+		"vendor id": { "regex": "0x1002" },
+		"driver version": { "regex": ".*\\..*\\.(\\d+)\\.(\\d+)", "<": [ 10, 0256 ] }, 
+		"status2d": "blocked driver version",
+		"reason2d": "No support for legacy drivers older than Catalyst 10.2. Please upgrade the driver",
+		"driver version-comment": "This is the driver dll version, see http://developer.amd.com/download/ccc/pages/default.aspx"
+	},
+	"list entry": {
+		"vendor id": { "regex": "0x10de" },
+		"driver version": { "regex": ".*\\..*\\.(\\d+)\\.(\\d+)", "<": [ 12, 5721 ] },
+		"status2d": "blocked driver version",
+		"reason2d": "No support for old legacy drivers prior to version 257.21",
+		"driver version-comment": "This is the driver dll version, see http://developer.amd.com/download/ccc/pages/default.aspx"
+	},
+	"list entry": {
+		"vendor id": { "regex": "0x1002" },
+		"status2d": "supported",
+		"status3d": "supported"
+	},
+	"list entry": {
+		"vendor id": { "regex": "0x10de" },
+		"status2d": "supported",
+		"status3d": "supported"
+	},
+	"list entry": {
+		"vendor id": { "regex": "0x8086" },
+		"status2d": "supported",
+		"statud3d": "supported"
+	}
+}

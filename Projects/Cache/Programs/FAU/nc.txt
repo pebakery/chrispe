@@ -1,0 +1,124 @@
+Forensic Acquisition Utilities, 3.5.0.2525
+Netcat network data redirector., 1.11.2.2525
+Copyright (C) 2002-2016 GMG Systems, Inc.
+
+Connect:   nc [OPTIONS] HOSTNAME [PORTS]
+Listen:    nc -l -p [LOCALPORT] [OPTIONS] [HOSTNAME] [PORT]
+
+OPTIONS:
+--append   -a  Append input to the output file.
+--block    -b [SIZE] Sets the input and output block sizes to SIZE.
+--comp     -c [ALGORITHM] Compress input or output using the
+                     specified algorithm.  
+--decomp   -x [ALGORITHM] Decompress input or output using the
+                     specified algorithm.  
+
+The following compression/decompression algorithms are
+supported:
+	     
+     zlib zlib+ gzip gzip+ bzip bzip+ lznt1 lznt1+
+
+--detach   -d        Detach from console, background mode.
+--help     -h        Display this cruft.
+--interval -i [MILLISECONDS]  Delay interval between lines sent, ports scanned.
+--if       -I [SOURCE] Input file or device (ignored if -l also is specified.
+--cryptsum [ALGORITHM]    Includes one or more cryptographic
+                     checksums in the output.  "md2", "md4", "md5""
+                     and "sha" or "sha1" are supported on all platforms
+                     "sha_256", "sha_384" and "sha_512" are supporte
+                     on Windows Server 2003 and later.
+--cryptout [FILE] Write cryptographic checksum to the specified file.
+--lock     -K        Lock the input or output file or device while copying.
+--localwrt           Enables writing output to a local fixed drive.
+--listen   -l        Listen for inbound connections.
+--numeric  -n        numeric-only IP addresses, no DNS.
+--of       -O [DESTINATION] Specify the output file or device (requires -l).
+--dump     -o [FILE] Specify the destination for the hex dump log.
+--port     -p [PORT] Specify the local port number.
+--random   -r        Randomize local and remote ports.
+--source   -s [ADDRESS] Specify the local interface.
+--sparse   -S        Make the output file sparse (ignored unless '-O --of' also
+                     is specified).
+--log [FILE]         Write log output to FILE.
+--volumelabel [VOLUME_LABEL]	Send log and cryptographic output to a volume on a
+					 removable drive with the specified volume label.  If
+					 '--volumelabel' is specified, the volume name will be prepended
+					 to the paths specified by '--log' and '--cryptout'.
+--ssl [CERTIFICATE]	 Make or receive TCP connections using the TLS 1.0 protocol
+                     and the specified certificate.  The certificate, which is 
+                     optional for client connections, must be in PFX (PKCS#12) file
+                     format, if it exists.
+                
+The following Qos options may be used when sending data:
+
+--peak_bandwidth [RATE]	Specifies the peak bandwidth in
+                     bits-per-second.
+--peak_bandwidth [PERCENT] Specifies the peak bandwidth
+                     as a percent of link speed.
+--token_rate [RATE]	Specifies the token rate in bits-per-second.
+--token_bucket_size [SIZE] Specifies the token bucket size in
+				     bits-per-second.
+--qos_service_type [TYPE] Specifies the Qos service type.
+
+Valid service types are:
+	1  SERVICETYPE_BESTEFFORT
+	2  SERVICETYPE_CONTROLLEDLOAD
+	3  SERVICETYPE_GUARANTEED
+	10 SERVICETYPE_NETWORK_CONTROL
+	13 SERVICETYPE_QUALITATIVE
+
+--remote_address [SCOPE] When listening, specifies the scope of 
+                 remote addresses to permit through the Windows
+                 Firewall.  The SCOPE may be '*', 'LocalSubnet'
+                 or a valid network scope, e.g. 
+                 '192.168.0.2/255.255.255.255'.
+                 
+--telnet   -t        Answer TELNET negotiation.
+
+--smtp               Answer emulating an SMTP server.
+--smtp_auth          Require authentication when acting as an SMTP server.
+--starttls           Support the STARTTLS command when acting as an SMTP
+                     server.  STARTTLS is incompatible with the --ssl option
+                     (supported only with the Enterprise version of netcat).
+                     
+                     The --smtp option may be combined with the --ssl
+                     option (Enterprise version only) to listen for SMTP
+                     connections over SSL.
+                     
+                     The --port -p option may be omitted with the --ssl
+                     option to listen over the well-known SMTP or SMTPS
+                     ports. 
+
+--udp      -u        Listen or send over a UDP socket.
+--verbose  -v        Output verbose information.
+--timeout  -w [MILLISECONDS] Specify the timeout for connects and final
+                     net reads.
+--zero     -z        Enable zero-I/O mode [used for scanning].  Port numbers
+                     can be individual or ranges: 'm-n' [inclusive].
+--skip [OFFSET]      Skips the specified number of bytes on the input device.
+                     OFFSET may include a binary suffix (e.g. "10GiB").
+--count [BYTES]      Copies no more than the specified number of bytes.
+--locale [LANG]      Specifies the output locale.
+
+--thread_priority [PRIORITY] sets the priority of the thread processing.
+
+	The thread priority may be set to any of the following values:
+		idle, lowest, belownormal, highest
+		abovenormal, timecritical
+
+The following may be used in conjunction with output in xml format:
+
+--case [CASE NUMBER] includes the specified case number in xml output.
+--evidence [EVIDENCE NUMBER] includes the specified evidence number in
+               XML output.
+--description [DESCRIPTION] includes an optional description in xml output.
+
+--ata_unlock [PASSWORD] unlocks an ATA drive using the provided password.
+--ata_master specifies that the password provided with --ata_unlock is a
+            master password.
+--ata_hpa temporarily disables the ATA host protected area if it exists
+            and sets the starting offset to skip the user accessible bytes.
+--ata_restore_configuration resets an ATA device configuration overlay
+            (DCO) and restores the original drive configuration.
+
+      Report bugs to <support@gmgsystemsinc.info>

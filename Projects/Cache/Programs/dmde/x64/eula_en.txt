@@ -1,0 +1,154 @@
+
+  DMDE 3.4 - DM Disk Editor and Data Recovery Software
+  Copyright (C) 2005-2018 Dmitry Sidorov
+
+  http://dmde.com/
+  http://softdm.com/
+
+  END-USER LICENSE AGREEMENT
+
+  This End-User License Agreement ("EULA") is a legal agreement 
+  between you (either a natural person or juridical entity) and 
+  Dmitry Sidorov - the SOFTWARE author. By keeping, running or 
+  otherwise using the SOFTWARE, you agree to be bound by the terms of 
+  the EULA. If you do not agree or the EULA contradicts applicable law 
+  you must cease all use of the SOFTWARE and destroy SOFTWARE copies.
+
+  1. GRANT OF LICENSE
+
+  1.0. EDITIONS
+
+  The scope of granted rights depends on the EDITION (license type) 
+  and the number of license copies provided for you.
+
+  In the "About" box you can see the EDITION, the number of copies, 
+  and the license end date (access through the menu "Help"-"About"). 
+  If the number of copies is not specified expressly then one (1) 
+  license is provided. If the license end date is not specified then 
+  there is no time limit (see par. 1.4). The number of OS platforms on 
+  which you may run the SOFTWARE is specified in your license order.
+
+  1.1. FREE EDITION
+
+  For FREE EDITION only the paragraphs 1.1, 5, and 6 are applied.
+
+  An unlimited number of FREE EDITION copies may be used for non-
+  commercial purposes including educational purposes of institutions 
+  and evaluation purposes. Only files from the current panel may be 
+  recovered and no more than 4000 files at a time (per command call).
+
+  You may reproduce and distribute FREE EDITION copies under the 
+  following set of conditions only: the SOFTWARE is obtained from the 
+  SOFTWARE author or got on the specified SOFTWARE websites; keys, 
+  files, and other materials of other EDITIONS are not transmitted; 
+  all SOFTWARE components are kept together, not modified (except 
+  encoding into a different form), and available to an end-user; 
+  an end user is requested to accept this EULA when first run the 
+  SOFTWARE (as it is designed originally); the SOFTWARE origin and 
+  composition are not misrepresented.
+
+  FREE EDITION may be distributed separately or included in freeware 
+  or paid packages provided that its freeware origin is not hidden.
+
+  1.2.1. EDITIONS "EXPRESS" AND "PERSONAL": PERSONAL USE ONLY
+
+  With the edition "EXPRESS" or "PERSONAL", you may use the SOFTWARE 
+  functionality for personal non-commercial purposes only. The usage 
+  in organizations and any direct or indirect benefit are prohibited. 
+
+  1.2.2. STANDARD EDITION: USE FOR OWN NEEDS ONLY
+
+  With STANDARD EDITION, you may use the SOFTWARE functionality as 
+  a person or organization for own needs only. Data recovery services 
+  for third parties are prohibited. In particular, any organization or 
+  its employee or other person providing data recovery services may 
+  not use the SOFTWARE.
+
+  1.3. RUN ONE COPY PER LICENSE ONLY
+
+  You may run simultaneously no more SOFTWARE instances (keep a number 
+  of unfinished processes) than a number of provided license copies.
+
+  Additionally you may create and keep two (2) backup copies. The copy 
+  not running currently is a backup copy.
+
+  1.4. ENVIRONMENT CHANGE RESTRICTIONS
+
+  You may run the SOFTWARE on different hardware configurations not 
+  exceeding the allowed number of configurations. The motherboard or 
+  CPU change, the change of motherboard serial number stored in ROM, 
+  the use of virtualization imply the change of hardware.
+
+  For the editions "EXPRESS" and "PERSONAL" the allowed number of 
+  configurations is two (2) per year. For STANDARD EDITION it is 
+  three (3) per year per license copy. The year is counted back from 
+  the current date.
+
+  The license EXPRESS EDITION is time-limited. When it expires, you 
+  may continue using the SOFTWARE on the same environment but no 
+  maintenance or ensuring of functioning is provided (reactivation 
+  services and other support are not provided as well).
+
+  2. ACTIVATION
+
+  The SOFTWARE may require activation. You may use Online Activation 
+  (if applicable) and Offline Activation (get the activation code on 
+  activation sites). Some changes to your hardware or software may 
+  cause the necessity to reactivate the SOFTWARE.
+
+  Activation is designed to reveal and prevent an illegal use of the 
+  SOFTWARE. It is prohibited to bypass or circumvent activation or to 
+  use other ways to hide the SOFTWARE usage.
+
+  3. SOFTWARE UPDATES
+
+  When new versions are released older versions may become unavailable. 
+  In such case you may use the succeeding available version if your 
+  license is not expired, and the newer agreement replaces the 
+  previous one in those stipulations only which clarify the terms and 
+  explicitly enhance your rights. In other cases updates may be used 
+  entirely under the terms of new license agreements only.
+
+  You may use previous available SOFTWARE versions under the terms 
+  of this EULA too. However running previous versions (considering the 
+  number before the first dot) is regarded as a run on different 
+  hardware configurations assuming the restrictions of the par. 1.4.
+
+  4. SOFTWARE UPGRADES
+
+  Upgrade is a change of a complete set, the number of license copies, 
+  or the EDITION. To apply the SOFTWARE upgrade, you must first have a 
+  license that is eligible for the upgrade. Upon the upgrade, the new 
+  agreement supersedes the previous one, and you may no longer use keys 
+  and other components provided under the previous license.
+
+  5. DESCRIPTION OF OTHER RIGHTS AND LIMITATIONS
+
+  You may not use the SOFTWARE otherwise than expressly provided by 
+  law, this EULA, and additional agreements with the SOFTWARE author.
+
+  This EULA does not grant you rights to create derivative work, to 
+  reverse engineer, decompile, disassemble, or otherwise study the 
+  SOFTWARE code, nor to sell, rent, lease or sublicense the SOFTWARE.
+
+  Violation of any EULA terms automatically terminates the EULA and 
+  your rights to use the SOFTWARE.
+
+  The SOFTWARE author retains all the rights of the author.
+
+  6. LIMITED WARRANTY
+
+  THE AUTHOR OF THE SOFTWARE EXPRESSLY DISCLAIMS ANY WARRANTY FOR 
+  THE SOFTWARE. THE SOFTWARE AND ANY RELATED DOCUMENTATION IS 
+  PROVIDED "AS IS" WITHOUT WARRANTY OF ANY KIND, EITHER EXPRESSED 
+  OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE IMPLIED WARRANTIES 
+  OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE, OR 
+  NON-INFRINGEMENT. THE ENTIRE RISK ARISING OUT OF USE OR 
+  PERFORMANCE OF THE SOFTWARE REMAINS WITH YOU. IN NO EVENT SHALL 
+  THE AUTHOR OF THE SOFTWARE BE LIABLE FOR ANY DAMAGES WHATSOEVER 
+  ARISING OUT OF USE OR INABILITY TO USE THE SOFTWARE (INCLUDING 
+  BUT NOT LIMITED TO ANY DATA LOSS OR DISTORTION, LOSS OF BUSINESS 
+  PROFITS, BUSINESS INTERRUPTION, LOSS OF BUSINESS INFORMATION, 
+  PERSONAL INJURY, LOSS OF PRIVACY OR OTHER PECUNIARY OR OTHER 
+  LOSS WHATSOEVER), EVEN IF THE AUTHOR HAS BEEN ADVISED OF THE 
+  POSSIBILITY OF SUCH DAMAGES.

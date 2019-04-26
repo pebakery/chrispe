@@ -1,0 +1,227 @@
+Opera Hotlist version 2.0
+Options: encoding = utf8, version=21
+
+#FOLDER
+	ID=11
+	NAME=Trash
+	TRASH FOLDER=YES
+	UNIQUEID=56BD213415BF4A29AADF55742DB4EA2C
+
+-
+
+#FOLDER
+	ID=12
+	NAME=Opera
+	UNIQUEID=826CF25AF11C491899711FC93513A4F4
+	PARTNERID=opera-operafolder
+
+#URL
+	ID=14
+	NAME=Nettsamfunnet My Opera
+	URL=http://my.opera.com/?utm_source=DesktopBrowser&utm_medium=Bookmark&utm_campaign=BrowserLinks
+	ICONFILE=http://redir.opera.com/favicons/myopera/favicon.ico
+	ON PERSONALBAR=YES
+	PERSONALBAR_POS=4
+	UNIQUEID=6081957B53904ED6BAD072D157C8D408
+	PARTNERID=opera-operasocial
+
+#URL
+	ID=15
+	NAME=Brukerstøtte
+	URL=http://www.opera.com/support/?utm_source=DesktopBrowser&utm_medium=Bookmark&utm_campaign=BrowserLinks
+	ICONFILE=http://redir.opera.com/favicons/opera/favicon.ico
+	UNIQUEID=BDBBEF1FCB2844A980752782E0D9670C
+	PARTNERID=opera-operasupport
+
+#URL
+	ID=16
+	NAME=Velkommen til Opera
+	URL=http://www.opera.com/portal/startup/?utm_source=DesktopBrowser&utm_medium=Bookmark&utm_campaign=BrowserLinks
+	ICONFILE=http://redir.opera.com/favicons/opera/favicon.ico
+	UNIQUEID=18CD2A92CCF9453A98D3C2B85ADE90F2
+	PARTNERID=opera-operastart
+
+#URL
+	ID=17
+	NAME=Opera Portal
+	URL=http://portal.opera.com/?utm_source=DesktopBrowser&utm_medium=Bookmark&utm_campaign=BrowserLinks
+	ICONFILE=http://redir.opera.com/favicons/opera/favicon.ico
+	UNIQUEID=93D5337B1657409084924E007F49387C
+	PARTNERID=opera-operaportal
+	
+#URL
+	ID=18
+	NAME=Opera Sport
+	URL=http://redir.opera.com/bookmarks/sports.opera.com
+	ICONFILE=http://redir.opera.com/favicons/opera.sports.com/favicon.ico
+	UNIQUEID=A3457DBDD69C4061B5B393A85D66F9D1
+	PARTNERID=opera-sportsnews
+
+#URL
+	ID=19
+	NAME=Opera Utvidelser
+	URL=https://addons.opera.com/
+	ICONFILE=http://redir.opera.com/favicons/opera/favicon.ico
+	DESCRIPTION=addons, extensions
+	UNIQUEID=29DF2B28174D42D08D98B71A16139D64
+	PARTNERID=opera-operaextensions
+
+#URL
+	ID=22
+	NAME=Download.com
+	URL=http://redir.opera.com/bookmarks/download
+	ICONFILE=http://redir.opera.com/favicons/downloadcom/favicon.ico
+	UNIQUEID=857166B8087A422CB42A6C541C615D94
+	PARTNERID=opera-downloadsite
+
+#URL
+	ID=25
+	NAME=SOL
+	URL=http://redir.opera.com/bookmarks/sol
+	ICONFILE=http://redir.opera.com/favicons/solno/favicon.ico
+	UNIQUEID=5C090157604D45C38F4CD7DE844AEA53
+	PARTNERID=opera-portal
+
+#URL
+	ID=26
+	NAME=Bing
+	URL=http://redir.opera.com/bookmarks/bing/
+	ICONFILE=http://redir.opera.com/favicons/bing/favicon.ico
+	UNIQUEID=C6DF94B10A2C49F18BCDFF051AE9A443
+	PARTNERID=opera-searchengine
+
+#URL
+	ID=27
+	NAME=Bigpoint
+	URL=http://redir.opera.com/bookmarks/bigpoint/
+	ICONFILE=http://redir.opera.com/favicons/bigpoint/favicon.ico
+	UNIQUEID=2633F9CAFCD54C7B97E49102BD772021
+	PARTNERID=opera-gamesportal
+	
+#URL
+	ID=28
+	NAME=Wikipedia
+	URL=http://no.wikipedia.org/wiki/
+	ICONFILE=http://redir.opera.com/favicons/wikipedia/favicon.ico
+	ON PERSONALBAR=YES
+	PERSONALBAR_POS=5
+	UNIQUEID=7847B9B30DA84A33AC1624579B504698
+	PARTNERID=opera-encyclopedia
+
+#URL
+	ID=29
+	NAME=FastMail
+	URL=http://redir.opera.com/bookmarks/fastmail
+	ICONFILE=http://redir.opera.com/favicons/fastmail/favicon.ico
+	UNIQUEID=BAF6AE40FA1543AC97010132CD806EEE
+	PARTNERID=opera-mail
+
+#URL
+	ID=30
+	NAME=Booking.com
+	URL=http://redir.opera.com/bookmarks/booking.com
+	DISPLAY URL=http://www.booking.com/
+	ICONFILE=http://redir.opera.com/favicons/booking/favicon.ico
+	DESCRIPTION=hotels, hoteller, ferie
+	ON PERSONALBAR=YES
+	PERSONALBAR_POS=3
+	UNIQUEID=0739A8A088FA4094ADDF36856DB4340F
+	PARTNERID=opera-booking
+	
+#URL
+	ID=31
+	NAME=My Opera Mail
+	URL=http://mail.opera.com/?utm_source=DesktopBrowser&utm_medium=Bookmark&utm_campaign=BrowserLinks
+	ICONFILE=https://mail.opera.com/favicon.ico
+	DESCRIPTION=Free mail
+	UNIQUEID=BE6CA6E1CA86413A92F5FC2C28E71CAD
+	PARTNERID=opera-mail2
+	
+#URL
+	ID=33
+	NAME=Games2Win
+	URL=http://redir.opera.com/bookmarks/Games2Win
+	ICONFILE=http://redir.opera.com/favicons/Games2Win/favicon.ico
+	DESCRIPTION=funny, play, free, online, games
+	UNIQUEID=FD1AE0CAE7AD404FA433AAE27791A7DC
+	PARTNERID=opera-gamesportal2
+	
+#URL
+	ID=34
+	NAME=Hotels.com
+	URL=http://redir.opera.com/bookmarks/hotels.com
+	DISPLAY URL=http://hotels.com/
+	ICONFILE=http://redir.opera.com/favicons/hotels.com/favicon.ico
+	DESCRIPTION=rom, bestillinger
+	UNIQUEID=83EDE91B0FE34F1392665EB3F5AD2BFE
+	PARTNERID=opera-booking2
+	
+#URL
+	ID=41
+	NAME=eBay
+	URL=http://redir.opera.com/bookmarks/ebay/
+	DISPLAY URL=http://www.ebay.com/
+	ICONFILE=http://redir.opera.com/favicons/ebay/favicon.ico
+	ON PERSONALBAR=YES
+	PERSONALBAR_POS=1
+	UNIQUEID=55DA86E6CC334CF9B2F5A38728A63F52
+	PARTNERID=opera-auction
+	
+#URL
+	ID=42
+	NAME=Amazon
+	URL=http://redir.opera.com/bookmarks/amazon/
+	ICONFILE=http://redir.opera.com/favicons/amazon/favicon.ico
+	ON PERSONALBAR=YES
+	PERSONALBAR_POS=2
+	UNIQUEID=80A0C80A99554C429032E569E083C6C4
+	PARTNERID=opera-webshop
+	
+#URL
+	ID=43
+	NAME=CDON.no
+	URL=http://redir.opera.com/bookmarks/cdon
+	DISPLAY URL=http://cdon.no
+	ICONFILE=http://redir.opera.com/favicons/cdon/favicon.ico
+	DESCRIPTION=musikk, film, spill,  DVD, CD, dataspill
+	UNIQUEID=57A249774B9F4274912F893C83118B60
+	PARTNERID=opera-webshop2
+	
+#URL
+	ID=44
+	NAME=Kelkoo
+	URL=http://redir.opera.com/bookmarks/kelkoo
+	ICONFILE=http://redir.opera.com/favicons/kelkoo/favicon.ico
+	DESCRIPTION=nettbutikker, pris, sammenlign
+	UNIQUEID=2298370EF4C54CF1A1BF9A3B86DD03F4
+	PARTNERID=opera-pricecomparison
+	
+#URL
+	ID=45
+	NAME=1881.no
+	URL=http://redir.opera.com/bookmarks/directory/no
+	DISPLAY URL=http://www.1881.no
+	ICONFILE=http://redir.opera.com/favicons/directory/no/favicon.ico
+	DESCRIPTION=telefon, katalog, kart
+	UNIQUEID=249A052FE08B495EBE841996299F4104
+	PARTNERID=opera-directory
+
+#URL
+	ID=46
+	NAME=Groupon
+	URL=http://redir.opera.com/bookmarks/shopping2/no
+	DISPLAY URL=http://www.groupon.no
+	ICONFILE=http://redir.opera.com/favicons/shopping2/no//favicon.ico
+	DESCRIPTION=kuponger, rabatter, deal
+	UNIQUEID=F79F7ABBDF6E4C8D83817C6717B242BD
+	PARTNERID=opera-discount
+
+#URL
+	ID=47
+	NAME=Zalando
+	URL=http://redir.opera.com/bookmarks/shopping3/no
+	DISPLAY URL=http://www.zalando.no
+	ICONFILE=http://redir.opera.com/favicons/shopping3/no/favicon.ico
+	DESCRIPTION=sko, vesker, tilbehør
+	UNIQUEID=664F3DF1FFB5494C8A52257DE217E230
+	PARTNERID=opera-shopping

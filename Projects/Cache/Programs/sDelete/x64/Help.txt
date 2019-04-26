@@ -1,0 +1,37 @@
+SDelete v2.01 - Secure file delete
+Copyright (C) 1999-2018 Mark Russinovich
+Sysinternals - www.sysinternals.com
+
+usage: sdelete [-p passes] [-r] [-s] [-q] <file or directory> [...]
+       sdelete [-p passes] [-z|-c [percent free]] <drive letter [...]>
+       sdelete [-p passes] [-z|-c] <physical disk number>
+   -c         Clean free space. Specify an option amount of space
+              to leave free for use by a running system.
+   -p         Specifies number of overwrite passes (default is 1)
+   -r         Remove Read-Only attribute
+   -s         Recurse subdirectories
+   -z         Zero free space (good for virtual disk optimization)
+   -nobanner  Do not display the startup banner and copyright message.
+
+Disks must not have any volumes in order to be cleaned.
+______________________________________________________________________
+
+https://www.ghacks.net/2017/11/14/delete-files-and-free-disk-space-securely-with-sdelete/
+
+Deleting files or folders securely
+==================================
+
+The command sdelete <file or directory> is the base command for any file or directory operations. Here are some examples that demonstrates the different options that you have:
+
+    sdelete -s c:\users\martin\downloads -- This deletes the folder downloads and all subdirectories securely.
+    sdelete -q c:\users\martin\text.txt -- This deletes the file text.txt securely, and suppresses any error messages.
+    sdelete -p 5 c:\*.zip -- This deletes all zip files under c:, and runs the operation in five passes.
+
+Deleting free disk space securely
+=================================
+
+The base command sdelete -c <drive letter> deletes free disk space on the specified drive securely. Here are some examples that demonstrate the various options that SDelete offers:
+
+    sdelete -c c: -- Deletes the free disk space on drive C: securely.
+    sdelete -c -p 2 f: -- Runs two delete passes on the free disk space of drive f:
+    sdelete -z d: -- Zeroes the free disk space of drive d:

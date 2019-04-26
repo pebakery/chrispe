@@ -1,0 +1,177 @@
+@charset "utf-8";
+
+/* Stylesheet for the Opera error documents */
+/* Copyright 2012 Opera Software */
+
+@media not print {
+
+html {
+  font: 13px/22px Arial, sans-serif;
+  background: url(images/opera-icon-red.png) 100% 0 no-repeat, linear-gradient(to bottom, rgba(187,202,215,1), rgba(187,202,215,0) 666px) #f8f8f8;
+  color: #525c66;
+  min-height: 100%;
+}
+
+html * {
+  font-size: 100%;
+  line-height: 1.55;
+}
+
+body {
+  max-width: 650px;
+  margin: 25px auto 10px auto;
+  padding: 40px;
+  border-width: 20px;
+  -o-border-image: url(images/container.png) 20  stretch;
+  text-align: left;
+  overflow-wrap: break-word;
+}
+
+dt, dd {
+  display: inline-block;
+  vertical-align: top;
+  margin: 0 0 0.32em 0;
+}
+
+dt {
+  width: 25%;
+  margin-right: 5%;
+}
+
+dd { 
+  width: 70%;
+  color: #000;
+}
+
+a {
+  color: #0082d9;
+  border-bottom: 1px solid rgba(0,130,217,0.2);
+  text-decoration: none;
+}
+
+a:hover {
+  color: #008ae5;
+  border-color: rgba(0,130,217,0.5);
+}
+
+h1 {
+  margin: 0 0 0.1em 0;
+  line-height: 1;
+  font-size: 1.8em;
+  color: #ae4444;
+  text-shadow: 0 1px rgba(255,255,255,0.5);
+}
+
+h2 {
+  font-size: 1.2em;
+  margin: 0 0 0.4em 0;
+  text-shadow: 0 1px rgba(255,255,255,0.5);
+}
+
+input {
+  vertical-align: middle;
+  box-sizing: border-box; 
+}
+
+cite {
+  font-style: normal;
+  margin: 0;
+  color: #999;
+  display: block;
+  text-overflow: ellipsis;
+  overflow: hidden;
+}
+
+ins {
+  text-decoration: none;
+  font-weight: bold;
+}
+
+dl,ul,ol  {
+  margin: 0 0 1em 0;
+  padding: 0;
+}
+
+li {
+  margin: 0 0 0.32em 0;
+}
+
+ul li {
+  padding: 0 0 0 20px;
+  list-style-type: none;
+  background: url(images/bullet.png) no-repeat 0 0.32em;
+}
+
+blockquote {
+  border-left: 5px solid #f1f1f1;
+  margin: 0;
+  padding: 0 0 0 1.5em;
+}
+
+address {
+  font-style: normal;
+  color: #666;
+  padding: 0;
+}
+
+table {
+  width: 100%;
+  margin: 0 0 15px 0;
+  border-collapse: collapse;
+}
+
+tr {
+  border-bottom: 1px solid rgba(0,0,0,0.1);
+}
+
+tr:nth-child(even) {
+  background-color: rgba(0,0,0,0.03);  
+}
+
+td {
+  padding: 0.2em 1em 0.2em 0;
+  color: #666;
+  vertical-align: top; 
+}
+
+th {
+  text-align: left;
+  width: 230px;
+  font-weight: inherit;
+  color: #999;
+  padding: 4px 6px 4px 0;
+  vertical-align: top;
+  border-bottom: 1px solid #ccc;
+}
+
+html[dir="rtl"] * { text-align: right; }
+
+input[type="number"] { padding: 0.1em;}
+
+}
+
+/* Text Sizing */
+
+@media tv, handheld {html {font-size: 150%;}}
+
+/* make table cells full width when panel is too narrow */
+@media screen and (max-width: 400px), projection and (max-width: 400px), tv and (max-width: 400px) {
+
+  body {
+    background-image: none;
+    padding: 6px;
+    margin: 0;
+    font-size: 85%;
+  }
+
+  th, td, tr, table {
+    display: block;
+    width: 98%;
+  }
+  
+  td, th { padding: 0 6px 0 0}
+  tr { margin: 0;}
+    
+  dt, dd { width: 100%; margin-bottom: -5px;}
+  dd { margin-bottom: 0}
+}

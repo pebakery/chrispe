@@ -1,0 +1,80 @@
+@charset "utf-8";
+/* Stylesheet for WML documents */
+/* Copyright 2012 Opera Software */
+@namespace url("http://www.wapforum.org/2001/wml");
+wml, template, card, p, br, pre {
+	font: 20px sans-serif;
+	display: block;
+}
+wml {
+	color: black;
+	background: white;
+	padding: 1em;
+}
+template {
+	background: #DDDDDD;
+	padding: 0.6em 1em;
+	margin-bottom: 0.3em;
+}
+img {margin: 0.3em;}
+timer {display: none;}
+card::before {
+	content: attr(title);
+	font-style: italic;
+	color: white;
+	background: #333333;
+	padding: 0.3em;
+	margin-bottom: 0.5em;
+	display: block;
+}
+card {
+	text-align: left;
+	background: #EEEEEE;
+	padding: 1em;
+	display: block;
+}
+do {
+	white-space: nowrap;
+	padding: 0.05em;
+	border: 0.1em black outset;
+}
+do[type]::before {content:attr(type);}
+do[type="prev"]::before {content: "Previous";}
+do[type="next"]::before {content: "Next";}
+do[type="accept"]::before {content: "Accept";}
+do[type="options"]::before {content: "Options";}
+do[label]::before {
+	text-decoration: underline;
+	content: attr(label);
+	font-style: normal;
+	margin: 0.2em 0.05em;
+	display: inline-block;
+}
+a, go, do, anchor {
+	text-decoration: underline;
+	color: blue;
+}
+go, anchor {display: inline;}
+onevent[type="onenterforward"] go::before {content: "Please press forward";}
+small {font-size: smaller;}
+p {padding: 0.3em;}
+p, p[align="left"] {text-align: left;}
+p[align="center"] {text-align: center;}
+p[align="right"] {text-align: right;}
+strong, b {font-weight: bold;}
+i, em {font-style: italic;}
+u {text-decoration: underline;}
+big {font-size: larger;}
+pre {white-space: pre;}
+table {
+	border: 1px solid black;
+	border-collapse: collapse;
+	display: table;
+}
+tr {display: table-row;}
+td {
+	border: 1px solid black;
+	display: table-cell;
+}
+fieldset {display: block;}
+

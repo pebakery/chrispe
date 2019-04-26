@@ -1,0 +1,43 @@
+@import url(opera.css);
+
+ol {
+	list-style-type: none;
+	font-size: 120%;
+	clear: both;
+}
+
+ol:after {
+    content: "."; 
+    display: block; 
+    height: 0; 
+    clear: both; 
+    visibility: hidden;
+}
+
+li {
+	display: inline;
+}
+
+li a{
+	text-decoration: none;
+	display: none;
+	float: left;
+	display: block;
+	margin: 0 20px 20px 0;
+	background: #f1f1f1;
+	border: 1px solid #ddd;
+	width: 80px;
+	height: 80px;
+	padding: 10px;
+	font-size: 30px;
+	text-shadow: 0 2px 0 #fff;
+	text-align: center;
+	line-height: 80px;
+	color: #666;
+}
+
+li a:hover {
+	background: #086fd8;
+	color: #fff;
+	text-shadow: 0 -2px 0 rgba(0,0,0,0.8);
+}

@@ -1,7 +1,7 @@
 [Version]
 signature = "$Windows NT$"
 Provider = "LTR Data"
-DriverVer=08/26/2016,6.0.6001.18000
+DriverVer=11/25/2018,6.0.6001.18000
 
 
 [SourceDisksNames]
@@ -13,7 +13,6 @@ awealloc.sys = 1,awealloc\i386
 imdisk.sys = 1,sys\i386
 imdsksvc.exe = 1,svc\i386
 imdisk.cpl = 1,cpl\i386
-imdisk.cpl.manifest = 1,cpl
 imdisk.exe = 1,cli\i386
 imdisk.inf = 1
 imdisk.pnf = 1
@@ -25,7 +24,6 @@ awealloc.sys = 1,awealloc\ia64
 imdisk.sys = 1,sys\ia64
 imdsksvc.exe = 1,svc\ia64
 imdisk.cpl = 1,cpl\ia64
-imdisk.cpl.manifest = 1,cpl
 imdisk.exe = 1,cli\ia64
 imdisk.inf = 1
 imdisk.pnf = 1
@@ -37,8 +35,29 @@ awealloc.sys = 1,awealloc\amd64
 imdisk.sys = 1,sys\amd64
 imdsksvc.exe = 1,svc\amd64
 imdisk.cpl = 1,cpl\amd64
-imdisk.cpl.manifest = 1,cpl
 imdisk.exe = 1,cli\amd64
+imdisk.inf = 1
+imdisk.pnf = 1
+uninstall_imdisk.cmd = 1
+
+
+[SourceDisksFiles.arm]
+awealloc.sys = 1,awealloc\arm
+imdisk.sys = 1,sys\arm
+imdsksvc.exe = 1,svc\arm
+imdisk.cpl = 1,cpl\arm
+imdisk.exe = 1,cli\arm
+imdisk.inf = 1
+imdisk.pnf = 1
+uninstall_imdisk.cmd = 1
+
+
+[SourceDisksFiles.arm64]
+awealloc.sys = 1,awealloc\arm64
+imdisk.sys = 1,sys\arm64
+imdsksvc.exe = 1,svc\arm64
+imdisk.cpl = 1,cpl\arm64
+imdisk.exe = 1,cli\arm64
 imdisk.inf = 1
 imdisk.pnf = 1
 uninstall_imdisk.cmd = 1
@@ -63,6 +82,17 @@ DelFiles = ImDiskSysFiles, ImDiskExeFiles, ImDiskInfFiles, ImDiskPnfFiles
 DelReg = ImDiskDelReg
 
 
+[DefaultInstall.ntarm]
+CopyFiles = ImDiskSysFiles, ImDiskExeFiles, ImDiskInfFiles
+AddReg = ImDiskAddReg
+DelReg = ImDiskDelOldReg
+
+
+[DefaultUninstall.ntarm]
+DelFiles = ImDiskSysFiles, ImDiskExeFiles, ImDiskInfFiles, ImDiskPnfFiles
+DelReg = ImDiskDelReg
+
+
 [DefaultInstall.ntamd64]
 CopyFiles = ImDiskSysFiles, ImDiskExeFiles, ImDiskExe32Files, ImDiskInfFiles
 AddReg = ImDiskAddReg
@@ -70,6 +100,17 @@ DelReg = ImDiskDelOldReg
 
 
 [DefaultUninstall.ntamd64]
+DelFiles = ImDiskSysFiles, ImDiskExeFiles, ImDiskExe32Files, ImDiskInfFiles, ImDiskPnfFiles
+DelReg = ImDiskDelReg
+
+
+[DefaultInstall.ntarm64]
+CopyFiles = ImDiskSysFiles, ImDiskExeFiles, ImDiskExe32Files, ImDiskInfFiles
+AddReg = ImDiskAddReg
+DelReg = ImDiskDelOldReg
+
+
+[DefaultUninstall.ntarm64]
 DelFiles = ImDiskSysFiles, ImDiskExeFiles, ImDiskExe32Files, ImDiskInfFiles, ImDiskPnfFiles
 DelReg = ImDiskDelReg
 
@@ -97,6 +138,18 @@ DelService = ImDisk
 DelService = ImDskSvc
 
 
+[DefaultInstall.ntarm.Services]
+AddService = AWEAlloc, , AWEAllocDrv
+AddService = ImDisk, , ImDskDrv
+AddService = ImDskSvc, , ImDskSvc
+
+
+[DefaultUninstall.ntarm.Services]
+DelService = AWEAlloc
+DelService = ImDisk
+DelService = ImDskSvc
+
+
 [DefaultInstall.ntamd64.Services]
 AddService = AWEAlloc, , AWEAllocDrv
 AddService = ImDisk, , ImDskDrv
@@ -104,6 +157,18 @@ AddService = ImDskSvc, , ImDskSvc
 
 
 [DefaultUninstall.ntamd64.Services]
+DelService = AWEAlloc
+DelService = ImDisk
+DelService = ImDskSvc
+
+
+[DefaultInstall.ntarm64.Services]
+AddService = AWEAlloc, , AWEAllocDrv
+AddService = ImDisk, , ImDskDrv
+AddService = ImDskSvc, , ImDskSvc
+
+
+[DefaultUninstall.ntarm64.Services]
 DelService = AWEAlloc
 DelService = ImDisk
 DelService = ImDskSvc
@@ -124,7 +189,6 @@ DelService = ImDskSvc
 [ImDiskExeFiles]
 imdisk.exe
 imdisk.cpl
-imdisk.cpl.manifest
 imdsksvc.exe
 uninstall_imdisk.cmd
 
@@ -132,7 +196,6 @@ uninstall_imdisk.cmd
 [ImDiskExe32Files]
 imdisk.exe,cli\i386\imdisk.exe
 imdisk.cpl,cpl\i386\imdisk.cpl
-imdisk.cpl.manifest
 
 
 [ImDiskSysFiles]

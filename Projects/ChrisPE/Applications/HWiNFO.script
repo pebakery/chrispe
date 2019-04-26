@@ -1,0 +1,143 @@
+[main]
+Title=HWiNFO
+Description=HWiNFO x86/x64
+Selected=False
+Level=5
+Author=ThePEBakeryTeam
+Version=20190426
+Date=2019-04-26
+Interface=Interface1
+
+[Interface1]
+pTextLabelMenu1="1",1,1,35,3,70,18,10,Bold
+pButtonMenu2="2",1,8,75,0,70,20,pButtonMenu2,0,True,_pButtonMenu2_,True
+pButtonMenu3="?",1,8,145,0,70,20,pButtonMenu3,0,True,_pButtonMenu3_,True
+pWebLabel1=https://www.hwinfo.com/,1,10,51,100,216,18,https://www.hwinfo.com/
+pTextLabel1="HWiNFO Website",1,1,51,77,230,18,10,Bold
+pCheckBoxInWim="Include Program in boot.wim",1,3,51,265,180,18,True
+
+[Interface2]
+pButtonMenu1="1",1,8,5,0,70,20,pButtonMenu1,0,True,_pButtonMenu1_,True
+pTextLabelMenu2="2",1,1,108,3,70,18,10,Bold
+pButtonMenu3="?",1,8,145,0,70,20,pButtonMenu3,0,True,_pButtonMenu3_,True
+pBevel1=,1,12,10,65,66,2
+pTextLabel="Menu Entries",1,1,10,50,230,18,8,Bold
+pCheckBoxShortcutDesktop="Add to Desktop Menu",1,3,40,80,150,18,True
+pCheckBoxShortcutQuick="Add to Quicklaunch Menu",1,3,40,110,150,18,True
+pCheckBoxShortcutPrograms="Add to #$qStart#$q > ",1,3,40,140,99,18,True
+pCheckBoxShortcutLaunchBar="Add to LaunchBar Menu ",1,3,40,170,150,18,True
+pButtonShortcut1=?,1,8,10,80,18,18,pButtonShortcut1,0,True,_pButtonShortcut1_,True
+pButtonShortcut2=?,1,8,10,110,18,18,pButtonShortcut2,0,True,_pButtonShortcut2_,True
+pButtonShortcut3=?,1,8,10,140,18,18,pButtonShortcut3,0,True,_pButtonShortcut3_,True
+pButtonShortcut4=?,1,8,10,170,18,18,pButtonShortcut4,0,True,_pButtonShortcut4_,True
+pTextBox1=,1,0,140,140,150,21,Programs
+
+[pButtonMenu1]
+IniWrite,%ScriptFile%,Main,Interface,Interface1
+System,REFRESHINTERFACE
+
+[pButtonMenu2]
+IniWrite,%ScriptFile%,Main,Interface,Interface2
+System,REFRESHINTERFACE
+
+[pButtonMenu3]
+message,"Click on the buttons to toggle between tabs 1 and 2. #$x#$xTab 2 contains menu options for use in the selected shell. Click on the ? button for information about the different options."
+
+[pButtonShortcut1]
+message,"WinXShell only#$x#$xSelect this option to add a program shortcut to the Desktop."
+
+[pButtonShortcut2]
+message,"WinXShell only#$x#$xSelect this option to add a program menu option to the Quicklaunch menu - similar in appearence to the 'Pin to Taskbar' option in Windows 7/8/10."
+
+[pButtonShortcut3]
+message,"Applies to WinXShell#$c BBLean and LaunchBar Shell(s)#$x#$xSelect this option to add a program menu option to the Start menu. Leave blank to add to the root of the menu#$c or manually type a path to place in a sub-menu (do not use spaces in the path). E.g. #$x#$s- FileManager#$x#$s- Programs#$x#$s- Programs\FileManager#$x#$xAnd looking at the examples above - #$x#$xLeave this option blank to add a menu entry to the root of the program menu (the 'Start' menu in WinXShell#$c the 'Start' menu in BBLean#$c or the root of the LaunchBar menu bar if LaunchBar is selected as Shell)#$x#$xEnter 'FileManager' to add a menu entry for this application to the 'Start' > 'FileManager' sub-menu (WinXShell and bblean) or the 'FileManager' sub-menu in LaunchBar.#$x#$xEnter 'Programs' to add a menu entry for this application to the 'Start' > 'Programs' sub-menu (WinXShell and bblean) or the 'Programs' sub-menu in LaunchBar.#$x#$xEnter 'Programs\FileManager' to add a menu entry for this application to the 'Start' > 'Programs' > 'FileManager' sub-menu (WinXShell and bblean) or the 'Programs' > 'FileManager' sub-menu in LaunchBar."
+
+[pButtonShortcut4]
+message,"This setting does not apply to any LaunchBar instance running as the WinPE Shell. This option only applies to a LaunchBar instance when the Applications' > 'LaunchBar' program script is selected in the build.#$x#$xIf the 'Applications' > 'LaunchBar' program script is selected than enable this option to add a program menu entry to the root of the LaunchBar menu bar. #$x#$xPlease note that if option '6] Programs in boot.wim' in the main project script is set as 'NO'#$c then LaunchBar and a number of other applications will not be available at boot. In this case a text based .ini file will be used for LaunchBar menu settings."
+
+[process]
+If,%FullProjectRun%,Equal,NO,Run,"%ProjectDir%\Core\common.script",PostConfigRun
+AddInterface,%ScriptFile%,Interface1,""
+AddInterface,%ScriptFile%,Interface2,""
+If,%pCheckBoxInWim%,Equal,True,Set,%PROGRAMS.IN.WIM%,YES
+Else,Set,%PROGRAMS.IN.WIM%,NO
+Run,%ScriptFile%,CHECKS
+Run,%ScriptFile%,MENU
+Run,%ScriptFile%,COMMON
+If,%PROGRAMS.IN.WIM%,Equal,NO,Run,%ScriptFile%,NOT.IN.WIM
+If,%PROGRAMS.IN.WIM%,Equal,YES,Run,%ScriptFile%,IN.WIM
+
+[CHECKS]
+If,%ARCH%,Equal,x86,If,Not,ExistFile,"%Programs%\HWiNFO\HWiNFO32.exe",Begin
+  Message,"HWiNFO is missing - exiting script...",Error,5
+  Exit,"HWiNFO is missing - exiting script..."
+End
+If,%ARCH%,Equal,x64,If,Not,ExistFile,"%Programs%\HWiNFO\HWiNFO64.exe",Begin
+  Message,"HWiNFO is missing - exiting script...",Error,5
+  Exit,"HWiNFO is missing - exiting script..."
+End
+
+
+[MENU]
+If,%PROGRAMS.IN.WIM%,Equal,NO,Begin
+  If,%ARCH%,Equal,x64,Begin
+    If,Not,ExistFile,"%OutputDir%\Programs\ShortcutsNotInWim.txt",Run,"%ProjectDir%\Core\common.script",NotInWim
+    TXTaddline,"%OutputDir%\Programs\ShortcutsNotInWim.txt","#$p~dp0nircmd.exe shortcut #$q#$p~dp0HWiNFO\HWiNFO64.exe#$q #$q#$pTemp#$p\ShortCuts#$q #$qHWiNFO#$q",Append
+  End
+  If,%ARCH%,Equal,x86,Begin
+    If,Not,ExistFile,"%OutputDir%\Programs\ShortcutsNotInWim.txt",Run,"%ProjectDir%\Core\common.script",NotInWim
+    TXTaddline,"%OutputDir%\Programs\ShortcutsNotInWim.txt","#$p~dp0nircmd.exe shortcut #$q#$p~dp0HWiNFO\HWiNFO32.exe#$q #$q#$pTemp#$p\ShortCuts#$q #$qHWiNFO#$q",Append
+  End
+End 
+If,%PROGRAMS.IN.WIM%,Equal,YES,Begin
+  If,%ARCH%,Equal,x64,ShellExecute,Hide,"%Tools%\Shortcut.exe","/A:C /T:#$q#$pSystemDrive#$p\Programs\HWiNFO\HWiNFO64.exe#$q /F:#$q%ProjectTemp%\HWiNFO.lnk#$q /I:#$q#$pSystemDrive#$p\Programs\HWiNFO\HWiNFO64.exe#$c0#$q"
+  If,%ARCH%,Equal,x86,ShellExecute,Hide,"%Tools%\Shortcut.exe","/A:C /T:#$q#$pSystemDrive#$p\Programs\HWiNFO\HWiNFO32.exe#$q /F:#$q%ProjectTemp%\HWiNFO.lnk#$q /I:#$q#$pSystemDrive#$p\Programs\HWiNFO\HWiNFO32.exe#$c0#$q"
+  If,ExistFile,"%ProjectTemp%\HWiNFO.lnk",Begin
+    Set,%MyShortcut%,HWiNFO.lnk
+    If,%pCheckBoxShortcutDesktop%,Equal,True,FileCopy,"%ProjectTemp%\%MyShortcut%","%ProjectTemp%\ShortCuts\Desktop"
+    If,%pCheckBoxShortcutQuick%,Equal,True,FileCopy,"%ProjectTemp%\%MyShortcut%","%ProjectTemp%\ShortCuts\Quick"
+    If,%pCheckBoxShortcutPrograms%,Equal,True,Begin
+      Set,%ProgramMenuPath%,%pTextBox1%
+      Run,"%ProjectDir%\Core\common.script",StartMenu
+    End
+    If,%pCheckBoxShortcutLaunchBar%,Equal,True,FileCopy,"%ProjectTemp%\%MyShortcut%","%ProjectTemp%\ShortCuts\LaunchBar"
+    If,%FullProjectRun%,Equal,NO,Run,"%ProjectDir%\Core\common.script",PostConfigRunShortcuts
+    FileDelete,"%ProjectTemp%\%MyShortcut%"
+  End
+End
+
+[COMMON]
+If,%PROGRAMS.IN.WIM%,Equal,NO,Set,%PATH%,%OutputDir%
+If,%PROGRAMS.IN.WIM%,Equal,YES,Set,%PATH%,%TargetDir%
+If,Not,ExistDir,"%PATH%\Programs",DirMake,"%PATH%\Programs"
+DirMake,"%PATH%\Programs\HWiNFO"
+If,%ARCH%,Equal,x86,Begin
+FileCopy,"%Programs%\HWiNFO\HWiNFO32.exe","%PATH%\Programs\HWiNFO"
+FileCopy,"%Programs%\HWiNFO\HWiNFO32.ini","%PATH%\Programs\HWiNFO"
+End
+If,%ARCH%,Equal,x64,Begin
+FileCopy,"%Programs%\HWiNFO\HWiNFO64.exe","%PATH%\Programs\HWiNFO"
+FileCopy,"%Programs%\HWiNFO\HWiNFO64.ini","%PATH%\Programs\HWiNFO"
+End
+IniWrite,"%OutputDir%\Project.Settings.ini",PROGRAMS,HWiNFO,YES
+
+[IN.WIM]
+If,%FullProjectRun%,Equal,NO,Begin
+  IniRead,"%TargetDir%\Project.Settings.ini",Main,Image.Number,%Boot.wim.Image.number%
+  WimPathAdd,%OutputDir%\sources\boot.wim,%Boot.wim.Image.number%,%TargetDir%,""
+End
+//Wait,1
+
+[NOT.IN.WIM]
+//Wait,1
+If,%FullProjectRun%,Equal,NO,Run,"%ProjectDir%\Core\common.script",PostConfigRunNotInWim
+
+[AuthorEncoded]
+HWiNFO48.ico=3800,5067
+logo=HWiNFO48.ico
+
+[EncodedFile-AuthorEncoded-HWiNFO48.ico]
+lines=1
+0=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
+1=8yAlr3puK9tD1wl7iTtgdbyN5O3QPNqbuxKXU3NBIN5NfvSYE6onZPCtaQrd69C6t274JKooL8ipSdUE6UpezEW2RLiZu7dmIJ5e/U2tUw39XlYTcjI2eSbC579uj22bvDtp9ZnoR/OnwIf0w/TBwR7AORAh9v/GNZGf65vBx/rKjAv1RW4l+rKrFxyWL84cgh/J5opXPvHT6Id0XuEC2HDuLtQwewmWgiGomGg/uxnqgTqSVqDuzDaqKKqCQqiPL9ewVuUn62hQSj81tvppPWfoRxO/0G7w8ePDTYw+NvxclUg+wsfJibAw+P5sCPuTlIQN3GDVhCvXIrKhIqY6KgNjYGG+JioWX1Srifm433c7LhB+L7nCxszcmCewxd5252FtzJzoSW7Ey8TbaZycrEpqwMaMzKwAay9URdZgbWZaZDLVGTmY7VZKszjsAtij+d5t99zOjmHqamzpR/M5n0f5M3+ujXb/sHuk3+e0Z8HJalpUILXbeVfue1kv5W0ngvNxuYuzkCeIcs00Kab5Pe5jawiTQzjaS/gfTWE3WkmYBaooZ0E1BNtiozA5hK0l9BmpmyjCNYfPAAFFA/b6Dfam5jxjTLzc3HGnfrZqnb91IxvPPaa7+dNGLEubmTXf8R4euLCf5zMDHA/xkSdFjm30a8ljkCcSKxOsQI+GH0nDaidIjU4OeHYbNnYdA0H/zqyy8ev//WWwdNjY3f6G5qataFdm0vcX8NdOxr72hvP9pGoXCxlssnPy9W/w4UClc7W9vx1grFqz179DAX+/1F/z8OTSyG/0X+Fc3/M0fbHVQmA37xoUz2M1u5TPaAralM1sDW6Kk9zdbg/7a9bZ8nTf40+dTkV5Nvjf0nZzYCIHic4/EIz/Rz8zex0MtMzmcYBSMN7FOF0D182OVfavY8Y2ACAFCeB9Cog8ayAQAAAAIAAAAoAAAAjA4AAAAAAAABAAAAAAAAAAAAAAA
+

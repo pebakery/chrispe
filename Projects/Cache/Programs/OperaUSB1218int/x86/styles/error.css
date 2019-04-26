@@ -1,0 +1,113 @@
+@charset "utf-8";
+/* Shared Stylesheet for internal Opera documents */
+/* Copyright 2012 Opera Software */
+
+@import url(opera.css);
+
+body {
+  overflow: visible;
+}
+
+h2 img {
+  float: left;
+  width: 16px;
+  height: 16px;
+  margin: 4px 6px 0 0px;
+}
+
+p {
+  overflow-wrap: break-word;
+}
+
+form {
+  padding: 3px;
+  border-radius: 4px;
+  background-color: rgba(227,232,236,0.4);
+  border: 1px solid rgba(175,188,203,0.5);
+  display: table;
+  width: 100%;
+}
+
+input[type="text"] {
+  border: 1px solid #afbccb;
+  border-radius: 3px;
+  padding: 0 5px;
+  height: 26px;
+}
+
+input[type="text"]:hover, input[type="text"]:focus {
+  border-color: #69b;
+  color: #000;
+}
+
+button, a.button {
+  padding: 2px 20px;
+  font-weight: bold;
+  background: #dae2ec;
+  border: 1px solid #afbccb;
+  border-radius: 3px;
+  box-shadow: 0 1px 2px rgba(175,188,203,0.6), inset 0 10px 15px rgba(255,255,255,0.5), inset 1px 1px rgba(255,255,255,0.5), inset -1px -1px rgba(255,255,255,0.5);
+  text-shadow: 0 1px rgba(255,255,255,0.5);
+  white-space: nowrap;
+}
+
+button:hover, button:focus, a.button:hover, a.button:hover {
+  background-color: #adf;
+  border-color: #69b;
+  color: #000;
+}
+
+form input[type="text"] {
+  width: 99%;
+  display: table-cell;
+}
+
+form button {
+  width: 10px;
+  display: table-cell;
+  vertical-align: middle;
+}
+
+#searchSuggestions {
+  line-height: 2em;
+  padding: 0;
+  margin: 0;
+}
+
+#searchSuggestions li {
+  margin: 10px 0 0 0;
+  background: none;
+}
+
+#learnmore {
+  position: relative;
+  top: 6em;
+  margin-top: -3em;
+  text-align: center;
+}
+
+.errorinformation {
+  display: none;
+  margin-left: 5em;
+  white-space: pre-line;
+}
+
+input:checked ~ .errorinformation {
+	display: block;
+}
+
+cite {
+  display: inline;
+}
+
+pre {
+  overflow-wrap: break-word;
+  font-family: Consolas,Menlo,monospace;
+}
+
+.error {
+  color: #b00;
+  background-color: #fdd;
+  border-radius: 2px;
+  box-shadow: 0 0 0 3px #fdd;
+}

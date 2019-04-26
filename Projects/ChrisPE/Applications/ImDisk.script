@@ -1,11 +1,11 @@
 [main]
 Title=ImDisk
 Description=Virtual Disk Driver - Version 2.0.9.
-Selected=True
+Selected=False
 Level=5
 Author=ThePEBakeryTeam
-Version=20180321
-Date=2018-03-21
+Version=20190426
+Date=2019-04-26
 Interface=Interface1
 
 [Interface1]
@@ -32,7 +32,7 @@ pButtonShortcut1=?,1,8,10,80,18,18,pButtonShortcut1,0,True,_pButtonShortcut1_,Tr
 pButtonShortcut2=?,1,8,10,110,18,18,pButtonShortcut2,0,True,_pButtonShortcut2_,True
 pButtonShortcut3=?,1,8,10,140,18,18,pButtonShortcut3,0,True,_pButtonShortcut3_,True
 pButtonShortcut4=?,1,8,10,170,18,18,pButtonShortcut4,0,True,_pButtonShortcut4_,True
-pTextBox1=,1,0,140,140,150,21,
+pTextBox1=,1,0,140,140,150,21,Programs
 
 
 [pButtonMenu1]
@@ -117,7 +117,10 @@ If,%pCheckBoxInstall%,Equal,False,Begin
   DirCopy,"%Programs%\ImDisk\*.*","%TargetDir%\Programs\ImDisk"
 End
 IniWrite,"%OutputDir%\Project.Settings.ini",PROGRAMS,ImDisk,YES
-If,%FullProjectRun%,Equal,NO,WimPathAdd,%OutputDir%\sources\boot.wim,%Boot.wim.Image.number%,%TargetDir%,""
+If,%FullProjectRun%,Equal,NO,Begin
+  IniRead,"%TargetDir%\Project.Settings.ini",Main,Image.Number,%Boot.wim.Image.number%
+  WimPathAdd,%OutputDir%\sources\boot.wim,%Boot.wim.Image.number%,%TargetDir%,""
+End
 
 [AuthorEncoded]
 logo=imdisk.ico

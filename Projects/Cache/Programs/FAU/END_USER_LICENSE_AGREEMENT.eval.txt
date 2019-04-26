@@ -1,0 +1,119 @@
+OPEN END USER LICENSE AGREEMENT
+
+IMPORTANT-PLEASE READ CAREFULLY
+
+THIS IS AN AGREEMENT (the "AGREEMENT") BY AND BETWEEN YOU THE ("USER") AND GMG SYSTEMS, INC., A MARYLAND CORPORATION, THE ("OWNER").  BY INSTALLING GMG SYSTEMS, INC. FORENSIC ACQUISITION UTILITIES, THE ("SOFTWARE") ONTO A COMPUTER SYSTEM, COPYING THE SOFTWARE AND/OR USING THE SOFTWARE, YOU THE ("USER") EITHER ON BEHALF OF YOURSELF AS AN INDIVIDUAL OR ON BEHALF OF AN ENTITY AS ITS AUTHORIZED REPRESENTATIVE, AGREE TO ALL OF THE TERMS OF THIS AGREEMENT REGARDING YOUR USE OF THE SOFTWARE. YOUR USE OF THE SOFTWARE INDICATES YOUR ACCEPTANCE OF THIS AGREEMENT AND WARRANTY. IF YOU DO NOT AGREE WITH ALL OF THE TERMS OF THIS AGREEMENT, DO NOT INSTALL, COPY OR OTHERWISE USE THE SOFTWARE.
+
+TITLE
+
+You acknowledge that no title to the intellectual property in THE SOFTWARE is transferred to you. Title, ownership, rights, and intellectual property rights in and to THE SOFTWARE shall remain in OWNER.
+
+LICENSE GRANTS
+
+Subject to the terms of this AGREEMENT, OWNER hereby grants USER a non-transferable license to install and to use the SOFTWARE for commercial and non-commercial purposes as stated under this AGREEMENT.
+
+(1) The USER may download and install an unlimited number of copies of the SOFTWARE in binary executable form onto one or more computer systems for use in the preparation of investigative or incident response media ("RESPONSE MEDIA").
+
+(2) The USER may install an unlimited number of copies of the SOFTWARE onto removable media such as a CDROM or thumbdrive for use as RESPONSE MEDIA.
+
+(3) The USER may create backup copies of the SOFTWARE that are stored in a safe place.
+
+(4) The USER may execute the SOFTWARE from RESPONSE MEDIA prepared under this AGREEMENT on the USER'S own computers or on computers that belong to a third party, the ("SUSPECT SYSTEM"), provided that:
+
+     (a) the USER has the legal right to access the SUSPECT SYSTEM; and
+
+     (b) the SOFTWARE is completely removed from the SUSPECT SYSTEM when not in use.
+
+LICENSE RESTRICTIONS
+
+The USER may not:
+
+(1) Reverse engineer, decompile, or disassemble the SOFTWARE, or otherwise reduce the SOFTWARE to a human-perceivable form;
+
+(2) Modify, or create derivative works based upon, the SOFTWARE in whole or in part;
+
+(3) Remove any proprietary notices or labels on the SOFTWARE; or
+
+(4) Resell, lease, rent, transfer, sub-license, or otherwise transfer rights to the SOFTWARE.
+
+(5) Except as expressly provided under this agreement, make or distribute copies of the SOFTWARE, or electronically transfer the SOFTWARE from one computer to another or over a network. 
+
+(6) Use the SOFTWARE for any unlawful or unethical purpose or deploy the SOFTWARE to any computer system unless the USER has the legal right to access and use the SOFTWARE on the computer system.
+
+(7) USE THE SOFTWARE IN ANY APPLICATION WHERE THE FAILURE OF THE SOFTWARE OR THE OPERATING SYSTEM MAY RESULT IN DEATH, PERSONAL INJURY OR SEVERE PHYSICAL OR ENVIRONMENTAL DAMAGE.  IN PARTICULAR, THE USER MAY NOT USE THE SOFTWARE ON ANY SYSTEM THAT IS DESIGNED TO CONTROL AIR OR SURFACE TRAFFIC, TO PROVIDE MEDICAL LIFE SUPPORT, TO OPERATE A NUCLEAR POWER PLANT, OR TO OPERATE CRITICAL INFRASTRUCTURE.
+
+TRANSFER OF THE SOFTWARE FROM ONE COMPUTER TO ANOTHER
+
+Subject to the license restrictions under this AGREEMENT, the USER may freely transfer the SOFTWARE in accordance with the license grants under this AGREEMENT from one computer to another computer, provided that the USER first removes the SOFTWARE from the first computer.
+
+OWNERSHIP
+
+The SOFTWARE is owned and copyrighted by GMG Systems, Inc. and the OWNER retains title and all ownership rights to THE SOFTWARE.  
+
+COPYRIGHT
+
+It is understood and agreed to that THE SOFTWARE including any accompanying help and support files, along with any printed documentation is copyrighted by the OWNER and may not be reproduced and/or redistributed without the advanced written consent of the OWNER except as expressly permitted under this agreement. 
+
+MAINTENANCE
+
+The OWNER shall not be obligated to provide maintenance and/or updates and/or fixes for THE SOFTWARE; however, any such maintenance and/or updates and/or fixes provided by the OWNER shall be covered by this AGREEMENT.
+
+STORAGE OF THE SOFTWARE WHEN NOT IN USE
+
+Components of the SOFTWARE are capable of capturing and transmitting the contents of computer storage media to a remote point over the network.  Unauthorized or improper use of the SOFTWARE may result in the compromise of your personal data.  
+
+DISTRIBUTION TO THE U.S. GOVERNMENT
+
+The Licensed Products provided under this Agreement are commercial computer software programs developed exclusively at private expense.  Use, duplication, and disclosure by civilian agencies of the U.S. Government shall comply with FAR 52.227-19 (c), or other comparable provision(s), as may be applicable. Use, duplication and disclosure by DOD agencies is subject solely to the terms of standard software License Agreement as stated under DFARS 227.7202.
+
+CUSTOMER REMEDIES
+
+The OWNER and its suppliers' entire liability and the USER's exclusive remedy shall be, at the OWNER's option, either:
+
+(1) return of the price paid by you for THE SOFTWARE (not to exceed the suggested retail price) if any, or
+
+(2) repair or replacement of the component(s) of THE SOFTWARE that do(es) not meet the OWNER's Limited Warranty and which is returned to the OWNER with a copy of the USER's purchase receipt. This Limited Warranty is void if failure of THE SOFTWARE has resulted from accident, abuse, or misapplication. Any replacement SOFTWARE will be warranted for the remainder of the original warranty period or thirty (30) days, whichever is longer.  
+
+LICENSE WARNING
+
+The USER understands that the SOFTWARE relies on undocumented operating system API's and structures that are subject to change, without prior notice, by a third party, Microsoft Corporation, that is not a party to this AGREEMENT.  Any such change to a supported operating system may result in the loss of all or part of the SOFTWARE'S functionality.  The USER further understands that any such change to a supported operating system may make it commercially infeasible to maintain the SOFTWARE, notwithstanding any other provision of this AGREEMENT.  The OWNER is not responsible for the actions of any person or other entity who is not a party to this AGREEMENT.
+
+DISCLAIMER OF WARRANTY
+
+THE SOFTWARE AND THE ACCOMPANYING FILES ARE PROVIDED "AS IS" AND WITHOUT WARRANTY OF ANY KIND. TO THE MAXIMUM EXTENT PERMITTED BY APPLICABLE LAW, THE OWNER FURTHER DISCLAIMS ALL WARRANTIES, INCLUDING WITHOUT LIMITATION ANY IMPLIED WARRANTIES OF MERCHANT ABILITY, FITNESS FOR A PARTICULAR PURPOSE, AND NONINFRINGEMENT. THE ENTIRE RISK ARISING OUT OF THE USE AND/OR PERFORMANCE OF THE PRODUCT AND/OR DOCUMENTATION REMAINS WITH THE USER TO THE MAXIMUM EXTENT PERMITTED BY APPLICABLE LAW, AND IN NO EVENT SHALL THE OWNER BE LIABLE FOR ANY CONSEQUENTIAL, INCIDENTAL, DIRECT, INDIRECT, SPECILA, PUNITIVE, OR OTHER DAMAGES WHATSOEVER (INCLUDING, WITHOUT LIMITATION, DAMAGES FOR LOSS OF BUSINESS PROFITS, BUSINESS INTERRUPTION, LOSS OF BUSINESS INFORMATION, OR OTHER PECUNIARY LOSS) ARISING OUT OF THIS AGREEMENT OR THE USE OF OR INABILITY TO USE THE PRODUCT, EVEN IF THE OWNER HAS BEEN ADVISED OF THE POSSIBILITY OF SUCH DAMAGES. ANY LIABILITY OF THE OWNER SHALL BE EXCLUSIVELY LIMITED TO THE PRODUCT RELACEMENT OR RETURN OF THE PURCHASE/LICENSING PRICE. NO OTHER ADVERTISING, DESCRIPTION OR REPRESENTATION, WHEHER OR NOT MADE BY THE OWNER OR THE OWNER'S DEALER, DISTRIBUTOR, AGENT OR EMPLOYEE, SHALL BE BINDING UPON THE OWNER OR SHALL CHANGE THE TERMS OF THIS WARRANTY. THIS LIMITED WARRANTY GIVES YOU THE SPECIFIC LEGAL RIGHTS. YOU MAY HAVE OTHERS, WHICH VARY FROM STATE/JURISDICTION TO STATE/JURISDICTION.
+
+TERMINATION
+
+The USER may terminate this AGREEMENT at any time by uninstalling the SOFTWARE and destroying all copies of the SOFTWARE in the possession of the USER.  This AGREEMENT shall terminate automatically if the  USER fails to comply with the limitations described under this AGREEMENT.  The right to use this software for educational or training purposes shall terminiate upon the release of a more recent version of the SOFTWARE.  (The most recent version of the SOFTWARE must be used for educational or training purposes.)  Upon termination, you must uninstall and destroy all copies of the SOFTWARE.
+
+GOVERNING LAW
+
+If you acquire or use the SOFTWARE in the United States, this AGREEMENT shall be governed by and construed in accordance with the laws of the State of Maryland and any arbitration under this agreement shall apply. If THE SOFTWARE was acquired and is used exclusively outside of the United States, then local law may also apply. Should any provision of this agreement be found, held or deemed to be unenforceable, voidable, or void as contrary to law or public policy under the State of Maryland or other appropriate jurisdiction, the parties intend and agree that the remaining provisions shall nevertheless continue in full force and be binding upon the parties, their heirs, personal representatives, and assigns. Furthermore, it is agreed and understood that Charles County, Maryland shall be the proper venue for any action or arbitration arising under this agreement. Should you have any questions concerning this AGREEMENT, or if you desire to contact the OWNER for any reason, please write: GMG Systems, Inc., P.O. Box 190, Waldorf, MD 20604-0190 or email to support@gmgsystemsinc.info.
+
+ARBITRATION
+
+The USER acknowledges and agrees that any dispute, controversy or claim arising out of or relating to this AGREEMENT or to a breach of this AGREEMENT, including its interpretation, performance or termination, shall be finally resolved by arbitration. The arbitration shall be conducted by three (3) arbitrators, one to be appointed by the OWNER, one to be appointed by the USER, and the third being nominated by the two arbitrators so selected or, if they cannot agree on a third arbitrator, by the President of the American Arbitration Association ("AAA"). The arbitration shall be conducted in English and in accordance with the commercial arbitration rules of the AAA. The arbitration, including the rendering of the award, shall take place in Charles County, Maryland, and shall be the exclusive forum for resolving the dispute, controversy or claim. The decision of the arbitrators shall be binding upon the parties to this AGREEMENT, and the expense of the arbitration (including, without limitation, the award of attorneys' fees to the prevailing party) shall be paid as the arbitrators determine. The decision of the arbitrators shall be executory, and judgment upon the decision may be entered by any court of competent jurisdiction. Notwithstanding anything contained in this Paragraph to the contrary, the OWNER shall have the right to institute judicial proceedings against the USER or anyone acting by, through, or under the USER, in order to enforce the OWNER's rights under this agreement through, including but not limited to, reformation of contract, specific performance, injunction, or similar equitable relief. 
+
+ENTIRE AGREEMENT
+
+This AGREEMENT constitutes the entire understanding between the OWNER and the USER. The USER agrees that this is the entire agreement between the USER and the OWNER, and supersedes any prior agreement, whether written or oral, and all other communications between the OWNER and the USER relating to the subject matter of this AGREEMENT and cannot be altered or modified, except in writing.
+
+RESERVATION OF RIGHTS
+
+All rights not expressly granted under this AGREEMENT are reserved entirely to the OWNER.
+
+HEADINGS AND CAPTIONS
+
+The captions of this AGREEMENT are for convenience and reference only, and in no way define or limit the intent, rights, or obligations of the parties hereunder. Additionally, any heading preceding the text of any of the paragraphs in this agreement are inserted solely for convenience of reference and shall not constitute a part of the agreement, nor shall they affect the meaning, construction or effect of any of the paragraphs of the agreement.
+
+BINDING EFFECT
+
+This AGREEMENT and the terms and conditions of this AGREEMENT shall be binding upon the parties to this AGREEMENT and their respective heirs, personal representatives and assigns.
+
+INTERPRETATION
+
+No provision of this AGREEMENT shall be interpreted for or against any party to this AGREEMENT by reason of the fact that the party or his/ her counsel or legal representative drafted all or any part of this AGREEMENT.
+
+ATTORNEY'S FEES
+
+In any action under this AGREEMENT, the prevailing party shall be entitled to reasonable attorney's fees set by the Court or by arbitration.

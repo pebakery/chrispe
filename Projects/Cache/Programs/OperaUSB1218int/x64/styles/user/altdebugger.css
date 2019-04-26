@@ -1,0 +1,42 @@
+@charset "utf-8";
+/*	Name: -332511012 */
+/*	AREA and IMG Alt Attribute Debugger
+	Catches images and areas with no ALT, empty ALT, and dummy ALT 
+	attributes. Images and areas with missing or invalid ALT attributes 
+	are highlighted with a blue outline.
+	Copyright 2012 Opera Software */
+html::before {
+	content: -o-language-string(-1197772896) !important;
+	font-size: 20px !important;
+	font-weight: bold !important;
+	text-align: center !important;
+	color: rgb(226,228,235) !important;
+	background-color: rgb(46,61,77) !important;
+	padding: 5px 0 !important;
+	margin: 0 !important;
+	border: none !important;
+	width: 100% !important;
+	float: none !important;
+	position: static !important;
+	display: inline-block !important;
+}
+html {
+	color: rgb(30,30,30) !important;
+	background-color: rgb(250,250,250) !important;
+	padding: 0 !important;
+	margin: 0 !important;
+	border: none !important;
+	width: auto !important;
+	max-width: none !important;
+	display: block !important;
+}
+html * {
+	visibility: hidden !important;
+}
+html area, html img {visibility: visible !important;}
+html area[alt], html img[alt] {visibility: hidden !important;}
+html area[alt="*"], html area[alt=""], html img[alt="*"], html img[alt=""], 
+html img[alt^=" "] {
+	outline: 4px solid rgb(51,102,204) !important;
+	visibility: visible !important;
+}

@@ -1,0 +1,52 @@
+@import url(opera.css);
+
+html {
+	min-height: 100%;
+	margin-bottom: 1px;
+}
+
+input[type="text"] {
+	width: 100%;
+	max-width: 36em;
+	padding: 3px;
+	margin: 5px 10px 5px 0;
+	font-size: 100%;
+}
+
+fieldset {
+	border: 0;
+	padding: 0;
+}
+
+legend {
+	display: none;
+}
+
+h2 {
+	border: 0;
+}
+
+li {
+	margin: 0 0 1em 0;
+}
+
+p {
+	margin: 0 0 0.3em 0;
+}
+
+ul {
+	border-top: 1px solid #ccc;
+	padding: 1em 0 0 0;
+}
+
+ul li {
+	display: inline;
+	color: #999;
+	background: none;
+	float: left;
+	padding: 0;
+}
+
+ul li+li {
+	float: right;
+}

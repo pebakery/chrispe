@@ -1,0 +1,9 @@
+@charset "utf-8";
+/*	Name: -2051949502 */
+/*	Page layout inspector - line breaks.
+ *	Removes BR and HR elements from the document.
+	Copyright 2012 Opera Software */
+br, hr {
+	display: none !important;
+}
+

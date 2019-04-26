@@ -1,0 +1,73 @@
+[main]
+Title=AccessGain
+Description=AccessGain MiniFilter Driver - bypass NTFS security permissions to access (and delete) restricted files and folders.
+Selected=False
+Level=5
+Author=ThePEBakeryTeam
+Version=20190426
+Date=2019-04-26
+Interface=Interface
+
+[Interface]
+pCheckBoxInWim="Include Program in boot.wim",1,3,51,265,180,18,True
+
+[process]
+If,%FullProjectRun%,Equal,NO,Run,"%ProjectDir%\Core\common.script",PostConfigRun
+If,%pCheckBoxInWim%,Equal,True,Set,%PROGRAMS.IN.WIM%,YES
+Else,Set,%PROGRAMS.IN.WIM%,NO
+Run,%ScriptFile%,CHECKS
+Run,%ScriptFile%,COMMON
+If,%PROGRAMS.IN.WIM%,Equal,NO,Run,%ScriptFile%,NOT.IN.WIM
+If,%PROGRAMS.IN.WIM%,Equal,YES,Run,%ScriptFile%,IN.WIM
+
+[CHECKS]
+If,Not,ExistFile,"%Programs%\AccessGain\%ARCH%\accgain.sys",Begin
+  Message,AccessGain is missing - exiting script...,Error,5
+  Exit,AccessGain is missing - exiting script...,WARN
+End
+
+[COMMON]
+If,%PROGRAMS.IN.WIM%,Equal,NO,Set,%PATH%,%OutputDir%
+If,%PROGRAMS.IN.WIM%,Equal,YES,Set,%PATH%,%TargetDir%
+If,Not,ExistDir,"%PATH%\Programs",DirMake,"%PATH%\Programs"
+DirMake,"%PATH%\Programs\AccessGain"
+DirCopy,"%Programs%\AccessGain\%ARCH%\*.*","%PATH%\Programs\AccessGain"
+If,Not,ExistFile,"%PATH%\Programs\registry.entries.cmd",Begin
+  FileCreateBlank,"%PATH%\Programs\registry.entries.cmd"
+  TXTaddLine,"%PATH%\Programs\registry.entries.cmd",@Echo off,Append
+  TXTaddLine,"%PATH%\Programs\registry.entries.cmd",,Append
+End
+TXTaddLine,"%PATH%\Programs\registry.entries.cmd",::==========AccessGain==========,Append
+TXTaddLine,"%PATH%\Programs\registry.entries.cmd",::for context menu entry,Append
+TXTaddLine,"%PATH%\Programs\registry.entries.cmd",ECHO.,Append
+TXTaddLine,"%PATH%\Programs\registry.entries.cmd",ECHO ACCESSGAIN Registry Entries,Append
+TXTaddLine,"%PATH%\Programs\registry.entries.cmd",IF EXIST #$q#$p~dp0AccessGain\AccessGain.cmd#$q (,Append
+TXTaddLine,"%PATH%\Programs\registry.entries.cmd",reg.exe add #$qHKLM\SOFTWARE\Classes\Drive\shell\AccessGain#$q /ve /t REG_SZ /d #$qAccessGain#$q,Append
+TXTaddLine,"%PATH%\Programs\registry.entries.cmd",reg.exe add #$qHKLM\SOFTWARE\Classes\Drive\shell\AccessGain\command#$q /ve /t REG_SZ /d #$q\#$q#$p~dp0AccessGain\AccessGain.cmd\#$q \#$q#$p#$p1\#$q#$q,Append
+TXTaddLine,"%PATH%\Programs\registry.entries.cmd",),Append
+TXTaddLine,"%PATH%\Programs\registry.entries.cmd",,Append
+IniWrite,"%OutputDir%\Project.Settings.ini",PROGRAMS,AccessGain,YES
+
+[IN.WIM]
+Echo,"Mounting registry hives..."
+If,Not,ExistRegSection,HKLM,_WinPE_SOFTWARE,RegHiveLoad,_WinPE_SOFTWARE,"%Target_config%\software"
+RegWrite,HKLM,0x1,_WinPE_SOFTWARE\Classes\Drive\shell\AccessGain,,AccessGain
+RegWrite,HKLM,0x2,_WinPE_SOFTWARE\Classes\Drive\shell\AccessGain\command,,#$psystemdrive#$p\Programs\AccessGain\AccessGain.cmd #$p1
+Echo,"Unmounting registry hives..."
+RegHiveUnload,_WinPE_SOFTWARE
+If,%FullProjectRun%,Equal,NO,Begin
+  IniRead,"%TargetDir%\Project.Settings.ini",Main,Image.Number,%Boot.wim.Image.number%
+  WimPathAdd,%OutputDir%\sources\boot.wim,%Boot.wim.Image.number%,%TargetDir%,""
+End
+
+[NOT.IN.WIM]
+If,%FullProjectRun%,Equal,NO,Run,"%ProjectDir%\Core\common.script",PostConfigRunNotInWim
+
+[AuthorEncoded]
+hdd.ico=1958,2611
+logo=hdd.ico
+
+[EncodedFile-AuthorEncoded-hdd.ico]
+lines=0
+0=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
+

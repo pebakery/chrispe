@@ -1,0 +1,82 @@
+@import url(opera.css);
+@import url(error.css);
+
+html {
+	background-color: #f8f8f8;
+	color: #000;
+}
+
+body {
+	text-align: center;
+	padding: 140px 22% 30px;
+}
+
+#main {
+	text-align: left;
+}
+
+h1 {
+	color: #cc0f16;
+	text-shadow: none;
+	background-image: none;
+	padding-left: 0px;
+}
+
+hr {
+	margin-left:0px;
+	border-left:0;
+	border-right:0;
+	border-bottom:1px;
+	background-color: rgba(255,255,255, 0.77);
+	border-color: rgba(0,0,0, 0.17);
+	height: 1px;
+}
+
+h2 {
+	color: #000;
+	border-bottom: 1px solid rgba(0,0,0,0.1);
+	text-shadow: 0 1px 0 rgba(255,255,255,0.3);
+}
+
+button, a.button {
+	color: rgba(0,0,0, .8);
+	display: inline-block;
+	padding: 5px 10px;
+	text-align:center;
+}
+
+#links {
+	padding: 5px 0;
+	overflow: hidden;
+}
+
+#links button, #links a.button {
+	 float: left;
+	 margin: 0;
+	 padding: 0 10px;
+}
+
+#links a.link {
+	float: right;
+	margin-left: 1em;
+}
+
+address {
+	font-size: 70%;
+	margin: 20px 0;
+	color: rgba(255,255,255,0.75);
+}
+
+address a { padding: 0 4px; }
+
+iframe {
+	width: 500px;
+	height: 100px;
+	border: none;
+	margin-top: 20px;
+}
+
+p {
+	padding-left: 0;
+}
+

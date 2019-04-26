@@ -4,8 +4,8 @@ Description=
 Selected=True
 Level=4
 Author=ThePEBakeryTeam
-Version=20180321
-Date=2018-03-21
+Version=20190426
+Date=2019-04-26
 Interface=Interface
 NoWarning=False
 
@@ -114,21 +114,21 @@ If,Not,ExistFile,"%Target_System32%\%MY_FILE%",Begin
 If,ExistFile,"%ProjectTemp%\File.and.Dependencies.txt",FileDelete,"%ProjectTemp%\File.and.Dependencies.txt"
 FileCopy,"%Tools%\wimlib.file.lists\File.and.Dependencies.txt","%ProjectTemp%\File.and.Dependencies.txt"
 TXTReplace,"%ProjectTemp%\File.and.Dependencies.txt",myfile.ext,%MY_FILE%
-WimExtractBulk,%Install.wim%,%Install.wim.Image.number%,%ProjectTemp%\File.and.Dependencies.txt,%TargetDir%,NOACL
+WimExtractBulk,%Install.wim%,%Install.wim.Image.number%,%ProjectTemp%\File.and.Dependencies.txt,%TargetDir%,NOACL,NOERR
 End
 Set,%MY_FILE%,chartv.dll
 If,Not,ExistFile,"%Target_System32%\%MY_FILE%",Begin
 If,ExistFile,"%ProjectTemp%\File.and.Dependencies.txt",FileDelete,"%ProjectTemp%\File.and.Dependencies.txt"
 FileCopy,"%Tools%\wimlib.file.lists\File.and.Dependencies.txt","%ProjectTemp%\File.and.Dependencies.txt"
 TXTReplace,"%ProjectTemp%\File.and.Dependencies.txt",myfile.ext,%MY_FILE%
-WimExtractBulk,%Install.wim%,%Install.wim.Image.number%,%ProjectTemp%\File.and.Dependencies.txt,%TargetDir%,NOACL
+WimExtractBulk,%Install.wim%,%Install.wim.Image.number%,%ProjectTemp%\File.and.Dependencies.txt,%TargetDir%,NOACL,NOERR
 End
 Set,%MY_FILE%,OneCoreUAPCommonProxyStub.dll
 If,Not,ExistFile,"%Target_System32%\%MY_FILE%",Begin
 If,ExistFile,"%ProjectTemp%\File.and.Dependencies.txt",FileDelete,"%ProjectTemp%\File.and.Dependencies.txt"
 FileCopy,"%Tools%\wimlib.file.lists\File.and.Dependencies.txt","%ProjectTemp%\File.and.Dependencies.txt"
 TXTReplace,"%ProjectTemp%\File.and.Dependencies.txt",myfile.ext,%MY_FILE%
-WimExtractBulk,%Install.wim%,%Install.wim.Image.number%,%ProjectTemp%\File.and.Dependencies.txt,%TargetDir%,NOACL
+WimExtractBulk,%Install.wim%,%Install.wim.Image.number%,%ProjectTemp%\File.and.Dependencies.txt,%TargetDir%,NOACL,NOERR
 End
 If,Not,ExistFile,"%Target_System32%\actxprxy.txt",If,ExistFile,"%Target_System32%\actxprxy.dll",Begin
 //OFFLINEREG
@@ -148,7 +148,7 @@ FileCreateBlank,"%Target_System32%\FileCopyProgress.txt"
 TXTAddLine,"%Target_System32%\FileCopyProgress.txt","Dummy file added to confirm that FileCopy Progress has already been applied.",APPEND
 
 [DragNDrop]
-WimExtractBulk,%Install.wim%,%Install.wim.Image.number%,%Tools%\wimlib.file.lists\DragDrop.Dependencies.txt,%TargetDir%,NOACL
+WimExtractBulk,%Install.wim%,%Install.wim.Image.number%,%Tools%\wimlib.file.lists\DragDrop.Dependencies.txt,%TargetDir%,NOACL,NOERR
 ShellExecute,Hide,"%Tools%\offlinereg\offlinereg-win32.exe","#$q%Target_config%\software#$q #$q #$q run #$q%Tools%\offlinereg.file.lists\dataexchange.txt#$q"
 
 [WallpaperHost]

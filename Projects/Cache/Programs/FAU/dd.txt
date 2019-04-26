@@ -1,0 +1,233 @@
+Forensic Acquisition Utilities, 1.5.0.2525
+dd, 5.5.0.2525
+Copyright (C) 2007-2016 GMG Systems, Inc.
+
+Usage: dd if=[SOURCE] of=[DESTINATION] [OPTIONS]
+
+Copy a device or one or more files or streams, converting and formatting
+according to the options specified:
+
+  bs=[BYTES]       Set 'ibs' and 'obs' equal to BYTES.
+  conv=[KEYWORDS]  Convert the input as per the comma separated keyword
+                   list.  The following are valid keywords:
+
+                    noerror  Continue reading after errors.
+                    comp     Compress the output.
+                    decomp   Decompress the output.
+                    swab     Swap each pair of bytes.
+                    notrunc  Don't truncate the output file.
+                    resume   Resume a broken copy operation (Enterprise
+                             level only).
+                                        base64Enc Base64-encode output.
+                                        base64Dec Base64-decode input.
+                                        rot13     Rot13-encode output.
+                                        rot47     Rot47-encode output.
+
+  count=[BLOCKS]   Copy only the specified number of input blocks.
+  ibs=[BYTES]      Sets the input block size.
+  if=[SOURCE]      Specifies the source for input; the default is stdin.
+  obs=[BYTES]      Sets the output block size.
+  of=[DESTINATION] Specifies the destination for output; the default is
+                   stdout.
+  seek=[BLOCKS]    Skip the specified number of obs-sized blocks at start
+                   of output.
+  skip=[BLOCKS]    Skip the specified number of ibs-sized blocks at start
+                   of input.
+
+   --iport {PORT]  Send output to the specified tcpip PORT.
+   --lport {PORT]  Send log output to the specified tcpip PORT.
+   --tport {PORT]  Send cryptographic thumbprint output to the
+               specified tcpip PORT.
+
+If --iport or --lport or --tport are specified, the OUTPUT_FILE
+specified with the 'of' option will be interpreted as an IP address.
+
+    -g --gather   Append multiple input files to a single output file.
+    -a --append   Append input to the output file.
+    -r --recursive   Recursively search subdirectories for files
+                      to copy.  Valid only if 'if' specifies a
+                      search pattern.
+        --help        Display this help and exit.
+    -v  --verbose  Output verbose information.
+        --cryptsum [ALGORITHM]    Includes one or more cryptographic
+                  checksums in the output.  "md2", "md4", "md5""
+                  and "sha" or "sha1" are supported on all platforms
+                  "sha_256", "sha_384" and "sha_512" are supported
+                  on Windows Server 2003 and later.
+        --cryptout [FILE] Write cryptographic checksum to the specified file.
+        --verify      Verifies the cryptographic checksum of the output file.
+        --verify_original Verifies whether the input has changed while being
+                                  copied.
+        --sparse      Makes the output file sparse (ntfs only).
+        --log [FILE]  Write log output to FILE.
+        --lockin      Lock input file while copying.
+        --lockout     Lock output file while copying.
+        --volumelabel [VOLUME_LABEL]    Send output to a volume on a removable
+                drive with the specified volume label.  If '--volumelabel' is
+                specified, the volume name is prepended to the path specified
+                by 'of'.
+        --eject       Dismount and, if possible, eject the volume specified
+                by the '--volumelabel' option.
+        --localwrt        Enables writing output to a local fixed drive.
+        --restore_access_times Restores file access times on the source.
+        --locale [LANG]  Specifies the output locale.
+        --seek [BYTES]   Skip the specified number of bytes at start of
+                         output.
+        --skip [BYTES]   Skip the specified number of bytes at start of
+                         input.
+        --count [BYTES]  Stop after acquiring the specified number of bytes.
+        --chunk [BYTES]  Set the maximum size of the output file.  If the
+                 output file exceeds the specified size, the file is split into
+                 multiple fragments of BYTES bytes in size.
+        --comp [ALGORITHM] Compress output using the specified algorithm.
+        --decomp [ALGORITHM] Decompress output using the specified algorithm.
+
+The following compression/decompression algorithms are
+supported:
+
+     zlib zlib+ gzip gzip+ bzip bzip+ lznt1 lznt1+
+
+        --firmware       Copy the firmware from the specified drive or drives.
+        --service_areas  Copy the service areas from the specified drive or
+                         drives.
+        --allvolumes     Copy all mounted volumes with optional user prompts
+                for each volume.
+        --alldrives      Copy all local drives with optional user prompts for
+                each disk.
+        --random_output_dir Append a random-named output directory to the
+                specified output path.
+
+BYTES may be suffixed: by xN for multiplication by N, by c for x1,
+by w for x2, by b for x512, by KB for x1000, by KiB for x1024,
+by MB for x1,000,000, by MiB for x1,048,576,
+by GB for x1,000,000,000, by GiB for x1,073,741,824
+by TB for x1,000,000,000,000, by TiB for x1,099,511,627,776
+
+BYTES may be prefixed by "0x" or "x" to indicate a hexadecimal value.
+
+The following options may be used in conjunction with a search pattern
+to select the files or streams that are to be processed:
+
+   -A, --attributes       hashes files with specified attributes:
+
+        attributes  D  Directories                R  Read-only files
+                    H  Hidden files               A  Files ready for archiving
+                    C  Compressed files           E  Encrypted files
+                    O  Offline files              P  Sparse files
+                    S  System files               ~  Prefix meaning not
+                    T  Temporary files
+
+        --any   Specifies how the -A --attribute option is to be
+                interpreted.  With '--any' files or streams with
+                any one of the specified attributes will be processed.
+                The default is to hash files with all of the specified
+                attributes.
+
+The following are used to select files based upon file times:
+
+   --modified [FILETIME]   Selects files based upon the file
+                           modification time.
+   --accessed [FILETIME]   Selects files based upon the file access time.
+   --created  [FILETIME]   Selects files based upon the file creation
+                           time.
+
+The format of the FILETIME string is specified according to the locale
+of the current user.  For example, 10:00PM June 6, 2003 is specified
+as "6/10/2003 10:00PM" in the United States and "10/6/2003 10:00PM"
+in most european countries.  The file time string may be pre-pended by <, =
+or > to search for file times that are less than, equal or greater than
+the specified time string.  The FILETIME string may include multiple conditions
+separated by a semi-colon (;).  Multiple conditions are evaluated in pairs.
+An un-paired condition is evaluated individually.
+
+The following may be used to select directories, files or streams
+based upon specified regular expressions:
+
+   --directoryfilter [EXPRESSION]   selects directories based upon an
+                                    expression.
+   --filefilter   [EXPRESSION]      selects files based upon an expression.
+   --streamfilter [EXPRESSION]      selects alternate streams based upon an
+                                    expression
+   --magicfilter [EXPRESSION]       selects files or alternate streams based
+                                    upon the binary contents at the start of
+                                    the data stream as evaluated by an
+                                    expression.
+
+EXPRESSION may be any regular expression.  Double quotes ("")
+may be used to prevent the command interpreter from splitting
+a single expression into two or more pieces.  With respect
+to the --magicfilter option, EXPRESSION is limited to a regular
+expression that may be converted to a single byte character set.
+
+The following may be used to select files or streams
+based upon the entropy of the initial data stream:
+
+   --entropy [THRESHOLD]   Selects files or streams whose initial
+                           data streams have an entropy greater than THRESHOLD.
+
+The following may be used in conjunction with output in xml format:
+   --case [CASE NUMBER] Includes the specified case number in xml output.
+   --evidence [EVIDENCE NUMBER] Includes the specified evidence number in
+               XML output.
+   --description [DESCRIPTION] Includes an optional description in xml output.
+
+The following option may be used to set the thread priority of the program:
+
+   --thread_priority [PRIORITY] Sets the priority of the thread processing.
+
+        The thread priority may be set to any of the following values:
+                idle, lowest, belownormal, highest
+                abovenormal, timecritical
+
+     --ata_unlock [PASSWORD] Unlocks an ATA drive using the provided password.
+     --ata_master Specifies that the password provided with --ata_unlock is a
+                  master password.
+     --ata_hpa Temporarily disables the ATA host protected area if it exists
+                  and sets the starting offset to skip the user accessible
+                  bytes.
+     --ata_restore_configuration Resets an ATA device configuration overlay
+                 (DCO) and restores the original drive configuration.
+
+Enterprise level options:
+
+  --cryptvolumes   Copy all mounted encrypted volumes with optional user
+                   prompts for each volume.
+
+  --ssl [CERTIFICATE]   Make TCP connections using the TLS 1.0
+         protocol and the specified certificate.  The certificate, which is
+         optional for client connections, must be in PFX (PKCS#12) file
+         format, if it exists.
+  --encrypt [ALGORITHM]  Specifies the encryption algorithm that will be
+         used to encrypt output.  The default algorithm is AES-256 on
+         Microsoft Windows XP and later and 3DES on Windows 2000.
+  --cert [PATH] Provides the path to an X-509/PKCS#7 encoded file.  The
+         certificate will be used to encrypt the encryption key
+         used to encrypt output.
+   --ignore_invalid_cert  Ignore errors that may occur due to use of an
+         unsigned or expired certificate.
+        EXAMPLES:
+                "dd.exe -v if=\\.\PhysicalDrive0 of=myimage.bin
+                    conv=noerror --log --cryptsum sha_256 --lockin"
+
+                "dd.exe -v if=myimage.bin of=\\.\PhysicalDrive1
+                    --log c:\logs\clone.log --lockout --localwrt"
+
+                "dd.exe -v of=d:\images\case2013001 conv=noerror
+                    --log --cryptsum sha_256 --lockin --alldrives"
+
+                "dd.exe -v if=\\.\C: of=myimage.bin
+                    conv=noerror --log --cryptsum sha_256 --lockin"
+
+                "dd.exe -v if=myimage.bin of=\\.\D:
+                    --log c:\logs\clone.log --lockout --localwrt"
+
+                "dd.exe -v of=d:\images\case2013001 conv=noerror
+                    --log --cryptsum sha_256 --lockin --allvolumes"
+
+                "dd.exe -v if=c:\images\myimage.bin of=d:\images\myimage.bin
+                    --log --cryptsum sha_256 --localwrt"
+
+                "dd.exe -v if=\\?\C:\*.* of=d:\evidence\case2013001\
+                    --log --cryptsum sha_256 --localwrt"
+
+                Report errors to <support@gmgsystemsinc.info>

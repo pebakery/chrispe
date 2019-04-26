@@ -4,8 +4,8 @@ Description=
 Selected=True
 Level=2
 Author=ThePEBakeryTeam
-Version=20180321
-Date=2018-03-21
+Version=20190426
+Date=2019-04-26
 Interface=Interface
 NoWarning=False
 
@@ -31,11 +31,11 @@ End
 Echo,"Extracting SysWow64 files to Target..."
 Set,%SysWow64_Files%,%TargetDir%,Global
 DirMake,"%SysWow64_Files%"
-If,%CodeBase%,Equal,6.1.7600,WimExtractBulk,%Install.wim%,%Install.wim.Image.number%,%Tools%\wimlib.file.lists\syswow.files.7.txt,%SysWow64_Files%,NOACL
-If,%CodeBase%,Equal,6.1.7601,WimExtractBulk,%Install.wim%,%Install.wim.Image.number%,%Tools%\wimlib.file.lists\syswow.files.7.txt,%SysWow64_Files%,NOACL
-If,%CodeBase%,Equal,6.2.9200,WimExtractBulk,%Install.wim%,%Install.wim.Image.number%,%Tools%\wimlib.file.lists\syswow.files.8.0.txt,%SysWow64_Files%,NOACL
-If,%CodeBase%,Equal,6.3.9600,WimExtractBulk,%Install.wim%,%Install.wim.Image.number%,%Tools%\wimlib.file.lists\syswow.files.8.1.txt,%SysWow64_Files%,NOACL
-If,%CodeBase2%,Equal,10.0,WimExtractBulk,%Install.wim%,%Install.wim.Image.number%,%Tools%\wimlib.file.lists\syswow.files.10.txt,%SysWow64_Files%,NOACL
+If,%CodeBase%,Equal,6.1.7600,WimExtractBulk,%Install.wim%,%Install.wim.Image.number%,%Tools%\wimlib.file.lists\syswow.files.7.txt,%SysWow64_Files%,NOACL,NOERR
+If,%CodeBase%,Equal,6.1.7601,WimExtractBulk,%Install.wim%,%Install.wim.Image.number%,%Tools%\wimlib.file.lists\syswow.files.7.txt,%SysWow64_Files%,NOACL,NOERR
+If,%CodeBase%,Equal,6.2.9200,WimExtractBulk,%Install.wim%,%Install.wim.Image.number%,%Tools%\wimlib.file.lists\syswow.files.8.0.txt,%SysWow64_Files%,NOACL,NOERR
+If,%CodeBase%,Equal,6.3.9600,WimExtractBulk,%Install.wim%,%Install.wim.Image.number%,%Tools%\wimlib.file.lists\syswow.files.8.1.txt,%SysWow64_Files%,NOACL,NOERR
+If,%CodeBase2%,Equal,10.0,WimExtractBulk,%Install.wim%,%Install.wim.Image.number%,%Tools%\wimlib.file.lists\syswow.files.10.txt,%SysWow64_Files%,NOACL,NOERR
 ShellExecute,Hide,"attrib.exe","-h -s #$q%SysWow64_Files%#$q"
 Echo,"SysWOW64 registry fix..."
 If,Not,ExistDir,"%ProjectTemp%\Install.wim_Registry",DirMake,"%ProjectTemp%\Install.wim_Registry"

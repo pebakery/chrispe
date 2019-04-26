@@ -1,0 +1,152 @@
+html, body
+{
+  margin: 0px
+}
+
+body
+{
+  font-family: monospace;
+  white-space: nowrap
+}
+
+div.header
+{
+  background-color: rgb(160, 160, 160);
+  border-bottom: 2px solid rgb(80, 80, 80);
+  margin-bottom: 1em;
+  padding: 1em;
+  font-weight: bold;
+  white-space: normal
+}
+
+div.header > div.message
+{
+  margin: 0.5em 0 0 1.5em;
+  font-weight: normal;
+  white-space: pre
+}
+
+body > div.syntax
+{
+  margin-left: 1em
+}
+
+body > div.syntax > div.element
+{
+  margin-top: 0.5em
+}
+
+div.document-type-declaration > span.name
+{
+  color: blue
+}
+
+div.document-type-declaration > span.public-id,
+div.document-type-declaration > span.system-id
+{
+  color: green
+}
+
+div.element > div.starttag
+{
+  color: black;
+  vertical-align: top;
+  white-space: nowrap
+}
+
+div.element > div.starttag > span.leading
+{
+  vertical-align: top;
+}
+
+div.element > div.starttag > span.trailing
+{
+  vertical-align: bottom
+}
+
+div.element > div.starttag > span.name,
+div.element > div.starttag > span.leading > span.name
+{
+  color: blue
+}
+
+div.element > div.endtag > span.name
+{
+  color: blue;
+}
+
+div.element > div.starttag > span.attributes
+{
+  display: inline-block;
+  white-space: normal
+}
+
+div.element > div.starttag > span.attributes > span.attribute
+{
+  white-space: nowrap
+}
+
+div.element > div.starttag > span.attributes > span.attribute > span.name
+{
+  color: blue
+}
+
+div.element > div.starttag > span.attributes > span.attribute > span.value
+{
+  color: green
+}
+
+div.comment
+{
+  margin: 0px
+}
+
+div.comment > span.data
+{
+  color: grey;
+  white-space: normal
+}
+
+div.text
+{
+  padding: 0px
+}
+
+div.text > span.data
+{
+  color: red;
+}
+
+div.text > span.data.normal
+{
+  white-space: normal
+}
+
+div.text > span.data.pre
+{
+  white-space: pre
+}
+
+div.element.normal > div.content
+{
+  margin-left: 1em
+}
+
+div.real
+{
+  display: none
+}
+
+div.element.preserve,
+div.element.preserve > div.starttag,
+div.element.preserve > div.endtag,
+div.element.preserve > div.content,
+div.element.preserve > div.content > div
+{
+  display: inline
+}
+
+div.element.normal > div.content > div.element.preserve
+{
+  display: block
+}

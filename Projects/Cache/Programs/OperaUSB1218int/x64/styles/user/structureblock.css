@@ -1,0 +1,110 @@
+@charset "utf-8";
+/*	Name: -686521710 */
+/*	Document structure inspector - blocks.
+	Adds an outline for common structural elements.
+	Copyright 2012 Opera Software */
+address::before, address::after,
+blockquote::before, blockquote::after,
+body>del::before, body>del::after,
+dd::before, dd::after, 
+div::before, div::after,
+dl::before, dl::after, 
+dt::before, dt::after, 
+fieldset::before, fieldset::after, 
+form::before, form::after, 
+h1::before, h1::after,
+h2::before, h2::after,
+h3::before, h3::after,
+h4::before, h4::after,
+h5::before, h5::after,
+h6::before, h6::after,
+body>ins::before, body>ins::after,
+legend::before, legend::after, 
+li::before, li::after,
+ol::before, ol::after,
+p::before, p::after,
+pre::before, pre::after,
+ul::before, ul::after {
+	font-family: sans-serif !important;
+	font-weight: bold !important;
+	font-style: normal !important;
+	text-decoration: none !important;
+	color: rgb(226,228,235) !important;
+	background-color: rgb(51,102,204) !important;
+	background-image: none !important;
+	outline: 1px solid rgb(0,0,0);
+	padding: 0px !important;
+	margin: 0px !important;
+	float: none !important;
+	position: static !important;
+	display: inline-block !important;
+}
+blockquote p::before, blockquote p::after, dd::before, dd::after, dt::before, dt::after, li::before, li::after {
+	color: rgb(30,30,30) !important;
+	background-color: rgb(255,204,0) !important;
+}
+div::before, div::after {
+	color: rgb(226,228,235) !important;
+	background-color: rgb(46,61,77) !important;
+}
+address::before {content: '<address>' !important;}
+address::after {content: '</address>' !important;}
+blockquote::before {content: '<blockquote>' !important;}
+blockquote::after {content: '</blockquote>' !important;}
+dd::before {content: '<dd>' !important;}
+dd::after {content: '</dd>' !important;}
+body>del::before {content: '<del>' !important;}
+body>del::after {content: '</del>' !important;}
+div::before {content: '<div>' !important;}
+div::after {content: '</div>' !important;}
+dl::before {content: '<dl>' !important;}
+dl::after {content: '</dl>' !important;}
+dt::before {content: '<dt>' !important;}
+dt::after {content: '</dt>' !important;}
+fieldset::before {content: '<fieldset>' !important;}
+fieldset::after {content: '</fieldset>' !important;}
+form::before {content: '<form>' !important;}
+form::after {content: '</form>' !important;}
+h1::before {content: '<h1>' !important;}
+h1::after {content: '</h1>' !important;}
+h2::before {content: '<h2>' !important;}
+h2::after {content: '</h2>' !important;}
+h3::before {content: '<h3>' !important;}
+h3::after {content: '</h3>' !important;}
+h4::before {content: '<h4>' !important;}
+h4::after {content: '</h4>' !important;}
+h5::before {content: '<h5>' !important;}
+h5::after {content: '</h5>' !important;}
+h6::before {content: '<h6>' !important;}
+h6::after {content: '</h6>' !important;}
+body>ins::before {content: '<ins>' !important;}
+body>ins::after {content: '</ins>' !important;}
+legend::before {content: '<legend>' !important;}
+legend::after {content: '</legend>' !important;}
+li::before {content: '<li>' !important;}
+li::after {content: '</li>' !important;}
+p::before {content: '<p>' !important;}
+p::after {content: '</p>' !important;}
+ol::before {content: '<ol>' !important;}
+ol::after {content: '</ol>' !important;}
+pre::before {content: '<pre>' !important;}
+pre::after {content: '</pre>' !important;}
+ul::before {content: '<ul>' !important;}
+ul::after {content: '</ul>' !important;}
+
+div div::before {content: '[2]<div>' !important;}
+div div::after {content: '</div>[/2]' !important;}
+div div div::before {content: '[3]<div>' !important;}
+div div div::after {content: '</div>[/3]' !important;}
+div div div div::before {content: '[4]<div>' !important;}
+div div div div::after {content: '</div>[/4]' !important;}
+div div div div div::before {content: '[5]<div>' !important;}
+div div div div div::after {content: '</div>[/5]' !important;}
+div div div div div div::before {content: '[6]<div>' !important;}
+div div div div div div::after {content: '</div>[/6]' !important;}
+div div div div div div div::before {content: '[7]<div>' !important;}
+div div div div div div div::after {content: '</div>[/7]' !important;}
+div div div div div div div div::before {content: '[8]<div>' !important;}
+div div div div div div div div::after {content: '</div>[/8]' !important;}
+div div div div div div div div div::before {content: '[9]<div>' !important;}
+div div div div div div div div div::after {content: '</div>[/9]' !important;}

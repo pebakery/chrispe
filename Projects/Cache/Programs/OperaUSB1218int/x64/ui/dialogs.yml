@@ -1,0 +1,2337 @@
+########## DEFINITIONS ##########
+definitions:
+  widgets:
+    DoNotShowAgainCheckBox: &DoNotShowAgainCheckBox
+      type: Checkbox
+      name: checkbox_Default
+      string: S_DO_NOT_SHOW_DIALOG_AGAIN
+
+  buttons:
+    # Ok button, typically used in a button strip using *OkButton
+    OkButton: &OkButton
+      type: Button
+      name: button_OK
+      string: DI_ID_OK
+      action-string: Ok
+      default: true
+
+    # Close button, typically used in a button strip using *CloseButton
+    CloseButton: &CloseButton
+      type: Button
+      name: button_Close
+      string: DI_IDBTN_CLOSE
+      action-string: Ok
+      default: true
+
+    # Cancel button, typically used in a button strip using *CancelButton
+    CancelButton: &CancelButton
+      type: Button
+      name: button_Cancel
+      string: DI_ID_CANCEL
+      action-string: Cancel
+    
+    # No button, used in "Yes No Cancel" dialog
+    NoButton: &NoButton
+      type: Button
+      name: button_No
+      string: DI_IDNO
+      action-string: No
+
+
+    # Back button, typically used in a wizard button strip using *BackButton
+    BackButton: &BackButton
+      type: Button
+      name: button_Previous
+      string: S_WIZARD_PREV_PAGE
+      action-string: Back
+
+    # Back button, typically used in a wizard button strip using *ForwardButton
+    ForwardButton: &ForwardButton
+      type: Button
+      name: button_Next
+      string: S_WIZARD_NEXT_PAGE
+      action-string: Forward
+
+    # Finish button, typically used in a wizard button strip using *WizardFinishButton
+    WizardFinishButton: &WizardFinishButton
+      <<: *OkButton
+      string: S_WIZARD_FINISH
+      hidden: true
+
+    # Help button, typically used in a button strip using *HelpButton
+    HelpButton: &HelpButton
+      type: Button
+      name: button_Help
+      string: DI_IDHELP
+      action-string: Show help
+
+  button-strips:
+    # this is how button strips usually look:
+    GenericButtonStrip: &GenericButtonStrip
+      type: ButtonStrip
+      name: button-strip
+      help_anchor: index.html
+      dynamic_help_anchor: false
+      #special-content:
+      #buttons:
+
+    # a button strip that shows an 'Ok' and a 'Cancel' button. To be used like this:
+    # button-strip:
+    #   *OkCancelButtonStrip
+    OkCancelButtonStrip: &OkCancelButtonStrip
+      <<: *GenericButtonStrip
+      buttons:
+        - *OkButton
+        - *CancelButton
+
+    # a button strip that shows 'Ok', 'Cancel' and 'Help' button. Typically used like this:
+    # button-strip:
+    #   <<: *OkCancelHelpButtonStrip
+    #   help_anchor: index.html
+    #
+    OkCancelHelpButtonStrip: &OkCancelHelpButtonStrip
+      <<: *GenericButtonStrip
+      buttons:
+        - *OkButton
+        - *CancelButton
+        - *HelpButton
+
+    # a button strip that shows a 'Close' button. Typically used like this:
+    # button-strip:
+    #   *CloseButtonStrip
+    #
+    CloseButtonStrip: &CloseButtonStrip
+      <<: *GenericButtonStrip
+      buttons:
+        - *CloseButton
+
+    # a button strip that shows 'Close' and 'Help' button. Typically used like this:
+    # button-strip:
+    #   <<: *CloseHelpButtonStrip
+    #   help_anchor: index.html
+    #
+    CloseHelpButtonStrip: &CloseHelpButtonStrip
+      <<: *GenericButtonStrip
+      buttons:
+        - *CloseButton
+        - *HelpButton
+
+    # The typical button strip for wizards. Typically used like this:
+    # button-strip:
+    #   *WizardButtonStrip
+    WizardButtonStrip: &WizardButtonStrip
+      <<: *GenericButtonStrip
+      buttons:
+        - *BackButton
+        - *ForwardButton
+        - *WizardFinishButton
+        - *CancelButton
+
+    # The typical button strip for wizards. Typically used like this:
+    # button-strip:
+    #   <<: *WizardHelpButtonStrip
+    #   help_anchor: index.html
+    WizardHelpButtonStrip: &WizardHelpButtonStrip
+      <<: *GenericButtonStrip
+      buttons:
+        - *BackButton
+        - *ForwardButton
+        - *WizardFinishButton
+        - *CancelButton
+        - *HelpButton
+
+    # The typical button strip for Yes No Cancel dialog. Typically used like this:
+    # button-strip:
+    #   <<: *YesNoCancelButtonStrip
+    YesNoCancelButtonStrip : &YesNoCancelButtonStrip
+      <<: *GenericButtonStrip
+      buttons:
+        - <<: *OkButton
+          string: DI_IDYES
+        - *NoButton
+        - <<: *CancelButton
+        - *HelpButton
+
+########## DIALOGS ##########
+dialogs:
+  
+  - type: Dialog
+    name: Add To Panel Dialog
+    title: D_ADD_TO_PANEL_TITLE
+    content:
+      type: StackLayout
+      orientation: vertical
+      preferred-width: fill
+      elements:
+        - type: GridLayout
+          elements:
+            - elements:
+                - type: Icon
+                  name: panel_icon
+                  skin-image: "Window Document Icon"
+                - type: Label
+                  name: panel_title
+                  font-weight: bold
+            - elements:
+                - type: Empty
+                  name: empty_field_1
+                - type: Label
+                  name: address_string
+        - type: Empty
+          name: empty_field_2
+          fixed-height: 15
+        - type: Separator
+          minimum-width: 350
+    button-strip:
+      <<: *OkCancelButtonStrip
+      buttons:
+        - <<: *OkButton
+          string: SI_NEW_BOOKMARK_BUTTON_TEXT
+        - *CancelButton
+
+  - type: Dialog
+    name: Add Web Panel Dialog
+    title: D_ADD_TO_PANEL_TITLE
+    scrolled-content: false # pending proper solution, see DSK-343305
+    content:
+      type: StackLayout
+      orientation: vertical
+      elements:
+        - type: Label
+          string: D_ADD_A_WEB_PANEL
+        - type: StackLayout
+          orientation: horizontal
+          elements:
+            - type: Address
+              name: address_inputbox
+              ghost-string: S_ENTER_WEB_ADDRESS_HERE
+              minimum-width: 70c
+            - *OkButton
+        - type: RichTextLabel
+          name: get_web_panel
+          preferred-width: fill
+          fixed-height: 20 # Hack
+  - type: Dialog
+    name: Addressbar Overlay Dialog
+    scrolled-content: false
+    content:
+      type: StackLayout
+      orientation: vertical
+      vcenter: false
+      elements:
+        - type: SkinElement
+          skin-image: Addressbar Overlay Dialog Tab
+          content:
+            type: StackLayout
+            orientation: horizontal
+            preferred-width: infinity
+            hidden: true
+            name: Tab_stack
+            elements:
+              - type: Button
+                name: Security_button
+                button-style: toolbar-text-right
+                action-string: Show security page
+                fixed-image: true
+                skin-foreground-image: Addressbar Overlay Security Button Image
+                skin-image: Addressbar Overlay Tab Button Skin
+              - type: Button
+                name: Access_button
+                button-style: toolbar-text-right
+                action-string: Show permissions page
+                fixed-image: true
+                skin-foreground-image: Addressbar Overlay Access Button Image
+                skin-image: Addressbar Overlay Tab Button Skin
+        - type: PagingLayout
+          name: Info_pages
+          elements:
+          - type: SkinElement
+            skin-image: Addressbar Overlay Paging Layout Skin
+            content:
+              type: StackLayout 
+              orientation: vertical
+              name: Security_page
+              elements:
+                - type: Label
+                  name: Security_string
+                  string: D_SECURITY_TAB_HEADER_LABEL
+                  font-rel-size: 140
+                  preferred-width: fill
+                  skin-image: Address Bar Overlay Header
+                - type: Separator
+                  skin-image: Addressbar Overlay Dialog Separator Skin
+                - type: DynamicGridLayout
+                  name: Security_page_grid
+                  template:
+                    - type: StackLayout
+                      orientation: horizontal
+                      vcenter: false
+                      elements:
+                        - type: Icon
+                          name: Security_info_icon
+                          left-margin: 40
+                        - type: StackLayout
+                          orientation: vertical
+                          bottom-margin: 10
+                          elements:
+                            - type: MultilineLabel
+                              name: Security_info_head
+                              font-weight: bold
+                            - type: MultilineLabel
+                              name: Security_info_description
+                              fixed-width: 45c
+                - type: StackLayout
+                  orientation: horizontal
+                  name: Details_button_stack
+                  hidden: true
+                  elements:
+                    - type: Empty
+                      preferred-width: 16
+                    - type: Button
+                      left-margin: 5
+                      name: addressbar_overlay_detail_button
+                      string: D_NEW_PREFERENCES_DETAILS
+          - type: SkinElement
+            skin-image: Addressbar Overlay Paging Layout Skin
+            content:
+              type: StackLayout
+              orientation: vertical
+              name: Access_page
+              elements:
+                - type: StackLayout
+                  orientation: vertical
+                  elements:
+                    - type: Label
+                      name: Access_string
+                      string: D_PERMISSIONS_TAB_HEADER_LABEL
+                      font-rel-size: 140
+                      preferred-width: fill
+                      skin-image: Address Bar Overlay Header
+                    - type: Separator
+                      skin-image: Addressbar Overlay Dialog Separator Skin
+                    - type: DynamicGridLayout
+                      name: Permissions_grid
+                      preferred-width: infinity
+                      template:
+                        - type: StackLayout
+                          orientation: horizontal
+                          elements:
+                            - type: StackLayout
+                              orientation: vertical
+                              minimum-width: 150
+                              elements:
+                                - type: StackLayout
+                                  orientation: horizontal
+                                  elements:
+                                    - type: Icon
+                                      name: Device_icon
+                                    - type: Label
+                                      font-weight: bold
+                                      name: Device_label
+                                      skin-image: Addressbar Overlay Dialog Device Label Skin
+                                - type: StackLayout
+                                  orientation: horizontal
+                                  name: Iframe_host_stack
+                                  hidden: true
+                                  elements:
+                                    - type: Empty
+                                      preferred-width: 16
+                                    - type: Label
+                                      name: Accessing_host_label
+                                      skin-image: Addressbar Overlay Dialog Hostname Skin
+                                - type: StackLayout
+                                  orientation: horizontal
+                                  name: Toplevel_host_stack
+                                  hidden: true
+                                  elements:
+                                    - type: Empty
+                                      preferred-width: 30
+                                    - type: Icon
+                                      skin-image: Permission Popup Arrow
+                                    - type: Label
+                                      name: Toplevel_host_label
+                                      skin-image: Addressbar Overlay Dialog Hostname Skin
+                            - type: Icon
+                              skin-image: Addressbar Arrow Right
+                              hidden: true
+                              name: Addressbar_vertical_separator
+                            - type: Empty
+                              preferred-width: fill
+                            - type: Dropdown
+                              name: Domain_dropdown
+                              minimum-width: 150
+                              elements:
+                                - string: D_PERMISSION_ALWAYS_ALLOW
+                                  data: 0
+                                  skin-image: Permission Allowed
+                                - string: D_PERMISSION_ALLOW_ONCE
+                                  data: 1
+                                  skin-image: Permission Allowed
+                                - string: D_PERMISSION_DISALLOW
+                                  data: 2
+                                  skin-image: Permission Denied
+  - type: Dialog
+    name: Ask Cookie Dialog
+    title: D_ASKCOOKIE_TITLE
+    scrolled-content: false
+    content:
+      type: StackLayout
+      name: MainView
+      elements:
+        - type: StackLayout
+          orientation: horizontal
+          vcenter: false
+          bottom-margin: 20
+          elements:
+            - type: Icon
+              skin-image: "Dialog Question"
+            - type: GridLayout
+              elements:
+                - elements:
+                    - type: Label
+                      string: D_ASKCOOKIE_REQUEST_FROM
+                      name: server_heading_label
+                    - type: Label
+                      name: server_heading
+                      font-weight : bold
+                - elements:
+                    - type: Label
+                      string: D_ASKCOOKIE_REQUEST_FOR
+                      name: domain_heading_label
+                    - type: Label
+                      name: domain_heading
+                      font-weight : bold
+        - type: MultilineLabel
+          name: description_multilabel
+          preferred-width: fill
+          bottom-margin: 15
+        - type: Checkbox
+          string: D_ASKCOOKIE_DELETE_ON_EXIT
+          name: session_only_checkbox
+        - type: Checkbox
+          string: D_ASKCOOKIE_ALL_COOKIES_FROM_SERVER
+          name: saveall_server_checkbox
+        - type: Expand
+          string: D_ASKCOOKIE_SHOWHIDE_DETAILS
+          name: details_expand
+          content:
+            type: GridLayout
+            elements:
+              - elements:
+                  - type: Label
+                    string: D_ASKCOOKIE_COOKIE_NAME
+                    name: name_label
+                  - type: Label
+                    name: name_value
+                    selectable: true
+              - elements:
+                  - type: Label
+                    string: D_ASKCOOKIE_COOKIE_VALUE
+                    name: value_label
+                  - type: Label
+                    name: value_value
+                    selectable: true
+                    minimum-width: 50c
+                    nominal-width: 50c
+              - elements:
+                  - type: Label
+                    string: D_ASKCOOKIE_COOKIE_EXPIRES
+                    name: expires_label
+                  - type: Label
+                    name: expires_value
+                    selectable: true
+              - elements:
+                  - type: Label
+                    string: D_ASKCOOKIE_COOKIE_DOMAIN
+                    name: domain_label
+                  - type: Label
+                    name: domain_value
+                    selectable: true
+              - elements:
+                  - type: Label
+                    string: D_ASKCOOKIE_COOKIE_PATH
+                    name: path_label
+                  - type: Label
+                    name: path_value
+                    selectable: true
+              - elements:
+                  - type: Label
+                    name: port_label
+                  - type: Label
+                    name: port_value
+                    selectable: true
+              - elements:
+                  - type: Label
+                    string: D_ASKCOOKIE_COOKIE_COMMENT
+                    name: comment_label
+                  - type: Label
+                    name: comment_value
+                    selectable: true
+              - elements:
+                  - type: Label
+                    string: D_ASKCOOKIE_COOKIE_COMMENTURL
+                    name: commentURL_label
+                  - type: Label
+                    name: commentURL_value
+                    selectable: true
+    button-strip:
+      <<: *GenericButtonStrip
+      help_anchor: "cookies.html#dialog"
+      buttons:
+        - <<: *OkButton
+          string: DI_IDM_ACCEPT_COOKIE
+        - <<: *CancelButton
+          string: DI_IDM_NOACCEPT_COOKIE
+        - *HelpButton
+      special-content:
+        *DoNotShowAgainCheckBox
+
+  - type: Dialog
+    name: Auto Window Reload Dialog
+    title: DI_AUTORELOAD
+    content:
+      type: StackLayout
+      elements:
+        - type: StackLayout
+          orientation: horizontal          
+          elements:
+            - type: Dropdown
+              name: Autoreload_minutes
+              editable: true
+              elements:
+                - string: "1"
+                  data: 1
+                - string: "5"
+                  data: 5
+                - string: "10"
+                  data: 10
+                - string: "15"
+                  data: 15
+                - string: "20"
+                  data: 20
+                - string: "30"
+                  data: 30
+            - type: Label
+              string: DI_IDDI_AUTORELOAD_COL
+              name: label_for_Autoreload_minutes
+            - type: Dropdown
+              name: Autoreload_seconds
+              editable: true
+              elements:
+                - string: "10"
+                  data: 10
+                - string: "20"
+                  data: 20
+                - string: "30"
+                  data: 30
+                - string: "45"
+                  data: 45
+            - type: Label
+              name: label_for_Autoreload_seconds
+              string: DI_IDDI_AUTORELOAD_TOUT_MIN_TEXT
+        - type: Checkbox
+          string: DI_IDDI_AUTORELOAD_TOUT_CHECKDOC
+          name: Reload_only_expired
+          top-margin: 15
+    button-strip:
+      <<: *OkCancelButtonStrip
+
+# -*- Mode: c++; tab-width: 2; indent-tabs-mode: nil; c-basic-offset: 2 -*-
+  - type: Dialog
+    name: Bookmark Properties Dialog
+    title: SI_IDSTR_HL_BOOKMARK_PROPERTIES
+    
+    content:
+      type: GridLayout
+      elements:
+        - elements:
+          - type: Label
+            string: D_BOOKMARK_PROPERTIES_TITLE
+            name: BmTitle_Label
+          - type: Edit
+            name: BmTitle_Edit
+        - elements:
+          - type: Label
+            string: D_BOOKMARK_PROPERTIES_FOLDER
+            name: BmFolder_Label
+          - type: Dropdown
+            name: BmFolder_Dropdown
+            preferred-width: fill
+        - elements:
+          - type: Label
+            string: D_BOOKMARK_PROPERTIES_ADDRESS
+            name: BmAddress_Label
+          - type: Edit
+            name: BmAddress_Edit
+            minimum-width: 60c
+        - elements:
+          - type: Label
+            string: D_BOOKMARK_PROPERTIES_NICKNAME
+            name: BmNick_Label
+          - type: Edit
+            name: BmNick_Edit
+        - elements:
+          - type: Label
+            string: D_BOOKMARK_PROPERTIES_DESCRIPTION
+            name: BmDescription_Label
+          - type: MultilineEdit
+            name: BmDescription_Edit
+            minimum-height: 8c
+        - elements:
+          - type: Empty
+            preferred-width: fill
+          - type: Checkbox
+            name: Panel_Checkbox
+            string: D_ADD_BOOKMARK_SHOW_IN_PANEL_CHECKBOX
+        - elements:
+          - type: Empty
+            preferred-width: fill
+          - type: Checkbox
+            name: Bookmarkbar_Checkbox
+            string: MI_IDM_HLITEM_SHOW_ON_PERSONALBAR
+
+    button-strip:
+      <<: *GenericButtonStrip
+      buttons:
+        - <<: *OkButton
+          string: S_CONTENT_BLOCK_DONE
+        - *CancelButton
+
+  - type: Dialog
+    name: Certificate Warning Dialog
+    content:
+      type: Tabs
+      elements:
+        - title: D_CERT_WARN_WARNING
+          name: gr1
+          type: StackLayout
+          orientation: horizontal
+          vcenter: false
+          elements:
+            - type: Icon
+              skin-image: "Dialog Warning"
+            - type: StackLayout
+              elements:
+                - type: MultilineLabel
+                  name: Cert_info_label
+                - type: GroupBox
+                  string: D_CERT_WARN_SERVERNAME
+                  name: Domain_label
+                  content:
+                    type: Label
+                    name: Domain_edit
+        - title: D_CERT_WARN_SECURITY
+          name: gr2
+          type: StackLayout
+          orientation: horizontal
+          vcenter: false
+          elements:
+            - type: Icon
+              skin-image: "Dialog Warning"
+            - type: StackLayout
+              elements:
+                - type: GroupBox
+                  string: D_CERT_WARN_CERT_ERRORS
+                  content:
+                    type: ScrollContainer
+                    minimum-height: 50
+                    preferred-height: fill
+                    content:
+                      type: MultilineLabel
+                      name: Warning_security_description
+                - type: GroupBox
+                  string: D_CERT_WARN_CERT_SUMMARY
+                  content:
+                    type: GridLayout
+                    elements:
+                      - elements:
+                          - type: Label
+                            string: D_CERT_WARN_HOLDER
+                          - type: Label
+                            name: Warning_name
+                            selectable: true
+                            minimum-width: 30c
+                            preferred-width: fill
+                      - elements:
+                          - type: Label
+                            string: D_CERT_WARN_ISSUER
+                          - type: Label
+                            name: Warning_issuer
+                            selectable: true
+                            minimum-width: 30c
+                            preferred-width: fill
+                      - elements:
+                          - type: Label
+                            string: D_CERT_WARN_EXPIRES
+                          - type: Label
+                            name: Warning_valid
+                            minimum-width: 30c
+                            preferred-width: fill
+                - type: GroupBox
+                  string: D_CERT_WARN_ENCRYPTION_PROTOCOL
+                  content:
+                    type: Label
+                    name: Warning_encryption
+                - type: Checkbox
+                  string: D_CERT_WARN_ACCEPT_CERT
+                  name: Warning_disable_checkbox
+        - title: D_CERT_WARN_DETAILS
+          name: gr3
+          type: StackLayout
+          vcenter: false
+          orientation: horizontal
+          elements:
+            - type: Icon
+              skin-image: "Dialog Warning"
+            - type: StackLayout
+              elements:
+                - type: GroupBox
+                  string: D_SECURITY_INFORMATION_SERVER_CHAIN
+                  name: Warning_chain_label
+                  content:
+                    type: Treeview
+                    name: Warning_chain_treeview
+                    minimum-width: 67c
+                    minimum-height: 6c
+                - type: GroupBox
+                  string: D_SECURITY_INFORMATION_DETAILS_LABEL
+                  name: Warning_details_label
+                  content:
+                    type: MultilineEdit
+                    name: Warning_details
+                    read-only: true
+                    minimum-height: 8c
+
+    button-strip:
+      <<: *GenericButtonStrip
+      help_anchor: "certificates.html"
+      buttons:
+        - <<: *OkButton
+          string: D_CERT_WARNING_OK
+        - <<: *CancelButton
+          string: D_CERT_WARNING_CANCEL
+        - <<: *HelpButton
+
+  - type: Dialog
+    name: Clear Private Data Dialog
+    title: DI_CLEAR_ALL_PRIVATE_DATA
+    scrolled-content: false # needed until DSK-343305 is fixed
+    content:
+      type: StackLayout
+      orientation: horizontal
+      vcenter: false
+      elements:
+        - type: Icon
+          skin-image: "Dialog Warning"
+        - type: StackLayout
+          elements:
+            - type: MultilineLabel
+              string: D_CLEAR_PRIVATE_DATA_WARNING
+              name: Description_label
+            - type: StackLayout
+              top-margin: 8
+              elements:
+                - type: Checkbox
+                  string: DI_IDM_CLEAR_NPCOOKIES
+                  name: Delete_temporary_cookies
+                - type: Checkbox
+                  string: DI_IDM_CLEAR_ALLCOOKIES
+                  name: Delete_all_cookies
+                - type: Checkbox
+                  string: DI_IDM_CLEAR_PASSDOCS
+                  name: Delete_passworddocs_and_data
+                - type: Checkbox
+                  string: DI_IDM_CLEAR_CACHE
+                  name: Clear_cache
+                - type: Checkbox
+                  string: DI_DELETE_PLUGIN_DATA
+                  name: Clear_plugin_data
+                - type: Checkbox
+                  string: DI_DELETE_GEOLOC_DATA
+                  name: Clear_geoloc_data
+                - type: Checkbox
+                  string: DI_DELETE_CAMERA_PERMISSIONS
+                  name: Clear_camera_permissions
+                - type: Checkbox
+                  string: DI_IDM_CLEAR_GLOBHIS
+                  name:  Clear_visited_pages
+                - type: Checkbox
+                  string: DI_IDM_CLEAR_DOWNHIS
+                  name: Clear_transferred_files_history
+                - type: Checkbox
+                  string: D_CLEAR_PRIVATE_DATA_CLEAR_BOOKM_VISITEDTIME
+                  name: Clear_bookmark_visited_time
+                - type: Checkbox
+                  string: DI_IDM_CLEAR_MAILPASS
+                  name: Clear_email_account_passwords
+                - type: Checkbox
+                  string: DI_IDM_CLEAR_WANDPASS
+                  name: Clear_wand_passwords
+                - type: Checkbox
+                  string: D_WEBSTORAGE_DELETE_DATABASE
+                  name: Clear_webstorage
+                - type: Checkbox
+                  string: D_DELETE_EXTENSION_DATA
+                  name: Clear_extension_data
+                - type: Checkbox
+                  string: D_CLEAR_PRIVATE_DATA_CLOSE_ALL
+                  name: Close_all_windows
+                - type: StackLayout
+                  orientation: horizontal
+                  elements:
+                    - type: Button
+                      string: D_CLEAR_PRIVATE_DATA_MANAGE_COOKIES
+                      name: button_manage_cookies
+                      action:
+                        name: Manage cookies
+                    - type: Button
+                      string: D_CLEAR_PRIVATE_DATA_MANAGE_WAND_PW
+                      name: button_manage_wand
+                      action:
+                        name: Manage wand
+
+    button-strip:
+      <<: *GenericButtonStrip
+      help_anchor: "deleteprivate.html"
+      buttons:
+        - <<: *OkButton
+          string: S_DELETE
+        - *CancelButton
+        - *HelpButton
+
+  - type: Dialog
+    name: Collection View Settings Dialog
+    scrolled-content: false # pending proper solution, see DSK-343305
+    content:
+      type: StackLayout
+      elements:
+        - type: StackLayout
+          orientation: horizontal
+          name: viewpane_display_style
+          elements:
+            - type: Button
+              name: thumbnail_style
+              button-style: toolbar-image
+              skin-foreground-image: Collection Thumbnail Style Skin
+              fixed-image: true
+              action-string: Switch to thumbnail view
+            - type: Button
+              name: listview_style
+              button-style: toolbar-image
+              skin-foreground-image: Collection Listview Style Skin
+              fixed-image: true
+              action-string: Switch to list view
+        - type: Separator
+          top-margin: 8
+          bottom-margin: 8
+        - type: Label
+          string: D_COLLECTION_DEFAULT_SORTING
+          font-weight: bold
+        - type: Dropdown
+          name: sorting_dropdown
+          preferred-width: fill
+          elements:
+            - string: M_COLLECTION_SORT_BY_DATE
+              action-string: Sort Collection View, 0
+            - string: M_COLLECTION_SORT_BY_NAME
+              action-string: Sort Collection View, 1
+       
+          
+
+# -*- Mode: c++; tab-width: 2; indent-tabs-mode: nil; c-basic-offset: 2 -*-
+  - type: Dialog
+    name:  Custom Web Feed Dialog
+    title: D_INSTALLED_WEBFEEDS
+    content:
+      type: StackLayout
+      name: horizontal_layout
+      orientation: horizontal
+      vcenter: false
+      elements:
+        - type: Listbox
+          name: listbox_feed_list
+          minimum-height: 150
+          minimum-width: 300
+          nominal-width: 300
+          preferred-width: infinity
+          preferred-height: infinity
+        - type: Button
+          name: button_delete
+          string: S_DELETE
+          action-string: Delete
+    button-strip:
+      *OkCancelButtonStrip
+
+  - type: Dialog
+    name: Download Selection Dialog
+    title: D_DOWNLOAD_MANAGER_SELECTION
+    scrolled-content: false
+    content:
+      type: StackLayout
+      elements:
+        - type: MultilineLabel
+          string: D_DOWNLOAD_MANAGER_SELECTION_LABEL
+          name: label_for_infotext_2
+          minimum-width: 62c
+        - type: StackLayout
+          orientation: horizontal
+          elements:
+            - type: Label
+              string: D_BITTORRENT_DOWNLOAD_WITH
+              name: label_client
+            - type: Dropdown
+              name: Download_dropdown
+              preferred-width: fill
+    button-strip:
+      <<: *GenericButtonStrip
+      buttons:
+        - *OkButton
+        - *CancelButton
+      special-content:
+        <<: *DoNotShowAgainCheckBox
+        string: D_REMEMBER_MY_PREF_CHOICE
+  - type: Dialog
+    name: Extension Popup
+    scrolled-content: false
+    content:
+      type: Browser
+      name: browser_view
+  - type: Dialog
+    name: Extension Install Dialog # NOTE: that's install and update extension dialog definition. 
+    title: D_EXTENSION_INSTALL_TITLE
+    scrolled-content: false
+    content:
+      type: StackLayout
+      name: Main_page
+      elements:
+        - type: Label
+          string: D_INSTALL_EXTENSION_QUERY
+          name: Extension_install_query
+          font-weight : bold
+          font-rel-size: 115
+        - type: StackLayout
+          orientation: horizontal
+          vcenter: false
+          elements:
+            - type: Icon
+              name: Extension_icon
+              fixed-width: 64
+              fixed-height: 64
+              allow-scaling: true
+            - type: StackLayout
+              elements:
+                - type: Label
+                  name: Extension_title
+                  font-weight : bold
+                  font-rel-size: 115
+                  minimum-width: 45c
+                  nominal-width: 45c
+                - type: Label
+                  name: Extension_version
+        - type: PagingLayout
+          name: paging_layout
+          elements:
+            - name: page0 
+              type: Expand
+              string: M_EXTENSIONS_PRIVACY
+              name: details_expand0
+              preferred-width: fill
+              content:
+                type: StackLayout
+                elements:
+                  - type: Checkbox
+                    string: D_INSTALL_EXTENSION_INTERACT_SECURE_PAGES
+                    name: Secure_conn_checkbox0
+                  - type: Checkbox
+                    string: D_INSTALL_EXTENSION_INTERACT_PRIVATE_TABS
+                    name: Private_mode_checkbox0
+            - name: page1 
+              type: Expand
+              string: M_EXTENSIONS_PRIVACY
+              name: details_expand1
+              preferred-width: fill
+              content:
+                type: StackLayout
+                elements:
+                  - type: MultilineLabel
+                    name: Access_message1
+                    minimum-width: 55c
+                    nominal-width: 55c
+            - name: page2
+              type: StackLayout
+              elements:
+                - type: Checkbox
+                  string: D_INSTALL_EXTENSION_INTERACT_SECURE_PAGES
+                  name: Secure_conn_checkbox2
+                - type: Checkbox
+                  string: D_INSTALL_EXTENSION_INTERACT_PRIVATE_TABS
+                  name: Private_mode_checkbox2
+            - name: page3
+              type: StackLayout
+              elements:
+                - type: MultilineLabel
+                  name: Access_message3
+                  minimum-width: 55c
+                  nominal-width: 55c
+    button-strip:
+      <<: *GenericButtonStrip
+      buttons:
+        - <<: *OkButton
+          string: D_EXTENSION_INSTALL_INSTALL
+        - *CancelButton
+  - type: Dialog
+    name: Extension Uninstall Dialog
+    title: D_EXTENSION_UNINSTALL_TITLE
+    content:
+      type: StackLayout
+      name: Main_page
+      orientation: horizontal
+      elements:
+        - type: Icon
+          name: Extension_icon
+          fixed-width: 64
+          fixed-height: 64
+          allow-scaling: true
+        - type: MultilineLabel
+          name: Main_question
+          minimum-width: 40c
+          nominal-width: 40c
+    button-strip:
+      <<: *GenericButtonStrip
+      buttons:
+        - <<: *OkButton
+          string: M_WIDGET_UNINSTALL
+        - *CancelButton
+  - type: Dialog
+    name: Fullscreen Popup
+    content:
+      type: Label
+      name: fullscreen_popup_label
+      string: D_EXIT_FULLSCREEN_MODE_NOTIFICATION
+      font-rel-size: 170
+
+  - type: Dialog
+    name: Image Properties Dialog
+    title: DI_IDM_GRP_IMG
+    scrolled-content: false # needed until DSK-343305 is fixed
+    widgets:
+      - &ImagePropertyValue
+        type: Label
+        selectable: true
+        ellipsis: none
+        minimum-width: 60c
+        nominal-width: 60c
+        preferred-width: infinity
+    content:
+      type: StackLayout
+      elements:
+        - type: GridLayout
+          elements:
+            - elements:
+                - type: Label
+                  string: DI_IDM_LBL_IMG_DIM
+                  name: Image_dimension_label
+                - <<: *ImagePropertyValue
+                  name: Image_dimension_content
+            - elements:
+                - type: Label
+                  string: DI_IDM_LBL_IMG_CAMERA_SETTINGS
+                  name: Image_camera_settings_label
+                - <<: *ImagePropertyValue
+                  name: Image_camera_settings_content
+            - elements:
+                - type: Label
+                  string: DI_IDM_LBL_IMG_TYPE
+                  name: Image_type_label
+                - <<: *ImagePropertyValue
+                  name: Image_type_content
+            - elements:
+                - type: Label
+                  string: DI_IDM_LBL_IMG_SIZE
+                  name: Image_filesize_label
+                - <<: *ImagePropertyValue
+                  name: Image_filesize_content
+            - elements:
+                - type: Label
+                  string: DI_IDM_LBL_IMG_URL
+                  name: Image_address_label
+                - <<: *ImagePropertyValue
+                  name: Image_address_content
+            - elements:
+                - type: Label
+                  string: DI_IDM_LBL_IMG_DESC
+                  name: Image_description_label
+                - <<: *ImagePropertyValue
+                  name: Image_description_content
+            - elements:
+                - type: Label
+                  string: DI_IDM_LBL_IMG_LONG_DESC
+                - <<: *ImagePropertyValue
+                  name: Image_long_desc_content
+        - type: Browser
+          name: Imagedetails_browserview
+          preferred-width: fill
+          minimum-height: 120
+          nominal-height: 120
+      
+    button-strip:
+      *CloseButtonStrip
+  - type: Dialog
+    name: Label Properties Dialog
+    title: S_MY_FOLDERS
+    content:
+      type: StackLayout
+      orientation: horizontal
+      elements:
+        - type: StackLayout
+          orientation: vertical
+          name: LabelSelector
+          elements:
+            - type: Treeview
+              name: LabelTreeView
+              minimum-width: 25c
+              minimum-height: 10c
+            - type: Button
+              name: AddButton
+              string: M_INDEX_ITEM_POPUP_MENU_NEW_FILTER
+              action-string: "New folder"
+              preferred-width: fill
+            - type: Button
+              name: RemoveButton
+              string: D_MAIL_REMOVE_LABEL
+              action-string: "Remove folder"
+              preferred-width: fill
+
+        - type: StackLayout
+          orientation: vertical
+          preferred-height: infinity
+          name: MainView
+          elements:
+            - type: StackLayout
+              orientation: horizontal
+              elements:
+                - type: Label
+                  string: D_MAIL_LABEL_NAME
+                - type: Edit
+                  name: LabelName
+                - type: Label
+                  string: D_MAIL_LABEL_ICON
+                - type: Button
+                  name: IconButton
+                  action:
+                    name: "Show Popup Menu"
+                    data_string: "Label Image Menu"
+
+            - type: Tabs
+              minimum-width: 600
+              preferred-width: fill
+              preferred-height: fill
+              elements:
+                - title: D_MAIL_INDEX_PROPERTIES_RULES
+                  type: StackLayout
+                  minimum-height: 100
+                  orientation: vertical
+                  elements:
+                    - type: ScrollContainer
+                      preferred-height: infinity
+                      preferred-width: infinity
+                      content:
+                        type: StackLayout
+                        orientation: vertical
+                        elements:
+                          - type: StackLayout
+                            orientation: horizontal
+                            name: SpamInternalFilter
+                            elements:
+                              - type: Label
+                                string: D_M2_ACCOUNT_PROPERTIES_INTERN_FILTER
+                              - type: Dropdown
+                                name: SpamInternalFilterLevel
+                                elements:
+                                  - string: S_FILTER_OFF
+                                    data: 1000
+                                  - string: S_FILTER_MEDIUM
+                                    data: 30
+                                  - string: S_FILTER_STRONG
+                                    data: 0
+                          - type: StackLayout
+                            orientation: horizontal
+                            name: SearchInMailbox
+                            elements:
+                              - type: Label
+                                string: D_MAIL_MATCH_MESSAGES_IN
+                              - type: Button
+                                string: DI_IDSTR_M2_COL_MYMAIL
+                                name: SearchInMailboxButton
+                                action:
+                                  name: "Show Popup Menu"
+                                  data_string: "Internal Mail Search In"
+                          - type: DynamicGridLayout
+                            name: RulesGrid
+                            template:
+                              - type: Dropdown
+                                name: Operator
+                                elements:
+                                  - string: S_FILTER_OR
+                                    data: 0
+                                  - string: S_FILTER_AND
+                                    data: 1
+                              - type: Dropdown
+                                name: Field
+                                elements:
+                                  - string: S_FILTER_SUBJECT
+                                    data: 2
+                                  - string: S_FILTER_FROM_HEADER
+                                    data: 6
+                                  - string: S_FILTER_TO_HEADER
+                                    data: 7
+                                  - string: S_FILTER_CC_HEADER
+                                    data: 8
+                                  - string: S_FILTER_REPLYTO_HEADER
+                                    data: 9
+                                  - string: S_FILTER_NEWSGROUPS_HEADER
+                                    data: 10
+                                  - string: S_FILTER_ANY_HEADER
+                                    data: 3
+                                  - string: S_FILTER_BODY
+                                    data: 11
+                                  - string: S_FILTER_ENTIRE_MESSAGE
+                                    data: 4
+                              - type: Dropdown
+                                name: MatchType
+                                elements:
+                                  - string: S_FILTER_CONTAINS
+                                    data: 0
+                                  - string: S_FILTER_DOES_NOT_CONTAIN
+                                    data: 3
+                                  - string: S_FILTER_MATCHES_REGEXP
+                                    data: 2
+                              - type: Edit
+                                name: Match
+                                minimum-width: 8c
+                              - type: Button
+                                name: RemoveRuleButton
+                                string: D_MAIL_LABEL_REMOVE_RULE
+                                action-string: "Remove filter"
+                          - type: Button
+                            name: AddRuleButton
+                            string: D_MAIL_FILTER_ADD_RULE
+                            action-string: "New filter"
+
+                - title: D_MAIL_LABEL_OPTIONS
+                  type: StackLayout
+                  orientation: vertical
+                  elements:
+                    - type: Checkbox
+                      name: HideFromOtherViews
+                      string: D_MAIL_INDEX_PROPERTIES_MARK_AS_FILTERED
+                    - type: Checkbox
+                      name: MarkAsRead
+                      string: D_M2_ACCOUNT_PROPERTIES_MARK_MATCH_READ
+                    - type: Checkbox
+                      name: LearnFromMessages
+                      string: D_MAIL_INDEX_PROPERTIES_LEARN_FROM_MESSAGES_ADDED
+                    - type: Checkbox
+                      name: NewMessagesOnly
+                      string: D_MAIL_LABEL_APPLY_RULES_ONLY_TO_NEW
+
+                - title: D_MAIL_LABEL_IMAP_OPTIONS
+                  type: GridLayout
+                  elements:
+                    - elements: 
+                        - type: Label
+                          string: D_MAIL_LABEL_IMAP_SYNCHRONIZATION_KEYWORD
+                        - type: Edit
+                          name: IMAPKeyword
+
+    button-strip:
+      <<: *CloseHelpButtonStrip
+
+  - type: Dialog
+    name: Mail Authentication Failed Dialog
+    scrolled-content: false # needed until DSK-343305 is fixed
+    content:
+      type: StackLayout
+      name: MainView
+      elements:
+        - type: MultilineLabel           
+          name: Server_message_label
+          minimum-width: 60c
+        - type: Expand
+          string: D_MAIL_LOGIN_DETAILS
+          name: Expand_details
+          content:
+            type: GridLayout
+            elements:
+              - elements:
+                - type: Label
+                  string: DI_IDSTR_M2_AUTH_DLG_USERNAME
+                - type: Edit
+                  name: Username_edit
+              - elements: 
+                - type: Label
+                  string: DI_IDSTR_M2_AUTH_DLG_PASSWORD
+                - type: Edit
+                  name: Password_edit
+                  password: true
+                  ghost-string: D_PASSWORD_NOT_DISPLAYED
+              - elements:
+                - type: Label
+                  string: DI_IDM_LBL_AUTHENTICATION
+                - type: Dropdown
+                  name: Authentication_dropdown
+                  preferred-width: fill
+              - elements:
+                - type: Empty
+                - type: Checkbox
+                  name: Remember_password
+                  string: D_AUTHENTICATION_REMEMB_PASSW   
+    button-strip:
+      <<: *GenericButtonStrip
+      buttons:
+        - <<: *OkButton
+          string: D_MAIL_AUTHENTICATION_TRY_AGAIN
+        - *CancelButton
+  - type: Dialog
+    name: Mail Compose Window Options Popup
+    content:
+      type: StackLayout
+      orientation: vertical
+      elements:
+        - type: Checkbox
+          name: Message_expanded_checkbox
+          string: D_MAIL_MAXIMIZE_MESSAGES
+        - type: Separator
+          top-margin: 10
+        - type: GroupBox
+          string: M_COMPOSE_WINDOW_SHOW_FIELDS
+          top-margin: 10
+          content:
+            type: StackLayout
+            orientation: vertical
+            elements:
+        #        - type: Checkbox
+        #          string: DI_IDSTR_M2_COMPOSEMAIL_TO
+        #          name: cb_show_0
+              - type: Checkbox
+                string: DI_IDSTR_M2_COMPOSEMAIL_CC
+                name: cb_show_1
+              - type: Checkbox
+                string: S_COMPOSEMAIL_BCC
+                name: cb_show_2
+              - type: Checkbox
+                string: S_COMPOSEMAIL_REPLYTO
+                name: cb_show_3
+        #        - type: Checkbox
+        #          string: DI_IDSTR_M2_COMPOSEMAIL_SUBJECT
+        #          name: cb_show_4
+              - type: Checkbox
+                string: S_ACCOUNT_ACCOUNT
+                name: cb_show_5
+              - type: Checkbox
+                string: DI_IDSTR_M2_COL_ATTACHMENTS
+                name: cb_show_6
+              - type: Checkbox
+                string: MI_IDM_ENCODING_AUTOMATIC_PARENT
+                name: cb_show_8
+              - type: Checkbox
+                string: M_DISPLAY_HEADERS_MENU_PRIORITY
+                name: cb_show_7
+              - type: Checkbox
+                string: M_MAIL_TEXT_DIRECTION
+                name: cb_show_9
+        #        - type: Checkbox
+        #          string: DI_IDSTR_M2_COL_NEWSGROUPS
+        #          name: cb_show_10
+              - type: Checkbox
+                string: S_COMPOSEMAIL_FOLLOWUP
+                name: cb_show_11
+        - type: Separator
+          top-margin: 10
+        - type: Button
+          string: D_MAIL_EDIT_SIGNATURE
+          action-string: Open Signature Dialog
+        - type: GroupBox
+          string: S_MAIL_DEFAULT_OUTGOING_ACCOUNT
+          content:
+            type: Dropdown
+            name: Default_Account_Dropdown
+            elements:
+              - string: S_MAIL_USE_LAST_USED_ACCOUNT
+                data: 0
+  - type: Dialog
+    name: Mail Default View Properties Popup
+    content:
+      type: StackLayout
+      orientation: vertical
+      elements:
+        - type: Label
+          string: D_MAIL_WINDOW_LAYOUT
+        - type: StackLayout
+          orientation: horizontal
+          elements:
+            - type: Button
+              button-style: toolbar-image
+              string: M_MAIL_DISPLAY_TYPE_LIST_AND_MESSAGE_ON_RIGHT
+              action-string: Show split view, 1,,,"Mail Layout Horizontal"
+            - type: Button
+              button-style: toolbar-image
+              string: M_MAIL_DISPLAY_TYPE_LIST_AND_MESSAGE_BELOW
+              action-string: Show split view, 0,,,"Mail Layout Vertical"
+            - type: Button
+              button-style: toolbar-image
+              string: M_MAIL_DISPLAY_TYPE_LIST_ONLY
+              action-string: Show list view,,,,"Mail Layout List"
+        - type: Checkbox
+          name: Message_expanded_checkbox
+          string: D_MAIL_MAXIMIZE_MESSAGES
+          action-string: Expand Message
+        - type: Separator
+          top-margin: 10
+        - type: Label
+          string: D_MAIL_LIST_SORTING_DEFAULTS
+          top-margin: 10
+        - type: StackLayout
+          elements:
+          - type: Dropdown
+            name: Sorting_dropdown
+            preferred-width: fill
+            elements:
+              - string: M_MAIL_SORT_BY_SENT_DATE
+                action-string: Sort by column, 7
+              - string: M_MAIL_SORT_BY_STATUS
+                action-string: Sort by column, 0
+              - string: M_MAIL_SORT_BY_LABEL
+                action-string: Sort by column, 4
+              - string: M_MAIL_SORT_BY_SIZE
+                action-string: Sort by column, 6
+              - string: M_MAIL_SORT_BY_SUBJECT
+                action-string: Sort by column, 2
+          - type: Dropdown
+            name: Grouping_dropdown
+            preferred-width: fill
+            elements:
+              - string: M_MAIL_GROUP_BY_NONE
+                action-string: Group mails, -1
+              - string: M_MAIL_GROUP_BY_READ
+                action-string: Group mails, 0
+              - string: M_MAIL_GROUP_BY_FLAG
+                action-string: Group mails, 1
+              - string: M_MAIL_GROUP_BY_DATE
+                action-string: Group mails, 2
+          - type: Checkbox
+            name: SortDirection
+            string: M_BOOKM_PANEL_VIEW_MENU_SORT_ASCENDING
+            action-string: Sort direction
+          - type: Checkbox
+            name: Threaded_checkbox
+            string: M_MAIL_STAND_VIEW_MENU_THREADED
+            action-string: Set mail view type
+        - type: Separator
+          top-margin: 10
+        - type: Checkbox
+          name: Prefer_plain_text_checkbox
+          string: M_PREFER_PLAIN_TEXT
+          action-string: Set mail display type
+          top-margin: 10
+        - type: Checkbox
+          name: Fit_to_width_checkbox
+          string: D_NEW_PREFERENCES_FIT_TO_WINDOW
+          action-string: Enable mediumscreen mode
+        - type: Checkbox
+          name: Show_QuickReply_checkbox
+          string: M_MAIL_VIEW_OPTION_MENU_SHOW_QUICKREPLY
+          action-string: Show quick reply
+        - type: Separator
+          top-margin: 10
+        - type: Label
+          top-margin: 10
+          string: M_MAIL_AUTO_MARK_AS_READ
+        - type: Dropdown
+          name: Mark_as_read_dropdown
+          elements:
+            - string: M_MANUALLY
+              action-string: Mark as read automatically, 0
+            - string: M_AFTER_1_SEC
+              action-string: Mark as read automatically, 1000
+            - string: M_AFTER_2_SEC
+              action-string: Mark as read automatically, 2000
+            - string: M_AFTER_3_SEC
+              action-string: Mark as read automatically, 3000
+            - string: M_AFTER_5_SEC
+              action-string: Mark as read automatically, 5000
+            - string: M_AFTER_10_SEC
+              action-string: Mark as read automatically, 10000
+  - type: Dialog
+    name: Mail Index View Properties Popup
+    content:
+      type: StackLayout
+      orientation: vertical
+      elements:
+        - type: Label
+          name: Sorting_for_view_label
+          string: S_MAIL_SORTING_FOR_VIEW
+          font-weight: bold
+          font-rel-size: 120
+        - type: Checkbox
+          string: S_MAIL_OVERRIDE_SORTING_FOR_THIS_VIEW
+          name: Custom_sorting_checkbox
+          top-margin: 20
+          content:
+            type: StackLayout
+            orientation: vertical
+            elements:
+              - type: StackLayout
+                elements:
+                  - type: StackLayout
+                    orientation: horizontal
+                    elements:
+                      - type: Dropdown
+                        name: Sorting_dropdown
+                        preferred-width: fill
+                        elements:
+                          - string: M_MAIL_SORT_BY_SENT_DATE
+                            data: 7
+                          - string: M_MAIL_SORT_BY_STATUS
+                            data: 0
+                          - string: M_MAIL_SORT_BY_LABEL
+                            data: 4
+                          - string: M_MAIL_SORT_BY_SIZE
+                            data: 6
+                          - string: M_MAIL_SORT_BY_SUBJECT
+                            data: 2
+                  - type: Dropdown
+                    name: Grouping_dropdown
+                    preferred-width: fill
+                    elements:
+                      - string: M_MAIL_GROUP_BY_NONE
+                        data: -1
+                      - string: M_MAIL_GROUP_BY_READ
+                        data: 0
+                      - string: M_MAIL_GROUP_BY_FLAG
+                        data: 1
+                      - string: M_MAIL_GROUP_BY_DATE
+                        data: 2
+                  - type: Checkbox
+                    name: SortDirection
+                    string: M_BOOKM_PANEL_VIEW_MENU_SORT_ASCENDING
+                  - type: Checkbox
+                    name: Threading_checkbox
+                    string: M_MAIL_STAND_VIEW_MENU_THREADED
+        - type: Expand
+          string: M_SHOW
+          name: Details_expand
+          top-margin: 10
+          content:
+            type: GridLayout
+            margin-top: 10
+            elements:
+              - elements:
+                - type: Checkbox
+                  string: M_MAIL_VIEW_OPTION_MENU_SHOW_READ
+                  name: cb_show_0
+                - type: Checkbox
+                  left-margin: 10
+                  string: M_MAIL_VIEW_OPTION_MENU_SHOW_NEWSGR
+                  name: cb_show_4
+              - elements:
+                - type: Checkbox
+                  string: M_MAIL_VIEW_OPTION_MENU_SHOW_TRASH
+                  name: cb_show_1
+                - type: Checkbox
+                  string: M_MAIL_VIEW_OPTION_MENU_SHOW_NEWSFEEDS
+                  name: cb_show_6
+              - elements:
+                - type: Checkbox
+                  string: M_MAIL_VIEW_OPTION_MENU_SHOW_SPAM
+                  name: cb_show_2
+                - type: Checkbox
+                  string: M_MAIL_VIEW_OPTION_MENU_SHOW_FILTERED
+                  name: cb_show_5
+              - elements:
+                - type: Checkbox
+                  string: M_MAIL_VIEW_OPTION_MENU_SHOW_MAILINGLIST
+                  name: cb_show_3
+                - type: Checkbox
+                  name: cb_show_7
+                  string: M_MAIL_VIEW_OPTION_MENU_SHOW_SENT
+              - elements:
+                - type: Checkbox
+                  name: cb_show_8
+                  string: M_MAIL_VIEW_OPTION_MENU_SHOW_DUPLICATES
+                - type: Empty
+
+
+  - type: Dialog
+    name: Mode Manager Dialog
+    title: D_STYLE_OPTIONS
+    content:
+      type: Tabs
+      elements:
+        - title: D_SITE_DISPLAY
+          name: Style_group
+          type: StackLayout
+          elements:
+            - type: Checkbox
+              string: DI_IDM_FRAMES_TOGGLE
+              name: Enable_frames_checkbox
+            - type: Checkbox
+              string: DI_IDM_IFRAMES_TOGGLE
+              name: Enable_inline_frames_checkbox
+            - type: Checkbox
+              string: DI_IDM_ALWAYS_SHOW_ACTIVE_FRAME
+              name: Show_frame_border_checkbox
+            - type: Checkbox
+              string: D_ENABLE_FORMS_STYLING
+              name: Forms_styling_checkbox
+            - type: Checkbox
+              string: D_ENABLE_SCROLLBAR_STYLING
+              name: Scrollbars_styling_checkbox
+            - type: GroupBox
+              string: DI_IDLABEL_USERCSS
+              name: label_for_My_style_sheet_chooser
+              content:
+                type: Filechooser
+                name: My_style_sheet_chooser
+                title: D_SELECT_STYLE_SHEET_FILE
+                filter-string: SI_CSS_TYPES
+        - title: D_PRESENTATION_MODES
+          name: Presentation_group
+          type: StackLayout
+          elements:
+            - type: StackLayout
+              orientation: horizontal
+              elements:
+                - type: GroupBox
+                  name: Author_mode_label
+                  string: DI_IDM_CSS_BOX
+                  content:
+                    type: StackLayout
+                    elements:
+                      - type: Checkbox
+                        string: DI_IDM_DOC_AUTH_CSS
+                        name: Author_page_style_sheet_checkbox
+                      - type: Checkbox
+                        string: DI_IDM_DOC_AUTH_FONT
+                        name: Author_page_fonts_and_colors_checkbox
+                      - type: Checkbox
+                        string: DI_IDM_DOC_USER_CSS
+                        name: Author_my_style_sheet_checkbox
+                      - type: Checkbox
+                        string: DI_IDM_DOC_USER_FONT
+                        name: Author_my_fonts_and_colors_checkbox
+                      - type: Checkbox
+                        string: DI_IDM_DOC_USER_LINKS
+                        name: Author_my_link_style_checkbox
+                - type: GroupBox
+                  name: User_mode_label
+                  string: DI_IDM_USERCSS_BOX
+                  content:
+                    type: StackLayout
+                    elements:
+                      - type: Checkbox
+                        string: DI_IDM_USER_AUTH_CSS
+                        name: User_page_style_sheet_checkbox
+                      - type: Checkbox
+                        string: DI_IDM_USER_AUTH_FONT
+                        name: User_page_fonts_and_colors_checkbox
+                      - type: Checkbox
+                        string: DI_IDM_USER_USER_CSS
+                        name: User_my_style_sheet_checkbox
+                      - type: Checkbox
+                        string: DI_IDM_USER_USER_FONT
+                        name: User_my_fonts_and_colors_checkbox
+                      - type: Checkbox
+                        string: DI_IDM_USER_USER_LINKS
+                        name: User_my_link_style_checkbox
+            - type: StackLayout
+              orientation: horizontal
+              elements:
+                - type: Label
+                  string: D_DEFAULT_PRESENTATION_MODE
+                  name: label_for_Default_mode_dropdown
+                - type: Dropdown
+                  name: Default_mode_dropdown
+                  preferred-width: fill
+                  elements:
+                    - string: DI_IDM_CSS_BOX
+                      data: 1
+                    - string: DI_IDM_USERCSS_BOX
+                      data: 0
+    button-strip:
+      <<: *OkCancelHelpButtonStrip
+      help_anchor: stylemodes.html
+  - type: Dialog
+    name: Name Completion Dialog
+    title: DI_NAMECOMPLETION
+    content:
+      type: StackLayout
+      name: main_layout
+      elements:
+        - type: Checkbox
+          name: Local_machine_checkbox
+          string: DI_IDM_TRY_LOCAL_TOGGLE
+        - type: Checkbox
+          name: Completion_checkbox
+          string: DI_IDM_TRY_NAME_COMPLETION_TOGGLE
+          content:
+            type: GridLayout
+            elements:
+              - elements:
+                  - type: Label
+                    name: label_for_Prefixes_edit
+                    string: DI_IDM_NC_START_LABEL
+                  - type: Edit
+                    name: Prefixes_edit
+              - elements:
+                  - type: Label
+                    name: label_for_Suffixes_edit
+                    string: DI_IDM_NC_END_LABEL
+                  - type: Edit
+                    name: Suffixes_edit
+    button-strip:
+      <<: *OkCancelHelpButtonStrip
+      help_anchor: server.html
+  - type: Dialog
+    name: Permission Popup
+    scrolled-content: false
+    content:
+      type: StackLayout
+      orientation: vertical
+      elements:
+        - type: SkinElement
+          skin-image: Permission Popup Dialog Tab
+          content:
+            type: RichTextLabel
+            name: Permission_label
+            font-rel-size: 95
+            preferred-width: fill
+            skin-image: Permission Popup Label Skin
+        - type: SkinElement
+          skin-image: Addressbar Overlay Paging Layout Skin
+          content:
+            type: StackLayout
+            orientation: vertical
+            elements:
+              - type: StackLayout
+                orientation: horizontal
+                elements:
+                  - type: StackLayout
+                    orientation: vertical
+                    minimum-width: 150
+                    elements:
+                      - type: StackLayout
+                        orientation: horizontal
+                        elements:
+                          - type: Icon
+                            name: Device_icon
+                          - type: Label
+                            font-weight: bold
+                            name: Device_label
+                            skin-image: Addressbar Overlay Dialog Device Label Skin
+                      - type: StackLayout
+                        orientation: horizontal
+                        name: Iframe_host_stack
+                        hidden: true
+                        elements:
+                          - type: Empty
+                            preferred-width: 16
+                          - type: Label
+                            name: Accessing_host_label
+                            skin-image: Addressbar Overlay Dialog Hostname Skin
+                      - type: StackLayout
+                        orientation: horizontal
+                        name: Toplevel_host_stack
+                        hidden: true
+                        elements:
+                          - type: Empty
+                            preferred-width: 30
+                          - type: Icon
+                            skin-image: Permission Popup Arrow
+                          - type: Label
+                            name: Toplevel_host_label
+                            skin-image: Addressbar Overlay Dialog Hostname Skin
+                  - type: Icon
+                    skin-image: Addressbar Arrow Right
+                    hidden: true
+                    name: Addressbar_vertical_separator
+                  - type: Empty
+                    preferred-width: fill
+                  - type: Dropdown
+                    name: Domain_dropdown
+                    minimum-width: 170
+                    elements:
+                      - string: D_PERMISSION_ALWAYS_ALLOW
+                        data: 0
+                        skin-image: Permission Allowed
+                      - string: D_PERMISSION_ALLOW_ONCE
+                        data: 1
+                        skin-image: Permission Allowed
+                      - string: D_PERMISSION_DISALLOW
+                        data: 2
+                        skin-image: Permission Denied
+              - type: Separator
+                skin-image: Permission Popup Separator Skin
+              - type: ButtonStrip
+                buttons:
+                  - *OkButton
+                  - *CancelButton
+  - type: Dialog
+    name: Plugin Crash Dialog
+    header:
+      type: StackLayout
+      orientation: vertical
+      elements:
+        - type: MultilineLabel
+          name: report_issue_header
+          string: D_PLUGIN_REPORT_ISSUE_HEADER
+          font-weight: bold
+          bottom-margin: 10
+        - type: RichTextLabel
+          name: report_issue_description
+          string: D_PLUGIN_REPORT_ISSUE_PRIVACY_POLICY
+          font-rel-size: 90
+    content:
+      type: StackLayout
+      orientation: vertical
+      elements:
+        - type: StackLayout
+          orientation: horizontal
+          elements:
+            - type: Label
+              name: error_description
+              string: D_PLUGIN_REPORT_ISSUE_ERROR_DESCRIPTION
+            - type: Empty
+              preferred-width: infinity
+            - type: Button
+              name: view_report_button
+              string: D_CRASH_LOGGING_DIALOG_VIEW_REPORT
+              action-string: Crash view report
+        - type: GridLayout
+          elements:
+            - elements:
+                - type: Label
+                  name: last_visited_label
+                  string: D_PLUGIN_REPORT_ISSUE_LAST_PAGE_VISITED
+                - type: Edit
+                  name: last_visited
+                  minimum-width: 40c
+            - elements:
+                - type: Label
+                  name: comments_label
+                  string: D_PLUGIN_REPORT_ISSUE_COMMENTS
+                - type: MultilineEdit
+                  name: comments
+            - elements:
+                - type: Label
+                  name: email_label
+                  string: D_PLUGIN_REPORT_ISSUE_CONTACT_EMAIL
+                - type: Edit
+                  name: email
+
+    button-strip:
+      <<: *GenericButtonStrip
+      buttons:
+        - <<: *CloseButton
+          string: D_CRASH_LOGGING_DIALOG_SEND
+  - type: Dialog
+    title: S_PLUGIN_AUTO_INSTALL_VIEWING_TOS
+    name: Plugin EULA Dialog
+    content:
+      type: StackLayout
+      orientation: vertical
+      nominal-width: 750
+      nominal-height: 550
+      elements:
+        - type: StackLayout
+          orientation: horizontal
+          elements:
+        - type: StackLayout
+          orientation: vertical
+          elements:
+          - type: StackLayout
+            orientation: horizontal
+            elements:
+            - type: Icon
+              name: plugin_eula_icon
+              skin-image: Install plugin dialog
+            - type: StackLayout
+              orientation: vertical
+              elements:
+              - type: Label
+                name: plugin_eula_title_label
+                font-rel-size: 130
+                font-weight: bold
+                minimum-width: 300
+              - type: Label
+                name: plugin_eula_license_label
+                string: D_PLUGIN_AUTO_INSTALL_DIALOG_LOADING_EULA
+                minimum-width: 300                
+              - type: Icon
+                name: plugin_eula_loading_icon
+                skin-image: Plugin install busy
+          - type: Browser
+            name: plugin_eula_browser
+    button-strip:
+      <<: *GenericButtonStrip
+      buttons:
+        - type: Button
+          name: plugin_eula_close_button
+          string: DI_IDBTN_CLOSE
+          action-string: Ok
+          default: true
+  - type: Dialog
+    name: Plugin Install Dialog
+    content:
+        type: PagingLayout
+        name: main_layout
+        minimum-width: 320
+        minimum-height: 120
+        nominal-height: 120
+        elements:
+        - type: StackLayout
+          name: welcome_page
+          elements:
+          - type: StackLayout
+            orientation: horizontal
+            vcenter: false
+            elements:
+            - type: Icon
+              name: main_icon_welcome
+              skin-image: Install plugin dialog
+            - type: StackLayout
+              elements:
+              - type: Label
+                name: plugin_installer_name_label_welcome
+                font-rel-size: 130
+                font-weight: bold
+              - type: RichTextLabel
+                name: plugin_eula_label_welcome
+                string: S_PLUGIN_AUTO_INSTALL_VIEW_TOS
+                wrap: false
+              - type: Label
+                preferred-height: infinity
+          - type: StackLayout
+            orientation: horizontal
+            elements:
+            - type: Checkbox
+              name: accept_eula_checkbox_welcome
+              preferred-width: 0
+            - type: MultilineLabel
+              name: accept_eula_label_welcome
+
+        - type: StackLayout
+          name: installing_auto_page
+          elements:
+          - type: StackLayout
+            orientation: horizontal
+            vcenter: false
+            elements:
+            - type: Icon
+              name: main_icon_installing_auto
+              skin-image: Install plugin dialog
+            - type: StackLayout
+              elements:
+              - type: Label
+                name: plugin_installer_name_label_installing_auto
+                font-rel-size: 130
+                font-weight: bold
+              - type: Label
+                name: info_label_installing_auto
+                string: S_PLUGIN_AUTO_INSTALL_INSTALLING_AUTO
+              - type: Label
+                preferred-height: infinity
+              - type: Icon
+                name: busy_icon_installing_auto
+                skin-image: Plugin install busy
+
+        - type: StackLayout
+          name: general_info_page
+          elements:
+          - type: StackLayout
+            orientation: horizontal
+            vcenter: false
+            elements:
+            - type: Icon
+              name: main_icon_general_info
+              skin-image: Install plugin dialog
+            - type: StackLayout
+              vcenter: false
+              elements:
+              - type: Label
+                name: plugin_installer_name_label_general_info
+                font-rel-size: 130
+                font-weight: bold
+              - type: MultilineLabel
+                name: info_label_general_info
+                string: DI_ID_OK
+
+    button-strip:
+      <<: *GenericButtonStrip
+      buttons:
+        - type: Button
+          name: button_open_externally
+          string: DI_PLUGIN_INSTALL_DIALOG_BUTTON_OPEN_EXTERNALLY
+          action-string: Plugin Install Open Externally
+        - type: Button
+          name: button_goto_page
+          string: D_PLUGIN_AUTO_INSTALL_DIALOG_GOTO_PAGE
+          action-string: Plugin Install Goto Page
+        - type: Button
+          name: button_start_download
+          string: DI_PLUGIN_TOOLBAR_BUTTON_DOWNLOAD
+          action-string: Plugin Install Start Download
+        - type: Button
+          name: button_start_auto
+          string: D_PLUGIN_AUTO_INSTALL_DIALOG_BUTTON_INSTALL
+          action-string: Plugin Install Start Auto
+        - type: Button
+          name: button_start_manual
+          string: D_PLUGIN_AUTO_INSTALL_DIALOG_BUTTON_RUN
+          action-string: Plugin Install Start Manual
+        - type: Button
+          name: button_close
+          string: DI_IDBTN_CLOSE
+          action-string: Cancel
+        - *CancelButton
+
+
+  - type: Dialog
+    name: Script Options Dialog
+    title: D_JAVASCRIPT_OPTION_DIALOG_TITLE
+    content:
+      type: StackLayout
+      name: Main_layout
+      elements:
+        - type: Checkbox
+          string: S_JAVASCRIPT_ALLOW_RESIZE
+          name: Allow_resize_checkbox
+        - type: Checkbox
+          string: S_JAVASCRIPT_ALLOW_MOVE
+          name: Allow_move_checkbox
+        - type: Checkbox
+          string: S_JAVASCRIPT_ALLOW_RAISE
+          name: Allow_raise_checkbox
+        - type: Checkbox
+          string: S_JAVASCRIPT_ALLOW_LOWER
+          name: Allow_lower_checkbox
+        - type: Checkbox
+          string: S_JAVASCRIPT_ALLOW_STATUS_FIELD
+          name: Allow_status_checkbox
+        - type: Checkbox
+          string: D_ALLOW_RIGHT_CLICK_JS
+          name: Allow_clicks_checkbox
+        - type: Checkbox
+          string: D_SCRIPT_OPTIONS_DIALOG_ALLOW_HIDE_ADDRESS_BAR
+          name: Allow_hide_address_checkbox
+        - type: Checkbox
+          string: D_OPEN_JAVASCRIPT_CONSOLE_ON_ERROR
+          name: Javascript_console_checkbox
+        - type: GroupBox
+          string: D_NEW_PREFERENCES_PERSONALIZE_DISPLAY
+          name: label_for_My_user_javascript_chooser
+          content:
+            type: Folderchooser
+            name: My_user_javascript_chooser
+    button-strip:
+      *OkCancelButtonStrip
+  - type: Dialog
+    name: Simple Dialog
+    scrolled-content: false # needed until DSK-343305 is fixed
+    content:
+      type: StackLayout
+      orientation: horizontal
+      elements:
+        - type: Icon
+          name: dialog_icon
+        - type: MultilineLabel
+          name: info_label
+          minimum-width: 50c
+          preffered-width: 50c
+    button-strip:
+      <<: *YesNoCancelButtonStrip
+      special-content:
+        *DoNotShowAgainCheckBox
+
+  - type: Dialog
+    name: Speed Dial Configuration Dialog
+    scrolled-content: false # pending proper solution, see DSK-343305
+    widgets:
+      - &PageSuggestionComposite
+        type: Composite
+        skin-image: Speed Dial Configuration Dialog Page Button
+      - &PageSuggestionStack
+        type: StackLayout
+        hcenter: true
+      - &PageSuggestionButton
+        type: Button
+        action-string: Go to typed address + Ok
+        fixed-width: 150
+        fixed-height: 96
+        bottom-margin: 0
+        skin-foreground-image: Thumbnail Busy Image
+      - &PageSuggestionName
+        type: Button
+        fixed-width: 150
+        top-margin: 0
+      - &ExtensionSuggestionComposite
+        type: Composite
+        skin-image: Speed Dial Configuration Dialog Extension Button
+      - &ExtensionSuggestionStack
+        <<: *PageSuggestionStack
+      - &ExtensionSuggestionButton
+        <<: *PageSuggestionButton
+        action-string: Install Speed Dial extension + Ok
+        skin-foreground-image: Extensions 64 Gray
+      - &ExtensionSuggestionName
+        <<: *PageSuggestionName
+    content:
+      type: StackLayout
+      elements:
+        - type: SkinElement
+          skin-image: Speed Dial Configuration Dialog Header Skin
+          content:
+            type: StackLayout
+            elements:
+              - type: StackLayout
+                orientation: horizontal
+                elements:
+                  - type: Label
+                    string: D_SD_LABEL_URL
+                  - type: Address
+                    name: address_inputbox
+                    minimum-width: 0
+                    ghost-string: S_ENTER_WEB_ADDRESS_HERE
+              - type: Label
+                string: S_SEARCH_FIELD_SUGGESTIONS
+                top-margin: 24
+                name: Suggestions
+        - type: SkinElement
+          skin-image: Speed Dial Configuration Dialog Suggestions
+          content:
+            type: GridLayout
+            name: suggestions_grid
+            elements:
+              - elements:
+                - <<: *PageSuggestionComposite
+                  name: Page0
+                  content:
+                    <<: *PageSuggestionStack
+                    elements:
+                      - <<: *PageSuggestionButton
+                        name: PageButton0
+                      - <<: *PageSuggestionName
+                        name: PageName0
+                - <<: *PageSuggestionComposite
+                  name: Page1
+                  content:
+                    <<: *PageSuggestionStack
+                    elements:
+                      - <<: *PageSuggestionButton
+                        name: PageButton1
+                      - <<: *PageSuggestionName
+                        name: PageName1
+                - <<: *PageSuggestionComposite
+                  name: Page2
+                  content:
+                    <<: *PageSuggestionStack
+                    elements:
+                      - <<: *PageSuggestionButton
+                        name: PageButton2
+                      - <<: *PageSuggestionName
+                        name: PageName2
+              - elements:
+                - <<: *ExtensionSuggestionComposite
+                  name: Extension0
+                  content:
+                    <<: *ExtensionSuggestionStack
+                    elements:
+                      - <<: *ExtensionSuggestionButton
+                        name: ExtensionButton0
+                      - <<: *ExtensionSuggestionName
+                        name: ExtensionName0
+                - <<: *ExtensionSuggestionComposite
+                  name: Extension1
+                  content:
+                    <<: *ExtensionSuggestionStack
+                    elements:
+                      - <<: *ExtensionSuggestionButton
+                        name: ExtensionButton1
+                      - <<: *ExtensionSuggestionName
+                        name: ExtensionName1
+                - <<: *ExtensionSuggestionComposite
+                  name: Extension2
+                  content:
+                    <<: *ExtensionSuggestionStack
+                    elements:
+                      - <<: *ExtensionSuggestionButton
+                        name: ExtensionButton2
+                      - <<: *ExtensionSuggestionName
+                        name: ExtensionName2
+    button-strip:
+      <<: *OkCancelButtonStrip
+      special-content:
+        type: Button
+        name: ViewAllExtensions
+        string: D_EXTENSION_PANEL_GET_MORE
+        action:
+          name: "Open url in new page"
+          data_string: "https://addons.opera.com/redirect/speeddial-extensions/"
+
+  - type: Dialog
+    name: Speed Dial Edit Dialog
+    content:
+      type: StackLayout
+      elements:
+        - type: GridLayout
+          elements:
+            - elements:
+              - type: Label
+                string: D_SD_LABEL_URL
+              - type: Address
+                name: address_inputbox
+                minimum-width: 300
+                ghost-string: S_ENTER_WEB_ADDRESS_HERE
+            - elements:
+              - type: Label
+                string: D_SD_LABEL_TITLE
+              - type: Edit
+                name: edit_title
+                ghost-string: D_SD_DEFAULT_TITLE
+    button-strip:
+      *OkCancelButtonStrip
+  - type: Dialog
+    name: Extension Preferences Dialog
+    scrolled-content: false # pending proper solution, see DSK-343305
+    content:
+      type: Browser
+      name: preferences_view
+      nominal-width: 480
+      nominal-height: 360
+
+  - type: Dialog
+    name: Startup Dialog
+    title: D_STARTUP_TITLE
+    content:
+      type: StackLayout
+      name: MainView
+      elements:
+        - type: StackLayout # pending proper solution, see DSK-343111
+          orientation: horizontal
+          bottom-margin: 16
+          elements:
+            - type: Icon
+              skin-image: "Startup Dialog"
+            - type: Label
+              string: D_STARTUP_TITLE
+              name: Welcome_label
+              font-rel-size: 150
+              font-weight: bold
+              left-margin: 12
+        - type: StackLayout
+          minimum-width: 300
+          elements:
+            - type: Radiobutton
+              string: D_STARTUP_LAST_TIME
+              name: Continue_lasttime_radio
+            - type: Radiobutton
+              string: D_STARTUP_SAVED_SESSIONS
+              name: Continue_session_radio
+              content:
+                type: Treeview
+                name: Sessions_treeview
+                nominal-height: 4c
+            - type: Radiobutton
+              string: D_STARTUP_WITH_HOMEPAGE
+              name: Start_homepage_radio
+            - type: Radiobutton
+              string: D_STARTUP_WITH_NOPAGE
+              name: Start_nowindows_radio
+            - type: Checkbox
+              string: D_STARTUP_RESTART_EXTENSIONS
+              name: restart_gadgets_checkbox
+    button-strip:
+      <<: *GenericButtonStrip
+      buttons:
+        - <<: *OkButton
+          string: DI_IDM_START_PREF_BOX
+        - *CancelButton
+      special-content:
+        <<: *DoNotShowAgainCheckBox
+
+
+
+  - type: Dialog
+    name: URL Fav Menu Dialog
+    scrolled-content: false # pending proper solution, see DSK-343305
+    content:
+      type: PagingLayout
+      name: pages
+      elements:
+        - type: StackLayout
+          orientation: vertical
+          elements:
+            - type: Composite
+              name: drop_down_btns_composite
+              skin-image: Composite Dropdown Button Skin
+              content:
+                type: StackLayout
+                orientation: horizontal
+                elements:
+                  - type: Button
+                    name: add_remove_to_bookmarks
+                    string: S_URL_ADD_TO_FAVORITES
+                    action-string: Add to Favorites > Remove from Favorites,,,S_URL_REMOVE_FROM_FAVORITES
+                    skin-image: Composite Dropdown Left Button Skin
+                    button-style: toolbar-text-right
+                  - type: Button
+                    name: bookmark_folder_list
+                    action-string: Menu folder
+                    skin-image: Composite Dropdown Right Button Skin
+                    button-style: toolbar-image
+                    preferred-height: fill
+            - type: Button
+              name: add_remove_to_startpage
+              string: S_URL_ADD_TO_STARTPAGE
+              action-string: Add to Start Page > Remove from Start Page,,,S_URL_REMOVE_FROM_STARTPAGE
+              skin-image: Rich Menu Button Skin
+              button-style: toolbar-text-right
+              preferred-width: fill 
+        - type: Button
+          name: add_remove_status_btn
+          string: S_URL_ADDED_NOTIFICATION
+          skin-image: Favorites Notification Button Skin
+          button-style: toolbar-text
+          preferred-height: fill
+          preferred-width: fill
+# -*- Mode: c++; tab-width: 2; indent-tabs-mode: nil; c-basic-offset: 2 -*-
+  - type: Dialog
+    name:  Web Handler Permissions Dialog
+    title: D_WEB_HANDLER_CHOOSE_APPLICATION
+    content:
+      type: StackLayout
+      name: vertical_list
+      elements:
+        - type: GroupBox
+          name: group_message
+          content:
+            type: StackLayout
+            name: group_list
+            elements:
+              - type: Radiobutton
+                name: radiobutton_1
+              - type: Radiobutton
+                name: radiobutton_2
+                string: DI_IDM_REG_APP
+              - type: Radiobutton
+                name: radiobutton_3
+                string: DI_IDM_APP
+                content:
+                  type: Filechooser
+                  name: filechooser_application
+                  minimum-width: 60c
+    button-strip:
+      <<: *OkCancelButtonStrip
+      special-content:
+        <<: *DoNotShowAgainCheckBox
+        string: D_REMEMBER_MY_PREF_CHOICE

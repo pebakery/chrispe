@@ -1,0 +1,1 @@
+You can add plugins to this folder in order to make them available to Opera.

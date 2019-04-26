@@ -1,0 +1,15 @@
+@charset "utf-8";
+/*	Name: -1367769115 */
+/*	Page layout inspector - tables.
+	Converts table elements to blocks.
+	Copyright 2012 Opera Software */
+table, caption, thead, tfoot, tbody, tr, th, td {
+	width: auto !important;
+	min-width: 0px !important;
+	max-width: none !important;
+	height: auto !important;
+	min-height: 0px !important;
+	max-height: none !important;
+	display: block !important;
+}
+

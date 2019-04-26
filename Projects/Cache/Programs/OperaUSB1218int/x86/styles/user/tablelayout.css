@@ -1,0 +1,12 @@
+@charset "utf-8";
+/*	Name: -825542133 */
+/*	Page layout inspector - table layout model.
+	Forces fixed table layout on table elements.
+	Copyright 2012 Opera Software */
+* {
+	table-layout: fixed !important;
+}
+table {
+	display: table !important;
+}
+

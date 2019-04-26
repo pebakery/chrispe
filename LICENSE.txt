@@ -6,7 +6,7 @@ The files developed by the PEBakery Team are subject to the MIT license.
 ChrisPE License
 --------------------------------------------------------
 
-Copyright 2018 David Hickinbottom
+Copyright 2018-2019 David Hickinbottom
 
 Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the "Software"), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:
 
@@ -30,7 +30,7 @@ PEBakery
 7-zip
 =====
 
-  7-Zip Copyright (C) 1999-2016 Igor Pavlov.
+  7-Zip Copyright (C) 1999-2019 Igor Pavlov.
   Licenses for files are:
     1) 7z.dll: GNU LGPL + unRAR restriction
     2) All other files:  GNU LGPL
@@ -66,9 +66,9 @@ DMDE
 ====
 
   DMDE 3.4 - DM Disk Editor and Data Recovery Software
-  Copyright (C) 2005-2017 Dmitry Sidorov
+  Copyright (C) 2005-2018 Dmitry Sidorov
 
-  Please refer to the following files for more information -
+  Please refer to the following file for more information -
 
   \Projects\Cache\Programs\dmde\eula_en.txt
 
@@ -84,6 +84,27 @@ Explorer++
 
   \Projects\Cache\Programs\Explorer++\x86\Readme.txt
   \Projects\Cache\Programs\Explorer++\x86\License.txt
+
+--------------------------------------------------------
+
+Forensic Acquisition Utilities
+==============================
+ 
+  The SOFTWARE is owned and copyrighted by GMG Systems, Inc. 
+  and the OWNER retains title and all ownership rights to THE 
+  SOFTWARE.
+
+  Please refer to the following file for more information -
+
+  \Projects\Cache\Programs\FAU\FAU_END_USER_LICENSE_AGREEMENT.pdf
+
+--------------------------------------------------------
+
+Free Shooter
+============
+
+  (c) 2009-2018 Henry++
+  Free Shooter is released under the GNU General Public License.
 
 --------------------------------------------------------
 
@@ -107,6 +128,34 @@ gsar
   Hans Peter Verne (ideas, demands, testing, UNIX platforms)
 
   Released under GNU GENERAL PUBLIC LICENSE
+
+--------------------------------------------------------
+
+HWiNFO
+======
+
+  This End-User License Agreement is a legal agreement between you (either 
+  an individual or a single entity) and REALiX (further also referred as the 
+  "Licensor") [Martin Malik, REALiX, B.Nemcovej 28, 90101 Malacky, SLOVAKIA]
+
+  1. PRODUCT LICENSE 
+
+  HWiNFO is a free software, you can freely use and distribute it.
+  This Software is protected by copyright laws and international 
+  copyright treaties, as well as other intellectual property laws and 
+  treaties. Modification, reverse engineering or disassembling of the 
+  Software is strictly prohibited.
+
+--------------------------------------------------------
+
+HxD
+===
+
+  HxD Copyright© 2002-2019 by Maël Hörz. All rights reserved.
+
+  Please refer to the following file for more information -
+
+  \Projects\Cache\Programs\HxD\license.txt
 
 --------------------------------------------------------
 
@@ -142,6 +191,25 @@ Innounp
   Innerfuse Pascal Script is Copyright © 2000-2004 by Carlo Kok, Innerfuse.
 
   StripReloc is Copyright © 1999-2005 Jordan Russell, www.jrsoftware.org
+
+--------------------------------------------------------
+
+IrfanView
+=========
+
+  Copyright (C) 2018 by Irfan Skiljan, Wiener Neustadt, Austria.  
+
+  Redistributed with ChrisPE with the kind permission of Irfan Skiljan
+
+  See https://www.irfanview.com/eula.htm
+
+--------------------------------------------------------
+
+JkDefrag
+========
+
+  Developed by Jeroen Kessels and released under GNU General Public License
+
 
 --------------------------------------------------------
 
@@ -200,6 +268,19 @@ nircmd
 
 --------------------------------------------------------
 
+NTPWEdit
+========
+
+  Copyright (c) 2005-2017 Vadim Druzhin
+
+  Released under GNU GENERAL PUBLIC LICENSE v2
+
+  Please refer to the following file for more information -
+
+  \Projects\Cache\Programs\ntpwedit\GPL.txt
+
+--------------------------------------------------------
+
 OfflineReg
 ==========
 
@@ -208,6 +289,33 @@ OfflineReg
   Refer to \Projects\Tools\offlinereg\license.txt
 
   offreg.dll / offreg64.dll - "The offline registry library is provided as a binary redistributable dynamic-link library (DLL)....Offreg.dll is provided in the Windows Driver Kit (WDK) for Windows 10 and earlier versions of the Windows operating system...." (https://msdn.microsoft.com/en-us/library/ee210757(v=vs.85).aspx)
+
+--------------------------------------------------------
+
+Opera@USB
+=========
+
+  Opera is a trademark of Opera Software ASA Oslo - Norway
+
+  Opera@USB is a private project of markus obermair austria.
+
+  Please refer to the following files for more information -
+
+  \Projects\Cache\Programs\OperaUSB1218int\locale\en\license.txt
+
+--------------------------------------------------------
+
+ProduKey v1.93
+==============
+
+  Copyright (c) 2005 - 2018 Nir Sofer
+
+  This utility is released as freeware. You are allowed to freely
+  distribute this utility via floppy disk, CD-ROM, Internet, or in any
+  other way, as long as you don't charge anything for this and you don't
+  sell it or distribute it as a part of commercial product. If you
+  distribute this utility, you must include all files in the distribution
+  package, without any modification !
 
 --------------------------------------------------------
 

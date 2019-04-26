@@ -1,0 +1,17 @@
+@charset "utf-8";
+/*	Name: 1693283863 */
+/*	Page layout inspector - outline.
+	Adds an outline for common structural elements.
+	Copyright 2012 Opera Software */
+dl, ol, ul {outline: 2px solid #3366CC !important;}
+dt, dd, li {outline: 1px dashed #7295DC !important;}
+p {outline: 2px solid #010101 !important;}
+address {outline: 1px dashed #010101 !important;}
+div {outline: 3px solid #CC0000 !important;}
+span {outline: 1px dotted #CC0000 !important;}
+table {outline: 3px solid #99CC00 !important;}
+thead, tfoot, tbody {outline: 2px dashed #99CC00 !important;}
+tr, th, td {outline: 1px dotted #99CC00 !important;}
+img, object, area {outline: 1px dashed #9966FF !important;}
+form {outline: 2px dotted green !important;}
+

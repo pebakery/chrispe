@@ -1,0 +1,581 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Feed Preview</title>
+<style>
+
+html,
+body
+{
+    margin:0;
+    padding:0;
+    border:0;
+}
+body
+{
+    color:#000;
+    background:#fff;
+    text-align:center;
+    font:normal normal .9em/1.5em sans-serif;
+    padding:2em 0;
+}
+body[class]:after
+{
+    position:fixed;
+    top:0;
+    left:0;
+    right:0;
+    bottom:0;
+    background:#fff;
+    content:attr(class);
+    text-transform:uppercase;
+    padding-top:30%;
+    text-align:center;
+}
+h1
+{
+    margin:0;
+    font-size:1.5em;
+    line-height:1.5em;
+    display:inline;
+}
+h1:before
+{
+    display:inline;
+    overflow:hidden;
+    vertical-align:middle;
+    content:-o-skin('Mail Newsfeeds');
+    margin-right:.2em;
+    line-height:1.5em;
+}
+#learn
+{
+    text-align:right;
+    font-size:.75em;
+    position:absolute;
+    top:1em;
+    right:1em;
+    padding:0;
+    margin:0;
+}
+#learn a
+{
+    color:#666;
+}
+#heading
+{
+    background:#a00 url(data:image/png,%89PNG%0D%0A%1A%0A%00%00%00%0DIHDR%00%00%00%04%00%00%00%C0%08%06%00%00%00%23%88%C2%DC%00%00%00%04gAMA%00%00%AF%C87%05%8A%E9%00%00%00%19tEXtSoftware%00Adobe%20ImageReadyq%C9e%3C%00%00%00%3AIDATx%DA%EC%D0%21%0E%000%08%04Ah%8A%EF%FF%3F%7BE%12%0C%02%BB%9B%9C%19y.%C9j%C7Z%00%00%00%000%82%E7%A2%C2%CD%BD%0E%C1c%00%00%00%C0%0E%BE%00%03%00k%9B%04%9A%B9%BDH%AF%00%00%00%00IEND%AEB%60%82) repeat-x center center;
+    color:#fff;
+    padding:8px;
+    margin:1em 0;
+    border:2px solid #eee;
+    border-width:2px 0;
+    text-align:center;
+}
+#heading select,
+#heading button
+{
+    margin:1px 2ex;
+    min-width:16ex;
+    max-width:95%;
+}
+
+a
+{
+    text-decoration:none;
+}
+
+a:hover
+{
+    text-decoration:underline;
+}
+#items
+{
+    display:block;
+    clear:both;
+    text-align:center;
+    margin:2em 0;
+    padding:0;
+    overflow:hidden;
+}
+
+#items > ul
+{
+    position:relative;
+    list-style:none;
+    margin:0;
+    padding:0;
+    border:0;
+    width:auto;
+    display:inline-block;
+    text-align:left;
+}
+#items > ul > li:last-child
+{
+    display:none;
+}
+#items > ul > li
+{
+    vertical-align:top;
+    font:normal normal .8em/1.6em sans-serif;
+    display:inline-block;
+    margin:2em;
+    padding:0;
+    width:50ex;
+    position:relative;
+}
+#items > ul > li > h2
+{
+    font:normal lighter 1.66em/1.1em sans-serif;
+    margin:0;
+    color:#000;
+    overflow:hidden;
+    text-overflow:ellipsis;
+    border-bottom:1px solid #ccc;
+}
+#items > ul > li > h2 > a
+{
+    display:block;
+    color:inherit;
+	padding:0.5em;
+}
+#items > ul > li > h2 > a:hover
+{
+    background:#eee;
+    text-decoration:none;
+}
+#items > ul > li > p
+{
+    color:#999;
+    text-align:right;
+    margin:1.1ex;
+    font-size:.9em;
+    line-height:1.3em;
+    white-space:pre-wrap;
+}
+#items > ul > li a
+{
+    color:#b00;
+}
+#items > ul > li > div
+{
+	text-align:justify;
+    margin:0;
+    padding:0 1ex;
+    color:#555;
+    vertical-align:top;
+    text-overflow:ellipsis;
+}
+#items > ul > li > div pre
+{
+    font:.9em/.9em monospace;
+    background:#eee;
+    overflow:auto;
+    border:1px solid #999;
+    border-width:1px 0;
+    padding:1em;
+	clear:both;
+}
+#items > ul > li > div pre a
+{
+    font-style:normal;
+}
+
+#items > ul > li > div p
+{
+	clear:both;
+    margin:0 0 2em 0;
+}
+#items > ul > li > div a
+{
+    font-style:italic;
+    margin-right:.25em;
+}
+#items > ul > li > div img
+{
+    position:relative;
+    display:inline-block;
+    vertical-align:middle;
+    max-width:100%;
+    max-height:50ex;
+    padding:.5ex;
+    box-sizing:border-box;;
+}
+#items > ul > li > div h1,
+#items > ul > li > div h2,
+#items > ul > li > div h3,
+#items > ul > li > div h4,
+#items > ul > li > div h5,
+#items > ul > li > div h6,
+#items > ul > li > div div
+{
+    display:block;
+    clear:both;
+}
+#footer
+{
+    font-size:.85em;
+}
+#footer a
+{
+    color:#b00;
+}
+
+/*
+ *  extra rules for HANDHELD devices
+ */
+@media handheld
+{
+    body
+    {
+        font:normal normal 1em/1.5em sans-serif;
+        padding:1em 0;
+    }
+    #heading > button
+    {
+        display:inline;
+        width:auto;
+        margin:0 .5em;
+        height:auto;
+    }
+    #items
+    {
+        margin:1em 0;
+    }
+    #items > ul
+    {
+        display:block;
+    }
+    #items > ul > li
+    {
+        font:normal normal 1em/1.5em sans-serif;
+        display:block;
+        padding:1em;
+        margin:0;
+        width:auto;
+        background:#fff;
+    }
+    #items > ul > li:nth-child(2n)
+    {
+        background:#eee;
+    }
+    #items > ul > li > h2
+    {
+        font:normal bold 1.33em/1.2em sans-serif;
+    }
+	#items > ul > li > h2 > a:hover
+	{
+    	background:#ddd;
+	}
+
+    #items > ul > li > div
+    {
+        border:0;
+    	padding:0;
+    	margin:0;
+    }
+    #items > ul > li > div:after
+    {
+        clear:both;
+        content:' ';
+        display:block;
+    }
+    #items > ul > li > div pre
+    {
+        font:1em/1em monospace;
+        background:#ddd;
+    }
+    #items > ul > li > div a
+    {
+        font-style:normal;
+    }
+    #footer a
+    {
+        font-size:1em;
+    }
+}
+
+
+</style>
+</head>
+<body class='loading'>
+
+    <h1 id="feedTitle">Title of the news feed</h1>
+    <p id="learn"><a href="opera:/help/feeds.html">Learn more about feeds</a></p>
+    <div id="heading">
+        <span id="subscribeInfo">Subscribe to this news feed using</span>
+        <select id="readers"><option>Opera Mail</option></select>
+        <button id="subscribe">Subscribe</button>
+    </div>
+    <div id="items">
+        <ul id="itemsUl"><!-- template LI follows --><li><h2><a href="#">...</a></h2><p>...</p><div></div></li></ul>
+    </div>
+
+
+
+    <div id="footer">This page was generated by Opera from <a href="#">here</a>.</div>
+
+<script>
+//<![CDATA[
+
+String.prototype.trim = String.prototype.trim||function()
+{
+	return this.replace( /^\s+|\s+$/g, '' );
+}
+
+
+var sanitize = (function()
+{
+    var undefined;
+
+	/**
+	 *	whiteList
+	 *	tags > attributes and method to validate them [ + __precondition__ ]
+	 */
+	var whitelist =
+	{
+		'A':
+		{
+		    '__precondition__':function( node )
+		    {
+				return node.hasAttribute('href') && whitelist['A'].__attributes__.href.call( {value:node.getAttribute('href')}, node );
+		    },
+		    '__attributes__':
+		    {
+    			'href':function( node )
+    			{
+    				return null!=this.value.match( /^https?:\/\//i );
+    			},
+    			'title':true
+    		}
+		}
+		,'IMG':
+		{
+		    '__precondition__':function( node )
+		    {
+				node.setAttribute( 'title', node.getAttribute('title')||node.getAttribute('src') )
+				return node.hasAttribute('src') && whitelist['IMG'].__attributes__.src.call( {value:node.getAttribute('src')}, node );
+		    },
+		    '__attributes__':
+		    {
+    			'src':function( node )
+    			{
+    				return null!=this.value.match( /^(https?:\/\/|\/|\.\.\/)/i );
+    			},
+    			'alt':true,
+    			'title':true
+    		}
+		}
+		,'P':{}
+		,'PRE':{}
+		,'UL':{}
+		,'OL':{}
+		,'LI':{}
+		,'DL':{}
+		,'DD':{}
+		,'DT':{}
+		,'H1':{}
+		,'H2':{}
+		,'H3':{}
+		,'H4':{}
+		,'H5':{}
+		,'H6':{}
+		,'BR':{}
+	}
+
+
+	/*
+	 *	return a sanitized copy of the node according to the whitelist object
+	 */
+	function sanitizedCopy( node )
+	{
+	    var t = node.nodeType;
+	    if( t!==1 )
+	    {
+		    return document.createTextNode( t==3?' '+node.nodeValue:' ' );
+	    }
+
+
+	    var w = whitelist[node.nodeName];
+	    if( !w || !w.__precondition__ || !w.__precondition__(node) )
+	    {
+	        t = document.createDocumentFragment();
+	        w = {};
+	    }
+	    else
+		{
+
+			t = document.createElement( node.nodeName );
+			w = w.__attributes__||{};
+		}
+
+		for( var i=node.attributes.length,a; a=node.attributes[--i]; )
+	    {
+	        var k=w[a.name];
+			if( k===true || typeof(k)=='function' && k.call( a, node ) )
+			{
+				t.setAttribute( a.name, a.value );
+			}
+
+	        //  wipe attributes
+	        node[ a.name ] = '';
+	        node.removeAttribute( a.name );
+        }
+
+
+
+	    //	children
+	    while( node.firstChild )
+	    {
+	        t.appendChild( sanitizedCopy( node.firstChild ) );
+	        node.removeChild( node.firstChild );
+	    }
+	    return t;
+
+	}
+
+
+	/*
+	 *	sanitize method
+	 */
+	return function( markup, dst )
+	{
+		var    dummy       = document.createElement('div'),
+		       dst			= dst||document.createDocumentFragment();
+		dummy.innerHTML    = markup;
+
+		while( dummy.firstChild )
+		{
+			dst.appendChild( sanitizedCopy( dummy.firstChild ) );
+			dummy.removeChild( dummy.firstChild );
+		}
+
+        dummy = null;
+		return dst;
+	}
+})();
+
+
+
+/*
+ *  outputFeed
+ */
+function outputFeed( feed, status )
+{
+    if( !feed )
+    {
+        var statusName = ['NO FEED ITEMS','CANCELED','REFRESH POSTPONED','NOT MODIFIED','OUT OF MEMORY','SERVER TIMEOUT','LOADING ERROR','PARSING ERROR']
+        document.body.className = 'error #'+ status +' ( '+ statusName[ status ] +' )';
+        return false;
+    }
+
+    //  l10n the 'footer' note including a link
+    var footer      = document.getElementById('footer'),
+        splitText   = (opera.getLocaleString( 'S_WEBFEEDS_FOOTER' )||'This page was generated by Opera from %s').split('%s');
+
+    footer.firstChild.nodeValue = splitText.shift()||'';
+    footer.lastChild.nodeValue = splitText.join(' ')||'';
+
+
+    //  l10n the 'learn' link
+    document.getElementById('learn').firstChild.firstChild.nodeValue = opera.getLocaleString( 'S_WEBFEEDS_SUBSCRIBE_HINT' )||'Learn more about feeds';
+
+    //  subscribeNative? getExternalReaderName?
+    var button  = document.getElementById('subscribe'),
+        select  = document.getElementById('readers'),
+        info    = document.getElementById('subscribeInfo');
+
+    //  l10 the 'Opera Mail' option
+    select.options[0].text = opera.getLocaleString( 'S_OPERA_MAIL' )||'Opera Mail';
+
+    //  populate the 'readers' dropdown with the externalReaders
+	for( var i=0; i < opera.feedreaders.length; i++)
+	{
+		var readerEntry = opera.feedreaders[i];
+		var externalReaderSubscribeUrl = readerEntry.getTargetURL( location.href ) || '';
+
+		if( externalReaderSubscribeUrl!=='' )
+		{
+			select.appendChild( new Option( readerEntry.name, externalReaderSubscribeUrl ) );
+		}
+	}
+    //  subscribe 'now' button
+    button.addEventListener
+    (
+        'click',
+        function(/* button.onclick */)
+        {
+            if( select.selectedIndex==0 ) // Opera Mail
+            {
+                opera.feed.subscribeNative();
+            }
+            else
+            {
+                window.open( select.value );
+            }
+        },
+        false
+    );
+
+    //  l10n the 'Subscription' span
+
+    info.firstChild.nodeValue = opera.getLocaleString( 'S_SUSCRIBE_TO_FEED_USING' )||'Subscribe to this feed using';
+
+    //  l10n the 'Subscribe' button
+    button.firstChild.nodeValue = opera.getLocaleString( 'S_MINI_FEED_SUBSCRIBE' )||'Subscribe';
+
+	//    set title
+    top.document.title = document.getElementById('feedTitle').firstChild.nodeValue = sanitize( feed.title.data ).textContent.trim()||feed.uri;
+    document.body.removeAttribute( 'class' );
+
+    //  walk the feed items
+    var hItemsUl    = document.getElementById('itemsUl'),
+        noTilteStr  = opera.getLocaleString( 'M_BREW_NO_TITLE' )||'<No Title>';
+    for( var i=0,feedEntry; feedEntry=feed.entries[i++]; )
+    {
+        var itemLi = hItemsUl.lastChild.cloneNode( true );
+
+        //  set the href
+        itemLi.firstChild.firstChild.setAttribute( 'href', feedEntry.uri||'#' );
+
+        //  set the title
+        itemLi.firstChild.firstChild.firstChild.nodeValue = sanitize( feedEntry.title.data ).textContent.trim()||noTilteStr;
+
+        //  set the timestamp & author
+        var txt = feedEntry.publicationDate.toLocaleString();
+        if( feedEntry.author )
+        {
+            txt += '\n'+ feedEntry.author;
+        }
+        itemLi.firstChild.nextSibling.firstChild.nodeValue = txt;
+
+        //  sanitize content
+        sanitize( (feedEntry.content.data.trim()||'\xa0'), itemLi.lastChild );
+
+
+        //  append itemLi to hItemsUl
+        hItemsUl.insertBefore( itemLi, hItemsUl.lastChild );
+    }
+
+    return true;
+}
+
+
+//  onload
+window.addEventListener
+(
+    'load',
+    function(/* window.load */)
+    {
+        var here    = document.getElementById('footer').getElementsByTagName('A')[0];
+
+		here.firstChild.nodeValue = here.href = opera.feed.uri;
+        outputFeed( opera.feed );
+    },
+    false
+);
+
+//]]>
+</script>
+</body>
+</html>

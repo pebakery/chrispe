@@ -1,0 +1,81 @@
+@charset "utf-8";
+/*	Name: 1457933711 */
+/*	Document structure inspector - tables.
+	Adds an outline and appends a tag name for all table elements.
+	Copyright 2012 Opera Software */
+table {outline: 4px solid rgb(51,102,204) !important;}
+table table {margin: 20px !important;}
+table::before, table::after, 
+thead::before, thead::after, 
+tfoot::before, tfoot::after, 
+tbody::before, tbody::after, 
+tr::before, tr::after, 
+th::before, th::after,  
+td::before, td::after, 
+caption::before, caption::after, 
+colgroup::before, colgroup::after, col {
+	font-family: sans-serif !important;
+	font-size: 11px !important;
+	font-weight: bold !important;
+	font-style: normal !important;
+	text-decoration: none !important;
+	white-space: nowrap !important;
+	color: rgb(30,30,30) !important;
+	background-color: rgb(255,204,0) !important;
+	background-image: none !important;
+	outline: 1px solid #010101;
+	padding: 0px !important;
+	margin: 0px !important;
+	float: none !important;
+	position: static !important;
+	display: inline-block !important;
+}
+table::before, table::after {
+	font-size: 13px !important;
+	color: rgb(226,228,235) !important;
+	background-color: rgb(46,61,77) !important;
+}
+tr::before, tr::after, th::before, th::after, td::before, td::after {
+	color: rgb(226,228,235) !important;
+	background-color: rgb(51,102,204) !important;
+}
+table::before {content: '<table>' !important;}
+table[summary]::before {
+	content: '<table summary=' '\0022' attr(summary) 
+		'\0022' '>' !important;
+}
+table::after {content: '</table>' !important;}
+thead::before {content: '<thead>' !important;}
+thead::after {content: '</thead>' !important;}
+tfoot::before {content: '<tfoot>' !important;}
+tfoot::after {content: '</tfoot>' !important;}
+tbody::before {content: '<tbody>' !important;}
+tbody::after {content: '</tbody>' !important;}
+tr::before {content: '<tr>' !important;}
+tr::after {content: '</tr>' !important;}
+th::before {content: '<th>' !important;}
+th::after {content: '</th>' !important;}
+th[scope]::before {
+	content: '<th scope=' '\0022'  attr(scope) '\0022' '>' !important;
+}
+td::before {content: '<td>' !important;}
+td::after {content: '</td>' !important;}
+caption::before {content: '<caption>' !important;}
+caption::after {content: '</caption>' !important;}
+colgroup::before {content: '<colgroup>' !important;}
+colgroup::after {content: '</colgroup>' !important;}
+
+col {
+	content: '<col/>';
+}
+col[width] {
+	content: '<col width=' '\0022' attr(width) '\0022' '/>';
+}
+col[align] {
+	content: '<col align=' '\0022' attr(align) '\0022' '/>';
+}
+col[align][width] {
+	content: '<col align=' '\0022' attr(align) 
+		'\0022' '\0020' '\0022' attr(width) '\0022' '/>';
+}
+

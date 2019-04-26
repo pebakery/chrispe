@@ -1,0 +1,123 @@
+[main]
+Title=Free Shooter
+Description=This is old-school tool for taking screenshots without bloatware features, simple as life, light as air.
+Selected=False
+Level=5
+Author=ThePEBakeryTeam
+Version=20190426
+Date=2019-04-26
+Interface=Interface1
+
+[Interface1]
+pTextLabelMenu1="1",1,1,35,3,70,18,10,Bold
+pButtonMenu2="2",1,8,75,0,70,20,pButtonMenu2,0,True,_pButtonMenu2_,True
+pButtonMenu3="?",1,8,145,0,70,20,pButtonMenu3,0,True,_pButtonMenu3_,True
+pWebLabel1=https://www.henrypp.org/product/freeshooter,1,10,51,100,216,18,https://www.henrypp.org/product/freeshooter
+pTextLabel1="Free Shooter Website",1,1,51,77,230,18,10,Bold
+pCheckBoxInWim="Include Program in boot.wim",1,3,51,265,180,18,True
+
+[Interface2]
+pButtonMenu1="1",1,8,5,0,70,20,pButtonMenu1,0,True,_pButtonMenu1_,True
+pTextLabelMenu2="2",1,1,108,3,70,18,10,Bold
+pButtonMenu3="?",1,8,145,0,70,20,pButtonMenu3,0,True,_pButtonMenu3_,True
+pBevel1=,1,12,10,65,66,2
+pTextLabel="Menu Entries",1,1,10,50,230,18,8,Bold
+pCheckBoxShortcutDesktop="Add to Desktop Menu",1,3,40,80,150,18,True
+pCheckBoxShortcutQuick="Add to Quicklaunch Menu",1,3,40,110,150,18,True
+pCheckBoxShortcutPrograms="Add to #$qStart#$q > ",1,3,40,140,99,18,True
+pCheckBoxShortcutLaunchBar="Add to LaunchBar Menu ",1,3,40,170,150,18,True
+pButtonShortcut1=?,1,8,10,80,18,18,pButtonShortcut1,0,True,_pButtonShortcut1_,True
+pButtonShortcut2=?,1,8,10,110,18,18,pButtonShortcut2,0,True,_pButtonShortcut2_,True
+pButtonShortcut3=?,1,8,10,140,18,18,pButtonShortcut3,0,True,_pButtonShortcut3_,True
+pButtonShortcut4=?,1,8,10,170,18,18,pButtonShortcut4,0,True,_pButtonShortcut4_,True
+pTextBox1=,1,0,140,140,150,21,Programs
+
+[pButtonMenu1]
+IniWrite,%ScriptFile%,Main,Interface,Interface1
+System,REFRESHINTERFACE
+
+[pButtonMenu2]
+IniWrite,%ScriptFile%,Main,Interface,Interface2
+System,REFRESHINTERFACE
+
+[pButtonMenu3]
+message,"Click on the buttons to toggle between tabs 1 and 2. #$x#$xTab 2 contains menu options for use in the selected shell. Click on the ? button for information about the different options."
+
+[pButtonShortcut1]
+message,"WinXShell only#$x#$xSelect this option to add a program shortcut to the Desktop."
+
+[pButtonShortcut2]
+message,"WinXShell only#$x#$xSelect this option to add a program menu option to the Quicklaunch menu - similar in appearence to the 'Pin to Taskbar' option in Windows 7/8/10."
+
+[pButtonShortcut3]
+message,"Applies to WinXShell#$c BBLean and LaunchBar Shell(s)#$x#$xSelect this option to add a program menu option to the Start menu. Leave blank to add to the root of the menu#$c or manually type a path to place in a sub-menu (do not use spaces in the path). E.g. #$x#$s- FileManager#$x#$s- Programs#$x#$s- Programs\FileManager#$x#$xAnd looking at the examples above - #$x#$xLeave this option blank to add a menu entry to the root of the program menu (the 'Start' menu in WinXShell#$c the 'Start' menu in BBLean#$c or the root of the LaunchBar menu bar if LaunchBar is selected as Shell)#$x#$xEnter 'FileManager' to add a menu entry for this application to the 'Start' > 'FileManager' sub-menu (WinXShell and bblean) or the 'FileManager' sub-menu in LaunchBar.#$x#$xEnter 'Programs' to add a menu entry for this application to the 'Start' > 'Programs' sub-menu (WinXShell and bblean) or the 'Programs' sub-menu in LaunchBar.#$x#$xEnter 'Programs\FileManager' to add a menu entry for this application to the 'Start' > 'Programs' > 'FileManager' sub-menu (WinXShell and bblean) or the 'Programs' > 'FileManager' sub-menu in LaunchBar."
+
+[pButtonShortcut4]
+message,"This setting does not apply to any LaunchBar instance running as the WinPE Shell. This option only applies to a LaunchBar instance when the Applications' > 'LaunchBar' program script is selected in the build.#$x#$xIf the 'Applications' > 'LaunchBar' program script is selected than enable this option to add a program menu entry to the root of the LaunchBar menu bar. #$x#$xPlease note that if option '6] Programs in boot.wim' in the main project script is set as 'NO'#$c then LaunchBar and a number of other applications will not be available at boot. In this case a text based .ini file will be used for LaunchBar menu settings."
+
+[process]
+If,%FullProjectRun%,Equal,NO,Run,"%ProjectDir%\Core\common.script",PostConfigRun
+AddInterface,%ScriptFile%,Interface1,""
+AddInterface,%ScriptFile%,Interface2,""
+If,%pCheckBoxInWim%,Equal,True,Set,%PROGRAMS.IN.WIM%,YES
+Else,Set,%PROGRAMS.IN.WIM%,NO
+Run,%ScriptFile%,CHECKS
+Run,%ScriptFile%,MENU
+Run,%ScriptFile%,COMMON
+If,%PROGRAMS.IN.WIM%,Equal,NO,Run,%ScriptFile%,NOT.IN.WIM
+If,%PROGRAMS.IN.WIM%,Equal,YES,Run,%ScriptFile%,IN.WIM
+
+[CHECKS]
+If,Not,ExistFile,"%Programs%\freeshooter\%ARCH%\freeshooter.exe",Begin
+  Message,Free Shooter is missing - exiting script...,Error,5
+  Exit,Free Shooter is missing - exiting script...,WARN
+End
+
+[MENU]
+If,%PROGRAMS.IN.WIM%,Equal,NO,Begin
+  If,Not,ExistFile,"%OutputDir%\Programs\ShortcutsNotInWim.txt",Run,"%ProjectDir%\Core\common.script",NotInWim
+  TXTaddline,"%OutputDir%\Programs\ShortcutsNotInWim.txt","#$p~dp0nircmd.exe shortcut #$q#$p~dp0freeshooter\freeshooter.exe#$q #$q#$pTemp#$p\ShortCuts#$q #$qFreeShooter#$q",Append
+End 
+If,%PROGRAMS.IN.WIM%,Equal,YES,Begin
+  ShellExecute,Hide,"%Tools%\Shortcut.exe","/A:C /T:#$q#$pSystemDrive#$p\Programs\freeshooter\freeshooter.exe#$q /F:#$q%ProjectTemp%\FreeShooter.lnk#$q /I:#$q#$pSystemDrive#$p\Programs\freeshooter\freeshooter.exe#$c0#$q"
+  If,ExistFile,"%ProjectTemp%\FreeShooter.lnk",Begin
+    Set,%MyShortcut%,FreeShooter.lnk
+    If,%pCheckBoxShortcutDesktop%,Equal,True,FileCopy,"%ProjectTemp%\%MyShortcut%","%ProjectTemp%\ShortCuts\Desktop"
+    If,%pCheckBoxShortcutQuick%,Equal,True,FileCopy,"%ProjectTemp%\%MyShortcut%","%ProjectTemp%\ShortCuts\Quick"
+    If,%pCheckBoxShortcutPrograms%,Equal,True,Begin
+      Set,%ProgramMenuPath%,%pTextBox1%
+      Run,"%ProjectDir%\Core\common.script",StartMenu
+    End
+    If,%pCheckBoxShortcutLaunchBar%,Equal,True,FileCopy,"%ProjectTemp%\%MyShortcut%","%ProjectTemp%\ShortCuts\LaunchBar"
+    If,%FullProjectRun%,Equal,NO,Run,"%ProjectDir%\Core\common.script",PostConfigRunShortcuts
+    FileDelete,"%ProjectTemp%\%MyShortcut%"
+  End
+End
+
+[COMMON]
+If,Not,ExistFile,"%Target_system32%\BrowseForFolder.txt",Run,"%ProjectDir%\Core\Browse.For.Folder.script",process
+If,%PROGRAMS.IN.WIM%,Equal,NO,Set,%PATH%,%OutputDir%
+If,%PROGRAMS.IN.WIM%,Equal,YES,Set,%PATH%,%TargetDir%
+If,Not,ExistDir,"%PATH%\Programs",DirMake,"%PATH%\Programs"
+DirMake,"%PATH%\Programs\freeshooter"
+DirCopy,"%Programs%\freeshooter\%ARCH%\*.*","%PATH%\Programs\freeshooter"
+IniWrite,"%OutputDir%\Project.Settings.ini",PROGRAMS,FreeShooter,YES
+
+[IN.WIM]
+If,%FullProjectRun%,Equal,NO,Begin
+  IniRead,"%TargetDir%\Project.Settings.ini",Main,Image.Number,%Boot.wim.Image.number%
+  WimPathAdd,%OutputDir%\sources\boot.wim,%Boot.wim.Image.number%,%TargetDir%,""
+End
+//Wait,1
+
+[NOT.IN.WIM]
+//Wait,1
+If,%FullProjectRun%,Equal,NO,Run,"%ProjectDir%\Core\common.script",PostConfigRunNotInWim
+
+[AuthorEncoded]
+freeshooter.ico=4286,2796
+Logo=freeshooter.ico
+
+[EncodedFile-AuthorEncoded-freeshooter.ico]
+lines=0
+0=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

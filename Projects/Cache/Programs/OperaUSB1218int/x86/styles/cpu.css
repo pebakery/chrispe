@@ -1,0 +1,15 @@
+@import url(opera.css);
+
+.ph { text-align: right; padding-right: 3.2em;}
+.phlong { text-align: center; }
+.p { font-family: sans-serif; text-align: right; width: 4em; white-space: nowrap; padding-right: 3em; cursor:default; }
+.desc { white-space: nowrap; overflow: hidden; text-overflow:ellipsis; }
+table { table-layout:fixed }
+tr.dead > td { color: rgb(200,200,200); }
+th { cursor: default; }
+tr.total > th { font-size: 115%; padding-right: 2.3em; font-weight: bold;}
+.processlabel { vertical-align: middle; font-size: 115%; }
+#commandblock { float: right; }
+ td, th { display: table-cell; }
+ tr { display: table-row; }
+ table { display: table; }

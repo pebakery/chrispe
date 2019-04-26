@@ -1,0 +1,134 @@
+Opera Hotlist version 2.0
+Options: encoding = utf8, version=21
+
+#FOLDER
+	ID=11
+	NAME=回收站
+	TRASH FOLDER=YES
+	UNIQUEID=A0BE96B086994829B5D4E9C5351C6587
+
+-
+
+#FOLDER
+	ID=12
+	NAME=Opera
+	UNIQUEID=D912D31E4E1B4A8B9FB60869393338CD
+	PARTNERID=opera-operafolder
+	
+#URL
+	ID=13
+	NAME=My Opera 电邮
+	URL=http://mail.opera.com/?utm_source=DesktopBrowser&utm_medium=Bookmark&utm_campaign=BrowserLinks
+	DISPLAY URL=http://mail.opera.com
+	ICONFILE=https://mail.opera.com/favicon.ico
+	DESCRIPTION=Free mail
+	UNIQUEID=BE6CA6E1CA86413A92F5FC2C28E71CAD
+	PARTNERID=opera-mail2
+
+#URL
+	ID=14
+	NAME=My Opera 社区
+	URL=http://my.opera.com/?utm_source=DesktopBrowser&utm_medium=Bookmark&utm_campaign=BrowserLinks
+	DISPLAY URL=http://my.opera.com
+	ICONFILE=http://redir.opera.com/favicons/myopera/favicon.ico
+	ON PERSONALBAR=YES
+	PERSONALBAR_POS=1
+	UNIQUEID=F9C75A8AF8AF49A2BCDF5D08AA2125CD
+	PARTNERID=opera-operasocial
+
+#URL
+	ID=15
+	NAME=Opera Portal
+	URL=http://portal.opera.com/?utm_source=DesktopBrowser&utm_medium=Bookmark&utm_campaign=BrowserLinks
+	DISPLAY URL=http://portal.opera.com
+	ICONFILE=http://redir.opera.com/favicons/opera/favicon.ico
+	UNIQUEID=93D5337B1657409084924E007F49387C
+	PARTNERID=opera-operaportal
+	
+#URL
+	ID=16
+	NAME=Opera 体育
+	URL=http://redir.opera.com/bookmarks/sports.opera.com
+	DISPLAY URL=http://sports-portal.opera.com/
+	ICONFILE=http://redir.opera.com/favicons/opera.sports.com/favicon.ico
+	UNIQUEID=A3457DBDD69C4061B5B393A85D66F9D1
+	PARTNERID=opera-sportsnews
+
+#URL
+	ID=17
+	NAME=Opera 扩展
+	URL=https://addons.opera.com/
+	ICONFILE=http://redir.opera.com/favicons/opera/favicon.ico
+	DESCRIPTION=addons, extensions
+	UNIQUEID=29DF2B28174D42D08D98B71A16139D64
+	PARTNERID=opera-operaextensions
+
+#URL
+	ID=18
+	NAME=支持中心
+	URL=http://www.opera.com/support/?utm_source=DesktopBrowser&utm_medium=Bookmark&utm_campaign=BrowserLinks
+	DISPLAY URL=http://www.opera.com/support/
+	ICONFILE=http://redir.opera.com/favicons/opera/favicon.ico
+	UNIQUEID=372CFB47CB654045B8032F5D1B354361
+	PARTNERID=opera-operasupport
+
+#URL
+	ID=19
+	NAME=欢迎使用 Opera
+	URL=http://www.opera.com/portal/startup/?utm_source=DesktopBrowser&utm_medium=Bookmark&utm_campaign=BrowserLinks
+	DISPLAY URL=http://www.opera.com/portal/startup
+	ICONFILE=http://redir.opera.com/favicons/opera/favicon.ico
+	UNIQUEID=18CD2A92CCF9453A98D3C2B85ADE90F2
+	PARTNERID=opera-operastart
+
+#URL
+	ID=20
+	NAME=Booking.com
+	URL=http://redir.opera.com/bookmarks/booking.com
+	DISPLAY URL=http://www.booking.com/
+	ICONFILE=http://redir.opera.com/favicons/booking/favicon.ico
+	DESCRIPTION=酒店, hotel, 放假
+	UNIQUEID=0739A8A088FA4094ADDF36856DB4340F
+	PARTNERID=opera-booking
+
+#URL
+	ID=21
+	NAME=京东
+	URL=http://redir.operachina.com/bookmarks/1
+	DISPLAY URL=http://www.360buy.com
+	ICONFILE=http://www.360buy.com/favicon.ico
+	DESCRIPTION=京东商城，数码产品，网购
+	UNIQUEID=6CD2C3E04EC5457A8B763FB660E8AEB
+	PARTNERID=opera-webshop2
+
+#URL
+	ID=22
+	NAME=淘宝
+	URL=http://redir.operachina.com/bookmarks/2
+	DISPLAY URL=http://www.taobao.com
+	ICONFILE=http://www.taobao.com/favicon.ico
+	DESCRIPTION=淘宝，购物，热卖
+	ON PERSONALBAR=YES
+	PERSONALBAR_POS=3
+	UNIQUEID=788572FADC834E1197F356905C1DBE7B
+	PARTNERID=opera-webshop
+
+#URL
+	ID=23
+	NAME=百度
+	URL=http://redir.operachina.com/bookmarks/4
+	ICONFILE=http://www.baidu.com/favicon.ico
+	DESCRIPTION=搜索, search, 网页
+	UNIQUEID=0147AC0E76434442A2C153D27BD2F696
+	PARTNERID=opera-searchengine
+
+#URL
+	ID=24
+	NAME=hao123网址导航
+	URL=http://redir.operachina.com/bookmarks/5
+	DISPLAY URL=http://www.hao123.com
+	ICONFILE=http://redir.opera.com/favicons/hao123/favicon.ico
+	ON PERSONALBAR=YES
+	PERSONALBAR_POS=2
+	UNIQUEID=4E8E642D5F6F45E9876DF89637C10D31
+	PARTNERID=opera-portal

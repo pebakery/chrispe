@@ -6,8 +6,8 @@ Locked=True
 Mandatory=True
 Level=8
 Author=ThePEBakeryTeam
-Version=20180321
-Date=2018-03-21
+Version=20190426
+Date=2019-04-26
 
 [process]
 If,%FullProjectRun%,Equal,NO,Run,"%ProjectDir%\Core\common.script",ExitScript
@@ -81,6 +81,8 @@ ShellExecute,Hide,"%Tools%\offlinereg\offlinereg-win32.exe","#$q%Target_config%\
 [BBLEAN]
 DirMake,"%TargetDir%\Programs\bblean"
 DirCopy,"%Programs%\bblean\%ARCH%\*","%TargetDir%\Programs\bblean"
+ReadInterface,Value,"%ProjectDir%\Shell\B_shell.script",Interface,pScrollBox_bblean2,%bbLeanSkinYesNo%
+If,%bbLeanSkinYesNo%,Equal,NO,TXTReplace,"%TargetDir%\Programs\bblean\plugins.rc","plugins\bbLeanSkin","#plugins\bbLeanSkin"
 Run,%ScriptFile%,BBLEAN_MENU
 Run,%ScriptFile%,BBKEYS_CONFIG
 Run,%ScriptFile%,BBLEAN_Wallpaper

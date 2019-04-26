@@ -1,0 +1,45 @@
+html { background-color: transparent; }
+body.feedEntryBody { 
+  margin: 0;
+  padding: 0 0.8em;
+	font-family: "helvetica neue", "helvetica-neue", "helvetica", "arial", sans-serif;
+  overflow: hidden; 
+  font-size: 14px;
+  line-height: 1.5em;
+}
+div.feedEntryContent { margin: 1.5em 0 2.5em; }
+div.feedEntryContent p, div.feedEntryContent ul, div.feedEntryContent ol, div.feedEntryContent dl { margin-bottom: 2em; }
+div.feedEntryContent ul { margin-left: 0em; list-style: disc outside; }
+div.feedEntryLinks, div.feedEntryEnclosureLinks { 
+	background-color: transparent; 
+}
+div.feedEntryLinks > hr, div.feedEntryEnclosureLinks > hr
+{	display: none; }
+div.feedEntryLinks > em, div.feedEntryEnclosureLinks > em { display: none; }
+div.feedEntryEnclosureLinks ul li img { max-width: 100%; }
+div.feedEntryLinks ul li a, div.feedEntryEnclosureLinks ul li a {
+  font-size: 90%;
+  font-style: normal;
+  font-weight: normal;
+	text-decoration: none;
+	color: rgb(128,128,128);
+}
+div.feedEntryLinks ul li a::before, div.feedEntryEnclosureLinks ul li a::before {
+  content: "";
+  width: 11px;
+  height: 11px;
+  float: left;
+  margin: 5px 3px 0 0;
+  background-image: -o-skin('External Hyperlink'); 
+}
+ul.feedEntryAlternateLinks li a { content: -o-language-string(S_NEWSFEED_ALTERNATE_LINKS_HEADER_SINGULAR); }
+ul.feedEntryEnclosureLinks li a { content: -o-language-string(S_NEWSFEED_ENCLOSURE_LINKS_HEADER_SINGULAR); }
+ul.feedEntryRelatedLinks li a { content: -o-language-string(S_NEWSFEED_RELATED_LINKS_HEADER_SINGULAR); }
+ul.feedEntryViaLinks li a { content: -o-language-string(S_NEWSFEED_VIA_LINKS_HEADER_SINGULAR); }
+div.feedEntryLinks li a:hover { text-decoration: underline; }
+ul.feedEntryAlternateLinks, ul.feedEntryRelatedLinks, ul.feedEntryViaLinks, ul.feedEntryEnclosureLinks
+{
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}

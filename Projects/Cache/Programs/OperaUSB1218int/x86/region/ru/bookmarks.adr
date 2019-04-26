@@ -1,0 +1,312 @@
+Opera Hotlist version 2.0
+Options: encoding = utf8, version=21
+
+#FOLDER
+    ID=11
+	NAME=Корзина
+	TRASH FOLDER=YES
+	UNIQUEID=A86AF3602B5641109DE0DAC709AEDDBD
+
+-
+
+#FOLDER
+	ID=12
+	NAME=Opera
+	UNIQUEID=22A208401A374AC093A1041CB1973E63
+	PARTNERID=opera-operafolder
+
+#URL
+	ID=14
+	NAME=Сообщество My Opera
+	URL=http://my.opera.com/?utm_source=DesktopBrowser&utm_medium=Bookmark&utm_campaign=BrowserLinks
+	ICONFILE=http://redir.opera.com/favicons/myopera/favicon.ico
+	ON PERSONALBAR=YES
+	PERSONALBAR_POS=3
+	UNIQUEID=0C07A568A3724FE49252B0046C79C09D
+	PARTNERID=opera-operasocial
+
+#URL
+	ID=15
+	NAME=Служба поддержки 
+	URL=http://www.opera.com/support/?utm_source=DesktopBrowser&utm_medium=Bookmark&utm_campaign=BrowserLinks
+	ICONFILE=http://redir.opera.com/favicons/opera/favicon.ico
+	UNIQUEID=0B09A989492D4A96B716457D7342F109
+	PARTNERID=opera-operasupport
+
+#URL
+	ID=16
+	NAME=Get started with Opera
+	URL=http://www.opera.com/portal/startup/?utm_source=DesktopBrowser&utm_medium=Bookmark&utm_campaign=BrowserLinks
+	ICONFILE=http://redir.opera.com/favicons/opera/favicon.ico
+	UNIQUEID=18CD2A92CCF9453A98D3C2B85ADE90F2
+	PARTNERID=opera-operastart
+
+#URL
+	ID=17
+	NAME=Расширения Opera
+	URL=https://addons.opera.com/
+	ICONFILE=http://redir.opera.com/favicons/opera/favicon.ico
+	DESCRIPTION=addons, extensions
+	UNIQUEID=29DF2B28174D42D08D98B71A16139D64
+	PARTNERID=opera-operaextensions
+
+#URL
+	ID=18
+	NAME=Opera Portal
+	URL=http://portal.opera.com/?utm_source=DesktopBrowser&utm_medium=Bookmark&utm_campaign=BrowserLinks
+	ICONFILE=http://redir.opera.com/favicons/opera/favicon.ico
+	UNIQUEID=93D5337B1657409084924E007F49387C
+	PARTNERID=opera-operaportal
+
+#URL
+	ID=19
+	NAME=OZON.ru
+	URL=http://redir.opera.com/bookmarks/ozon/
+	ICONFILE=http://redir.opera.com/favicons/ozon/favicon.ico
+	DESCRIPTION=покупки, подарки, книги, кино, Озон
+	ON PERSONALBAR=YES
+	PERSONALBAR_POS=1
+	UNIQUEID=619F07BBCA734202B2EF9B7B2F7956AB
+	PARTNERID=opera-webshop
+
+#URL
+	ID=20
+	NAME=Mail.Ru
+	URL=http://redir.opera.com/bookmarks/mail.ru
+	ICONFILE=http://redir.opera.com/favicons/mailru/favicon.ico
+	DESCRIPTION=почта, мэйл
+	ON PERSONALBAR=YES
+	PERSONALBAR_POS=2
+	UNIQUEID=53450AAB91294BB1961239E3D6870607
+	PARTNERID=opera-portal
+
+#URL
+	ID=21
+	NAME=Рамблер Новости
+	URL=http://redir.opera.com/bookmarks/rambler
+	DISPLAY URL=http://news.rambler.ru
+	ICONFILE=http://redir.opera.com/favicons/rambler/favicon.ico
+	UNIQUEID=4F107ADA64C049CDA90AC7FA0BDE09D5
+	PARTNERID=opera-portal2
+
+#URL
+	ID=22
+	NAME=Яндекс
+	URL=http://redir.opera.com/bookmarks/yandex/
+	ICONFILE=http://redir.opera.com/favicons/yandex/favicon.ico
+	UNIQUEID=16832BF851CC4691B7ABA4B77E799745
+	PARTNERID=opera-searchengine
+
+#URL
+	ID=23
+	NAME=Wikipedia
+	URL=http://ru.wikipedia.org/wiki/Заглавная_страница
+	ICONFILE=http://redir.opera.com/favicons/wikipedia/favicon.ico
+	ON PERSONALBAR=YES
+	PERSONALBAR_POS=5
+	UNIQUEID=FBFC57E6A81E4924AF7945154E2B98E8
+	PARTNERID=opera-encyclopedia
+
+#URL
+	ID=25
+	NAME=Groupon
+	URL=http://redir.opera.com/bookmarks/groupon.ru
+	DISPLAY URL=http://groupon.ru/
+	ICONFILE=http://redir.opera.com/favicons/groupon.ru/favicon.ico
+	DESCRIPTION=Купон, акции, распродажа, групон, скидки
+	UNIQUEID=F79F7ABBDF6E4C8D83817C6717B242BD
+	PARTNERID=opera-discount
+	
+#URL
+	ID=28
+	NAME=My Opera Mail
+	URL=http://mail.opera.com/?utm_source=DesktopBrowser&utm_medium=Bookmark&utm_campaign=BrowserLinks
+	ICONFILE=https://mail.opera.com/favicon.ico
+	DESCRIPTION=Free mail
+	UNIQUEID=BE6CA6E1CA86413A92F5FC2C28E71CAD
+	PARTNERID=opera-mail2
+	
+#URL
+	ID=30
+	NAME=Автопортал Drom.ru
+	URL=http://redir.opera.com/bookmarks/drom
+	DISPLAY URL=http://www.drom.ru/
+	ICONFILE=http://redir.opera.com/favicons/drom/favicon.ico
+	DESCRIPTION=продажа, автомобили, auto
+	UNIQUEID=6AF4D12C130F4644A3159F7E63DB4AE7
+	PARTNERID=opera-cars
+
+#URL
+	ID=31
+	NAME=Sports
+	URL=http://redir.opera.com/bookmarks/sports.opera.com
+	ICONFILE=http://redir.opera.com/favicons/opera.sports.com/favicon.ico
+	UNIQUEID=A3457DBDD69C4061B5B393A85D66F9D1
+	PARTNERID=opera-sportsnews
+
+#URL
+	ID=32
+	NAME=Booking.com
+	URL=http://redir.opera.com/bookmarks/booking.com/ru/
+	DISPLAY URL=http://www.booking.com/
+	ICONFILE=http://redir.opera.com/favicons/booking/favicon.ico
+	DESCRIPTION=Отель, Гостиница, Бронирование
+	ON PERSONALBAR=YES
+	PERSONALBAR_POS=4
+	UNIQUEID=0739A8A088FA4094ADDF36856DB4340F
+	PARTNERID=opera-booking
+	
+#URL
+	ID=33
+	NAME=Hotels.com
+	URL=http://redir.opera.com/bookmarks/hotels.com
+	DISPLAY URL=http://hotels.com/
+	ICONFILE=http://redir.opera.com/favicons/hotels.com/favicon.ico
+	DESCRIPTION=hotels
+	UNIQUEID=83EDE91B0FE34F1392665EB3F5AD2BFE
+	PARTNERID=opera-booking2
+
+#URL
+	ID=34
+	NAME=Skyscanner
+	URL=http://redir.opera.com/bookmarks/skyscanner
+	DISPLAY URL=http://www.skyscanner.ru
+	ICONFILE=http://redir.opera.com/favicons/skyscanner/favicon.ico
+	DESCRIPTION=авиа, билеты, аэро
+	UNIQUEID=727C65A69979407B9CE5AE3258FB846B
+	PARTNERID=opera-travel
+
+#URL
+	ID=41
+	NAME=Бесплатные программы - izone.ru
+	URL=http://redir.opera.com/bookmarks/izone
+	ICONFILE=http://redir.opera.com/favicons/izone/favicon.ico
+	DESCRIPTION=софт
+	UNIQUEID=C5D46EA0A7CE4A289BF51D48488D03AF
+	PARTNERID=opera-downloadsite
+	
+#URL
+	ID=42
+	NAME=Softportal - 20000 программ
+	URL=http://redir.opera.com/bookmarks/softportal
+	ICONFILE=http://redir.opera.com/favicons/softportal/favicon.ico
+	DESCRIPTION=софт
+	UNIQUEID=4069F6480B084C2A99AFF28CF4AD563E
+	PARTNERID=opera-downloadsite2
+	
+#URL
+	ID=51
+	NAME=Онлайн-игры
+	URL=http://redir.opera.com/bookmarks/gamexp
+	ICONFILE=http://redir.opera.com/favicons/gamexp/favicon.ico
+	UNIQUEID=B93270B497EC48ECBB1CEF96A95D6D6D
+	PARTNERID=opera-gamesportal
+	
+#URL
+	ID=52
+	NAME=Мини-игры
+	URL=http://redir.opera.com/bookmarks/alawar
+	ICONFILE=http://redir.opera.com/favicons/alawar/favicon.ico
+	DISPLAY URL=http://www.alawar.ru/
+	DESCRIPTION=Игры, мини-игры, game
+	UNIQUEID=DB946CB195514BB4BA8BE45F352B409D
+	PARTNERID=opera-gamesportal2
+
+#URL
+	ID=53
+	NAME=Bigpoint
+	URL=http://redir.opera.com/bookmarks/bigpoint/
+	ICONFILE=http://redir.opera.com/favicons/bigpoint/favicon.ico
+	DESCRIPTION=Онлайн-игры. MMO-игры, бесплатные игры
+	UNIQUEID=2633F9CAFCD54C7B97E49102BD772021
+	PARTNERID=opera-gamesportal3
+
+#URL
+	ID=54
+	NAME=Sapato.ru
+	URL=http://redir.opera.com/bookmarks/shopping1/ru
+	ICONFILE=http://redir.opera.com/favicons/shopping1/ru/favicon.ico
+	DISPLAY URL=http://www.sapato.ru/
+	DESCRIPTION=женская, мужская, детская, обувь, сумки
+	UNIQUEID=383741AFBDF24D0ABB24A5452C284335
+	PARTNERID=opera-clothing
+
+#URL
+	ID=55
+	NAME=Рамблер-Авиа
+	URL=http://redir.opera.com/bookmarks/avia/ru
+	ICONFILE=http://redir.opera.com/favicons/avia/ru/favicon.ico
+	DISPLAY URL=http://avia.rambler.ru/
+	DESCRIPTION=авиа, билеты, бронирование
+	UNIQUEID=0D08A78AC54240B58036A617F4E78DBA
+	PARTNERID=opera-travel3
+
+#URL
+	ID=56
+	NAME=eBay.ru
+	URL=http://redir.opera.com/bookmarks/shopping/ru
+	DISPLAY URL=http://www.ebay.ru
+	DESCRIPTION=Мода, электроника, покупки
+	ICONFILE=http://ebay.ru/favicon.ico
+	UNIQUEID=55DA86E6CC334CF9B2F5A38728A63F52
+	PARTNERID=opera-auction
+	
+#URL
+	ID=57
+	NAME=FreeSoft - Каталог программ
+	URL=http://redir.opera.com/bookmarks/soft/ru
+	DISPLAY URL=http://freesoft.ru/
+	DESCRIPTION=софт, бесплатно, скачать
+	ICONFILE=http://redir.opera.com/favicons/soft/ru/favicon.ico
+	UNIQUEID=98A57E58F0B445F4BEFECB162C380B5A
+	PARTNERID=opera-downloadsite3
+	
+#URL
+	ID=58
+	NAME=ЛитРес
+	URL=http://redir.opera.com/bookmarks/shopping2/ru
+	DISPLAY URL=http://www.litres.ru/
+	DESCRIPTION=магазин, электронных, аудио, книгz
+	ICONFILE=http://www.litres.ru/favicon.ico
+	UNIQUEID=19DC336C0B6647658941ACE7D6BB07BB
+	PARTNERID=opera-webshop2
+	
+#URL
+	ID=59
+	NAME=торговый центр Wikimart
+	URL=http://redir.opera.com/bookmarks/shopping4/ru
+	DISPLAY URL=http://wikimart.ru/
+	DESCRIPTION=коляски, холодильники, стиральные, автокресла, шины
+	ICONFILE=http://redir.opera.com/favicons/shopping4/ru/favicon.ico
+	UNIQUEID=4649D3338DA74F1FB30CB39105E101C8
+	PARTNERID=opera-webshop3
+	
+#URL
+	ID=60
+	NAME=Поиск объявлений по автомобилям - Pingola.ru
+	URL=http://redir.opera.com/bookmarks/auto/ru
+	DISPLAY URL=http://vehicles.pingola.ru
+	DESCRIPTION=Машина, ВАЗ, ниссан, тойота, форд
+	ICONFILE=http://redir.opera.com/favicons/auto/ru/favicon.ico
+	UNIQUEID=2FDD11366CB94BC691C0878D68F6F00D
+	PARTNERID=opera-cars2
+	
+#URL
+	ID=61
+	NAME=Онлайн видео Megogo.net
+	URL=http://redir.opera.com/bookmarks/video/ru
+	DISPLAY URL=http://megogo.net/ru
+	DESCRIPTION=видео, кино, смотреть
+	ICONFILE=http://redir.opera.com/favicons/video/ru/favicon.ico
+	UNIQUEID=936D076B428F474F96145A29716EF233
+	PARTNERID=opera-videostreaming
+	
+#URL
+	ID=62
+	NAME=Aviasales - дешевые авиабилеты
+	URL=http://redir.opera.com/bookmarks/avia1/ru
+	DISPLAY URL=http://www.aviasales.ru/
+	DESCRIPTION=аэро, билеты, бронирование, купить, спецпредложения
+	ICONFILE=http://redir.opera.com/favicons/avia1/ru/favicon.ico
+	UNIQUEID=D3A86ABB0EF5488BA107B2A61652C349
+	PARTNERID=opera-booking3

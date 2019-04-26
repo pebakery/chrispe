@@ -1,0 +1,168 @@
+Usage: Fmdata.exe [OPTIONS] [FILE]
+or:    Fmdata.exe [OPTIONS] [DIRECTORY]
+or:    Fmdata.exe [OPTIONS] [SEARCH PATTERN]
+
+Display file and directory attributes, MAC times, security
+attributes and cryptographic hashes of data streams attached to
+directories or files.
+
+OPTIONS:
+   --standardinfo     Includes standard information (attributes, MAC times
+				      and size)in the output.
+   --security         Includes security information in the output.
+   --cryptsum [ALGORITHM]    Includes one or more cryptographic
+				      checksums in the output.  "md2", "md4", "md5""
+				      and "sha" or "sha1" are supported on all platforms
+					  "sha_256", "sha_384" and "sha_512" are supported
+				      on Windows Server 2003 and later.
+   --reference_number Includes file or directory reference numbers and
+					  object id's.
+   --max_output [SIZE] Specifies the maximum size of the output file.
+   --localvol         Processes all local fixed volumes.
+   --volumelabel [VOLUME_LABEL]	Send output to a volume on a removable
+					  drive with the specified volume label.  If --volumelabel is
+					  specified,the volume name is prepended to the path specified
+					  by -o --out.
+   --eject			  Dismount and, if possible, eject the volume specified
+					  by the -volumelabel option.
+   --localwrt         Enables writing output to a local fixed drive.
+   --restore_access_times restores file access times on the source.
+   --locale [LANG]    Specifies the output locale.
+   
+The file name may include wildcard characters (* and ?), with multiple filters 
+separated by a semicolon: e.g. "*.exe;*.dll".
+
+    -o, --out [DESTINATION] Send output to the specified file or IP address.
+	--iport {PORT]	  Send output to the specified tcpip PORT.
+	--lport {PORT]	  Send log output to the specified tcpip PORT.
+    --random_output_dir Append a random-named output directory to the
+                     specified output path.
+	
+If --iport or --lport are specified, the OUTPUT_FILE specified with the 
+-o --out option will be interpreted as an IP address.
+
+The following Qos options may be used with the --iport options:
+
+   --peak_bandwidth [RATE]	Specifies the peak bandwidth in
+					  bits-per-second.
+   --peak_bandwidth [PERCENT] Specifies the peak bandwidth
+					as a percent of link speed.
+   --token_rate [RATE]	Specifies the token rate in bits-per-second.
+   --token_bucket_size [SIZE] Specifies the token bucket size in
+					bits-per-second.
+    --qos_service_type [TYPE] Specifies the Qos service type.
+	
+	Valid service types are:
+		1  SERVICETYPE_BESTEFFORT
+		2  SERVICETYPE_CONTROLLEDLOAD
+		3  SERVICETYPE_GUARANTEED
+		10 SERVICETYPE_NETWORK_CONTROL
+		13 SERVICETYPE_QUALITATIVE
+		
+	-r --recursive        Recursively search subdirectories for files to 
+	                       be processed.
+    --help                 Display this help and exit
+	-v, --verbose          Output verbose information.
+    -g --gather            Produce a single hash for multiple input files
+                           specified in a DD "contents" file.
+    -c, --check            Verify a metadata or security catalog by rescanning
+                           the indicated root directory.
+        --sfc              Scan all protected system files and verify their hashes
+                           in the system catalogs.  Use the '--root' option to
+                           select an alternate system root.
+	--root                 Used in conjunction with the '-c --check' and '--sfc'
+	                       options to specify a root directory different from the
+	                       root directory used to produce the original baseline.                           
+	--changed_only         Used in conjunction with the '-c --check' option to
+	                       limit output to only files or streams that have changed
+	                       since the previous "baseline".                           
+	-d, --decompress [ALGORITHM] Produce cryptographic hashes from decompressed file
+	                       or stream data using the specified compression algorithm.
+	                       
+The following options may be used in conjunction with a search pattern
+to select the files or streams that are to be processed:
+   -A, --attributes       hashes files with specified attributes:
+   
+	attributes  D  Directories                R  Read-only files
+	            H  Hidden files               A  Files ready for archiving
+	            C  Compressed files           E  Encrypted files
+	            O  Offline files              P  Sparse files
+	            S  System files               ~  Prefix meaning not
+	            T  Temporary files
+
+	--any               Specifies how the -A --attribute option is to be
+	                    interpreted.  With '--any' files or streams with
+	                    any one of the specified attributes will be
+	                    processed.  The default is to hash files with all
+	                    of the specified
+	                    attributes.
+
+The following are used to select files based upon file times:
+   --modified [FILETIME]   selects files based upon the file
+		                   modification time.
+   --accessed [FILETIME]   selects files based upon the file access time.
+   --created  [FILETIME]   selects files based upon the file creation
+		                   time.
+	
+The format of the FILETIME string is specified according to the locale
+of the current user.  For example, 10:00PM June 6, 2003 is specified
+as "6/10/2003 10:00PM" in the United States and "10/6/2003 10:00PM"
+in most european countries.  The file time string may be pre-pended by <, = or >
+to search for file times that are less than, equal or greater than
+the specified time string.  The FILETIME string may include multiple conditions
+separated by a semi-colon (;).  Multiple conditions are evaluated in pairs.
+An un-paired condition is evaluated individually.
+
+The following may be used to select directories, files or streams
+based upon specified regular expressions:
+
+   --directoryfilter [EXPRESSION]   selects directories based upon an
+	                                expression.
+   --filefilter   [EXPRESSION]      selects files based upon an expression.
+   --streamfilter [EXPRESSION]      selects alternate streams based upon an
+	                                expression
+   --magicfilter [EXPRESSION]       selects files or alternate streams based
+                                    upon the binary contents at the start of
+                                    the data stream as evaluated by an
+                                    expression.
+
+EXPRESSION may be any regular expression.  Double quotes ("")
+may be used to prevent the command interpreter from splitting
+a single expression into two or more pieces.  With respect
+to the --magicfilter option, EXPRESSION is limited to a regular
+expression that may be converted to a single byte character set.
+
+The following may be used to select files or streams
+based upon the entropy of the initial data stream:
+
+   --entropy [THRESHOLD]   selects files or streams whose initial
+	                   data streams have an entropy greater than THRESHOLD.
+
+The following may be used in conjunction with output in xml format:
+   --case [CASE NUMBER] includes the specified case number in xml output.
+   --evidence [EVIDENCE NUMBER] specifies one less than the initial
+                        evidence number.
+   --description [DESCRIPTION] includes an optional description in xml output.
+
+   --thread_priority [PRIORITY] sets the priority of the thread processing.
+	
+	The thread priority may be set to any of the following values:
+		idle, lowest, belownormal, highest
+		abovenormal, timecritical
+
+Enterprise level options:
+
+  --ssl [CERTIFICATE]	Make or receive TCP connections using the TLS 1.0 
+         protocol and the specified certificate.  The certificate, which is
+         optional for client connections, must be in PFX (PKCS#12) file
+         format, if it exists.
+  --encrypt [ALGORITHM]  Specifies the encryption algorithm that will be
+         used to encrypt output.  The default algorithm is AES-256 on 
+         Microsoft Windows XP and later and 3DES on Windows 2000.
+  --cert [PATH] Provides the path to an X-509/PKCS#7 encoded file.  The 
+         certificate will be used to encrypt the encryption key 
+         that is used to encrypt output. 
+   --ignore_invalid_cert  Ignore errors that may occur due to use of an
+         unsigned or expired certificate.
+
+    Report bugs to <support@gmgsystemsinc.info>

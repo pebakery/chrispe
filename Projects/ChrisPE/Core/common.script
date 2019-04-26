@@ -4,8 +4,8 @@ Description=This is set as hidden and will be executed from another project scri
 Selected=False
 Level=-2
 Author=ThePEBakeryTeam
-Version=20180321
-Date=2018-03-21
+Version=20190426
+Date=2019-04-26
 
 [DIRECTORY.DELETE]
 Set,%CONTINUE%,NO
@@ -115,6 +115,7 @@ message,ERROR - source files do not match current build. #$x#$xAborting...
 Halt
 
 [PostConfigRunNotInWim]
+IniRead,"%TargetDir%\Project.Settings.ini",Main,Image.Number,%Boot.wim.Image.number%
 If,ExistDir,"%OutputDir%\Programs.%ARCH%",Begin
   If,Not,ExistFile,"%OutputDir%\Programs.%ARCH%\ShortcutsNotInWim.cmd",If,ExistFile,"%OutputDir%\Programs\ShortcutsNotInWim.txt",Begin
     TXTaddLine,"%OutputDir%\Programs\ShortcutsNotInWim.txt",MD #$q#$pTemp#$p\ShortCuts#$q,PrePend

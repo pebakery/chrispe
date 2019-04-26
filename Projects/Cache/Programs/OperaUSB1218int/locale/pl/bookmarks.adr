@@ -1,0 +1,343 @@
+Opera Hotlist version 2.0
+Options: encoding = utf8, version=21
+
+#FOLDER
+	ID=11
+	NAME=Kosz
+	TRASH FOLDER=YES
+	UNIQUEID=3D4B12CFBE4B40CE8D24B5CD106A747F
+
+-
+
+#FOLDER
+	ID=12
+	NAME=Opera
+	UNIQUEID=BB460AE51DC441FC8AF2B825492AE144
+	PARTNERID=opera-operafolder
+
+#URL
+	ID=13
+	NAME=Społeczność My Opera
+	URL=http://my.opera.com/?utm_source=DesktopBrowser&utm_medium=Bookmark&utm_campaign=BrowserLinks
+	ICONFILE=http://redir.opera.com/favicons/myopera/favicon.ico
+	ON PERSONALBAR=YES
+	PERSONALBAR_POS=2
+	UNIQUEID=857E7117C2AC4EDD9D6C20E303741112
+	PARTNERID=opera-operasocial
+
+#URL
+	ID=14
+	NAME=Dział pomocy
+	URL=http://www.opera.com/support/?utm_source=DesktopBrowser&utm_medium=Bookmark&utm_campaign=BrowserLinks
+	ICONFILE=http://redir.opera.com/favicons/opera/favicon.ico
+	UNIQUEID=61008CBE024D4BB088A58ECC408D2370
+	PARTNERID=opera-operasupport
+
+#URL
+	ID=15
+	NAME=Get started with Opera
+	URL=http://www.opera.com/portal/startup/?utm_source=DesktopBrowser&utm_medium=Bookmark&utm_campaign=BrowserLinks
+	ICONFILE=http://redir.opera.com/favicons/opera/favicon.ico
+	UNIQUEID=18CD2A92CCF9453A98D3C2B85ADE90F2
+	PARTNERID=opera-operastart
+
+#URL
+	ID=16
+	NAME=Opera Portal
+	URL=http://portal.opera.com/?utm_source=DesktopBrowser&utm_medium=Bookmark&utm_campaign=BrowserLinks
+	ICONFILE=http://redir.opera.com/favicons/opera/favicon.ico
+	UNIQUEID=93D5337B1657409084924E007F49387C
+	PARTNERID=opera-operaportal
+
+#URL
+	ID=17
+	NAME=Rozszerzenia Opery
+	URL=https://addons.opera.com/
+	ICONFILE=http://redir.opera.com/favicons/opera/favicon.ico
+	DESCRIPTION=addons, extensions
+	UNIQUEID=29DF2B28174D42D08D98B71A16139D64
+	PARTNERID=opera-operaextensions
+	
+#URL
+	ID=18
+	NAME=Download.com
+	URL=http://redir.opera.com/bookmarks/download
+	ICONFILE=http://redir.opera.com/favicons/downloadcom/favicon.ico
+	UNIQUEID=9DB55B41128448A6B33036C1FB3F7B9A
+	PARTNERID=opera-downloadsite
+
+#URL
+	ID=19
+	NAME=Wikipedia
+	URL=http://pl.wikipedia.org/wiki/Strona_główna
+	ICONFILE=http://redir.opera.com/favicons/wikipedia/favicon.ico
+	ON PERSONALBAR=YES
+	PERSONALBAR_POS=5
+	UNIQUEID=09D2EA961ED9401F9AFD9E7AD2A734CD
+	PARTNERID=opera-encyclopedia
+	
+#URL
+	ID=20
+	NAME=Dobreprogramy
+	URL=http://redir.opera.com/bookmarks/dobreprogramy
+	ICONFILE=http://redir.opera.com/favicons/dobreprogramy/favicon.ico
+	ON PERSONALBAR=YES
+	PERSONALBAR_POS=4
+	ON PERSONALBAR=YES
+	UNIQUEID=9A6CB9B721FF4972920461275A86F5E9
+	PARTNERID=opera-downloadsite2
+
+#URL
+	ID=21
+	NAME=Bigpoint
+	URL=http://redir.opera.com/bookmarks/bigpoint/
+	ICONFILE=http://redir.opera.com/favicons/bigpoint/favicon.ico
+	UNIQUEID=2633F9CAFCD54C7B97E49102BD772021
+	PARTNERID=opera-gamesportal
+
+#URL
+	ID=22
+	NAME=FastMail
+	URL=http://redir.opera.com/bookmarks/fastmail
+	ICONFILE=http://redir.opera.com/favicons/fastmail/favicon.ico
+	UNIQUEID=BAF6AE40FA1543AC97010132CD806EEE
+	PARTNERID=opera-mail
+	
+#URL
+	ID=25
+	NAME=Alawar
+	URL=http://redir.opera.com/bookmarks/alawar
+	ICONFILE=http://redir.opera.com/favicons/alawar/favicon.ico
+	DESCRIPTION=gry, farma, online
+	UNIQUEID=DB946CB195514BB4BA8BE45F352B409D
+	PARTNERID=opera-gamesportal2
+	
+#URL
+	ID=26
+	NAME=My Opera Mail
+	URL=http://mail.opera.com/?utm_source=DesktopBrowser&utm_medium=Bookmark&utm_campaign=BrowserLinks
+	ICONFILE=https://mail.opera.com/favicon.ico
+	DESCRIPTION=Free mail
+	UNIQUEID=BE6CA6E1CA86413A92F5FC2C28E71CAD
+	PARTNERID=opera-mail2
+
+#URL
+	ID=27
+	NAME=Sports
+	URL=http://redir.opera.com/bookmarks/sports.opera.com
+	ICONFILE=http://redir.opera.com/favicons/opera.sports.com/favicon.ico
+	UNIQUEID=A3457DBDD69C4061B5B393A85D66F9D1
+	PARTNERID=opera-sportsnews
+	
+#URL
+	ID=28
+	NAME=Games2Win
+	URL=http://redir.opera.com/bookmarks/Games2Win
+	ICONFILE=http://redir.opera.com/favicons/Games2Win/favicon.ico
+	DESCRIPTION=funny, play, free, online, games
+	UNIQUEID=FD1AE0CAE7AD404FA433AAE27791A7DC
+	PARTNERID=opera-gamesportal3
+	
+#URL
+	ID=30
+	NAME=Hewlett-Packard
+	URL=http://redir.opera.com/bookmarks/sklephp
+	DISPLAY URL=http://www.sklephp.pl
+	ICONFILE=http://redir.opera.com/favicons/sklephp/favicon.ico
+	DESCRIPTION=HP, drukarki, tonery
+	UNIQUEID=02CC4B2DC9E04E36ADDB4299AAF8BF75
+	PARTNERID=opera-webshop3
+	
+#URL
+	ID=32
+	NAME=Inbook
+	URL=http://redir.opera.com/bookmarks/inbook
+	DISPLAY URL=http://www.inbook.pl/
+	ICONFILE=http://redir.opera.com/favicons/inbook/favicon.ico
+	DESCRIPTION=książki, księgarnia
+	UNIQUEID=85C1D85898CE4E84B6B9799EB0ECCE0C
+	PARTNERID=opera-webshop5
+
+#URL
+	ID=34
+	NAME=T-mobile
+	URL=http://redir.opera.com/bookmarks/telelcom/pl
+	DISPLAY URL=http://www.t-mobile.pl
+	ICONFILE=http://redir.opera.com/favicons//telelcom/pl/favicon.ico
+	DESCRIPTION=t-mobile, blueconnect, telefony
+	UNIQUEID=2232D6EBFC474D6990D21CE54A921359
+	PARTNERID=opera-mobile
+
+#URL
+	ID=35
+	NAME=Amazon
+	URL=http://redir.opera.com/bookmarks/amazon/
+	DISPLAY URL=http://amazon.com
+	ICONFILE=http://redir.opera.com/favicons/amazon/favicon.ico
+	DESCRIPTION=książki, multimedia, elektronika
+	UNIQUEID=9D41D34960DC4C9CA3301948DA3356A7
+	PARTNERID=opera-webshop7
+
+#URL
+	ID=36
+	NAME=Travian
+	URL=http://redir.opera.com/bookmarks/game/pl
+	DISPLAY URL=http://www.travian.com
+	ICONFILE=http://redir.opera.com/favicons/game/pl/favicon.ico
+	UNIQUEID=2E7E1DC555B144A5B5194D47905E6EFB
+	PARTNERID=opera-games
+	
+#URL
+	ID=37
+	NAME=Empik Foto
+	URL=http://redir.opera.com/bookmarks/empikfoto
+	DISPLAY URL=http://www.empikfoto.pl
+	ICONFILE=http://redir.opera.com/favicons/empikfoto/favicon.ico
+	DESCRIPTION=zdjęcia, odbitki
+	UNIQUEID=227EC7F40F764CDF838E52F8F85E9375
+	PARTNERID=opera-photography
+	
+#URL
+	ID=38
+	NAME=Orange
+	URL=http://redir.opera.com/bookmarks/mobile/pl
+	DISPLAY URL=http://www.orange.pl
+	ICONFILE=http://redir.opera.com/favicons/mobile/pl/favicon.ico
+	UNIQUEID=BFD5A2287A1F4007971476CC9C8DAA79
+	PARTNERID=opera-orange
+
+-
+
+#FOLDER
+	ID=40
+	NAME=Zakupy
+	UNIQUEID=6D465519C7BA45ACB6D756F57B0AA36C
+	PARTNERID=opera-shoppingfolder
+
+#URL
+	ID=41
+	NAME=Ceneo.pl
+	URL=http://redir.opera.com/bookmarks/ceneo/
+	ICONFILE=http://redir.opera.com/favicons/ceneopl/favicon.ico
+	ON PERSONALBAR=YES
+	PERSONALBAR_POS=1
+	UNIQUEID=38FA57924D794085BA1AAF8ECB695269
+	PARTNERID=opera-pricecomparison
+
+#URL
+	ID=42
+	NAME=Conrad.pl
+	URL=http://redir.opera.com/bookmarks/conrad
+	DISPLAY URL=http://www.conrad.pl
+	ICONFILE=http://redir.opera.com/favicons/conrad/favicon.ico
+	DESCRIPTION=elektronika, elektryka
+	UNIQUEID=8C13EC5BB1B34DF78F026E6072DBBA9A
+	PARTNERID=opera-webshop6
+
+#URL
+	ID=43
+	NAME=Douglas
+	URL=http://redir.opera.com/bookmarks/onlineshop1/pl
+	DISPLAY URL=http://www.douglas.pl
+	ICONFILE=http://redir.opera.com/favicons//onlineshop1/pl/favicon.ico
+	DESCRIPTION=perfumy, kosmetyki
+	UNIQUEID=CC37D32571314D9AB8E4102AD67F38F0
+	PARTNERID=opera-cosmetics
+	
+#URL
+	ID=44
+	NAME=Komputronik
+	URL=http://redir.opera.com/bookmarks/komputronik
+	DISPLAY URL=http://www.komputronik.pl
+	ICONFILE=http://redir.opera.com/favicons/komputronik/favicon.ico
+	DESCRIPTION=notebook, komputer, laptop
+	UNIQUEID=B3952729382B49B78E188533263DFAFA
+	PARTNERID=opera-webshop4
+
+#URL
+	ID=45
+	NAME=RTV Euro AGD
+	URL=http://redir.opera.com/bookmarks/rtv
+	ICONFILE=http://redir.opera.com/favicons/rtv/favicon.ico
+	DESCRIPTION=RTV, AGD
+	UNIQUEID=B4232AE7479C49E7BDAA5EF69C1993A2
+	PARTNERID=opera-webshop2
+
+#URL
+	ID=46
+	NAME=Skapiec.pl
+	URL=http://redir.opera.com/bookmarks/Skapiec
+	ICONFILE=https://mail.opera.com/favicon.ico
+	DESCRIPTION=cena, wyszukiwarka, aukcje
+	UNIQUEID=7D8EDB05B4C24F8AB497508EBD2C2ED7
+	PARTNERID=opera-webshop
+
+#URL
+	ID=47
+	NAME=Tchibo
+	URL=http://redir.opera.com/bookmarks/onlineshop/pl
+	DISPLAY URL=http://www.tchibo.pl
+	ICONFILE=http://redir.opera.com/favicons//onlineshop/pl/favicon.ico
+	DESCRIPTION=dom, ogród, sklep
+	UNIQUEID=A690D13CAA954C249C458F06DC4455C3
+	PARTNERID=opera-clothing
+
+-
+
+#FOLDER
+	ID=50
+	NAME=Turystyka
+	UNIQUEID=A1AA6FE24C0948178831EBDCFB65C44C
+	PARTNERID=opera-travelfolder
+	
+#URL
+	ID=51
+	NAME=Hotels.com
+	URL=http://redir.opera.com/bookmarks/hotels.com
+	DISPLAY URL=http://hotels.com/
+	ICONFILE=http://redir.opera.com/favicons/hotels.com/favicon.ico
+	DESCRIPTION=hotels
+	UNIQUEID=83EDE91B0FE34F1392665EB3F5AD2BFE
+	PARTNERID=opera-booking2
+
+#URL
+	ID=52
+	NAME=Skyscanner
+	URL=http://redir.opera.com/bookmarks/skyscanner
+	DISPLAY URL=http://www.skyscanner.pl
+	ICONFILE=http://redir.opera.com/favicons/skyscanner/favicon.ico
+	DESCRIPTION=bilety lotnicze, loty
+	UNIQUEID=727C65A69979407B9CE5AE3258FB846B
+	PARTNERID=opera-travel
+
+#URL
+	ID=53
+	NAME=Booking.com
+	URL=http://redir.opera.com/bookmarks/booking.com
+	DISPLAY URL=http://www.booking.com/
+	ICONFILE=http://redir.opera.com/favicons/booking/favicon.ico
+	DESCRIPTION=hotel, podróż, hotele
+	ON PERSONALBAR=YES
+	PERSONALBAR_POS=3
+	UNIQUEID=0739A8A088FA4094ADDF36856DB4340F
+	PARTNERID=opera-booking
+	
+#URL
+	ID=54
+	NAME=HRS
+	URL=http://redir.opera.com/bookmarks/travel2/pl
+	DISPLAY URL=http://www.hrs.com
+	DESCRIPTION=hotel, pokoje, rezewacja
+	ICONFILE=http://redir.opera.com/favicons/travel2/pl/favicon.ico
+	UNIQUEID=63D4383F0C8A475C82DD581317F88539
+	PARTNERID=opera-booking3
+	
+#URL
+	ID=55
+	NAME=eSky
+	URL=http://redir.opera.com/bookmarks/travel1/pl
+	DISPLAY URL=http://www.esky.pl/
+	ICONFILE=http://redir.opera.com/favicons/travel1/pl/favicon.ico
+	DESCRIPTION=bilety, lotnicze, rezerwacje
+	UNIQUEID=A8EFDC60AE8D4751951B3B2553B02518
+	PARTNERID=opera-esky

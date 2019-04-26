@@ -1,0 +1,187 @@
+[main]
+Title=Opera 12.18
+Description=Opera (USB) Web browser (Version 12.18).
+Selected=False
+Level=5
+Author=ThePEBakeryTeam
+Version=20190426
+Date=2019-04-26
+Interface=Interface1
+
+[Interface1]
+pTextLabelMenu1="1",1,1,35,3,70,18,10,Bold
+pButtonMenu2="2",1,8,75,0,70,20,pButtonMenu2,0,True,_pButtonMenu2_,True
+pButtonMenu3="?",1,8,145,0,70,20,pButtonMenu3,0,True,_pButtonMenu3_,True
+pWebLabel1=http://www.opera-usb.com/,1,10,10,100,216,18,http://www.opera-usb.com/
+pTextLabel1="Opera USB Website",1,1,10,77,230,18,10,Bold
+pCheckBoxInWim="Include Program in boot.wim",1,3,10,265,180,18,True
+pBevel1=,1,12,10,150,500,35
+pScrollBox1=en-GB,1,4,20,158,70,20,af,ar,az,be,bg,bn,cs,da,de,el,en,en-GB,es-ES,es-LA,et,fa,fi,fr,fr-CA,fy,gd,he,hi,hr,hu,id,it,ja,ka,kk,ko,lt,lv,me,mk,ms,nb,nl,nn,pa,pl,pt,pt-BR,ro,ru,sk,sr,sv,sw,ta,te,th,tl,tr,uk,ur,uz,vi,zh-cn,zh-tw,zu
+pButton1=HELP,1,8,430,158,70,20,HELP.1,0,True,_HELP.1_,True
+pTextLabel2="1] Select Language",1,1,180,160,222,18,8,Bold
+
+[HELP.1]
+Message,"Please select the required language."
+
+[Interface2]
+pButtonMenu1="1",1,8,5,0,70,20,pButtonMenu1,0,True,_pButtonMenu1_,True
+pTextLabelMenu2="2",1,1,108,3,70,18,10,Bold
+pButtonMenu3="?",1,8,145,0,70,20,pButtonMenu3,0,True,_pButtonMenu3_,True
+pBevel1=,1,12,10,65,66,2
+pTextLabel="Menu Entries",1,1,10,50,230,18,8,Bold
+pCheckBoxShortcutDesktop="Add to Desktop Menu",1,3,40,80,150,18,True
+pCheckBoxShortcutQuick="Add to Quicklaunch Menu",1,3,40,110,150,18,True
+pCheckBoxShortcutPrograms="Add to #$qStart#$q > ",1,3,40,140,99,18,True
+pCheckBoxShortcutLaunchBar="Add to LaunchBar Menu ",1,3,40,170,150,18,True
+pButtonShortcut1=?,1,8,10,80,18,18,pButtonShortcut1,0,True,_pButtonShortcut1_,True
+pButtonShortcut2=?,1,8,10,110,18,18,pButtonShortcut2,0,True,_pButtonShortcut2_,True
+pButtonShortcut3=?,1,8,10,140,18,18,pButtonShortcut3,0,True,_pButtonShortcut3_,True
+pButtonShortcut4=?,1,8,10,170,18,18,pButtonShortcut4,0,True,_pButtonShortcut4_,True
+pTextBox1=,1,0,140,140,150,21,Programs
+
+[pButtonMenu1]
+IniWrite,%ScriptFile%,Main,Interface,Interface1
+System,REFRESHINTERFACE
+
+[pButtonMenu2]
+IniWrite,%ScriptFile%,Main,Interface,Interface2
+System,REFRESHINTERFACE
+
+[pButtonMenu3]
+message,"Click on the buttons to toggle between tabs 1 and 2. #$x#$xTab 2 contains menu options for use in the selected shell. Click on the ? button for information about the different options."
+
+[pButtonShortcut1]
+message,"WinXShell only#$x#$xSelect this option to add a program shortcut to the Desktop."
+
+[pButtonShortcut2]
+message,"WinXShell only#$x#$xSelect this option to add a program menu option to the Quicklaunch menu - similar in appearence to the 'Pin to Taskbar' option in Windows 7/8/10."
+
+[pButtonShortcut3]
+message,"Applies to WinXShell#$c BBLean and LaunchBar Shell(s)#$x#$xSelect this option to add a program menu option to the Start menu. Leave blank to add to the root of the menu#$c or manually type a path to place in a sub-menu (do not use spaces in the path). E.g. #$x#$s- FileManager#$x#$s- Programs#$x#$s- Programs\FileManager#$x#$xAnd looking at the examples above - #$x#$xLeave this option blank to add a menu entry to the root of the program menu (the 'Start' menu in WinXShell#$c the 'Start' menu in BBLean#$c or the root of the LaunchBar menu bar if LaunchBar is selected as Shell)#$x#$xEnter 'FileManager' to add a menu entry for this application to the 'Start' > 'FileManager' sub-menu (WinXShell and bblean) or the 'FileManager' sub-menu in LaunchBar.#$x#$xEnter 'Programs' to add a menu entry for this application to the 'Start' > 'Programs' sub-menu (WinXShell and bblean) or the 'Programs' sub-menu in LaunchBar.#$x#$xEnter 'Programs\FileManager' to add a menu entry for this application to the 'Start' > 'Programs' > 'FileManager' sub-menu (WinXShell and bblean) or the 'Programs' > 'FileManager' sub-menu in LaunchBar."
+
+[pButtonShortcut4]
+message,"This setting does not apply to any LaunchBar instance running as the WinPE Shell. This option only applies to a LaunchBar instance when the Applications' > 'LaunchBar' program script is selected in the build.#$x#$xIf the 'Applications' > 'LaunchBar' program script is selected than enable this option to add a program menu entry to the root of the LaunchBar menu bar. #$x#$xPlease note that if option '6] Programs in boot.wim' in the main project script is set as 'NO'#$c then LaunchBar and a number of other applications will not be available at boot. In this case a text based .ini file will be used for LaunchBar menu settings."
+
+[process]
+
+If,%FullProjectRun%,Equal,NO,Run,"%ProjectDir%\Core\common.script",PostConfigRun
+AddInterface,%ScriptFile%,Interface1,""
+AddInterface,%ScriptFile%,Interface2,""
+If,%pCheckBoxInWim%,Equal,True,Set,%PROGRAMS.IN.WIM%,YES
+Else,Set,%PROGRAMS.IN.WIM%,NO
+Run,%ScriptFile%,CHECKS
+Run,%ScriptFile%,MENU
+Run,%ScriptFile%,COMMON
+If,%PROGRAMS.IN.WIM%,Equal,NO,Run,%ScriptFile%,NOT.IN.WIM
+If,%PROGRAMS.IN.WIM%,Equal,YES,Run,%ScriptFile%,IN.WIM
+
+[CHECKS]
+If,Not,ExistFile,"%Programs%\OperaUSB1218int\%ARCH%\opera.exe",Begin
+Message,Opera is missing - exiting script...,Error,5
+Exit,Opera is missing - exiting script...,WARN
+End
+
+[MENU]
+If,%PROGRAMS.IN.WIM%,Equal,NO,Begin
+  If,Not,ExistFile,"%OutputDir%\Programs\ShortcutsNotInWim.txt",Run,"%ProjectDir%\Core\common.script",NotInWim
+  TXTaddline,"%OutputDir%\Programs\ShortcutsNotInWim.txt","#$p~dp0nircmd.exe shortcut #$q#$p~dp0Opera1218\opera.exe#$q #$q#$pTemp#$p\ShortCuts#$q #$qOpera#$q",Append
+End 
+If,%PROGRAMS.IN.WIM%,Equal,YES,Begin
+  ShellExecute,Hide,"%Tools%\Shortcut.exe","/A:C /T:#$q#$pSystemDrive#$p\Programs\Opera1218\opera.exe#$q /F:#$q%ProjectTemp%\Opera.lnk#$q /I:#$q#$pSystemDrive#$p\Programs\Opera1218\opera.exe#$c0#$q"
+  If,ExistFile,"%ProjectTemp%\Opera.lnk",Begin
+    Set,%MyShortcut%,Opera.lnk
+    If,%pCheckBoxShortcutDesktop%,Equal,True,FileCopy,"%ProjectTemp%\%MyShortcut%","%ProjectTemp%\ShortCuts\Desktop"
+    If,%pCheckBoxShortcutQuick%,Equal,True,FileCopy,"%ProjectTemp%\%MyShortcut%","%ProjectTemp%\ShortCuts\Quick"
+    If,%pCheckBoxShortcutPrograms%,Equal,True,Begin
+      Set,%ProgramMenuPath%,%pTextBox1%
+      Run,"%ProjectDir%\Core\common.script",StartMenu
+    End
+    If,%pCheckBoxShortcutLaunchBar%,Equal,True,FileCopy,"%ProjectTemp%\%MyShortcut%","%ProjectTemp%\ShortCuts\LaunchBar"
+    If,%FullProjectRun%,Equal,NO,Run,"%ProjectDir%\Core\common.script",PostConfigRunShortcuts
+    FileDelete,"%ProjectTemp%\%MyShortcut%"
+  End
+End
+
+
+[COMMON]
+If,%PROGRAMS.IN.WIM%,Equal,NO,Set,%PATH%,%OutputDir%
+If,%PROGRAMS.IN.WIM%,Equal,YES,Set,%PATH%,%TargetDir%
+If,Not,ExistDir,"%PATH%\Programs",DirMake,"%PATH%\Programs"
+DirMake,"%PATH%\Programs\Opera1218"
+DirCopy,"%Programs%\OperaUSB1218int\%ARCH%\*.*","%PATH%\Programs\Opera1218"
+If,Not,ExistDir,"%PATH%\Programs\Opera1218\locale",DirMake,"%PATH%\Programs\Opera1218\locale"
+If,ExistDir,"%Programs%\OperaUSB1218int\locale",DirCopy,"%Programs%\OperaUSB1218int\locale\*.*","%PATH%\Programs\Opera1218\locale"
+//
+If,ExistFile,"%PATH%\Programs\Opera1218\operaprefs_default.ini",Begin
+set,%Opera.Lang%,%pScrollBox1%
+IniWrite,"%PATH%\Programs\Opera1218\operaprefs_default.ini","User Prefs","Language Files Directory",{Resources}locale\%Opera.Lang%
+IniWrite,"%PATH%\Programs\Opera1218\operaprefs_default.ini","User Prefs","Language File",{Resources}locale\%Opera.Lang%\%Opera.Lang%.lng
+End
+//
+If,Not,ExistFile,"%PATH%\Programs\registry.entries.cmd",Begin
+  FileCreateBlank,"%PATH%\Programs\registry.entries.cmd"
+  TXTaddLine,"%PATH%\Programs\registry.entries.cmd",@Echo off,Append
+  TXTaddLine,"%PATH%\Programs\registry.entries.cmd",,Append
+End
+TXTaddLine,"%PATH%\Programs\registry.entries.cmd",::==========OPERA===============,Append
+TXTaddLine,"%PATH%\Programs\registry.entries.cmd",::for file associations,Append
+TXTaddLine,"%PATH%\Programs\registry.entries.cmd",IF EXIST #$q#$p~dp0Opera1218\Opera.exe#$q (,Append
+TXTaddLine,"%PATH%\Programs\registry.entries.cmd",ECHO.,Append
+TXTaddLine,"%PATH%\Programs\registry.entries.cmd",ECHO OPERA Registry Entries,Append
+TXTaddLine,"%PATH%\Programs\registry.entries.cmd",reg.exe add #$qHKLM\SOFTWARE\Classes\.htm#$q /ve /t REG_SZ /d #$qOpera1218#$q /f,Append
+TXTaddLine,"%PATH%\Programs\registry.entries.cmd",reg.exe add #$qHKLM\SOFTWARE\Classes\.html#$q /ve /t REG_SZ /d #$qOpera1218#$q /f,Append
+TXTaddLine,"%PATH%\Programs\registry.entries.cmd",reg.exe DELETE HKLM\Software\Classes\.htm\OpenWithList /f,Append
+TXTaddLine,"%PATH%\Programs\registry.entries.cmd",reg.exe DELETE HKLM\Software\Classes\.html\OpenWithList /f,Append
+TXTaddLine,"%PATH%\Programs\registry.entries.cmd",reg.exe add #$qHKLM\SOFTWARE\Classes\Opera1218#$q /ve /t REG_SZ /d #$qWeb Page#$q /f,Append
+TXTaddLine,"%PATH%\Programs\registry.entries.cmd",reg.exe add #$qHKLM\SOFTWARE\Classes\Opera1218\DefaultIcon#$q /ve /t REG_SZ /d #$q#$p~dp0Opera1218\Opera.exe#$q /f,Append
+TXTaddLine,"%PATH%\Programs\registry.entries.cmd",reg.exe add #$qHKLM\SOFTWARE\Classes\Opera1218\shell\open\command#$q /ve /t REG_SZ /d #$q\#$q#$p~dp0Opera1218\Opera.exe\#$q \#$q%%1\#$q#$q /f,Append
+TXTaddLine,"%PATH%\Programs\registry.entries.cmd",::add to openwith list,Append
+TXTaddLine,"%PATH%\Programs\registry.entries.cmd",reg.exe add #$qHKLM\SOFTWARE\Classes\*\OpenWithList\Opera1218.exe#$q /ve /t REG_SZ /d #$qOpera1218#$q /f,Append
+TXTaddLine,"%PATH%\Programs\registry.entries.cmd",reg.exe add #$qHKLM\SOFTWARE\Classes\Applications\Opera1218.exe\shell\open\command#$q /ve /t REG_SZ /d #$q\#$q#$p~dp0Opera1218\Opera.exe\#$q \#$q%%1\#$q#$q /f,Append
+TXTaddLine,"%PATH%\Programs\registry.entries.cmd",),Append
+TXTaddLine,"%PATH%\Programs\registry.entries.cmd",,Append
+IniWrite,"%OutputDir%\Project.Settings.ini",PROGRAMS,Opera,YES
+
+[IN.WIM]
+Echo,"Mounting registry hives..."
+If,Not,ExistRegSection,HKLM,_WinPE_SOFTWARE,RegHiveLoad,_WinPE_SOFTWARE,"%Target_config%\software"
+RegWrite,HKLM,0x1,_WinPE_SOFTWARE\Classes\.htm,,Opera1218
+System,Erroroff,1
+RegDelete,HKLM,_WinPE_SOFTWARE\Classes\.htm\OpenWithList
+RegWrite,HKLM,0x1,_WinPE_SOFTWARE\Classes\.html,,Opera1218
+System,Erroroff,1
+RegDelete,HKLM,_WinPE_SOFTWARE\Classes\.html\OpenWithList
+RegWrite,HKLM,0x1,_WinPE_SOFTWARE\Classes\Opera1218,,Web Page
+RegWrite,HKLM,0x2,_WinPE_SOFTWARE\Classes\Opera1218\DefaultIcon,,#$psystemdrive#$p\Programs\Opera1218\Opera.exe
+RegWrite,HKLM,0x2,_WinPE_SOFTWARE\Classes\Opera1218\shell\open\command,,#$psystemdrive#$p\Programs\Opera1218\Opera.exe #$q%1#$q
+RegWrite,HKLM,0x1,_WinPE_SOFTWARE\Classes\*\OpenWithList\Opera1218.exe,,Opera1218
+RegWrite,HKLM,0x2,_WinPE_SOFTWARE\Classes\Applications\Opera1218.exe\shell\open\command,,#$psystemdrive#$p\Programs\Opera1218\Opera.exe #$q%1#$q
+If,%Openwith.workaround%,Equal,YES,Begin
+RegRead,HKLM,_WinPE_SOFTWARE\Classes\*\shell\Open with,Subcommands,%Subcommands%
+Set,%new.subcommand%,%Subcommands%;openwith.Opera1218
+RegWrite,HKLM,0x1,"_WinPE_SOFTWARE\Classes\*\shell\Open with",Subcommands,%new.subcommand%
+RegWrite,HKLM,0x1,_WinPE_SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\CommandStore\shell\openwith.Opera1218,,Opera1218
+RegWrite,HKLM,0x2,_WinPE_SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\CommandStore\shell\openwith.Opera1218\command,,#$q#$psystemdrive#$p\Programs\Opera1218\Opera.exe#$q #$q%1#$q
+End
+Echo,"Unmounting registry hives..."
+RegHiveUnload,_WinPE_SOFTWARE
+If,%FullProjectRun%,Equal,NO,Begin
+  IniRead,"%TargetDir%\Project.Settings.ini",Main,Image.Number,%Boot.wim.Image.number%
+  WimPathAdd,%OutputDir%\sources\boot.wim,%Boot.wim.Image.number%,%TargetDir%,""
+End
+//Wait,1
+
+[NOT.IN.WIM]
+//Wait,1
+If,%FullProjectRun%,Equal,NO,Run,"%ProjectDir%\Core\common.script",PostConfigRunNotInWim
+
+[AuthorEncoded]
+Opera.ico=8481,11308
+logo=Opera.ico
+
+[EncodedFile-AuthorEncoded-Opera.ico]
+lines=2
+0=eJztXAdYVEfXvkjZpbPLFmDZvkvZRUSll12wx15iiyXYKwrGjkqzm8QaY43dJCoWUKxRLBHF3rFF0NgbWFFZ3n/u3V0ExJLP5P+f5/szz3OYnTt35rxz5tyZM+VAURYUi5LJXEhsRd2pRlHDKYpycTGmfSwoqqslRfIpkmZTv7ApaqIVnW9M97WmKH9HigoIoNMy6hc1Rc3lmt8nafKeLtT8vozqS8reakRRPoQHeYWKpiiGDxOqUe+E5ORkUBQIUXg39+MBnxQIBg6HY04VGpPmB3Q1HI4URcYHdNKC+Uk/pF+mnDmmNMeYbcqh32Kyi5g0XUrKZDPpQnPa2ZimzGmmIqkJRFma/CCvcQpNaRdjNUaGdNoZprQRCOH3z6WLytLSKtMoJ48q00UmeUrx9oW3Ai97UL6LKiX/cigkckum9CWUxLmQ0rPyXfSW2QHjLJNjx1hQ+SMtLPLjLSyzYynL7OjktGzL5EJKmozspKopPymFoUK9JUPFEhZKSD+C0gPZFdjSeu5i0nWznidXoad/n54zakRXxJEWcRgtQyGtPiRBHtG6WkgUhtZR829n0LJ9HxXRsfRtDKbeCt1t5EsVsigquwdpSwFFsfeSdpOGBpDGJ8eTvMK3VFxkpBLybinL2OqK4wHb2Cird9t57jxw8dITnD5bhBMnC3H0hAEHc0uRc+gJ8i7cxZmzD3Hi1AMcOfYQ+w7cRW7ubRzYfwWbd5ViY0YhlqW/xu7d95G1/TF27ryNbVtvYUPmXaxcfR/Ll+dj0Vpg9jIDpi8txcJl9/HDj4WYtgiYOB9I/cGA5DnPMWPmA3w7/R5SJ9/Bt9/fQtrEm9ix/SzSMy5i8ZJryNzwG9av2Ym1q7IwZdpviJ/wEv1SSzEy7S5iE0vQ/ZsidBpRirbxQOtBpWjW+xVa9HmJ1j0fo34XA+p3fYHoLwk1voWxY86gx5CL6N03DwPiziNh+D707pmLLl2uoFWbPLRsvh8NGx9CnTpH0LzZPtStsw/61s8Q2fgZIhoVIqzOfQQ3PI0Y/SmE6h4iKPQ6akcUoFZIPvwDCuBf8w/UrHEV/to8QmfhpT4Fne4woQOoXesgfH2Owtf7OFSKXGi1B6FWHYRcug8SSQ709bagdu1d0PjshpdmG9TKXdD6boWXfxb5vRV+weuhUK6GSLQT7sKdEIsz4SbYDL5rJjhOG+EmXAc+bx3Enisg4K0kz9bD0X4tRIqZELrNB891MTxFM+HKnQVn5/lwcpoJiehb8Hjfg8uZgMTERCQMGI3BvXujb9eu6N7uS7Rv+TW6ftkWbRq3RtN6HfFVi2Zo27gxatUaieo1x8JPOw5K5VCCrzfcPcZBLEqAo+MYONgPhYewH6m/N1xcesLefhAcHfpCIWkNhWc9SMSdCZb2EPLbkPfbwl1QF1ynpnB2agyFKAI8bgTs7SL+4+/33/Bp4bPmgHfDhIlTpi5aNG1yVXlpaWnfrloxNylx+PDEMTOqyJ20auXYhLgGdTv2j4ttX9+vUi7JXpAwKEEvAMbPG9y2RU3vCrlpaYsXDBo84isB/WDKj+0a13ZxrJD93bKEwQlD1QLmweLeof5O1VjlstOWj4uLH9rf2fjgu1GB7pS1ve3b7O8WDIqPH/GVjfHBlDnVra3FMnZZdtriJJI/UudoejBTRLkHBPHtzPlYOnQwyVd7mdLf+7jVCm2iZpvygfnx8fEJI1S+pvwZUbW+aNqmztv8H0j1CUMVGlM6uVnjVq07NLczA0Bq3ODB8QkKrfFtjO3dtn2X2E6csgamxNFBrmFygZ+GdYmNjevFKxPR6K6xJHh6mR6kjO0WFxff35wPDGvXvn27Lz0dTMklYwm/hP6uZfkDW7RoHB4oqmZKpjL5fe3L8gcEBfp7OHGrlZUn4hja860NMl3iYm3lIjDnL6XzR9QTvlUBLuUkDaphYc5PJPkJkeVUJNotIKxVXUtTatlwIo1y8ICZwV+06vC1wJRaGD84fmTDmHL56Neyc7c4vSnxAyke71M+G/P6dItL6Gn8vTIxLn5kTIXiwBzSA/E96F/LF5C+blQpm7zwzeD4b2avXv3zgqFDRnZ8JxuYNZwIJXHs8Pi4Tsoqsuk3hsZ2b98hIqTq3M8IpUSy+VQSsemkpZSbczEVySqkQi3zqXiLbCrWIplYEsnJFJXCkAWVncyiiE1HlVJJFJIrUXaSRRnlJ1kifxyx6yJZKCY2XQklJfZJkpltRXvOZKdYvDtO7d5bjHUZRZi/7AEWLirBnLmFWLD4EVLTbmN04gsyjxehz6CH6N79Lr766iaGDf8DsYMvoFuvC/h6wEU0bnoVLVocQ8MW+1GvLplrdXmIjDiHiPDjZF4+isjoaQioQeZd9R4yR28lc/R6iNwzyTybAQ+3DVAqFiAkLJXM1VPIHLcYUvFsZr709e7x7xz1b/g3/MOhqiFLrVZ7KSUSidCcIkny24vrUj4JtZuzHZMkxiefzpBbWNJpeEkkPKYSx2q2JAkvqYTHPOc6sZnnIlceeUzec7ejOXhxbRiLgZTjM7EDVTFtZV0hDRXH3pg2JuGlZKYfL7F5WvXy5NNP+WVN8pJ5mAtXDp+/HgwgFEsZ942YMOP/qjf/Df+G/+4Q6Cm0CFeKWZG+Mme9Vumhq65S67XqGhG+XhG1VeoW1WXevb08fBJlQu0UCT9gtlQYNFMmDBnNddB/aWPTzM/aqjn7fxtzhJfEWq9RcGP8VN7RfuoYvVbVjmDvo9OoEkLUqhQfT9kSoYv0iKNdwCNbdn3Y2XYj6/oEstYfDgeHUWQdPxwczhAIBXHFYnG/k3JFr5FcTnvpP4k5XCGyitYqBXo/dU29Rtlcp1H2IzSKUAqhtDAv9WQfkexnV0f1eTt2/Vf0vgSXM5/YdOsh9txM7LhMSDwzIPIgdp77ZkKbSN4vEItXISDwFzRv/dPtli0npXqKuon+TtwRPjK23k9JdELVlOCMI5REaDyhCaY4taZcNUfgIj7Ktol65ew8DW6CTIJtO8G7jdio2xEethfR+lyEhvwOH2KzeorWEdt0C+Sy/VArD8PH+xgCgw6hR989mDd/z9WGDZLrfy7uSB+pbYxW6U9wf0UwjjRhNVMaTXqNKrmmXPGji73imq1tLAS8NQxudyGRr3ATsbd3Yep3N7F52yssWfKscOKE6/tbNVu2tbpm7BWBYAppx1qC/Sj8/c4jJPQGGrS6jYQxedix88KL4cOWDv1PcIepPCxi/NQSnVbVlmBMLCfnMtxG7MrkIJVyhou98oat7UCCeSvBnsWsA4T8TUSuWZg09Q7uPwbO5uHn9PTn6j59FjInLTF+Cl+tIuo3DmcEWS/sQs2AqwiJvImY1s/RfZQBMxdewfHj+RgUt7DfX8Ee4S2zi/ZTRRB8CVVhLsOuVaaEeSknC5yVeXZ2cQQzjXsLg50mvutGtO9wChcvAdduYMbqdSUVVlrkO4qK9pMkKj0iTvH536F27T8QUf8B6nZ8hS4E/4JfDdiy7Rou5t0syc292PhTsOu0Cg6ReUuTfk+oCrdJ7qlRhBRCeTaL1YaMIfR3+BY7LXu5dAvmL3yIP2+W/pG+/rVLeT6kb31JPUOjtYqkUC/ZHK5Tp2K/gCOIbvkSTfqUYOCEEixZW4qTZ95g//7LuH378R9nz9wQfAh7HT+VK8He2YSxSpmXk31STYXiJ7ZN8BsuZwHBvq0MO0087gZERe5HTm4J9u0r/aaC3Gm91CgHmuUTrZUme7iGX5aTNWj9TqX4akQpJv5IZL/LgMtXgDPnnuHYsQJcL3gw4X3YI4nOkG+01SdhN8YpYr7PCTZ7oElvMiri56xH169P4dx5PF+y9IHCzKe+n8qN9FuP8vXF+MnHqNx9dgtE09C452sMmQKsSDfg5CkDjh43IGsPkLH1T9y48ejhxbw78srYg8T0t6oKLjcmvhe7WfZBXqp5DnbRr3jcFWXfq5ncBDRtQkpaAa4VIPfr5gmM3tNznU6r7FqZB9GhcQEy2VIOL670y4EPMGs58PshA06fMSB9swGT55cSeoGDubfw8MGzie/ovLfchehNzw/peyX8Y2RC9V42u4/pe82sgJ
+1=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
+2=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
+

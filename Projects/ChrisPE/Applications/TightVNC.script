@@ -1,11 +1,11 @@
 [main]
 Title=TightVNC Server
 Description=TightVNC for Windows version 2.8.8.0
-Selected=True
+Selected=False
 Level=5
 Author=ThePEBakeryTeam
-Version=20180321
-Date=2018-03-21
+Version=20190426
+Date=2019-04-26
 Interface=Interface1
 
 [Interface1]
@@ -149,7 +149,10 @@ If,%pCheckBoxAuto%,Equal,True,Begin
   If,Not,ExistFile,%ProjectTemp%\winpeshl.txt,FileCreateBlank,%ProjectTemp%\winpeshl.txt
   TXTaddLine,%ProjectTemp%\winpeshl.txt,"#$pSystemDrive#$p\Programs\TightVNC\tvnserver.cmd",Append
 End
-If,%FullProjectRun%,Equal,NO,WimPathAdd,%OutputDir%\sources\boot.wim,%Boot.wim.Image.number%,%TargetDir%,""
+If,%FullProjectRun%,Equal,NO,Begin
+  IniRead,"%TargetDir%\Project.Settings.ini",Main,Image.Number,%Boot.wim.Image.number%
+  WimPathAdd,%OutputDir%\sources\boot.wim,%Boot.wim.Image.number%,%TargetDir%,""
+End
 
 [NOT.IN.WIM]
 //Wait,1

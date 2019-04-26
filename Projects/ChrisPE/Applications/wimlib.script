@@ -1,0 +1,132 @@
+[main]
+Title=wimlib
+Description=wimlib is an open source, cross-platform library for creating, extracting, and modifying Windows Imaging (WIM) archives. 
+Selected=False
+Level=5
+Author=ThePEBakeryTeam
+Version=20190426
+Date=2019-04-26
+Interface=Interface1
+
+[Interface1]
+pTextLabelMenu1="1",1,1,35,3,70,18,10,Bold
+pButtonMenu2="2",1,8,75,0,70,20,pButtonMenu2,0,True,_pButtonMenu2_,True
+pButtonMenu3="?",1,8,145,0,70,20,pButtonMenu3,0,True,_pButtonMenu3_,True
+pWebLabel1=https://wimlib.net/,1,10,51,100,216,18,https://wimlib.net/
+pTextLabel1="wimlib Website",1,1,51,77,230,18,10,Bold
+pCheckBoxInWim="Include Program in boot.wim",1,3,51,265,180,18,True
+
+[Interface2]
+pButtonMenu1="1",1,8,5,0,70,20,pButtonMenu1,0,True,_pButtonMenu1_,True
+pTextLabelMenu2="2",1,1,108,3,70,18,10,Bold
+pButtonMenu3="?",1,8,145,0,70,20,pButtonMenu3,0,True,_pButtonMenu3_,True
+pBevel1=,1,12,10,65,66,2
+pTextLabel="Menu Entries",1,1,10,50,230,18,8,Bold
+pCheckBoxShortcutDesktop="Add to Desktop Menu",1,3,40,80,150,18,True
+pCheckBoxShortcutQuick="Add to Quicklaunch Menu",1,3,40,110,150,18,True
+pCheckBoxShortcutPrograms="Add to #$qStart#$q > ",1,3,40,140,99,18,True
+pCheckBoxShortcutLaunchBar="Add to LaunchBar Menu ",1,3,40,170,150,18,True
+pButtonShortcut1=?,1,8,10,80,18,18,pButtonShortcut1,0,True,_pButtonShortcut1_,True
+pButtonShortcut2=?,1,8,10,110,18,18,pButtonShortcut2,0,True,_pButtonShortcut2_,True
+pButtonShortcut3=?,1,8,10,140,18,18,pButtonShortcut3,0,True,_pButtonShortcut3_,True
+pButtonShortcut4=?,1,8,10,170,18,18,pButtonShortcut4,0,True,_pButtonShortcut4_,True
+pTextBox1=,1,0,140,140,150,21,Programs
+
+[pButtonMenu1]
+IniWrite,%ScriptFile%,Main,Interface,Interface1
+System,REFRESHINTERFACE
+
+[pButtonMenu2]
+IniWrite,%ScriptFile%,Main,Interface,Interface2
+System,REFRESHINTERFACE
+
+[pButtonMenu3]
+message,"Click on the buttons to toggle between tabs 1 and 2. #$x#$xTab 2 contains menu options for use in the selected shell. Click on the ? button for information about the different options."
+
+[pButtonShortcut1]
+message,"WinXShell only#$x#$xSelect this option to add a program shortcut to the Desktop."
+
+[pButtonShortcut2]
+message,"WinXShell only#$x#$xSelect this option to add a program menu option to the Quicklaunch menu - similar in appearence to the 'Pin to Taskbar' option in Windows 7/8/10."
+
+[pButtonShortcut3]
+message,"Applies to WinXShell#$c BBLean and LaunchBar Shell(s)#$x#$xSelect this option to add a program menu option to the Start menu. Leave blank to add to the root of the menu#$c or manually type a path to place in a sub-menu (do not use spaces in the path). E.g. #$x#$s- FileManager#$x#$s- Programs#$x#$s- Programs\FileManager#$x#$xAnd looking at the examples above - #$x#$xLeave this option blank to add a menu entry to the root of the program menu (the 'Start' menu in WinXShell#$c the 'Start' menu in BBLean#$c or the root of the LaunchBar menu bar if LaunchBar is selected as Shell)#$x#$xEnter 'FileManager' to add a menu entry for this application to the 'Start' > 'FileManager' sub-menu (WinXShell and bblean) or the 'FileManager' sub-menu in LaunchBar.#$x#$xEnter 'Programs' to add a menu entry for this application to the 'Start' > 'Programs' sub-menu (WinXShell and bblean) or the 'Programs' sub-menu in LaunchBar.#$x#$xEnter 'Programs\FileManager' to add a menu entry for this application to the 'Start' > 'Programs' > 'FileManager' sub-menu (WinXShell and bblean) or the 'Programs' > 'FileManager' sub-menu in LaunchBar."
+
+[pButtonShortcut4]
+message,"This setting does not apply to any LaunchBar instance running as the WinPE Shell. This option only applies to a LaunchBar instance when the Applications' > 'LaunchBar' program script is selected in the build.#$x#$xIf the 'Applications' > 'LaunchBar' program script is selected than enable this option to add a program menu entry to the root of the LaunchBar menu bar. #$x#$xPlease note that if option '6] Programs in boot.wim' in the main project script is set as 'NO'#$c then LaunchBar and a number of other applications will not be available at boot. In this case a text based .ini file will be used for LaunchBar menu settings."
+
+
+[process]
+If,%FullProjectRun%,Equal,NO,Run,"%ProjectDir%\Core\common.script",PostConfigRun
+AddInterface,%ScriptFile%,Interface1,""
+AddInterface,%ScriptFile%,Interface2,""
+If,%pCheckBoxInWim%,Equal,True,Set,%PROGRAMS.IN.WIM%,YES
+Else,Set,%PROGRAMS.IN.WIM%,NO
+Run,%ScriptFile%,CHECKS
+Run,%ScriptFile%,MENU
+Run,%ScriptFile%,COMMON
+If,%PROGRAMS.IN.WIM%,Equal,NO,Run,%ScriptFile%,NOT.IN.WIM
+If,%PROGRAMS.IN.WIM%,Equal,YES,Run,%ScriptFile%,IN.WIM
+
+[CHECKS]
+If,Not,ExistFile,"%Programs%\wimlib\%ARCH%\wimlib-imagex.exe",Begin
+  Message,wimlib is missing - exiting script...,Error,5
+  Exit,wimlib is missing - exiting script...,WARN
+End
+
+[MENU]
+If,%PROGRAMS.IN.WIM%,Equal,NO,Begin
+  If,Not,ExistFile,"%OutputDir%\Programs\ShortcutsNotInWim.txt",Run,"%ProjectDir%\Core\common.script",NotInWim
+  If,%Filemanager%,Equal,7-zip,TXTaddline,"%OutputDir%\Programs\ShortcutsNotInWim.txt","#$p~dp0nircmd.exe shortcut #$q#$pSystemDrive#$p\Programs\7-zip\7zfm.exe#$q #$q#$pTemp#$p\ShortCuts#$q #$qwimlib#$q #$q#$p~dp0wimlib#$q #$q#$p~dp0misc\folder.ico#$q #$q0#$q",Append
+  If,%Filemanager%,Equal,Explorer++,TXTaddline,"%OutputDir%\Programs\ShortcutsNotInWim.txt","#$p~dp0nircmd.exe shortcut #$q#$pSystemDrive#$p\Programs\Explorer++\Explorer++.exe#$q #$q#$pTemp#$p\ShortCuts#$q #$qwimlib#$q #$q#$p~dp0wimlib#$q #$q#$p~dp0misc\folder.ico#$q #$q0#$q",Append
+  If,%Filemanager%,Equal,JustManager,TXTaddline,"%OutputDir%\Programs\ShortcutsNotInWim.txt","#$p~dp0nircmd.exe shortcut #$q#$pSystemDrive#$p\Programs\JustManager\JustManager.exe#$q #$q#$pTemp#$p\ShortCuts#$q #$qwimlib#$q #$q#$p~dp0wimlib#$q #$q#$p~dp0misc\folder.ico#$q #$q0#$q",Append
+  If,%Filemanager%,Equal,Q-Dir,TXTaddline,"%OutputDir%\Programs\ShortcutsNotInWim.txt","#$p~dp0nircmd.exe shortcut #$q#$pSystemDrive#$p\Programs\Q-Dir\Q-Dir.exe#$q #$q#$pTemp#$p\ShortCuts#$q #$qwimlib#$q #$q#$p~dp0wimlib#$q #$q#$p~dp0misc\folder.ico#$q #$q0#$q",Append
+End 
+If,%PROGRAMS.IN.WIM%,Equal,YES,Begin
+  If,%Filemanager%,Equal,Q-Dir,ShellExecute,Hide,"%Tools%\Shortcut.exe","/A:C /T:#$q#$pSystemDrive#$p\Programs\Q-Dir\Q-Dir.exe#$q /F:#$q%ProjectTemp%\wimlib.lnk#$q /P:#$q#$pSystemDrive#$p\Programs\wimlib#$q /W:#$q#$pSystemDrive#$p\Programs\wimlib#$q /I:#$q#$pSystemDrive#$p\Programs\misc\folder.ico#$c0#$q"
+  If,%Filemanager%,Equal,Explorer++,ShellExecute,Hide,"%Tools%\Shortcut.exe","/A:C /T:#$q#$pSystemDrive#$p\Programs\Explorer++\Explorer++.exe#$q /F:#$q%ProjectTemp%\wimlib.lnk#$q /P:#$q#$pSystemDrive#$p\Programs\wimlib#$q /W:#$q#$pSystemDrive#$p\Programs\wimlib#$q /I:#$q#$pSystemDrive#$p\Programs\misc\folder.ico#$c0#$q"
+  If,%Filemanager%,Equal,JustManager,ShellExecute,Hide,"%Tools%\Shortcut.exe","/A:C /T:#$q#$pSystemDrive#$p\Programs\JustManager\JustManager.exe#$q /F:#$q%ProjectTemp%\wimlib.lnk#$q /P:#$q#$pSystemDrive#$p\Programs\wimlib#$q /W:#$q#$pSystemDrive#$p\Programs\wimlib#$q /I:#$q#$pSystemDrive#$p\Programs\misc\folder.ico#$c0#$q"
+  If,%Filemanager%,Equal,7-zip,ShellExecute,Hide,"%Tools%\Shortcut.exe","/A:C /T:#$q#$pSystemDrive#$p\Programs\7-zip\7zfm.exe#$q /F:#$q%ProjectTemp%\wimlib.lnk#$q /P:#$q#$pSystemDrive#$p\Programs\wimlib#$q /W:#$q#$pSystemDrive#$p\Programs\wimlib#$q /I:#$q#$pSystemDrive#$p\Programs\misc\folder.ico#$c0#$q"
+  If,ExistFile,"%ProjectTemp%\wimlib.lnk",Begin
+    Set,%MyShortcut%,wimlib.lnk
+    If,%pCheckBoxShortcutDesktop%,Equal,True,FileCopy,"%ProjectTemp%\%MyShortcut%","%ProjectTemp%\ShortCuts\Desktop"
+    If,%pCheckBoxShortcutQuick%,Equal,True,FileCopy,"%ProjectTemp%\%MyShortcut%","%ProjectTemp%\ShortCuts\Quick"
+    If,%pCheckBoxShortcutPrograms%,Equal,True,Begin
+      Set,%ProgramMenuPath%,%pTextBox1%
+      Run,"%ProjectDir%\Core\common.script",StartMenu
+    End
+    If,%pCheckBoxShortcutLaunchBar%,Equal,True,FileCopy,"%ProjectTemp%\%MyShortcut%","%ProjectTemp%\ShortCuts\LaunchBar"
+    If,%FullProjectRun%,Equal,NO,Run,"%ProjectDir%\Core\common.script",PostConfigRunShortcuts
+    FileDelete,"%ProjectTemp%\%MyShortcut%"
+  End
+End
+
+[COMMON]
+If,%PROGRAMS.IN.WIM%,Equal,NO,Set,%PATH%,%OutputDir%
+If,%PROGRAMS.IN.WIM%,Equal,YES,Set,%PATH%,%TargetDir%
+If,Not,ExistDir,"%PATH%\Programs",DirMake,"%PATH%\Programs"
+If,Not,ExistDir,"%PATH%\Programs\misc",DirMake,"%PATH%\Programs\misc"
+If,ExistFile,"%Programs%\misc\folder.ico",FileCopy,"%Programs%\misc\folder.ico","%PATH%\Programs\misc"
+DirMake,"%PATH%\Programs\wimlib"
+Echo,"Copying files..."
+DirCopy,"%Programs%\wimlib\%ARCH%\*.*","%PATH%\Programs\wimlib"
+IniWrite,"%OutputDir%\Project.Settings.ini",PROGRAMS,WIMLIB,YES
+
+[IN.WIM]
+If,%FullProjectRun%,Equal,NO,Begin
+  IniRead,"%TargetDir%\Project.Settings.ini",Main,Image.Number,%Boot.wim.Image.number%
+  WimPathAdd,%OutputDir%\sources\boot.wim,%Boot.wim.Image.number%,%TargetDir%,""
+End
+//Wait,1
+
+[NOT.IN.WIM]
+//Wait,1
+If,%FullProjectRun%,Equal,NO,Run,"%ProjectDir%\Core\common.script",PostConfigRunNotInWim
+
+[AuthorEncoded]
+wim2.ico=1820,2427
+logo=wim2.ico
+
+[EncodedFile-AuthorEncoded-wim2.ico]
+lines=0
+0=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

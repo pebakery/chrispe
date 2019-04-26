@@ -1,0 +1,36 @@
+@charset "utf-8";
+/*	Name: 837256235 */
+/*	Append CLASS and/or ID names for elements.
+	Copyright 2012 Opera Software */
+[id]::before, [class]::before, [class][id]::before {
+	font-size: 11px !important;
+	font-weight: bold !important;
+	text-decoration: none !important;
+	padding: 1px !important;
+	margin: 0 !important;
+	border: 1px solid #010101 !important;
+	float: none !important;
+	position: static !important;
+	display: inline-block !important;
+}
+[id]::before {
+	content: "ID: " "\0022" attr(id) "\0022";
+	color: rgb(226,228,235) !important;
+	background-color: rgb(51,102,204) !important;
+}
+[class]::before {
+	content: "CLASS: " "\0022" attr(class) "\0022";
+	color: rgb(226,228,235) !important;
+	background-color: rgb(46,61,77) !important;
+}
+[class][id]::before {
+	content: "CLASS: " "\0022" attr(class) "\0022" 
+		" and ID: " "\0022" attr(id) "\0022";
+	color: rgb(30,30,30) !important;
+	background-color: rgb(255,204,0) !important;
+}
+html[id]::before, html[class]::before, table[id]::before, 
+table[class]::before, table[id][class]::before, td[id]::before, 
+td[class]::before, td[id][class]::before, th[id]::before, 
+th[class]::before, th[id][class]::before {display: none !important;}
+

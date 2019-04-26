@@ -1,0 +1,158 @@
+@charset "utf-8";
+/* Stylesheet for the Opera security certificate document */
+/* Copyright 2012 Opera Software */
+@media not print {
+html {
+	font-family: sans-serif;
+	color: hsl(0,0%,22%);
+	background-color: hsl(0,0%,93%);
+	margin: 0 auto 10px;
+	border-width: 0 1px;
+	border-color: hsl(0,0%,57%);
+	border-style: solid;
+	max-width: 660px;
+}
+html, head {max-width: 660px;}
+head {
+	margin: auto;
+	position: relative;
+	display: block;
+}
+body {
+	color: inherit;
+	background-color: hsl(0,0%,96%);
+	margin: 0;
+}
+title {
+	font-family: sans-serif;	
+	font-size: 110%;
+	font-weight: normal;
+	text-align: right;
+	letter-spacing: -1px;
+	color: hsl(0,0%,29%);
+	background-image: url(images/top.png);
+	background-repeat: repeat-x;
+	padding: 20px 10px 15px;
+	margin: 0;
+	display: block;
+}
+html[dir="rtl"] title {
+	text-align: left;
+	letter-spacing: normal;
+}
+h1, h2, caption {
+	font-family: sans-serif;
+	font-size: 75%;
+	font-weight: normal;
+	letter-spacing: -1px;
+	color: hsl(0,0%,29%);
+	background-color: hsl(0,0%,89%);
+	background-image: url(images/bar.png);
+	background-repeat: repeat-x;
+	background-position: 0px -5px;
+	padding: 5px 7px;
+	margin: 0;
+	border-top: 1px solid hsl(0,0%,57%);
+	border-bottom: 1px solid hsl(0,0%,57%);
+}
+html[dir="rtl"] h1, html[dir="rtl"] h1, html[dir="rtl"] caption {
+	text-align: right;
+	letter-spacing: normal;
+}
+caption {
+	font-size: 120%;
+	text-align: left;
+}
+html[dir="rtl"] caption {text-align: right;}
+address {font-style: normal;}
+a {
+	color: hsl(0,0%,29%);
+	background-color: transparent;
+}
+table {
+	font-size: 70%;
+	line-height: 130%;
+	padding: 0;
+	margin: 5px auto 10px;
+	border-spacing: 0;
+	border-collapse: collapse;
+	width: 100%;
+}
+table table {font-size: 100%;}
+th, td {
+	vertical-align: top;
+	padding: 2px 3px;
+	border-width: 1px 0;
+	border-style: solid;
+	border-color: hsl(0,0%,87%) hsl(0,0%,96%) hsl(0,0%,96%);
+}
+th {
+	font-weight: normal;
+	text-align: left;
+	padding: 2px 10px;
+	width: 150px;
+}
+html[dir="rtl"] th {text-align: right;}
+.certificate table th {
+	font-style: italic;
+	width: auto;
+}
+tr:first-child th, tr:first-child td {border-top-color: hsl(0,0%,96%);}
+pre {
+	font-size: 100%;
+	white-space: pre-wrap;
+	padding-right: 5px;
+}
+html[dir="rtl"] pre {padding: 0 0 0 5px;}
+body::after {
+	content: "";
+	background-color: hsl(0,0%,98%);
+	background-image: url(images/center.png);
+	background-repeat: repeat-x;
+	background-position: left bottom;
+	border-top: 1px solid hsl(0,0%,57%);
+	height: 20px;
+	width: 100%;
+	display: block;
+}}
+@media tv, handheld {html {font-size: 150%;}}
+@media screen and (max-width: 660px), projection and (max-width: 660px), tv and (max-width: 660px), handheld and (max-width: 660px) {
+	pre {
+		max-width: 250px;
+		overflow: auto;
+	}
+}
+@media screen and (max-width: 400px), projection and (max-width: 400px), tv and (max-width: 400px), handheld and (max-width: 400px) {
+	th {width: 100px;}
+}
+@media screen and (max-width: 235px), projection and (max-width: 235px), tv and (max-width: 235px), handheld and (max-width: 235px) {
+	html {
+		margin: 0 auto;
+		border-width: 0 1px 1px;
+	}
+	h1 {
+		text-align: center;
+		padding: 10px 5px;
+		height: auto;
+	}
+}
+@media all and (min-width: 1025px) {html, head {max-width: 700px;}}
+@media all and (min-width: 1281px) {html, head {max-width: 800px;}}
+@media all and (min-width: 1601px) {html, head {max-width: 900px;}}
+@media print {
+	* {border: none;}
+	h1 {
+		font-size: 16pt;
+		text-align:center;
+	}
+	h2 {font-size: 13pt;}
+	table, h2+p {margin-bottom: 1cm;}
+	td, th {
+		font-size: 10pt;
+		text-align: left;
+		vertical-align: top;
+	}
+	pre {white-space: normal;}
+	address {font-style: normal;}
+}
+

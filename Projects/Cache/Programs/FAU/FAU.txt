@@ -1,0 +1,246 @@
+November 30, 2007:
+
+ 
+•FAU released.
+•Build 2362 fixes a bug in the DD  `seek’  and `--seek’ options that was discovered subsequent to the release of build 2362.  This bug also affected the function of the DD `notrunc’ and `-a’  options.  Thanks to Liang Chen for reporting this problem.
+
+ 
+
+What’s included in this release: 
+
+ 
+
+Included in this release are x86 and x64 versions of the following modules:
+
+ 
+
+1.      Dd.exe:  A completely new implementation inspired by the popular GNU dd utility program.
+
+2.      Volume_dump.exe: An original utility to dump volume information and drive information and USN journals. 
+
+3.   FMData.exe: An original utility to collect files system metadata, to produce and verify security catalogs (cryptographic hash sets) using one or more cryptographic hash algorithms and to verify system binaries using the system file checker (SFC) API.
+
+4.      Wipe.exe:  An original utility to sterilize media prior to forensic duplication.
+
+5.      Nc.exe:  A completely new implementation of the popular Netcat utility inspired by the original version created by Hobbit.
+
+6.      Zlib.dll:  The latest version of Jean-loup Gailly and Mark Adler’s Zlib (currently version 1.2.8). 
+
+7.   Bzip2.dll:   The latest version of J. Seward’s bzip2 library (currently 1.0.6).
+
+8.   Boost_regex-vc100-mt-1_46_1.dll: Boost’s regular expression library.
+
+9.   Fauerror_xxx.dll: A series of dynamic link libraries (dll’s) that contain the localized language strings for FAU output.  There is one dll for each locale supported by the FAU.
+
+ 
+
+This software requires Microsoft Windows 5.0 (Windows 2000) or later.  Versions of Microsoft Windows prior to Windows 2000 will not be supported.  The software has been tested on Microsoft Windows 2000 Gold and SP1-SP4, Microsoft Windows XP with SP2 and SP3, Windows XP Home SP2,  Microsoft Windows Server 2003 Gold and SP1 and SP2, and both x86 and x64 versions of Microsoft Windows Vista with SP1 and SP2, Microsoft Windows Server 2008, Microsoft Windows Server 2008 with SP2, Microsoft Windows 7 and Microsoft Windows Server 2008 R2.  
+
+ 
+
+Program Binaries:
+
+ 
+
+This release is distributed only in binary form and includes both Intel x86 and AMD x64 binaries.  FAU binaries may be downloaded from here.  A detached PGP signature of the compressed zipped binaries is available from here.  Decompress the ZIP archive into a folder.  Download the PGP detached signature and verify the ZIP archive.  The decompressed binaries then may be burned onto a CDROM disk or other removable media.  To run the accompanying executables, open a command prompt and navigate to the FAU installation folder.  Type the appropriate command and press enter.
+
+ 
+
+Program executables are optimized to minimize their memory footprint.  Programs optimized for reduced size may be slower than the same programs when optimized for speed.
+
+ 
+
+Microsoft CRT version 10.0:
+
+ 
+
+This release requires version 10.0 SP1 of the Microsoft C/C++ runtime libraries.  Redistributable copies of the Microsoft runtime libraries are included in the FAU distribution.  They also may be downloaded independently from http://www.microsoft.com/download/en/details.aspx?id=8328 (x86); and http://www.microsoft.com/download/en/details.aspx?id=13523 (x64).
+
+ 
+
+Operating System Requirements: 
+
+ 
+
+This software requires Windows™ XP or later version of Microsoft Windows™.  Both x86 and x64 versions of Microsoft Windows™ are supported.  
+
+ 
+
+License: 
+
+ 
+
+The Forensic Acquisition Utilities are distributed under the GMG Systems, Inc. Open License.  The Open License permits the use of the FAU for both commercial and non-commercial uses, subject to certain restrictions.
+
+ 
+
+Downloading the Forensic Acquisition Utilities:
+
+ 
+
+The current release Microsoft Windows binaries of the Forensic Acquisition Utilities is build 1.4.0.2464, which may be downloaded as a compressed zip file from here.  A detached PGP signature of the compressed zipped binaries is available from here.   
+
+ 
+
+National Language Support:
+
+ 
+
+The FAU is a fully localized application with initial support for American English, Dutch, French, German, Italian, Spanish, Portuguese and Chinese (PRC).  My apologies if I have offended anyone by my attempt to translate the FAU into their language.  Any errors in the language bindings are wholly my own.  Corrections will be welcomed.  I am indebted to Robert-Jan Mora and Christel Verheyden for assistance with the Dutch translation.  I am indebted to Alexander Geschonneck and Frank Birkmair for assistance with the German translation and to Silvia Latapie for assistance with the Spanish translation.   I am indebted to Tom Zhou and William Ma for the Chinese translation.  I am indebted to Daniel Moreira for assistance with the Portuguese translation.
+
+ 
+
+XML schema used by the FAU.
+
+ 
+
+The FAU produces output for many commands in XML format.  The XML schema used by the FAU is available here.  
+
+ 
+
+Contact Information.
+
+ 
+
+The Forensic Acquisition Utilities is a product of GMG Systems, Inc.  If you have any questions or to report bugs, please contact GMG Systems, Inc. at support (at) gmgsystemsinc (dot) com.
+
+ 
+
+Remarks:
+
+ 
+
+Over the past several years differing visions of computer or digital forensics have evolved [1].  On the one hand, there are those who view computer forensics as applying narrowly to the analysis of evidence acquired through “proper evidence handling procedures.”  The term “proper” is reserved for the acquisition of evidence by forensic duplication (“imaging”) and the term “evidence” generally refers to file system evidence.  Often the principle that evidence must be acquired without changing it is stated in absolute terms as a sort of digital “Prime Directive” of computer forensic discovery [2].  (For a more nuanced statement of this principle, compare [3].)  Authors debate whether to shut the system down using the normal system shutdown commands (Robert E. Greenfield, 2002,  74) or by abruptly terminating its power (“pulling the plug”).   (Kruze and Heiser, 2002,  5.)   But shutting the system down is commonly accepted as the necessary predicate of forensic discovery.
+
+ 
+
+During the same time period, a different vision of computer forensic discovery has emerged, in large measure due to the pioneering work of Dan Farmer and Wietse Venema [4].  This perspective regards the “Prime Directive” as more as an obstacle to digital forensic discovery than as its founding principle (at least as applied to the investigation of malicious within the incident response context).
+
+ 
+
+Since 1999, we have come to remove the phrase “in a manner as free from distortion or bias as possible” from our definition of forensic computing.  We believe that by risking digital evidence, investigators are more likely to retrieve additional data and have a better chance of addressing and understanding the problem at hand.  (Farmer and Venema, 2005, 194.)
+
+ 
+
+The reason for this rather sharp rejection of classical digital forensic paradigm is because the traditional belief system forces us to discard a good deal of evidence that that cannot be acquired within the traditional framework.   By selectively including some evidence and discarding other evidence the classical approach itself alters evidence and thereby risks introducing the very thing which it seeks to avoid, bias and uncertainty.  For Farmer and Venema it is better to “risk evidence” by observing a “live” computer system over time than to cling to the illusory “certainty” afforded by analysis of a computer system’s fossilized remains.
+
+ 
+
+A year ago one might well have ascribed the former view of digital forensics to law enforcement and the latter view to security professionals and military intelligence [1].  Today this stereotype appears to be fading.  Classical formulations which seemed an absolute bar to “live response” are being reinterpreted to allow what once seemed forbidden [12]. We are witnessing a convergence of interest on the part of law enforcement, security professionals and military intelligence in what is variously may be described as “live forensics,” “network forensics” or “remote forensics.”  
+
+ 
+
+The reasons for this convergence are varied but ultimately rooted in the nature of modern computing systems and computer crime.  First there is the ubiquitous nature of malicious code, especially virus-delivered malware, within the modern computing environment [7].  This presence raises questions about the provenance of non-volatile computing artifacts that are difficult to answer within the traditional framework [8].   
+
+ 
+
+Advances in cryptography also present vexing problems for contemporary investigations.  Encrypted documents have been shown to persist as plain text in volatile memory for some time after the document is committed to disk [6].  If a user currently is logged on to the suspect computer when the investigator arrives on the scene and that user has the right to access encrypted files, an investigator may be able to decrypt the documents without obtaining the user’s password or encryption keys.  This opportunity will be lost once the suspect system is shut down.   
+
+ 
+
+Then there is the distributed nature of modern computing and computer crime.  Also, an investigation may span literally thousands of machines and several continents.  Implementing a classical computer forensic methodology would be extremely burdensome and time consuming in many modern investigative contexts.  
+
+ 
+
+Finally, there is the fact that crime or other inappropriate activity often targets the most valuable resources.  The owner’s of mission critical servers or servers doing millions of dollars in transactions per day may be reluctant to shut their systems down without proof of a compromise (or other compelling reason).  These same owners may be unwilling to shut their systems down at all if their systems are only incidentally affected by the matter under investigation, for example if an email is suspected to have been transmitted through one of their servers.  Investigators need a way to rapidly identify and acquire items of evidentiary interest while minimizing interruptions to service and potential distortion or other risks to evidentiary integrity.  
+
+ 
+
+To the extent that digital forensics aspires to science it needs to come to grips with the notion of uncertainty since this notion pervades the process of scientific discovery from beginning to end.  If we deny the operation of this principle we cease to be objective and become advocates of a particular party or point of view.
+
+ 
+
+Scientists and jurists have to abandon the idea of absolute certainty in order to approach the identification process in a fully objective manner.  If it can be accepted that nothing is absolutely certain then it becomes logical to determine the degree of confidence that may be assigned to a particular belief.  (Aitken and Taroni, 2004, 5, citing Kirk and Kingston, 1964.)
+
+ 
+
+If evidence were inherently reliable then there would be no need for forensics.  Trust is not the starting point of a forensic investigation but its goal.  Forensics sifts the facts in order to determine the confidence level which may be assigned to a particular belief.  To this extent, forensics is the art of drawing trusted inferences from one or more un-trusted sources by the methodic application of reason to the evidence.   
+
+ 
+
+It is the application of a method based upon reason and observation that distinguishes forensics from the naive approach to evidence.  Yet this same method may itself be the source of bias and error.  The investigator’s training and method instill in him certain preconceptions concerning the nature and scope of a case, of what evidence is relevant and how it should be collected.  These assumptions select and shape the evidence and thereby shape the results, for better or for worse.  
+
+ 
+
+The conventional approach sifts the facts by discarding volatile evidence from the outset.  Volatile evidence is faulted because it cannot be collected without alteration (given the current state of technology).  Yet the assumption that volatile evidence collection methods make volatile evidence inherently more unreliable than non-volatile evidence collection is just that, an assumption.  Classical evidence collection procedures also modify evidence, and in some cases extremely pertinent evidence, namely by discarding it.  To say that discarding 500+ MiB of memory does not alter evidence is to use words in a manner that is contrary to their ordinary meaning.
+
+ 
+
+If it be accepted that all digital evidence collection methods result in at least some degree of alteration to the evidence (considered as a whole), then it seems possible to ask which evidence alterations will lead to the minimum distortion of the facts as applied to an individual case.  It is after all not evidence alteration per se but strong misleading evidence which renders evidence unreliable.     Maybe the classical approach will lead to the minimal misleading evidence in some cases.  But in the light of the broad diffusion of anti-forensic techniques [13], the classical approach clearly is not always the best way to go.  
+
+ 
+
+Discarding volatile evidence is only one possible way of sifting the facts.  Another way is by fusing evidence obtained from multiple sources (e.g. hard drive, memory, network, external records).  We believe that evidence fusion offers a clear advantage in a number of contemporary contexts, such as the investigation of malicious code and related economic crimes.  In other cases where the relevant facts are primarily historical in nature and likely saved to persistent storage the classical approach may be a better option. 
+
+ 
+
+The Forensic Acquisition Utilities does not attempt to resolve the problematic of forensic methodology.  Rather, it assumes that both the classical and “live” approaches are valid in their proper application.  Unlike in the sphere of religion, a scientist is permitted to subscribe to multiple belief systems while applying each one according to its heuristic value within the context of an individual case.  It is for the investigator to weigh the probabilities and determine which method is more probable to arrive at a result which corresponds to the facts[†].  It is hoped that the tools accompanying this release will be found useful in either context.
+
+ 
+
+Specific Remarks:
+
+ 
+1.DD, Netcat, FMData and Volume_dump require the ‘--localwrt’ option to write to a local fixed drive. 
+2.The version of Netcat included in this release is able to support up to 10 simultaneous connections.  Use the ‘-L’ option (with a capital ‘L’) to listen for multiple connections.  
+3.Always use the ‘-s’ option with the IP address of a local interface to listen with Netcat for inbound connections.  The default is to listen over the loopback interface.
+4.The ‘--iport’ option is used consistently to specify a destination TCP port number for output.  If the ‘--iport’ option is specified, the destination address (‘-o’ option or ‘of’ option with DD) is interpreted as an IP address.
+5.DD and netcat support the following compression algorithms:  "zlib", "zlib+", "gzip", " gzip+", "bzip", "bzip+", "lznt1" and "lznt1+".  The "lznt1" algorithm is the most efficient and dramatically improves network throughput.  For example:
+
+ 
+
+dd.exe -v if=\\.\F: of=192.168.0.1 conv=noerror --iport 3000 --comp lznt1 --log --cryptsum md5 --cryptsum sha1
+
+ 
+
+nc -v -n -L -p 3000 -s 192.168.0.2 --decomp lznt1 -O h:\servername\filename.img –localwrt
+
+ 
+
+Note that the log and cryptographic checksum files also will be transmitted over separate sockets to the same destination TCP port (3000 in the example above).  
+6.DD supports the use of wildcards (‘*’, ‘?’) as part of the input path.  Use the ‘-r’ option with wildcards to recursively search (and copy) a directory and its subdirectories for files based upon a search pattern.  Add “–A E” to select only EFS-encrypted files. 
+7.The default block size for DD is 1 MiB.  The handling of “bad blocks” (“conv=noerror”) is new.  Traditional versions of DD skip “bad blocks” in increments equal to the block size.  If the block size is larger than the sector size of the device, data will be lost.  The alternative is to set the block size equal to the device sector size.  But that is usually quite slow.  The new version of DD uses the specified block size until a “bad sector” is encountered, at which point the block size drops back to a value equal to the device sector size.  The larger blocks size is resumed once the “bad block” is passed, until the next “bad block” is encountered.
+8.If you are imaging a static drive (not "live" imaging), please add the ‘—verify’ option so that we test whether the output matches the input.
+9.Use the ‘--chunk’ option with DD to segment output.  For example the following command will image a logical volume in 2 GiB segments:
+
+ 
+
+dd.exe -v if=\\.\F: of=h:\filename.img conv=noerror --chunk 2GiB --log --cryptsum md5 --cryptsum sha1 –localwrt
+
+ 
+
+The output from this command will include a contents file (“*.contents.xml”).  Use the ‘-g’ option together with the contents file as input to reassemble the “chunks” into a single image.
+
+ 
+
+dd.exe -v -g if= filename.contents.xml of=fdrive.img --log --cryptsum md5 --cryptsum sha1 –localwrt
+
+ 
+10.The null output device may be used with DD to generate cryptographic hashes of a file or device:
+
+ 
+
+dd.exe -v if=fdrive.img of=NUL --cryptsum md5 --cryptsum sha1
+
+ 
+11.The versions of DD distributed with this release does not support the \\.\PhysicalMemory pseudo-device as input.
+12.The \\.\Zero pseudo-device may be used with DD as input to write zeroed blocks to the output file or device.  Addition of the “--sparse” option makes the zeroed output file sparse.
+13.Volume_dump and DD log output includes the “native size” for drives attached through the ATA bus.  This is the value returned by the drive in response to the ATA READ NATIVE MAX ADDRESS/EXT commands.  The commands are sent to the drive via ATA pass throughs.  The implementation of ATA pass throughs is broken on versions of Microsoft Windows™ prior to Windows™ Vista, Windows XP with SP3 and Windows™ Server 2003 with SP2, however, in that “broken” versions of Microsoft Windows™ fail to pass the contents of the HOB-1 register up to the application layer.  As a consequence, the “native size” will be truncated to 32-bits when Volume_dump and DD are run on versions of Microsoft Windows™ prior to Windows™ Vista and Windows™ Server 2003 with SP2.  In addition the “--ata_hpa” option will fail when DD is run on susceptible versions of Microsoft Windows™.
+14.This release of the FAU will not run on Microsoft Windows Vista x64 Gold due to a bug in the Microsoft operating system relating to manifest for the Microsoft runtime library.   This problem has been fixed in SP1 for Windows Vista.
+15.Safety considerations when acquiring volatile evidence to removable media:
+
+ 
+
+Warning: Malicious code that spreads via writable removable media (e.g. a USB or firewire drive) has become sufficiently common place that many organizations and some government agencies ban their use from the workplace.  Forensic acquisition of volatile evidence to removable media presents many of the same risks.  If you acquire volatile evidence to removable media without taking proper precautions you subsequently may find that you were the one who spread the infection to the entire network, or that you yourself have become a part of the global botnet.  Do not acquire volatile evidence to removable media unless you understand the associated risk of malicious code transmission via removable media and have implemented a strategy to mitigate that risk. Do not rely exclusively on commercial antivirus products as a risk mitigation strategy.  At a minimum a mitigation strategy should include the following elements:
+
+ 
+
+§       Always run volatile evidence collection tools from read-only media.
+
+§       Do not use the same removable evidence collection media on more than one suspect computer.
+
+§       Copy the evidence from the removable media to your forensic workstation using a “sacrificial” computer as an intermediary. 
+
+§       Boot the sacrificial computer from read only media (e.g. a boot CD) and use a network tool such as Netcat or FTP to copy the evidence over a closed network for subsequent storage and analysis. 
+
+§       Reboot the “sacrificial” computer before attaching the next removable evidence collection device.

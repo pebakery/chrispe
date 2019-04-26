@@ -1,0 +1,9 @@
+@charset "utf-8";
+/*	Name: -2094734467 */
+/*	Page layout inspector - positioning.
+	Resets the position property to 'static' for all elements.
+	Copyright 2012 Opera Software */
+*, *::before, *::after {
+	position: static !important;
+}
+

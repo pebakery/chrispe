@@ -65,13 +65,13 @@
 		<Setting name="ToolbarState" Button0="Back" Button1="Forward" Button2="Up" Button3="Separator" Button4="Folders" Button5="Separator" Button6="Cut" Button7="Copy" Button8="Paste" Button9="Delete" Button10="Delete permanently" Button11="Properties" Button12="Search" Button13="Separator" Button14="New Folder" Button15="Copy To" Button16="Move To" Button17="Separator" Button18="Views" Button19="Show Command Prompt" Button20="Refresh" Button21="Separator" Button22="Bookmark the current tab" Button23="Organize Bookmarks"/>
 		<Setting name="TreeViewDelayEnabled">no</Setting>
 		<Setting name="TreeViewWidth">208</Setting>
-		<Setting name="ViewModeGlobal">1</Setting>
+		<Setting name="ViewModeGlobal">3</Setting>
 	</Settings>
 	<WindowPosition>
 		<Setting name="Position" Flags="0" ShowCmd="1" MinPositionX="0" MinPositionY="0" MaxPositionX="-1" MaxPositionY="-1" NormalPositionLeft="20" NormalPositionTop="38" NormalPositionRight="1003" NormalPositionBottom="667"/>
 	</WindowPosition>
 	<Tabs>
-		<Tab name="0" Directory="::{20D04FE0-3AEA-1069-A2D8-08002B30309D}" ApplyFilter="no" AutoArrange="yes" Filter="" FilterCaseSensitive="no" ShowGridlines="yes" ShowHidden="yes" ShowInGroups="no" SortAscending="yes" SortMode="1" ViewMode="1" Locked="no" AddressLocked="no" UseCustomName="no" CustomName="">
+		<Tab name="0" Directory="::{20D04FE0-3AEA-1069-A2D8-08002B30309D}" ApplyFilter="no" AutoArrange="yes" Filter="" FilterCaseSensitive="no" ShowGridlines="yes" ShowHidden="yes" ShowInGroups="no" SortAscending="yes" SortMode="1" ViewMode="3" Locked="no" AddressLocked="no" UseCustomName="no" CustomName="">
 			<Columns>
 				<Column name="Generic" Name="yes" Name_Width="150" Type="yes" Type_Width="150" Size="yes" Size_Width="150" DateModified="yes" DateModified_Width="150" Attributes="no" Attributes_Width="150" SizeOnDisk="no" SizeOnDisk_Width="150" ShortName="no" ShortName_Width="150" Owner="no" Owner_Width="150" ProductName="no" ProductName_Width="150" Company="no" Company_Width="150" Description="no" Description_Width="150" FileVersion="no" FileVersion_Width="150" ProductVersion="no" ProductVersion_Width="150" ShortcutTo="no" ShortcutTo_Width="150" HardLinks="no" HardLinks_Width="150" Extension="no" Extension_Width="150" Created="no" Created_Width="150" Accessed="no" Accessed_Width="150" Title="no" Title_Width="150" Subject="no" Subject_Width="150" Author="no" Author_Width="150" Keywords="no" Keywords_Width="150" Comment="no" Comment_Width="150" CameraModel="no" CameraModel_Width="150" DateTaken="no" DateTaken_Width="150" Width="no" Width_Width="150" Height="no" Height_Width="150"/>
 				<Column name="MyComputer" Name="yes" Name_Width="150" TotalSize="yes" TotalSize_Width="150" FreeSpace="no" FreeSpace_Width="150" FileSystem="no" FileSystem_Width="150"/>

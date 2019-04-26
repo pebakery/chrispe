@@ -1,0 +1,138 @@
+Opera Hotlist version 2.0
+Options: encoding = utf8, version=21
+
+#FOLDER
+	ID=11
+	NAME=Trash
+	TRASH FOLDER=YES
+	UNIQUEID=14C645A5B8A3470FB3B52CC32C97E2B8
+
+-
+
+#FOLDER
+	ID=12
+	NAME=Opera
+	UNIQUEID=CFF0FB2AB8F0403BB524F77EF43A30E3
+	PARTNERID=opera-operafolder
+
+#URL
+	ID=13
+	NAME=My Opera Community
+	URL=http://redir.opera.com/speeddials/myopera/
+	ICONFILE=http://redir.opera.com/favicons/myopera/favicon.ico
+	ON PERSONALBAR=YES
+	PERSONALBAR_POS=1
+	UNIQUEID=1C5D1DBE78A544968A9D1AED2CD404D5
+	PARTNERID=opera-operasocial
+
+#URL
+	ID=14
+	NAME=Opera support Desk
+	URL=http://www.opera.com/support/?utm_source=DesktopBrowser&utm_medium=Bookmark&utm_campaign=BrowserLinks
+	ICONFILE=http://redir.opera.com/favicons/opera/favicon.ico
+	UNIQUEID=3D20CEFF1F8343F0B942FFB93A96DEEA
+	PARTNERID=opera-operasupport
+
+#URL
+	ID=15
+	NAME=Opera Extensions
+	URL=https://addons.opera.com/
+	ICONFILE=http://redir.opera.com/favicons/opera/favicon.ico
+	DESCRIPTION=addons, extensions
+	UNIQUEID=29DF2B28174D42D08D98B71A16139D64
+	PARTNERID=opera-operaextensions
+
+#URL
+	ID=16
+	NAME=Welcome to Opera
+	URL=http://www.opera.com/portal/startup/?utm_source=DesktopBrowser&utm_medium=Bookmark&utm_campaign=BrowserLinks
+	ICONFILE=http://redir.opera.com/favicons/opera/favicon.ico
+	UNIQUEID=18CD2A92CCF9453A98D3C2B85ADE90F2
+	PARTNERID=opera-operastart
+
+#URL
+	ID=17
+	NAME=My Opera Mail
+	URL=http://mail.opera.com/?utm_source=DesktopBrowser&utm_medium=Bookmark&utm_campaign=BrowserLinks
+	ICONFILE=https://mail.opera.com/favicon.ico
+	DESCRIPTION=Free mail
+	UNIQUEID=BE6CA6E1CA86413A92F5FC2C28E71CAD
+	PARTNERID=opera-mail
+
+#URL
+	ID=18
+	NAME=Opera on Facebook
+	URL=http://facebook.com/ArabicOpera
+	ICONFILE=https://s-static.ak.facebook.com/rsrc.php/yi/r/q9U99v3_saj.ico
+	DESCRIPTION=facebook, opera, arabic, internet, news
+	UNIQUEID=F6830B2203AB43D0915708D43ABCE417
+	PARTNERID=opera-operafacebook
+
+#URL
+	ID=19
+	NAME=Opera on Twitter
+	URL=http://twitter.com/ArabicOpera
+	ICONFILE=https://twitter.com/phoenix/favicon.ico	
+	DESCRIPTION=twitter, internet, egypt, arabic, opera
+	UNIQUEID=6EDB5B5F30A448038BAC95956627294C
+	PARTNERID=opera-operatwitter
+
+#URL
+	ID=20
+	NAME=Masrawy
+	URL=http://redir.opera.com/bookmarks/masrawy/
+	ICONFILE=http://redir.opera.com/favicons/masrawy/favicon.ico
+	ON PERSONALBAR=YES
+	PERSONALBAR_POS=3
+	DESCRIPTION=masrawy, egypt, news
+	UNIQUEID=9006D1C07830463DB622F6E88B0547AC
+	PARTNERID=opera-news
+
+#URL
+	ID=21
+	NAME=Otlob
+	URL=http://redir.opera.com/bookmarks/otlob/
+	ICONFILE=http://redir.opera.com/favicons/otlob/favicon.ico
+	DESCRIPTION=otlob, food , ordering,  delivery
+	UNIQUEID=43C2CB0AA251445E8D254BC05A17C930
+	PARTNERID=opera-fooddelivery
+
+#URL
+	ID=21
+	NAME=Yallakora
+	URL=http://redir.opera.com/bookmarks/yallakora/
+	ICONFILE=http://redir.opera.com/favicons/yallakora/favicon.ico
+	ON PERSONALBAR=YES
+	PERSONALBAR_POS=2
+	DESCRIPTION=yallakora, sports, news
+	UNIQUEID=1A97BA2EBA25497C87F6C1BBAB08B14B
+	PARTNERID=opera-sportsnews
+
+#URL
+	ID=22
+	NAME=El3ab
+	URL=http://redir.opera.com/bookmarks/el3ab/
+	ICONFILE=http://redir.opera.com/favicons/el3ab/favicon.ico
+	ON PERSONALBAR=YES
+	PERSONALBAR_POS=4
+	DESCRIPTION=games, tarneeb, play
+	UNIQUEID=BA768C35A57C4FEBB31A2E86BC3738D7
+	PARTNERID=opera-gamesportal
+
+#URL
+	ID=23
+	NAME=Mubasher
+	URL=http://redir.opera.com/bookmarks/mubasher/
+	ICONFILE=http://redir.opera.com/favicons/mubasher/favicon.ico
+	DESCRIPTION=borsa, stock, exchange
+	UNIQUEID=882E3A502C73424EB56DF9FCB1E8DABC
+	PARTNERID=opera-finance
+
+#URL
+	ID=24
+	NAME=Filbalad
+	URL=http://redir.opera.com/bookmarks/filbalad/
+	ICONFILE=http://redir.opera.com/favicons/filbalad/favicon.ico
+	DESCRIPTION=cairo, city, restaurants, movies
+	UNIQUEID=E2898DC02D8342569A58562145399E80
+	PARTNERID=opera-cityguide

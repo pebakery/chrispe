@@ -1,0 +1,56 @@
+@charset "utf-8";
+/*	Name: 1576075846 */
+/*	Document structure inspector - inlines.
+	Adds an outline for common inline structural elements.
+	Copyright 2012 Opera Software */
+abbr::before, abbr::after, 
+acronym::before, acronym::after,
+code::before, code::after,
+body>* del::before, body>* del::after,
+dfn::before, dfn::after,
+em::before, em::after,
+body>* ins::before, body>* ins::after,
+kbd::before, kbd::after,
+q::before, q::after,
+samp::before, samp::after,
+strong::before, strong::after,
+var::before, var::after {
+	font-family: sans-serif !important;
+	font-weight: bold !important;
+	font-style: normal !important;
+	text-decoration: none !important;
+	color: rgb(30,30,30) !important;
+	background-color: rgb(255,204,0) !important;
+	outline: 1px solid rgb(0,0,0);
+	display: inline-block !important;
+}
+dfn::before, dfn::after,
+em::before, em::after,
+strong::before, strong::after {
+	color: rgb(226,228,235) !important;
+	background-color: rgb(51,102,204) !important;
+}
+abbr::before {content: '<abbr>' !important;}
+abbr::after {content: '</abbr>' !important;}
+acronym::before {content: '<acronym>' !important;}
+acronym::after {content: '</acronym>' !important;}
+code::before {content: '<code>' !important;}
+code::after {content: '</code>' !important;}
+body>* del::before {content: '<del>' !important;}
+body>* del::after {content: '</del>' !important;}
+dfn::before {content: '<dfn>' !important;}
+dfn::after {content: '</dfn>' !important;}
+em::before {content: '<em>' !important;}
+em::after {content: '</em>' !important;}
+body>* ins::before {content: '<ins>' !important;}
+body>* ins::after {content: '</ins>' !important;}
+kbd::before {content: '<kbd>' !important;}
+kbd::after {content: '</kbd>' !important;}
+q::before {content: '<q>' !important;}
+q::after {content: '</q>' !important;}
+samp::before {content: '<samp>' !important;}
+samp::after {content: '</samp>' !important;}
+strong::before {content: '<strong>' !important;}
+strong::after {content: '</strong>' !important;}
+var::before {content: '<var>' !important;}
+var::after {content: '</var>' !important;}

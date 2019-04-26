@@ -1,0 +1,244 @@
+[main]
+Title=WinHex
+Description=
+Selected=False
+Level=5
+Author=ThePEBakeryTeam
+Version=20190426
+Date=2019-04-26
+Interface=Interface1
+
+[Interface1]
+pTextLabelMenu1="1",1,1,35,3,70,18,10,Bold
+pButtonMenu2="2",1,8,75,0,70,20,pButtonMenu2,0,True,_pButtonMenu2_,True
+pButtonMenu3="?",1,8,145,0,70,20,pButtonMenu3,0,True,_pButtonMenu3_,True
+pBevel_B1=,1,12,10,70,500,40
+pTextLabel_B1="PATH to 32-bit",1,1,20,80,130,18,8,Bold
+pFileBox_B1=,1,13,150,80,230,20,file
+pButton_B1="ADD TO CACHE",1,8,404,80,96,20,B1.RUN,0,True,_B1.RUN_,True
+pBevel_B2=,1,12,10,130,500,40
+pTextLabel_B2="PATH to 64-bit",1,1,20,140,130,18,8,Bold
+pFileBox_B2=,1,13,150,140,230,20,file
+pButton_B2="ADD TO CACHE",1,8,404,140,96,20,B2.RUN,0,True,_B2.RUN_,True
+pBevel_B3=,1,12,10,190,500,40
+pTextLabel_B3="Download 32-bit Evaluation version automatically",1,1,20,200,350,18,8,Bold
+pButton_B3="ADD TO CACHE",1,8,404,200,96,20,B3.RUN,0,True,_B3.RUN_,True
+pWebLabel1=http://www.x-ways.net/winhex/,1,10,120,43,180,18,http://www.x-ways.net/winhex/
+pTextLabel5="WinHex Website",1,1,10,45,150,18,10,Bold
+pCheckBoxInWim="Include Program in boot.wim",1,3,10,265,180,18,True
+
+[Interface2]
+pButtonMenu1="1",1,8,5,0,70,20,pButtonMenu1,0,True,_pButtonMenu1_,True
+pTextLabelMenu2="2",1,1,108,3,70,18,10,Bold
+pButtonMenu3="?",1,8,145,0,70,20,pButtonMenu3,0,True,_pButtonMenu3_,True
+pBevel1=,1,12,10,65,66,2
+pTextLabel="Menu Entries",1,1,10,50,230,18,8,Bold
+pCheckBoxShortcutDesktop="Add to Desktop Menu",1,3,40,80,150,18,True
+pCheckBoxShortcutQuick="Add to Quicklaunch Menu",1,3,40,110,150,18,True
+pCheckBoxShortcutPrograms="Add to #$qStart#$q > ",1,3,40,140,99,18,True
+pCheckBoxShortcutLaunchBar="Add to LaunchBar Menu ",1,3,40,170,150,18,True
+pButtonShortcut1=?,1,8,10,80,18,18,pButtonShortcut1,0,True,_pButtonShortcut1_,True
+pButtonShortcut2=?,1,8,10,110,18,18,pButtonShortcut2,0,True,_pButtonShortcut2_,True
+pButtonShortcut3=?,1,8,10,140,18,18,pButtonShortcut3,0,True,_pButtonShortcut3_,True
+pButtonShortcut4=?,1,8,10,170,18,18,pButtonShortcut4,0,True,_pButtonShortcut4_,True
+pTextBox1=,1,0,140,140,150,21,Programs
+
+[pButtonMenu1]
+IniWrite,%ScriptFile%,Main,Interface,Interface1
+System,REFRESHINTERFACE
+
+[pButtonMenu2]
+IniWrite,%ScriptFile%,Main,Interface,Interface2
+System,REFRESHINTERFACE
+
+[pButtonMenu3]
+message,"Click on the buttons to toggle between tabs 1 and 2. #$x#$xTab 2 contains menu options for use in the selected shell. Click on the ? button for information about the different options."
+
+[pButtonShortcut1]
+message,"WinXShell only#$x#$xSelect this option to add a program shortcut to the Desktop."
+
+[pButtonShortcut2]
+message,"WinXShell only#$x#$xSelect this option to add a program menu option to the Quicklaunch menu - similar in appearence to the 'Pin to Taskbar' option in Windows 7/8/10."
+
+[pButtonShortcut3]
+message,"Applies to WinXShell#$c BBLean and LaunchBar Shell(s)#$x#$xSelect this option to add a program menu option to the Start menu. Leave blank to add to the root of the menu#$c or manually type a path to place in a sub-menu (do not use spaces in the path). E.g. #$x#$s- FileManager#$x#$s- Programs#$x#$s- Programs\FileManager#$x#$xAnd looking at the examples above - #$x#$xLeave this option blank to add a menu entry to the root of the program menu (the 'Start' menu in WinXShell#$c the 'Start' menu in BBLean#$c or the root of the LaunchBar menu bar if LaunchBar is selected as Shell)#$x#$xEnter 'FileManager' to add a menu entry for this application to the 'Start' > 'FileManager' sub-menu (WinXShell and bblean) or the 'FileManager' sub-menu in LaunchBar.#$x#$xEnter 'Programs' to add a menu entry for this application to the 'Start' > 'Programs' sub-menu (WinXShell and bblean) or the 'Programs' sub-menu in LaunchBar.#$x#$xEnter 'Programs\FileManager' to add a menu entry for this application to the 'Start' > 'Programs' > 'FileManager' sub-menu (WinXShell and bblean) or the 'Programs' > 'FileManager' sub-menu in LaunchBar."
+
+[pButtonShortcut4]
+message,"This setting does not apply to any LaunchBar instance running as the WinPE Shell. This option only applies to a LaunchBar instance when the Applications' > 'LaunchBar' program script is selected in the build.#$x#$xIf the 'Applications' > 'LaunchBar' program script is selected than enable this option to add a program menu entry to the root of the LaunchBar menu bar. #$x#$xPlease note that if option '6] Programs in boot.wim' in the main project script is set as 'NO'#$c then LaunchBar and a number of other applications will not be available at boot. In this case a text based .ini file will be used for LaunchBar menu settings."
+
+[B1.RUN]
+If,ExistFile,"%Programs%\WinHex\x86\WinHex.exe",Message,"The cache already contains a copy of WinHex. Exiting..."
+Else,Begin
+set,%WinHex%,%pFileBox_B1%
+If,%WinHex%,Equal,"",Begin
+Message,"ERROR - The filebox is empty. Change the path and retry. Exiting..."
+Exit,"ERROR - The filebox is empty. Change the path and retry. Exiting..."
+End
+If,Not,ExistFile,"%WinHex%",Begin
+Message,"ERROR - The selected file does not exist. Change the path and retry. Exiting..."
+Exit,"ERROR - The selected file does not exist. Change the path and retry. Exiting..."
+End
+StrFormat,PATH,"%WinHex%","%WinHex.PATH%"
+StrFormat,FILENAME,"%WinHex%","%WinHex.EXE%"
+If,Not,%WinHex.EXE%,Equal,WinHex.exe,Begin
+Message,"ERROR - Selected file is not WinHex.exe. Change the path and retry. Aborting..."
+Exit,"ERROR - Selected file is not WinHex.exe. Change the path and retry. Aborting..."
+End
+If,Not,ExistDir,"%Programs%\WinHex\x86",DirMake,"%Programs%\WinHex\x86"
+Echo,"Copying files to cache"
+DirCopy,"%WinHex.PATH%\*.*","%Programs%\WinHex\x86"
+If,Not,ExistFile,"%Programs%\WinHex\x86\WinHex.exe",Begin
+Message,"There appears to have been an error copying WinHex to the cache. Exiting..."
+Exit,"There appears to have been an error copying WinHex to the cache. Exiting..."
+End
+Else,Message,"WinHex added to the following path -#$x#$x#$s#$s#$s#$q%Programs%\WinHex\x86#$q"
+End
+
+[B2.RUN]
+If,ExistFile,"%Programs%\WinHex\x64\WinHex64.exe",Message,"The cache already contains a copy of WinHex. Exiting..."
+Else,Begin
+set,%WinHex%,%pFileBox_B2%
+If,%WinHex%,Equal,"",Begin
+Message,"ERROR - The filebox is empty. Change the path and retry. Exiting..."
+Exit,"ERROR - The filebox is empty. Change the path and retry. Exiting..."
+End
+If,Not,ExistFile,"%WinHex%",Begin
+Message,"ERROR - The selected file does not exist. Change the path and retry. Exiting..."
+Exit,"ERROR - The selected file does not exist. Change the path and retry. Exiting..."
+End
+StrFormat,PATH,"%WinHex%","%WinHex.PATH%"
+StrFormat,FILENAME,"%WinHex%","%WinHex.EXE%"
+If,Not,%WinHex.EXE%,Equal,WinHex64.exe,Begin
+Message,"ERROR - Selected file is not WinHex64.exe. Change the path and retry. Aborting..."
+Exit,"ERROR - Selected file is not WinHex64.exe. Change the path and retry. Aborting..."
+End
+If,Not,ExistDir,"%Programs%\WinHex\x64",DirMake,"%Programs%\WinHex\x64"
+Echo,"Copying files to cache"
+DirCopy,"%WinHex.PATH%\*.*","%Programs%\WinHex\x64"
+If,Not,ExistFile,"%Programs%\WinHex\x64\WinHex64.exe",Begin
+Message,"There appears to have been an error copying WinHex to the cache. Exiting..."
+Exit,"There appears to have been an error copying WinHex to the cache. Exiting..."
+End
+Else,Message,"WinHex added to the following path -#$x#$x#$s#$s#$s#$q%Programs%\WinHex\x64#$q"
+End
+
+[B3.RUN]
+If,ExistFile,"%Programs%\WinHex\x86\WinHex.exe",Message,"The cache already contains a copy of WinHex. Exiting..."
+If,Not,ExistFile,"%Programs%\WinHex\x86\WinHex.exe",Begin
+Message,"Downloading 32-bit Evaluation version of WinHex"
+Set,%MANUAL.DOWNLOAD%,YES
+Run,%ScriptFile%,DOWNLOAD
+End
+
+[DOWNLOAD]
+If,Not,ExistDir,"%Programs%\WinHex",DirMake,"%Programs%\WinHex"
+If,Not,ExistDir,"%Programs%\WinHex\x86",DirMake,"%Programs%\WinHex\x86"
+System,ERROROFF,1
+WebGet,http://www.x-ways.net/winhex.zip,"%Programs%\winhex.zip"
+If,Not,ExistFile,"%Programs%\winhex.zip",Begin
+Message,"Could not find %Programs%\winhex.zip - possible error with download"
+Exit,"Could not find %Programs%\winhex.zip - possible error with download"
+End
+ShellExecute,Hide,"%Tools%\7z.exe","x -y #$q%Programs%\winhex.zip#$q -o#$q%Programs%\WinHex\x86#$q"
+FileDelete,%Programs%\winhex.zip
+If,Not,ExistFile,"%Programs%\WinHex\x86\WinHex.exe",Begin
+Message,"Could not find %Programs%\WinHex\x86\WinHex.exe - possible error with download. Exiting script..."
+Exit,"Could not find %Programs%\WinHex\x86\WinHex.exe - possible error with download. Exiting script..."
+End
+If,%MANUAL.DOWNLOAD%,Equal,YES,Message,"Finished Downloading WinHex"
+
+[process]
+If,%FullProjectRun%,Equal,NO,Run,"%ProjectDir%\Core\common.script",PostConfigRun
+AddInterface,%ScriptFile%,Interface1,""
+AddInterface,%ScriptFile%,Interface2,""
+If,%pCheckBoxInWim%,Equal,True,Set,%PROGRAMS.IN.WIM%,YES
+Else,Set,%PROGRAMS.IN.WIM%,NO
+Run,%ScriptFile%,CHECKS
+Run,%ScriptFile%,MENU
+Run,%ScriptFile%,COMMON
+If,%PROGRAMS.IN.WIM%,Equal,NO,Run,%ScriptFile%,NOT.IN.WIM
+If,%PROGRAMS.IN.WIM%,Equal,YES,Run,%ScriptFile%,IN.WIM
+
+[CHECKS]
+If,%ARCH%,Equal,x86,Run,%ScriptFile%,CHECKS-x86
+If,%ARCH%,Equal,x64,Run,%ScriptFile%,CHECKS-x64
+
+[CHECKS-x86]
+If,Not,ExistFile,"%Programs%\WinHex\x86\WinHex.exe",Begin
+Set,%CONTINUE%,NO
+If,Question,"WinHex 32-bit is missing. Attempt to download Evaluation version?#$x#$xPress YES to attempt to download the file or NO to exit THIS script",Set,%CONTINUE%,YES
+If,%CONTINUE%,Equal,NO,Exit
+Run,%ScriptFile%,DOWNLOAD
+End
+
+[CHECKS-x64]
+If,Not,ExistFile,"%Programs%\WinHex\x64\WinHex64.exe",Begin
+Set,%CONTINUE%,No
+  IniRead,"%ProjectDir%\Core\G_WoW64.script",main,Selected,%WoW64YesOrNo%
+  If,%WoW64YesOrNo%,Equal,False,Run,%ScriptFile%,Exit
+  If,Question,ERROR - could not find 64-bit WinHex. Select YES to attempt to use 32-bit source files (SysWoW Support required) - or NO to Exit,Set,%CONTINUE%,YES
+  If,%CONTINUE%,Equal,No,Run,%ScriptFile%,Exit
+  If,%CONTINUE%,Equal,YES,Begin
+    Set,%WinHex_SYSWOW64%,yes
+    Run,%ScriptFile%,CHECKS-x86
+  End
+End
+
+[Exit]
+Exit,WinHex is missing - exiting script...,WARN
+
+[MENU]
+If,%ARCH%,Equal,x86,Set,%WinHex.exe%,WinHex.exe
+If,%ARCH%,Equal,x64,Set,%WinHex.exe%,WinHex64.exe
+If,%WinHex_SYSWOW64%,Equal,yes,Set,%WinHex.exe%,WinHex.exe
+If,%PROGRAMS.IN.WIM%,Equal,NO,Begin
+  If,Not,ExistFile,"%OutputDir%\Programs\ShortcutsNotInWim.txt",Run,"%ProjectDir%\Core\common.script",NotInWim
+  TXTaddline,"%OutputDir%\Programs\ShortcutsNotInWim.txt","#$p~dp0nircmd.exe shortcut #$q#$p~dp0WinHex\%WinHex.exe%#$q #$q#$pTemp#$p\ShortCuts#$q #$qWinHex#$q",Append
+End 
+If,%PROGRAMS.IN.WIM%,Equal,YES,Begin
+  ShellExecute,Hide,"%Tools%\Shortcut.exe","/A:C /T:#$q#$pSystemDrive#$p\Programs\WinHex\%WinHex.exe%#$q /F:#$q%ProjectTemp%\WinHex.lnk#$q /I:#$q#$pSystemDrive#$p\Programs\WinHex\%WinHex.exe%#$c0#$q"
+  If,ExistFile,"%ProjectTemp%\WinHex.lnk",Begin
+    Set,%MyShortcut%,WinHex.lnk
+    If,%pCheckBoxShortcutDesktop%,Equal,True,FileCopy,"%ProjectTemp%\%MyShortcut%","%ProjectTemp%\ShortCuts\Desktop"
+    If,%pCheckBoxShortcutQuick%,Equal,True,FileCopy,"%ProjectTemp%\%MyShortcut%","%ProjectTemp%\ShortCuts\Quick"
+    If,%pCheckBoxShortcutPrograms%,Equal,True,Begin
+      Set,%ProgramMenuPath%,%pTextBox1%
+      Run,"%ProjectDir%\Core\common.script",StartMenu
+    End
+    If,%pCheckBoxShortcutLaunchBar%,Equal,True,FileCopy,"%ProjectTemp%\%MyShortcut%","%ProjectTemp%\ShortCuts\LaunchBar"
+    If,%FullProjectRun%,Equal,NO,Run,"%ProjectDir%\Core\common.script",PostConfigRunShortcuts
+    FileDelete,"%ProjectTemp%\%MyShortcut%"
+  End
+End
+
+[COMMON]
+If,%PROGRAMS.IN.WIM%,Equal,NO,Set,%PATH%,%OutputDir%
+If,%PROGRAMS.IN.WIM%,Equal,YES,Set,%PATH%,%TargetDir%
+If,Not,ExistDir,"%PATH%\Programs",DirMake,"%PATH%\Programs"
+DirMake,"%PATH%\Programs\WinHex"
+If,%ARCH%,Equal,x86,DirCopy,"%Programs%\WinHex\x86\*.*","%PATH%\Programs\WinHex"
+If,%ARCH%,Equal,x64,Begin
+  If,%WinHex_SYSWOW64%,Equal,yes,DirCopy,"%Programs%\WinHex\x86\*.*","%PATH%\Programs\WinHex"
+  Else,DirCopy,"%Programs%\WinHex\x64\*.*","%PATH%\Programs\WinHex"
+End
+IniWrite,"%OutputDir%\Project.Settings.ini",PROGRAMS,WinHex,YES
+
+[IN.WIM]
+If,%FullProjectRun%,Equal,NO,Begin
+  IniRead,"%TargetDir%\Project.Settings.ini",Main,Image.Number,%Boot.wim.Image.number%
+  WimPathAdd,%OutputDir%\sources\boot.wim,%Boot.wim.Image.number%,%TargetDir%,""
+End
+//Wait,1
+
+[NOT.IN.WIM]
+//Wait,1
+If,%FullProjectRun%,Equal,NO,Run,"%ProjectDir%\Core\common.script",PostConfigRunNotInWim
+
+[AuthorEncoded]
+WinHex.ico=2268,3024
+logo=WinHex.ico
+
+[EncodedFile-AuthorEncoded-WinHex.ico]
+lines=0
+0=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
+

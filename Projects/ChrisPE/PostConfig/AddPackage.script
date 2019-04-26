@@ -4,8 +4,8 @@ Description=
 Selected=None
 Level=10
 Author=ThePEBakeryTeam
-Version=20180321
-Date=2018-03-21
+Version=20190426
+Date=2019-04-26
 Interface=Interface1
 
 [Interface1]
@@ -69,7 +69,7 @@ Set,%CONTINUE%,NO
 If,Question,"Running this script will extract all .7z files in the target path to the ChrisPE project directory. #$x#$xPlease ensure that any .7z files in the path are compatible project packages.#$x#$xSelect YES to CONTINUE or NO to ABORT.",Set,%CONTINUE%,YES
 If,%CONTINUE%,Equal,NO,Exit
 ShellExecute,Hide,"%Tools%\7z.exe","x #$q%MYPATH%*.7z#$q -y -o#$q%BaseDir%#$q"
-System,LoadAll
+System,RefreshAllScripts
 
 [SinglePackage]
 set,%MYPACKAGE%,%pFileBox1%,Global
@@ -90,4 +90,4 @@ Set,%CONTINUE%,NO
 If,Question,"Running this script will extract the selected .7z file to the ChrisPE project directory. #$x#$xPlease ensure that this file is a compatible project package.#$x#$xSelect YES to CONTINUE or NO to ABORT.",Set,%CONTINUE%,YES
 If,%CONTINUE%,Equal,NO,Exit
 ShellExecute,Hide,"%Tools%\7z.exe","x #$q%MYPACKAGE%#$q -y -o#$q%BaseDir%#$q"
-System,LoadAll
+System,RefreshAllScripts

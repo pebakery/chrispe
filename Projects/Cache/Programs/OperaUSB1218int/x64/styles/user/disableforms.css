@@ -1,0 +1,9 @@
+@charset "utf-8";
+/*	Name: 1504276433 */
+/*	Page layout and hidden functionality inspector - forms.
+	Removes forms and form controls from the page.
+	Copyright 2012 Opera Software */
+form, button, input, fieldset, legend, select {
+	display: none !important;
+}
+

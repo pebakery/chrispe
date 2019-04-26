@@ -1,0 +1,9 @@
+@charset "utf-8";
+/*	Name: -1902163789 */
+/*	Page layout inspector - floats. 
+	Resets the float property to 'none' for all elements.
+	Copyright 2012 Opera Software */
+*, *::before, *::after {
+	float: none !important;
+}
+

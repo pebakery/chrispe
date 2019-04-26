@@ -1,0 +1,139 @@
+@import url(opera.css);
+
+h1 {
+	margin-bottom: 10px;
+}
+
+/* Plug-in container */
+fieldset {
+	border: 1px solid transparent;
+	margin: 0 0 8px 0;
+	padding: 0;
+	border-radius: 0 0 6px 6px;
+}
+
+fieldset > div {
+	padding: 5px 5px 4px 5px;
+}
+
+fieldset * {
+	transition: color .2s ease-in;
+}
+
+/* Gray out when plugins are disabled, either globally or individually */
+body#plugins-disabled fieldset *, fieldset.disabled * {
+	color: #aaa;
+}
+
+/* Plug-in name */
+legend {
+	font-size: 110%;
+	font-weight: bold;
+	box-sizing: border-box;
+	color: #333;
+	width: 100%;
+	padding: 0 10px 0 20px;
+	margin: 0 -1px;
+	line-height: 1.7;
+	text-shadow: 0 1px 0 rgba(255,255,255,0.5);
+	background: rgba(0,0,0,0.075) linear-gradient(rgba(255,255,255,0.9), rgba(255,255,255,0));
+	border: 1px solid #ccc;
+	border-radius: 4px;
+	cursor: pointer;
+}
+
+/* Plug-in version */
+legend span {
+	color: #777;
+}
+
+/* Link for toggling plug-in */
+legend a {
+	border: none;
+	color: #0174A7 !important;
+	float: right;
+}
+
+/* Hiding toggle link when plugins disabled globally */
+body#plugins-disabled legend a {
+	display: none;
+}
+
+legend:before {
+	content: url(images/arrow.png);
+	position: relative;
+	left: -6px;
+}
+
+legend.expanded:before {
+	transform: rotate(90deg);
+}
+
+legend:hover {
+	box-shadow: 0 0 0 2px rgba(0,0,0,0.15);
+}
+
+legend.expanded + div div.mime {
+	opacity: 1;
+}
+
+label {
+	display: block;
+	padding: 1px 3px;
+	background: rgba(255,255,255,0.5);
+	border-radius: 4px;
+	border: 1px solid #ccc;
+}
+
+label:hover {
+	box-shadow: 0 0 0 2px rgba(0,0,0,0.15);
+}
+
+/* Mime type global toggle */
+p#details label {
+	float: right;
+	width: 200px;
+	text-align: center;
+}
+
+/* First plugin */
+#plug_0 {
+	clear: both;
+}
+
+div.mime {
+	height: 0;
+	opacity: 0;
+	margin: 5px;
+	overflow: hidden;
+	transition: height .2s, opacity .2s;
+}
+
+table {
+	margin: 0;
+}
+
+td {
+	width: 40%;
+}
+
+td+td {
+	width: auto;
+}
+
+td+td+td {
+	text-align: right;
+}
+
+/* make table cells full width when panel is too narrow */
+@media screen and (max-width: 400px), projection and (max-width: 400px), tv and (max-width: 400px) {
+
+	th, td, tr, table {
+		width: 98%;
+	}
+
+	p#details label {
+		width: auto;
+	}
+
+}

@@ -1,0 +1,25 @@
+@charset "utf-8";
+/*	Name: 1490680845
+	High contrast (B/W)
+	Copyright 2012 Opera Software */
+* {
+	color: black !important;	
+	background: white !important;
+}
+button, input[type="file"], input[type="submit"], input[type="button"], input[type="reset"] {
+	color: black !important;	
+	background: silver !important;
+}
+a[href] {text-decoration: underline !important;}
+a[href]:hover, a[href]:hover * {
+	color: white !important;	
+	background-color: black !important;
+}
+a[href] img {border: thin solid black !important;}
+@media screen, projection, handheld, tv {
+	input, textarea, select {
+		color: black !important;	
+		background: #FFFFCC !important;
+	}
+}
+

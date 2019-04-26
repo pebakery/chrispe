@@ -6,26 +6,30 @@ Locked=True
 Mandatory=True
 Level=3
 Author=ThePEBakeryTeam
-Version=20180321
-Date=2018-03-21
+Version=20190426
+Date=2019-04-26
 
 [Interface]
 pBevel_A1=,1,12,10,70,500,40
-pScrollBox_A1=WinXShell,1,4,20,80,100,20,BBLean,CMD,LaunchBar,WinXShell,_on_change_,True
+pScrollBox_A1=BBLean,1,4,20,80,100,20,BBLean,CMD,LaunchBar,WinXShell,_on_change_,True
 pTextLabel_A1=Select Shell,1,1,220,80,222,18,10,Bold
 pButton_A1=HELP,1,8,430,80,70,20,HELPShell,0,True,_HELPShell_,True
-pBevel_WinXShell2=,1,12,10,120,500,40
-pScrollBox_WinXShell2=YES,1,4,20,130,100,20,YES,NO
-pTextLabel_WinXShell2="Desktop Icons",1,1,215,131,133,18,10,Bold
-pButton_WinXShell2=HELP,1,8,430,130,70,20,HELPWinXShell2,0,True
-pBevel_WinXShell3=,1,12,10,170,500,40
-pScrollBox_WinXShell3=YES,1,4,20,180,100,20,YES,NO
-pTextLabel_WinXShell3="Start Menu Icons",1,1,205,181,150,18,10,Bold
-pButton_WinXShell3=HELP,1,8,430,180,70,20,HELPWinXShell3,0,True
-pBevel_WinXShell4=,1,12,10,220,500,40
-pScrollBox_WinXShell4=NO,1,4,20,230,100,20,YES,NO
-pTextLabel_WinXShell4="QuickLaunch Icons",1,1,200,231,150,18,10,Bold
-pButton_WinXShell4=HELP,1,8,430,230,70,20,HELPWinXShell4,0,True
+pBevel_bblean2=,1,12,10,120,500,40
+pScrollBox_bblean2=YES,1,4,20,130,100,20,YES,NO
+pTextLabel_bblean2="Skin Windows",1,1,215,131,133,18,10,Bold
+pButton_bblean2=HELP,1,8,430,130,70,20,HELPBBLean2,0,True
+pBevel_WinXShell2=,0,12,10,120,500,40
+pScrollBox_WinXShell2=YES,0,4,20,130,100,20,YES,NO
+pTextLabel_WinXShell2="Desktop Icons",0,1,215,131,133,18,10,Bold
+pButton_WinXShell2=HELP,0,8,430,130,70,20,HELPWinXShell2,0,True
+pBevel_WinXShell3=,0,12,10,170,500,40
+pScrollBox_WinXShell3=YES,0,4,20,180,100,20,YES,NO
+pTextLabel_WinXShell3="Start Menu Icons",0,1,205,181,150,18,10,Bold
+pButton_WinXShell3=HELP,0,8,430,180,70,20,HELPWinXShell3,0,True
+pBevel_WinXShell4=,0,12,10,220,500,40
+pScrollBox_WinXShell4=NO,0,4,20,230,100,20,YES,NO
+pTextLabel_WinXShell4="QuickLaunch Icons",0,1,200,231,150,18,10,Bold
+pButton_WinXShell4=HELP,0,8,430,230,70,20,HELPWinXShell4,0,True
 pBevel_LaunchBar3=,0,12,10,120,500,40
 pScrollBox_LaunchBar3=SMALL,0,4,20,130,100,20,SMALL,LARGE
 pTextLabel_LaunchBar3=Icons,0,1,233,131,150,18,10,Bold
@@ -36,6 +40,9 @@ pTextLabel_LaunchBar4=Position,0,1,228,181,150,18,10,Bold
 pButton_LaunchBar4=HELP,0,8,430,180,70,20,HELPLaunchBar4,0,True
 pWebLabel_LaunchBar=http://www.lerup.com/LaunchBar/,0,10,150,35,180,18,http://www.lerup.com/LaunchBar/
 pTextLabel_LaunchBar="LaunchBar Website",0,1,10,35,150,18,10,Bold
+
+[HELPBBLean2]
+Message,"Enable bbLeanSkin plugin - this will apply a skin to all windows opened when the BBLean shell is running.#$x#$xSome programs may not function properly if skinned - if running Opera for example, the settings menu button will not be displayed/accessible."
 
 [HELPShell]
 Message,"Select one of the currently supported shells"
@@ -57,6 +64,10 @@ Message,"Enable to add Quick Launch Menu Shortcuts to WinXShell. This option wil
 
 
 [HideEverything]
+WriteInterface,Visible,%ScriptFile%,Interface,pScrollBox_bblean2,False
+WriteInterface,Visible,%ScriptFile%,Interface,pButton_bblean2,False
+WriteInterface,Visible,%ScriptFile%,Interface,pBevel_bblean2,False
+WriteInterface,Visible,%ScriptFile%,Interface,pTextLabel_bblean2,False
 WriteInterface,Visible,%ScriptFile%,Interface,pScrollBox_WinXShell2,False
 WriteInterface,Visible,%ScriptFile%,Interface,pScrollBox_WinXShell3,False
 WriteInterface,Visible,%ScriptFile%,Interface,pScrollBox_WinXShell4,False
@@ -83,6 +94,12 @@ WriteInterface,Visible,%ScriptFile%,Interface,pTextLabel_LaunchBar,False
 [on_change]
 ReadInterface,Value,"%ScriptFile%",Interface,pScrollBox_A1,%Shell%
 Run,%ScriptFile%,HideEverything
+If,%Shell%,Equal,BBLean,Begin
+  WriteInterface,Visible,%ScriptFile%,Interface,pScrollBox_bblean2,True
+  WriteInterface,Visible,%ScriptFile%,Interface,pButton_bblean2,True
+  WriteInterface,Visible,%ScriptFile%,Interface,pBevel_bblean2,True
+  WriteInterface,Visible,%ScriptFile%,Interface,pTextLabel_bblean2,True
+End
 If,%Shell%,Equal,WinXShell,Begin
   WriteInterface,Visible,%ScriptFile%,Interface,pScrollBox_WinXShell2,True
   WriteInterface,Visible,%ScriptFile%,Interface,pScrollBox_WinXShell3,True

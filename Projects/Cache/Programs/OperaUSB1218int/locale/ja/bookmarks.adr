@@ -1,0 +1,139 @@
+Opera Hotlist version 2.0
+Options: encoding = utf8, version=21
+
+#FOLDER
+	ID=11
+	NAME=ごみ箱
+	TRASH FOLDER=YES
+	UNIQUEID=56BD213415BF4A29AADF55742DB4EA2C
+
+-
+
+#FOLDER
+	ID=25
+	NAME=--Opera Software--
+	UNIQUEID=0CECF1F446554A288A02538C4E233490
+	PARTNERID=opera-operafolder
+
+#URL
+	ID=26
+	NAME=Opera 日本語サイト
+	URL=http://www.opera.com/?language=ja
+	ICONFILE=http://redir.opera.com/favicons/opera/favicon.ico
+	DESCRIPTION=Opera, ホームページ
+	UNIQUEID=4ABF6FE5A3904F78A3D14C9E1AD41611
+	PARTNERID=opera-homepage
+
+#URL
+	ID=27
+	NAME=Opera ダウンロード
+	URL=http://www.opera.com/download/?utm_source=DesktopBrowser&utm_medium=Bookmark&utm_campaign=BrowserLinks
+	ICONFILE=http://redir.opera.com/favicons/opera/favicon.ico
+	DESCRIPTION=Opera, ダウンロード
+	UNIQUEID=6346265318C548DC831B7DF6D8EBB577
+	PARTNERID=opera-operadownload
+
+#URL
+	ID=28
+	NAME=Opera サポートデスク
+	URL=http://www.opera.com/support/?utm_source=DesktopBrowser&utm_medium=Bookmark&utm_campaign=BrowserLinks
+	ICONFILE=http://redir.opera.com/favicons/opera/favicon.ico
+	DESCRIPTION=Opera, サポート
+	UNIQUEID=BDBBEF1FCB2844A980752782E0D9670C
+	PARTNERID=opera-operasupport
+
+#URL
+	ID=29
+	NAME=My Opera コミュニティ
+	URL=http://my.opera.com/?utm_source=DesktopBrowser&utm_medium=Bookmark&utm_campaign=BrowserLinks
+	ICONFILE=http://redir.opera.com/favicons/opera/favicon.ico
+	DESCRIPTION=My Opera
+	UNIQUEID=0C07A568A3724FE49252B0046C79C09D
+	PARTNERID=opera-operasocial
+
+#URL
+	ID=30
+	NAME=Get started with Opera
+	URL=http://www.opera.com/portal/startup/?utm_source=DesktopBrowser&utm_medium=Bookmark&utm_campaign=BrowserLinks
+	ICONFILE=http://redir.opera.com/favicons/opera/favicon.ico
+	UNIQUEID=18CD2A92CCF9453A98D3C2B85ADE90F2
+	PARTNERID=opera-operastart
+
+#URL
+	ID=31
+	NAME=Opera Portal
+	URL=http://portal.opera.com/?utm_source=DesktopBrowser&utm_medium=Bookmark&utm_campaign=BrowserLinks
+	ICONFILE=http://redir.opera.com/favicons/opera/favicon.ico
+	DESCRIPTION=ポータル
+	UNIQUEID=93D5337B1657409084924E007F49387C
+	PARTNERID=opera-operaportal
+
+#URL
+	ID=32
+	NAME=楽天市場
+	URL=http://pt.afl.rakuten.co.jp/c/0a5b732f.d379d233/?url=http%3a%2f%2fwww.rakuten.co.jp%2f
+	DESCRIPTION=楽天, 買い物
+	UNIQUEID=CCB02C8961D0403CB5FB72DE06C77102
+	PARTNERID=opera-webshop9
+
+#URL
+	ID=33
+	NAME=Yahoo!オークション
+	URL=http://redir.opera.com/valuecommerce/?id=1
+	DESCRIPTION=ヤフオク, オークション
+	UNIQUEID=B4EC35F85A8C4CB1BAB6834C3C2ECF1B
+	PARTNERID=opera-auction
+
+#URL
+	ID=34
+	NAME=じゃらんnet
+	URL=http://redir.opera.com/valuecommerce/?id=2
+	DESCRIPTION=旅行, 旅
+	UNIQUEID=5C02EBD1A24B2F43831D6C6D9D81E97B
+	PARTNERID=opera-travel4
+
+#URL
+	ID=35
+	NAME=Amazon.co.jp
+	URL=http://redir.opera.com/amazon/
+	DESCRIPTION=買い物, アマゾン, 本, 書籍
+	UNIQUEID=3B88B591449F44718D68400B9BD076E1
+	PARTNERID=opera-webshop8
+
+#URL
+	ID=36
+	NAME=Yahoo! JAPAN
+	URL=http://yahoo.opera.com/search
+	ICONFILE=http://redir.opera.com/favicons/yahoo/favicon.ico
+	UNIQUEID=00DAD01584314141845DE3C54E0245DC
+	PARTNERID=opera-searchengine
+
+#URL
+	ID=37
+	NAME=Bing
+	URL=http://www.bing.com/?pc=OPER
+	UNIQUEID=C6DF94B10A2C49F18BCDFF051AE9A443
+	PARTNERID=opera-searchengine2
+
+#URL
+	ID=38
+	NAME=Wikipedia
+	URL=http://ja.wikipedia.org/wiki/メインページ
+	UNIQUEID=E86E91A28D61476B92F56F4AF3B75F00
+	PARTNERID=opera-encyclopedia
+
+#URL
+	ID=39
+	NAME=FastMail
+	URL=http://redir.opera.com/bookmarks/fastmail
+	ICONFILE=http://redir.opera.com/favicons/fastmail/favicon.ico
+	UNIQUEID=BAF6AE40FA1543AC97010132CD806EEE
+	PARTNERID=opera-mail
+
+#URL
+	ID=40
+	NAME=My Opera Mail
+	URL=http://mail.opera.com/?utm_source=DesktopBrowser&utm_medium=Bookmark&utm_campaign=BrowserLinks
+	ICONFILE=https://mail.opera.com/favicon.ico
+	UNIQUEID=BE6CA6E1CA86413A92F5FC2C28E71CAD
+	PARTNERID=opera-mail2

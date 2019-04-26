@@ -1,0 +1,187 @@
+[main]
+Title=HxD
+Description=Freeware Hex Editor and Disk Editor
+Selected=False
+Level=5
+Author=ThePEBakeryTeam
+Version=20190426
+Date=2019-04-26
+Interface=Interface1
+
+[Interface1]
+pTextLabelMenu1="1",1,1,35,3,70,18,10,Bold
+pButtonMenu2="2",1,8,75,0,70,20,pButtonMenu2,0,True,_pButtonMenu2_,True
+pButtonMenu3="?",1,8,145,0,70,20,pButtonMenu3,0,True,_pButtonMenu3_,True
+pWebLabel1=https://mh-nexus.de/en/hxd/,1,10,51,100,216,18,https://mh-nexus.de/en/hxd/
+pTextLabel1="HxD Website",1,1,51,77,230,18,10,Bold
+pCheckBoxInWim="Include Program in boot.wim",1,3,51,265,180,18,True
+
+[Interface2]
+pButtonMenu1="1",1,8,5,0,70,20,pButtonMenu1,0,True,_pButtonMenu1_,True
+pTextLabelMenu2="2",1,1,108,3,70,18,10,Bold
+pButtonMenu3="?",1,8,145,0,70,20,pButtonMenu3,0,True,_pButtonMenu3_,True
+pBevel1=,1,12,10,65,66,2
+pTextLabel="Menu Entries",1,1,10,50,230,18,8,Bold
+pCheckBoxShortcutDesktop="Add to Desktop Menu",1,3,40,80,150,18,True
+pCheckBoxShortcutQuick="Add to Quicklaunch Menu",1,3,40,110,150,18,True
+pCheckBoxShortcutPrograms="Add to #$qStart#$q > ",1,3,40,140,99,18,True
+pCheckBoxShortcutLaunchBar="Add to LaunchBar Menu ",1,3,40,170,150,18,True
+pButtonShortcut1=?,1,8,10,80,18,18,pButtonShortcut1,0,True,_pButtonShortcut1_,True
+pButtonShortcut2=?,1,8,10,110,18,18,pButtonShortcut2,0,True,_pButtonShortcut2_,True
+pButtonShortcut3=?,1,8,10,140,18,18,pButtonShortcut3,0,True,_pButtonShortcut3_,True
+pButtonShortcut4=?,1,8,10,170,18,18,pButtonShortcut4,0,True,_pButtonShortcut4_,True
+pTextBox1=,1,0,140,140,150,21,Programs
+
+[pButtonMenu1]
+IniWrite,%ScriptFile%,Main,Interface,Interface1
+System,REFRESHINTERFACE
+
+[pButtonMenu2]
+IniWrite,%ScriptFile%,Main,Interface,Interface2
+System,REFRESHINTERFACE
+
+[pButtonMenu3]
+message,"Click on the buttons to toggle between tabs 1 and 2. #$x#$xTab 2 contains menu options for use in the selected shell. Click on the ? button for information about the different options."
+
+[pButtonShortcut1]
+message,"WinXShell only#$x#$xSelect this option to add a program shortcut to the Desktop."
+
+[pButtonShortcut2]
+message,"WinXShell only#$x#$xSelect this option to add a program menu option to the Quicklaunch menu - similar in appearence to the 'Pin to Taskbar' option in Windows 7/8/10."
+
+[pButtonShortcut3]
+message,"Applies to WinXShell#$c BBLean and LaunchBar Shell(s)#$x#$xSelect this option to add a program menu option to the Start menu. Leave blank to add to the root of the menu#$c or manually type a path to place in a sub-menu (do not use spaces in the path). E.g. #$x#$s- FileManager#$x#$s- Programs#$x#$s- Programs\FileManager#$x#$xAnd looking at the examples above - #$x#$xLeave this option blank to add a menu entry to the root of the program menu (the 'Start' menu in WinXShell#$c the 'Start' menu in BBLean#$c or the root of the LaunchBar menu bar if LaunchBar is selected as Shell)#$x#$xEnter 'FileManager' to add a menu entry for this application to the 'Start' > 'FileManager' sub-menu (WinXShell and bblean) or the 'FileManager' sub-menu in LaunchBar.#$x#$xEnter 'Programs' to add a menu entry for this application to the 'Start' > 'Programs' sub-menu (WinXShell and bblean) or the 'Programs' sub-menu in LaunchBar.#$x#$xEnter 'Programs\FileManager' to add a menu entry for this application to the 'Start' > 'Programs' > 'FileManager' sub-menu (WinXShell and bblean) or the 'Programs' > 'FileManager' sub-menu in LaunchBar."
+
+[pButtonShortcut4]
+message,"This setting does not apply to any LaunchBar instance running as the WinPE Shell. This option only applies to a LaunchBar instance when the Applications' > 'LaunchBar' program script is selected in the build.#$x#$xIf the 'Applications' > 'LaunchBar' program script is selected than enable this option to add a program menu entry to the root of the LaunchBar menu bar. #$x#$xPlease note that if option '6] Programs in boot.wim' in the main project script is set as 'NO'#$c then LaunchBar and a number of other applications will not be available at boot. In this case a text based .ini file will be used for LaunchBar menu settings."
+
+[process]
+If,%FullProjectRun%,Equal,NO,Run,"%ProjectDir%\Core\common.script",PostConfigRun
+AddInterface,%ScriptFile%,Interface1,""
+AddInterface,%ScriptFile%,Interface2,""
+If,%pCheckBoxInWim%,Equal,True,Set,%PROGRAMS.IN.WIM%,YES
+Else,Set,%PROGRAMS.IN.WIM%,NO
+Run,%ScriptFile%,CHECKS
+Run,%ScriptFile%,MENU
+Run,%ScriptFile%,COMMON
+If,%PROGRAMS.IN.WIM%,Equal,NO,Run,%ScriptFile%,NOT.IN.WIM
+If,%PROGRAMS.IN.WIM%,Equal,YES,Run,%ScriptFile%,IN.WIM
+
+[CHECKS]
+If,%ARCH%,Equal,x86,If,Not,ExistFile,"%Programs%\HxD\HxD32.exe",Begin
+  Message,"HxD is missing - exiting script...",Error,5
+  Exit,"HxD is missing - exiting script..."
+End
+If,%ARCH%,Equal,x64,If,Not,ExistFile,"%Programs%\HxD\HxD64.exe",Begin
+  Message,"HxD is missing - exiting script...",Error,5
+  Exit,"HxD is missing - exiting script..."
+End
+
+
+[MENU]
+If,%PROGRAMS.IN.WIM%,Equal,NO,Begin
+  If,%ARCH%,Equal,x64,Begin
+    If,Not,ExistFile,"%OutputDir%\Programs\ShortcutsNotInWim.txt",Run,"%ProjectDir%\Core\common.script",NotInWim
+    TXTaddline,"%OutputDir%\Programs\ShortcutsNotInWim.txt","#$p~dp0nircmd.exe shortcut #$q#$p~dp0HxD\HxD64.exe#$q #$q#$pTemp#$p\ShortCuts#$q #$qHxD#$q",Append
+  End
+  If,%ARCH%,Equal,x86,Begin
+    If,Not,ExistFile,"%OutputDir%\Programs\ShortcutsNotInWim.txt",Run,"%ProjectDir%\Core\common.script",NotInWim
+    TXTaddline,"%OutputDir%\Programs\ShortcutsNotInWim.txt","#$p~dp0nircmd.exe shortcut #$q#$p~dp0HxD\HxD32.exe#$q #$q#$pTemp#$p\ShortCuts#$q #$qHxD#$q",Append
+  End
+End 
+If,%PROGRAMS.IN.WIM%,Equal,YES,Begin
+  If,%ARCH%,Equal,x64,ShellExecute,Hide,"%Tools%\Shortcut.exe","/A:C /T:#$q#$pSystemDrive#$p\Programs\HxD\HxD64.exe#$q /F:#$q%ProjectTemp%\HxD.lnk#$q /I:#$q#$pSystemDrive#$p\Programs\HxD\HxD64.exe#$c0#$q"
+  If,%ARCH%,Equal,x86,ShellExecute,Hide,"%Tools%\Shortcut.exe","/A:C /T:#$q#$pSystemDrive#$p\Programs\HxD\HxD32.exe#$q /F:#$q%ProjectTemp%\HxD.lnk#$q /I:#$q#$pSystemDrive#$p\Programs\HxD\HxD32.exe#$c0#$q"
+  If,ExistFile,"%ProjectTemp%\HxD.lnk",Begin
+    Set,%MyShortcut%,HxD.lnk
+    If,%pCheckBoxShortcutDesktop%,Equal,True,FileCopy,"%ProjectTemp%\%MyShortcut%","%ProjectTemp%\ShortCuts\Desktop"
+    If,%pCheckBoxShortcutQuick%,Equal,True,FileCopy,"%ProjectTemp%\%MyShortcut%","%ProjectTemp%\ShortCuts\Quick"
+    If,%pCheckBoxShortcutPrograms%,Equal,True,Begin
+      Set,%ProgramMenuPath%,%pTextBox1%
+      Run,"%ProjectDir%\Core\common.script",StartMenu
+    End
+    If,%pCheckBoxShortcutLaunchBar%,Equal,True,FileCopy,"%ProjectTemp%\%MyShortcut%","%ProjectTemp%\ShortCuts\LaunchBar"
+    If,%FullProjectRun%,Equal,NO,Run,"%ProjectDir%\Core\common.script",PostConfigRunShortcuts
+    FileDelete,"%ProjectTemp%\%MyShortcut%"
+  End
+End
+
+[COMMON]
+If,%PROGRAMS.IN.WIM%,Equal,NO,Set,%PATH%,%OutputDir%
+If,%PROGRAMS.IN.WIM%,Equal,YES,Set,%PATH%,%TargetDir%
+If,Not,ExistDir,"%PATH%\Programs",DirMake,"%PATH%\Programs"
+DirMake,"%PATH%\Programs\HxD"
+DirCopy,"%Programs%\HxD\*.*","%PATH%\Programs\HxD"
+If,%ARCH%,Equal,x86,If,ExistFile,"%PATH%\Programs\HxD\HxD64.exe",FileDelete,"%PATH%\Programs\HxD\HxD64.exe"
+If,%ARCH%,Equal,x64,If,ExistFile,"%PATH%\Programs\HxD\HxD32.exe",FileDelete,"%PATH%\Programs\HxD\HxD32.exe"
+If,Not,ExistFile,"%PATH%\Programs\registry.entries.cmd",Begin
+  FileCreateBlank,"%PATH%\Programs\registry.entries.cmd"
+  TXTaddLine,"%PATH%\Programs\registry.entries.cmd",@Echo off,Append
+  TXTaddLine,"%PATH%\Programs\registry.entries.cmd",,Append
+End
+If,%ARCH%,Equal,x86,Begin
+  TXTaddLine,"%PATH%\Programs\registry.entries.cmd",::=============HxD==============,Append
+  TXTaddLine,"%PATH%\Programs\registry.entries.cmd",::for context menu entries,Append
+  TXTaddLine,"%PATH%\Programs\registry.entries.cmd",IF EXIST #$q#$p~dp0HxD\HxD32.exe#$q (,Append
+  TXTaddLine,"%PATH%\Programs\registry.entries.cmd",ECHO.,Append
+  TXTaddLine,"%PATH%\Programs\registry.entries.cmd",ECHO HxD Registry Entries,Append
+  TXTaddLine,"%PATH%\Programs\registry.entries.cmd",reg.exe add #$qHKLM\SOFTWARE\Classes\*\shell\HxD#$q /ve /t REG_SZ /d #$qOpen with HxD#$q /f,Append
+  TXTaddLine,"%PATH%\Programs\registry.entries.cmd",reg.exe add #$qHKLM\SOFTWARE\Classes\*\shell\HxD\command#$q /ve /t REG_SZ /d #$q\#$q#$p~dp0HxD\HxD32.exe\#$q \#$q%%1\#$q#$q /f,Append
+  TXTaddLine,"%PATH%\Programs\registry.entries.cmd",::add to openwith list,Append
+  TXTaddLine,"%PATH%\Programs\registry.entries.cmd",reg.exe add #$qHKLM\SOFTWARE\Classes\*\OpenWithList\HxD32.exe#$q /ve /t REG_SZ /d #$qHxD#$q /f,Append
+  TXTaddLine,"%PATH%\Programs\registry.entries.cmd",reg.exe add #$qHKLM\SOFTWARE\Classes\Applications\HxD32.exe\shell\open\command#$q /ve /t REG_SZ /d #$q\#$q#$p~dp0HxD\HxD32.exe\#$q \#$q%%1\#$q#$q /f,Append
+  TXTaddLine,"%PATH%\Programs\registry.entries.cmd",),Append
+  TXTaddLine,"%PATH%\Programs\registry.entries.cmd",,Append
+End
+If,%ARCH%,Equal,x64,Begin
+  TXTaddLine,"%PATH%\Programs\registry.entries.cmd",::=============HxD==============,Append
+  TXTaddLine,"%PATH%\Programs\registry.entries.cmd",::for context menu entries,Append
+  TXTaddLine,"%PATH%\Programs\registry.entries.cmd",IF EXIST #$q#$p~dp0HxD\HxD64.exe#$q (,Append
+  TXTaddLine,"%PATH%\Programs\registry.entries.cmd",ECHO.,Append
+  TXTaddLine,"%PATH%\Programs\registry.entries.cmd",ECHO HxD Registry Entries,Append
+  TXTaddLine,"%PATH%\Programs\registry.entries.cmd",reg.exe add #$qHKLM\SOFTWARE\Classes\*\shell\HxD#$q /ve /t REG_SZ /d #$qOpen with HxD#$q /f,Append
+  TXTaddLine,"%PATH%\Programs\registry.entries.cmd",reg.exe add #$qHKLM\SOFTWARE\Classes\*\shell\HxD\command#$q /ve /t REG_SZ /d #$q\#$q#$p~dp0HxD\HxD64.exe\#$q \#$q%%1\#$q#$q /f,Append
+  TXTaddLine,"%PATH%\Programs\registry.entries.cmd",::add to openwith list,Append
+  TXTaddLine,"%PATH%\Programs\registry.entries.cmd",reg.exe add #$qHKLM\SOFTWARE\Classes\*\OpenWithList\HxD64.exe#$q /ve /t REG_SZ /d #$qHxD#$q /f,Append
+  TXTaddLine,"%PATH%\Programs\registry.entries.cmd",reg.exe add #$qHKLM\SOFTWARE\Classes\Applications\HxD64.exe\shell\open\command#$q /ve /t REG_SZ /d #$q\#$q#$p~dp0HxD\HxD64.exe\#$q \#$q%%1\#$q#$q /f,Append
+  TXTaddLine,"%PATH%\Programs\registry.entries.cmd",),Append
+  TXTaddLine,"%PATH%\Programs\registry.entries.cmd",,Append
+End
+IniWrite,"%OutputDir%\Project.Settings.ini",PROGRAMS,HxD,YES
+
+[IN.WIM]
+Echo,"Mounting registry hives..."
+If,Not,ExistRegSection,HKLM,_WinPE_SOFTWARE,RegHiveLoad,_WinPE_SOFTWARE,"%Target_config%\software"
+RegWrite,HKLM,0x1,_WinPE_SOFTWARE\Classes\*\shell\HxD,,Open with HxD
+If,%ARCH%,Equal,x86,RegWrite,HKLM,0x2,_WinPE_SOFTWARE\Classes\*\shell\HxD\command,,#$psystemdrive#$p\Programs\HxD\HxD32.exe #$q%1#$q
+If,%ARCH%,Equal,x64,RegWrite,HKLM,0x2,_WinPE_SOFTWARE\Classes\*\shell\HxD\command,,#$psystemdrive#$p\Programs\HxD\HxD64.exe #$q%1#$q
+RegWrite,HKLM,0x1,_WinPE_SOFTWARE\Classes\*\OpenWithList\HxD.exe,,HxD
+If,%ARCH%,Equal,x86,RegWrite,HKLM,0x2,_WinPE_SOFTWARE\Classes\Applications\HxD.exe\shell\open\command,,#$psystemdrive#$p\Programs\HxD\HxD32.exe #$q%1#$q
+If,%ARCH%,Equal,x64,RegWrite,HKLM,0x2,_WinPE_SOFTWARE\Classes\Applications\HxD.exe\shell\open\command,,#$psystemdrive#$p\Programs\HxD\HxD64.exe #$q%1#$q
+If,%Openwith.workaround%,Equal,YES,Begin
+  RegRead,HKLM,_WinPE_SOFTWARE\Classes\*\shell\Open with,Subcommands,%Subcommands%
+  Set,%new.subcommand%,%Subcommands%;openwith.HxD
+  RegWrite,HKLM,0x1,"_WinPE_SOFTWARE\Classes\*\shell\Open with",Subcommands,%new.subcommand%
+  RegWrite,HKLM,0x1,_WinPE_SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\CommandStore\shell\openwith.HxD,,HxD
+  If,%ARCH%,Equal,x86,RegWrite,HKLM,0x2,_WinPE_SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\CommandStore\shell\openwith.HxD\command,,#$q#$psystemdrive#$p\Programs\HxD\HxD32.exe#$q #$q%1#$q
+  If,%ARCH%,Equal,x64,RegWrite,HKLM,0x2,_WinPE_SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\CommandStore\shell\openwith.HxD\command,,#$q#$psystemdrive#$p\Programs\HxD\HxD64.exe#$q #$q%1#$q
+End
+Echo,"Unmounting registry hives..."
+RegHiveUnload,_WinPE_SOFTWARE
+If,%FullProjectRun%,Equal,NO,Begin
+  IniRead,"%TargetDir%\Project.Settings.ini",Main,Image.Number,%Boot.wim.Image.number%
+  WimPathAdd,%OutputDir%\sources\boot.wim,%Boot.wim.Image.number%,%TargetDir%,""
+End
+//Wait,1
+
+[NOT.IN.WIM]
+//Wait,1
+If,%FullProjectRun%,Equal,NO,Run,"%ProjectDir%\Core\common.script",PostConfigRunNotInWim
+
+[AuthorEncoded]
+HxD.ico=1089,1452
+logo=HxD.ico
+
+[EncodedFile-AuthorEncoded-HxD.ico]
+lines=0
+0=eJztlFlME1EUhsd3n42PmBCjUYxEUdBgfPXBB33QigtiWaa0QEFEK6i4EXCrVREXpJ0qRmgw2jKdoRSKSY1hCVIDAUVQkgpaaVW2EDb96cWbsQJucXnwMEzunN75zpn/nHsYZg7+goIY3Oczd+YyzDyGYRbhHy5mPUP8k5Y9l/lv/5h9nNkmJiZGR0eHh4cHBwcH/DY0NDT82bAmTvyKR+zE/lloX8PHxsbwYl9fn9frfeM3j8fT29uLR9yxJk48Yg92Yv/3hyDJIze87na7Ozo6nvmtvb0da72jddsNV+ipxtAzrhW61rCCl6sLX4frvazQX9E58p38kZERJNbT0wNsU1NTbW3tI7/p7jqXHrbjCsmuXnbiIaKsvPhs1bVX4freCO59hPEDKw58MwrJH/zu7u62tra6ujqHwyEIgsVi2XDUtCitZHF62RINH5LtWJ7XsOLCUz/fS/jSEEn39qjuxiSadkvh0de2bNdt3nJqI/SBzsgfyYuiWFpaynFccNzl4PgrC1Vcbm6uRqNRq9VKpVIul8tksnXaBsKnIdSWuBRzLKJI+XHG7QgRpduEqvl8vs7Ozvr6eqvVajQa8/Pzg3bkLYg+G5xwFeHKysrMZrPdbud53mAw5OTksCy7ttBN+Xt5NrU8PsUSK+UrSqJjuSjaw11dXY2NjeDr9XqtVkv98MCvtbWvuuoOL3ortr5zuVzYo1Kp1hi8JMQ+a2I6r0AIKR+KJdzeGXN9K0VRPvVAJcI/XznFh/hPPGMQU6fTreF8hJ8hqBACXyHlQy72zq6YIhn0kWZL10QfeKDbuYq2sIKu1UWeCO4dmK/6x202G+oyCz/ZLIdEMTdkpL4BR57WFxVH3U/zzSvzO0j/4xPAh54oE6lyhqAkEqVbFViQNYquNO2WG6Jof1I4+hPNSfoTHYu+zSp2SvsTfGRlMpkInzBx4UM0YvLBCvUBMRmPyffl8cU76PmifJyvkCNV5Hwh+ZqamqQCQXq+CB/SEX4az+IK0EcjpqRZEhSlu8h8CNAHMyH09GMcW8QFn73E0/lA+Bh9TqeT8CEFroD+OWTbm2FV4ROk9cUoo+uwyy+gOTwtLS2p+gdIHvUNN/gIH4OuubmZ1Bedj/MV0P9H7fszbanp5QoKpPOZepAwceaJzyfh/uRdb0YJIfLm1BEm5xeXlH+8+uCRyn0UhXwwi3AfHx/HXArwc08GJzuTe1/1vJ8SIm9N8SH+ZIgv8z/pyDpWpYFKH6czOmGm/RW2oaSPbMB82C8koSHTyhOkG3IcWSeqM6HSj/LjhYGA+TZTDrMYXqSQma6fhsPw4u+D0xDTfsWvk/81Y/7bX7U/XY/AeJ8AJurCqHicY/eocNHLTM5nGAUjEuzjgdC/mLHL52sr7mNgAgB/SQW3GacYTQEAAAACAAAAIwAAAPoDAAAAAAAAAQAAAAAAAAAAAAAA

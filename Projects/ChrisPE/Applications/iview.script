@@ -1,0 +1,211 @@
+[main]
+Title=IrfanView
+Description=Graphic viewer and screen capture.
+Selected=False
+Level=5
+Author=ThePEBakeryTeam
+Version=20190426
+Date=2019-04-26
+Interface=Interface1
+
+[Interface1]
+pTextLabelMenu1="1",1,1,35,3,70,18,10,Bold
+pButtonMenu2="2",1,8,75,0,70,20,pButtonMenu2,0,True,_pButtonMenu2_,True
+pButtonMenu3="?",1,8,145,0,70,20,pButtonMenu3,0,True,_pButtonMenu3_,True
+pWebLabel1=https://www.irfanview.com/,1,10,51,100,216,18,https://www.irfanview.com/
+pTextLabel1="IrfanViewer Website",1,1,51,77,230,18,10,Bold
+pCheckBoxInWim="Include Program in boot.wim",1,3,51,265,180,18,True
+
+[Interface2]
+pButtonMenu1="1",1,8,5,0,70,20,pButtonMenu1,0,True,_pButtonMenu1_,True
+pTextLabelMenu2="2",1,1,108,3,70,18,10,Bold
+pButtonMenu3="?",1,8,145,0,70,20,pButtonMenu3,0,True,_pButtonMenu3_,True
+pBevel1=,1,12,10,65,66,2
+pTextLabel="Menu Entries",1,1,10,50,230,18,8,Bold
+pCheckBoxShortcutDesktop="Add to Desktop Menu",1,3,40,80,150,18,True
+pCheckBoxShortcutQuick="Add to Quicklaunch Menu",1,3,40,110,150,18,True
+pCheckBoxShortcutPrograms="Add to #$qStart#$q > ",1,3,40,140,99,18,True
+pCheckBoxShortcutLaunchBar="Add to LaunchBar Menu ",1,3,40,170,150,18,True
+pButtonShortcut1=?,1,8,10,80,18,18,pButtonShortcut1,0,True,_pButtonShortcut1_,True
+pButtonShortcut2=?,1,8,10,110,18,18,pButtonShortcut2,0,True,_pButtonShortcut2_,True
+pButtonShortcut3=?,1,8,10,140,18,18,pButtonShortcut3,0,True,_pButtonShortcut3_,True
+pButtonShortcut4=?,1,8,10,170,18,18,pButtonShortcut4,0,True,_pButtonShortcut4_,True
+pTextBox1=,1,0,140,140,150,21,Programs
+
+[pButtonMenu1]
+IniWrite,%ScriptFile%,Main,Interface,Interface1
+System,REFRESHINTERFACE
+
+[pButtonMenu2]
+IniWrite,%ScriptFile%,Main,Interface,Interface2
+System,REFRESHINTERFACE
+
+[pButtonMenu3]
+message,"Click on the buttons to toggle between tabs 1 and 2. #$x#$xTab 2 contains menu options for use in the selected shell. Click on the ? button for information about the different options."
+
+[pButtonShortcut1]
+message,"WinXShell only#$x#$xSelect this option to add a program shortcut to the Desktop."
+
+[pButtonShortcut2]
+message,"WinXShell only#$x#$xSelect this option to add a program menu option to the Quicklaunch menu - similar in appearence to the 'Pin to Taskbar' option in Windows 7/8/10."
+
+[pButtonShortcut3]
+message,"Applies to WinXShell#$c BBLean and LaunchBar Shell(s)#$x#$xSelect this option to add a program menu option to the Start menu. Leave blank to add to the root of the menu#$c or manually type a path to place in a sub-menu (do not use spaces in the path). E.g. #$x#$s- FileManager#$x#$s- Programs#$x#$s- Programs\FileManager#$x#$xAnd looking at the examples above - #$x#$xLeave this option blank to add a menu entry to the root of the program menu (the 'Start' menu in WinXShell#$c the 'Start' menu in BBLean#$c or the root of the LaunchBar menu bar if LaunchBar is selected as Shell)#$x#$xEnter 'FileManager' to add a menu entry for this application to the 'Start' > 'FileManager' sub-menu (WinXShell and bblean) or the 'FileManager' sub-menu in LaunchBar.#$x#$xEnter 'Programs' to add a menu entry for this application to the 'Start' > 'Programs' sub-menu (WinXShell and bblean) or the 'Programs' sub-menu in LaunchBar.#$x#$xEnter 'Programs\FileManager' to add a menu entry for this application to the 'Start' > 'Programs' > 'FileManager' sub-menu (WinXShell and bblean) or the 'Programs' > 'FileManager' sub-menu in LaunchBar."
+
+[pButtonShortcut4]
+message,"This setting does not apply to any LaunchBar instance running as the WinPE Shell. This option only applies to a LaunchBar instance when the Applications' > 'LaunchBar' program script is selected in the build.#$x#$xIf the 'Applications' > 'LaunchBar' program script is selected than enable this option to add a program menu entry to the root of the LaunchBar menu bar. #$x#$xPlease note that if option '6] Programs in boot.wim' in the main project script is set as 'NO'#$c then LaunchBar and a number of other applications will not be available at boot. In this case a text based .ini file will be used for LaunchBar menu settings."
+
+[process]
+If,%FullProjectRun%,Equal,NO,Run,"%ProjectDir%\Core\common.script",PostConfigRun
+AddInterface,%ScriptFile%,Interface1,""
+AddInterface,%ScriptFile%,Interface2,""
+If,%pCheckBoxInWim%,Equal,True,Set,%PROGRAMS.IN.WIM%,YES
+Else,Set,%PROGRAMS.IN.WIM%,NO
+Run,%ScriptFile%,CHECKS
+Run,%ScriptFile%,MENU
+Run,%ScriptFile%,COMMON
+If,%PROGRAMS.IN.WIM%,Equal,NO,Run,%ScriptFile%,NOT.IN.WIM
+If,%PROGRAMS.IN.WIM%,Equal,YES,Run,%ScriptFile%,IN.WIM
+
+[CHECKS]
+If,%ARCH%,Equal,x86,If,Not,ExistFile,"%Programs%\iview\x86\i_view32.exe",Begin
+  Message,IrfanView is missing - exiting script...,Error,5
+  Exit,IrfanView is missing - exiting script...,WARN
+End
+If,%ARCH%,Equal,x64,If,Not,ExistFile,"%Programs%\iview\x64\i_view64.exe",Begin
+  Message,IrfanView is missing - exiting script...,Error,5
+  Exit,IrfanView is missing - exiting script...,WARN
+End
+
+[MENU]
+If,%PROGRAMS.IN.WIM%,Equal,NO,Begin
+  If,Not,ExistFile,"%OutputDir%\Programs\ShortcutsNotInWim.txt",Run,"%ProjectDir%\Core\common.script",NotInWim
+  If,%ARCH%,Equal,x86,TXTaddline,"%OutputDir%\Programs\ShortcutsNotInWim.txt","#$p~dp0nircmd.exe shortcut #$q#$p~dp0iview\i_view32.exe#$q #$q#$pTemp#$p\ShortCuts#$q #$qIrfanView#$q",Append
+  If,%ARCH%,Equal,x64,TXTaddline,"%OutputDir%\Programs\ShortcutsNotInWim.txt","#$p~dp0nircmd.exe shortcut #$q#$p~dp0iview\i_view64.exe#$q #$q#$pTemp#$p\ShortCuts#$q #$qIrfanView#$q",Append
+End 
+If,%PROGRAMS.IN.WIM%,Equal,YES,Begin
+  If,%ARCH%,Equal,x86,ShellExecute,Hide,"%Tools%\Shortcut.exe","/A:C /T:#$q#$pSystemDrive#$p\Programs\iview\i_view32.exe#$q /F:#$q%ProjectTemp%\IrfanView.lnk#$q /I:#$q#$pSystemDrive#$p\Programs\iview\i_view32.exe#$c0#$q"
+  If,%ARCH%,Equal,x64,ShellExecute,Hide,"%Tools%\Shortcut.exe","/A:C /T:#$q#$pSystemDrive#$p\Programs\iview\i_view64.exe#$q /F:#$q%ProjectTemp%\IrfanView.lnk#$q /I:#$q#$pSystemDrive#$p\Programs\iview\i_view64.exe#$c0#$q"
+  If,ExistFile,"%ProjectTemp%\IrfanView.lnk",Begin
+    Set,%MyShortcut%,IrfanView.lnk
+    If,%pCheckBoxShortcutDesktop%,Equal,True,FileCopy,"%ProjectTemp%\%MyShortcut%","%ProjectTemp%\ShortCuts\Desktop"
+    If,%pCheckBoxShortcutQuick%,Equal,True,FileCopy,"%ProjectTemp%\%MyShortcut%","%ProjectTemp%\ShortCuts\Quick"
+    If,%pCheckBoxShortcutPrograms%,Equal,True,Begin
+      Set,%ProgramMenuPath%,%pTextBox1%
+      Run,"%ProjectDir%\Core\common.script",StartMenu
+    End
+    If,%pCheckBoxShortcutLaunchBar%,Equal,True,FileCopy,"%ProjectTemp%\%MyShortcut%","%ProjectTemp%\ShortCuts\LaunchBar"
+    If,%FullProjectRun%,Equal,NO,Run,"%ProjectDir%\Core\common.script",PostConfigRunShortcuts
+    FileDelete,"%ProjectTemp%\%MyShortcut%"
+  End
+End
+
+[COMMON]
+If,%PROGRAMS.IN.WIM%,Equal,NO,Set,%PATH%,%OutputDir%
+If,%PROGRAMS.IN.WIM%,Equal,YES,Set,%PATH%,%TargetDir%
+If,Not,ExistDir,"%PATH%\Programs",DirMake,"%PATH%\Programs"
+DirMake,"%PATH%\Programs\iview"
+DirCopy,"%Programs%\iview\%ARCH%\*.*","%PATH%\Programs\iview"
+If,Not,ExistFile,"%PATH%\Programs\registry.entries.cmd",Begin
+  FileCreateBlank,"%PATH%\Programs\registry.entries.cmd"
+  TXTaddLine,"%PATH%\Programs\registry.entries.cmd",@Echo off,Append
+  TXTaddLine,"%PATH%\Programs\registry.entries.cmd",,Append
+End
+If,%Arch%,Equal,x86,Begin
+  TXTaddLine,"%PATH%\Programs\registry.entries.cmd",::==========IrfanView===========,Append
+  TXTaddLine,"%PATH%\Programs\registry.entries.cmd",::for file associations,Append
+  TXTaddLine,"%PATH%\Programs\registry.entries.cmd",IF EXIST #$q#$p~dp0iview\i_view32.exe#$q (,Append
+  TXTaddLine,"%PATH%\Programs\registry.entries.cmd",ECHO.,Append
+  TXTaddLine,"%PATH%\Programs\registry.entries.cmd",ECHO IrfanView Registry Entries,Append
+  TXTaddLine,"%PATH%\Programs\registry.entries.cmd",reg.exe add #$qHKLM\SOFTWARE\Classes\.bmp#$q /ve /t REG_SZ /d #$qIrfanView#$q /f,Append
+  TXTaddLine,"%PATH%\Programs\registry.entries.cmd",reg.exe add #$qHKLM\SOFTWARE\Classes\.jpg#$q /ve /t REG_SZ /d #$qIrfanView#$q /f,Append
+  TXTaddLine,"%PATH%\Programs\registry.entries.cmd",reg.exe add #$qHKLM\SOFTWARE\Classes\.png#$q /ve /t REG_SZ /d #$qIrfanView#$q /f,Append
+  TXTaddLine,"%PATH%\Programs\registry.entries.cmd",reg.exe DELETE HKLM\Software\Classes\.bmp\OpenWithList /f,Append
+  TXTaddLine,"%PATH%\Programs\registry.entries.cmd",reg.exe DELETE HKLM\Software\Classes\.jpg\OpenWithList /f,Append
+  TXTaddLine,"%PATH%\Programs\registry.entries.cmd",reg.exe DELETE HKLM\Software\Classes\.png\OpenWithList /f,Append
+  TXTaddLine,"%PATH%\Programs\registry.entries.cmd",reg.exe add #$qHKLM\SOFTWARE\Classes\IrfanView#$q /ve /t REG_SZ /d #$qIrfanView#$q /f,Append
+  TXTaddLine,"%PATH%\Programs\registry.entries.cmd",reg.exe add #$qHKLM\SOFTWARE\Classes\IrfanView\DefaultIcon#$q /ve /t REG_SZ /d #$q#$p~dp0iview\i_view32.exe#$q /f,Append
+  TXTaddLine,"%PATH%\Programs\registry.entries.cmd",reg.exe add #$qHKLM\SOFTWARE\Classes\IrfanView\shell\open\command#$q /ve /t REG_SZ /d #$q\#$q#$p~dp0iview\i_view32.exe\#$q \#$q%%1\#$q#$q /f,Append
+  TXTaddLine,"%PATH%\Programs\registry.entries.cmd",::add to openwith list,Append
+  TXTaddLine,"%PATH%\Programs\registry.entries.cmd",reg.exe add #$qHKLM\SOFTWARE\Classes\*\OpenWithList\IrfanView.exe#$q /ve /t REG_SZ /d #$qIrfanView#$q /f,Append
+  TXTaddLine,"%PATH%\Programs\registry.entries.cmd",reg.exe add #$qHKLM\SOFTWARE\Classes\Applications\IrfanView.exe\shell\open\command#$q /ve /t REG_SZ /d #$q\#$q#$p~dp0iview\i_view32.exe\#$q \#$q%%1\#$q#$q /f,Append
+  TXTaddLine,"%PATH%\Programs\registry.entries.cmd",),Append
+  TXTaddLine,"%PATH%\Programs\registry.entries.cmd",,Append
+End
+If,%Arch%,Equal,x64,Begin
+  TXTaddLine,"%PATH%\Programs\registry.entries.cmd",::==========IrfanView===========,Append
+  TXTaddLine,"%PATH%\Programs\registry.entries.cmd",::for file associations,Append
+  TXTaddLine,"%PATH%\Programs\registry.entries.cmd",IF EXIST #$q#$p~dp0iview\i_view64.exe#$q (,Append
+  TXTaddLine,"%PATH%\Programs\registry.entries.cmd",ECHO.,Append
+  TXTaddLine,"%PATH%\Programs\registry.entries.cmd",ECHO IrfanView Registry Entries,Append
+  TXTaddLine,"%PATH%\Programs\registry.entries.cmd",reg.exe add #$qHKLM\SOFTWARE\Classes\.bmp#$q /ve /t REG_SZ /d #$qIrfanView#$q /f,Append
+  TXTaddLine,"%PATH%\Programs\registry.entries.cmd",reg.exe add #$qHKLM\SOFTWARE\Classes\.jpg#$q /ve /t REG_SZ /d #$qIrfanView#$q /f,Append
+  TXTaddLine,"%PATH%\Programs\registry.entries.cmd",reg.exe add #$qHKLM\SOFTWARE\Classes\.png#$q /ve /t REG_SZ /d #$qIrfanView#$q /f,Append
+  TXTaddLine,"%PATH%\Programs\registry.entries.cmd",reg.exe DELETE HKLM\Software\Classes\.bmp\OpenWithList /f,Append
+  TXTaddLine,"%PATH%\Programs\registry.entries.cmd",reg.exe DELETE HKLM\Software\Classes\.jpg\OpenWithList /f,Append
+  TXTaddLine,"%PATH%\Programs\registry.entries.cmd",reg.exe DELETE HKLM\Software\Classes\.png\OpenWithList /f,Append
+  TXTaddLine,"%PATH%\Programs\registry.entries.cmd",reg.exe add #$qHKLM\SOFTWARE\Classes\IrfanView#$q /ve /t REG_SZ /d #$qIrfanView#$q /f,Append
+  TXTaddLine,"%PATH%\Programs\registry.entries.cmd",reg.exe add #$qHKLM\SOFTWARE\Classes\IrfanView\DefaultIcon#$q /ve /t REG_SZ /d #$q#$p~dp0iview\i_view64.exe#$q /f,Append
+  TXTaddLine,"%PATH%\Programs\registry.entries.cmd",reg.exe add #$qHKLM\SOFTWARE\Classes\IrfanView\shell\open\command#$q /ve /t REG_SZ /d #$q\#$q#$p~dp0iview\i_view64.exe\#$q \#$q%%1\#$q#$q /f,Append
+  TXTaddLine,"%PATH%\Programs\registry.entries.cmd",::add to openwith list,Append
+  TXTaddLine,"%PATH%\Programs\registry.entries.cmd",reg.exe add #$qHKLM\SOFTWARE\Classes\*\OpenWithList\IrfanView.exe#$q /ve /t REG_SZ /d #$qIrfanView#$q /f,Append
+  TXTaddLine,"%PATH%\Programs\registry.entries.cmd",reg.exe add #$qHKLM\SOFTWARE\Classes\Applications\IrfanView.exe\shell\open\command#$q /ve /t REG_SZ /d #$q\#$q#$p~dp0iview\i_view64.exe\#$q \#$q%%1\#$q#$q /f,Append
+  TXTaddLine,"%PATH%\Programs\registry.entries.cmd",),Append
+  TXTaddLine,"%PATH%\Programs\registry.entries.cmd",,Append
+End
+IniWrite,"%OutputDir%\Project.Settings.ini",PROGRAMS,IrfanView,YES
+
+[IN.WIM]
+Echo,"Mounting registry hives..."
+If,Not,ExistRegSection,HKLM,_WinPE_SOFTWARE,RegHiveLoad,_WinPE_SOFTWARE,"%Target_config%\software"
+RegWrite,HKLM,0x1,_WinPE_SOFTWARE\Classes\.bmp,,IrfanView
+System,Erroroff,1
+RegDelete,HKLM,_WinPE_SOFTWARE\Classes\.bmp\OpenWithList
+RegWrite,HKLM,0x1,_WinPE_SOFTWARE\Classes\.jpg,,IrfanView
+System,Erroroff,1
+RegDelete,HKLM,_WinPE_SOFTWARE\Classes\.jpg\OpenWithList
+RegWrite,HKLM,0x1,_WinPE_SOFTWARE\Classes\.png,,IrfanView
+System,Erroroff,1
+RegDelete,HKLM,_WinPE_SOFTWARE\Classes\.png\OpenWithList
+RegWrite,HKLM,0x1,_WinPE_SOFTWARE\Classes\IrfanView,,Image Viewer
+If,%ARCH%,Equal,x64,Begin
+  RegWrite,HKLM,0x2,_WinPE_SOFTWARE\Classes\IrfanView\DefaultIcon,,#$psystemdrive#$p\Programs\iview\i_view64.exe
+  RegWrite,HKLM,0x2,_WinPE_SOFTWARE\Classes\IrfanView\shell\open\command,,#$psystemdrive#$p\Programs\iview\i_view64.exe #$q%1#$q
+End
+If,%ARCH%,Equal,x86,Begin
+  RegWrite,HKLM,0x2,_WinPE_SOFTWARE\Classes\IrfanView\DefaultIcon,,#$psystemdrive#$p\Programs\iview\i_view32.exe
+  RegWrite,HKLM,0x2,_WinPE_SOFTWARE\Classes\IrfanView\shell\open\command,,#$psystemdrive#$p\Programs\iview\i_view32.exe #$q%1#$q
+End
+RegWrite,HKLM,0x1,_WinPE_SOFTWARE\Classes\*\OpenWithList\IrfanView.exe,,IrfanView
+If,%ARCH%,Equal,x86,RegWrite,HKLM,0x2,_WinPE_SOFTWARE\Classes\Applications\IrfanView.exe\shell\open\command,,#$psystemdrive#$p\Programs\iview\i_view32.exe #$q%1#$q
+If,%ARCH%,Equal,x64,RegWrite,HKLM,0x2,_WinPE_SOFTWARE\Classes\Applications\IrfanView.exe\shell\open\command,,#$psystemdrive#$p\Programs\iview\i_view64.exe #$q%1#$q
+If,%Openwith.workaround%,Equal,YES,Begin
+  RegRead,HKLM,_WinPE_SOFTWARE\Classes\*\shell\Open with,Subcommands,%Subcommands%
+  Set,%new.subcommand%,%Subcommands%;openwith.IrfanView
+  RegWrite,HKLM,0x1,"_WinPE_SOFTWARE\Classes\*\shell\Open with",Subcommands,%new.subcommand%
+  RegWrite,HKLM,0x1,_WinPE_SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\CommandStore\shell\openwith.IrfanView,,IrfanView
+  If,%ARCH%,Equal,x86,RegWrite,HKLM,0x2,_WinPE_SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\CommandStore\shell\openwith.IrfanView\command,,#$q#$psystemdrive#$p\Programs\iview\i_view32.exe#$q #$q%1#$q
+  If,%ARCH%,Equal,x64,RegWrite,HKLM,0x2,_WinPE_SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\CommandStore\shell\openwith.IrfanView\command,,#$q#$psystemdrive#$p\Programs\iview\i_view64.exe#$q #$q%1#$q
+End
+Echo,"Unmounting registry hives..."
+RegHiveUnload,_WinPE_SOFTWARE
+If,%FullProjectRun%,Equal,NO,Begin
+  IniRead,"%TargetDir%\Project.Settings.ini",Main,Image.Number,%Boot.wim.Image.number%
+  WimPathAdd,%OutputDir%\sources\boot.wim,%Boot.wim.Image.number%,%TargetDir%,""
+End
+//Wait,1
+
+[NOT.IN.WIM]
+//Wait,1
+If,%FullProjectRun%,Equal,NO,Run,"%ProjectDir%\Core\common.script",PostConfigRunNotInWim
+
+[AuthorEncoded]
+iview.ico=32038,15932
+Logo=iview.ico
+
+[EncodedFile-AuthorEncoded-iview.ico]
+lines=3
+0=eJzNXQd4VFX2v/e9NyU9JHRCGr13pDcVQakCIr1J770IJJDQQwmQSYCAoaMCUtQVpASwL7LqrnXVZUVddy1LUQSSzPmf3ythMpmEAMH9v+87353MvHlzz+/Ue++5N0JIoYl27QS30aJ6ByE6CiHq1zf+3ldFiEn8XnS0+XeoEKXHCBEaavw9RhPi1BwhqvN3+BEiXhjvF3RNmTIlsXHjxsn9+/d3NWnSxDV+/HjXpEmTXF26dHENGzbM9cwzz7hWrVrl2rZtm04HDhxwtWvXbgR/tRNTXaYS8fHxSoE/4HXxvdxDwb0VlZhaMj3M1JyJORPh/LmtqM8qjot5TJw/f77Of5UqVXT+BwwY4Bo8eLCOw7Rp01zr1693JSQk6K+HDBni2rFjh2v69Okz+OtdmZowlTT5KvDiz1Vh8F2Lqa8QthVMqUKoG/nvZGGIqr/5eSDfLx8k39bFsk+sU6dOcunSpV3dunVzde7c2VWtWjXXo48+6mrZsqWL++Hq1auXq3fv3i6+F7J3DRo0SNeFDRs2LFZVtacw5FiR73V69xt/431+GcP0tBDOdCHq/FPI/llCjskSogtTlZ+EsL/En29iepapNVPQH8E/yzWxU6dOyQ0aNHBVr17dFRoa6ipXrpzeDh8+3PXUU0+5HnvsMRf0o0OHDq6xY8fqegD92LRpE2hF7dq1B/KjHhGGTvtbGJhtIGAWwm+9ENV+ZJ5zhLKMhLLcJLxeSkKOdgtR+TshlK18/3ymGnfSqeK4WJ8TY2Njdf5BPXv2dD399NO6HkDXy5cvr/sF6EbHjh11fRgzZoyL/YYrNTXVlZaW5jp8+LCrVatWw/lxjwlDf0NNfQ9mHWcbKfdnlrfb4HWFSct9UCKxS/mZPRZsAm4v4EHzX7NmTV3/Q0JCdPuHvMFn3bp1XW3btnU1bNhQ9wnQe+gA/CHsYeTIka61a9e6FixY4Nq4caPr0KFDuG+KMHwCy1tEMAz9hazzrZSLSCorc+k2Bivy4yEH57AtQAfYR4gSD5r/wMDARLb9ZMZAl3vr1q1dlSpV0nWhXr16+nuwBdgGPhs1apRuD3PnznU9/vjjul+An0xJSXHt3LlT9wn82O7MwzAhm/4k1aUk1VUGKavy4OATDzmVdcDxPD9jCFP4g+Z/+fLlicxXMniLjo52hYeHu4KCglx2u90VExOj+0DoBPt7FzDCPeAbOgCb6NGjh2vevHmuxMRE3R/AL7JNLAsPr/iKVOYx30ketMoLC194LAD/R7hrw5hKFoUH08fa+WUIUxmmCkLXv1wqyxTmyz+zjieyv0+Gb4PO+/n5uUqWLOliu9DlDL2H7GvVquUqU6aM7h/gF8E38gN8D+8tW7ZM9wuwEdjEunUbtjsczX6T6grmd7UXDgXhAf4XMv/+R7lrQ0UR5G/mHmFMDZl6M41jms00TxixZC4T7BI+uhmwMLHSr+bNmyc6nc5k6Lqmaa7KlSvrug+dRxxEi/fAP6hr164u/o7uGyF/4DN79mzdF8AO4B/hG/B6+PDRLytqp2yDf0/yhYWJh86//TB3bcSd5G/6WJa3wljZMlj8p4SI/JRd8GfsR5mimCLfYX1iPBXE1iTzucjb9DgF+bPfS46MjHQxDjrvsGnLB8IOoAfQd/wNHYCNAJuKFSvqeIB/2Ah8Jb6L2IH3oRN16zb5UCrzmbc1HlQIHkoc868d4v4hv4osKA8y3y/FWC0S4qFrQk7g+JLgI7ZwzJFzmTrdYH98gmPLZlM/6vMzHH379s31f2FhYa6IiAjdxmEHNptNlz3kjfwINoG4D33He+Bx8uTJOhb8HF0fECuBC/wmYmTr1u0yFW2aW2prvTAoCAvOBUQoy0ysZWoDORXAO9u6bTHzlSWZz4JjiwcWcibnGNGXGIMt/P3R0B2WV2KFChWSEfvg9+Dz0H/wDp7hC6DjAQEB+mfACf4AegKfib9h85aOID7AV65cuVLXg5Yt270q1RE5Ov/eVAAeQra/xX3kPFFMMHVA8eKdcyptlJAt2L+sLFpcyY0vcxjfsLdM3xAF/WcbTwbvyHUefvhhXc/xN3QA/DVr1gz5jR4PwTvyYOSI0AdgAz8IrIAHYgPGTsgdoB9PPNHtkGYfkiW1dZSXCsFDiWc5BZ3j/nHOKLoxlQYGpr0jJ3iS08PvpbrsDr60ADxEvSv8jAHwm3zp9g9+EOvAB3S7adOmum8HJrBr+D74QvAF3w+MYC/QD9wPmwEu4Bnyx32wlS5derwg1Z4s/2S6Td5Y5MdDKH1v8thoh+mzeghjfFiN/RjnBdF/k8pit6fvEMrUbCG7XxfKyOzC4qyQwxnbQOhWNPBk3U9k3pKh8/BrnA/pNg/dhQ0gL8RYCC3sHJiAV+AEXcB3gAX038IQOoHvIAbUqdP4ZakOYftfTwYl052xAK1hnjpcZz3fyX1FPryQfV0K51T/lkqi+7bvWMU8df6Vx1WsK7YG3MYL+fCvUl3upRuQ/0DOLcu9zM+KtcYW3N9EjnvJ8Ovw/5ApfAH4Av/gDfyCoOf4HPjAF+Ae/A3sgAf0BL4AdgJ9AT5BQWFnpDbDLW3Mu83CwJMKwwN6MOSmkBEXhKx7SagTsoDLbVthucsml5nvmaaNmLHC3lXIRv9GLmXwjbFVnavsMhMQM0w70i+2WZ1/xDv0GTmAoih63INugzcQ9AFY8Fd02wBhngC6D7uw8mb4SfhG+ItHHnmE7afyp4rGOZBtgxcVBYvkXF3wZStCHc98OTOQxiCW5Y0SMVVZ1hz3Iz9kX8Ix0l7V13iSx66JzEsyxrWIV2gRx6Dn4BV6AXkCA9gGCJ8BD0vmlt+08iNgCdmXLVt2q1Qa3lBsG8mT8mNxt3gYJJROiBOrwYanTL1iZaFzU5yrJjLPyfBd8PmQPXQa8kUsR14E3mALkLHVwlbgE2DzUkpd5sAI9yIXYPtIjYmpnMmxz63YUug2bcxH94qHkG05pxGrmGoVxP+dLh63JiYkJCTDVyGeQfbgD7xAjmghY/AKHpEfoYWeAyN8B7oOncD3gBnwCw0Ne95mr3tdYT4Um8ukFB9UFDx8+Q7w3w78r2FqcK/zhm+88UbirFmz9PwXeR1iN/wb9AGxH34Af8PXwedBryFz+HvwCv6BBTDC59AfVbVtU9TYf0tbEin2VJNcBtlcheCRH4sC8WAMjDxJpDA9IfS5lvyXNTY0x375bIFz90TW12T4NsxrwefBDtq3b5/KvKWy/NNY5qns41IR0+DjIGfcD96RC1g+AfrCviJNUUt8LLU5bsWeRgalepHrnvHwxEGoA7I5Pj4njFyunrcPNG2iNFMjphbCyCXz3MN5aiKP3ZJZB3QZsl9LZVlvZh63tmnTJoNlncExIYPf2xYVFZXu7++/md/bxLlhGrdpJUqUSIXMoQuMXZrDEXBKakOyFfsmus2/NxUFjyLYCmKArPI5+0DMF2GMW8Piz/T1UTx8mGjkBvp4AmPjuuZ8rH69//77CS6XazX7/o0TJkxInTFjxrbomCrHY2Kqv1mxYuW3YmKqvWW3lzgdEBBymHOAF5jnPRwTdvHrHawbGcz7Ntb/9EaNGqWHh5d+VbU9ctPgfTMZrScVBYui2oqBh9QWcwws9wGzgjENxgu1TFuoxKnyc0J5LEuowzk3LPcu5464ZzpTHWsO4NatWxN++OGHJefOnVs3YsSoF8PC636rOSZmK4613AfYL49dbWM4f+uZo2gtbgYG1fjeZi/xgd0e+DY/74Td7jxStmy5A/7+Jd6Rapuber8dm/OSTyyKDw+pzeO8Loz7IzC2nSb0OciS+6Q6MTvXVrQFrCuRn5nj31FMEVa+xPyPnDs3br+ff5vrimMDqc5tPklxbGXawn3h/MO2gO17DOdjfTnf7si/M82tf+aTihMP37YitTjOEyu8x2MGzu2DD0l10q18vkObz7oSdkYY4yrMLwcaPsL5pM3xxFWV+6Y6n/Mg3zjcxsKb0n3QHfCwF4THXeqGjgfnBWq/W1KdnlOQ7+DPMb8Mn4mcOVr3j7L6Fyr3VXVmeNBzPuhB4OFLNx6g79DzhtjPTB1oLYTfWMU+IUf12858WJThg+
+1=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
+2=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
+3=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

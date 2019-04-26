@@ -1,0 +1,101 @@
+@charset "utf-8";
+/*	Name: 1490680842
+	Accessibility layout
+	Copyright 2012 Opera Software */
+* {
+	font-family: sans-serif !important;
+	font-size: 18px !important;
+	text-align: left !important;
+	text-transform: none !important;
+	text-decoration: none !important;
+	word-spacing: 0.4mm !important;
+	letter-spacing: 0.2mm !important;
+	line-height: 1.4em !important;
+	color: black !important;
+	background: #D8F5D3 !important;
+	width: auto !important;
+	max-width: none !important;
+	min-width: 0px !important;
+	height: auto !important;
+	max-height: none !important;
+	min-height: 0px !important;
+}
+html *::before, html *::after {display: none !important}
+html q::before {content: open-quote !important;}
+html q::after {content: close-quote !important;}
+body {
+	padding-bottom: 2em !important;
+	margin: 10px auto !important;
+	max-width: 45em !important;
+}
+a[href] {text-decoration: underline !important;}
+a[href]:hover {
+	color: black !important;	
+	background: white !important;
+}
+a[href]:active {
+	background: transparent !important;
+	text-decoration: none !important;
+}
+img, object[type^="image"] {border: none !important;}
+a[href] img, a[href] object[type^="image"] {border: medium solid black !important;}
+input, textarea, select {
+	color: Black !important;	
+	background: White !important;
+}
+input[type="text"], input[type="password"] {min-height: 1.2em !important;}
+textarea {min-height: 4em !important;}
+button, input[type="file"], input[type="submit"], input[type="button"], input[type="reset"], 
+input[type="image"] {
+	text-align: center !important;	
+	color: black !important;
+	background: silver !important;
+	padding: 2px !important;
+	min-width: 2em !important;
+	height: 1.2em !important;
+}
+a[accesskey]:after, button[accesskey]:after, input[accesskey]:after, label[accesskey]:after, 
+legend[accesskey]:after, textarea[accesskey]:after {
+	content: "(" attr(accesskey) ")";
+	margin-left: 0.3em;
+	display: inline !important;
+}
+b, strong, em, h1, h2, h3, h4, h5, h6 {font-weight: bold !important;}
+h1 {
+	font-size: 160% !important;
+	line-height: 1.0em !important;
+}
+h2 {
+	font-size: 140% !important;
+	line-height: 1.2em !important;
+}
+h3 {
+	font-size: 120% !important;
+	line-height: 1.4em !important;
+}
+h4 {
+	font-size: 110% !important;
+	line-height: 1.4em !important;
+}
+h5 {
+	font-size: 100% !important;
+	line-height: 1.2em !important;
+}
+h6 {
+	font-size: 90% !important;
+	line-height: 1.2em !important;
+}
+hr {
+	color: black !important;
+	background-color: black !important;
+	border: none !important;
+	height: 5px !important;
+}
+@media print {
+	* {
+		color: black !important;
+		background: white !important;	
+		font-size: 5.6mm !important;
+	}
+}
+

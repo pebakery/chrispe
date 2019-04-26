@@ -1,0 +1,263 @@
+[main]
+Title=Drive Snapshot
+Description=Disk cloning/backup and recovery tool.
+Selected=False
+Level=5
+Author=ThePEBakeryTeam
+Version=20190426
+Date=2019-04-26
+Interface=Interface1
+
+[Interface1]
+pTextLabelMenu1="1",1,1,35,3,70,18,10,Bold
+pButtonMenu2="2",1,8,75,0,70,20,pButtonMenu2,0,True,_pButtonMenu2_,True
+pButtonMenu3="?",1,8,145,0,70,20,pButtonMenu3,0,True,_pButtonMenu3_,True
+pBevel_B1=,1,12,10,70,500,40
+pTextLabel_B1="PATH to 32-bit",1,1,20,80,130,18,8,Bold
+pFileBox_B1=,1,13,150,80,230,20,File
+pButton_B1="ADD TO CACHE",1,8,404,80,96,20,B1.RUN,0,True,_B1.RUN_,True
+pBevel_B2=,1,12,10,130,500,40
+pTextLabel_B2="PATH to 64-bit",1,1,20,140,130,18,8,Bold
+pFileBox_B2=,1,13,150,140,230,20,File
+pButton_B2="ADD TO CACHE",1,8,404,140,96,20,B2.RUN,0,True,_B2.RUN_,True
+pBevel_B3=,1,12,10,190,500,40
+pTextLabel_B3="Download automatically (RECOMMENDED)",1,1,20,200,250,18,8,Bold
+pButton_B3="ADD TO CACHE",1,8,404,200,96,20,B3.RUN,0,True,_B3.RUN_,True
+pWebLabel1=http://www.drivesnapshot.de/en/,1,10,180,43,180,18,http://www.drivesnapshot.de/en/
+pTextLabel5="Drive Snapshot Website",1,1,10,45,150,18,10,Bold
+pCheckBoxInWim="Include Program in boot.wim",1,3,10,265,180,18,True
+
+
+[Interface2]
+pButtonMenu1="1",1,8,5,0,70,20,pButtonMenu1,0,True,_pButtonMenu1_,True
+pTextLabelMenu2="2",1,1,108,3,70,18,10,Bold
+pButtonMenu3="?",1,8,145,0,70,20,pButtonMenu3,0,True,_pButtonMenu3_,True
+pBevel1=,1,12,10,65,66,2
+pTextLabel="Menu Entries",1,1,10,50,230,18,8,Bold
+pCheckBoxShortcutDesktop="Add to Desktop Menu",1,3,40,80,150,18,True
+pCheckBoxShortcutQuick="Add to Quicklaunch Menu",1,3,40,110,150,18,True
+pCheckBoxShortcutPrograms="Add to #$qStart#$q > ",1,3,40,140,99,18,True
+pCheckBoxShortcutLaunchBar="Add to LaunchBar Menu ",1,3,40,170,150,18,True
+pButtonShortcut1=?,1,8,10,80,18,18,pButtonShortcut1,0,True,_pButtonShortcut1_,True
+pButtonShortcut2=?,1,8,10,110,18,18,pButtonShortcut2,0,True,_pButtonShortcut2_,True
+pButtonShortcut3=?,1,8,10,140,18,18,pButtonShortcut3,0,True,_pButtonShortcut3_,True
+pButtonShortcut4=?,1,8,10,170,18,18,pButtonShortcut4,0,True,_pButtonShortcut4_,True
+pTextBox1=,1,0,140,140,150,21,Programs
+
+[pButtonMenu1]
+IniWrite,%ScriptFile%,Main,Interface,Interface1
+System,REFRESHINTERFACE
+
+[pButtonMenu2]
+IniWrite,%ScriptFile%,Main,Interface,Interface2
+System,REFRESHINTERFACE
+
+[pButtonMenu3]
+message,"Click on the buttons to toggle between tabs 1 and 2. #$x#$xTab 2 contains menu options for use in the selected shell. Click on the ? button for information about the different options."
+
+[pButtonShortcut1]
+message,"WinXShell only#$x#$xSelect this option to add a program shortcut to the Desktop."
+
+[pButtonShortcut2]
+message,"WinXShell only#$x#$xSelect this option to add a program menu option to the Quicklaunch menu - similar in appearence to the 'Pin to Taskbar' option in Windows 7/8/10."
+
+[pButtonShortcut3]
+message,"Applies to WinXShell#$c BBLean and LaunchBar Shell(s)#$x#$xSelect this option to add a program menu option to the Start menu. Leave blank to add to the root of the menu#$c or manually type a path to place in a sub-menu (do not use spaces in the path). E.g. #$x#$s- FileManager#$x#$s- Programs#$x#$s- Programs\FileManager#$x#$xAnd looking at the examples above - #$x#$xLeave this option blank to add a menu entry to the root of the program menu (the 'Start' menu in WinXShell#$c the 'Start' menu in BBLean#$c or the root of the LaunchBar menu bar if LaunchBar is selected as Shell)#$x#$xEnter 'FileManager' to add a menu entry for this application to the 'Start' > 'FileManager' sub-menu (WinXShell and bblean) or the 'FileManager' sub-menu in LaunchBar.#$x#$xEnter 'Programs' to add a menu entry for this application to the 'Start' > 'Programs' sub-menu (WinXShell and bblean) or the 'Programs' sub-menu in LaunchBar.#$x#$xEnter 'Programs\FileManager' to add a menu entry for this application to the 'Start' > 'Programs' > 'FileManager' sub-menu (WinXShell and bblean) or the 'Programs' > 'FileManager' sub-menu in LaunchBar."
+
+[pButtonShortcut4]
+message,"This setting does not apply to any LaunchBar instance running as the WinPE Shell. This option only applies to a LaunchBar instance when the Applications' > 'LaunchBar' program script is selected in the build.#$x#$xIf the 'Applications' > 'LaunchBar' program script is selected than enable this option to add a program menu entry to the root of the LaunchBar menu bar. #$x#$xPlease note that if option '6] Programs in boot.wim' in the main project script is set as 'NO'#$c then LaunchBar and a number of other applications will not be available at boot. In this case a text based .ini file will be used for LaunchBar menu settings."
+
+[B1.RUN]
+If,ExistFile,"%Programs%\Snapshot\Snapshot.exe",Message,"The cache already contains a copy of Drive Snapshot. Exiting..."
+Else,Begin
+set,%Snapshot%,%pFileBox_B1%
+If,%Snapshot%,Equal,"",Begin
+Message,"ERROR - The filebox is empty. Change the path and retry. Exiting..."
+Exit,"ERROR - The filebox is empty. Change the path and retry. Exiting..."
+End
+If,Not,ExistFile,"%Snapshot%",Begin
+Message,"ERROR - The selected file does not exist. Change the path and retry. Exiting..."
+Exit,"ERROR - The selected file does not exist. Change the path and retry. Exiting..."
+End
+StrFormat,FILENAME,"%Snapshot%","%Snapshot.EXE%"
+If,Not,%Snapshot.EXE%,Equal,Snapshot.exe,Begin
+Message,"ERROR - Selected file is not Snapshot.exe. Change the path and retry. Aborting..."
+Exit,"ERROR - Selected file is not Snapshot.exe. Change the path and retry. Aborting..."
+End
+If,Not,ExistDir,"%Programs%\Snapshot",DirMake,"%Programs%\Snapshot"
+Echo,"Copying files to cache"
+FileCopy,"%Snapshot%","%Programs%\Snapshot"
+If,Not,ExistFile,"%Programs%\Snapshot\Snapshot.exe",Begin
+Message,"There appears to have been an error copying Snapshot to the cache. Exiting..."
+Exit,"There appears to have been an error copying Snapshot to the cache. Exiting..."
+End
+Else,Message,"Snapshot added to the following path -#$x#$x#$s#$s#$s#$q%Programs%\Snapshot#$q"
+End
+
+[B2.RUN]
+If,ExistFile,"%Programs%\Snapshot\Snapshot64.exe",Message,"The cache already contains a copy of Drive Snapshot. Exiting..."
+Else,Begin
+set,%Snapshot%,%pFileBox_B2%
+If,%Snapshot%,Equal,"",Begin
+Message,"ERROR - The filebox is empty. Change the path and retry. Exiting..."
+Exit,"ERROR - The filebox is empty. Change the path and retry. Exiting..."
+End
+If,Not,ExistFile,"%Snapshot%",Begin
+Message,"ERROR - The selected file does not exist. Change the path and retry. Exiting..."
+Exit,"ERROR - The selected file does not exist. Change the path and retry. Exiting..."
+End
+StrFormat,FILENAME,"%Snapshot%","%Snapshot.EXE%"
+If,Not,%Snapshot.EXE%,Equal,Snapshot64.exe,Begin
+Message,"ERROR - Selected file is not Snapshot64.exe. Change the path and retry. Aborting..."
+Exit,"ERROR - Selected file is not Snapshot64.exe. Change the path and retry. Aborting..."
+End
+If,Not,ExistDir,"%Programs%\Snapshot",DirMake,"%Programs%\Snapshot"
+Echo,"Copying files to cache"
+FileCopy,"%Snapshot%","%Programs%\Snapshot"
+If,Not,ExistFile,"%Programs%\Snapshot\Snapshot64.exe",Begin
+Message,"There appears to have been an error copying Snapshot to the cache. Exiting..."
+Exit,"There appears to have been an error copying Snapshot to the cache. Exiting..."
+End
+Else,Message,"Snapshot added to the following path -#$x#$x#$s#$s#$s#$q%Programs%\Snapshot#$q"
+End
+
+[B3.RUN]
+If,ExistFile,"%Programs%\Snapshot\Snapshot.exe",If,ExistFile,"%Programs%\Snapshot\Snapshot64.exe",Message,"The cache already contains a copy of Drive Snapshot. Exiting..."
+If,Not,ExistFile,"%Programs%\Snapshot\Snapshot.exe",If,Not,ExistFile,"%Programs%\Snapshot\Snapshot64.exe",Begin
+Message,"Downloading Drive Snapshot"
+Set,%MANUAL.DOWNLOAD%,YES
+Run,%ScriptFile%,DOWNLOAD
+End
+
+[DOWNLOAD]
+If,Not,ExistDir,"%Programs%\Snapshot",DirMake,"%Programs%\Snapshot"
+System,ERROROFF,2
+WebGet,http://www.drivesnapshot.de/download/snapshot64.exe,"%Programs%\SnapShot\snapshot64.exe"
+WebGet,http://www.drivesnapshot.de/download/snapshot.exe,"%Programs%\SnapShot\snapshot.exe"
+If,Not,ExistFile,"%Programs%\SnapShot\snapshot.exe",Begin
+Message,"Could not find %Programs%\SnapShot\snapshot.exe. Possible error with download - exiting script...",Error,5
+Exit,"Could not find %Programs%\SnapShot\snapshot.exe. Possible error with download - exiting script...",WARN
+End
+If,Not,ExistFile,"%Programs%\SnapShot\snapshot64.exe",Begin
+Message,"Could not find %Programs%\SnapShot\snapshot64.exe. Possible error with download - exiting script...",Error,5
+Exit,"Could not find %Programs%\SnapShot\snapshot64.exe. Possible error with download - exiting script...",WARN
+End
+If,%MANUAL.DOWNLOAD%,Equal,YES,Message,"Finished Downloading Drive Snapshot"
+
+[process]
+If,%FullProjectRun%,Equal,NO,Run,"%ProjectDir%\Core\common.script",PostConfigRun
+AddInterface,%ScriptFile%,Interface1,""
+AddInterface,%ScriptFile%,Interface2,""
+If,%pCheckBoxInWim%,Equal,True,Set,%PROGRAMS.IN.WIM%,YES
+Else,Set,%PROGRAMS.IN.WIM%,NO
+Run,%ScriptFile%,CHECKS
+Run,%ScriptFile%,MENU
+Run,%ScriptFile%,COMMON
+If,%PROGRAMS.IN.WIM%,Equal,NO,Run,%ScriptFile%,NOT.IN.WIM
+If,%PROGRAMS.IN.WIM%,Equal,YES,Run,%ScriptFile%,IN.WIM
+
+[CHECKS]
+Echo,"Check local files for Drive Snapshot and download if not found..."
+If,%ARCH%,Equal,x86,If,Not,ExistFile,"%Programs%\SnapShot\SnapShot.exe",Run,%ScriptFile%,DOWNLOAD
+If,%ARCH%,Equal,x64,If,Not,ExistFile,"%Programs%\SnapShot\SnapShot64.exe",Run,%ScriptFile%,DOWNLOAD
+If,%ARCH%,Equal,x86,If,Not,ExistFile,"%Programs%\SnapShot\SnapShot.exe",Begin
+Message,"SnapShot.exe is missing - exiting script...",Error,5
+Exit,"SnapShot.exe is missing - exiting script...",WARN
+End
+If,%ARCH%,Equal,x64,If,Not,ExistFile,"%Programs%\SnapShot\SnapShot64.exe",Begin
+Message,"SnapShot64.exe is missing - exiting script...",Error,5
+Exit,"SnapShot64.exe is missing - exiting script...",WARN
+End
+
+[MENU]
+If,%PROGRAMS.IN.WIM%,Equal,NO,Begin
+  If,Not,ExistFile,"%OutputDir%\Programs\ShortcutsNotInWim.txt",Run,"%ProjectDir%\Core\common.script",NotInWim
+  If,%ARCH%,Equal,x86,TXTaddline,"%OutputDir%\Programs\ShortcutsNotInWim.txt","#$p~dp0nircmd.exe shortcut #$q#$p~dp0snapshot\snapshot.exe#$q #$q#$pTemp#$p\ShortCuts#$q #$qSnapshot#$q",Append
+  If,%ARCH%,Equal,x64,TXTaddline,"%OutputDir%\Programs\ShortcutsNotInWim.txt","#$p~dp0nircmd.exe shortcut #$q#$p~dp0snapshot\snapshot64.exe#$q #$q#$pTemp#$p\ShortCuts#$q #$qSnapshot#$q",Append
+End 
+If,%PROGRAMS.IN.WIM%,Equal,YES,Begin
+  If,%ARCH%,Equal,x86,ShellExecute,Hide,"%Tools%\Shortcut.exe","/A:C /T:#$q#$pSystemDrive#$p\Programs\Snapshot\snapshot.exe#$q /F:#$q%ProjectTemp%\Snapshot.lnk#$q /I:#$q#$pSystemDrive#$p\Programs\Snapshot\snapshot.exe#$c0#$q"
+  If,%ARCH%,Equal,x64,ShellExecute,Hide,"%Tools%\Shortcut.exe","/A:C /T:#$q#$pSystemDrive#$p\Programs\Snapshot\snapshot64.exe#$q /F:#$q%ProjectTemp%\Snapshot.lnk#$q /I:#$q#$pSystemDrive#$p\Programs\Snapshot\snapshot64.exe#$c0#$q"
+  If,ExistFile,"%ProjectTemp%\Snapshot.lnk",Begin
+    Set,%MyShortcut%,Snapshot.lnk
+    If,%pCheckBoxShortcutDesktop%,Equal,True,FileCopy,"%ProjectTemp%\%MyShortcut%","%ProjectTemp%\ShortCuts\Desktop"
+    If,%pCheckBoxShortcutQuick%,Equal,True,FileCopy,"%ProjectTemp%\%MyShortcut%","%ProjectTemp%\ShortCuts\Quick"
+    If,%pCheckBoxShortcutPrograms%,Equal,True,Begin
+      Set,%ProgramMenuPath%,%pTextBox1%
+      Run,"%ProjectDir%\Core\common.script",StartMenu
+    End
+    If,%pCheckBoxShortcutLaunchBar%,Equal,True,FileCopy,"%ProjectTemp%\%MyShortcut%","%ProjectTemp%\ShortCuts\LaunchBar"
+    If,%FullProjectRun%,Equal,NO,Run,"%ProjectDir%\Core\common.script",PostConfigRunShortcuts
+    FileDelete,"%ProjectTemp%\%MyShortcut%"
+  End
+End
+
+
+
+
+[COMMON]
+If,%PROGRAMS.IN.WIM%,Equal,NO,Set,%PATH%,%OutputDir%
+If,%PROGRAMS.IN.WIM%,Equal,YES,Set,%PATH%,%TargetDir%
+If,Not,ExistDir,"%PATH%\Programs",DirMake,"%PATH%\Programs"
+DirMake,"%PATH%\Programs\SnapShot"
+If,%ARCH%,Equal,x86,FileCopy,"%Programs%\SnapShot\snapshot.exe","%PATH%\Programs\SnapShot"
+If,%ARCH%,Equal,x64,FileCopy,"%Programs%\SnapShot\snapshot64.exe","%PATH%\Programs\SnapShot"
+If,Not,ExistFile,"%PATH%\Programs\registry.entries.cmd",Begin
+  FileCreateBlank,"%PATH%\Programs\registry.entries.cmd"
+  TXTaddLine,"%PATH%\Programs\registry.entries.cmd",@Echo off,Append
+  TXTaddLine,"%PATH%\Programs\registry.entries.cmd",,Append
+End
+TXTaddLine,"%PATH%\Programs\registry.entries.cmd",::===========SNAPSHOT========,Append
+TXTaddLine,"%PATH%\Programs\registry.entries.cmd",::for file associations,Append
+TXTaddLine,"%PATH%\Programs\registry.entries.cmd",IF EXIST #$q#$p~dp0Snapshot\Snapshot.exe#$q (,Append
+TXTaddLine,"%PATH%\Programs\registry.entries.cmd",ECHO.,Append
+TXTaddLine,"%PATH%\Programs\registry.entries.cmd",ECHO Snapshot Registry Entries,Append
+TXTaddLine,"%PATH%\Programs\registry.entries.cmd",reg.exe add #$qHKLM\SOFTWARE\Classes\.sna#$q /ve /t REG_SZ /d #$qSnapshot#$q /f,Append
+TXTaddLine,"%PATH%\Programs\registry.entries.cmd",reg.exe add #$qHKLM\SOFTWARE\Classes\Snapshot#$q /ve /t REG_SZ /d #$qSnapshot Mount#$q /f,Append
+TXTaddLine,"%PATH%\Programs\registry.entries.cmd",reg.exe add #$qHKLM\SOFTWARE\Classes\Snapshot\DefaultIcon#$q /ve /t REG_SZ /d #$q#$p~dp0Snapshot\Snapshot.exe#$q /f,Append
+TXTaddLine,"%PATH%\Programs\registry.entries.cmd",reg.exe add #$qHKLM\SOFTWARE\Classes\Snapshot\shell\open\command#$q /ve /t REG_SZ /d #$q\#$q#$p~dp0Snapshot\Snapshot.exe\#$q \#$q%%1\#$q#$q /f,Append
+TXTaddLine,"%PATH%\Programs\registry.entries.cmd",),Append
+TXTaddLine,"%PATH%\Programs\registry.entries.cmd",IF EXIST #$q#$p~dp0Snapshot\Snapshot64.exe#$q (,Append
+TXTaddLine,"%PATH%\Programs\registry.entries.cmd",ECHO.,Append
+TXTaddLine,"%PATH%\Programs\registry.entries.cmd",ECHO Snapshot Registry Entries,Append
+TXTaddLine,"%PATH%\Programs\registry.entries.cmd",reg.exe add #$qHKLM\SOFTWARE\Classes\.sna#$q /ve /t REG_SZ /d #$qSnapshot#$q /f,Append
+TXTaddLine,"%PATH%\Programs\registry.entries.cmd",reg.exe add #$qHKLM\SOFTWARE\Classes\Snapshot#$q /ve /t REG_SZ /d #$qSnapshot Mount#$q /f,Append
+TXTaddLine,"%PATH%\Programs\registry.entries.cmd",reg.exe add #$qHKLM\SOFTWARE\Classes\Snapshot\DefaultIcon#$q /ve /t REG_SZ /d #$q#$p~dp0Snapshot\Snapshot64.exe#$q /f,Append
+TXTaddLine,"%PATH%\Programs\registry.entries.cmd",reg.exe add #$qHKLM\SOFTWARE\Classes\Snapshot\shell\open\command#$q /ve /t REG_SZ /d #$q\#$q#$p~dp0Snapshot\Snapshot64.exe\#$q \#$q%%1\#$q#$q /f,Append
+TXTaddLine,"%PATH%\Programs\registry.entries.cmd",),Append
+TXTaddLine,"%PATH%\Programs\registry.entries.cmd",,Append
+IniWrite,"%OutputDir%\Project.Settings.ini",PROGRAMS,DriveSnapshot,YES
+
+[IN.WIM]
+Echo,"Mounting registry hives..."
+If,Not,ExistRegSection,HKLM,_WinPE_SOFTWARE,RegHiveLoad,_WinPE_SOFTWARE,"%Target_config%\software"
+RegWrite,HKLM,0x1,_WinPE_SOFTWARE\Classes\.sna,,Snapshot
+RegWrite,HKLM,0x1,_WinPE_SOFTWARE\Classes\Snapshot,,Snapshot Mount
+If,%ARCH%,Equal,x86,Begin
+RegWrite,HKLM,0x2,_WinPE_SOFTWARE\Classes\Snapshot\DefaultIcon,,#$psystemdrive#$p\Programs\Snapshot\Snapshot.exe
+RegWrite,HKLM,0x2,_WinPE_SOFTWARE\Classes\Snapshot\shell\open\command,,#$psystemdrive#$p\Programs\Snapshot\Snapshot.exe #$q%1#$q
+End
+If,%ARCH%,Equal,x64,Begin
+RegWrite,HKLM,0x2,_WinPE_SOFTWARE\Classes\Snapshot\DefaultIcon,,#$psystemdrive#$p\Programs\Snapshot\Snapshot64.exe
+RegWrite,HKLM,0x2,_WinPE_SOFTWARE\Classes\Snapshot\shell\open\command,,#$psystemdrive#$p\Programs\Snapshot\Snapshot64.exe #$q%1#$q
+End
+Echo,"Unmounting registry hives..."
+RegHiveUnload,_WinPE_SOFTWARE
+If,%FullProjectRun%,Equal,NO,Begin
+  IniRead,"%TargetDir%\Project.Settings.ini",Main,Image.Number,%Boot.wim.Image.number%
+  WimPathAdd,%OutputDir%\sources\boot.wim,%Boot.wim.Image.number%,%TargetDir%,""
+End
+//Wait,1
+
+[NOT.IN.WIM]
+//Wait,1
+If,%FullProjectRun%,Equal,NO,Run,"%ProjectDir%\Core\common.script",PostConfigRunNotInWim
+
+[AuthorEncoded]
+logo=snapshot.ico
+snapshot.ico=380,507
+
+[EncodedFile-AuthorEncoded-snapshot.ico]
+lines=0
+0=eJylUTFOxDAQXC5IThEpVLSJqPgFPMmi2QihO3e4u3/wCku0ke4LVx2UKa9AWWbXl1xAAiExzngz68mu7RBdYLTtFeZLel8RXRPRLdiC96DmFWFFPyDYQyHkoAMvKSVEzYg9JJKDDk3p9E9EIDBbjGi1ZWYXyDtEjtAbGbqqd9qMYdh20YVdn3wZo+mNuAo6LNar3UcK0zqz970kb/WydqgX+OHmpJk8dY4fX0yjzuBY24lAl/qdJ9sOd9jgMy8AXcYFwnSsehCpUembno8tpoezlszJbu0X9gzz9/0XQ5WqNDvMPGnKH5g/F1dtq/l3ntyWOW8l+/8KWQCnb3RvoAOL3whvgb7FHjw+GZ0cSe+kkT1iwp0N5A7Ij2sqhrEo3sb69bBucHd3c89P5izq6nic4ynOSywozsgv0ctMzmcYBSMN/GOC0AaM2OUfBRZfYmACAJ7jCJFQZW/tAQAAAAIAAAAoAAAAMAEAAAAAAAABAAAAAAAAAAAAAAA
+

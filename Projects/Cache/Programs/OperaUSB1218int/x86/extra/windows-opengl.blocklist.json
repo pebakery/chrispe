@@ -1,0 +1,146 @@
+{
+	"blocklist version": "1.1.0",
+	"driver links":
+	{
+		"driver entry":
+		{
+			"OpenGL-vendor": { "regex": "NVIDIA.*" },
+			"URL": "http://www.nvidia.com/page/drivers.html"
+		},
+		"driver entry":
+		{
+			"OpenGL-vendor": { "regex": "(ATI|Advanced Micro Devices).*" },
+			"URL": "http://support.amd.com/us/gpudownload/Pages/index.aspx"
+		},
+		"driver entry":
+		{
+			"OpenGL-vendor": { "regex": "Intel.*" },
+			"URL": "http://support.intel.com/support/graphics/detect.htm"
+		}
+	},
+	
+	
+	"list entry": {
+		"OS-kernel-version": { "regex": "(\\d+)\\.(\\d+)", "<": [ 5, 1 ] },
+		"status2d": "blocked driver version",
+		"reason2d": "No support for Windows versions earlier than XP",
+		"status2d-comment": "DSK-364917: OS versions earlier than XP should be blocked by default"
+	},
+	
+	
+	"list entry": {
+		"vendor id": { "regex": "0x1002" },
+		"driver version": { "regex": "(\\d+)\\.(\\d+)\\..*", "<": [ 8, 702 ] }, 
+		"status2d": "blocked driver version",
+		"reason2d": "No support for legacy drivers older than Catalyst 10.2. Please upgrade the driver",
+		"driver version-comment": "This is the driver package version, see http://developer.amd.com/download/ccc/pages/default.aspx",
+		"status2d-comment": "This entry blocks ATI driver version without needing to initialize OpenGL, instead using DX9"
+	},
+	"list entry": {
+		"vendor id": { "regex": "0x10de" }, 
+		"driver version": { "regex": ".*\\..*\\.(\\d+)\\.(\\d+)", "<": [ 12, 5721 ] },
+		"status2d": "blocked driver version",
+		"reason2d": "No support for old legacy drivers prior to version 257.21",
+		"status2d-comment": "This entry blocks nVidia driver version without needing to initialize OpenGL, instead using DX9"
+	},
+	"list entry": {
+		"vendor id": { "regex": "0x8086" },
+		"status2d": "blocked device",
+		"reason2d": "Severe drawing errors on Intel GPU's when using OpenGL",
+		"status2d-comment": "This entry blocks Intel driver version without needing to initialize OpenGL, instead using DX9"
+	},
+	
+	
+	"list entry": {
+		"OpenGL-vendor": { "regex": "(ATI|Advanced Micro Devices).*" },
+		"OpenGL-version": { "regex": "(\\d+)\\.(\\d+)\\.(\\d+).*", "<": [ 2, 1, 9551 ] },
+		"status2d": "blocked driver version",
+		"reason2d": "No support for legacy drivers older than Catalyst 10.2. Please upgrade the driver",
+		"status2d-comment": "This entry blocks the driver version by using OpenGL calls. Used in case the DX9 rule doesn't match anything"
+	},
+	"list entry": {
+		"OpenGL-vendor": { "regex": "(ATI|Advanced Micro Devices).*" },
+		"OpenGL-version": { "regex": "(\\d+)\\.(\\d+)\\.(\\d+).*", "<": [ 2, 1, 10907 ] },
+		"status2d": "discouraged",
+		"reason2d": "According to our internal benchmarks, DirectX performance is better then OpenGL",
+		"status3d": "supported",
+		"quirks.noblendfuncextended": "true",
+		"quirks.nomultisample": "true",
+		"quirks-comment": "ATI drivers earlier than Catalyst 11.7 crash and Opera freeses when using BlendFuncExtended and multisampling at the same time"
+	},
+	"list entry": {
+		"OpenGL-vendor": { "regex": "(ATI|Advanced Micro Devices).*" },
+		"status2d": "discouraged",
+		"reason2d": "According to our internal benchmarks, DirectX performance is better then OpenGL",
+		"status3d": "supported",
+		"quirks-comment": "quirks.nomultisample (Some ATI cards crash infrequently with multisampling enabled) was removed due to DSK-362158 (Regression: line in <canvas> is not antialiased)"
+	},
+	
+	
+	"list entry": {
+		"OpenGL-vendor": { "regex": "NVIDIA.*" },
+		"vendor id": { "regex": "0x8086" }, 
+		"status2d": "discouraged",
+		"reason2d": "According to our internal benchmarks, DirectX performance is better then OpenGL",
+		"status3d": "supported",
+		"status2d-comment": "This rule MUST appear before the OpenGL driver version check for NVIDIA. This is a workaround for DSK-347809"
+	},
+	"list entry": {
+		"OpenGL-vendor": { "regex": "NVIDIA.*" },
+		"driver version": { "regex": ".*\\..*\\.(\\d+)\\.(\\d+)", "<": [ 12, 5721 ] },
+		"status2d": "blocked driver version",
+		"reason2d": "No support for old legacy drivers prior to version 257.21",
+		"status2d-comment": "This entry blocks the driver version by using OpenGL calls. Used in case the DX9 rule doesn't match anything"
+	},
+	"list entry": {
+		"OpenGL-vendor": { "regex": "NVIDIA.*" },
+		"OpenGL-renderer": { "regex": "GeForce (FX|PCX) (Go|5).*" },
+		"status2d": "blocked device",
+		"reason2d": "Nvidia FX/PCX cards are too old, but Opera sometimes can't find the driver version for these cards."
+	},
+	"list entry": {
+		"OpenGL-vendor": { "regex": "NVIDIA.*" },
+		"OpenGL-renderer": { "regex": "Quadro NVS.*" },
+		"status2d": "blocked device",
+		"reason2d": "Nvidia Quadro have very poor performance"
+	},
+	"list entry": {
+		"OpenGL-vendor": { "regex": "NVIDIA.*" },
+		"OpenGL-renderer": { "regex": "(GeForce [67]|Quadro FX).*" },
+		"status2d": "discouraged",
+		"reason2d": "According to our internal benchmarks, DirectX performance is better then OpenGL",
+		"status3d": "supported",
+		"quirks.nomultisample": "true"
+	},
+	"list entry": {
+		"OpenGL-vendor": { "regex": "NVIDIA.*" },
+		"status2d": "discouraged",
+		"reason2d": "According to our internal benchmarks, DirectX performance is better then OpenGL",
+		"status3d": "supported"
+	},
+	
+	
+	"list entry": {
+		"OpenGL-vendor": { "regex": "Intel.*" },
+		"status2d": "blocked device",
+		"reason2d": "Severe drawing errors on Intel GPU's when using OpenGL",
+		"status2d-comment": "This entry blocks the driver version by using OpenGL calls. Used in case the DX9 rule doesn't match anything"
+	},
+	
+	
+	"list entry": {
+		"status2d": "discouraged",
+		"reason2d": "Unknown driver or device, use is risky.",
+		"status3d": "discouraged",
+		"reason3d": "Unknown driver or device, use is risky."
+	},
+	
+	
+	"list entry": {
+		"OS-kernel-version": { "regex": "6\\.0" },
+		"status2d": "blocked driver version",
+		"reason2d": "Windows Vista composition causes drawing errors on transparent elements",
+		"status2d-comment": "DSK-357272: Transparent edges of Opera 12 are opaque black in Windows Vista",
+		"list entry-comment": "rules located below catch-all rule are disabled"
+	}
+}

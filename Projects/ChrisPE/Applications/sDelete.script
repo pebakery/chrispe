@@ -1,0 +1,112 @@
+[main]
+Title=sDelete
+Description=Commandline tool to securely erase disk free space and files - added to right-click context menu.
+Selected=False
+Level=5
+Author=ThePEBakeryTeam
+Version=20190426
+Date=2019-04-26
+Interface=Interface
+
+[Interface]
+pWebLabel1=https://docs.microsoft.com/en-us/sysinternals/downloads/sdelete,1,10,51,100,350,18,https://docs.microsoft.com/en-us/sysinternals/downloads/sdelete
+pTextLabel1="sDelete Website",1,1,51,77,230,18,10,Bold
+pCheckBoxInWim="Include Program in boot.wim",1,3,51,265,180,18,True
+
+[process]
+If,%FullProjectRun%,Equal,NO,Run,"%ProjectDir%\Core\common.script",PostConfigRun
+If,%pCheckBoxInWim%,Equal,True,Set,%PROGRAMS.IN.WIM%,YES
+Else,Set,%PROGRAMS.IN.WIM%,NO
+Run,%ScriptFile%,CHECKS
+Run,%ScriptFile%,COMMON
+If,%PROGRAMS.IN.WIM%,Equal,NO,Run,%ScriptFile%,NOT.IN.WIM
+If,%PROGRAMS.IN.WIM%,Equal,YES,Run,%ScriptFile%,IN.WIM
+
+[DOWNLOAD]
+If,Not,ExistDir,"%Programs%\Snapshot",DirMake,"%Programs%\Snapshot"
+System,ERROROFF,1
+WebGet,https://download.sysinternals.com/files/SDelete.zip,"%ProjectTemp%\SDelete.zip"
+If,ExistFile,"%ProjectTemp%\SDelete.zip",Begin
+  ShellExecute,Hide,"%Tools%\7z.exe","e -y #$q%ProjectTemp%\SDelete.zip#$q -o#$q%Programs%\sdelete\x86#$q sdelete.exe"
+  ShellExecute,Hide,"%Tools%\7z.exe","e -y #$q%ProjectTemp%\SDelete.zip#$q -o#$q%Programs%\sdelete\x86#$q Eula.txt"
+  ShellExecute,Hide,"%Tools%\7z.exe","e -y #$q%ProjectTemp%\SDelete.zip#$q -o#$q%Programs%\sdelete\x64#$q sdelete64.exe"
+  ShellExecute,Hide,"%Tools%\7z.exe","e -y #$q%ProjectTemp%\SDelete.zip#$q -o#$q%Programs%\sdelete\x64#$q Eula.txt"
+  FileDelete,"%ProjectTemp%\SDelete.zip"
+End
+
+[CHECKS]
+Echo,"Check local files for sDelete and download if not found..."
+If,%ARCH%,Equal,x86,If,Not,ExistFile,"%Programs%\sDelete\sDelete.exe",Run,%ScriptFile%,DOWNLOAD
+If,%ARCH%,Equal,x64,If,Not,ExistFile,"%Programs%\sDelete\sDelete64.exe",Run,%ScriptFile%,DOWNLOAD
+If,%ARCH%,Equal,x86,If,Not,ExistFile,"%Programs%\sDelete\x86\sDelete.exe",Begin
+  Message,sDelete is missing - exiting script...,Error,5
+  Exit,sDelete is missing - exiting script...,WARN
+End
+If,%ARCH%,Equal,x64,If,Not,ExistFile,"%Programs%\sDelete\x64\sDelete64.exe",Begin
+  Message,sDelete is missing - exiting script...,Error,5
+  Exit,sDelete is missing - exiting script...,WARN
+End
+
+[COMMON]
+If,%PROGRAMS.IN.WIM%,Equal,NO,Set,%PATH%,%OutputDir%
+If,%PROGRAMS.IN.WIM%,Equal,YES,Set,%PATH%,%TargetDir%
+If,Not,ExistDir,"%PATH%\Programs",DirMake,"%PATH%\Programs"
+DirMake,"%PATH%\Programs\sDelete"
+DirCopy,"%Programs%\sDelete\%ARCH%\*.*","%PATH%\Programs\sDelete"
+If,Not,ExistFile,"%PATH%\Programs\registry.entries.cmd",Begin
+  FileCreateBlank,"%PATH%\Programs\registry.entries.cmd"
+  TXTaddLine,"%PATH%\Programs\registry.entries.cmd",@Echo off,Append
+  TXTaddLine,"%PATH%\Programs\registry.entries.cmd",,Append
+End
+If,%ARCH%,Equal,x86,Begin
+  TXTaddLine,"%PATH%\Programs\registry.entries.cmd",::===========sDelete============,Append
+  TXTaddLine,"%PATH%\Programs\registry.entries.cmd",::for context menu entries,Append
+  TXTaddLine,"%PATH%\Programs\registry.entries.cmd",IF EXIST #$q#$p~dp0sDelete\sDelete.exe#$q (,Append
+  TXTaddLine,"%PATH%\Programs\registry.entries.cmd",ECHO.,Append
+  TXTaddLine,"%PATH%\Programs\registry.entries.cmd",ECHO sDelete Registry Entries,Append
+  TXTaddLine,"%PATH%\Programs\registry.entries.cmd",reg.exe add #$qHKLM\SOFTWARE\Classes\*\shell\sDelete#$q /ve /t REG_SZ /d #$qsDelete#$q /f,Append
+  TXTaddLine,"%PATH%\Programs\registry.entries.cmd",reg.exe add #$qHKLM\SOFTWARE\Classes\*\shell\sDelete\command#$q /ve /t REG_SZ /d #$q\#$q#$p~dp0sDelete\sDelete.file.from.context.menu.cmd\#$q \#$q%%1\#$q#$q /f,Append
+  TXTaddLine,"%PATH%\Programs\registry.entries.cmd",reg.exe add #$qHKLM\SOFTWARE\Classes\Drive\shell\sDelete#$q /ve /t REG_SZ /d #$qsDelete#$q,Append
+  TXTaddLine,"%PATH%\Programs\registry.entries.cmd",reg.exe add #$qHKLM\SOFTWARE\Classes\Drive\shell\sDelete\command#$q /ve /t REG_SZ /d #$q\#$q#$p~dp0sDelete\sDelete.drive.from.context.menu.cmd\#$q %%1#$q /f,Append
+  TXTaddLine,"%PATH%\Programs\registry.entries.cmd",reg.exe add #$qHKLM\SOFTWARE\Classes\Directory\shell\sDelete#$q /ve /t REG_SZ /d #$qsDelete#$q,Append
+  TXTaddLine,"%PATH%\Programs\registry.entries.cmd",reg.exe add #$qHKLM\SOFTWARE\Classes\Directory\shell\sDelete\command#$q /ve /t REG_SZ /d #$q\#$q#$p~dp0sDelete\sDelete.folder.from.context.menu.cmd\#$q \#$q%%1\#$q#$q /f,Append
+  TXTaddLine,"%PATH%\Programs\registry.entries.cmd",),Append
+  TXTaddLine,"%PATH%\Programs\registry.entries.cmd",,Append
+End
+If,%ARCH%,Equal,x64,Begin
+  TXTaddLine,"%PATH%\Programs\registry.entries.cmd",::===========sDelete============,Append
+  TXTaddLine,"%PATH%\Programs\registry.entries.cmd",::for context menu entries,Append
+  TXTaddLine,"%PATH%\Programs\registry.entries.cmd",IF EXIST #$q#$p~dp0sDelete\sDelete64.exe#$q (,Append
+  TXTaddLine,"%PATH%\Programs\registry.entries.cmd",ECHO.,Append
+  TXTaddLine,"%PATH%\Programs\registry.entries.cmd",ECHO sDelete Registry Entries,Append
+  TXTaddLine,"%PATH%\Programs\registry.entries.cmd",reg.exe add #$qHKLM\SOFTWARE\Classes\*\shell\sDelete#$q /ve /t REG_SZ /d #$qsDelete#$q /f,Append
+  TXTaddLine,"%PATH%\Programs\registry.entries.cmd",reg.exe add #$qHKLM\SOFTWARE\Classes\*\shell\sDelete\command#$q /ve /t REG_SZ /d #$q\#$q#$p~dp0sDelete\sDelete.file.from.context.menu.cmd\#$q \#$q%%1\#$q#$q /f,Append
+  TXTaddLine,"%PATH%\Programs\registry.entries.cmd",reg.exe add #$qHKLM\SOFTWARE\Classes\Drive\shell\sDelete#$q /ve /t REG_SZ /d #$qsDelete#$q,Append
+  TXTaddLine,"%PATH%\Programs\registry.entries.cmd",reg.exe add #$qHKLM\SOFTWARE\Classes\Drive\shell\sDelete\command#$q /ve /t REG_SZ /d #$q\#$q#$p~dp0sDelete\sDelete.drive.from.context.menu.cmd\#$q %%1#$q /f,Append
+  TXTaddLine,"%PATH%\Programs\registry.entries.cmd",reg.exe add #$qHKLM\SOFTWARE\Classes\Directory\shell\sDelete#$q /ve /t REG_SZ /d #$qsDelete#$q,Append
+  TXTaddLine,"%PATH%\Programs\registry.entries.cmd",reg.exe add #$qHKLM\SOFTWARE\Classes\Directory\shell\sDelete\command#$q /ve /t REG_SZ /d #$q\#$q#$p~dp0sDelete\sDelete.folder.from.context.menu.cmd\#$q \#$q%%1\#$q#$q /f,Append
+  TXTaddLine,"%PATH%\Programs\registry.entries.cmd",),Append
+  TXTaddLine,"%PATH%\Programs\registry.entries.cmd",,Append
+End
+IniWrite,"%OutputDir%\Project.Settings.ini",PROGRAMS,sDelete,YES
+
+[IN.WIM]
+Echo,"Mounting registry hives..."
+If,Not,ExistRegSection,HKLM,_WinPE_SOFTWARE,RegHiveLoad,_WinPE_SOFTWARE,"%Target_config%\software"
+RegWrite,HKLM,0x1,_WinPE_SOFTWARE\Classes\*\shell\sDelete,,sDelete
+RegWrite,HKLM,0x2,_WinPE_SOFTWARE\Classes\*\shell\sDelete\command,,#$psystemdrive#$p\Programs\sDelete\sDelete.file.from.context.menu.cmd #$q%1#$q
+RegWrite,HKLM,0x1,_WinPE_SOFTWARE\Classes\Drive\shell\sDelete,,sDelete
+RegWrite,HKLM,0x2,_WinPE_SOFTWARE\Classes\Drive\shell\sDelete\command,,#$psystemdrive#$p\Programs\sDelete\sDelete.drive.from.context.menu.cmd %1
+RegWrite,HKLM,0x1,_WinPE_SOFTWARE\Classes\Directory\shell\sDelete,,sDelete
+RegWrite,HKLM,0x2,_WinPE_SOFTWARE\Classes\Directory\shell\sDelete\command,,#$psystemdrive#$p\Programs\sDelete\sDelete.folder.from.context.menu.cmd #$q%1#$q
+Echo,"Unmounting registry hives..."
+RegHiveUnload,_WinPE_SOFTWARE
+ShellExecute,Hide,"%Tools%\offlinereg\offlinereg-win32.exe","#$q%Target_config%\default#$q #$qSoftware\Sysinternals\SDelete#$q setvalue #$qEulaAccepted#$q 1 4"
+If,%FullProjectRun%,Equal,NO,Begin
+  IniRead,"%TargetDir%\Project.Settings.ini",Main,Image.Number,%Boot.wim.Image.number%
+  WimPathAdd,%OutputDir%\sources\boot.wim,%Boot.wim.Image.number%,%TargetDir%,""
+End
+
+[NOT.IN.WIM]
+If,%FullProjectRun%,Equal,NO,Run,"%ProjectDir%\Core\common.script",PostConfigRunNotInWim
+

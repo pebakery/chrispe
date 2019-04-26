@@ -1,0 +1,680 @@
+########## DEFINITIONS ##########
+definitions:
+  - &MailWindowHeaderButton
+    type: Button
+    button-style: toolbar-text
+    skin-border-image: Mail Window Header Button Skin
+    top-margin: 0
+    bottom-margin: 0
+  - &MailComposeHeaderButton
+    type: Button
+    button-style: toolbar-image
+    skin-border-image: Mail Compose Header Button Skin
+    top-margin: 0
+    bottom-margin: 0
+  - &MailWindowShowMoreHeaderButton
+    <<: *MailWindowHeaderButton
+    name: hb_Show_More_CCHeaders
+    string: S_MAIL_SHOW_MORE_CONTACTS
+    hidden: true
+    button-style: toolbar-image
+    skin-border-image: null
+  - &MailHeaderWrapLayout
+    type: WrapLayout
+    preferred-width: infinity
+    nominal-width: 300
+    hidden: true
+    max-lines: 1
+  - &MailHeaderLabel
+    type: Label
+    hidden: true
+    font-weight: bold
+    skin-image: Mail Window Header Label Skin
+  - &MailSubjectLabel
+    type: MultilineLabel
+    name: hl_Subject
+    string: S_NO_SUBJECT
+    minimum-width: 0
+    nominal-width: 300
+    ellipsis: center
+    font-rel-size: 130
+    font-weight: bold
+    selectable: true
+  - &MailFlagButton
+    type: Button
+    name: hb_FlagMessage
+    string: S_MAIL_FLAG_MESSAGE
+    button-style: toolbar-image
+    skin-border-image: null
+    action-string: Flag Message,1,,S_MAIL_FLAG_MESSAGE,"Mail Unflagged" | Flag Message,0,,S_MAIL_UNFLAG_MESSAGE,"Mail Flagged"
+  - &MailDateLabel
+    type: Label
+    name: hl_Date
+    selectable: true
+    skin-image: Mail Window Date Label Skin
+    minimum-width: 0
+    ellipsis: center
+  - &MailWindowToolbarGroup
+    type: Group
+    name: mw_ToolbarGroup
+    preferred-width: fill
+  - &MailWindowBrowser
+    type: Browser
+    skin-image: Mail Browser Window Skin
+    name: mw_mail_view
+    minimum-height: 100
+    minimum-width: 100
+    preferred-width: 700
+    preferred-height: 200
+# insert definitions above
+########## WIDGETS ##########
+widgets:
+  - type: SkinElement
+    name: Mail Compose Window
+    skin-image: Mail Window Background Skin
+    content:
+      type: SkinElement
+      skin-image: Compose Window Background Overlay
+      top-margin: 0
+      bottom-margin: 0
+      left-margin: 0
+      right-margin: 0
+      dynamic-padding: true
+      content:
+        type: SkinElement
+        skin-image: Compose Window Border Skin
+        content:
+          type: StackLayout
+          top-margin: 0
+          bottom-margin: 0
+          left-margin: 0
+          right-margin: 0
+          orientation: vertical
+          elements:
+            - type: SkinElement
+              skin-image: Compose Header Pane
+              content:
+                type: StackLayout
+                orientation: horizontal
+                preferred-width: fill
+                elements:
+                  - type: GridLayout
+                    elements:
+                      - elements:
+                        - type: Label
+                          name: cw_From
+                          string: DI_IDSTR_M2_COMPOSEMAIL_FROM
+                          font-weight: bold
+                          skin-image: Compose Header Pane Label
+                        - type: StackLayout
+                          orientation: horizontal
+                          elements:
+                            - type: Dropdown
+                              name: cw_FromDropdown
+                              preferred-width: infinity
+                              minimum-width: 15c
+                            - type: Dropdown
+                              name: cw_EncodingDropdown
+                      - elements:
+                        - type: Button
+                          name: cw_To
+                          string: DI_IDSTR_M2_COMPOSEMAIL_TO
+                          button-style: toolbar-text
+                          font-weight: bold
+                          preferred-width: fill
+                          preferred-height: fill
+                          action: 
+                            name: Show Hidden Popup Menu
+                            data_string: Compose To Contact Menu
+                        - type: ComposeEdit
+                          name: cw_ToEdit
+                          preferred-width: infinity
+                      - elements:
+                        - type: Button
+                          name: cw_Cc
+                          button-style: toolbar-text
+                          font-weight: bold
+                          string: DI_IDSTR_M2_COMPOSEMAIL_CC
+                          preferred-width: fill
+                          preferred-height: fill
+                          action: 
+                            name: Show Hidden Popup Menu
+                            data_string: Compose CC Contact Menu
+                        - type: ComposeEdit
+                          name: cw_CcEdit
+                          preferred-width: infinity
+                      - elements:
+                        - type: Button
+                          name: cw_Bcc
+                          button-style: toolbar-text
+                          font-weight: bold
+                          string: S_COMPOSEMAIL_BCC
+                          preferred-width: fill
+                          preferred-height: fill
+                          action: 
+                            name: Show Hidden Popup Menu
+                            data_string: Compose BCC Contact Menu
+                        - type: ComposeEdit
+                          name: cw_BccEdit
+                          preferred-width: infinity
+                      - elements:
+                        - type: Label
+                          name: cw_Newsgroups
+                          font-weight: bold
+                          string: S_COMPOSEMAIL_NEWSGROUP
+                          skin-image: Compose Header Pane Label
+                        - type: ComposeEdit
+                          name: cw_NewsgroupsEdit
+                          preferred-width: infinity
+                      - elements:
+                        - type: Label
+                          name: cw_Followupto
+                          font-weight: bold
+                          string: S_COMPOSEMAIL_FOLLOWUP
+                          skin-image: Compose Header Pane Label
+                        - type: ComposeEdit
+                          name: cw_FollowuptoEdit
+                          preferred-width: infinity
+                      - elements:
+                        - type: Label
+                          name: cw_Replyto
+                          font-weight: bold
+                          string: S_COMPOSEMAIL_REPLYTO
+                          skin-image: Compose Header Pane Label
+                        - type: ComposeEdit
+                          name: cw_ReplytoEdit
+                          preferred-width: infinity
+                      - elements:
+                        - type: Label
+                          name: cw_Subject
+                          font-weight: bold
+                          string: DI_IDSTR_M2_COMPOSEMAIL_SUBJECT
+                          skin-image: Compose Header Pane Label
+                        - type: StackLayout
+                          orientation: horizontal
+                          left-margin: 0
+                          right-margin: 0
+                          elements:
+                            - type: Edit
+                              name: cw_SubjectEdit
+                              preferred-width: infinity
+                              right-margin: 0
+                            - <<: *MailComposeHeaderButton
+                              string: S_NORMAL_PRIORITY
+                              name: cw_PriorityButton
+                              skin-foreground-image: Priority Normal
+                              fixed-image: true
+                              action: 
+                                name: Show Popup Menu
+                                data_string: Mail Priority Menu
+                            - <<: *MailComposeHeaderButton
+                              name: cw_DirectionButton
+                              action-string: Change direction to LTR,,,D_MAIL_DIRECTION_LEFT_TO_RIGHT,"Mail Compose Left to right" | Change direction to RTL,,,,"Mail Compose Right to left"
+                  - type: SkinElement
+                    name: cw_AttachmentArea
+                    skin-image: Mail Compose Attachment Section Skin
+                    content:
+                      type: Treeview
+                      name: cw_AttachmentList
+                      minimum-width: 15c
+                      preferred-width: 40c
+                      preferred-height: fill
+                      nominal-height: 2c
+                      skin-image: Mail Compose Attachment
+            - type: RichTextEditor
+              name: cw_RichTextEditor
+              preferred-width: infinity
+              preferred-height: infinity
+  - type: SkinElement
+    name: Mail Window Mail Message Pane
+    skin-image: Mail Window Background Skin
+    content:
+      type: SkinElement
+      name: Mail Window Background Skin Element
+      skin-image: Mail Window Background Overlay
+      top-margin: 0
+      bottom-margin: 0
+      left-margin: 0
+      right-margin: 0
+      dynamic-padding: true
+      content:
+        type: SkinElement
+        name: MessagePaddedElement
+        skin-image: Mail Window Message Skin
+        dynamic-padding: true
+        content:
+          type: StackLayout
+          top-margin: 0
+          bottom-margin: 0
+          left-margin: 0
+          right-margin: 0
+          orientation: vertical
+          elements:
+            - type: SkinElement
+              name: Mail Window Toolbar And Headers
+              skin-image: Mail Window Message Toolbar
+              preferred-width: fill
+              content:
+                type: StackLayout
+                orientation: vertical
+                elements:
+                  - type: WrapLayout
+                    preferred-width: fill
+                    nominal-width: 300
+                    elements:
+                      - *MailSubjectLabel
+                      - type: StackLayout
+                        orientation: horizontal
+                        elements:
+                          - type: Empty
+                            preferred-width: fill
+                          - *MailDateLabel
+                          - *MailFlagButton
+                  - type: DynamicGridLayout
+                    preferred-width: fill
+                    name: CustomHeaderGrid
+                    vcenter: false
+                    top-margin: 8
+                    elements:
+                      - elements:
+                        - type: StackLayout
+                          orientation: horizontal
+                          elements:
+                            - type: Empty
+                              preferred-width: fill
+                            - <<: *MailHeaderLabel
+                              name: hl_From
+                              string: SI_MIME_TRANSLATE_FROM
+                        - <<: *MailHeaderWrapLayout
+                          name: hs_FromHeaders
+                          max-lines: 0
+                          elements:
+                            - <<: *MailHeaderLabel
+                              name: hl_Organization
+                              font-weight: normal
+                        - type: Empty
+                      - elements:
+                        - type: StackLayout
+                          orientation: horizontal
+                          elements:
+                            - type: Empty
+                              preferred-width: fill
+                            - <<: *MailHeaderLabel
+                              name: hl_To
+                              string: SI_MIME_TRANSLATE_TO
+                        - <<: *MailHeaderWrapLayout
+                          name: hs_ToHeaders
+                        - <<: *MailWindowShowMoreHeaderButton
+                          name: hb_Show_More_ToHeaders
+                          type: ToggleButton
+                          states:
+                            - skin-image: Mail Show More
+                              action: 
+                                name: Open expand
+                                data_string: hs_ToHeaders
+                            - skin-image: Mail Hide More
+                              action: 
+                                name: Close Expand
+                                data_string: hs_ToHeaders
+                      - elements:
+                        - type: StackLayout
+                          orientation: horizontal
+                          elements:
+                            - type: Empty
+                              preferred-width: fill
+                            - <<: *MailHeaderLabel
+                              name: hl_CC
+                              string: SI_MIME_TRANSLATE_CC
+                        - <<: *MailHeaderWrapLayout
+                          name: hs_CCHeaders
+                        - <<: *MailWindowShowMoreHeaderButton
+                          type: ToggleButton
+                          name: hb_Show_More_CCHeaders
+                          states:
+                            - skin-image: Mail Show More
+                              action: 
+                                name: Open expand
+                                data_string: hs_CCHeaders
+                            - skin-image: Mail Hide More
+                              action: 
+                                name: Close Expand
+                                data_string: hs_CCHeaders
+                      - elements:
+                        - type: StackLayout
+                          orientation: horizontal
+                          elements:
+                            - type: Empty
+                              preferred-width: fill
+                            - <<: *MailHeaderLabel
+                              name: hl_BCC
+                              string: SI_MIME_TRANSLATE_BCC
+                        - <<: *MailHeaderWrapLayout
+                          name: hs_BCCHeaders
+                        - <<: *MailWindowShowMoreHeaderButton
+                          type: ToggleButton
+                          name: hb_Show_More_BCCHeaders
+                          states:
+                            - skin-image: Mail Show More
+                              action: 
+                                name: Open expand
+                                data_string: hs_BCCHeaders
+                            - skin-image: Mail Hide More
+                              action: 
+                                name: Close Expand
+                                data_string: hs_BCCHeaders
+                      - elements:
+                        - type: StackLayout
+                          orientation: horizontal
+                          elements:
+                            - type: Empty
+                              preferred-width: fill
+                            - <<: *MailHeaderLabel
+                              name: hl_Attachments
+                              string: DI_IDSTR_M2_COL_ATTACHMENTS
+                        - <<: *MailHeaderWrapLayout
+                          name: hs_Attachments
+                          max-lines: 2
+                          elements:
+                            - <<: *MailWindowHeaderButton
+                              name: hb_SaveAttachments
+                              string: SI_SAVE_BUTTON_TEXT
+                              action-string: Save attachments to folder,,,,"Save.mini"
+                              button-style: toolbar-text-right
+                              hidden: true
+                        - <<: *MailWindowShowMoreHeaderButton
+                          name: hb_Show_More_Attachments
+                          type: ToggleButton
+                          states:
+                            - skin-image: Mail Show More
+                              action: 
+                                name: Open expand
+                                data_string: hs_Attachments
+                            - skin-image: Mail Hide More
+                              action: 
+                                name: Close Expand
+                                data_string: hs_Attachments
+                    template:
+                      - type: StackLayout
+                        orientation: horizontal
+                        elements:
+                          - type: Empty
+                            preferred-width: fill
+                          - <<: *MailHeaderLabel
+                            name: CustomHeaderTitle
+                            hidden: false
+                      - type: MultilineLabel
+                        name: CustomHeaderValue
+                        selectable: true
+                        skin-image: Mail Window Header Button Skin
+                      - type: Empty
+            - *MailWindowToolbarGroup
+            - *MailWindowBrowser
+            - type: SkinElement
+              name: mw_QuickReplySection
+              hidden: true
+              skin-image: Mail Window Quick Reply Toolbar
+              content:
+                type: StackLayout
+                orientation: vertical
+                preferred-width: fill
+                elements:
+                  - type: MultilineEdit
+                    name: mw_QuickReplyEdit
+                    preferred-width: fill
+                    preferred-height: 2c
+                  - type: StackLayout
+                    orientation: horizontal
+                    elements:
+                      - type: Dropdown
+                        name: mw_QuickReplyType
+                        preferred-width: fill
+                        minimum-width: 100
+                      - type: Button
+                        name: mw_QuickReplyButton
+                        tab-stop: true
+                        button-style: toolbar-text-right
+                        action-string: Quick reply,,,,"Send mail"
+                        string: DI_IDSTR_M2_MAILVIEWTOOLBAR_QUICKREPLY
+  - type: SkinElement
+    name: Mail Window Feed Message Pane
+    skin-image: Mail Window Background Skin
+    content:
+      type: SkinElement
+      name: Mail Window Background Skin Element
+      skin-image: Mail Window Background Overlay
+      top-margin: 0
+      bottom-margin: 0
+      left-margin: 0
+      right-margin: 0
+      dynamic-padding: true
+      content:
+        type: SkinElement
+        name: MessagePaddedElement
+        skin-image: Mail Window Message Skin
+        dynamic-padding: true
+        content:
+          type: StackLayout
+          top-margin: 0
+          bottom-margin: 0
+          left-margin: 0
+          right-margin: 0
+          orientation: vertical
+          elements:
+            - type: SkinElement
+              name: Mail Window Toolbar And Headers
+              skin-image: Mail Window Feed Item Headers
+              preferred-width: fill
+              content:
+                type: StackLayout
+                orientation: vertical
+                elements:
+                  - <<: *MailSubjectLabel
+                    preferred-width: fill
+                  - type: SkinElement
+                    skin-image: Mail Window Feed Item Header Texts
+                    preferred-width: fill
+                    content:
+                      type: StackLayout
+                      orientation: horizontal
+                      preferred-width: fill
+                      elements:
+                        - type: Label
+                          name: hl_Author
+                        - type: Empty
+                          preferred-width: fill
+                        - *MailDateLabel
+                        - *MailFlagButton
+            - *MailWindowToolbarGroup
+            - *MailWindowBrowser
+  - type: SkinElement
+    name: Mail Window No Message Selected
+    skin-image: Mail Window Background Skin
+    content:
+      type: SkinElement
+      name: Mail Window Background Skin Element
+      skin-image: Mail Window No Message Selected Background Overlay
+      dynamic-padding: true
+      content:
+        type: StackLayout
+        orientation: vertical
+        hcenter: true
+        elements:
+          - type: Icon
+            name: No Message Selected Image
+            skin-image: Mail No Message Selected
+          - type: Label
+            top-margin: 15
+            name: No Message Selected Label
+            string: S_NO_MESSAGE_SELECTED
+            skin-image: Mail No Message Selected Label
+            font-rel-size: 150
+            font-weight: bold
+
+  - type: SkinElement
+    name: Collection Manager ViewPane
+    skin-image: Bookmarks Manager Window Background Skin
+    content:
+      type: ScrollContainer
+      name: view_pane_scroll_container
+      preferred-width: fill
+      content:
+        type: StackLayout
+        name: viewpane_contents
+        elements:
+          - type: StackLayout
+            name: view_pane_toolbar_layout
+            orientation: horizontal
+            elements:
+              - type: Empty
+                preferred-width: fill
+              - type: Button
+                name: settings_button
+                button-style: toolbar-image
+                skin-image: Speed Dial Button Skin
+                skin-foreground-image: Speed Dial Configure Icon
+                fixed-image: true
+                action-string: Open Collection view Settings
+          - type: Centered
+            name: thumbnail_view_container
+            content:
+              type: FlowLayout
+              name: view_pane_flowlayout
+          - type: SkinElement
+            name: listview_container
+            skin-image: ViewPane ListView Container Skin
+            content:
+              type: SkinElement
+              skin-image: Bookmarks Manager List Background Skin
+              content:
+                type: DynamicGridLayout
+                name: list_view_page
+                preferred-width: fill
+          - type: Centered
+            name: notification_view_container
+            content:
+              type: StackLayout
+              hcenter: true
+              elements:
+                - type: Icon
+                  name: message_icon
+                - type: Label
+                  top-margin: 15
+                  name: information
+                  string: S_EMPTY_FOLDER
+                  skin-image: Mail No Message Selected Label
+                  font-rel-size: 150
+                  font-weight: bold
+                      
+  - type: Composite
+    name: Collection Manager ViewPane Thumbnail Item
+    skin-image: Bookmark Item Thumbnail Skin
+    content:
+      type: StackLayout
+      name: bookmark_item_composite_stacklayout
+      hcenter: true
+      elements:
+        - type: Button
+          name: thumbnail_button
+          button-style: toolbar-image
+          skin-image: Bookmark Thumbnail Button
+          skin-foreground-image: Viewpane Generic Thumbnail
+          fixed-image: true
+          tab-stop: true
+        - type: StackLayout
+          orientation: horizontal
+          top-margin: 2
+          left-margin: 0
+          right-margin: 0
+          minimum-height: 24
+          elements:
+            - type: Button
+              name: info_button
+              button-style: toolbar-image
+              action-string: Edit properties
+              skin-foreground-image: Collection Property Button Skin
+              skin-image: Viewpane Property Button Background Skin
+              fixed-image: true
+            - type: Button
+              name: item_title
+              button-style: toolbar-text
+              preferred-width: fill
+              nominal-width: 25c
+              minimum-width: 25c
+              skin-image: Viewpane Thumbnail Title Skin
+            - type: Button
+              name: delete_button
+              button-style: toolbar-image
+              action-string: Delete Item
+              skin-foreground-image: Collection Delete Button Skin
+              skin-image: Viewpane Delete Button Background Skin
+              fixed-image: true
+              
+  - type: Composite
+    name: Collection Manager ViewPane ListView Item
+    skin-image: Bookmark Generic Listview Skin
+    content:
+      type: StackLayout
+      name: bookmark_item_composite_stacklayout
+      orientation: horizontal
+      elements:
+        - type: Button
+          name: fav_icon_button
+          button-style: toolbar-image
+          skin-image: Viewpane FavIcon Button Background Skin
+          fixed-image: true
+          fixed-width: 22
+          fixed-height: 22
+        - type: Label
+          name: item_title
+          skin-image: Viewpane Listview Title Skin
+          preferred-height: fill
+          fixed-width: 25c
+        - type: Label
+          name: item_url
+          skin-image: Viewpane Listview URL Skin
+          preferred-width: fill
+          preferred-height: fill
+          minimum-width: 10c
+        - type: Button
+          name: info_button
+          button-style: toolbar-image
+          action-string: Edit properties
+          preferred-height: fill
+          fixed-image: true
+          skin-foreground-image: Collection Property Button Skin
+          skin-image: Viewpane Property Button Background Skin
+        - type: Button
+          name: delete_button
+          button-style: toolbar-image
+          action-string: Delete Item
+          preferred-height: fill
+          fixed-image: true
+          skin-foreground-image: Collection Delete Button Skin
+          skin-image: Viewpane Delete Button Background Skin
+
+  - type: SkinElement
+    name: Collection Manager NavigationPane
+    skin-image: NavigationPane Skin
+    content:
+      type: StackLayout
+      name: navigation_pane_stack_layout
+      elements:
+        - type: Label
+          preferred-width: fill
+          name: navigation_pane_title
+          skin-image: NavigationPane Title Skin
+          string: S_NAVIGATION_PANE_TITLE
+          font-rel-size: 140
+          font-weight: bold
+        - type: SkinElement
+          skin-image: NavigationPane Quickfind Skin
+          content:
+            type: Quickfind
+            name: quick_find
+            preferred-width: fill
+            minimum-width: 100
+        - type: Separator
+          name: navigation_pane_separator
+        - type: Treeview
+          name: tree_view
+

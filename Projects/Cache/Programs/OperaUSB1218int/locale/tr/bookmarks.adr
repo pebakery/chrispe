@@ -1,0 +1,191 @@
+Opera Hotlist version 2.0
+Options: encoding = utf8, version=21
+
+#FOLDER
+	ID=11
+	NAME=Trash
+	TRASH FOLDER=YES
+	UNIQUEID=14C645A5B8A3470FB3B52CC32C97E2B8
+
+-
+
+#FOLDER
+	ID=12
+	NAME=Opera
+	UNIQUEID=CFF0FB2AB8F0403BB524F77EF43A30E3
+	PARTNERID=opera-operafolder
+
+#URL
+	ID=15
+	NAME=My Opera
+	URL=http://my.opera.com/?utm_source=DesktopBrowser&utm_medium=Bookmark&utm_campaign=BrowserLinks
+	ICONFILE=http://redir.opera.com/favicons/myopera/favicon.ico
+	UNIQUEID=1C5D1DBE78A544968A9D1AED2CD404D5
+	PARTNERID=opera-operasocial
+
+#URL
+	ID=16
+	NAME=Support Desk
+	URL=http://www.opera.com/support/?utm_source=DesktopBrowser&utm_medium=Bookmark&utm_campaign=BrowserLinks
+	ICONFILE=http://redir.opera.com/favicons/opera/favicon.ico
+	UNIQUEID=3D20CEFF1F8343F0B942FFB93A96DEEA
+	PARTNERID=opera-operasupport
+
+#URL
+	ID=17
+	NAME=Get started with Opera
+	URL=http://www.opera.com/portal/startup/?utm_source=DesktopBrowser&utm_medium=Bookmark&utm_campaign=BrowserLinks
+	ICONFILE=http://redir.opera.com/favicons/opera/favicon.ico
+	UNIQUEID=18CD2A92CCF9453A98D3C2B85ADE90F2
+	PARTNERID=opera-operastart
+
+#URL
+	ID=18
+	NAME=Opera Portal
+	URL=http://portal.opera.com/?utm_source=DesktopBrowser&utm_medium=Bookmark&utm_campaign=BrowserLinks
+	ICONFILE=http://redir.opera.com/favicons/opera/favicon.ico
+	ON PERSONALBAR=YES
+	PERSONALBAR_POS=2
+	UNIQUEID=93D5337B1657409084924E007F49387C
+	PARTNERID=opera-operaportal
+
+#URL
+	ID=19
+	NAME=Opera Eklentileri
+	URL=https://addons.opera.com/
+	ICONFILE=http://redir.opera.com/favicons/opera/favicon.ico
+	DESCRIPTION=addons, extensions
+	UNIQUEID=29DF2B28174D42D08D98B71A16139D64
+	PARTNERID=opera-operaextensions
+
+#URL
+	ID=20
+	NAME=Opera Türkiye
+	URL=http://redir.opera.com/bookmarks/operaturkiye/
+	ICONFILE=http://redir.opera.com/favicons/operaturkiye/favicon.ico
+	DESCRIPTION=opera, türkiye, iletişim
+	ON PERSONALBAR=YES
+	PERSONALBAR_POS=1
+	UNIQUEID=11256AE80F9E44FA954DC0A10B320CF1
+	PARTNERID=opera-operaturkey
+
+#URL
+	ID=21
+	NAME=FastMail
+	URL=http://redir.opera.com/bookmarks/fastmail
+	ICONFILE=http://redir.opera.com/favicons/fastmail/favicon.ico
+	UNIQUEID=BAF6AE40FA1543AC97010132CD806EEE
+	PARTNERID=opera-mail
+	
+#URL
+	ID=22
+	NAME=My Opera Mail
+	URL=http://mail.opera.com/?utm_source=DesktopBrowser&utm_medium=Bookmark&utm_campaign=BrowserLinks
+	ICONFILE=https://mail.opera.com/favicon.ico
+	UNIQUEID=BE6CA6E1CA86413A92F5FC2C28E71CAD
+	PARTNERID=opera-mail2
+
+#URL
+	ID=23
+	NAME=Bing
+	URL=http://redir.opera.com/bookmarks/bing/
+	ICONFILE=http://redir.opera.com/favicons/bing/favicon.ico
+	UNIQUEID=C6DF94B10A2C49F18BCDFF051AE9A443
+	PARTNERID=opera-searchengine
+
+#URL
+	ID=24
+	NAME=Booking.com
+	URL=http://redir.opera.com/bookmarks/booking.com
+	ICONFILE=http://redir.opera.com/favicons/booking/favicon.ico
+	DESCRIPTION=oteller, hostel, tatil
+	UNIQUEID=0739A8A088FA4094ADDF36856DB4340F
+	PARTNERID=opera-booking
+
+#URL
+	ID=25
+	NAME=İzlesene
+	URL=http://redir.opera.com/bookmarks/izlesene
+	ICONFILE=http://redir.opera.com/favicons/izlesene/favicon.ico
+	DESCRIPTION=video,videolar,video, izle
+	UNIQUEID=68ABE9A9503B46DCB6968A89B782247E
+	PARTNERID=opera-videosharing
+
+#URL
+	ID=26
+	NAME=Sabah
+	URL=http://redir.opera.com/bookmarks/sabah
+	ICONFILE=http://redir.opera.com/favicons/sabah/favicon.ico
+	DESCRIPTION=Sabah Gazetesi, sabah, türkiye
+	UNIQUEID=7CE2406F1F7442C1A6A9B8D40920AE04
+	PARTNERID=opera-news
+
+#URL
+	ID=27
+	NAME=DonanımHaber
+	URL=http://redir.opera.com/bookmarks/donanimhaber
+	ICONFILE=http://redir.opera.com/favicons/donanimhaber/favicon.ico
+	DESCRIPTION=donanım,  haberleri, CPU, fiyatları
+	UNIQUEID=E011FC06AC14495C80D4F126B0D2D5F4
+	PARTNERID=opera-technologynews
+
+#URL
+	ID=28
+	NAME=Bigpoint
+	URL=http://redir.opera.com/bookmarks/bigpoint/
+	ICONFILE=http://redir.opera.com/favicons/bigpoint/favicon.ico
+	UNIQUEID=2633F9CAFCD54C7B97E49102BD772021
+	PARTNERID=opera-gamesportal
+
+#URL
+	ID=29
+	NAME=Sahibinden.com
+	URL=http://redir.opera.com/bookmarks/sahibinden/
+	ICONFILE=http://redir.opera.com/favicons/sahidindem/favicon.ico
+	UNIQUEID=4A04CBFBC8F04C0F9A1BFCA778C3D744
+	PARTNERID=opera-classifieds
+
+#URL
+	ID=30
+	NAME=Habertürk
+	URL=http://redir.opera.com/bookmarks/haberturk
+	ICONFILE=http://redir.opera.com/favicons/haberturk/favicon.ico
+	UNIQUEID=FAD6C5A030504D69A273EED24B04B48D
+	PARTNERID=opera-news2
+	
+#URL
+	ID=31
+	NAME=Vikipedi
+	URL=http://tr.wikipedia.org/wiki/Ana_Sayfa
+	ICONFILE=http://redir.opera.com/favicons/wikipedia/favicon.ico
+	UNIQUEID=E86E91A28D61476B92F56F4AF3B75F00
+	PARTNERID=opera-encyclopedia
+	
+#URL
+	ID=32
+	NAME=Hotels.com
+	URL=http://redir.opera.com/bookmarks/hotels.com
+	DISPLAY URL=http://hotels.com/
+	ICONFILE=http://redir.opera.com/favicons/hotels.com/favicon.ico
+	DESCRIPTION=hotels
+	UNIQUEID=83EDE91B0FE34F1392665EB3F5AD2BFE
+	PARTNERID=opera-booking2
+
+#URL
+	ID=33
+	NAME=Skyscanner
+	URL=http://redir.opera.com/bookmarks/skyscanner
+	DISPLAY URL=http://www.skyscanner.com.tr
+	ICONFILE=http://redir.opera.com/favicons/skyscanner/favicon.ico
+	DESCRIPTION=ucuz, uçak, biletlerini
+	UNIQUEID=727C65A69979407B9CE5AE3258FB846B
+	PARTNERID=opera-travel
+
+#URL
+	ID=34
+	NAME=Travian
+	URL=http://redir.opera.com/bookmarks/game/tr
+	DISPLAY URL=http://www.travian.com
+	ICONFILE=http://redir.opera.com/favicons/game/tr/favicon.ico
+	UNIQUEID=2E7E1DC555B144A5B5194D47905E6EFB
+	PARTNERID=opera-games

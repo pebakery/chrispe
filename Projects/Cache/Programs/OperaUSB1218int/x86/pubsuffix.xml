@@ -1,0 +1,5293 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!-- IzllhLee8k6X9fnBy7JsjkwqxuPsRIJG2t7lIOJNNBL0IKFXP6qzeBMwjLaTXJdB6jjGOO82Y8KD54D0iIiJ1SQJs2FnPIb398CPRY5n5fwUMXzVVzUuUN0XCex4pBxQUKlR2OqAAc3APmRNZDk0b8vE2VI8z0mnl3QPq7qHfg/Ex0sLNg36SrxnWbNrQ8h3RTHlCoTIxOhrVL4E8eF9MIoZpNuzrNYQiE/Dta1WqW4d7P818RuxM38WfenR7fIGiIy+IaxOkOe0aLDhH4y87dlyOw28sCi69AGxcwjULOh42FCuI+ismDDqLM8gvTBvCExgKU/FbqDQTcloya9MGDWSGuWrk0F87o6lr9qe1Y/GKIPfyUa3+Tw+WeyyelbUXDxrpomyqFYE4J3FCQdfhl6CDIo2nGoHw4Q5TugE/jd3+PmyWp27e2sPpCs5IBfnKael0Fzcr1qkAG1EC5+UJYsKffDAjJdn28f4Qia6Ba/qLXs9GD+xYulXu9XgDCdTh1bYUcjDekuGdfmjQNsDWIn9EFhJ+pdrBWuUEx/4kvmHaTPmN8adsAjIToQSc5CXkH2SQ533OAbdru3bmCFnl4fbjDSYL5qGldNh4fkTBtnsteJrIdCJC2pafYSAYS8ocwTqYpBsTJe+w/gDQ4/RmExOHwJ/vC0+RSSJGhPa4nk=
+-->
+<!-- This file is covered by the Mozilla Public License Version 1.1, GNU GPL 2.0 and GNU LGPL 2.1.
+					For details see LICENSE in the same folder as this file -->
+<tlds>
+<tld name="ac" >
+  <registry name="com" />
+  <registry name="edu" />
+  <registry name="gov" />
+  <registry name="mil" />
+  <registry name="net" />
+  <registry name="org" />
+</tld>
+<tld name="ad" >
+  <registry name="nom" />
+</tld>
+<tld name="ae" >
+  <registry name="ac" />
+  <registry name="co" />
+  <registry name="gov" />
+  <registry name="mil" />
+  <registry name="net" />
+  <registry name="org" />
+  <registry name="sch" />
+</tld>
+<tld name="aero" >
+  <registry name="accident-investigation" />
+  <registry name="accident-prevention" />
+  <registry name="aerobatic" />
+  <registry name="aeroclub" />
+  <registry name="aerodrome" />
+  <registry name="agents" />
+  <registry name="air-surveillance" />
+  <registry name="air-traffic-control" />
+  <registry name="aircraft" />
+  <registry name="airline" />
+  <registry name="airport" />
+  <registry name="airtraffic" />
+  <registry name="ambulance" />
+  <registry name="amusement" />
+  <registry name="association" />
+  <registry name="author" />
+  <registry name="ballooning" />
+  <registry name="broker" />
+  <registry name="caa" />
+  <registry name="cargo" />
+  <registry name="catering" />
+  <registry name="certification" />
+  <registry name="championship" />
+  <registry name="charter" />
+  <registry name="civilaviation" />
+  <registry name="club" />
+  <registry name="conference" />
+  <registry name="consultant" />
+  <registry name="consulting" />
+  <registry name="control" />
+  <registry name="council" />
+  <registry name="crew" />
+  <registry name="design" />
+  <registry name="dgca" />
+  <registry name="educator" />
+  <registry name="emergency" />
+  <registry name="engine" />
+  <registry name="engineer" />
+  <registry name="entertainment" />
+  <registry name="equipment" />
+  <registry name="exchange" />
+  <registry name="express" />
+  <registry name="federation" />
+  <registry name="flight" />
+  <registry name="freight" />
+  <registry name="fuel" />
+  <registry name="gliding" />
+  <registry name="government" />
+  <registry name="groundhandling" />
+  <registry name="group" />
+  <registry name="hanggliding" />
+  <registry name="homebuilt" />
+  <registry name="insurance" />
+  <registry name="journal" />
+  <registry name="journalist" />
+  <registry name="leasing" />
+  <registry name="logistics" />
+  <registry name="magazine" />
+  <registry name="maintenance" />
+  <registry name="marketplace" />
+  <registry name="media" />
+  <registry name="microlight" />
+  <registry name="modelling" />
+  <registry name="navigation" />
+  <registry name="parachuting" />
+  <registry name="paragliding" />
+  <registry name="passenger-association" />
+  <registry name="pilot" />
+  <registry name="press" />
+  <registry name="production" />
+  <registry name="recreation" />
+  <registry name="repbody" />
+  <registry name="res" />
+  <registry name="research" />
+  <registry name="rotorcraft" />
+  <registry name="safety" />
+  <registry name="scientist" />
+  <registry name="services" />
+  <registry name="show" />
+  <registry name="skydiving" />
+  <registry name="software" />
+  <registry name="student" />
+  <registry name="taxi" />
+  <registry name="trader" />
+  <registry name="trading" />
+  <registry name="trainer" />
+  <registry name="union" />
+  <registry name="workinggroup" />
+  <registry name="works" />
+</tld>
+<tld name="af" >
+  <registry name="com" />
+  <registry name="edu" />
+  <registry name="gov" />
+  <registry name="net" />
+  <registry name="org" />
+</tld>
+<tld name="ag" >
+  <registry name="co" />
+  <registry name="com" />
+  <registry name="net" />
+  <registry name="nom" />
+  <registry name="org" />
+</tld>
+<tld name="ai" >
+  <registry name="com" />
+  <registry name="net" />
+  <registry name="off" />
+  <registry name="org" />
+</tld>
+<tld name="al" >
+  <registry name="com" />
+  <registry name="edu" />
+  <registry name="gov" />
+  <registry name="mil" />
+  <registry name="net" />
+  <registry name="org" />
+</tld>
+<tld name="am" />
+<tld name="an" >
+  <registry name="com" />
+  <registry name="edu" />
+  <registry name="net" />
+  <registry name="org" />
+</tld>
+<tld name="ao" >
+  <registry name="co" />
+  <registry name="ed" />
+  <registry name="gv" />
+  <registry name="it" />
+  <registry name="og" />
+  <registry name="pb" />
+</tld>
+<tld name="aq" />
+<tld name="ar" levels="1" >
+  <domain name="congresodelalengua3" />
+  <domain name="educ" />
+  <domain name="gobiernoelectronico" />
+  <domain name="mecon" />
+  <domain name="nacion" />
+  <domain name="nic" />
+  <domain name="promocion" />
+  <domain name="retina" />
+  <domain name="uba" />
+</tld>
+<tld name="arpa" >
+  <registry name="e164" />
+  <registry name="in-addr" />
+  <registry name="ip6" />
+  <registry name="iris" />
+  <registry name="uri" />
+  <registry name="urn" />
+</tld>
+<tld name="as" >
+  <registry name="gov" />
+</tld>
+<tld name="asia" />
+<tld name="at" >
+  <registry name="ac" />
+  <registry name="biz" />
+  <registry name="co" />
+  <registry name="gv" />
+  <registry name="info" />
+  <registry name="or" />
+  <registry name="priv" />
+</tld>
+<tld name="au" levels="1" >
+  <registry name="act" />
+  <registry name="edu" >
+    <registry name="act" />
+    <registry name="nsw" />
+    <registry name="nt" />
+    <registry name="qld" />
+    <registry name="sa" />
+    <registry name="tas" />
+    <registry name="vic" />
+    <registry name="wa" />
+  </registry>
+  <registry name="gov" >
+    <registry name="act" />
+    <registry name="nt" />
+    <registry name="qld" />
+    <registry name="sa" />
+    <registry name="tas" />
+    <registry name="vic" />
+    <registry name="wa" />
+  </registry>
+  <registry name="nsw" />
+  <registry name="nt" />
+  <registry name="qld" />
+  <registry name="sa" />
+  <registry name="tas" />
+  <registry name="vic" />
+  <registry name="wa" />
+</tld>
+<tld name="aw" >
+  <registry name="com" />
+</tld>
+<tld name="ax" />
+<tld name="az" >
+  <registry name="biz" />
+  <registry name="com" />
+  <registry name="edu" />
+  <registry name="gov" />
+  <registry name="info" />
+  <registry name="int" />
+  <registry name="mil" />
+  <registry name="name" />
+  <registry name="net" />
+  <registry name="org" />
+  <registry name="pp" />
+  <registry name="pro" />
+</tld>
+<tld name="ba" >
+  <registry name="co" />
+  <registry name="com" />
+  <registry name="edu" />
+  <registry name="gov" />
+  <registry name="mil" />
+  <registry name="net" />
+  <registry name="org" />
+  <registry name="rs" />
+  <registry name="unbi" />
+  <registry name="unsa" />
+</tld>
+<tld name="bb" >
+  <registry name="biz" />
+  <registry name="com" />
+  <registry name="edu" />
+  <registry name="gov" />
+  <registry name="info" />
+  <registry name="net" />
+  <registry name="org" />
+  <registry name="store" />
+</tld>
+<tld name="bd" levels="1" />
+<tld name="be" >
+  <registry name="ac" />
+</tld>
+<tld name="bf" >
+  <registry name="gov" />
+</tld>
+<tld name="bg" >
+  <registry name="0" />
+  <registry name="1" />
+  <registry name="2" />
+  <registry name="3" />
+  <registry name="4" />
+  <registry name="5" />
+  <registry name="6" />
+  <registry name="7" />
+  <registry name="8" />
+  <registry name="9" />
+  <registry name="a" />
+  <registry name="b" />
+  <registry name="c" />
+  <registry name="d" />
+  <registry name="e" />
+  <registry name="f" />
+  <registry name="g" />
+  <registry name="h" />
+  <registry name="i" />
+  <registry name="j" />
+  <registry name="k" />
+  <registry name="l" />
+  <registry name="m" />
+  <registry name="n" />
+  <registry name="o" />
+  <registry name="p" />
+  <registry name="q" />
+  <registry name="r" />
+  <registry name="s" />
+  <registry name="t" />
+  <registry name="u" />
+  <registry name="v" />
+  <registry name="w" />
+  <registry name="x" />
+  <registry name="y" />
+  <registry name="z" />
+</tld>
+<tld name="bh" >
+  <registry name="com" />
+  <registry name="edu" />
+  <registry name="gov" />
+  <registry name="net" />
+  <registry name="org" />
+</tld>
+<tld name="bi" >
+  <registry name="co" />
+  <registry name="com" />
+  <registry name="edu" />
+  <registry name="or" />
+  <registry name="org" />
+</tld>
+<tld name="biz" >
+  <registry name="dyndns" />
+  <registry name="for-better" />
+  <registry name="for-more" />
+  <registry name="for-some" />
+  <registry name="for-the" />
+  <registry name="selfip" />
+  <registry name="webhop" />
+</tld>
+<tld name="bj" >
+  <registry name="asso" />
+  <registry name="barreau" />
+  <registry name="gouv" />
+</tld>
+<tld name="bm" >
+  <registry name="com" />
+  <registry name="edu" />
+  <registry name="gov" />
+  <registry name="net" />
+  <registry name="org" />
+</tld>
+<tld name="bn" levels="1" />
+<tld name="bo" >
+  <registry name="com" />
+  <registry name="edu" />
+  <registry name="gob" />
+  <registry name="gov" />
+  <registry name="int" />
+  <registry name="mil" />
+  <registry name="net" />
+  <registry name="org" />
+  <registry name="tv" />
+</tld>
+<tld name="br" >
+  <registry name="adm" />
+  <registry name="adv" />
+  <registry name="agr" />
+  <registry name="am" />
+  <registry name="arq" />
+  <registry name="art" />
+  <registry name="ato" />
+  <registry name="b" />
+  <registry name="bio" />
+  <registry name="blog" />
+  <registry name="bmd" />
+  <registry name="can" />
+  <registry name="cim" />
+  <registry name="cng" />
+  <registry name="cnt" />
+  <registry name="com" />
+  <registry name="coop" />
+  <registry name="ecn" />
+  <registry name="edu" />
+  <registry name="emp" />
+  <registry name="eng" />
+  <registry name="esp" />
+  <registry name="etc" />
+  <registry name="eti" />
+  <registry name="far" />
+  <registry name="flog" />
+  <registry name="fm" />
+  <registry name="fnd" />
+  <registry name="fot" />
+  <registry name="fst" />
+  <registry name="g12" />
+  <registry name="ggf" />
+  <registry name="gov" />
+  <registry name="imb" />
+  <registry name="ind" />
+  <registry name="inf" />
+  <registry name="jor" />
+  <registry name="jus" />
+  <registry name="lel" />
+  <registry name="mat" />
+  <registry name="med" />
+  <registry name="mil" />
+  <registry name="mus" />
+  <registry name="net" />
+  <registry name="nom" />
+  <registry name="not" />
+  <registry name="ntr" />
+  <registry name="odo" />
+  <registry name="org" />
+  <registry name="ppg" />
+  <registry name="pro" />
+  <registry name="psc" />
+  <registry name="psi" />
+  <registry name="qsl" />
+  <registry name="radio" />
+  <registry name="rec" />
+  <registry name="slg" />
+  <registry name="srv" />
+  <registry name="taxi" />
+  <registry name="teo" />
+  <registry name="tmp" />
+  <registry name="trd" />
+  <registry name="tur" />
+  <registry name="tv" />
+  <registry name="vet" />
+  <registry name="vlog" />
+  <registry name="wiki" />
+  <registry name="zlg" />
+</tld>
+<tld name="bs" >
+  <registry name="com" />
+  <registry name="edu" />
+  <registry name="gov" />
+  <registry name="net" />
+  <registry name="org" />
+</tld>
+<tld name="bt" >
+  <registry name="com" />
+  <registry name="edu" />
+  <registry name="gov" />
+  <registry name="net" />
+  <registry name="org" />
+</tld>
+<tld name="bw" >
+  <registry name="co" />
+  <registry name="org" />
+</tld>
+<tld name="by" >
+  <registry name="com" />
+  <registry name="gov" />
+  <registry name="mil" />
+  <registry name="of" />
+</tld>
+<tld name="bz" >
+  <registry name="com" />
+  <registry name="edu" />
+  <registry name="gov" />
+  <registry name="net" />
+  <registry name="org" />
+</tld>
+<tld name="ca" >
+  <registry name="ab" />
+  <registry name="bc" />
+  <registry name="gc" />
+  <registry name="mb" />
+  <registry name="nb" />
+  <registry name="nf" />
+  <registry name="nl" />
+  <registry name="ns" />
+  <registry name="nt" />
+  <registry name="nu" />
+  <registry name="on" />
+  <registry name="pe" />
+  <registry name="qc" />
+  <registry name="sk" />
+  <registry name="yk" />
+</tld>
+<tld name="cat" />
+<tld name="cc" >
+  <registry name="ftpaccess" />
+  <registry name="game-server" />
+  <registry name="myphotos" />
+  <registry name="scrapping" />
+</tld>
+<tld name="cd" >
+  <registry name="gov" />
+</tld>
+<tld name="cf" />
+<tld name="cg" />
+<tld name="ch" />
+<tld name="ci" >
+  <registry name="ac" />
+  <registry name="asso" />
+  <registry name="co" />
+  <registry name="com" />
+  <registry name="ed" />
+  <registry name="edu" />
+  <registry name="go" />
+  <registry name="gouv" />
+  <registry name="int" />
+  <registry name="md" />
+  <registry name="net" />
+  <registry name="or" />
+  <registry name="org" />
+  <registry name="presse" />
+  <registry name="xn--aroport-bya" />
+</tld>
+<tld name="ck" levels="1" />
+<tld name="cl" >
+  <registry name="gob" />
+  <registry name="gov" />
+</tld>
+<tld name="cm" >
+  <registry name="gov" />
+</tld>
+<tld name="cn" >
+  <registry name="ac" />
+  <registry name="ah" />
+  <registry name="bj" />
+  <registry name="com" />
+  <registry name="cq" />
+  <registry name="edu" />
+  <registry name="fj" />
+  <registry name="gd" />
+  <registry name="gov" />
+  <registry name="gs" />
+  <registry name="gx" />
+  <registry name="gz" />
+  <registry name="ha" />
+  <registry name="hb" />
+  <registry name="he" />
+  <registry name="hi" />
+  <registry name="hk" />
+  <registry name="hl" />
+  <registry name="hn" />
+  <registry name="jl" />
+  <registry name="js" />
+  <registry name="jx" />
+  <registry name="ln" />
+  <registry name="mil" />
+  <registry name="mo" />
+  <registry name="net" />
+  <registry name="nm" />
+  <registry name="nx" />
+  <registry name="org" />
+  <registry name="qh" />
+  <registry name="sc" />
+  <registry name="sd" />
+  <registry name="sh" />
+  <registry name="sn" />
+  <registry name="sx" />
+  <registry name="tj" />
+  <registry name="tw" />
+  <registry name="xj" />
+  <registry name="xn--55qx5d" />
+  <registry name="xn--io0a7i" />
+  <registry name="xn--od0alg" />
+  <registry name="xz" />
+  <registry name="yn" />
+  <registry name="zj" />
+</tld>
+<tld name="co" >
+  <registry name="arts" />
+  <registry name="com" />
+  <registry name="edu" />
+  <registry name="firm" />
+  <registry name="gov" />
+  <registry name="info" />
+  <registry name="int" />
+  <registry name="mil" />
+  <registry name="net" />
+  <registry name="nom" />
+  <registry name="org" />
+  <registry name="rec" />
+  <registry name="web" />
+</tld>
+<tld name="com" >
+  <registry name="appspot" />
+  <registry name="ar" />
+  <registry name="blogdns" />
+  <registry name="br" />
+  <registry name="cechire" />
+  <registry name="cn" />
+  <registry name="de" />
+  <registry name="dnsalias" />
+  <registry name="dnsdojo" />
+  <registry name="doesntexist" />
+  <registry name="dontexist" />
+  <registry name="doomdns" />
+  <registry name="dyn-o-saur" />
+  <registry name="dynalias" />
+  <registry name="dyndns-at-home" />
+  <registry name="dyndns-at-work" />
+  <registry name="dyndns-blog" />
+  <registry name="dyndns-free" />
+  <registry name="dyndns-home" />
+  <registry name="dyndns-ip" />
+  <registry name="dyndns-mail" />
+  <registry name="dyndns-office" />
+  <registry name="dyndns-pics" />
+  <registry name="dyndns-remote" />
+  <registry name="dyndns-server" />
+  <registry name="dyndns-web" />
+  <registry name="dyndns-wiki" />
+  <registry name="dyndns-work" />
+  <registry name="est-a-la-maison" />
+  <registry name="est-a-la-masion" />
+  <registry name="est-le-patron" />
+  <registry name="est-mon-blogueur" />
+  <registry name="eu" />
+  <registry name="from-ak" />
+  <registry name="from-al" />
+  <registry name="from-ar" />
+  <registry name="from-ca" />
+  <registry name="from-ct" />
+  <registry name="from-dc" />
+  <registry name="from-de" />
+  <registry name="from-fl" />
+  <registry name="from-ga" />
+  <registry name="from-hi" />
+  <registry name="from-ia" />
+  <registry name="from-id" />
+  <registry name="from-il" />
+  <registry name="from-in" />
+  <registry name="from-ks" />
+  <registry name="from-ky" />
+  <registry name="from-ma" />
+  <registry name="from-md" />
+  <registry name="from-mi" />
+  <registry name="from-mn" />
+  <registry name="from-mo" />
+  <registry name="from-ms" />
+  <registry name="from-mt" />
+  <registry name="from-nc" />
+  <registry name="from-nd" />
+  <registry name="from-ne" />
+  <registry name="from-nh" />
+  <registry name="from-nj" />
+  <registry name="from-nm" />
+  <registry name="from-nv" />
+  <registry name="from-oh" />
+  <registry name="from-ok" />
+  <registry name="from-or" />
+  <registry name="from-pa" />
+  <registry name="from-pr" />
+  <registry name="from-ri" />
+  <registry name="from-sc" />
+  <registry name="from-sd" />
+  <registry name="from-tn" />
+  <registry name="from-tx" />
+  <registry name="from-ut" />
+  <registry name="from-va" />
+  <registry name="from-vt" />
+  <registry name="from-wa" />
+  <registry name="from-wi" />
+  <registry name="from-wv" />
+  <registry name="from-wy" />
+  <registry name="gb" />
+  <registry name="getmyip" />
+  <registry name="gotdns" />
+  <registry name="hobby-site" />
+  <registry name="homelinux" />
+  <registry name="homeunix" />
+  <registry name="hu" />
+  <registry name="iamallama" />
+  <registry name="is-a-anarchist" />
+  <registry name="is-a-blogger" />
+  <registry name="is-a-bookkeeper" />
+  <registry name="is-a-bulls-fan" />
+  <registry name="is-a-caterer" />
+  <registry name="is-a-chef" />
+  <registry name="is-a-conservative" />
+  <registry name="is-a-cpa" />
+  <registry name="is-a-cubicle-slave" />
+  <registry name="is-a-democrat" />
+  <registry name="is-a-designer" />
+  <registry name="is-a-doctor" />
+  <registry name="is-a-financialadvisor" />
+  <registry name="is-a-geek" />
+  <registry name="is-a-green" />
+  <registry name="is-a-guru" />
+  <registry name="is-a-hard-worker" />
+  <registry name="is-a-hunter" />
+  <registry name="is-a-landscaper" />
+  <registry name="is-a-lawyer" />
+  <registry name="is-a-liberal" />
+  <registry name="is-a-libertarian" />
+  <registry name="is-a-llama" />
+  <registry name="is-a-musician" />
+  <registry name="is-a-nascarfan" />
+  <registry name="is-a-nurse" />
+  <registry name="is-a-painter" />
+  <registry name="is-a-personaltrainer" />
+  <registry name="is-a-photographer" />
+  <registry name="is-a-player" />
+  <registry name="is-a-republican" />
+  <registry name="is-a-rockstar" />
+  <registry name="is-a-socialist" />
+  <registry name="is-a-student" />
+  <registry name="is-a-teacher" />
+  <registry name="is-a-techie" />
+  <registry name="is-a-therapist" />
+  <registry name="is-an-accountant" />
+  <registry name="is-an-actor" />
+  <registry name="is-an-actress" />
+  <registry name="is-an-anarchist" />
+  <registry name="is-an-artist" />
+  <registry name="is-an-engineer" />
+  <registry name="is-an-entertainer" />
+  <registry name="is-certified" />
+  <registry name="is-gone" />
+  <registry name="is-into-anime" />
+  <registry name="is-into-cars" />
+  <registry name="is-into-cartoons" />
+  <registry name="is-into-games" />
+  <registry name="is-leet" />
+  <registry name="is-not-certified" />
+  <registry name="is-slick" />
+  <registry name="is-uberleet" />
+  <registry name="is-with-theband" />
+  <registry name="isa-geek" />
+  <registry name="isa-hockeynut" />
+  <registry name="issmarterthanyou" />
+  <registry name="jpn" />
+  <registry name="kr" />
+  <registry name="likes-pie" />
+  <registry name="likescandy" />
+  <registry name="neat-url" />
+  <registry name="no" />
+  <registry name="operaunite" />
+  <registry name="qc" />
+  <registry name="ru" />
+  <registry name="sa" />
+  <registry name="saves-the-whales" />
+  <registry name="se" />
+  <registry name="selfip" />
+  <registry name="sells-for-less" />
+  <registry name="sells-for-u" />
+  <registry name="servebbs" />
+  <registry name="simple-url" />
+  <registry name="space-to-rent" />
+  <registry name="teaches-yoga" />
+  <registry name="uk" />
+  <registry name="us" />
+  <registry name="uy" />
+  <registry name="writesthisblog" />
+  <registry name="za" />
+</tld>
+<tld name="coop" />
+<tld name="cr" >
+  <registry name="ac" />
+  <registry name="co" />
+  <registry name="ed" />
+  <registry name="fi" />
+  <registry name="go" />
+  <registry name="or" />
+  <registry name="sa" />
+</tld>
+<tld name="cu" >
+  <registry name="com" />
+  <registry name="edu" />
+  <registry name="gov" />
+  <registry name="inf" />
+  <registry name="net" />
+  <registry name="org" />
+</tld>
+<tld name="cv" />
+<tld name="cx" >
+  <registry name="ath" />
+  <registry name="gov" />
+</tld>
+<tld name="cy" levels="1" />
+<tld name="cz" />
+<tld name="de" >
+  <registry name="fuettertdasnetz" />
+  <registry name="isteingeek" />
+  <registry name="istmein" />
+  <registry name="lebtimnetz" />
+  <registry name="leitungsen" />
+  <registry name="traeumtgerade" />
+</tld>
+<tld name="dj" />
+<tld name="dk" />
+<tld name="dm" >
+  <registry name="com" />
+  <registry name="edu" />
+  <registry name="gov" />
+  <registry name="net" />
+  <registry name="org" />
+</tld>
+<tld name="do" >
+  <registry name="art" />
+  <registry name="com" />
+  <registry name="edu" />
+  <registry name="gob" />
+  <registry name="gov" />
+  <registry name="mil" />
+  <registry name="net" />
+  <registry name="org" />
+  <registry name="sld" />
+  <registry name="web" />
+</tld>
+<tld name="dz" >
+  <registry name="art" />
+  <registry name="asso" />
+  <registry name="com" />
+  <registry name="edu" />
+  <registry name="gov" />
+  <registry name="net" />
+  <registry name="org" />
+  <registry name="pol" />
+</tld>
+<tld name="ec" >
+  <registry name="com" />
+  <registry name="edu" />
+  <registry name="fin" />
+  <registry name="gob" />
+  <registry name="gov" />
+  <registry name="info" />
+  <registry name="k12" />
+  <registry name="med" />
+  <registry name="mil" />
+  <registry name="net" />
+  <registry name="org" />
+  <registry name="pro" />
+</tld>
+<tld name="edu" />
+<tld name="ee" >
+  <registry name="aip" />
+  <registry name="com" />
+  <registry name="edu" />
+  <registry name="fie" />
+  <registry name="gov" />
+  <registry name="lib" />
+  <registry name="med" />
+  <registry name="org" />
+  <registry name="pri" />
+  <registry name="riik" />
+</tld>
+<tld name="eg" >
+  <registry name="com" />
+  <registry name="edu" />
+  <registry name="eun" />
+  <registry name="gov" />
+  <registry name="mil" />
+  <registry name="name" />
+  <registry name="net" />
+  <registry name="org" />
+  <registry name="sci" />
+</tld>
+<tld name="er" levels="1" />
+<tld name="es" >
+  <registry name="com" />
+  <registry name="edu" />
+  <registry name="gob" />
+  <registry name="nom" />
+  <registry name="org" />
+</tld>
+<tld name="et" levels="1" />
+<tld name="eu" />
+<tld name="fi" >
+  <registry name="aland" />
+  <registry name="iki" />
+</tld>
+<tld name="fj" levels="1" />
+<tld name="fk" levels="1" />
+<tld name="fm" />
+<tld name="fo" />
+<tld name="fr" >
+  <registry name="aeroport" />
+  <registry name="assedic" />
+  <registry name="asso" />
+  <registry name="avocat" />
+  <registry name="avoues" />
+  <registry name="cci" />
+  <registry name="chambagri" />
+  <registry name="chirurgiens-dentistes" />
+  <registry name="com" />
+  <registry name="experts-comptables" />
+  <registry name="geometre-expert" />
+  <registry name="gouv" />
+  <registry name="greta" />
+  <registry name="huissier-justice" />
+  <registry name="medecin" />
+  <registry name="nom" />
+  <registry name="notaires" />
+  <registry name="pharmacien" />
+  <registry name="port" />
+  <registry name="prd" />
+  <registry name="presse" />
+  <registry name="tm" />
+  <registry name="veterinaire" />
+</tld>
+<tld name="ga" />
+<tld name="gd" />
+<tld name="ge" >
+  <registry name="com" />
+  <registry name="edu" />
+  <registry name="gov" />
+  <registry name="mil" />
+  <registry name="net" />
+  <registry name="org" />
+  <registry name="pvt" />
+</tld>
+<tld name="gf" />
+<tld name="gg" >
+  <registry name="co" />
+  <registry name="gov" />
+  <registry name="net" />
+  <registry name="org" />
+  <registry name="sch" />
+</tld>
+<tld name="gh" >
+  <registry name="com" />
+  <registry name="edu" />
+  <registry name="gov" />
+  <registry name="mil" />
+  <registry name="org" />
+</tld>
+<tld name="gi" >
+  <registry name="com" />
+  <registry name="edu" />
+  <registry name="gov" />
+  <registry name="ltd" />
+  <registry name="mod" />
+  <registry name="org" />
+</tld>
+<tld name="gl" />
+<tld name="gm" />
+<tld name="gn" >
+  <registry name="ac" />
+  <registry name="com" />
+  <registry name="edu" />
+  <registry name="gov" />
+  <registry name="net" />
+  <registry name="org" />
+</tld>
+<tld name="gov" />
+<tld name="gp" >
+  <registry name="asso" />
+  <registry name="com" />
+  <registry name="edu" />
+  <registry name="mobi" />
+  <registry name="net" />
+  <registry name="org" />
+</tld>
+<tld name="gq" />
+<tld name="gr" >
+  <registry name="com" />
+  <registry name="edu" />
+  <registry name="gov" />
+  <registry name="net" />
+  <registry name="org" />
+</tld>
+<tld name="gs" />
+<tld name="gt" levels="1" />
+<tld name="gu" levels="1" />
+<tld name="gw" />
+<tld name="gy" >
+  <registry name="co" />
+  <registry name="com" />
+  <registry name="net" />
+</tld>
+<tld name="hk" >
+  <registry name="com" />
+  <registry name="edu" />
+  <registry name="gov" />
+  <registry name="idv" />
+  <registry name="net" />
+  <registry name="org" />
+  <registry name="xn--55qx5d" />
+  <registry name="xn--ciqpn" />
+  <registry name="xn--gmq050i" />
+  <registry name="xn--gmqw5a" />
+  <registry name="xn--io0a7i" />
+  <registry name="xn--lcvr32d" />
+  <registry name="xn--mk0axi" />
+  <registry name="xn--mxtq1m" />
+  <registry name="xn--od0alg" />
+  <registry name="xn--od0aq3b" />
+  <registry name="xn--tn0ag" />
+  <registry name="xn--uc0atv" />
+  <registry name="xn--uc0ay4a" />
+  <registry name="xn--wcvs22d" />
+  <registry name="xn--zf0avx" />
+</tld>
+<tld name="hm" />
+<tld name="hn" >
+  <registry name="com" />
+  <registry name="edu" />
+  <registry name="gob" />
+  <registry name="mil" />
+  <registry name="net" />
+  <registry name="org" />
+</tld>
+<tld name="hr" >
+  <registry name="com" />
+  <registry name="from" />
+  <registry name="iz" />
+  <registry name="name" />
+</tld>
+<tld name="ht" >
+  <registry name="adult" />
+  <registry name="art" />
+  <registry name="asso" />
+  <registry name="com" />
+  <registry name="coop" />
+  <registry name="edu" />
+  <registry name="firm" />
+  <registry name="gouv" />
+  <registry name="info" />
+  <registry name="med" />
+  <registry name="net" />
+  <registry name="org" />
+  <registry name="perso" />
+  <registry name="pol" />
+  <registry name="pro" />
+  <registry name="rel" />
+  <registry name="shop" />
+</tld>
+<tld name="hu" >
+  <registry name="2000" />
+  <registry name="agrar" />
+  <registry name="bolt" />
+  <registry name="casino" />
+  <registry name="city" />
+  <registry name="co" />
+  <registry name="erotica" />
+  <registry name="erotika" />
+  <registry name="film" />
+  <registry name="forum" />
+  <registry name="games" />
+  <registry name="hotel" />
+  <registry name="info" />
+  <registry name="ingatlan" />
+  <registry name="jogasz" />
+  <registry name="konyvelo" />
+  <registry name="lakas" />
+  <registry name="media" />
+  <registry name="news" />
+  <registry name="org" />
+  <registry name="priv" />
+  <registry name="reklam" />
+  <registry name="sex" />
+  <registry name="shop" />
+  <registry name="sport" />
+  <registry name="suli" />
+  <registry name="szex" />
+  <registry name="tm" />
+  <registry name="tozsde" />
+  <registry name="utazas" />
+  <registry name="video" />
+</tld>
+<tld name="id" >
+  <registry name="ac" />
+  <registry name="co" />
+  <registry name="go" />
+  <registry name="mil" />
+  <registry name="net" />
+  <registry name="or" />
+  <registry name="sch" />
+  <registry name="web" />
+</tld>
+<tld name="ie" >
+  <registry name="gov" />
+</tld>
+<tld name="il" levels="1" />
+<tld name="im" >
+  <registry name="ac" />
+  <registry name="co" >
+    <registry name="ltd" />
+    <registry name="plc" />
+  </registry>
+  <registry name="gov" />
+  <registry name="net" />
+  <registry name="nic" />
+  <registry name="org" />
+</tld>
+<tld name="in" >
+  <registry name="ac" />
+  <registry name="co" />
+  <registry name="edu" />
+  <registry name="firm" />
+  <registry name="gen" />
+  <registry name="gov" />
+  <registry name="ind" />
+  <registry name="mil" />
+  <registry name="net" />
+  <registry name="nic" />
+  <registry name="org" />
+  <registry name="res" />
+</tld>
+<tld name="info" >
+  <registry name="barrel-of-knowledge" />
+  <registry name="barrell-of-knowledge" />
+  <registry name="dyndns" />
+  <registry name="for-our" />
+  <registry name="groks-the" />
+  <registry name="groks-this" />
+  <registry name="here-for-more" />
+  <registry name="knowsitall" />
+  <registry name="selfip" />
+  <registry name="webhop" />
+</tld>
+<tld name="int" >
+  <registry name="eu" />
+</tld>
+<tld name="io" >
+  <registry name="com" />
+</tld>
+<tld name="iq" >
+  <registry name="com" />
+  <registry name="edu" />
+  <registry name="gov" />
+  <registry name="mil" />
+  <registry name="net" />
+  <registry name="org" />
+</tld>
+<tld name="ir" >
+  <registry name="ac" />
+  <registry name="co" />
+  <registry name="gov" />
+  <registry name="id" />
+  <registry name="net" />
+  <registry name="org" />
+  <registry name="sch" />
+  <registry name="xn--mgba3a4f16a" />
+  <registry name="xn--mgba3a4fra" />
+</tld>
+<tld name="is" >
+  <registry name="com" />
+  <registry name="edu" />
+  <registry name="gov" />
+  <registry name="int" />
+  <registry name="net" />
+  <registry name="org" />
+</tld>
+<tld name="it" >
+  <registry name="ag" />
+  <registry name="agrigento" />
+  <registry name="al" />
+  <registry name="alessandria" />
+  <registry name="alto-adige" />
+  <registry name="altoadige" />
+  <registry name="an" />
+  <registry name="ancona" />
+  <registry name="andria-barletta-trani" />
+  <registry name="andria-trani-barletta" />
+  <registry name="andriabarlettatrani" />
+  <registry name="andriatranibarletta" />
+  <registry name="ao" />
+  <registry name="aosta" />
+  <registry name="aoste" />
+  <registry name="ap" />
+  <registry name="aq" />
+  <registry name="aquila" />
+  <registry name="ar" />
+  <registry name="arezzo" />
+  <registry name="ascoli-piceno" />
+  <registry name="ascolipiceno" />
+  <registry name="asti" />
+  <registry name="at" />
+  <registry name="av" />
+  <registry name="avellino" />
+  <registry name="ba" />
+  <registry name="balsan" />
+  <registry name="bari" />
+  <registry name="barletta-trani-andria" />
+  <registry name="barlettatraniandria" />
+  <registry name="belluno" />
+  <registry name="benevento" />
+  <registry name="bergamo" />
+  <registry name="bg" />
+  <registry name="bi" />
+  <registry name="biella" />
+  <registry name="bl" />
+  <registry name="bn" />
+  <registry name="bo" />
+  <registry name="bologna" />
+  <registry name="bolzano" />
+  <registry name="bozen" />
+  <registry name="br" />
+  <registry name="brescia" />
+  <registry name="brindisi" />
+  <registry name="bs" />
+  <registry name="bt" />
+  <registry name="bz" />
+  <registry name="ca" />
+  <registry name="cagliari" />
+  <registry name="caltanissetta" />
+  <registry name="campidano-medio" />
+  <registry name="campidanomedio" />
+  <registry name="campobasso" />
+  <registry name="carbonia-iglesias" />
+  <registry name="carboniaiglesias" />
+  <registry name="carrara-massa" />
+  <registry name="carraramassa" />
+  <registry name="caserta" />
+  <registry name="catania" />
+  <registry name="catanzaro" />
+  <registry name="cb" />
+  <registry name="ce" />
+  <registry name="cesena-forli" />
+  <registry name="cesenaforli" />
+  <registry name="ch" />
+  <registry name="chieti" />
+  <registry name="ci" />
+  <registry name="cl" />
+  <registry name="cn" />
+  <registry name="co" />
+  <registry name="como" />
+  <registry name="cosenza" />
+  <registry name="cr" />
+  <registry name="cremona" />
+  <registry name="crotone" />
+  <registry name="cs" />
+  <registry name="ct" />
+  <registry name="cuneo" />
+  <registry name="cz" />
+  <registry name="dell-ogliastra" />
+  <registry name="dellogliastra" />
+  <registry name="edu" />
+  <registry name="en" />
+  <registry name="enna" />
+  <registry name="fc" />
+  <registry name="fe" />
+  <registry name="fermo" />
+  <registry name="ferrara" />
+  <registry name="fg" />
+  <registry name="fi" />
+  <registry name="firenze" />
+  <registry name="florence" />
+  <registry name="fm" />
+  <registry name="foggia" />
+  <registry name="forli-cesena" />
+  <registry name="forlicesena" />
+  <registry name="fr" />
+  <registry name="frosinone" />
+  <registry name="ge" />
+  <registry name="genoa" />
+  <registry name="genova" />
+  <registry name="go" />
+  <registry name="gorizia" />
+  <registry name="gov" />
+  <registry name="gr" />
+  <registry name="grosseto" />
+  <registry name="iglesias-carbonia" />
+  <registry name="iglesiascarbonia" />
+  <registry name="im" />
+  <registry name="imperia" />
+  <registry name="is" />
+  <registry name="isernia" />
+  <registry name="kr" />
+  <registry name="la-spezia" />
+  <registry name="laquila" />
+  <registry name="laspezia" />
+  <registry name="latina" />
+  <registry name="lc" />
+  <registry name="le" />
+  <registry name="lecce" />
+  <registry name="lecco" />
+  <registry name="li" />
+  <registry name="livorno" />
+  <registry name="lo" />
+  <registry name="lodi" />
+  <registry name="lt" />
+  <registry name="lu" />
+  <registry name="lucca" />
+  <registry name="macerata" />
+  <registry name="mantova" />
+  <registry name="massa-carrara" />
+  <registry name="massacarrara" />
+  <registry name="matera" />
+  <registry name="mb" />
+  <registry name="mc" />
+  <registry name="me" />
+  <registry name="medio-campidano" />
+  <registry name="mediocampidano" />
+  <registry name="messina" />
+  <registry name="mi" />
+  <registry name="milan" />
+  <registry name="milano" />
+  <registry name="mn" />
+  <registry name="mo" />
+  <registry name="modena" />
+  <registry name="monza" />
+  <registry name="monza-brianza" />
+  <registry name="monza-e-della-brianza" />
+  <registry name="monzabrianza" />
+  <registry name="monzaebrianza" />
+  <registry name="monzaedellabrianza" />
+  <registry name="ms" />
+  <registry name="mt" />
+  <registry name="na" />
+  <registry name="naples" />
+  <registry name="napoli" />
+  <registry name="no" />
+  <registry name="novara" />
+  <registry name="nu" />
+  <registry name="nuoro" />
+  <registry name="og" />
+  <registry name="ogliastra" />
+  <registry name="olbia-tempio" />
+  <registry name="olbiatempio" />
+  <registry name="or" />
+  <registry name="oristano" />
+  <registry name="ot" />
+  <registry name="pa" />
+  <registry name="padova" />
+  <registry name="padua" />
+  <registry name="palermo" />
+  <registry name="parma" />
+  <registry name="pavia" />
+  <registry name="pc" />
+  <registry name="pd" />
+  <registry name="pe" />
+  <registry name="perugia" />
+  <registry name="pesaro-urbino" />
+  <registry name="pesarourbino" />
+  <registry name="pescara" />
+  <registry name="pg" />
+  <registry name="pi" />
+  <registry name="piacenza" />
+  <registry name="pisa" />
+  <registry name="pistoia" />
+  <registry name="pn" />
+  <registry name="po" />
+  <registry name="pordenone" />
+  <registry name="potenza" />
+  <registry name="pr" />
+  <registry name="prato" />
+  <registry name="pt" />
+  <registry name="pu" />
+  <registry name="pv" />
+  <registry name="pz" />
+  <registry name="ra" />
+  <registry name="ragusa" />
+  <registry name="ravenna" />
+  <registry name="rc" />
+  <registry name="re" />
+  <registry name="reggio-calabria" />
+  <registry name="reggio-emilia" />
+  <registry name="reggiocalabria" />
+  <registry name="reggioemilia" />
+  <registry name="rg" />
+  <registry name="ri" />
+  <registry name="rieti" />
+  <registry name="rimini" />
+  <registry name="rm" />
+  <registry name="rn" />
+  <registry name="ro" />
+  <registry name="roma" />
+  <registry name="rome" />
+  <registry name="rovigo" />
+  <registry name="sa" />
+  <registry name="salerno" />
+  <registry name="sassari" />
+  <registry name="savona" />
+  <registry name="si" />
+  <registry name="siena" />
+  <registry name="siracusa" />
+  <registry name="so" />
+  <registry name="sondrio" />
+  <registry name="sp" />
+  <registry name="sr" />
+  <registry name="ss" />
+  <registry name="suedtirol" />
+  <registry name="sv" />
+  <registry name="ta" />
+  <registry name="taranto" />
+  <registry name="te" />
+  <registry name="tempio-olbia" />
+  <registry name="tempioolbia" />
+  <registry name="teramo" />
+  <registry name="terni" />
+  <registry name="tn" />
+  <registry name="to" />
+  <registry name="torino" />
+  <registry name="tp" />
+  <registry name="tr" />
+  <registry name="trani-andria-barletta" />
+  <registry name="trani-barletta-andria" />
+  <registry name="traniandriabarletta" />
+  <registry name="tranibarlettaandria" />
+  <registry name="trapani" />
+  <registry name="trentino" />
+  <registry name="trento" />
+  <registry name="treviso" />
+  <registry name="trieste" />
+  <registry name="ts" />
+  <registry name="turin" />
+  <registry name="tv" />
+  <registry name="ud" />
+  <registry name="udine" />
+  <registry name="urbino-pesaro" />
+  <registry name="urbinopesaro" />
+  <registry name="va" />
+  <registry name="varese" />
+  <registry name="vb" />
+  <registry name="vc" />
+  <registry name="ve" />
+  <registry name="venezia" />
+  <registry name="venice" />
+  <registry name="verbania" />
+  <registry name="vercelli" />
+  <registry name="verona" />
+  <registry name="vi" />
+  <registry name="vibo-valentia" />
+  <registry name="vibovalentia" />
+  <registry name="vicenza" />
+  <registry name="viterbo" />
+  <registry name="vr" />
+  <registry name="vs" />
+  <registry name="vt" />
+  <registry name="vv" />
+</tld>
+<tld name="je" >
+  <registry name="co" />
+  <registry name="gov" />
+  <registry name="net" />
+  <registry name="org" />
+  <registry name="sch" />
+</tld>
+<tld name="jm" levels="1" />
+<tld name="jo" >
+  <registry name="com" />
+  <registry name="edu" />
+  <registry name="gov" />
+  <registry name="mil" />
+  <registry name="name" />
+  <registry name="net" />
+  <registry name="org" />
+  <registry name="sch" />
+</tld>
+<tld name="jobs" />
+<tld name="jp" >
+  <registry name="ac" />
+  <registry name="ad" />
+  <registry name="aichi" >
+    <registry name="aichi.jp" >
+    </registry>
+    <domain name="pref" />
+  </registry>
+  <registry name="akita" >
+    <registry name="akita.jp" >
+    </registry>
+    <domain name="pref" />
+  </registry>
+  <registry name="aomori" >
+    <registry name="aomori.jp" >
+    </registry>
+    <domain name="pref" />
+  </registry>
+  <registry name="chiba" >
+    <registry name="chiba.jp" >
+    </registry>
+    <domain name="city" />
+    <domain name="pref" />
+  </registry>
+  <registry name="co" />
+  <registry name="ed" />
+  <registry name="ehime" >
+    <registry name="ehime.jp" >
+    </registry>
+    <domain name="pref" />
+  </registry>
+  <registry name="fukui" >
+    <registry name="fukui.jp" >
+    </registry>
+    <domain name="pref" />
+  </registry>
+  <registry name="fukuoka" >
+    <registry name="fukuoka.jp" >
+    </registry>
+    <domain name="city" />
+    <domain name="pref" />
+  </registry>
+  <registry name="fukushima" >
+    <registry name="fukushima.jp" >
+    </registry>
+    <domain name="pref" />
+  </registry>
+  <registry name="gifu" >
+    <registry name="gifu.jp" >
+    </registry>
+    <domain name="pref" />
+  </registry>
+  <registry name="go" />
+  <registry name="gr" />
+  <registry name="gunma" >
+    <registry name="gunma.jp" >
+    </registry>
+    <domain name="pref" />
+  </registry>
+  <registry name="hiroshima" >
+    <registry name="hiroshima.jp" >
+    </registry>
+    <domain name="city" />
+    <domain name="pref" />
+  </registry>
+  <registry name="hokkaido" >
+    <registry name="hokkaido.jp" >
+    </registry>
+    <domain name="pref" />
+  </registry>
+  <registry name="hyogo" >
+    <registry name="hyogo.jp" >
+    </registry>
+    <domain name="pref" />
+  </registry>
+  <registry name="ibaraki" >
+    <registry name="ibaraki.jp" >
+    </registry>
+    <domain name="pref" />
+  </registry>
+  <registry name="ishikawa" >
+    <registry name="ishikawa.jp" >
+    </registry>
+    <domain name="pref" />
+  </registry>
+  <registry name="iwate" >
+    <registry name="iwate.jp" >
+    </registry>
+    <domain name="pref" />
+  </registry>
+  <registry name="kagawa" >
+    <registry name="kagawa.jp" >
+    </registry>
+    <domain name="pref" />
+  </registry>
+  <registry name="kagoshima" >
+    <registry name="kagoshima.jp" >
+    </registry>
+    <domain name="pref" />
+  </registry>
+  <registry name="kanagawa" >
+    <registry name="kanagawa.jp" >
+    </registry>
+    <domain name="pref" />
+  </registry>
+  <registry name="kawasaki" >
+    <registry name="kawasaki.jp" >
+    </registry>
+    <domain name="city" />
+  </registry>
+  <registry name="kitakyushu" >
+    <registry name="kitakyushu.jp" >
+    </registry>
+    <domain name="city" />
+  </registry>
+  <registry name="kobe" >
+    <registry name="kobe.jp" >
+    </registry>
+    <domain name="city" />
+  </registry>
+  <registry name="kochi" >
+    <registry name="kochi.jp" >
+    </registry>
+    <domain name="pref" />
+  </registry>
+  <registry name="kumamoto" >
+    <registry name="kumamoto.jp" >
+    </registry>
+    <domain name="pref" />
+  </registry>
+  <registry name="kyoto" >
+    <registry name="kyoto.jp" >
+    </registry>
+    <domain name="city" />
+    <domain name="pref" />
+  </registry>
+  <registry name="lg" />
+  <registry name="mie" >
+    <registry name="mie.jp" >
+    </registry>
+    <domain name="pref" />
+  </registry>
+  <registry name="miyagi" >
+    <registry name="miyagi.jp" >
+    </registry>
+    <domain name="pref" />
+  </registry>
+  <registry name="miyazaki" >
+    <registry name="miyazaki.jp" >
+    </registry>
+    <domain name="pref" />
+  </registry>
+  <registry name="nagano" >
+    <registry name="nagano.jp" >
+    </registry>
+    <domain name="pref" />
+  </registry>
+  <registry name="nagasaki" >
+    <registry name="nagasaki.jp" >
+    </registry>
+    <domain name="pref" />
+  </registry>
+  <registry name="nagoya" >
+    <registry name="nagoya.jp" >
+    </registry>
+    <domain name="city" />
+  </registry>
+  <registry name="nara" >
+    <registry name="nara.jp" >
+    </registry>
+    <domain name="pref" />
+  </registry>
+  <registry name="ne" />
+  <registry name="niigata" >
+    <registry name="niigata.jp" >
+    </registry>
+    <domain name="city" />
+    <domain name="pref" />
+  </registry>
+  <registry name="oita" >
+    <registry name="oita.jp" >
+    </registry>
+    <domain name="pref" />
+  </registry>
+  <registry name="okayama" >
+    <registry name="okayama.jp" >
+    </registry>
+    <domain name="city" />
+    <domain name="pref" />
+  </registry>
+  <registry name="okinawa" >
+    <registry name="okinawa.jp" >
+    </registry>
+    <domain name="pref" />
+  </registry>
+  <registry name="or" />
+  <registry name="osaka" >
+    <registry name="osaka.jp" >
+    </registry>
+    <domain name="city" />
+    <domain name="pref" />
+  </registry>
+  <registry name="saga" >
+    <registry name="saga.jp" >
+    </registry>
+    <domain name="pref" />
+  </registry>
+  <registry name="saitama" >
+    <registry name="saitama.jp" >
+    </registry>
+    <domain name="city" />
+    <domain name="pref" />
+  </registry>
+  <registry name="sapporo" >
+    <registry name="sapporo.jp" >
+    </registry>
+    <domain name="city" />
+  </registry>
+  <registry name="sendai" >
+    <registry name="sendai.jp" >
+    </registry>
+    <domain name="city" />
+  </registry>
+  <registry name="shiga" >
+    <registry name="shiga.jp" >
+    </registry>
+    <domain name="pref" />
+  </registry>
+  <registry name="shimane" >
+    <registry name="shimane.jp" >
+    </registry>
+    <domain name="pref" />
+  </registry>
+  <registry name="shizuoka" >
+    <registry name="shizuoka.jp" >
+    </registry>
+    <domain name="city" />
+    <domain name="pref" />
+  </registry>
+  <registry name="tochigi" >
+    <registry name="tochigi.jp" >
+    </registry>
+    <domain name="pref" />
+  </registry>
+  <registry name="tokushima" >
+    <registry name="tokushima.jp" >
+    </registry>
+    <domain name="pref" />
+  </registry>
+  <registry name="tokyo" >
+    <registry name="tokyo.jp" >
+    </registry>
+    <domain name="metro" />
+  </registry>
+  <registry name="tottori" >
+    <registry name="tottori.jp" >
+    </registry>
+    <domain name="pref" />
+  </registry>
+  <registry name="toyama" >
+    <registry name="toyama.jp" >
+    </registry>
+    <domain name="pref" />
+  </registry>
+  <registry name="wakayama" >
+    <registry name="wakayama.jp" >
+    </registry>
+    <domain name="pref" />
+  </registry>
+  <registry name="yamagata" >
+    <registry name="yamagata.jp" >
+    </registry>
+    <domain name="pref" />
+  </registry>
+  <registry name="yamaguchi" >
+    <registry name="yamaguchi.jp" >
+    </registry>
+    <domain name="pref" />
+  </registry>
+  <registry name="yamanashi" >
+    <registry name="yamanashi.jp" >
+    </registry>
+    <domain name="pref" />
+  </registry>
+  <registry name="yokohama" >
+    <registry name="yokohama.jp" >
+    </registry>
+    <domain name="city" />
+  </registry>
+</tld>
+<tld name="ke" levels="1" />
+<tld name="kg" >
+  <registry name="com" />
+  <registry name="edu" />
+  <registry name="gov" />
+  <registry name="mil" />
+  <registry name="net" />
+  <registry name="org" />
+</tld>
+<tld name="kh" levels="1" />
+<tld name="ki" >
+  <registry name="biz" />
+  <registry name="com" />
+  <registry name="edu" />
+  <registry name="gov" />
+  <registry name="info" />
+  <registry name="net" />
+  <registry name="org" />
+</tld>
+<tld name="km" >
+  <registry name="ass" />
+  <registry name="asso" />
+  <registry name="com" />
+  <registry name="coop" />
+  <registry name="edu" />
+  <registry name="gouv" />
+  <registry name="gov" />
+  <registry name="medecin" />
+  <registry name="mil" />
+  <registry name="nom" />
+  <registry name="notaires" />
+  <registry name="org" />
+  <registry name="pharmaciens" />
+  <registry name="prd" />
+  <registry name="presse" />
+  <registry name="tm" />
+  <registry name="veterinaire" />
+</tld>
+<tld name="kn" >
+  <registry name="edu" />
+  <registry name="gov" />
+  <registry name="net" />
+  <registry name="org" />
+</tld>
+<tld name="kp" >
+  <registry name="com" />
+  <registry name="edu" />
+  <registry name="gov" />
+  <registry name="org" />
+  <registry name="rep" />
+  <registry name="tra" />
+</tld>
+<tld name="kr" >
+  <registry name="ac" />
+  <registry name="busan" />
+  <registry name="chungbuk" />
+  <registry name="chungnam" />
+  <registry name="co" />
+  <registry name="daegu" />
+  <registry name="daejeon" />
+  <registry name="es" />
+  <registry name="gangwon" />
+  <registry name="go" />
+  <registry name="gwangju" />
+  <registry name="gyeongbuk" />
+  <registry name="gyeonggi" />
+  <registry name="gyeongnam" />
+  <registry name="hs" />
+  <registry name="incheon" />
+  <registry name="jeju" />
+  <registry name="jeonbuk" />
+  <registry name="jeonnam" />
+  <registry name="kg" />
+  <registry name="mil" />
+  <registry name="ms" />
+  <registry name="ne" />
+  <registry name="or" />
+  <registry name="pe" />
+  <registry name="re" />
+  <registry name="sc" />
+  <registry name="seoul" />
+  <registry name="ulsan" />
+</tld>
+<tld name="kw" levels="1" />
+<tld name="ky" >
+  <registry name="com" />
+  <registry name="edu" />
+  <registry name="gov" />
+  <registry name="net" />
+  <registry name="org" />
+</tld>
+<tld name="kz" >
+  <registry name="com" />
+  <registry name="edu" />
+  <registry name="gov" />
+  <registry name="mil" />
+  <registry name="net" />
+  <registry name="org" />
+</tld>
+<tld name="la" >
+  <registry name="c" />
+  <registry name="com" />
+  <registry name="edu" />
+  <registry name="gov" />
+  <registry name="info" />
+  <registry name="int" />
+  <registry name="net" />
+  <registry name="org" />
+  <registry name="per" />
+</tld>
+<tld name="lb" >
+  <registry name="com" />
+  <registry name="edu" />
+  <registry name="gov" />
+  <registry name="net" />
+  <registry name="org" />
+</tld>
+<tld name="lc" >
+  <registry name="co" />
+  <registry name="com" />
+  <registry name="edu" />
+  <registry name="gov" />
+  <registry name="net" />
+  <registry name="org" />
+</tld>
+<tld name="li" />
+<tld name="lk" >
+  <registry name="assn" />
+  <registry name="com" />
+  <registry name="edu" />
+  <registry name="gov" />
+  <registry name="grp" />
+  <registry name="hotel" />
+  <registry name="int" />
+  <registry name="ltd" />
+  <registry name="net" />
+  <registry name="ngo" />
+  <registry name="org" />
+  <registry name="sch" />
+  <registry name="soc" />
+  <registry name="web" />
+</tld>
+<tld name="local" />
+<tld name="lr" >
+  <registry name="com" />
+  <registry name="edu" />
+  <registry name="gov" />
+  <registry name="net" />
+  <registry name="org" />
+</tld>
+<tld name="ls" >
+  <registry name="co" />
+  <registry name="org" />
+</tld>
+<tld name="lt" >
+  <registry name="gov" />
+</tld>
+<tld name="lu" />
+<tld name="lv" >
+  <registry name="asn" />
+  <registry name="com" />
+  <registry name="conf" />
+  <registry name="edu" />
+  <registry name="gov" />
+  <registry name="id" />
+  <registry name="mil" />
+  <registry name="net" />
+  <registry name="org" />
+</tld>
+<tld name="ly" >
+  <registry name="com" />
+  <registry name="edu" />
+  <registry name="gov" />
+  <registry name="id" />
+  <registry name="med" />
+  <registry name="net" />
+  <registry name="org" />
+  <registry name="plc" />
+  <registry name="sch" />
+</tld>
+<tld name="ma" >
+  <registry name="ac" />
+  <registry name="co" />
+  <registry name="gov" />
+  <registry name="net" />
+  <registry name="org" />
+  <registry name="press" />
+</tld>
+<tld name="mc" >
+  <registry name="asso" />
+  <registry name="tm" />
+</tld>
+<tld name="md" />
+<tld name="me" >
+  <registry name="ac" />
+  <registry name="co" />
+  <registry name="edu" />
+  <registry name="gov" />
+  <registry name="its" />
+  <registry name="net" />
+  <registry name="org" />
+  <registry name="priv" />
+</tld>
+<tld name="mg" >
+  <registry name="com" />
+  <registry name="edu" />
+  <registry name="gov" />
+  <registry name="mil" />
+  <registry name="nom" />
+  <registry name="org" />
+  <registry name="prd" />
+  <registry name="tm" />
+</tld>
+<tld name="mh" />
+<tld name="mil" />
+<tld name="mk" >
+  <registry name="com" />
+  <registry name="edu" />
+  <registry name="gov" />
+  <registry name="inf" />
+  <registry name="name" />
+  <registry name="net" />
+  <registry name="org" />
+</tld>
+<tld name="ml" >
+  <registry name="com" />
+  <registry name="edu" />
+  <registry name="gouv" />
+  <registry name="gov" />
+  <registry name="net" />
+  <registry name="org" />
+  <registry name="presse" />
+</tld>
+<tld name="mm" levels="1" />
+<tld name="mn" >
+  <registry name="edu" />
+  <registry name="gov" />
+  <registry name="org" />
+</tld>
+<tld name="mo" >
+  <registry name="com" />
+  <registry name="edu" />
+  <registry name="gov" />
+  <registry name="net" />
+  <registry name="org" />
+</tld>
+<tld name="mobi" />
+<tld name="mp" />
+<tld name="mq" />
+<tld name="mr" >
+  <registry name="gov" />
+</tld>
+<tld name="ms" />
+<tld name="mt" levels="1" />
+<tld name="mu" >
+  <registry name="ac" />
+  <registry name="co" />
+  <registry name="com" />
+  <registry name="gov" />
+  <registry name="net" />
+  <registry name="or" />
+  <registry name="org" />
+</tld>
+<tld name="museum" >
+  <registry name="academy" />
+  <registry name="agriculture" />
+  <registry name="air" />
+  <registry name="airguard" />
+  <registry name="alabama" />
+  <registry name="alaska" />
+  <registry name="amber" />
+  <registry name="ambulance" />
+  <registry name="american" />
+  <registry name="americana" />
+  <registry name="americanantiques" />
+  <registry name="americanart" />
+  <registry name="amsterdam" />
+  <registry name="and" />
+  <registry name="annefrank" />
+  <registry name="anthro" />
+  <registry name="anthropology" />
+  <registry name="antiques" />
+  <registry name="aquarium" />
+  <registry name="arboretum" />
+  <registry name="archaeological" />
+  <registry name="archaeology" />
+  <registry name="architecture" />
+  <registry name="art" />
+  <registry name="artanddesign" />
+  <registry name="artcenter" />
+  <registry name="artdeco" />
+  <registry name="arteducation" />
+  <registry name="artgallery" />
+  <registry name="arts" />
+  <registry name="artsandcrafts" />
+  <registry name="asmatart" />
+  <registry name="assassination" />
+  <registry name="assisi" />
+  <registry name="association" />
+  <registry name="astronomy" />
+  <registry name="atlanta" />
+  <registry name="austin" />
+  <registry name="australia" />
+  <registry name="automotive" />
+  <registry name="aviation" />
+  <registry name="axis" />
+  <registry name="badajoz" />
+  <registry name="baghdad" />
+  <registry name="bahn" />
+  <registry name="bale" />
+  <registry name="baltimore" />
+  <registry name="barcelona" />
+  <registry name="baseball" />
+  <registry name="basel" />
+  <registry name="baths" />
+  <registry name="bauern" />
+  <registry name="beauxarts" />
+  <registry name="beeldengeluid" />
+  <registry name="bellevue" />
+  <registry name="bergbau" />
+  <registry name="berkeley" />
+  <registry name="berlin" />
+  <registry name="bern" />
+  <registry name="bible" />
+  <registry name="bilbao" />
+  <registry name="bill" />
+  <registry name="birdart" />
+  <registry name="birthplace" />
+  <registry name="bonn" />
+  <registry name="boston" />
+  <registry name="botanical" />
+  <registry name="botanicalgarden" />
+  <registry name="botanicgarden" />
+  <registry name="botany" />
+  <registry name="brandywinevalley" />
+  <registry name="brasil" />
+  <registry name="bristol" />
+  <registry name="british" />
+  <registry name="britishcolumbia" />
+  <registry name="broadcast" />
+  <registry name="brunel" />
+  <registry name="brussel" />
+  <registry name="brussels" />
+  <registry name="bruxelles" />
+  <registry name="building" />
+  <registry name="burghof" />
+  <registry name="bus" />
+  <registry name="bushey" />
+  <registry name="cadaques" />
+  <registry name="california" />
+  <registry name="cambridge" />
+  <registry name="can" />
+  <registry name="canada" />
+  <registry name="capebreton" />
+  <registry name="carrier" />
+  <registry name="cartoonart" />
+  <registry name="casadelamoneda" />
+  <registry name="castle" />
+  <registry name="castres" />
+  <registry name="celtic" />
+  <registry name="center" />
+  <registry name="chattanooga" />
+  <registry name="cheltenham" />
+  <registry name="chesapeakebay" />
+  <registry name="chicago" />
+  <registry name="children" />
+  <registry name="childrens" />
+  <registry name="childrensgarden" />
+  <registry name="chiropractic" />
+  <registry name="chocolate" />
+  <registry name="christiansburg" />
+  <registry name="cincinnati" />
+  <registry name="cinema" />
+  <registry name="circus" />
+  <registry name="civilisation" />
+  <registry name="civilization" />
+  <registry name="civilwar" />
+  <registry name="clinton" />
+  <registry name="clock" />
+  <registry name="coal" />
+  <registry name="coastaldefence" />
+  <registry name="cody" />
+  <registry name="coldwar" />
+  <registry name="collection" />
+  <registry name="colonialwilliamsburg" />
+  <registry name="coloradoplateau" />
+  <registry name="columbia" />
+  <registry name="columbus" />
+  <registry name="communication" />
+  <registry name="communications" />
+  <registry name="community" />
+  <registry name="computer" />
+  <registry name="computerhistory" />
+  <registry name="contemporary" />
+  <registry name="contemporaryart" />
+  <registry name="convent" />
+  <registry name="copenhagen" />
+  <registry name="corporation" />
+  <registry name="corvette" />
+  <registry name="costume" />
+  <registry name="countryestate" />
+  <registry name="county" />
+  <registry name="crafts" />
+  <registry name="cranbrook" />
+  <registry name="creation" />
+  <registry name="cultural" />
+  <registry name="culturalcenter" />
+  <registry name="culture" />
+  <registry name="cyber" />
+  <registry name="cymru" />
+  <registry name="dali" />
+  <registry name="dallas" />
+  <registry name="database" />
+  <registry name="ddr" />
+  <registry name="decorativearts" />
+  <registry name="delaware" />
+  <registry name="delmenhorst" />
+  <registry name="denmark" />
+  <registry name="depot" />
+  <registry name="design" />
+  <registry name="detroit" />
+  <registry name="dinosaur" />
+  <registry name="discovery" />
+  <registry name="dolls" />
+  <registry name="donostia" />
+  <registry name="durham" />
+  <registry name="eastafrica" />
+  <registry name="eastcoast" />
+  <registry name="education" />
+  <registry name="educational" />
+  <registry name="egyptian" />
+  <registry name="eisenbahn" />
+  <registry name="elburg" />
+  <registry name="elvendrell" />
+  <registry name="embroidery" />
+  <registry name="encyclopedic" />
+  <registry name="england" />
+  <registry name="entomology" />
+  <registry name="environment" />
+  <registry name="environmentalconservation" />
+  <registry name="epilepsy" />
+  <registry name="essex" />
+  <registry name="estate" />
+  <registry name="ethnology" />
+  <registry name="exeter" />
+  <registry name="exhibition" />
+  <registry name="family" />
+  <registry name="farm" />
+  <registry name="farmequipment" />
+  <registry name="farmers" />
+  <registry name="farmstead" />
+  <registry name="field" />
+  <registry name="figueres" />
+  <registry name="filatelia" />
+  <registry name="film" />
+  <registry name="fineart" />
+  <registry name="finearts" />
+  <registry name="finland" />
+  <registry name="flanders" />
+  <registry name="florida" />
+  <registry name="force" />
+  <registry name="fortmissoula" />
+  <registry name="fortworth" />
+  <registry name="foundation" />
+  <registry name="francaise" />
+  <registry name="frankfurt" />
+  <registry name="franziskaner" />
+  <registry name="freemasonry" />
+  <registry name="freiburg" />
+  <registry name="fribourg" />
+  <registry name="frog" />
+  <registry name="fundacio" />
+  <registry name="furniture" />
+  <registry name="gallery" />
+  <registry name="garden" />
+  <registry name="gateway" />
+  <registry name="geelvinck" />
+  <registry name="gemological" />
+  <registry name="geology" />
+  <registry name="georgia" />
+  <registry name="giessen" />
+  <registry name="glas" />
+  <registry name="glass" />
+  <registry name="gorge" />
+  <registry name="grandrapids" />
+  <registry name="graz" />
+  <registry name="guernsey" />
+  <registry name="halloffame" />
+  <registry name="hamburg" />
+  <registry name="handson" />
+  <registry name="harvestcelebration" />
+  <registry name="hawaii" />
+  <registry name="health" />
+  <registry name="heimatunduhren" />
+  <registry name="hellas" />
+  <registry name="helsinki" />
+  <registry name="hembygdsforbund" />
+  <registry name="heritage" />
+  <registry name="histoire" />
+  <registry name="historical" />
+  <registry name="historicalsociety" />
+  <registry name="historichouses" />
+  <registry name="historisch" />
+  <registry name="historisches" />
+  <registry name="history" />
+  <registry name="historyofscience" />
+  <registry name="horology" />
+  <registry name="house" />
+  <registry name="humanities" />
+  <registry name="illustration" />
+  <registry name="imageandsound" />
+  <registry name="indian" />
+  <registry name="indiana" />
+  <registry name="indianapolis" />
+  <registry name="indianmarket" />
+  <registry name="intelligence" />
+  <registry name="interactive" />
+  <registry name="iraq" />
+  <registry name="iron" />
+  <registry name="isleofman" />
+  <registry name="jamison" />
+  <registry name="jefferson" />
+  <registry name="jerusalem" />
+  <registry name="jewelry" />
+  <registry name="jewish" />
+  <registry name="jewishart" />
+  <registry name="jfk" />
+  <registry name="journalism" />
+  <registry name="judaica" />
+  <registry name="judygarland" />
+  <registry name="juedisches" />
+  <registry name="juif" />
+  <registry name="karate" />
+  <registry name="karikatur" />
+  <registry name="kids" />
+  <registry name="koebenhavn" />
+  <registry name="koeln" />
+  <registry name="kunst" />
+  <registry name="kunstsammlung" />
+  <registry name="kunstunddesign" />
+  <registry name="labor" />
+  <registry name="labour" />
+  <registry name="lajolla" />
+  <registry name="lancashire" />
+  <registry name="landes" />
+  <registry name="lans" />
+  <registry name="larsson" />
+  <registry name="lewismiller" />
+  <registry name="lincoln" />
+  <registry name="linz" />
+  <registry name="living" />
+  <registry name="livinghistory" />
+  <registry name="localhistory" />
+  <registry name="london" />
+  <registry name="losangeles" />
+  <registry name="louvre" />
+  <registry name="loyalist" />
+  <registry name="lucerne" />
+  <registry name="luxembourg" />
+  <registry name="luzern" />
+  <registry name="mad" />
+  <registry name="madrid" />
+  <registry name="mallorca" />
+  <registry name="manchester" />
+  <registry name="mansion" />
+  <registry name="mansions" />
+  <registry name="manx" />
+  <registry name="marburg" />
+  <registry name="maritime" />
+  <registry name="maritimo" />
+  <registry name="maryland" />
+  <registry name="marylhurst" />
+  <registry name="media" />
+  <registry name="medical" />
+  <registry name="medizinhistorisches" />
+  <registry name="meeres" />
+  <registry name="memorial" />
+  <registry name="mesaverde" />
+  <registry name="michigan" />
+  <registry name="midatlantic" />
+  <registry name="military" />
+  <registry name="mill" />
+  <registry name="miners" />
+  <registry name="mining" />
+  <registry name="minnesota" />
+  <registry name="missile" />
+  <registry name="missoula" />
+  <registry name="modern" />
+  <registry name="moma" />
+  <registry name="money" />
+  <registry name="monmouth" />
+  <registry name="monticello" />
+  <registry name="montreal" />
+  <registry name="moscow" />
+  <registry name="motorcycle" />
+  <registry name="muenchen" />
+  <registry name="muenster" />
+  <registry name="mulhouse" />
+  <registry name="muncie" />
+  <registry name="museet" />
+  <registry name="museumcenter" />
+  <registry name="museumvereniging" />
+  <registry name="music" />
+  <registry name="national" />
+  <registry name="nationalfirearms" />
+  <registry name="nationalheritage" />
+  <registry name="nativeamerican" />
+  <registry name="naturalhistory" />
+  <registry name="naturalhistorymuseum" />
+  <registry name="naturalsciences" />
+  <registry name="nature" />
+  <registry name="naturhistorisches" />
+  <registry name="natuurwetenschappen" />
+  <registry name="naumburg" />
+  <registry name="naval" />
+  <registry name="nebraska" />
+  <registry name="neues" />
+  <registry name="newhampshire" />
+  <registry name="newjersey" />
+  <registry name="newmexico" />
+  <registry name="newport" />
+  <registry name="newspaper" />
+  <registry name="newyork" />
+  <registry name="niepce" />
+  <registry name="norfolk" />
+  <registry name="north" />
+  <registry name="nrw" />
+  <registry name="nuernberg" />
+  <registry name="nuremberg" />
+  <registry name="nyc" />
+  <registry name="nyny" />
+  <registry name="oceanographic" />
+  <registry name="oceanographique" />
+  <registry name="omaha" />
+  <registry name="online" />
+  <registry name="ontario" />
+  <registry name="openair" />
+  <registry name="oregon" />
+  <registry name="oregontrail" />
+  <registry name="otago" />
+  <registry name="oxford" />
+  <registry name="pacific" />
+  <registry name="paderborn" />
+  <registry name="palace" />
+  <registry name="paleo" />
+  <registry name="palmsprings" />
+  <registry name="panama" />
+  <registry name="paris" />
+  <registry name="pasadena" />
+  <registry name="pharmacy" />
+  <registry name="philadelphia" />
+  <registry name="philadelphiaarea" />
+  <registry name="philately" />
+  <registry name="phoenix" />
+  <registry name="photography" />
+  <registry name="pilots" />
+  <registry name="pittsburgh" />
+  <registry name="planetarium" />
+  <registry name="plantation" />
+  <registry name="plants" />
+  <registry name="plaza" />
+  <registry name="portal" />
+  <registry name="portland" />
+  <registry name="portlligat" />
+  <registry name="posts-and-telecommunications" />
+  <registry name="preservation" />
+  <registry name="presidio" />
+  <registry name="press" />
+  <registry name="project" />
+  <registry name="public" />
+  <registry name="pubol" />
+  <registry name="quebec" />
+  <registry name="railroad" />
+  <registry name="railway" />
+  <registry name="research" />
+  <registry name="resistance" />
+  <registry name="riodejaneiro" />
+  <registry name="rochester" />
+  <registry name="rockart" />
+  <registry name="roma" />
+  <registry name="russia" />
+  <registry name="saintlouis" />
+  <registry name="salem" />
+  <registry name="salvadordali" />
+  <registry name="salzburg" />
+  <registry name="sandiego" />
+  <registry name="sanfrancisco" />
+  <registry name="santabarbara" />
+  <registry name="santacruz" />
+  <registry name="santafe" />
+  <registry name="saskatchewan" />
+  <registry name="satx" />
+  <registry name="savannahga" />
+  <registry name="schlesisches" />
+  <registry name="schoenbrunn" />
+  <registry name="schokoladen" />
+  <registry name="school" />
+  <registry name="schweiz" />
+  <registry name="science" />
+  <registry name="science-fiction" />
+  <registry name="scienceandhistory" />
+  <registry name="scienceandindustry" />
+  <registry name="sciencecenter" />
+  <registry name="sciencecenters" />
+  <registry name="sciencehistory" />
+  <registry name="sciences" />
+  <registry name="sciencesnaturelles" />
+  <registry name="scotland" />
+  <registry name="seaport" />
+  <registry name="settlement" />
+  <registry name="settlers" />
+  <registry name="shell" />
+  <registry name="sherbrooke" />
+  <registry name="sibenik" />
+  <registry name="silk" />
+  <registry name="ski" />
+  <registry name="skole" />
+  <registry name="society" />
+  <registry name="sologne" />
+  <registry name="soundandvision" />
+  <registry name="southcarolina" />
+  <registry name="southwest" />
+  <registry name="space" />
+  <registry name="spy" />
+  <registry name="square" />
+  <registry name="stadt" />
+  <registry name="stalbans" />
+  <registry name="starnberg" />
+  <registry name="state" />
+  <registry name="stateofdelaware" />
+  <registry name="station" />
+  <registry name="steam" />
+  <registry name="steiermark" />
+  <registry name="stjohn" />
+  <registry name="stockholm" />
+  <registry name="stpetersburg" />
+  <registry name="stuttgart" />
+  <registry name="suisse" />
+  <registry name="surgeonshall" />
+  <registry name="surrey" />
+  <registry name="svizzera" />
+  <registry name="sweden" />
+  <registry name="sydney" />
+  <registry name="tank" />
+  <registry name="tcm" />
+  <registry name="technology" />
+  <registry name="telekommunikation" />
+  <registry name="television" />
+  <registry name="texas" />
+  <registry name="textile" />
+  <registry name="theater" />
+  <registry name="time" />
+  <registry name="timekeeping" />
+  <registry name="topology" />
+  <registry name="torino" />
+  <registry name="touch" />
+  <registry name="town" />
+  <registry name="transport" />
+  <registry name="tree" />
+  <registry name="trolley" />
+  <registry name="trust" />
+  <registry name="trustee" />
+  <registry name="uhren" />
+  <registry name="ulm" />
+  <registry name="undersea" />
+  <registry name="university" />
+  <registry name="usa" />
+  <registry name="usantiques" />
+  <registry name="usarts" />
+  <registry name="uscountryestate" />
+  <registry name="usculture" />
+  <registry name="usdecorativearts" />
+  <registry name="usgarden" />
+  <registry name="ushistory" />
+  <registry name="ushuaia" />
+  <registry name="uslivinghistory" />
+  <registry name="utah" />
+  <registry name="uvic" />
+  <registry name="valley" />
+  <registry name="vantaa" />
+  <registry name="versailles" />
+  <registry name="viking" />
+  <registry name="village" />
+  <registry name="virginia" />
+  <registry name="virtual" />
+  <registry name="virtuel" />
+  <registry name="vlaanderen" />
+  <registry name="volkenkunde" />
+  <registry name="wales" />
+  <registry name="wallonie" />
+  <registry name="war" />
+  <registry name="washingtondc" />
+  <registry name="watch-and-clock" />
+  <registry name="watchandclock" />
+  <registry name="western" />
+  <registry name="westfalen" />
+  <registry name="whaling" />
+  <registry name="wildlife" />
+  <registry name="williamsburg" />
+  <registry name="windmill" />
+  <registry name="workshop" />
+  <registry name="xn--9dbhblg6di" />
+  <registry name="xn--comunicaes-v6a2o" />
+  <registry name="xn--correios-e-telecomunicaes-ghc29a" />
+  <registry name="xn--h1aegh" />
+  <registry name="xn--lns-qla" />
+  <registry name="york" />
+  <registry name="yorkshire" />
+  <registry name="yosemite" />
+  <registry name="youth" />
+  <registry name="zoological" />
+  <registry name="zoology" />
+</tld>
+<tld name="mv" >
+  <registry name="aero" />
+  <registry name="biz" />
+  <registry name="com" />
+  <registry name="coop" />
+  <registry name="edu" />
+  <registry name="gov" />
+  <registry name="info" />
+  <registry name="int" />
+  <registry name="mil" />
+  <registry name="museum" />
+  <registry name="name" />
+  <registry name="net" />
+  <registry name="org" />
+  <registry name="pro" />
+</tld>
+<tld name="mw" >
+  <registry name="ac" />
+  <registry name="biz" />
+  <registry name="co" />
+  <registry name="com" />
+  <registry name="coop" />
+  <registry name="edu" />
+  <registry name="gov" />
+  <registry name="int" />
+  <registry name="museum" />
+  <registry name="net" />
+  <registry name="org" />
+</tld>
+<tld name="mx" >
+  <registry name="com" />
+  <registry name="edu" />
+  <registry name="gob" />
+  <registry name="net" />
+  <registry name="org" />
+</tld>
+<tld name="my" >
+  <registry name="com" />
+  <registry name="edu" />
+  <registry name="gov" />
+  <registry name="mil" />
+  <registry name="name" />
+  <registry name="net" />
+  <registry name="org" />
+</tld>
+<tld name="mz" levels="1" />
+<tld name="na" >
+  <registry name="ca" />
+  <registry name="cc" />
+  <registry name="co" />
+  <registry name="com" />
+  <registry name="dr" />
+  <registry name="in" />
+  <registry name="info" />
+  <registry name="mobi" />
+  <registry name="mx" />
+  <registry name="name" />
+  <registry name="or" />
+  <registry name="org" />
+  <registry name="pro" />
+  <registry name="school" />
+  <registry name="tv" />
+  <registry name="us" />
+  <registry name="ws" />
+</tld>
+<tld name="name" levels="all" />
+<tld name="nc" >
+  <registry name="asso" />
+</tld>
+<tld name="ne" />
+<tld name="net" >
+  <registry name="at-band-camp" />
+  <registry name="blogdns" />
+  <registry name="broke-it" />
+  <registry name="buyshouses" />
+  <registry name="dnsalias" />
+  <registry name="dnsdojo" />
+  <registry name="does-it" />
+  <registry name="dontexist" />
+  <registry name="dynalias" />
+  <registry name="dynathome" />
+  <registry name="endofinternet" />
+  <registry name="from-az" />
+  <registry name="from-co" />
+  <registry name="from-la" />
+  <registry name="from-ny" />
+  <registry name="gb" />
+  <registry name="gets-it" />
+  <registry name="ham-radio-op" />
+  <registry name="homeftp" />
+  <registry name="homeip" />
+  <registry name="homelinux" />
+  <registry name="homeunix" />
+  <registry name="in-the-band" />
+  <registry name="is-a-chef" />
+  <registry name="is-a-geek" />
+  <registry name="isa-geek" />
+  <registry name="kicks-ass" />
+  <registry name="office-on-the" />
+  <registry name="podzone" />
+  <registry name="scrapper-site" />
+  <registry name="se" />
+  <registry name="selfip" />
+  <registry name="sells-it" />
+  <registry name="servebbs" />
+  <registry name="serveftp" />
+  <registry name="thruhere" />
+  <registry name="uk" />
+  <registry name="webhop" />
+  <registry name="za" />
+</tld>
+<tld name="nf" >
+  <registry name="arts" />
+  <registry name="com" />
+  <registry name="firm" />
+  <registry name="info" />
+  <registry name="net" />
+  <registry name="other" />
+  <registry name="per" />
+  <registry name="rec" />
+  <registry name="store" />
+  <registry name="web" />
+</tld>
+<tld name="ng" >
+  <registry name="ac" />
+  <registry name="com" />
+  <registry name="edu" />
+  <registry name="gov" />
+  <registry name="net" />
+  <registry name="org" />
+</tld>
+<tld name="ni" levels="1" />
+<tld name="nl" >
+  <registry name="bv" />
+  <registry name="co" />
+</tld>
+<tld name="no" >
+  <registry name="aa" >
+    <registry name="gs" />
+  </registry>
+  <registry name="aarborte" />
+  <registry name="aejrie" />
+  <registry name="afjord" />
+  <registry name="agdenes" />
+  <registry name="ah" >
+    <registry name="gs" />
+  </registry>
+  <registry name="akershus" >
+    <registry name="nes" />
+  </registry>
+  <registry name="aknoluokta" />
+  <registry name="akrehamn" />
+  <registry name="al" />
+  <registry name="alaheadju" />
+  <registry name="alesund" />
+  <registry name="algard" />
+  <registry name="alstahaug" />
+  <registry name="alta" />
+  <registry name="alvdal" />
+  <registry name="amli" />
+  <registry name="amot" />
+  <registry name="andasuolo" />
+  <registry name="andebu" />
+  <registry name="andoy" />
+  <registry name="ardal" />
+  <registry name="aremark" />
+  <registry name="arendal" />
+  <registry name="arna" />
+  <registry name="aseral" />
+  <registry name="asker" />
+  <registry name="askim" />
+  <registry name="askoy" />
+  <registry name="askvoll" />
+  <registry name="asnes" />
+  <registry name="audnedaln" />
+  <registry name="aukra" />
+  <registry name="aure" />
+  <registry name="aurland" />
+  <registry name="aurskog-holand" />
+  <registry name="austevoll" />
+  <registry name="austrheim" />
+  <registry name="averoy" />
+  <registry name="badaddja" />
+  <registry name="bahcavuotna" />
+  <registry name="bahccavuotna" />
+  <registry name="baidar" />
+  <registry name="bajddar" />
+  <registry name="balat" />
+  <registry name="balestrand" />
+  <registry name="ballangen" />
+  <registry name="balsfjord" />
+  <registry name="bamble" />
+  <registry name="bardu" />
+  <registry name="barum" />
+  <registry name="batsfjord" />
+  <registry name="bearalvahki" />
+  <registry name="beardu" />
+  <registry name="beiarn" />
+  <registry name="berg" />
+  <registry name="bergen" />
+  <registry name="berlevag" />
+  <registry name="bievat" />
+  <registry name="bindal" />
+  <registry name="birkenes" />
+  <registry name="bjarkoy" />
+  <registry name="bjerkreim" />
+  <registry name="bjugn" />
+  <registry name="bodo" />
+  <registry name="bokn" />
+  <registry name="bomlo" />
+  <registry name="bremanger" />
+  <registry name="bronnoy" />
+  <registry name="bronnoysund" />
+  <registry name="brumunddal" />
+  <registry name="bryne" />
+  <registry name="bu" >
+    <registry name="gs" />
+  </registry>
+  <registry name="budejju" />
+  <registry name="buskerud" >
+    <registry name="nes" />
+  </registry>
+  <registry name="bygland" />
+  <registry name="bykle" />
+  <registry name="cahcesuolo" />
+  <registry name="co" />
+  <registry name="davvenjarga" />
+  <registry name="davvesiida" />
+  <registry name="deatnu" />
+  <registry name="dep" />
+  <registry name="dielddanuorri" />
+  <registry name="divtasvuodna" />
+  <registry name="divttasvuotna" />
+  <registry name="donna" />
+  <registry name="dovre" />
+  <registry name="drammen" />
+  <registry name="drangedal" />
+  <registry name="drobak" />
+  <registry name="dyroy" />
+  <registry name="egersund" />
+  <registry name="eid" />
+  <registry name="eidfjord" />
+  <registry name="eidsberg" />
+  <registry name="eidskog" />
+  <registry name="eidsvoll" />
+  <registry name="eigersund" />
+  <registry name="elverum" />
+  <registry name="enebakk" />
+  <registry name="engerdal" />
+  <registry name="etne" />
+  <registry name="etnedal" />
+  <registry name="evenassi" />
+  <registry name="evenes" />
+  <registry name="evje-og-hornnes" />
+  <registry name="farsund" />
+  <registry name="fauske" />
+  <registry name="fedje" />
+  <registry name="fet" />
+  <registry name="fetsund" />
+  <registry name="fhs" />
+  <registry name="finnoy" />
+  <registry name="fitjar" />
+  <registry name="fjaler" />
+  <registry name="fjell" />
+  <registry name="fla" />
+  <registry name="flakstad" />
+  <registry name="flatanger" />
+  <registry name="flekkefjord" />
+  <registry name="flesberg" />
+  <registry name="flora" />
+  <registry name="floro" />
+  <registry name="fm" >
+    <registry name="gs" />
+  </registry>
+  <registry name="folkebibl" />
+  <registry name="folldal" />
+  <registry name="forde" />
+  <registry name="forsand" />
+  <registry name="fosnes" />
+  <registry name="frana" />
+  <registry name="fredrikstad" />
+  <registry name="frei" />
+  <registry name="frogn" />
+  <registry name="froland" />
+  <registry name="frosta" />
+  <registry name="froya" />
+  <registry name="fuoisku" />
+  <registry name="fuossko" />
+  <registry name="fusa" />
+  <registry name="fylkesbibl" />
+  <registry name="fyresdal" />
+  <registry name="gaivuotna" />
+  <registry name="galsa" />
+  <registry name="gamvik" />
+  <registry name="gangaviika" />
+  <registry name="gaular" />
+  <registry name="gausdal" />
+  <registry name="giehtavuoatna" />
+  <registry name="gildeskal" />
+  <registry name="giske" />
+  <registry name="gjemnes" />
+  <registry name="gjerdrum" />
+  <registry name="gjerstad" />
+  <registry name="gjesdal" />
+  <registry name="gjovik" />
+  <registry name="gloppen" />
+  <registry name="gol" />
+  <registry name="gran" />
+  <registry name="grane" />
+  <registry name="granvin" />
+  <registry name="gratangen" />
+  <registry name="grimstad" />
+  <registry name="grong" />
+  <registry name="grue" />
+  <registry name="gulen" />
+  <registry name="guovdageaidnu" />
+  <registry name="ha" />
+  <registry name="habmer" />
+  <registry name="hadsel" />
+  <registry name="hagebostad" />
+  <registry name="halden" />
+  <registry name="halsa" />
+  <registry name="hamar" />
+  <registry name="hamaroy" />
+  <registry name="hammarfeasta" />
+  <registry name="hammerfest" />
+  <registry name="hapmir" />
+  <registry name="haram" />
+  <registry name="hareid" />
+  <registry name="harstad" />
+  <registry name="hasvik" />
+  <registry name="hattfjelldal" />
+  <registry name="haugesund" />
+  <registry name="hedmark" >
+    <registry name="os" />
+    <registry name="valer" />
+    <registry name="xn--vler-qoa" />
+  </registry>
+  <registry name="hemne" />
+  <registry name="hemnes" />
+  <registry name="hemsedal" />
+  <registry name="herad" />
+  <registry name="hitra" />
+  <registry name="hjartdal" />
+  <registry name="hjelmeland" />
+  <registry name="hl" >
+    <registry name="gs" />
+  </registry>
+  <registry name="hm" >
+    <registry name="gs" />
+  </registry>
+  <registry name="hobol" />
+  <registry name="hof" />
+  <registry name="hokksund" />
+  <registry name="hol" />
+  <registry name="hole" />
+  <registry name="holmestrand" />
+  <registry name="holtalen" />
+  <registry name="honefoss" />
+  <registry name="hordaland" >
+    <registry name="os" />
+  </registry>
+  <registry name="hornindal" />
+  <registry name="horten" />
+  <registry name="hoyanger" />
+  <registry name="hoylandet" />
+  <registry name="hurdal" />
+  <registry name="hurum" />
+  <registry name="hvaler" />
+  <registry name="hyllestad" />
+  <registry name="ibestad" />
+  <registry name="idrett" />
+  <registry name="inderoy" />
+  <registry name="iveland" />
+  <registry name="ivgu" />
+  <registry name="jan-mayen" >
+    <registry name="gs" />
+  </registry>
+  <registry name="jessheim" />
+  <registry name="jevnaker" />
+  <registry name="jolster" />
+  <registry name="jondal" />
+  <registry name="jorpeland" />
+  <registry name="kafjord" />
+  <registry name="karasjohka" />
+  <registry name="karasjok" />
+  <registry name="karlsoy" />
+  <registry name="karmoy" />
+  <registry name="kautokeino" />
+  <registry name="kirkenes" />
+  <registry name="klabu" />
+  <registry name="klepp" />
+  <registry name="kommune" />
+  <registry name="kongsberg" />
+  <registry name="kongsvinger" />
+  <registry name="kopervik" />
+  <registry name="kraanghke" />
+  <registry name="kragero" />
+  <registry name="kristiansand" />
+  <registry name="kristiansund" />
+  <registry name="krodsherad" />
+  <registry name="krokstadelva" />
+  <registry name="kvafjord" />
+  <registry name="kvalsund" />
+  <registry name="kvam" />
+  <registry name="kvanangen" />
+  <registry name="kvinesdal" />
+  <registry name="kvinnherad" />
+  <registry name="kviteseid" />
+  <registry name="kvitsoy" />
+  <registry name="laakesvuemie" />
+  <registry name="lahppi" />
+  <registry name="langevag" />
+  <registry name="lardal" />
+  <registry name="larvik" />
+  <registry name="lavagis" />
+  <registry name="lavangen" />
+  <registry name="leangaviika" />
+  <registry name="lebesby" />
+  <registry name="leikanger" />
+  <registry name="leirfjord" />
+  <registry name="leirvik" />
+  <registry name="leka" />
+  <registry name="leksvik" />
+  <registry name="lenvik" />
+  <registry name="lerdal" />
+  <registry name="lesja" />
+  <registry name="levanger" />
+  <registry name="lier" />
+  <registry name="lierne" />
+  <registry name="lillehammer" />
+  <registry name="lillesand" />
+  <registry name="lindas" />
+  <registry name="lindesnes" />
+  <registry name="loabat" />
+  <registry name="lodingen" />
+  <registry name="lom" />
+  <registry name="loppa" />
+  <registry name="lorenskog" />
+  <registry name="loten" />
+  <registry name="lund" />
+  <registry name="lunner" />
+  <registry name="luroy" />
+  <registry name="luster" />
+  <registry name="lyngdal" />
+  <registry name="lyngen" />
+  <registry name="malatvuopmi" />
+  <registry name="malselv" />
+  <registry name="malvik" />
+  <registry name="mandal" />
+  <registry name="marker" />
+  <registry name="marnardal" />
+  <registry name="masfjorden" />
+  <registry name="masoy" />
+  <registry name="matta-varjjat" />
+  <registry name="meland" />
+  <registry name="meldal" />
+  <registry name="melhus" />
+  <registry name="meloy" />
+  <registry name="meraker" />
+  <registry name="midsund" />
+  <registry name="midtre-gauldal" />
+  <registry name="mil" />
+  <registry name="mjondalen" />
+  <registry name="mo-i-rana" />
+  <registry name="moareke" />
+  <registry name="modalen" />
+  <registry name="modum" />
+  <registry name="molde" />
+  <registry name="more-og-romsdal" >
+    <registry name="heroy" />
+    <registry name="sande" />
+  </registry>
+  <registry name="mosjoen" />
+  <registry name="moskenes" />
+  <registry name="moss" />
+  <registry name="mosvik" />
+  <registry name="mr" >
+    <registry name="gs" />
+  </registry>
+  <registry name="muosat" />
+  <registry name="museum" />
+  <registry name="naamesjevuemie" />
+  <registry name="namdalseid" />
+  <registry name="namsos" />
+  <registry name="namsskogan" />
+  <registry name="nannestad" />
+  <registry name="naroy" />
+  <registry name="narviika" />
+  <registry name="narvik" />
+  <registry name="naustdal" />
+  <registry name="navuotna" />
+  <registry name="nedre-eiker" />
+  <registry name="nesna" />
+  <registry name="nesodden" />
+  <registry name="nesoddtangen" />
+  <registry name="nesseby" />
+  <registry name="nesset" />
+  <registry name="nissedal" />
+  <registry name="nittedal" />
+  <registry name="nl" >
+    <registry name="gs" />
+  </registry>
+  <registry name="nord-aurdal" />
+  <registry name="nord-fron" />
+  <registry name="nord-odal" />
+  <registry name="norddal" />
+  <registry name="nordkapp" />
+  <registry name="nordland" >
+    <registry name="bo" />
+    <registry name="heroy" />
+    <registry name="xn--b-5ga" />
+    <registry name="xn--hery-ira" />
+  </registry>
+  <registry name="nordre-land" />
+  <registry name="nordreisa" />
+  <registry name="nore-og-uvdal" />
+  <registry name="notodden" />
+  <registry name="notteroy" />
+  <registry name="nt" >
+    <registry name="gs" />
+  </registry>
+  <registry name="odda" />
+  <registry name="of" >
+    <registry name="gs" />
+  </registry>
+  <registry name="oksnes" />
+  <registry name="ol" >
+    <registry name="gs" />
+  </registry>
+  <registry name="omasvuotna" />
+  <registry name="oppdal" />
+  <registry name="oppegard" />
+  <registry name="orkanger" />
+  <registry name="orkdal" />
+  <registry name="orland" />
+  <registry name="orskog" />
+  <registry name="orsta" />
+  <registry name="osen" />
+  <registry name="oslo" >
+    <registry name="gs" />
+  </registry>
+  <registry name="osoyro" />
+  <registry name="osteroy" />
+  <registry name="ostfold" >
+    <registry name="valer" />
+  </registry>
+  <registry name="ostre-toten" />
+  <registry name="overhalla" />
+  <registry name="ovre-eiker" />
+  <registry name="oyer" />
+  <registry name="oygarden" />
+  <registry name="oystre-slidre" />
+  <registry name="porsanger" />
+  <registry name="porsangu" />
+  <registry name="porsgrunn" />
+  <registry name="priv" />
+  <registry name="rade" />
+  <registry name="radoy" />
+  <registry name="rahkkeravju" />
+  <registry name="raholt" />
+  <registry name="raisa" />
+  <registry name="rakkestad" />
+  <registry name="ralingen" />
+  <registry name="rana" />
+  <registry name="randaberg" />
+  <registry name="rauma" />
+  <registry name="rendalen" />
+  <registry name="rennebu" />
+  <registry name="rennesoy" />
+  <registry name="rindal" />
+  <registry name="ringebu" />
+  <registry name="ringerike" />
+  <registry name="ringsaker" />
+  <registry name="risor" />
+  <registry name="rissa" />
+  <registry name="rl" >
+    <registry name="gs" />
+  </registry>
+  <registry name="roan" />
+  <registry name="rodoy" />
+  <registry name="rollag" />
+  <registry name="romsa" />
+  <registry name="romskog" />
+  <registry name="roros" />
+  <registry name="rost" />
+  <registry name="royken" />
+  <registry name="royrvik" />
+  <registry name="ruovat" />
+  <registry name="rygge" />
+  <registry name="salangen" />
+  <registry name="salat" />
+  <registry name="saltdal" />
+  <registry name="samnanger" />
+  <registry name="sandefjord" />
+  <registry name="sandnes" />
+  <registry name="sandnessjoen" />
+  <registry name="sandoy" />
+  <registry name="sarpsborg" />
+  <registry name="sauda" />
+  <registry name="sauherad" />
+  <registry name="sel" />
+  <registry name="selbu" />
+  <registry name="selje" />
+  <registry name="seljord" />
+  <registry name="sf" >
+    <registry name="gs" />
+  </registry>
+  <registry name="siellak" />
+  <registry name="sigdal" />
+  <registry name="siljan" />
+  <registry name="sirdal" />
+  <registry name="skanit" />
+  <registry name="skanland" />
+  <registry name="skaun" />
+  <registry name="skedsmo" />
+  <registry name="skedsmokorset" />
+  <registry name="ski" />
+  <registry name="skien" />
+  <registry name="skierva" />
+  <registry name="skiptvet" />
+  <registry name="skjak" />
+  <registry name="skjervoy" />
+  <registry name="skodje" />
+  <registry name="slattum" />
+  <registry name="smola" />
+  <registry name="snaase" />
+  <registry name="snasa" />
+  <registry name="snillfjord" />
+  <registry name="snoasa" />
+  <registry name="sogndal" />
+  <registry name="sogne" />
+  <registry name="sokndal" />
+  <registry name="sola" />
+  <registry name="solund" />
+  <registry name="somna" />
+  <registry name="sondre-land" />
+  <registry name="songdalen" />
+  <registry name="sor-aurdal" />
+  <registry name="sor-fron" />
+  <registry name="sor-odal" />
+  <registry name="sor-varanger" />
+  <registry name="sorfold" />
+  <registry name="sorreisa" />
+  <registry name="sortland" />
+  <registry name="sorum" />
+  <registry name="spjelkavik" />
+  <registry name="spydeberg" />
+  <registry name="st" >
+    <registry name="gs" />
+  </registry>
+  <registry name="stange" />
+  <registry name="stat" />
+  <registry name="stathelle" />
+  <registry name="stavanger" />
+  <registry name="stavern" />
+  <registry name="steigen" />
+  <registry name="steinkjer" />
+  <registry name="stjordal" />
+  <registry name="stjordalshalsen" />
+  <registry name="stokke" />
+  <registry name="stor-elvdal" />
+  <registry name="stord" />
+  <registry name="stordal" />
+  <registry name="storfjord" />
+  <registry name="strand" />
+  <registry name="stranda" />
+  <registry name="stryn" />
+  <registry name="sula" />
+  <registry name="suldal" />
+  <registry name="sund" />
+  <registry name="sunndal" />
+  <registry name="surnadal" />
+  <registry name="svalbard" >
+    <registry name="gs" />
+  </registry>
+  <registry name="sveio" />
+  <registry name="svelvik" />
+  <registry name="sykkylven" />
+  <registry name="tana" />
+  <registry name="tananger" />
+  <registry name="telemark" >
+    <registry name="bo" />
+    <registry name="xn--b-5ga" />
+  </registry>
+  <registry name="time" />
+  <registry name="tingvoll" />
+  <registry name="tinn" />
+  <registry name="tjeldsund" />
+  <registry name="tjome" />
+  <registry name="tm" >
+    <registry name="gs" />
+  </registry>
+  <registry name="tokke" />
+  <registry name="tolga" />
+  <registry name="tonsberg" />
+  <registry name="torsken" />
+  <registry name="tr" >
+    <registry name="gs" />
+  </registry>
+  <registry name="trana" />
+  <registry name="tranby" />
+  <registry name="tranoy" />
+  <registry name="troandin" />
+  <registry name="trogstad" />
+  <registry name="tromsa" />
+  <registry name="tromso" />
+  <registry name="trondheim" />
+  <registry name="trysil" />
+  <registry name="tvedestrand" />
+  <registry name="tydal" />
+  <registry name="tynset" />
+  <registry name="tysfjord" />
+  <registry name="tysnes" />
+  <registry name="tysvar" />
+  <registry name="ullensaker" />
+  <registry name="ullensvang" />
+  <registry name="ulvik" />
+  <registry name="unjarga" />
+  <registry name="utsira" />
+  <registry name="va" >
+    <registry name="gs" />
+  </registry>
+  <registry name="vaapste" />
+  <registry name="vadso" />
+  <registry name="vaga" />
+  <registry name="vagan" />
+  <registry name="vagsoy" />
+  <registry name="vaksdal" />
+  <registry name="valle" />
+  <registry name="vang" />
+  <registry name="vanylven" />
+  <registry name="vardo" />
+  <registry name="varggat" />
+  <registry name="varoy" />
+  <registry name="vefsn" />
+  <registry name="vega" />
+  <registry name="vegarshei" />
+  <registry name="vennesla" />
+  <registry name="verdal" />
+  <registry name="verran" />
+  <registry name="vestby" />
+  <registry name="vestfold" >
+    <registry name="sande" />
+  </registry>
+  <registry name="vestnes" />
+  <registry name="vestre-slidre" />
+  <registry name="vestre-toten" />
+  <registry name="vestvagoy" />
+  <registry name="vevelstad" />
+  <registry name="vf" >
+    <registry name="gs" />
+  </registry>
+  <registry name="vgs" />
+  <registry name="vik" />
+  <registry name="vikna" />
+  <registry name="vindafjord" />
+  <registry name="voagat" />
+  <registry name="volda" />
+  <registry name="voss" />
+  <registry name="vossevangen" />
+  <registry name="xn--andy-ira" />
+  <registry name="xn--asky-ira" />
+  <registry name="xn--aurskog-hland-jnb" />
+  <registry name="xn--avery-yua" />
+  <registry name="xn--bdddj-mrabd" />
+  <registry name="xn--bearalvhki-y4a" />
+  <registry name="xn--berlevg-jxa" />
+  <registry name="xn--bhcavuotna-s4a" />
+  <registry name="xn--bhccavuotna-k7a" />
+  <registry name="xn--bidr-5nac" />
+  <registry name="xn--bievt-0qa" />
+  <registry name="xn--bjarky-fya" />
+  <registry name="xn--bjddar-pta" />
+  <registry name="xn--blt-elab" />
+  <registry name="xn--bmlo-gra" />
+  <registry name="xn--bod-2na" />
+  <registry name="xn--brnny-wuac" />
+  <registry name="xn--brnnysund-m8ac" />
+  <registry name="xn--brum-voa" />
+  <registry name="xn--btsfjord-9za" />
+  <registry name="xn--davvenjrga-y4a" />
+  <registry name="xn--dnna-gra" />
+  <registry name="xn--drbak-wua" />
+  <registry name="xn--dyry-ira" />
+  <registry name="xn--eveni-0qa01ga" />
+  <registry name="xn--finny-yua" />
+  <registry name="xn--fjord-lra" />
+  <registry name="xn--fl-zia" />
+  <registry name="xn--flor-jra" />
+  <registry name="xn--frde-gra" />
+  <registry name="xn--frna-woa" />
+  <registry name="xn--frya-hra" />
+  <registry name="xn--ggaviika-8ya47h" />
+  <registry name="xn--gildeskl-g0a" />
+  <registry name="xn--givuotna-8ya" />
+  <registry name="xn--gjvik-wua" />
+  <registry name="xn--gls-elac" />
+  <registry name="xn--h-2fa" />
+  <registry name="xn--hbmer-xqa" />
+  <registry name="xn--hcesuolo-7ya35b" />
+  <registry name="xn--hgebostad-g3a" />
+  <registry name="xn--hmmrfeasta-s4ac" />
+  <registry name="xn--hnefoss-q1a" />
+  <registry name="xn--hobl-ira" />
+  <registry name="xn--holtlen-hxa" />
+  <registry name="xn--hpmir-xqa" />
+  <registry name="xn--hyanger-q1a" />
+  <registry name="xn--hylandet-54a" />
+  <registry name="xn--indery-fya" />
+  <registry name="xn--jlster-bya" />
+  <registry name="xn--jrpeland-54a" />
+  <registry name="xn--karmy-yua" />
+  <registry name="xn--kfjord-iua" />
+  <registry name="xn--klbu-woa" />
+  <registry name="xn--koluokta-7ya57h" />
+  <registry name="xn--krager-gya" />
+  <registry name="xn--kranghke-b0a" />
+  <registry name="xn--krdsherad-m8a" />
+  <registry name="xn--krehamn-dxa" />
+  <registry name="xn--krjohka-hwab49j" />
+  <registry name="xn--ksnes-uua" />
+  <registry name="xn--kvfjord-nxa" />
+  <registry name="xn--kvitsy-fya" />
+  <registry name="xn--kvnangen-k0a" />
+  <registry name="xn--l-1fa" />
+  <registry name="xn--laheadju-7ya" />
+  <registry name="xn--langevg-jxa" />
+  <registry name="xn--ldingen-q1a" />
+  <registry name="xn--leagaviika-52b" />
+  <registry name="xn--lesund-hua" />
+  <registry name="xn--lgrd-poac" />
+  <registry name="xn--lhppi-xqa" />
+  <registry name="xn--linds-pra" />
+  <registry name="xn--loabt-0qa" />
+  <registry name="xn--lrdal-sra" />
+  <registry name="xn--lrenskog-54a" />
+  <registry name="xn--lt-liac" />
+  <registry name="xn--lten-gra" />
+  <registry name="xn--lury-ira" />
+  <registry name="xn--mely-ira" />
+  <registry name="xn--merker-kua" />
+  <registry name="xn--mjndalen-64a" />
+  <registry name="xn--mlatvuopmi-s4a" />
+  <registry name="xn--mli-tla" />
+  <registry name="xn--mlselv-iua" />
+  <registry name="xn--moreke-jua" />
+  <registry name="xn--mosjen-eya" />
+  <registry name="xn--mot-tla" />
+  <registry name="xn--mre-og-romsdal-qqb" >
+    <registry name="sande" />
+    <registry name="xn--hery-ira" />
+  </registry>
+  <registry name="xn--msy-ula0h" />
+  <registry name="xn--mtta-vrjjat-k7af" />
+  <registry name="xn--muost-0qa" />
+  <registry name="xn--nmesjevuemie-tcba" />
+  <registry name="xn--nry-yla5g" />
+  <registry name="xn--nttery-byae" />
+  <registry name="xn--nvuotna-hwa" />
+  <registry name="xn--oppegrd-ixa" />
+  <registry name="xn--ostery-fya" />
+  <registry name="xn--osyro-wua" />
+  <registry name="xn--porsgu-sta26f" />
+  <registry name="xn--rady-ira" />
+  <registry name="xn--rdal-poa" />
+  <registry name="xn--rde-ula" />
+  <registry name="xn--rdy-0nab" />
+  <registry name="xn--rennesy-v1a" />
+  <registry name="xn--rhkkervju-01af" />
+  <registry name="xn--rholt-mra" />
+  <registry name="xn--risa-5na" />
+  <registry name="xn--risr-ira" />
+  <registry name="xn--rland-uua" />
+  <registry name="xn--rlingen-mxa" />
+  <registry name="xn--rmskog-bya" />
+  <registry name="xn--rros-gra" />
+  <registry name="xn--rskog-uua" />
+  <registry name="xn--rst-0na" />
+  <registry name="xn--rsta-fra" />
+  <registry name="xn--ryken-vua" />
+  <registry name="xn--ryrvik-bya" />
+  <registry name="xn--s-1fa" />
+  <registry name="xn--sandnessjen-ogb" />
+  <registry name="xn--sandy-yua" />
+  <registry name="xn--seral-lra" />
+  <registry name="xn--sgne-gra" />
+  <registry name="xn--skierv-uta" />
+  <registry name="xn--skjervy-v1a" />
+  <registry name="xn--skjk-soa" />
+  <registry name="xn--sknit-yqa" />
+  <registry name="xn--sknland-fxa" />
+  <registry name="xn--slat-5na" />
+  <registry name="xn--slt-elab" />
+  <registry name="xn--smla-hra" />
+  <registry name="xn--smna-gra" />
+  <registry name="xn--snase-nra" />
+  <registry name="xn--sndre-land-0cb" />
+  <registry name="xn--snes-poa" />
+  <registry name="xn--snsa-roa" />
+  <registry name="xn--sr-aurdal-l8a" />
+  <registry name="xn--sr-fron-q1a" />
+  <registry name="xn--sr-odal-q1a" />
+  <registry name="xn--sr-varanger-ggb" />
+  <registry name="xn--srfold-bya" />
+  <registry name="xn--srreisa-q1a" />
+  <registry name="xn--srum-gra" />
+  <registry name="xn--stfold-9xa" >
+    <registry name="xn--vler-qoa" />
+  </registry>
+  <registry name="xn--stjrdal-s1a" />
+  <registry name="xn--stjrdalshalsen-sqb" />
+  <registry name="xn--stre-toten-zcb" />
+  <registry name="xn--tjme-hra" />
+  <registry name="xn--tnsberg-q1a" />
+  <registry name="xn--trany-yua" />
+  <registry name="xn--trgstad-r1a" />
+  <registry name="xn--trna-woa" />
+  <registry name="xn--troms-zua" />
+  <registry name="xn--tysvr-vra" />
+  <registry name="xn--unjrga-rta" />
+  <registry name="xn--vads-jra" />
+  <registry name="xn--vard-jra" />
+  <registry name="xn--vegrshei-c0a" />
+  <registry name="xn--vestvgy-ixa6o" />
+  <registry name="xn--vg-yiab" />
+  <registry name="xn--vgan-qoa" />
+  <registry name="xn--vgsy-qoa0j" />
+  <registry name="xn--vre-eiker-k8a" />
+  <registry name="xn--vrggt-xqad" />
+  <registry name="xn--vry-yla5g" />
+  <registry name="xn--yer-zna" />
+  <registry name="xn--ygarden-p1a" />
+  <registry name="xn--ystre-slidre-ujb" />
+</tld>
+<tld name="np" levels="1" />
+<tld name="nr" >
+  <registry name="biz" />
+  <registry name="com" />
+  <registry name="edu" />
+  <registry name="gov" />
+  <registry name="info" />
+  <registry name="net" />
+  <registry name="org" />
+</tld>
+<tld name="nu" >
+  <registry name="merseine" />
+  <registry name="mine" />
+  <registry name="shacknet" />
+</tld>
+<tld name="nz" levels="1" />
+<tld name="om" levels="1" >
+  <domain name="mediaphone" />
+  <domain name="nawras" />
+  <domain name="nawrastelecom" />
+  <domain name="omanmobile" />
+  <domain name="omanpost" />
+  <domain name="omantel" />
+  <domain name="rakpetroleum" />
+  <domain name="siemens" />
+  <domain name="songfest" />
+  <domain name="statecouncil" />
+</tld>
+<tld name="org" >
+  <registry name="ae" />
+  <registry name="blogdns" />
+  <registry name="blogsite" />
+  <registry name="boldlygoingnowhere" />
+  <registry name="dnsalias" />
+  <registry name="dnsdojo" />
+  <registry name="doesntexist" />
+  <registry name="dontexist" />
+  <registry name="doomdns" />
+  <registry name="dvrdns" />
+  <registry name="dynalias" />
+  <registry name="dyndns" >
+    <registry name="go" />
+    <registry name="home" />
+  </registry>
+  <registry name="endofinternet" />
+  <registry name="endoftheinternet" />
+  <registry name="from-me" />
+  <registry name="game-host" />
+  <registry name="gotdns" />
+  <registry name="hobby-site" />
+  <registry name="homedns" />
+  <registry name="homeftp" />
+  <registry name="homelinux" />
+  <registry name="homeunix" />
+  <registry name="is-a-bruinsfan" />
+  <registry name="is-a-candidate" />
+  <registry name="is-a-celticsfan" />
+  <registry name="is-a-chef" />
+  <registry name="is-a-geek" />
+  <registry name="is-a-knight" />
+  <registry name="is-a-linux-user" />
+  <registry name="is-a-patsfan" />
+  <registry name="is-a-soxfan" />
+  <registry name="is-found" />
+  <registry name="is-lost" />
+  <registry name="is-saved" />
+  <registry name="is-very-bad" />
+  <registry name="is-very-evil" />
+  <registry name="is-very-good" />
+  <registry name="is-very-nice" />
+  <registry name="is-very-sweet" />
+  <registry name="isa-geek" />
+  <registry name="kicks-ass" />
+  <registry name="misconfused" />
+  <registry name="podzone" />
+  <registry name="readmyblog" />
+  <registry name="selfip" />
+  <registry name="sellsyourhome" />
+  <registry name="servebbs" />
+  <registry name="serveftp" />
+  <registry name="servegame" />
+  <registry name="stuff-4-sale" />
+  <registry name="webhop" />
+  <registry name="za" />
+</tld>
+<tld name="pa" >
+  <registry name="abo" />
+  <registry name="ac" />
+  <registry name="com" />
+  <registry name="edu" />
+  <registry name="gob" />
+  <registry name="ing" />
+  <registry name="med" />
+  <registry name="net" />
+  <registry name="nom" />
+  <registry name="org" />
+  <registry name="sld" />
+</tld>
+<tld name="pe" >
+  <registry name="com" />
+  <registry name="edu" />
+  <registry name="gob" />
+  <registry name="mil" />
+  <registry name="net" />
+  <registry name="nom" />
+  <registry name="org" />
+</tld>
+<tld name="pf" >
+  <registry name="com" />
+  <registry name="edu" />
+  <registry name="org" />
+</tld>
+<tld name="pg" levels="1" />
+<tld name="ph" >
+  <registry name="com" />
+  <registry name="edu" />
+  <registry name="gov" />
+  <registry name="i" />
+  <registry name="mil" />
+  <registry name="net" />
+  <registry name="ngo" />
+  <registry name="org" />
+</tld>
+<tld name="pk" >
+  <registry name="biz" />
+  <registry name="com" />
+  <registry name="edu" />
+  <registry name="fam" />
+  <registry name="gob" />
+  <registry name="gok" />
+  <registry name="gon" />
+  <registry name="gop" />
+  <registry name="gos" />
+  <registry name="gov" />
+  <registry name="info" />
+  <registry name="net" />
+  <registry name="org" />
+  <registry name="web" />
+</tld>
+<tld name="pl" >
+  <registry name="6bone" />
+  <registry name="agro" />
+  <registry name="aid" />
+  <registry name="art" />
+  <registry name="atm" />
+  <registry name="augustow" />
+  <registry name="auto" />
+  <registry name="babia-gora" />
+  <registry name="bedzin" />
+  <registry name="beskidy" />
+  <registry name="bialowieza" />
+  <registry name="bialystok" />
+  <registry name="bielawa" />
+  <registry name="bieszczady" />
+  <registry name="biz" />
+  <registry name="boleslawiec" />
+  <registry name="bydgoszcz" />
+  <registry name="bytom" />
+  <registry name="cieszyn" />
+  <registry name="co" />
+  <registry name="com" />
+  <registry name="czeladz" />
+  <registry name="czest" />
+  <registry name="dlugoleka" />
+  <registry name="edu" />
+  <registry name="elblag" />
+  <registry name="elk" />
+  <registry name="gda" />
+  <registry name="gdansk" />
+  <registry name="gdynia" />
+  <registry name="gliwice" />
+  <registry name="glogow" />
+  <registry name="gmina" />
+  <registry name="gniezno" />
+  <registry name="gorlice" />
+  <registry name="gov" >
+    <registry name="pa" />
+    <registry name="po" />
+    <registry name="so" />
+    <registry name="sr" />
+    <registry name="starostwo" />
+    <registry name="ug" />
+    <registry name="um" />
+    <registry name="upow" />
+    <registry name="uw" />
+  </registry>
+  <registry name="grajewo" />
+  <registry name="gsm" />
+  <registry name="ilawa" />
+  <registry name="info" />
+  <registry name="irc" />
+  <registry name="jaworzno" />
+  <registry name="jelenia-gora" />
+  <registry name="jgora" />
+  <registry name="kalisz" />
+  <registry name="karpacz" />
+  <registry name="kartuzy" />
+  <registry name="kaszuby" />
+  <registry name="katowice" />
+  <registry name="kazimierz-dolny" />
+  <registry name="kepno" />
+  <registry name="ketrzyn" />
+  <registry name="klodzko" />
+  <registry name="kobierzyce" />
+  <registry name="kolobrzeg" />
+  <registry name="konin" />
+  <registry name="konskowola" />
+  <registry name="krakow" />
+  <registry name="kutno" />
+  <registry name="lapy" />
+  <registry name="lebork" />
+  <registry name="legnica" />
+  <registry name="lezajsk" />
+  <registry name="limanowa" />
+  <registry name="lomza" />
+  <registry name="lowicz" />
+  <registry name="lubin" />
+  <registry name="lukow" />
+  <registry name="mail" />
+  <registry name="malbork" />
+  <registry name="malopolska" />
+  <registry name="mazowsze" />
+  <registry name="mazury" />
+  <registry name="mbone" />
+  <registry name="med" />
+  <registry name="media" />
+  <registry name="miasta" />
+  <registry name="mielec" />
+  <registry name="mielno" />
+  <registry name="mil" />
+  <registry name="mragowo" />
+  <registry name="naklo" />
+  <registry name="net" />
+  <registry name="ngo" />
+  <registry name="nieruchomosci" />
+  <registry name="nom" />
+  <registry name="nowaruda" />
+  <registry name="nysa" />
+  <registry name="olawa" />
+  <registry name="olecko" />
+  <registry name="olkusz" />
+  <registry name="olsztyn" />
+  <registry name="opoczno" />
+  <registry name="opole" />
+  <registry name="org" />
+  <registry name="ostroda" />
+  <registry name="ostroleka" />
+  <registry name="ostrowiec" />
+  <registry name="ostrowwlkp" />
+  <registry name="pc" />
+  <registry name="pila" />
+  <registry name="pisz" />
+  <registry name="podhale" />
+  <registry name="podlasie" />
+  <registry name="polkowice" />
+  <registry name="pomorskie" />
+  <registry name="pomorze" />
+  <registry name="powiat" />
+  <registry name="poznan" />
+  <registry name="priv" />
+  <registry name="prochowice" />
+  <registry name="pruszkow" />
+  <registry name="przeworsk" />
+  <registry name="pulawy" />
+  <registry name="radom" />
+  <registry name="rawa-maz" />
+  <registry name="realestate" />
+  <registry name="rel" />
+  <registry name="rybnik" />
+  <registry name="rzeszow" />
+  <registry name="sanok" />
+  <registry name="sejny" />
+  <registry name="sex" />
+  <registry name="shop" />
+  <registry name="siedlce" />
+  <registry name="sklep" />
+  <registry name="skoczow" />
+  <registry name="slask" />
+  <registry name="slupsk" />
+  <registry name="sopot" />
+  <registry name="sos" />
+  <registry name="sosnowiec" />
+  <registry name="stalowa-wola" />
+  <registry name="starachowice" />
+  <registry name="stargard" />
+  <registry name="suwalki" />
+  <registry name="swidnica" />
+  <registry name="swiebodzin" />
+  <registry name="swinoujscie" />
+  <registry name="szczecin" />
+  <registry name="szczytno" />
+  <registry name="szkola" />
+  <registry name="targi" />
+  <registry name="tarnobrzeg" />
+  <registry name="tgory" />
+  <registry name="tm" />
+  <registry name="tourism" />
+  <registry name="travel" />
+  <registry name="turek" />
+  <registry name="turystyka" />
+  <registry name="tychy" />
+  <registry name="usenet" />
+  <registry name="ustka" />
+  <registry name="walbrzych" />
+  <registry name="warmia" />
+  <registry name="warszawa" />
+  <registry name="waw" />
+  <registry name="wegrow" />
+  <registry name="wielun" />
+  <registry name="wlocl" />
+  <registry name="wloclawek" />
+  <registry name="wodzislaw" />
+  <registry name="wolomin" />
+  <registry name="wroc" />
+  <registry name="wroclaw" />
+  <registry name="zachpomor" />
+  <registry name="zagan" />
+  <registry name="zakopane" />
+  <registry name="zarow" />
+  <registry name="zgora" />
+  <registry name="zgorzelec" />
+</tld>
+<tld name="pn" >
+  <registry name="co" />
+  <registry name="edu" />
+  <registry name="gov" />
+  <registry name="net" />
+  <registry name="org" />
+</tld>
+<tld name="pr" >
+  <registry name="ac" />
+  <registry name="biz" />
+  <registry name="com" />
+  <registry name="edu" />
+  <registry name="est" />
+  <registry name="gov" />
+  <registry name="info" />
+  <registry name="isla" />
+  <registry name="name" />
+  <registry name="net" />
+  <registry name="org" />
+  <registry name="pro" />
+  <registry name="prof" />
+</tld>
+<tld name="pro" >
+  <registry name="aca" />
+  <registry name="bar" />
+  <registry name="cpa" />
+  <registry name="eng" />
+  <registry name="jur" />
+  <registry name="law" />
+  <registry name="med" />
+</tld>
+<tld name="ps" >
+  <registry name="com" />
+  <registry name="edu" />
+  <registry name="gov" />
+  <registry name="net" />
+  <registry name="org" />
+  <registry name="plo" />
+  <registry name="sec" />
+</tld>
+<tld name="pt" >
+  <registry name="com" />
+  <registry name="edu" />
+  <registry name="gov" />
+  <registry name="int" />
+  <registry name="net" />
+  <registry name="nome" />
+  <registry name="org" />
+  <registry name="publ" />
+</tld>
+<tld name="pw" >
+  <registry name="belau" />
+  <registry name="co" />
+  <registry name="ed" />
+  <registry name="go" />
+  <registry name="ne" />
+  <registry name="or" />
+</tld>
+<tld name="py" levels="1" />
+<tld name="qa" levels="1" />
+<tld name="re" >
+  <registry name="asso" />
+  <registry name="com" />
+  <registry name="nom" />
+</tld>
+<tld name="ro" >
+  <registry name="arts" />
+  <registry name="com" />
+  <registry name="firm" />
+  <registry name="info" />
+  <registry name="nom" />
+  <registry name="nt" />
+  <registry name="org" />
+  <registry name="rec" />
+  <registry name="store" />
+  <registry name="tm" />
+  <registry name="www" />
+</tld>
+<tld name="rs" >
+  <registry name="ac" />
+  <registry name="co" />
+  <registry name="edu" />
+  <registry name="gov" />
+  <registry name="in" />
+  <registry name="org" />
+</tld>
+<tld name="ru" >
+  <registry name="ac" />
+  <registry name="adygeya" />
+  <registry name="altai" />
+  <registry name="amur" />
+  <registry name="amursk" />
+  <registry name="arkhangelsk" />
+  <registry name="astrakhan" />
+  <registry name="baikal" />
+  <registry name="bashkiria" />
+  <registry name="belgorod" />
+  <registry name="bir" />
+  <registry name="bryansk" />
+  <registry name="buryatia" />
+  <registry name="cbg" />
+  <registry name="chel" />
+  <registry name="chelyabinsk" />
+  <registry name="chita" />
+  <registry name="chukotka" />
+  <registry name="chuvashia" />
+  <registry name="cmw" />
+  <registry name="com" />
+  <registry name="dagestan" />
+  <registry name="dudinka" />
+  <registry name="e-burg" />
+  <registry name="edu" />
+  <registry name="fareast" />
+  <registry name="gov" />
+  <registry name="grozny" />
+  <registry name="int" />
+  <registry name="irkutsk" />
+  <registry name="ivanovo" />
+  <registry name="izhevsk" />
+  <registry name="jamal" />
+  <registry name="jar" />
+  <registry name="joshkar-ola" />
+  <registry name="k-uralsk" />
+  <registry name="kalmykia" />
+  <registry name="kaluga" />
+  <registry name="kamchatka" />
+  <registry name="karelia" />
+  <registry name="kazan" />
+  <registry name="kchr" />
+  <registry name="kemerovo" />
+  <registry name="khabarovsk" />
+  <registry name="khakassia" />
+  <registry name="khv" />
+  <registry name="kirov" />
+  <registry name="kms" />
+  <registry name="koenig" />
+  <registry name="komi" />
+  <registry name="kostroma" />
+  <registry name="krasnoyarsk" />
+  <registry name="kuban" />
+  <registry name="kurgan" />
+  <registry name="kursk" />
+  <registry name="kustanai" />
+  <registry name="kuzbass" />
+  <registry name="lipetsk" />
+  <registry name="magadan" />
+  <registry name="magnitka" />
+  <registry name="mari" />
+  <registry name="mari-el" />
+  <registry name="marine" />
+  <registry name="mil" />
+  <registry name="mordovia" />
+  <registry name="mosreg" />
+  <registry name="msk" />
+  <registry name="murmansk" />
+  <registry name="mytis" />
+  <registry name="nakhodka" />
+  <registry name="nalchik" />
+  <registry name="net" />
+  <registry name="nkz" />
+  <registry name="nnov" />
+  <registry name="norilsk" />
+  <registry name="nov" />
+  <registry name="novosibirsk" />
+  <registry name="nsk" />
+  <registry name="omsk" />
+  <registry name="orenburg" />
+  <registry name="org" />
+  <registry name="oryol" />
+  <registry name="oskol" />
+  <registry name="palana" />
+  <registry name="penza" />
+  <registry name="perm" />
+  <registry name="pp" />
+  <registry name="pskov" />
+  <registry name="ptz" />
+  <registry name="pyatigorsk" />
+  <registry name="rnd" />
+  <registry name="rubtsovsk" />
+  <registry name="ryazan" />
+  <registry name="sakhalin" />
+  <registry name="samara" />
+  <registry name="saratov" />
+  <registry name="simbirsk" />
+  <registry name="smolensk" />
+  <registry name="snz" />
+  <registry name="spb" />
+  <registry name="stavropol" />
+  <registry name="stv" />
+  <registry name="surgut" />
+  <registry name="syzran" />
+  <registry name="tambov" />
+  <registry name="tatarstan" />
+  <registry name="test" />
+  <registry name="tom" />
+  <registry name="tomsk" />
+  <registry name="tsaritsyn" />
+  <registry name="tsk" />
+  <registry name="tula" />
+  <registry name="tuva" />
+  <registry name="tver" />
+  <registry name="tyumen" />
+  <registry name="udm" />
+  <registry name="udmurtia" />
+  <registry name="ulan-ude" />
+  <registry name="vdonsk" />
+  <registry name="vladikavkaz" />
+  <registry name="vladimir" />
+  <registry name="vladivostok" />
+  <registry name="volgograd" />
+  <registry name="vologda" />
+  <registry name="voronezh" />
+  <registry name="vrn" />
+  <registry name="vyatka" />
+  <registry name="yakutia" />
+  <registry name="yamal" />
+  <registry name="yaroslavl" />
+  <registry name="yekaterinburg" />
+  <registry name="yuzhno-sakhalinsk" />
+  <registry name="zgrad" />
+</tld>
+<tld name="rw" >
+  <registry name="ac" />
+  <registry name="co" />
+  <registry name="com" />
+  <registry name="edu" />
+  <registry name="gouv" />
+  <registry name="gov" />
+  <registry name="int" />
+  <registry name="mil" />
+  <registry name="net" />
+</tld>
+<tld name="sa" >
+  <registry name="com" />
+  <registry name="edu" />
+  <registry name="gov" />
+  <registry name="med" />
+  <registry name="net" />
+  <registry name="org" />
+  <registry name="pub" />
+  <registry name="sch" />
+</tld>
+<tld name="sb" >
+  <registry name="com" />
+  <registry name="edu" />
+  <registry name="gov" />
+  <registry name="net" />
+  <registry name="org" />
+</tld>
+<tld name="sc" >
+  <registry name="com" />
+  <registry name="edu" />
+  <registry name="gov" />
+  <registry name="net" />
+  <registry name="org" />
+</tld>
+<tld name="sd" >
+  <registry name="com" />
+  <registry name="edu" />
+  <registry name="gov" />
+  <registry name="info" />
+  <registry name="med" />
+  <registry name="net" />
+  <registry name="org" />
+</tld>
+<tld name="se" >
+  <registry name="a" />
+  <registry name="ac" />
+  <registry name="b" />
+  <registry name="bd" />
+  <registry name="brand" />
+  <registry name="c" />
+  <registry name="d" />
+  <registry name="e" />
+  <registry name="f" />
+  <registry name="fh" />
+  <registry name="fhsk" />
+  <registry name="fhv" />
+  <registry name="g" />
+  <registry name="h" />
+  <registry name="i" />
+  <registry name="k" />
+  <registry name="komforb" />
+  <registry name="kommunalforbund" />
+  <registry name="komvux" />
+  <registry name="l" />
+  <registry name="lanbib" />
+  <registry name="m" />
+  <registry name="n" />
+  <registry name="naturbruksgymn" />
+  <registry name="o" />
+  <registry name="org" />
+  <registry name="p" />
+  <registry name="parti" />
+  <registry name="pp" />
+  <registry name="press" />
+  <registry name="r" />
+  <registry name="s" />
+  <registry name="sshn" />
+  <registry name="t" />
+  <registry name="tm" />
+  <registry name="u" />
+  <registry name="w" />
+  <registry name="x" />
+  <registry name="y" />
+  <registry name="z" />
+</tld>
+<tld name="sg" >
+  <registry name="com" />
+  <registry name="edu" />
+  <registry name="gov" />
+  <registry name="net" />
+  <registry name="org" />
+  <registry name="per" />
+</tld>
+<tld name="sh" />
+<tld name="si" />
+<tld name="sk" />
+<tld name="sl" >
+  <registry name="com" />
+  <registry name="edu" />
+  <registry name="gov" />
+  <registry name="net" />
+  <registry name="org" />
+</tld>
+<tld name="sm" />
+<tld name="sn" >
+  <registry name="art" />
+  <registry name="com" />
+  <registry name="edu" />
+  <registry name="gouv" />
+  <registry name="org" />
+  <registry name="perso" />
+  <registry name="univ" />
+</tld>
+<tld name="so" >
+  <registry name="com" />
+  <registry name="net" />
+  <registry name="org" />
+</tld>
+<tld name="sr" />
+<tld name="st" >
+  <registry name="co" />
+  <registry name="com" />
+  <registry name="consulado" />
+  <registry name="edu" />
+  <registry name="embaixada" />
+  <registry name="gov" />
+  <registry name="mil" />
+  <registry name="net" />
+  <registry name="org" />
+  <registry name="principe" />
+  <registry name="saotome" />
+  <registry name="store" />
+</tld>
+<tld name="su" />
+<tld name="sv" levels="1" />
+<tld name="sy" >
+  <registry name="com" />
+  <registry name="edu" />
+  <registry name="gov" />
+  <registry name="mil" />
+  <registry name="net" />
+  <registry name="org" />
+</tld>
+<tld name="sz" >
+  <registry name="ac" />
+  <registry name="co" />
+  <registry name="org" />
+</tld>
+<tld name="tc" />
+<tld name="td" />
+<tld name="tel" />
+<tld name="tf" />
+<tld name="tg" />
+<tld name="th" >
+  <registry name="ac" />
+  <registry name="co" />
+  <registry name="go" />
+  <registry name="in" />
+  <registry name="mi" />
+  <registry name="net" />
+  <registry name="or" />
+</tld>
+<tld name="tj" >
+  <registry name="ac" />
+  <registry name="biz" />
+  <registry name="co" />
+  <registry name="com" />
+  <registry name="edu" />
+  <registry name="go" />
+  <registry name="gov" />
+  <registry name="int" />
+  <registry name="mil" />
+  <registry name="name" />
+  <registry name="net" />
+  <registry name="nic" />
+  <registry name="org" />
+  <registry name="test" />
+  <registry name="web" />
+</tld>
+<tld name="tk" />
+<tld name="tl" >
+  <registry name="gov" />
+</tld>
+<tld name="tm" />
+<tld name="tn" >
+  <registry name="agrinet" />
+  <registry name="com" />
+  <registry name="defense" />
+  <registry name="edunet" />
+  <registry name="ens" />
+  <registry name="fin" />
+  <registry name="gov" />
+  <registry name="ind" />
+  <registry name="info" />
+  <registry name="intl" />
+  <registry name="mincom" />
+  <registry name="nat" />
+  <registry name="net" />
+  <registry name="org" />
+  <registry name="perso" />
+  <registry name="rnrt" />
+  <registry name="rns" />
+  <registry name="rnu" />
+  <registry name="tourism" />
+  <registry name="turen" />
+</tld>
+<tld name="to" >
+  <registry name="com" />
+  <registry name="edu" />
+  <registry name="gov" />
+  <registry name="mil" />
+  <registry name="net" />
+  <registry name="org" />
+</tld>
+<tld name="tr" levels="1" >
+  <registry name="nc" >
+    <registry name="gov" />
+  </registry>
+  <domain name="nic" />
+</tld>
+<tld name="travel" />
+<tld name="tt" >
+  <registry name="aero" />
+  <registry name="biz" />
+  <registry name="co" />
+  <registry name="com" />
+  <registry name="coop" />
+  <registry name="edu" />
+  <registry name="gov" />
+  <registry name="info" />
+  <registry name="int" />
+  <registry name="jobs" />
+  <registry name="mobi" />
+  <registry name="museum" />
+  <registry name="name" />
+  <registry name="net" />
+  <registry name="org" />
+  <registry name="pro" />
+  <registry name="travel" />
+</tld>
+<tld name="tv" >
+  <registry name="better-than" />
+  <registry name="dyndns" />
+  <registry name="on-the-web" />
+  <registry name="worse-than" />
+</tld>
+<tld name="tw" >
+  <registry name="club" />
+  <registry name="com" />
+  <registry name="ebiz" />
+  <registry name="edu" />
+  <registry name="game" />
+  <registry name="gov" />
+  <registry name="idv" />
+  <registry name="mil" />
+  <registry name="net" />
+  <registry name="org" />
+  <registry name="xn--czrw28b" />
+  <registry name="xn--uc0atv" />
+  <registry name="xn--zf0ao64a" />
+</tld>
+<tld name="tz" >
+  <registry name="ac" />
+  <registry name="co" />
+  <registry name="go" />
+  <registry name="mil" />
+  <registry name="ne" />
+  <registry name="or" />
+  <registry name="sc" />
+</tld>
+<tld name="ua" >
+  <registry name="cherkassy" />
+  <registry name="chernigov" />
+  <registry name="chernovtsy" />
+  <registry name="ck" />
+  <registry name="cn" />
+  <registry name="com" />
+  <registry name="crimea" />
+  <registry name="cv" />
+  <registry name="dn" />
+  <registry name="dnepropetrovsk" />
+  <registry name="donetsk" />
+  <registry name="dp" />
+  <registry name="edu" />
+  <registry name="gov" />
+  <registry name="if" />
+  <registry name="in" />
+  <registry name="ivano-frankivsk" />
+  <registry name="kh" />
+  <registry name="kharkov" />
+  <registry name="kherson" />
+  <registry name="khmelnitskiy" />
+  <registry name="kiev" />
+  <registry name="kirovograd" />
+  <registry name="km" />
+  <registry name="kr" />
+  <registry name="ks" />
+  <registry name="kv" />
+  <registry name="lg" />
+  <registry name="lugansk" />
+  <registry name="lutsk" />
+  <registry name="lviv" />
+  <registry name="mk" />
+  <registry name="net" />
+  <registry name="nikolaev" />
+  <registry name="od" />
+  <registry name="odessa" />
+  <registry name="org" />
+  <registry name="pl" />
+  <registry name="poltava" />
+  <registry name="rovno" />
+  <registry name="rv" />
+  <registry name="sebastopol" />
+  <registry name="sumy" />
+  <registry name="te" />
+  <registry name="ternopil" />
+  <registry name="uzhgorod" />
+  <registry name="vinnica" />
+  <registry name="vn" />
+  <registry name="zaporizhzhe" />
+  <registry name="zhitomir" />
+  <registry name="zp" />
+  <registry name="zt" />
+</tld>
+<tld name="ug" >
+  <registry name="ac" />
+  <registry name="co" />
+  <registry name="go" />
+  <registry name="ne" />
+  <registry name="or" />
+  <registry name="sc" />
+</tld>
+<tld name="uk" levels="1" >
+  <registry name="sch" levels="1" />
+  <domain name="bl" />
+  <domain name="british-library" />
+  <domain name="gov" />
+  <domain name="icnet" />
+  <domain name="jet" />
+  <domain name="mod" />
+  <domain name="national-library-scotland" />
+  <domain name="nel" />
+  <domain name="nhs" />
+  <domain name="nic" />
+  <domain name="nls" />
+  <domain name="parliament" />
+  <domain name="police" />
+</tld>
+<tld name="us" >
+  <registry name="ak" >
+    <registry all="true" >
+      <domain name="ci" />
+      <domain name="co" />
+      <domain name="town" />
+    </registry>
+    <registry name="cc" />
+    <registry name="gen" />
+    <registry name="k12" >
+      <registry name="pvt" />
+    </registry>
+    <registry name="lib" />
+    <registry name="state" />
+    <registry name="tec" />
+  </registry>
+  <registry name="al" >
+    <registry all="true" >
+      <domain name="ci" />
+      <domain name="co" />
+      <domain name="town" />
+    </registry>
+    <registry name="cc" />
+    <registry name="gen" />
+    <registry name="k12" >
+      <registry name="pvt" />
+    </registry>
+    <registry name="lib" />
+    <registry name="state" />
+    <registry name="tec" />
+  </registry>
+  <registry name="ar" >
+    <registry all="true" >
+      <domain name="ci" />
+      <domain name="co" />
+      <domain name="town" />
+    </registry>
+    <registry name="cc" />
+    <registry name="gen" />
+    <registry name="k12" >
+      <registry name="pvt" />
+    </registry>
+    <registry name="lib" />
+    <registry name="state" />
+    <registry name="tec" />
+  </registry>
+  <registry name="as" >
+    <registry all="true" >
+      <domain name="ci" />
+      <domain name="co" />
+      <domain name="town" />
+    </registry>
+    <registry name="cc" />
+    <registry name="gen" />
+    <registry name="k12" >
+      <registry name="pvt" />
+    </registry>
+    <registry name="lib" />
+    <registry name="state" />
+    <registry name="tec" />
+  </registry>
+  <registry name="az" >
+    <registry all="true" >
+      <domain name="ci" />
+      <domain name="co" />
+      <domain name="town" />
+    </registry>
+    <registry name="cc" />
+    <registry name="gen" />
+    <registry name="k12" >
+      <registry name="pvt" />
+    </registry>
+    <registry name="lib" />
+    <registry name="state" />
+    <registry name="tec" />
+  </registry>
+  <registry name="ca" >
+    <registry all="true" >
+      <domain name="ci" />
+      <domain name="co" />
+      <domain name="town" />
+    </registry>
+    <registry name="cc" />
+    <registry name="gen" />
+    <registry name="k12" >
+      <registry name="pvt" />
+    </registry>
+    <registry name="lib" />
+    <registry name="state" />
+    <registry name="tec" />
+  </registry>
+  <registry name="co" >
+    <registry all="true" >
+      <domain name="ci" />
+      <domain name="co" />
+      <domain name="town" />
+    </registry>
+    <registry name="cc" />
+    <registry name="gen" />
+    <registry name="k12" >
+      <registry name="pvt" />
+    </registry>
+    <registry name="lib" />
+    <registry name="state" />
+    <registry name="tec" />
+  </registry>
+  <registry name="ct" >
+    <registry all="true" >
+      <domain name="ci" />
+      <domain name="co" />
+      <domain name="town" />
+    </registry>
+    <registry name="cc" />
+    <registry name="gen" />
+    <registry name="k12" >
+      <registry name="pvt" />
+    </registry>
+    <registry name="lib" />
+    <registry name="state" />
+    <registry name="tec" />
+  </registry>
+  <registry name="dc" >
+    <registry all="true" >
+      <domain name="ci" />
+      <domain name="co" />
+      <domain name="town" />
+    </registry>
+    <registry name="cc" />
+    <registry name="gen" />
+    <registry name="k12" >
+      <registry name="pvt" />
+    </registry>
+    <registry name="lib" />
+    <registry name="state" />
+    <registry name="tec" />
+  </registry>
+  <registry name="de" >
+    <registry all="true" >
+      <domain name="ci" />
+      <domain name="co" />
+      <domain name="town" />
+    </registry>
+    <registry name="cc" />
+    <registry name="gen" />
+    <registry name="k12" >
+      <registry name="pvt" />
+    </registry>
+    <registry name="lib" />
+    <registry name="state" />
+    <registry name="tec" />
+  </registry>
+  <registry name="dni" />
+  <registry name="fed" />
+  <registry name="fl" >
+    <registry all="true" >
+      <domain name="ci" />
+      <domain name="co" />
+      <domain name="town" />
+    </registry>
+    <registry name="cc" />
+    <registry name="gen" />
+    <registry name="k12" >
+      <registry name="pvt" />
+    </registry>
+    <registry name="lib" />
+    <registry name="state" />
+    <registry name="tec" />
+  </registry>
+  <registry name="ga" >
+    <registry all="true" >
+      <domain name="ci" />
+      <domain name="co" />
+      <domain name="town" />
+    </registry>
+    <registry name="cc" />
+    <registry name="gen" />
+    <registry name="k12" >
+      <registry name="pvt" />
+    </registry>
+    <registry name="lib" />
+    <registry name="state" />
+    <registry name="tec" />
+  </registry>
+  <registry name="gu" >
+    <registry all="true" >
+      <domain name="ci" />
+      <domain name="co" />
+      <domain name="town" />
+    </registry>
+    <registry name="cc" />
+    <registry name="gen" />
+    <registry name="k12" >
+      <registry name="pvt" />
+    </registry>
+    <registry name="lib" />
+    <registry name="state" />
+    <registry name="tec" />
+  </registry>
+  <registry name="hi" >
+    <registry all="true" >
+      <domain name="ci" />
+      <domain name="co" />
+      <domain name="town" />
+    </registry>
+    <registry name="cc" />
+    <registry name="gen" />
+    <registry name="k12" >
+      <registry name="pvt" />
+    </registry>
+    <registry name="lib" />
+    <registry name="state" />
+    <registry name="tec" />
+  </registry>
+  <registry name="ia" >
+    <registry all="true" >
+      <domain name="ci" />
+      <domain name="co" />
+      <domain name="town" />
+    </registry>
+    <registry name="cc" />
+    <registry name="gen" />
+    <registry name="k12" >
+      <registry name="pvt" />
+    </registry>
+    <registry name="lib" />
+    <registry name="state" />
+    <registry name="tec" />
+  </registry>
+  <registry name="id" >
+    <registry all="true" >
+      <domain name="ci" />
+      <domain name="co" />
+      <domain name="town" />
+    </registry>
+    <registry name="cc" />
+    <registry name="gen" />
+    <registry name="k12" >
+      <registry name="pvt" />
+    </registry>
+    <registry name="lib" />
+    <registry name="state" />
+    <registry name="tec" />
+  </registry>
+  <registry name="il" >
+    <registry all="true" >
+      <domain name="ci" />
+      <domain name="co" />
+      <domain name="town" />
+    </registry>
+    <registry name="cc" />
+    <registry name="gen" />
+    <registry name="k12" >
+      <registry name="pvt" />
+    </registry>
+    <registry name="lib" />
+    <registry name="state" />
+    <registry name="tec" />
+  </registry>
+  <registry name="in" >
+    <registry all="true" >
+      <domain name="ci" />
+      <domain name="co" />
+      <domain name="town" />
+    </registry>
+    <registry name="cc" />
+    <registry name="gen" />
+    <registry name="k12" >
+      <registry name="pvt" />
+    </registry>
+    <registry name="lib" />
+    <registry name="state" />
+    <registry name="tec" />
+  </registry>
+  <registry name="is-by" />
+  <registry name="isa" />
+  <registry name="kids" />
+  <registry name="ks" >
+    <registry all="true" >
+      <domain name="ci" />
+      <domain name="co" />
+      <domain name="town" />
+    </registry>
+    <registry name="cc" />
+    <registry name="gen" />
+    <registry name="k12" >
+      <registry name="pvt" />
+    </registry>
+    <registry name="lib" />
+    <registry name="state" />
+    <registry name="tec" />
+  </registry>
+  <registry name="ky" >
+    <registry all="true" >
+      <domain name="ci" />
+      <domain name="co" />
+      <domain name="town" />
+    </registry>
+    <registry name="cc" />
+    <registry name="gen" />
+    <registry name="k12" >
+      <registry name="pvt" />
+    </registry>
+    <registry name="lib" />
+    <registry name="state" />
+    <registry name="tec" />
+  </registry>
+  <registry name="la" >
+    <registry all="true" >
+      <domain name="ci" />
+      <domain name="co" />
+      <domain name="town" />
+    </registry>
+    <registry name="cc" />
+    <registry name="gen" />
+    <registry name="k12" >
+      <registry name="pvt" />
+    </registry>
+    <registry name="lib" />
+    <registry name="state" />
+    <registry name="tec" />
+  </registry>
+  <registry name="land-4-sale" />
+  <registry name="ma" >
+    <registry all="true" >
+      <domain name="ci" />
+      <domain name="co" />
+      <domain name="town" />
+    </registry>
+    <registry name="cc" />
+    <registry name="gen" />
+    <registry name="k12" >
+      <registry name="chtr" />
+      <registry name="paroch" />
+      <registry name="pvt" />
+    </registry>
+    <registry name="lib" />
+    <registry name="state" />
+    <registry name="tec" />
+  </registry>
+  <registry name="md" >
+    <registry all="true" >
+      <domain name="ci" />
+      <domain name="co" />
+      <domain name="town" />
+    </registry>
+    <registry name="cc" />
+    <registry name="gen" />
+    <registry name="k12" >
+      <registry name="pvt" />
+    </registry>
+    <registry name="lib" />
+    <registry name="state" />
+    <registry name="tec" />
+  </registry>
+  <registry name="me" >
+    <registry all="true" >
+      <domain name="ci" />
+      <domain name="co" />
+      <domain name="town" />
+    </registry>
+    <registry name="cc" />
+    <registry name="gen" />
+    <registry name="k12" >
+      <registry name="pvt" />
+    </registry>
+    <registry name="lib" />
+    <registry name="state" />
+    <registry name="tec" />
+  </registry>
+  <registry name="mi" >
+    <registry all="true" >
+      <domain name="ci" />
+      <domain name="co" />
+      <domain name="town" />
+    </registry>
+    <registry name="cc" />
+    <registry name="gen" />
+    <registry name="k12" >
+      <registry name="pvt" />
+    </registry>
+    <registry name="lib" />
+    <registry name="state" />
+    <registry name="tec" />
+  </registry>
+  <registry name="mn" >
+    <registry all="true" >
+      <domain name="ci" />
+      <domain name="co" />
+      <domain name="town" />
+    </registry>
+    <registry name="cc" />
+    <registry name="gen" />
+    <registry name="k12" >
+      <registry name="pvt" />
+    </registry>
+    <registry name="lib" />
+    <registry name="state" />
+    <registry name="tec" />
+  </registry>
+  <registry name="mo" >
+    <registry all="true" >
+      <domain name="ci" />
+      <domain name="co" />
+      <domain name="town" />
+    </registry>
+    <registry name="cc" />
+    <registry name="gen" />
+    <registry name="k12" >
+      <registry name="pvt" />
+    </registry>
+    <registry name="lib" />
+    <registry name="state" />
+    <registry name="tec" />
+  </registry>
+  <registry name="ms" >
+    <registry all="true" >
+      <domain name="ci" />
+      <domain name="co" />
+      <domain name="town" />
+    </registry>
+    <registry name="cc" />
+    <registry name="gen" />
+    <registry name="k12" >
+      <registry name="pvt" />
+    </registry>
+    <registry name="lib" />
+    <registry name="state" />
+    <registry name="tec" />
+  </registry>
+  <registry name="mt" >
+    <registry all="true" >
+      <domain name="ci" />
+      <domain name="co" />
+      <domain name="town" />
+    </registry>
+    <registry name="cc" />
+    <registry name="gen" />
+    <registry name="k12" >
+      <registry name="pvt" />
+    </registry>
+    <registry name="lib" />
+    <registry name="state" />
+    <registry name="tec" />
+  </registry>
+  <registry name="nc" >
+    <registry all="true" >
+      <domain name="ci" />
+      <domain name="co" />
+      <domain name="town" />
+    </registry>
+    <registry name="cc" />
+    <registry name="gen" />
+    <registry name="k12" >
+      <registry name="pvt" />
+    </registry>
+    <registry name="lib" />
+    <registry name="state" />
+    <registry name="tec" />
+  </registry>
+  <registry name="nd" >
+    <registry all="true" >
+      <domain name="ci" />
+      <domain name="co" />
+      <domain name="town" />
+    </registry>
+    <registry name="cc" />
+    <registry name="gen" />
+    <registry name="k12" >
+      <registry name="pvt" />
+    </registry>
+    <registry name="lib" />
+    <registry name="state" />
+    <registry name="tec" />
+  </registry>
+  <registry name="ne" >
+    <registry all="true" >
+      <domain name="ci" />
+      <domain name="co" />
+      <domain name="town" />
+    </registry>
+    <registry name="cc" />
+    <registry name="gen" />
+    <registry name="k12" >
+      <registry name="pvt" />
+    </registry>
+    <registry name="lib" />
+    <registry name="state" />
+    <registry name="tec" />
+  </registry>
+  <registry name="nh" >
+    <registry all="true" >
+      <domain name="ci" />
+      <domain name="co" />
+      <domain name="town" />
+    </registry>
+    <registry name="cc" />
+    <registry name="gen" />
+    <registry name="k12" >
+      <registry name="pvt" />
+    </registry>
+    <registry name="lib" />
+    <registry name="state" />
+    <registry name="tec" />
+  </registry>
+  <registry name="nj" >
+    <registry all="true" >
+      <domain name="ci" />
+      <domain name="co" />
+      <domain name="town" />
+    </registry>
+    <registry name="cc" />
+    <registry name="gen" />
+    <registry name="k12" >
+      <registry name="pvt" />
+    </registry>
+    <registry name="lib" />
+    <registry name="state" />
+    <registry name="tec" />
+  </registry>
+  <registry name="nm" >
+    <registry all="true" >
+      <domain name="ci" />
+      <domain name="co" />
+      <domain name="town" />
+    </registry>
+    <registry name="cc" />
+    <registry name="gen" />
+    <registry name="k12" >
+      <registry name="pvt" />
+    </registry>
+    <registry name="lib" />
+    <registry name="state" />
+    <registry name="tec" />
+  </registry>
+  <registry name="nsn" />
+  <registry name="nv" >
+    <registry all="true" >
+      <domain name="ci" />
+      <domain name="co" />
+      <domain name="town" />
+    </registry>
+    <registry name="cc" />
+    <registry name="gen" />
+    <registry name="k12" >
+      <registry name="pvt" />
+    </registry>
+    <registry name="lib" />
+    <registry name="state" />
+    <registry name="tec" />
+  </registry>
+  <registry name="ny" >
+    <registry all="true" >
+      <domain name="ci" />
+      <domain name="co" />
+      <domain name="town" />
+    </registry>
+    <registry name="cc" />
+    <registry name="gen" />
+    <registry name="k12" >
+      <registry name="pvt" />
+    </registry>
+    <registry name="lib" />
+    <registry name="state" />
+    <registry name="tec" />
+  </registry>
+  <registry name="oh" >
+    <registry all="true" >
+      <domain name="ci" />
+      <domain name="co" />
+      <domain name="town" />
+    </registry>
+    <registry name="cc" />
+    <registry name="gen" />
+    <registry name="k12" >
+      <registry name="pvt" />
+    </registry>
+    <registry name="lib" />
+    <registry name="state" />
+    <registry name="tec" />
+  </registry>
+  <registry name="ok" >
+    <registry all="true" >
+      <domain name="ci" />
+      <domain name="co" />
+      <domain name="town" />
+    </registry>
+    <registry name="cc" />
+    <registry name="gen" />
+    <registry name="k12" >
+      <registry name="pvt" />
+    </registry>
+    <registry name="lib" />
+    <registry name="state" />
+    <registry name="tec" />
+  </registry>
+  <registry name="or" >
+    <registry all="true" >
+      <domain name="ci" />
+      <domain name="co" />
+      <domain name="town" />
+    </registry>
+    <registry name="cc" />
+    <registry name="gen" />
+    <registry name="k12" >
+      <registry name="pvt" />
+    </registry>
+    <registry name="lib" />
+    <registry name="state" />
+    <registry name="tec" />
+  </registry>
+  <registry name="pa" >
+    <registry all="true" >
+      <domain name="ci" />
+      <domain name="co" />
+      <domain name="town" />
+    </registry>
+    <registry name="cc" />
+    <registry name="gen" />
+    <registry name="k12" >
+      <registry name="pvt" />
+    </registry>
+    <registry name="lib" />
+    <registry name="state" />
+    <registry name="tec" />
+  </registry>
+  <registry name="pr" >
+    <registry all="true" >
+      <domain name="ci" />
+      <domain name="co" />
+      <domain name="town" />
+    </registry>
+    <registry name="cc" />
+    <registry name="gen" />
+    <registry name="k12" >
+      <registry name="pvt" />
+    </registry>
+    <registry name="lib" />
+    <registry name="state" />
+    <registry name="tec" />
+  </registry>
+  <registry name="ri" >
+    <registry all="true" >
+      <domain name="ci" />
+      <domain name="co" />
+      <domain name="town" />
+    </registry>
+    <registry name="cc" />
+    <registry name="gen" />
+    <registry name="k12" >
+      <registry name="pvt" />
+    </registry>
+    <registry name="lib" />
+    <registry name="state" />
+    <registry name="tec" />
+  </registry>
+  <registry name="sc" >
+    <registry all="true" >
+      <domain name="ci" />
+      <domain name="co" />
+      <domain name="town" />
+    </registry>
+    <registry name="cc" />
+    <registry name="gen" />
+    <registry name="k12" >
+      <registry name="pvt" />
+    </registry>
+    <registry name="lib" />
+    <registry name="state" />
+    <registry name="tec" />
+  </registry>
+  <registry name="sd" >
+    <registry all="true" >
+      <domain name="ci" />
+      <domain name="co" />
+      <domain name="town" />
+    </registry>
+    <registry name="cc" />
+    <registry name="gen" />
+    <registry name="k12" >
+      <registry name="pvt" />
+    </registry>
+    <registry name="lib" />
+    <registry name="state" />
+    <registry name="tec" />
+  </registry>
+  <registry name="stuff-4-sale" />
+  <registry name="tn" >
+    <registry all="true" >
+      <domain name="ci" />
+      <domain name="co" />
+      <domain name="town" />
+    </registry>
+    <registry name="cc" />
+    <registry name="gen" />
+    <registry name="k12" >
+      <registry name="pvt" />
+    </registry>
+    <registry name="lib" />
+    <registry name="state" />
+    <registry name="tec" />
+  </registry>
+  <registry name="tx" >
+    <registry all="true" >
+      <domain name="ci" />
+      <domain name="co" />
+      <domain name="town" />
+    </registry>
+    <registry name="cc" />
+    <registry name="gen" />
+    <registry name="k12" >
+      <registry name="pvt" />
+    </registry>
+    <registry name="lib" />
+    <registry name="state" />
+    <registry name="tec" />
+  </registry>
+  <registry name="ut" >
+    <registry all="true" >
+      <domain name="ci" />
+      <domain name="co" />
+      <domain name="town" />
+    </registry>
+    <registry name="cc" />
+    <registry name="gen" />
+    <registry name="k12" >
+      <registry name="pvt" />
+    </registry>
+    <registry name="lib" />
+    <registry name="state" />
+    <registry name="tec" />
+  </registry>
+  <registry name="va" >
+    <registry all="true" >
+      <domain name="ci" />
+      <domain name="co" />
+      <domain name="town" />
+    </registry>
+    <registry name="cc" />
+    <registry name="gen" />
+    <registry name="k12" >
+      <registry name="pvt" />
+    </registry>
+    <registry name="lib" />
+    <registry name="state" />
+    <registry name="tec" />
+  </registry>
+  <registry name="vi" >
+    <registry all="true" >
+      <domain name="ci" />
+      <domain name="co" />
+      <domain name="town" />
+    </registry>
+    <registry name="cc" />
+    <registry name="gen" />
+    <registry name="k12" >
+      <registry name="pvt" />
+    </registry>
+    <registry name="lib" />
+    <registry name="state" />
+    <registry name="tec" />
+  </registry>
+  <registry name="vt" >
+    <registry all="true" >
+      <domain name="ci" />
+      <domain name="co" />
+      <domain name="town" />
+    </registry>
+    <registry name="cc" />
+    <registry name="gen" />
+    <registry name="k12" >
+      <registry name="pvt" />
+    </registry>
+    <registry name="lib" />
+    <registry name="state" />
+    <registry name="tec" />
+  </registry>
+  <registry name="wa" >
+    <registry all="true" >
+      <domain name="ci" />
+      <domain name="co" />
+      <domain name="town" />
+    </registry>
+    <registry name="cc" />
+    <registry name="gen" />
+    <registry name="k12" >
+      <registry name="pvt" />
+    </registry>
+    <registry name="lib" />
+    <registry name="state" />
+    <registry name="tec" />
+  </registry>
+  <registry name="wi" >
+    <registry all="true" >
+      <domain name="ci" />
+      <domain name="co" />
+      <domain name="town" />
+    </registry>
+    <registry name="cc" />
+    <registry name="gen" />
+    <registry name="k12" >
+      <registry name="pvt" />
+    </registry>
+    <registry name="lib" />
+    <registry name="state" />
+    <registry name="tec" />
+  </registry>
+  <registry name="wv" >
+    <registry all="true" >
+      <domain name="ci" />
+      <domain name="co" />
+      <domain name="town" />
+    </registry>
+    <registry name="cc" />
+    <registry name="gen" />
+    <registry name="k12" >
+      <registry name="pvt" />
+    </registry>
+    <registry name="lib" />
+    <registry name="state" />
+    <registry name="tec" />
+  </registry>
+  <registry name="wy" >
+    <registry all="true" >
+      <domain name="ci" />
+      <domain name="co" />
+      <domain name="town" />
+    </registry>
+    <registry name="cc" />
+    <registry name="gen" />
+    <registry name="k12" >
+      <registry name="pvt" />
+    </registry>
+    <registry name="lib" />
+    <registry name="state" />
+    <registry name="tec" />
+  </registry>
+</tld>
+<tld name="uy" levels="1" />
+<tld name="uz" >
+  <registry name="co" />
+  <registry name="com" />
+</tld>
+<tld name="va" />
+<tld name="vc" >
+  <registry name="com" />
+  <registry name="edu" />
+  <registry name="gov" />
+  <registry name="mil" />
+  <registry name="net" />
+  <registry name="org" />
+</tld>
+<tld name="ve" levels="1" />
+<tld name="vg" />
+<tld name="vi" >
+  <registry name="co" />
+  <registry name="com" />
+  <registry name="k12" />
+  <registry name="net" />
+  <registry name="org" />
+</tld>
+<tld name="vn" >
+  <registry name="ac" />
+  <registry name="biz" />
+  <registry name="com" />
+  <registry name="edu" />
+  <registry name="gov" />
+  <registry name="health" />
+  <registry name="info" />
+  <registry name="int" />
+  <registry name="name" />
+  <registry name="net" />
+  <registry name="org" />
+  <registry name="pro" />
+</tld>
+<tld name="vu" />
+<tld name="ws" >
+  <registry name="com" />
+  <registry name="dyndns" />
+  <registry name="edu" />
+  <registry name="gov" />
+  <registry name="mypets" />
+  <registry name="net" />
+  <registry name="org" />
+</tld>
+<tld name="xn--3e0b707e" />
+<tld name="xn--45brj9c" />
+<tld name="xn--54b7fta0cc" />
+<tld name="xn--90a3ac" />
+<tld name="xn--clchc0ea0b2g2a9gcd" />
+<tld name="xn--fiqs8s" />
+<tld name="xn--fiqz9s" />
+<tld name="xn--fpcrj9c3d" />
+<tld name="xn--fzc2c9e2c" />
+<tld name="xn--gecrj9c" />
+<tld name="xn--h2brj9c" />
+<tld name="xn--j1amh" />
+<tld name="xn--j6w193g" />
+<tld name="xn--kprw13d" />
+<tld name="xn--kpry57d" />
+<tld name="xn--lgbbat1ad8j" />
+<tld name="xn--mgb2ddes" />
+<tld name="xn--mgb9awbf" />
+<tld name="xn--mgba3a4f16a" />
+<tld name="xn--mgba3a4fra" />
+<tld name="xn--mgbaam7a8h" />
+<tld name="xn--mgbayh7gpa" />
+<tld name="xn--mgbbh1a71e" />
+<tld name="xn--mgbc0a9azcg" />
+<tld name="xn--mgberp4a5d4a87g" />
+<tld name="xn--mgberp4a5d4ar" />
+<tld name="xn--mgbqly7c0a67fbc" />
+<tld name="xn--mgbqly7cvafr" />
+<tld name="xn--mgbtf8fl" />
+<tld name="xn--nnx388a" />
+<tld name="xn--node" />
+<tld name="xn--o3cw4h" />
+<tld name="xn--ogbpf8fl" />
+<tld name="xn--p1ai" />
+<tld name="xn--pgbs0dh" />
+<tld name="xn--s9brj9c" />
+<tld name="xn--wgbh1c" />
+<tld name="xn--wgbl6a" />
+<tld name="xn--xkc2al3hye2a" />
+<tld name="xn--xkc2dl3a5ee0h" />
+<tld name="xn--yfro4i67o" />
+<tld name="xn--ygbi2ammx" />
+<tld name="xxx" />
+<tld name="ye" levels="1" />
+<tld name="yu" levels="1" />
+<tld name="za" levels="1" />
+<tld name="zm" levels="1" />
+<tld name="zw" levels="1" />
+</tlds>

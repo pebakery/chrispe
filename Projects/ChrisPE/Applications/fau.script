@@ -1,0 +1,136 @@
+[main]
+Title=F.A.U.
+Description=Forensic Acquisitions Utilities by Mr George M. Garner Jr. "This is a collection of utilities and libraries intended for forensic or forensic-related investigative use in a modern Microsoft Windows environment...."
+Selected=False
+Level=5
+Author=ThePEBakeryTeam
+Version=20190426
+Date=2019-04-26
+Interface=Interface1
+
+[Interface1]
+pTextLabelMenu1="1",1,1,35,3,70,18,10,Bold
+pButtonMenu2="2",1,8,75,0,70,20,pButtonMenu2,0,True,_pButtonMenu2_,True
+pButtonMenu3="?",1,8,145,0,70,20,pButtonMenu3,0,True,_pButtonMenu3_,True
+pTextLabel2="FAU is the property of GMG Systems, Inc. The author of the software, Mr George M. Garner sadly passed away in 2017 and development of the software appears to have ended. Mr Garner kindly gave permission under an Open License to redistribute the software -",1,1,51,150,480,50,9,Normal
+pWebLabel1=http://www.gmgsystemsinc.com/fau/,1,10,51,100,216,18,http://www.gmgsystemsinc.com/fau/
+pTextLabel1="Forensic Acquisitions Utilities website",1,1,51,77,330,18,10,Bold
+pWebLabel2=FAU_END_USER_LICENSE_AGREEMENT.pdf,1,10,51,200,211,18,http://www.gmgsystemsinc.com/fau/FAU_END_USER_LICENSE_AGREEMENT.pdf
+pCheckBoxInWim="Include Program in boot.wim",1,3,51,265,180,18,True
+
+[Interface2]
+pButtonMenu1="1",1,8,5,0,70,20,pButtonMenu1,0,True,_pButtonMenu1_,True
+pTextLabelMenu2="2",1,1,108,3,70,18,10,Bold
+pButtonMenu3="?",1,8,145,0,70,20,pButtonMenu3,0,True,_pButtonMenu3_,True
+pBevel1=,1,12,10,65,66,2
+pTextLabel="Menu Entries",1,1,10,50,230,18,8,Bold
+pCheckBoxShortcutDesktop="Add to Desktop Menu",1,3,40,80,150,18,True
+pCheckBoxShortcutQuick="Add to Quicklaunch Menu",1,3,40,110,150,18,True
+pCheckBoxShortcutPrograms="Add to #$qStart#$q > ",1,3,40,140,99,18,True
+pCheckBoxShortcutLaunchBar="Add to LaunchBar Menu ",1,3,40,170,150,18,True
+pButtonShortcut1=?,1,8,10,80,18,18,pButtonShortcut1,0,True,_pButtonShortcut1_,True
+pButtonShortcut2=?,1,8,10,110,18,18,pButtonShortcut2,0,True,_pButtonShortcut2_,True
+pButtonShortcut3=?,1,8,10,140,18,18,pButtonShortcut3,0,True,_pButtonShortcut3_,True
+pButtonShortcut4=?,1,8,10,170,18,18,pButtonShortcut4,0,True,_pButtonShortcut4_,True
+pTextBox1=,1,0,140,140,150,21,Programs
+
+[pButtonMenu1]
+IniWrite,%ScriptFile%,Main,Interface,Interface1
+System,REFRESHINTERFACE
+
+[pButtonMenu2]
+IniWrite,%ScriptFile%,Main,Interface,Interface2
+System,REFRESHINTERFACE
+
+[pButtonMenu3]
+message,"Click on the buttons to toggle between tabs 1 and 2. #$x#$xTab 2 contains menu options for use in the selected shell. Click on the ? button for information about the different options."
+
+[pButtonShortcut1]
+message,"WinXShell only#$x#$xSelect this option to add a program shortcut to the Desktop."
+
+[pButtonShortcut2]
+message,"WinXShell only#$x#$xSelect this option to add a program menu option to the Quicklaunch menu - similar in appearence to the 'Pin to Taskbar' option in Windows 7/8/10."
+
+[pButtonShortcut3]
+message,"Applies to WinXShell#$c BBLean and LaunchBar Shell(s)#$x#$xSelect this option to add a program menu option to the Start menu. Leave blank to add to the root of the menu#$c or manually type a path to place in a sub-menu (do not use spaces in the path). E.g. #$x#$s- FileManager#$x#$s- Programs#$x#$s- Programs\FileManager#$x#$xAnd looking at the examples above - #$x#$xLeave this option blank to add a menu entry to the root of the program menu (the 'Start' menu in WinXShell#$c the 'Start' menu in BBLean#$c or the root of the LaunchBar menu bar if LaunchBar is selected as Shell)#$x#$xEnter 'FileManager' to add a menu entry for this application to the 'Start' > 'FileManager' sub-menu (WinXShell and bblean) or the 'FileManager' sub-menu in LaunchBar.#$x#$xEnter 'Programs' to add a menu entry for this application to the 'Start' > 'Programs' sub-menu (WinXShell and bblean) or the 'Programs' sub-menu in LaunchBar.#$x#$xEnter 'Programs\FileManager' to add a menu entry for this application to the 'Start' > 'Programs' > 'FileManager' sub-menu (WinXShell and bblean) or the 'Programs' > 'FileManager' sub-menu in LaunchBar."
+
+[pButtonShortcut4]
+message,"This setting does not apply to any LaunchBar instance running as the WinPE Shell. This option only applies to a LaunchBar instance when the Applications' > 'LaunchBar' program script is selected in the build.#$x#$xIf the 'Applications' > 'LaunchBar' program script is selected than enable this option to add a program menu entry to the root of the LaunchBar menu bar. #$x#$xPlease note that if option '6] Programs in boot.wim' in the main project script is set as 'NO'#$c then LaunchBar and a number of other applications will not be available at boot. In this case a text based .ini file will be used for LaunchBar menu settings."
+
+[process]
+If,%FullProjectRun%,Equal,NO,Run,"%ProjectDir%\Core\common.script",PostConfigRun
+AddInterface,%ScriptFile%,Interface1,""
+AddInterface,%ScriptFile%,Interface2,""
+If,%pCheckBoxInWim%,Equal,True,Set,%PROGRAMS.IN.WIM%,YES
+Else,Set,%PROGRAMS.IN.WIM%,NO
+Run,%ScriptFile%,CHECKS
+Run,%ScriptFile%,MENU
+Run,%ScriptFile%,COMMON
+If,%PROGRAMS.IN.WIM%,Equal,NO,Run,%ScriptFile%,NOT.IN.WIM
+If,%PROGRAMS.IN.WIM%,Equal,YES,Run,%ScriptFile%,IN.WIM
+
+
+[CHECKS]
+If,Not,ExistFile,"%Programs%\FAU\%ARCH%\dd.exe",Begin
+  Message,FAU is missing - exiting script...,Error,5
+  Exit,FAU is missing - exiting script...,WARN
+End
+
+[MENU]
+If,%PROGRAMS.IN.WIM%,Equal,NO,Begin
+  If,Not,ExistFile,"%OutputDir%\Programs\ShortcutsNotInWim.txt",Run,"%ProjectDir%\Core\common.script",NotInWim
+  If,%Filemanager%,Equal,7-zip,TXTaddline,"%OutputDir%\Programs\ShortcutsNotInWim.txt","#$p~dp0nircmd.exe shortcut #$q#$pSystemDrive#$p\Programs\7-zip\7zfm.exe#$q #$q#$pTemp#$p\ShortCuts#$q #$qFAU#$q #$q#$p~dp0FAU#$q #$q#$p~dp0misc\folder.ico#$q #$q0#$q",Append
+  If,%Filemanager%,Equal,Explorer++,TXTaddline,"%OutputDir%\Programs\ShortcutsNotInWim.txt","#$p~dp0nircmd.exe shortcut #$q#$pSystemDrive#$p\Programs\Explorer++\Explorer++.exe#$q #$q#$pTemp#$p\ShortCuts#$q #$qFAU#$q #$q#$p~dp0FAU#$q #$q#$p~dp0misc\folder.ico#$q #$q0#$q",Append
+  If,%Filemanager%,Equal,JustManager,TXTaddline,"%OutputDir%\Programs\ShortcutsNotInWim.txt","#$p~dp0nircmd.exe shortcut #$q#$pSystemDrive#$p\Programs\JustManager\JustManager.exe#$q #$q#$pTemp#$p\ShortCuts#$q #$qFAU#$q #$q#$p~dp0FAU#$q #$q#$p~dp0misc\folder.ico#$q #$q0#$q",Append
+  If,%Filemanager%,Equal,Q-Dir,TXTaddline,"%OutputDir%\Programs\ShortcutsNotInWim.txt","#$p~dp0nircmd.exe shortcut #$q#$pSystemDrive#$p\Programs\Q-Dir\Q-Dir.exe#$q #$q#$pTemp#$p\ShortCuts#$q #$qFAU#$q #$q#$p~dp0FAU#$q #$q#$p~dp0misc\folder.ico#$q #$q0#$q",Append
+End 
+If,%PROGRAMS.IN.WIM%,Equal,YES,Begin
+  If,%Filemanager%,Equal,Q-Dir,ShellExecute,Hide,"%Tools%\Shortcut.exe","/A:C /T:#$q#$pSystemDrive#$p\Programs\Q-Dir\Q-Dir.exe#$q /F:#$q%ProjectTemp%\FAU.lnk#$q /P:#$q#$pSystemDrive#$p\Programs\FAU#$q /W:#$q#$pSystemDrive#$p\Programs\FAU#$q /I:#$q#$pSystemDrive#$p\Programs\misc\folder.ico#$c0#$q"
+  If,%Filemanager%,Equal,Explorer++,ShellExecute,Hide,"%Tools%\Shortcut.exe","/A:C /T:#$q#$pSystemDrive#$p\Programs\Explorer++\Explorer++.exe#$q /F:#$q%ProjectTemp%\FAU.lnk#$q /P:#$q#$pSystemDrive#$p\Programs\FAU#$q /W:#$q#$pSystemDrive#$p\Programs\FAU#$q /I:#$q#$pSystemDrive#$p\Programs\misc\folder.ico#$c0#$q"
+  If,%Filemanager%,Equal,JustManager,ShellExecute,Hide,"%Tools%\Shortcut.exe","/A:C /T:#$q#$pSystemDrive#$p\Programs\JustManager\JustManager.exe#$q /F:#$q%ProjectTemp%\FAU.lnk#$q /P:#$q#$pSystemDrive#$p\Programs\FAU#$q /W:#$q#$pSystemDrive#$p\Programs\FAU#$q /I:#$q#$pSystemDrive#$p\Programs\misc\folder.ico#$c0#$q"
+  If,%Filemanager%,Equal,7-zip,ShellExecute,Hide,"%Tools%\Shortcut.exe","/A:C /T:#$q#$pSystemDrive#$p\Programs\7-zip\7zfm.exe#$q /F:#$q%ProjectTemp%\FAU.lnk#$q /P:#$q#$pSystemDrive#$p\Programs\FAU#$q /W:#$q#$pSystemDrive#$p\Programs\FAU#$q /I:#$q#$pSystemDrive#$p\Programs\misc\folder.ico#$c0#$q"
+  If,ExistFile,"%ProjectTemp%\FAU.lnk",Begin
+    Set,%MyShortcut%,FAU.lnk
+    If,%pCheckBoxShortcutDesktop%,Equal,True,FileCopy,"%ProjectTemp%\%MyShortcut%","%ProjectTemp%\ShortCuts\Desktop"
+    If,%pCheckBoxShortcutQuick%,Equal,True,FileCopy,"%ProjectTemp%\%MyShortcut%","%ProjectTemp%\ShortCuts\Quick"
+    If,%pCheckBoxShortcutPrograms%,Equal,True,Begin
+      Set,%ProgramMenuPath%,%pTextBox1%
+      Run,"%ProjectDir%\Core\common.script",StartMenu
+    End
+    If,%pCheckBoxShortcutLaunchBar%,Equal,True,FileCopy,"%ProjectTemp%\%MyShortcut%","%ProjectTemp%\ShortCuts\LaunchBar"
+    If,%FullProjectRun%,Equal,NO,Run,"%ProjectDir%\Core\common.script",PostConfigRunShortcuts
+    FileDelete,"%ProjectTemp%\%MyShortcut%"
+  End
+End
+
+[COMMON]
+If,%PROGRAMS.IN.WIM%,Equal,NO,Set,%PATH%,%OutputDir%
+If,%PROGRAMS.IN.WIM%,Equal,YES,Set,%PATH%,%TargetDir%
+If,Not,ExistDir,"%PATH%\Programs",DirMake,"%PATH%\Programs"
+DirMake,"%PATH%\Programs\FAU"
+DirCopy,"%Programs%\FAU\%ARCH%\*.*","%PATH%\Programs\FAU"
+FileCopy,"%Programs%\FAU\dd.txt","%PATH%\Programs\FAU"
+FileCopy,"%Programs%\FAU\fmdata.txt","%PATH%\Programs\FAU"
+FileCopy,"%Programs%\FAU\nc.txt","%PATH%\Programs\FAU"
+IniWrite,"%OutputDir%\Project.Settings.ini",PROGRAMS,FAU,YES
+
+[IN.WIM]
+If,%FullProjectRun%,Equal,NO,Begin
+  IniRead,"%TargetDir%\Project.Settings.ini",Main,Image.Number,%Boot.wim.Image.number%
+  WimPathAdd,%OutputDir%\sources\boot.wim,%Boot.wim.Image.number%,%TargetDir%,""
+End
+//Wait,1
+
+[NOT.IN.WIM]
+//Wait,1
+If,%FullProjectRun%,Equal,NO,Run,"%ProjectDir%\Core\common.script",PostConfigRunNotInWim
+
+[EncodedFile-AuthorEncoded-icon2.JPG]
+lines=1
+0=eJztVmdUU9u63SF0UIoooUrvIYQQaigKUqUpAlINIUCE0AISehFFIVIFFAQPAiJK7yAIKIKggNKLjSaHUENTQeEF77nnvHHf/fHaeO+N8Zh77L2/tfa3vrnmWmvsMffH9j8D7Mb6RvoACAQCLlEvYH+KfeIMEecGAKamgAwAAIwALUgDoKFGdNSGcRwOoKXGIGpscS/n4A0wAwD7KzI/wEDtY6W2tag3wE/+NfYQhzjEIQ5xiEP8P8UFAtaf+qJLBv/yEVxUv5CbTPtnXJWa8isGIxUBIDX1r/gvT8GYelDn0FMc4hCHOMQhDvH/G4oKcIS6gpo6HClEfSIU1OHK/7SP6j4AAoAFDgzI/hQLt0dAgK86DOZNkEe7+rhg5TE+eBgR7QuDyyvAAJQ20ReN8cQGCLlg3XHempKrT1slhXCumpI2SFMFU19drAfOMMQfez7EzAoT4olRc5XU1jrCjCKqE/G+eGwAWoiI9/ImqBM1RX5VV6fGB90wES2Uv6ub+jk9/T8yqC1NkT/mEhQUJB+EkPfxd4fB1dTUYAqKMEVFKDUDSgj2DkATod4E0T8K6GEJGH+cbwDOx1vooI128QkM0BQJDMS5qruh3ZAurq5IqAsa4QqFw13RULQrAg51RSBcVZBwVUU3uIvIH/SumD/ZfQP9vX5xu2JgWC8sHusdQKCuBhwmAvvv5aQu0Z+k/3T5qRqpOeq6/lh0AFaPemsdbChUQQ0KR1r9fUPlkXBlFOwf8lCwf5jo/8JqaaFcMeqYgzn5+P+N/jzW77+22144rQPr/Dd11MbfAmpZ6pljYmJCwf41479dAtgfR44a/XlAqSOF/gdwSHJIckhySHJIckhySPJ/i+Qvk4v1pjrbIKqF3Z8EdAEGOjp6OloGejp6RgYGRmYOFqrHYD7Oxs7KATnOywM5DuHmE5QU5hMQF+CGiMiLiEtJy8rJ8grBEDAZRUkZWZmDIiAGRkZmJmYuFhYuGX4Iv8x/GPttAAcjgAbswSARgIYDBOYA7XcAJwEARAf6hb/7fxANmJaOnoGRiZmFmlDLDtCAwGAaWjAdHS0t9Ws49TtAy0HHKQw/RX/MEs0g4selGJ2Sxyh6urL9+Ll3a2IIF/8YJuYT3BAeXnEJSSlpGSWksoqqmrqu3hl9A0Mj4/NWF6xtbC/aYVyxbu4euMuEgMArQcTgkKux167H3bgZn5p2Oz0j887drAf5BYUPix4VP66qrqmtq29obHr+ouNlZ9er7p6BwaHhkdGx8Ymp6ZnZuS/zvy+QKesbm1vbX7993znQBQLAoL/jn+rioOqioaUF0zIc6ALRBB0kcNDSCcPpOU9ZMqD9jokoRjNynU7Jq2xnEkWcWzvu4v+O+YSY0pQ45UDaL2X/PmEx/yllfwr7S9cEwAoGUTcPzAFoAzv68dIsIB2WCVKSU3ov8WpnU0SSb52CgXz+4+69x53DQa/C+7GCXxqfvmp2fzSevRxqied8W5VUgTvj5MsEhiHY6RGvLMJvAYGC4hTxhwm0D8jbssc9thPyb7KeU2HZLZnd2fFzMPk2MC2rJprQuaP84JwzNGPDNPXTm/OkPQr/Z/R1iLz6QO+UD70BIVDgZ+l2npL7SVxTkzvO0Q5enxa9YXyVgrw8+fwZ3dPm68i1DsbRd8ZBtI6VSmc5orqE64MEY7/OgmVWu+IMgwuGAya/y0mk0GY2OQ58Gu/IZpTEObYd/VxuOVJmT5yAnpLYhRbwxsVNpbk4LCSOVIvqW11bvxudYvZZMS4tJT7yh/Az9tSJEXKXaetgQUOjcujSyhtTHtaeixVj2kF1IaMq0/ePOLxvJ4iiBMVrqq49tN0ytJTXM5xz7ml0UEw2OK326ksUUn6r1My66d3muSyymcP7SWf9Cicd2znGRMs6K8trC2OEBfqrpUVXa2RD+V7ZGKYGpeO3IHmZS0YItE7WifabN/u4wp7FZdVLPC10shUQ3B6AaQ0TlJOmmXp6bkXHJc7Vu/Oo9jts2V3ffsnXkYyrwn3FFtaMZeSKMFIcOkq4u02uXRFu7IMoaBJRbxnM8dN59Pme+Yvq906EdJMY7mqFGsWn3At7gVH250qOaNnZCOnpQLZ0nlq6ezKHWDgcu61OqnsGqcjosL/dmP1chdJV9fmoyaSqHCLXTCNxvKwUj88J2gfwxHJD2AYygT65zVw8CF2FGKQlYfgtGB5+aWjlICbufLXW4lurjg6tD5yjOBTGh+40LmkXOlNab0qsbd/IN71h/tipB1qC1uS1/t28gmx6ZiqS7Qi38a7U7X5UCbapwbue835z104ISOf45k+Y2VpiWiCSpGgiPwjtHSpCOFTs7QYttv2O6JSWaDX5Xqq0OBnM5fjJCCed6ELrw28qpQYRY2/84et52ejqZf8FzotdcqbuX+jdd/cB5YECTPRqL8a+HyunxdUQDrX6+GZQ/8yLYz6yp0Qz9gGvZB7/0GM6XL3bKb6CUzWdqfZjej2sY2x8+v0N96e8TmuzN38tlZqpMsoyCddy/pZpm5CAmY8s4VyRg+c2mhUh9TV6lfFSvYJpHKehZRY8F427ZLkgmqdAd/D8l1I+FjWNKH0LZBlWZtsd4Y3QIz1d64ZAGJgbsx8tp+mw890S0a6YuCN/nOn615+hbtISG46RH7+obM9GcBRXP63OVA+Ihn2xVxsy/8p5gdNvELhJr7O6WWoCdod+TK8/e+qO2C1Ij1k/TIabYfWoGdNCGvky6etOeG6c92rhjRHpwka4AULgmQmdHBtfIjwqHD4RJfWtyPgdSjffE/pk4ZyJxP02tLLADdJJuLnbhF+/hew9lY+i73zs25ve1Y1eCu6ZfO9siFGBL9HqpV6KvUtIeVruAnf0ziNg5e+X1W+7bXnY4SzLIEwxCP22fSAodnkI81DmJMeC3ZWWQOU0Au4mNvNVzEav8HSOi6LY1U8enSstTbzAE89L63JNIqivvA6eQjny7oFDAWtmcxzPmFKM+AU+wLv5be6bUo51vO2j2BEXjRMhYw8eFhWY1csmwoUY9adInGyaxF5vos3F4a1byHJkcPkqkkVyVzVrZOSYH65RUeJcMLGnzBDdLRqDo+Dsru3UvnHSHIRZfojKwl6XVHVROP/6Mwmz9tvRB4OR8c9kydxJGZVrm6d7xq6oHFUx/mRRyDDj2PuzZyFEs/et456e165BGPPsHpee+JrHMH/ExvmnuZT+YnehyJk8gylHreoreK/kYCPhhruXXpAevfdLW9aBQMu7flbK70ImvrC2o367fxf10oJ7dHV+rdja8FyPGy/28T7g8vG7dffTuRtcFheJn5eTSReIyBt2fR+Xa7IDTxWW5XGyNZd0YEMC+tQKHY1PtNRWhisOdYUXm+B9X7ddMbSzIGvMX2LQZCuTAmWGZNz3QS4XbVvp06VBui5yzLSjx9wsDN5m1eIC8Y8uW3fLZwPqsYSbs5omeuTce1ej+387rke8Jn7h9kLdtMlkYCZBunPk5ifMPlB7I2of2HKpGZgLW/goy3LGU5a2oVZuDHuUT4b43eD1RBTPkWnow7sBSt9oH1CWRj0jH/ONGzmp9bWnWHkHeqp6+TS3SLzvcmetT5Z1ZS245hzEz6lvUK60uhzqmtv5aVfmpHR+zNLjchqj2NL0HUii+a5z9tQQ+lklm0SO2+vgYIHaLpRhOW937r2ZCG2wzonCjHdbnjnau4oM8V98qnpzq1RuY+eHg0XJ5i3uR+x4HgxugYueZ3IrV76WleW0QpQQzdQWR8vgi3bcmc9HBh1adunyTR9ypsxVttBefn/PN8JFOtBoWSl70sQ+XP19ATzOPJOWPuU80/eYiJgoVJfVkNxmr4/BaGnNZDZefWVCQ1pkELSR/5GlrQe022N5O/rePP8oPp9sJ1Gcb+9kJJgTJHYzLneti7XvxZz44Dd7odlI+fSblBO2/VcD7QNr4j/MtIqoQSfpeMU2Ou7ubXMlFT/ezpVv2eUSmdtkU9IHC1iPzzRikprJUWXmDomMQok1oPEfUsLPuIiRkK5xrpNlZpF2H0YlFWyFOPS+XExF9TxN8Y+gCMY0rl6bPTXlmSN2z6jwssoJkiYQ/n
+1=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
+
+[AuthorEncoded]
+icon2.JPG=5324,7099
+logo=icon2.JPG
+

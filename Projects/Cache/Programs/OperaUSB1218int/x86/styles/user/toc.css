@@ -1,0 +1,160 @@
+@charset "utf-8";
+/*	Name: 922536704 */
+/*	Heading Outline. Converts the document to a table of contents based
+ 	on heading elements H1-H6.
+	Copyright 2012 Opera Software */
+* {
+	font-size: 13px !important;
+	text-decoration: none !important;
+	text-indent: 0 !important;
+	text-align: left !important;
+	text-decoration: none !important;
+	text-transform: none !important;
+	line-height: 0 !important;
+	vertical-align: top !important;
+	color: rgb(0,0,0) !important;
+	background-color: transparent !important;
+	background-image: none !important;
+	padding: 0 !important;
+	margin: 0 !important;
+	border: none !important;
+	list-style: none !important;
+	width: auto !important;
+	max-width: none !important;
+	height: 0 !important;
+	min-height: 0 !important;
+	float: none !important;
+	position: static !important;
+	overflow: visible !important;
+	visibility: hidden !important;
+	display: inline !important;
+}
+address, blockquote, body::before, body::after, br, caption, div::before, 
+div::after, h1::after, h2::after, h3::after, h4::after, h5::after, h6::after, 
+head, hr, html::before, html::after, iframe, img, input, label, legend, dt, 
+dd, object, p, p::before, p::after, pre, span::before, span::after, textarea, 
+ul::before, ul::after {
+	display: none !important;
+}
+a, font {
+	padding: 0 !important;
+	margin: 0 !important;
+	float: none !important;
+	visibility: hidden !important;
+	position: static !important;
+	display: inline !important;
+}
+h1, h2, h3, h4, h5, h6 {
+	font-family: sans-serif !important;
+	font-size: 28px !important;
+	font-weight: bold !important;
+	font-style: normal !important;
+	text-align: left !important;
+	line-height: 120% !important;
+	letter-spacing: normal !important;
+	color: rgb(0,0,0) !important;
+	background-color: transparent !important;
+	background-image: none !important;
+	padding: 10px 5px !important;
+	margin: 0 !important;
+	border: 0 solid !important;
+	width: auto !important; 
+	height: auto !important;
+	max-width: 1024px !important;
+	min-height: 20px !important;
+	min-height: 0 !important;
+	float: none !important;
+	visibility: visible !important;
+	position: static !important;
+	display: block !important;
+}
+h2 {
+	font-size: 20px !important;
+	padding-left: 20px !important;
+}
+h3 {
+	font-size: 18px !important;
+	padding-left: 40px !important;
+}
+h4 {
+	font-size: 16px !important;
+	padding-left: 60px !important;
+}
+h5 {
+	font-size: 14px !important;
+	padding-left: 80px !important;
+}
+h6 {
+	font-size: 12px !important;
+	padding-left: 100px !important;
+}
+h1 *, h1 a, h2 *, h2 a, h3 *, h3 a, h4 *, h4 a, h5 *, h5 a, h6 *, h6 a {
+	font-family: inherit !important;
+	font-size: inherit !important;
+	font-weight: inherit !important;
+	font-style: inherit !important;
+	color: inherit !important;
+	background: none !important;
+	padding: 0 !important;
+	margin: 0 !important;
+	border: 0 solid !important;
+	width: auto !important;
+	float: none !important;
+	visibility: visible !important;
+	position: static !important;
+	display: inline !important;
+}
+h1 sup, h2 sup, h3 sup, h4 sup, h5 sup, h6 sup, h1 sub, h2 sub, 
+h3 sub, h4 sub, h5 sub, h6 sub {font-size: 11px !important;}
+h1 br, h2 br, h3 br, h4 br, h5 br, h6 br {content: "\0020" !important;}
+h1::before, h2::before, h3::before, h4::before, h5::before, h6::before {
+	content: "H1: " !important;
+	font-weight: bold !important;
+	color: rgb(46,61,77) !important;
+	background-color: transparent !important;
+	background-image: none !important;
+	padding: 0 !important;
+	float: none !important;
+	position: static !important;
+	display: inline !important;
+}
+h2::before {content: "H2: " !important;}
+h3::before {content: "H3: " !important;}
+h4::before {content: "H4: " !important;}
+h5::before {content: "H5: " !important;}
+h6::before {content: "H6: " !important;}
+html {
+	color: rgb(30,30,30) !important;
+	background-color: rgb(235,235,235) !important;
+	margin: 10px auto !important;
+	border: 1px solid rgb(0,0,0) !important;
+	max-width: 800px !important;
+	height: auto !important;
+	visibility: visible !important;
+	display: block !important;
+}
+html::before {
+	content: -o-language-string(922536704) !important;
+	font-weight: bold !important;
+	text-align: center !important;
+	line-height: 1.5em !important;
+	color: rgb(226,228,235) !important;
+	background: rgb(46,61,77) !important;
+	padding: 5px 0 !important;
+	width: 100% !important;
+	visibility: visible !important;
+	display: inline-block !important;
+}
+html body {
+	color: rgb(30,30,30) !important;
+	background-color: rgb(245,245,245) !important;
+	height: auto !important;
+	visibility: visible !important;
+	display: block !important;
+}
+@media print {
+	html, html::before, * {
+		color: black !important;
+		background: white !important;
+	}
+}

@@ -6,8 +6,8 @@ Locked=True
 Mandatory=True
 Level=2
 Author=ThePEBakeryTeam
-Version=20180321
-Date=2018-03-21
+Version=20190426
+Date=2019-04-26
 Interface=Interface
 NoWarning=False
 
@@ -146,7 +146,7 @@ If,Not,ExistDir,%ProjectTemp%,DirMake,%ProjectTemp%
 Echo,"Copying boot.wim#$c removing read-only flag and extracting required files..."
 FileCopy,"%boot.wim%","%OutputDir%\sources\boot.wim"
 ShellExecute,Hide,"attrib.exe","-r #$q%Outputdir%\Sources\boot.wim#$q"
-WimExtractBulk,%OutputDir%\sources\boot.wim,%boot.wim.Image.number%,%Tools%\wimlib.file.lists\boot.wim.registry.txt,%TargetDir%,NOACL
+WimExtractBulk,%OutputDir%\sources\boot.wim,%boot.wim.Image.number%,%Tools%\wimlib.file.lists\boot.wim.registry.txt,%TargetDir%,NOACL,NOERR
 IniRead,"%ProjectDir%\Drivers\Drivers.script",MAIN,Selected,%Drivers%
 If,%Drivers%,Equal,True,Begin
   ReadInterface,Value,"%ProjectDir%\Drivers\Drivers.script",Interface,pScrollBox_A1,%DriversMethod%

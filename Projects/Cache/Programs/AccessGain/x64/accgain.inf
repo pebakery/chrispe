@@ -1,0 +1,83 @@
+;;;
+;;; AccessGain Driver
+;;;
+
+[Version]
+Signature   = "$Windows NT$"
+Class       = "ActivityMonitor"             ;This is determined by the work this filter driver does
+ClassGuid   = {b86dff51-a31e-4bac-b3cf-e8cfe75c9fc2}    ;This value is determined by the Class
+Provider    = %Twindows%
+DriverVer   = 01/14/2011,1.1.0.1
+
+
+[DestinationDirs]
+DefaultDestDir          = 12
+AccessGainDriver.DriverFiles  = 12            ;%windir%\system32\drivers
+
+;;
+;; Default install sections
+;;
+
+[DefaultInstall]
+OptionDesc  = %ServiceDescription%
+CopyFiles   = AccessGainDriver.DriverFiles
+
+[DefaultInstall.Services]
+AddService  = %ServiceName%,,AccessGainDriver.Service
+
+;;
+;; Default uninstall sections
+;;
+
+[DefaultUninstall]
+DelFiles   = AccessGainDriver.DriverFiles
+
+[DefaultUninstall.Services]
+DelService = %ServiceName%,0x200      ;Ensure service is stopped before deleting
+
+;
+; Services Section
+;
+
+[AccessGainDriver.Service]
+DisplayName      = %ServiceName%
+Description      = %ServiceDescription%
+ServiceBinary    = %12%\%DriverName%.sys    ;%windir%\system32\drivers\
+Dependencies     = "FltMgr"
+ServiceType      = 2                        ;SERVICE_FILE_SYSTEM_DRIVER
+StartType        = 3                        ;SERVICE_DEMAND_START
+ErrorControl     = 1                        ;SERVICE_ERROR_NORMAL
+LoadOrderGroup   = "FSFilter Activity Monitor"
+AddReg           = AccessGainDriver.AddRegistry
+
+;
+; Registry Modifications
+;
+
+[AccessGainDriver.AddRegistry]
+HKR,"Instances","DefaultInstance",0x00000000,%DefaultInstance%
+HKR,"Instances\"%Instance1.Name%,"Altitude",0x00000000,%Instance1.Altitude%
+HKR,"Instances\"%Instance1.Name%,"Flags",0x00010001,%Instance1.Flags%
+
+;
+; Copy Files
+;
+
+[AccessGainDriver.DriverFiles]
+%DriverName%.sys
+
+;;
+;; String Section
+;;
+
+[Strings]
+Twindows                = "Twindows Internals - http://www.hobeanu.com/blog"
+ServiceDescription      = "File system access gain mini-filter driver"
+ServiceName             = "AccessGainDriver"
+DriverName              = "accgain"
+
+;Instances specific information.
+DefaultInstance         = "AccessGain Instance"
+Instance1.Name          = "AccessGain Instance"
+Instance1.Altitude      = "370020"
+Instance1.Flags         = 0x1          ; Suppress automatic attachments

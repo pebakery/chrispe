@@ -1,0 +1,38 @@
+@charset "utf-8";
+/* Stylesheet for the Opera private mode page*/
+/* Copyright 2012 Opera Software */
+html {
+	font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+	line-height: 1.4;
+	font-size: 14px;
+	background: #f8f8f8 url(images/bkgd.png) top left repeat-x;
+	color: #666;
+	min-height: 100%; 
+	padding: 0 10% 0 7%;
+}
+
+body {
+	margin: 0 auto 0 auto;
+	padding: 160px 0 55px 230px;
+	max-width: 430px;
+	background: url(images/hanger.png) no-repeat left bottom;
+}
+
+h1 {
+	font-size: 32px;
+	margin: 0 0 0.6em 0;
+	line-height: 1.1;
+	text-shadow: 0 1px 0 #fff;
+	color: #cc0f16;
+	letter-spacing: -1px;
+}
+
+a {
+	color: #0174A7;
+	font-weight: bold;
+	text-shadow: 0 1px 0 #fff;
+}
+
+a:hover { color: #111;}
+p { color: rgba(0,0,0,0.6);}
+label { margin: 0 20px 0 0; }

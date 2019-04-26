@@ -1,0 +1,93 @@
+@charset "utf-8";
+/* CSS style sheet for Instant Messenger */
+/* Copyright 2012 Opera Software */
+html {
+	margin: 0;
+	padding: 0;
+}
+body {
+	margin: 0;
+	padding: 0;
+	background-color: white;
+	color: black;
+	font-family: sans-serif;
+	font-size: 12px;
+	overflow-wrap: break-word;
+}
+table {border-collapse: collapse;}
+td {
+	vertical-align: top;
+	padding: 3px 5px;
+}
+td:first-child, td:first-child+td {
+	white-space: nowrap;
+}
+td img {vertical-align: middle;}
+.time {
+	color: gray;
+	background-color: hsl(0,0%,97%);
+	white-space: nowrap;
+}
+div.highlight {
+	display: table-cell;
+	border: 1px dotted #552;
+	padding: 1px;
+	background-color: #ffffe1;
+}
+span.highlight {
+	border: 1px dotted #552;
+	padding: 1px;
+	background-color: #ffffe1;
+}
+.self {
+	color: #009;
+	background-color: hsl(0,0%,97%);
+	text-align: right;
+	white-space: nowrap;
+}
+.self-message {font-weight: bolder;}
+.sender {
+	color: #900;
+	background-color: hsl(0,0%,97%);
+	text-align: right;
+}
+.disconnect, .join, .leave, .nick, .operator, .voiced {
+	color: #090;
+	background-color: hsl(0,0%,97%);
+	text-align: right;
+}
+.disconnect-message, .join-message, .leave-message, .nick-message, .operator-message, .voiced-message {
+	color: #090;
+}
+.action, .self-action {
+	background-color: hsl(0,0%,97%);
+	text-align: right;
+}
+.action-message, .self-action-message {color: #909;}
+.limit-message, .moderated-message, .password-message, .secret-message, .status-message, 
+.topic-message, .topic-protection-message, .unknown-mode-message, .whois-message {
+	color: gray;
+}
+.limit, .moderated, .password, .secret, .status, .topic, .topic-protection, .unknown-mode, .whois {
+	width:	6em;
+	color: gray;
+	background-color: hsl(0,0%,97%);
+	text-align: right;
+}
+[class^="smiley"] {
+	width: -o-skin;
+	height: -o-skin;
+	display: inline-block;
+	vertical-align: middle;
+}
+.smiley-happy {content: -o-skin("Smiley Happy");}
+.smiley-unhappy {content: -o-skin("Smiley Unhappy");}
+.smiley-wink {content: -o-skin("Smiley Wink");}
+.smiley-surprised {content: -o-skin("Smiley Surprised");}
+.smiley-grin {content: -o-skin("Smiley Grin");}
+.smiley-cool {content: -o-skin("Smiley Cool");}
+.smiley-indifferent {content: -o-skin("Smiley Indifferent");}
+.smiley-cry {content: -o-skin("Smiley Cry");}
+.smiley-angry {content: -o-skin("Smiley Angry");}
+.smiley-tongue {content: -o-skin("Smiley Tongue");}
+.smiley-pacman {content: -o-skin("Smiley Pacman");}

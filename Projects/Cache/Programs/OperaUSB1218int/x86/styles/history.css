@@ -1,0 +1,28 @@
+@import url(opera.css);
+
+table {
+	table-layout: fixed;
+}
+
+td:first-child {
+	width: 6em;
+}
+
+td + td {
+	display: block;
+	max-height: 4.85em;
+	overflow: hidden;
+	text-overflow: -o-ellipsis-lastline;
+	overflow-wrap: break-word;
+}
+
+@media screen and (max-width: 400px), projection and (max-width: 400px), tv and (max-width: 400px)
+{
+	table {
+		display: table;
+	}
+
+	tr, table {
+		width: 100%;
+	}
+}
