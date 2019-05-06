@@ -1,11 +1,11 @@
 [Main]
-Title=ChrisPE Beta 0.1.2
+Title=ChrisPE Beta 0.1.4
 SourceDir=
 TargetDir=
 Description=
 Author=ThePEBakeryTeam
-Version=20180321
-Date=2018-03-21
+Version=20190506
+Date=2019-05-06
 Locked=true
 Selected=None
 Mandatory=true
@@ -30,7 +30,7 @@ Project=ChrisPE
 %Target_system32%=%TargetDir%\WINDOWS\System32
 %USECACHE%=NEVER
 %CODEBASE%=unchecked
-%PROJECT.DATE%=2018-03-21
+%PROJECT.DATE%=2019-05-06
 %LANG3%=en-US
 %USE.TOOLS%=YES
 
@@ -70,7 +70,7 @@ pScrollBox_B3=en-US,1,4,20,132,80,20,bg-BG,cs-CZ,da-DK,de-DE,el-GR,en-GB,en-US,e
 pButton_B3=HELP,1,8,430,132,70,20,HELP.B3,0,True,_HELP.B3_,True
 pTextLabel_B3="6] WinPE Language / Fallback Language",1,1,135,135,232,18,8,Bold
 pBevel_B5=,1,12,10,180,500,35
-pScrollBox_B5=DEFAULT,1,4,20,187,80,20,16,32,64,128,256,512,DEFAULT
+pScrollBox_B5=DEFAULT,1,4,20,187,80,20,16,32,64,128,256,512,1024,DEFAULT
 pButton_B5=HELP,1,8,430,187,70,20,HELP.B5,0,True,_HELP.B5_,True
 pTextLabel_B5="7] RAM Disk Size",1,1,198,190,101,18,8,Bold
 

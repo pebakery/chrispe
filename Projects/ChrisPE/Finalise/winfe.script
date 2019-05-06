@@ -4,8 +4,8 @@ Description=WinPE as a Windows Forensic Environment.
 Selected=False
 Level=8
 Author=ThePEBakeryTeam
-Version=20180321
-Date=2018-03-21
+Version=20190506
+Date=2019-05-06
 Credits=Colin Ramsden, Karl Morton, Royal Meier
 Interface=Interface1
 
@@ -111,6 +111,8 @@ If,%CODEBASE%,Equal,10.0.10586,Set,%Settings%,3
 If,%CODEBASE%,Equal,10.0.14393,Set,%Settings%,3
 If,%CODEBASE%,Equal,10.0.15063,Set,%Settings%,3
 If,%CODEBASE%,Equal,10.0.16299,Set,%Settings%,3
+If,%CODEBASE%,Equal,10.0.17134,Set,%Settings%,3
+If,%CODEBASE%,Equal,10.0.17763,Set,%Settings%,3
 Set,%CONTINUE%,No
 If,%Settings%,Equal,0,Begin
   If,Question,The WinFE Project script is about to run.#$x#$xWARNING - either the build has not been tested in the ChrisPE project#$c or the build version could not be verified. It is therefore difficult to know which registry settings to apply for WinFE to work correctly. If you wish to proceed then a SanPolicy value of 3 will be used.#$x#$xIt's possible that a disk signature might be written to any hard disks that do not already have one - some versions of WinFE have also performed accidental writes during testing.#$x#$xPlease use Windows 8 or 8.1 source files if possible - in testing these versions did not perform ANY accidental writes.#$x#$xAre you sure you want to run this script? Select YES to CONTINUE (adding WinFE) - or NO to EXIT this script,Set,%CONTINUE%,YES

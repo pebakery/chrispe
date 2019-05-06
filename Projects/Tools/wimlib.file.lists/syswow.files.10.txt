@@ -27,6 +27,8 @@
 \Windows\SysWOW64\bcrypt.dll
 \Windows\SysWOW64\browcli.dll
 \Windows\SysWOW64\browseui.dll 
+;Following file added on 2019/05/06 (6th May 2019)
+\Windows\SysWOW64\CoreUIComponents.dll
 \Windows\SysWOW64\cfgmgr32.dll 
 \Windows\SysWOW64\clbcatq.dll 
 \Windows\SysWOW64\clusapi.dll 
@@ -61,11 +63,15 @@
 \Windows\SysWOW64\dui70.dll
 \Windows\SysWOW64\duser.dll 
 \Windows\SysWOW64\dwmapi.dll 
+;Following file added on 2019/05/06 (6th May 2019)
+\Windows\SysWOW64\DXCore.dll
 \Windows\SysWOW64\dxgi.dll
 \Windows\SysWOW64\edputil.dll
 \Windows\SysWOW64\esent.dll 
 \Windows\SysWOW64\ExplorerFrame.dll 
 \Windows\SysWOW64\FirewallAPI.dll
+;Following file added on 2019/05/06 (6th May 2019)
+\Windows\SysWOW64\fltLib.dll
 \Windows\SysWOW64\fwbase.dll
 \Windows\SysWOW64\FWPUCLNT.DLL 
 \Windows\SysWOW64\gdi32.dll 
@@ -95,6 +101,8 @@
 \Windows\SysWOW64\mscms.dll 
 \Windows\SysWOW64\msctf.dll 
 \Windows\SysWOW64\msi.dll 
+;Following file added on 2019/05/06 (6th May 2019)
+\Windows\SysWOW64\msiso.dll
 \Windows\SysWOW64\msimg32.dll 
 \Windows\SysWOW64\msls31.dll 
 \Windows\SysWOW64\msvcirt.dll 
@@ -163,11 +171,17 @@
 \Windows\SysWOW64\sxsstore.dll 
 \Windows\SysWOW64\sxstrace.exe 
 \Windows\SysWOW64\syssetup.dll 
+;Following file added on 2019/05/06 (6th May 2019)
+\Windows\SysWOW64\textinputframework.dll
 \Windows\SysWOW64\tzres.dll 
 \Windows\SysWOW64\ucrtbase.dll
+;Following file added on 2019/05/06 (6th May 2019)
+\Windows\SysWOW64\umpdc.dll
 \Windows\SysWOW64\urlmon.dll 
 \Windows\SysWOW64\user32.dll 
 \Windows\SysWOW64\userenv.dll 
+;Following file added on 2019/05/06 (6th May 2019)
+\Windows\SysWOW64\usermgrcli.dll
 \Windows\SysWOW64\usp10.dll 
 \Windows\SysWOW64\uxtheme.dll 
 \Windows\SysWOW64\vds_ps.dll 
@@ -229,10 +243,14 @@
 \Windows\SysWOW64\*\dui70.dll.mui
 \Windows\SysWOW64\*\duser.dll.mui
 \Windows\SysWOW64\*\dwmapi.dll.mui
+;Following file added on 2019/05/06 (6th May 2019)
+\Windows\SysWOW64\*\DXCore.dll.mui
 \Windows\SysWOW64\*\edputil.dll.mui
 \Windows\SysWOW64\*\ESENT.dll.mui
 \Windows\SysWOW64\*\explorerframe.dll.mui
 \Windows\SysWOW64\*\FirewallAPI.dll.mui
+;Following file added on 2019/05/06 (6th May 2019)
+\Windows\SysWOW64\*\fltLib.dll.mui
 \Windows\SysWOW64\*\fwpuclnt.dll.mui
 \Windows\SysWOW64\*\iertutil.dll.mui
 \Windows\SysWOW64\*\imageres.dll.mui
@@ -281,6 +299,8 @@
 \Windows\SysWOW64\*\sxs.dll.mui
 \Windows\SysWOW64\*\sxstrace.exe.mui
 \Windows\SysWOW64\*\tzres.dll.mui
+;Following file added on 2019/05/06 (6th May 2019)
+\Windows\SysWOW64\*\umpdc.dll.mui
 \Windows\SysWOW64\*\urlmon.dll.mui
 \Windows\SysWOW64\*\user32.dll.mui
 \Windows\SysWOW64\*\userenv.dll.mui
@@ -298,92 +318,3 @@
 \Windows\SysWOW64\*\wship6.dll.mui
 \Windows\SysWOW64\*\wshtcpip.dll.mui
 \Windows\SysWOW64\*\wsock32.dll.mui
-\Windows\SysWOW64\*\activeds.dll.mui
-\Windows\SysWOW64\*\adsldp.dll.mui
-\Windows\SysWOW64\*\adsldpc.dll.mui
-\Windows\SysWOW64\*\advapi32.dll.mui
-\Windows\SysWOW64\*\apphelp.dll.mui
-\Windows\SysWOW64\*\atl.dll.mui
-\Windows\SysWOW64\*\AudioSes.dll.mui
-\Windows\SysWOW64\*\avifil32.dll.mui
-\Windows\SysWOW64\*\bcrypt.dll.mui
-\Windows\SysWOW64\*\clusapi.dll.mui
-\Windows\SysWOW64\*\cmd.exe.mui
-\Windows\SysWOW64\*\combase.dll.mui
-\Windows\SysWOW64\*\comctl32.dll.mui
-\Windows\SysWOW64\*\comdlg32.dll.mui
-\Windows\SysWOW64\*\credui.dll.mui
-\Windows\SysWOW64\*\crypt32.dll.mui
-\Windows\SysWOW64\*\dhcpcsvc.dll.mui
-\Windows\SysWOW64\*\dhcpcsvc6.dll.mui
-\Windows\SysWOW64\*\dnsapi.dll.mui
-\Windows\SysWOW64\*\dsound.dll.mui
-\Windows\SysWOW64\*\dui70.dll.mui
-\Windows\SysWOW64\*\duser.dll.mui
-\Windows\SysWOW64\*\dwmapi.dll.mui
-\Windows\SysWOW64\*\ESENT.dll.mui
-\Windows\SysWOW64\*\explorerframe.dll.mui
-\Windows\SysWOW64\*\fwpuclnt.dll.mui
-\Windows\SysWOW64\*\iertutil.dll.mui
-\Windows\SysWOW64\*\imageres.dll.mui
-\Windows\SysWOW64\*\iphlpapi.dll.mui
-\Windows\SysWOW64\*\kerberos.dll.mui
-\Windows\SysWOW64\*\kernel32.dll.mui
-\Windows\SysWOW64\*\KernelBase.dll.mui
-\Windows\SysWOW64\*\mlang.dll.mui
-\Windows\SysWOW64\*\MMDevAPI.dll.mui
-\Windows\SysWOW64\*\mpr.dll.mui
-\Windows\SysWOW64\*\mprext.dll.mui
-\Windows\SysWOW64\*\msacm32.dll.mui
-\Windows\SysWOW64\*\msacm32.drv.mui
-\Windows\SysWOW64\*\mscms.dll.mui
-\Windows\SysWOW64\*\msctf.dll.mui
-\Windows\SysWOW64\*\msvfw32.dll.mui
-\Windows\SysWOW64\*\mswsock.dll.mui
-\Windows\SysWOW64\*\NetworkExplorer.dll.mui
-\Windows\SysWOW64\*\ntdll.dll.mui
-\Windows\SysWOW64\*\ntmarta.dll.mui
-\Windows\SysWOW64\*\ntshrui.dll.mui
-\Windows\SysWOW64\*\ntvdm64.dll.mui
-\Windows\SysWOW64\*\odbcint.dll.mui
-\Windows\SysWOW64\*\ole32.dll.mui
-\Windows\SysWOW64\*\oleaccrc.dll.mui
-\Windows\SysWOW64\*\oledlg.dll.mui
-\Windows\SysWOW64\*\powrprof.dll.mui
-\Windows\SysWOW64\*\propsys.dll.mui
-\Windows\SysWOW64\*\reg.exe.mui
-\Windows\SysWOW64\*\regsvr32.exe.mui
-\Windows\SysWOW64\*\resutils.dll.mui
-\Windows\SysWOW64\*\rpcrt4.dll.mui
-\Windows\SysWOW64\*\rsaenh.dll.mui
-\Windows\SysWOW64\*\rundll32.exe.mui
-\Windows\SysWOW64\*\schannel.dll.mui
-\Windows\SysWOW64\*\sechost.dll.mui
-\Windows\SysWOW64\*\setupapi.dll.mui
-\Windows\SysWOW64\*\SHCore.dll.mui
-\Windows\SysWOW64\*\shell32.dll.mui
-\Windows\SysWOW64\*\shellstyle.dll.mui
-\Windows\SysWOW64\*\shlwapi.dll.mui
-\Windows\SysWOW64\*\slc.dll.mui
-\Windows\SysWOW64\*\slcext.dll.mui
-\Windows\SysWOW64\*\svchost.exe.mui
-\Windows\SysWOW64\*\sxs.dll.mui
-\Windows\SysWOW64\*\sxstrace.exe.mui
-\Windows\SysWOW64\*\tzres.dll.mui
-\Windows\SysWOW64\*\urlmon.dll.mui
-\Windows\SysWOW64\*\user32.dll.mui
-\Windows\SysWOW64\*\userenv.dll.mui
-\Windows\SysWOW64\*\uxtheme.dll.mui
-\Windows\SysWOW64\*\wdmaud.drv.mui
-\Windows\SysWOW64\*\webio.dll.mui
-\Windows\SysWOW64\*\winhttp.dll.mui
-\Windows\SysWOW64\*\wininet.dll.mui
-\Windows\SysWOW64\*\winmm.dll.mui
-\Windows\SysWOW64\*\winmmbase.dll.mui
-\Windows\SysWOW64\*\winspool.drv.mui
-\Windows\SysWOW64\*\wldap32.dll.mui
-\Windows\SysWOW64\*\ws2_32.dll.mui
-\Windows\SysWOW64\*\wship6.dll.mui
-\Windows\SysWOW64\*\wshtcpip.dll.mui
-\Windows\SysWOW64\*\wsock32.dll.mui
-

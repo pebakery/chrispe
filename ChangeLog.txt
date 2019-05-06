@@ -1,0 +1,140 @@
+
+		Changelog
+		=========
+
+
+20190506 (6th May 2019)
+========
+
+* Moved Tweaks.script to Core so that it is processed before WoW64.
+  This significantly reduces build time if WoW64 is selected in the
+  build (15 seconds saved on a relatively fast test system with a 
+  Crucial BX300 Solid State Drive).
+
+* Included option to set RAMDISK size as 1024 MB. 
+
+* Added support for Windows 10 builds 1803 and 1809.
+
+
+
+20190426 (26th April 2019)
+========
+
+* Added support for PEBakery 0.9.5.1 beta5 - some project scripts 
+  updated to support the new build.
+
+* Compatibility setting for ChrisPE edited to include 
+	- "FileRenameCanMoveDir=True"
+
+* Updates to all Applications scripts to add a check to ensure that
+  the correct image in boot.wim is updated if Applications are added
+  post build to boot.wim.
+
+* Following programs added -
+	- AccessGain (bypass NTFS security permissions)
+	- FAU (Forensic Acquisition Utilities)
+	- FreeShooter (Screen capture)
+	- HWiNFO (hardware information)
+	- HxD (hex editor)
+	- IrfanView (image viewer/converter)
+	- JK Defrag (defragmentor)
+	- NT Passwor Edit
+	- Opera USB (Browser)
+	- ProduKey (view product/activation keys)
+	- sDelete (secure file delete)
+	- wimlib 
+	
+* Following programs updated - 
+	- 7-zip
+	- DMDE (now includes 64-bit version)
+	- ImDisk
+	- wimlib
+
+
+
+20180321 (21st March 2018)
+========
+
+Following scripts added - 
+
+* Settings > Network - new script. This has been split from the Settings 
+  > Recommended script. Includes option to set the ComputerName. 
+  Enabling any of the options in this script will add Unattend.xml 
+  to the root of the \ChrisPE.Files\ISO.ROOT\ folder and will add an 
+  entry to run wpeinit.exe from winpeshl.ini. The unattend.xml file 
+  includes an entry for setting the default screen resolution to 1024x768. 
+  This will probably not make any difference if using Windows 8 or newer 
+  sources, but should if Windows 6.1.7600/6.1.7601 source files are used 
+  as these sources default to low screen resolutions.
+
+* Applications > TightVNC Server script added. This includes an option 
+  for automatically starting TightVNC Server during the WinPE boot 
+  process (automatically initializing the network).
+
+* Finalise > Subst - new script. Use to run subst to assign a virtual 
+  mount point for the media used to boot ChrisPE.
+
+* Finalise > WinFE - new script. Create a Windows Forensic Environment.
+
+* Drivers > Drivers - new script. Experimental Driver integration support. 
+  Get WAIK Tools is used to download DISM - ensure that your firewall 
+  is configured to allow access to GWT.exe.
+
+Other (main) changes -
+
+* Main project script now includes an option to select the METHOD - either 
+  INJECT or EXTRACT. using the EXTRACT method will significantly increase 
+  build time as the contents of boot.wim will be fully extracted before
+  the project run. 
+
+* Get WAIK Tools added to Tools. Used to download DISM and dependencies.
+  This is required for the new Drivers script. 
+
+* nircmd added to tools. 
+
+* innounp.exe added to tools. 
+
+* Settings > Recommended - Network option removed from this script and 
+  moved to a seperate script (see above).
+
+* All Applications scripts can now be executed post build by using the 
+  Run Script button.
+
+* A new method of generating shortcuts for any programs with 'Include 
+  Program in boot.wim' disabled has been introduced. Shortcuts will 
+  now be added to the main shell menu after running FindPrograms menu 
+  option from the booted WinPE - this works by searching for a unique 
+  tag file and then running a series of batch files if the .tag file 
+  is located. The tag filename is generated based on date and time. 
+  Shortcuts for programs on the .iso will be added to the following
+  menu option -
+	Start > ExternalMedia
+
+
+
+20180311 (11th March 2018)
+========
+
+* Licence files added. 
+
+* Updated Tweaks.script to add segoeui.ttf font to the  build - fixing 
+  an issue in Windows 10 based WinPE where italic fonts are displayed 
+  for icons and in other areas.
+
+
+
+20180306 (6th March 2018)
+========
+
+* Original release - including PEBakery 0.9.3 beta3.
+
+
+
+
+
+
+
+
+
+
+

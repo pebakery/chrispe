@@ -6,8 +6,8 @@ Locked=True
 Mandatory=True
 Level=3
 Author=ThePEBakeryTeam
-Version=20180321
-Date=2018-03-21
+Version=20190506
+Date=2019-05-06
 Interface=Interface1
 
 [Interface1]
@@ -103,7 +103,7 @@ If,%pScrollBox_A1%,Equal,JustManager,Begin
   DirCopy,"%Programs%\JustManager\%ARCH%\*.*","%TargetDir%\Programs\JustManager"
   IniWrite,"%OutputDir%\Project.Settings.ini",ESSENTIAL,FileManager,JustManager
   If,ExistFile,"%ProjectTemp%\WinXShell.txt",ShellExecute,Hide,"%Tools%\gsar.exe","-o -i -s#$q:x233rd_filename:x22:x3A:x22:x23:x23{JVAR_MODULEPATH}\\explorer++.exe#$q -r#$q3rd_filename:x22:x3A:x22X:x3A\\Programs\\JustManager\\JustManager.exe#$q #$q%ProjectTemp%\WinXShell.txt#$q"
-  If,Not,ExistFile,"%Target_system32%\FileCopyProgress.txt",Run,"%ProjectDir%\Settings\Tweaks.script",FileCopyProgress
+  If,Not,ExistFile,"%Target_system32%\FileCopyProgress.txt",Run,"%ProjectDir%\Core\D_Tweaks.script",FileCopyProgress
   If,Not,ExistFile,"%Target_system32%\BrowseForFolder.txt",Run,"%ProjectDir%\Core\Browse.For.Folder.script",process
   //Create menu entry
   ShellExecute,Hide,"%Tools%\Shortcut.exe","/A:C /T:#$q#$pSystemDrive#$p\Programs\JustManager\JustManager.exe#$q /F:#$q%ProjectTemp%\FileManager.lnk#$q /I:#$q#$pSystemDrive#$p\Programs\JustManager\JustManager.exe#$c0#$q"
@@ -114,7 +114,7 @@ If,%pScrollBox_A1%,Equal,Explorer++,Begin
   DirCopy,"%Programs%\Explorer++\%ARCH%\*.*","%TargetDir%\Programs\Explorer++"
   IniWrite,"%OutputDir%\Project.Settings.ini",ESSENTIAL,FileManager,Explorer++
   If,ExistFile,"%ProjectTemp%\WinXShell.txt",ShellExecute,Hide,"%Tools%\gsar.exe","-o -i -s#$q:x233rd_filename:x22:x3A:x22:x23:x23{JVAR_MODULEPATH}\\explorer++.exe#$q -r#$q3rd_filename:x22:x3A:x22X:x3A\\Programs\\Explorer++\\Explorer++.exe#$q #$q%ProjectTemp%\WinXShell.txt#$q"
-  If,Not,ExistFile,"%Target_system32%\FileCopyProgress.txt",Run,"%ProjectDir%\Settings\Tweaks.script",FileCopyProgress
+  If,Not,ExistFile,"%Target_system32%\FileCopyProgress.txt",Run,"%ProjectDir%\Core\D_Tweaks.script",FileCopyProgress
   If,Not,ExistFile,"%Target_system32%\BrowseForFolder.txt",Run,"%ProjectDir%\Core\Browse.For.Folder.script",process
   //Create menu entry
   ShellExecute,Hide,"%Tools%\Shortcut.exe","/A:C /T:#$q#$pSystemDrive#$p\Programs\Explorer++\Explorer++.exe#$q /F:#$q%ProjectTemp%\FileManager.lnk#$q /I:#$q#$pSystemDrive#$p\Programs\Explorer++\Explorer++.exe#$c0#$q"
@@ -125,7 +125,7 @@ If,%pScrollBox_A1%,Equal,Q-Dir,Begin
   DirCopy,"%Programs%\Q-Dir\%ARCH%\*.*","%TargetDir%\Programs\Q-Dir"
   IniWrite,"%OutputDir%\Project.Settings.ini",ESSENTIAL,FileManager,Q-Dir
   If,ExistFile,"%ProjectTemp%\WinXShell.txt",ShellExecute,Hide,"%Tools%\gsar.exe","-o -i -s#$q:x233rd_filename:x22:x3A:x22:x23:x23{JVAR_MODULEPATH}\\explorer++.exe#$q -r#$q3rd_filename:x22:x3A:x22X:x3A\\Programs\\Q-Dir\\Q-Dir.exe#$q #$q%ProjectTemp%\WinXShell.txt#$q"
-  If,Not,ExistFile,"%Target_system32%\FileCopyProgress.txt",Run,"%ProjectDir%\Settings\Tweaks.script",FileCopyProgress
+  If,Not,ExistFile,"%Target_system32%\FileCopyProgress.txt",Run,"%ProjectDir%\Core\D_Tweaks.script",FileCopyProgress
   If,Not,ExistFile,"%Target_system32%\BrowseForFolder.txt",Run,"%ProjectDir%\Core\Browse.For.Folder.script",process
   //Create menu entry
   ShellExecute,Hide,"%Tools%\Shortcut.exe","/A:C /T:#$q#$pSystemDrive#$p\Programs\Q-Dir\Q-Dir.exe#$q /F:#$q%ProjectTemp%\FileManager.lnk#$q /I:#$q#$pSystemDrive#$p\Programs\Q-Dir\Q-Dir.exe#$c0#$q"
