@@ -4,8 +4,8 @@ Description=This is set as hidden and will be executed from another project scri
 Selected=False
 Level=-2
 Author=ThePEBakeryTeam
-Version=20190506
-Date=2019-05-06
+Version=20190508
+Date=2019-05-08
 
 [boot.wim]
 Echo,"Checking boot.wim for required information (build number, architecture, etc)..."
@@ -202,9 +202,10 @@ If,%CodeBase%,Equal,10.0.15063,Set,%ERROR%,1
 If,%CodeBase%,Equal,10.0.16299,Set,%ERROR%,1
 If,%CodeBase%,Equal,10.0.17134,Set,%ERROR%,1
 If,%CodeBase%,Equal,10.0.17763,Set,%ERROR%,1
+If,%CodeBase%,Equal,10.0.18362,Set,%ERROR%,1
 If,%ERROR%,Equal,0,Begin
   Set,%Officially.Supported.OS%,NO,Global
-  Message,This source has not been tested - but might work anyway. Please try using one of the following tested sources if possible - #$x#$x  * 6.0.6000 (Windows Vista)#$x  * 6.0.6001 (Windows Vista SP1/Server 2008)#$x  * 6.1.7600 (Windows 7/Server 2008 R2)#$x  * 6.1.7601 (Windows 7 SP1/Server 2008 R2 SP1)#$x  * 6.2.9200 (Windows 8/Server 2012)#$x  * 6.3.9600 (Windows 8.1/Server 2012 R2)#$x  * 10.0.10240 (Windows 10 RTM)#$x  * 10.0.10586 (Windows 10 November Update)#$x  * 10.0.14393 (Windows 10 Aniversary Update)#$x  * 10.0.15063 (Windows 10 Creators Update)#$x  * 10.0.16299 (Windows 10 Fall Creators Update)#$x  * 10.0.17134 (Windows 10 April 2018 Update)#$x  * 10.0.17763 (Windows 10 October 2018 Update)#$x#$xSome project scripts might not work with an untested/unknown source!,Warning
+  Message,This source has not been tested - but might work anyway. Please try using one of the following tested sources if possible - #$x#$x  * 6.0.6000 (Windows Vista)#$x  * 6.0.6001 (Windows Vista SP1/Server 2008)#$x  * 6.1.7600 (Windows 7/Server 2008 R2)#$x  * 6.1.7601 (Windows 7 SP1/Server 2008 R2 SP1)#$x  * 6.2.9200 (Windows 8/Server 2012)#$x  * 6.3.9600 (Windows 8.1/Server 2012 R2)#$x  * 10.0.10240 (Windows 10 RTM)#$x  * 10.0.10586 (Windows 10 November Update)#$x  * 10.0.14393 (Windows 10 Aniversary Update)#$x  * 10.0.15063 (Windows 10 Creators Update)#$x  * 10.0.16299 (Windows 10 Fall Creators Update)#$x  * 10.0.17134 (Windows 10 April 2018 Update)#$x  * 10.0.17763 (Windows 10 October 2018 Update)#$x  * 10.0.18362 (Windows 10 May 2019 Update)#$x#$xSome project scripts might not work with an untested/unknown source!,Warning
 End
 
 [Tools.Check]

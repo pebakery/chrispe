@@ -6,8 +6,8 @@ Locked=True
 Mandatory=True
 Level=2
 Author=ThePEBakeryTeam
-Version=20190426
-Date=2019-04-26
+Version=20190508
+Date=2019-05-08
 Interface=Interface
 NoWarning=False
 
@@ -171,7 +171,7 @@ FileCreateBlank,"%Target_System32%\wim_applied.txt"
 TXTaddLine,"%Target_System32%\wim_applied.txt","Dummy file added to confirm that boot.wim has been fully extracted during the project build process (required for Driver integration - EXTRACT method).",APPEND
 
 [OPEN.WITH]
-SET,%Openwith.workaround%,NO
+SET,%Openwith.workaround%,NO,Global
 If,%CodeBase2%,Equal,10.0,Set,%Openwith.workaround%,YES,Global
 If,%Openwith.workaround%,Equal,YES,Begin
   If,Not,ExistRegSection,HKLM,_WinPE_SOFTWARE,RegHiveLoad,_WinPE_SOFTWARE,"%Target_config%\software"

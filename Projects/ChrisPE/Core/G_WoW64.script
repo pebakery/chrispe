@@ -4,8 +4,8 @@ Description=
 Selected=True
 Level=2
 Author=ThePEBakeryTeam
-Version=20190426
-Date=2019-04-26
+Version=20190508
+Date=2019-05-08
 Interface=Interface
 NoWarning=False
 
@@ -28,6 +28,16 @@ If,%CodeBase2%,Equal,10.0,Run,%ScriptFile%,Cache.WoW64.Dependencies
 End
 
 [Wow64-WIM.All]
+//Copy registry settings from WinPE SOFTWARE hive and import to a blank hive to remove security permissions.
+RegHiveLoad,_WinPE_SOFTWARE,"%Target_config%\software"
+RegExport,HKEY_LOCAL_MACHINE,_WinPE_SOFTWARE,%ProjectTemp%\WinPE_Software.reg
+RegHiveUnload,_WinPE_SOFTWARE
+FileDelete,"%Target_config%\software"
+FileCopy,"%Tools%\empty.hive","%Target_config%\software",NOWARN
+RegHiveLoad,_WinPE_SOFTWARE,"%Target_config%\software"
+RegImport,%ProjectTemp%\WinPE_Software.reg
+RegHiveUnload,_WinPE_SOFTWARE
+//
 Echo,"Extracting SysWow64 files to Target..."
 Set,%SysWow64_Files%,%TargetDir%,Global
 DirMake,"%SysWow64_Files%"
@@ -42,22 +52,25 @@ If,Not,ExistDir,"%ProjectTemp%\Install.wim_Registry",DirMake,"%ProjectTemp%\Inst
 Set,%SysWow64_Registry%,"%ProjectTemp%\Install.wim_Registry"
 //extracting SOFTWARE registry hive from install.wim if it wasn't previously extracted by another script
 If,Not,ExistFile,"%SysWow64_Registry%\software",Begin
-WimExtract,%Install.wim%,%Install.wim.Image.number%,Windows\System32\config\SOFTWARE,%SysWow64_Registry%,NOACL
-If,Not,ExistFile,"%SysWow64_Registry%\software",Begin
-Message,"Could not locate SOFTWARE registry hive - does the source .wim file contain image number %Install.wim.Image.number%? Aborting..."
-Halt
-End
+  WimExtract,%Install.wim%,%Install.wim.Image.number%,Windows\System32\config\SOFTWARE,%SysWow64_Registry%,NOACL
+  If,Not,ExistFile,"%SysWow64_Registry%\software",Begin
+    Message,"Could not locate SOFTWARE registry hive - does the source .wim file contain image number %Install.wim.Image.number%? Aborting..."
+    Halt
+  End
 End
 If,Not,ExistFile,%SysWow64_Registry%\Wow6432Node.reg,If,Not,ExistFile,%SysWow64_Registry%\Classes_Wow6432Node.reg,Begin
-If,Not,ExistRegSection,HKLM,_WinPE_SOFTWARE,RegHiveLoad,_WinPE_SOFTWARE,"%SysWow64_Registry%\software"
-ShellExecute,hide,regedit.exe,"/e #$q%SysWow64_Registry%\Wow6432Node.reg#$q HKEY_LOCAL_MACHINE\_WinPE_SOFTWARE\Wow6432Node"
-ShellExecute,hide,regedit.exe,"/e #$q%SysWow64_Registry%\Classes_Wow6432Node.reg#$q HKEY_LOCAL_MACHINE\_WinPE_SOFTWARE\Classes\Wow6432Node"
-If,ExistRegSection,HKLM,_WinPE_SOFTWARE,RegHiveUnload,_WinPE_SOFTWARE
-//Fix paths in reg files (replace C:\ with X:\)
-ShellExecute,Hide,"%Tools%\gsar.exe","-o -i -sC:x00:::x00\ -rX:x00:::x00\ #$q%SysWow64_Registry%\*.reg#$q"
-//Windows 7 sources appear to use D: as path, so also attempt to replace D:\ with X:\
-ShellExecute,Hide,"%Tools%\gsar.exe","-o -i -sD:x00:::x00\ -rX:x00:::x00\ #$q%SysWow64_Registry%\*.reg#$q"
+  If,Not,ExistRegSection,HKLM,_WinPE_SOFTWARE,RegHiveLoad,_WinPE_SOFTWARE,"%SysWow64_Registry%\software"
+  ShellExecute,hide,regedit.exe,"/e #$q%SysWow64_Registry%\Wow6432Node.reg#$q HKEY_LOCAL_MACHINE\_WinPE_SOFTWARE\Wow6432Node"
+  ShellExecute,hide,regedit.exe,"/e #$q%SysWow64_Registry%\Classes_Wow6432Node.reg#$q HKEY_LOCAL_MACHINE\_WinPE_SOFTWARE\Classes\Wow6432Node"
+  If,ExistRegSection,HKLM,_WinPE_SOFTWARE,RegHiveUnload,_WinPE_SOFTWARE
+  //Fix paths in reg files (replace C:\ with X:\)
+  ShellExecute,Hide,"%Tools%\gsar.exe","-o -i -sC:x00:::x00\ -rX:x00:::x00\ #$q%SysWow64_Registry%\*.reg#$q"
+  //Windows 7 sources appear to use D: as path, so also attempt to replace D:\ with X:\
+  ShellExecute,Hide,"%Tools%\gsar.exe","-o -i -sD:x00:::x00\ -rX:x00:::x00\ #$q%SysWow64_Registry%\*.reg#$q"
 End
+If,Not,ExistDir,%SysWow64_Files%\Windows\SysWOW64\config\systemprofile\Desktop,DirMake,%SysWow64_Files%\Windows\SysWOW64\config\systemprofile\Desktop
+WimExtract,%OutputDir%\sources\boot.wim,%boot.wim.Image.number%,Windows\System32\imageres.dll,%SysWow64_Files%\Windows\SysWOW64,NOACL,NOATTRIB
+
 
 [Cache.WoW64.Dependencies]
 Echo,"Running SysWow64 section..."

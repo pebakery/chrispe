@@ -1,11 +1,11 @@
 [Main]
-Title=ChrisPE Beta 0.1.4
+Title=ChrisPE Beta 0.1.5
 SourceDir=
 TargetDir=
 Description=
 Author=ThePEBakeryTeam
-Version=20190506
-Date=2019-05-06
+Version=20190508
+Date=2019-05-08
 Locked=true
 Selected=None
 Mandatory=true
@@ -30,7 +30,7 @@ Project=ChrisPE
 %Target_system32%=%TargetDir%\WINDOWS\System32
 %USECACHE%=NEVER
 %CODEBASE%=unchecked
-%PROJECT.DATE%=2019-05-06
+%PROJECT.DATE%=2019-05-08
 %LANG3%=en-US
 %USE.TOOLS%=YES
 
@@ -47,7 +47,7 @@ pScrollBox_A2=2,1,4,20,132,80,20,1,2,3,4
 pButton_A2=HELP,1,8,430,132,70,20,HELP.A2,0,True,_HELP.A2_,True
 pTextLabel_A2="2] Set 'boot.wim' Image Number",1,1,163,135,210,18,8,Bold
 pBevel_A3=,1,12,10,180,500,35
-pScrollBox_A3=1,1,4,20,187,80,20,1,2,3,4,5,6,7,8,9
+pScrollBox_A3=1,1,4,20,187,80,20,1,2,3,4,5,6,7,8,9,10,11
 pButton_A3=HELP,1,8,430,187,70,20,HELP.A3,0,True,_HELP.A3_,True
 pTextLabel_A3="3] Set 'install.wim' Image Number",1,1,160,190,210,18,8,Bold
 pBevel_A4=,1,12,10,235,500,35

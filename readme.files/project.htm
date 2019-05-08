@@ -102,6 +102,14 @@ Please note that only two of the scripts in this section are actually visible to
 </ul>
 
 
+<ul class="break3em">
+<li><b>Tweaks</b> - includes a range of tweaks. Click on the <font class="file">?</font> buttons for information about the available options. 
+<br />Path - <font class="file">Projects</font> &gt; <font class="file">ChrisPE</font> &gt; <font class="file">Core</font> &gt; <font class="file">D_Tweaks.script</font></li>
+	<br />
+	<a href="img/tweaks.png"><IMG SRC="img/tweaks.png" float=left width=70% margin-right=1% margin-bottom=0.5em border=1></a>
+</ul>
+
+
 
 <ul class="break3em">
 <li><b>WoW64</b> - Add WoW64 support. <br />Path - <font class="file">Projects</font> &gt; <font class="file">ChrisPE</font> &gt; <font class="file">Core</font> &gt; <font class="file">G_WoW64.script</font>.</li>
@@ -161,7 +169,7 @@ Please note that only two of the scripts in this section are actually visible to
 
 
 <ul class="break3em">
-<li><b>Default Filemanager</b> - set the default FileExplorer. Either <font class="file">7-zip</font>, <font class="file">Explorer++</font>, <font class="file">Q-Dir</font> or <font class="file">7-zip</font> can be selected.<br />Path - <font class="file">Projects</font> &gt; <font class="file">ChrisPE</font> &gt; <font class="file">Shell</font> &gt; <font class="file">B_shell.script</font></li>
+<li><b>Default Filemanager</b> - set the default FileExplorer. Either <font class="file">7-zip</font>, <font class="file">Explorer++</font>, <font class="file">Q-Dir</font> or <font class="file">7-zip</font> can be selected.<br />Path - <font class="file">Projects</font> &gt; <font class="file">ChrisPE</font> &gt; <font class="file">Shell</font> &gt; <font class="file">D_filemanager.script</font></li>
 	<br />
 	<ul>
 	<a href="img/filemanager_1.jpg"><IMG SRC="img/filemanager_1.jpg" float=left width=70% margin-right=1% margin-bottom=0.5em border=1></a>
@@ -213,14 +221,6 @@ Please note that only two of the scripts in this section are actually visible to
 	</ul>
 </ul>
 
-
-
-<ul class="break3em">
-<li><b>Tweaks</b> - includes a range of tweaks. Click on the <font class="file">?</font> buttons for information about the available options. 
-<br />Path - <font class="file">Projects</font> &gt; <font class="file">ChrisPE</font> &gt; <font class="file">Settings</font> &gt; <font class="file">Tweaks.script</font></li>
-	<br />
-	<a href="img/tweaks.png"><IMG SRC="img/tweaks.png" float=left width=70% margin-right=1% margin-bottom=0.5em border=1></a>
-</ul>
 
 
 
@@ -332,7 +332,7 @@ checks in order to access folders protected by NTFS security permissions or by
 <b>DMDE</b> (Version 3.4.4.740) - "...is a powerful software for data searching, editing, and recovery on disks. It may recover directory structure and files in some complicated cases through the use of special algorithms when other software can't help....DMDE has a number of freeware features such as disk editor, simple partition manager (e.g. allows undelete a partition), a tool to create disk images and clones, RAID constructor, file recovery from the current panel....DMDE supports FAT12/16, FAT32, NTFS, Ext2/3/4..." The Free Edition is included in the download - please refer to the  License Agreement - <a class="internal" href="eula_en.txt">here</a>. <a class="external" target="_blank" href="http://dmde.com/">DMDE website</a>
 	<ul>
 	<li>Included in download - YES</li>
-	<li>Processor Architecture - <b>x86 only</b></li>
+	<li>Processor Architecture - x86 and x64</li>
 	</ul>
 </li>
 </ul>
@@ -522,9 +522,9 @@ checks in order to access folders protected by NTFS security permissions or by
 
 <ul class="break3em">
 <li>
-<b>Drive Snapshot</b> - partition backup tool. Can be used to backup and restore an operating system. This utility is not included in the download, however the script will automatically attempt to download a time limited trial version. If you have a licensed copy then copy it to the <i>"/Project/Cache/Programs/SnapShot"</i> folder. <a class="external" target="_blank" href="http://www.drivesnapshot.de/en/">Drive Snapshot website</a>
+<b>sDelete</b> - Secure delete application. "...SDelete is a command line utility that takes a number of options. In any given use, it allows you to delete one or more files and/or directories, or to cleanse the free space on a logical disk...". <a class="external" target="_blank" href="https://docs.microsoft.com/en-us/sysinternals/downloads/sdelete">sDelete website</a>
 	<ul>
-	<li>Included in download - <b>NO</b></li>
+	<li>Included in download - YES</li>
 	<li>Processor Architecture - x86 and x64</li>
 	</ul>
 </li>
@@ -535,9 +535,9 @@ checks in order to access folders protected by NTFS security permissions or by
 
 <ul class="break3em">
 <li>
-<b>sDelete</b> - Secure delete application. "...SDelete is a command line utility that takes a number of options. In any given use, it allows you to delete one or more files and/or directories, or to cleanse the free space on a logical disk...". <a class="external" target="_blank" href="https://docs.microsoft.com/en-us/sysinternals/downloads/sdelete">sDelete website</a>
+<b>Drive Snapshot</b> - partition backup tool. Can be used to backup and restore an operating system. This utility is not included in the download, however the script will automatically attempt to download a time limited trial version. If you have a licensed copy then copy it to the <i>"/Project/Cache/Programs/SnapShot"</i> folder. <a class="external" target="_blank" href="http://www.drivesnapshot.de/en/">Drive Snapshot website</a>
 	<ul>
-	<li>Included in download - YES</li>
+	<li>Included in download - <b>NO</b></li>
 	<li>Processor Architecture - x86 and x64</li>
 	</ul>
 </li>
@@ -744,5 +744,5 @@ The scripts in this section cannot be executed during the build process and is d
 
 
 
-<p class="breaktop"><font class="file">Document date - 26<sup>th</sup> April 2019</font></p></font></body></html>
+<p class="breaktop"><font class="file">Document date - 8<sup>th</sup> May 2019</font></p></font></body></html>
 

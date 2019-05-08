@@ -3,6 +3,18 @@
 		=========
 
 
+20190508 (8th May 2019)
+========
+
+* Added support for Winows 10 build 1903 (tested using 10.0.18362.30 
+  source)
+
+* Added option to select up to image 11 in install.wim 
+
+* Updated relevant sections of the documentation. 
+
+
+
 20190506 (6th May 2019)
 ========
 
